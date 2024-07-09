@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omra Octobre 2023 - Formule Essentielle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        .card-container {
+            margin-bottom: 20px;
+        }
+
+        .card-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body > div {
+            display: flex;
+            align-items: center;
+        }
+
+        .city-badge {
+            margin-right: 10px;
+        }
+
+        .departure-info {
+            margin-right: 20px;
+        }
+
+        .airline-logo {
+            max-width: 50px;
+            margin-left: 10px;
+        }
+
+        .price-info {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-footer {
+            background-color: #f8f9fa;
+            border-top: none;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container details-section">
+    <div class="card card-container">
+        <div class="card-body">
+            <div>
+                <div class="departure-info">
+                    <span class="city-badge badge bg-secondary">LYON</span>
+                    <strong>Mer., Nov. 18, 2026</strong>
+                </div>
+                <div class="arrival-info">
+                    <strong>Jeu., Nov. 26, 2026</strong>
+                </div>
+            </div>
+            <div class="price-info">
+                <span>2 486 $ CAD</span>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAA4CAMAAABaKlG9AAAAclBMVEX///8AaTcAZzQAYScAYyv6/PsAZC4AZjGvxLYAXiEAWxvY4tvw9PHi6uXc5d8AVw5FgFvP3NQATgCNrZlViWhmlHddjm8jcEK3yr6+z8QtdksAVACatqRPh2SHqZOhvKt9oop0nIIASAAAQwA3elIANwDUbTSwAAACjElEQVRIie2V3XqjIBCGB1EcQECjqBiNkNr7v8XFpNvdpmrSPd7vgAflnZH5AQH+619U/QSWuAwLyhfpvpvSPMnTsutfcq7dkBBCksFJ/YrBTAJNSEJDMr+CFwtQ5JnoKSzFHqSyz2kFDp0HH8e/spSpL7w+LR7lh1EProLKwUe4mUQ/nB5CkYZRwX8brYvqA124oMx8S64za04Y5WLwt9RLDIPglK25MhvlQ0HuikbnGebzHV0lNgsxipyld4hGPr2bpiwX43aSLtNlRk8EI3SEMSVMEI9zfLuNA1hBu1rpIEQNtRBBq7qjwu7hAFOaMFFKqGP+a5ClYEna7OMACyMkXy1gpXNC2HKEQ9ZFJuUYp8hjxHmXHfJQ5Ex4UHH/BXjB8t0O+jRoC6hNA42pQbXP8dBWhOYTTDklVRsODfRYnqcqdkaywJIQ46rpXI4Hhya7RYcmGaBLDP55daxRECB7XbAlz0HsdsGWbHbQBVt6Ydc/kg/6bX+1H+b24fsZHJTGlfgQz8XaEMcKamvjYbHWgmxtW3ndYxG+8d5izQHKHvo5WCxxPCmB86y6avSKVo98g6DEjY+bteMFsrMW60Inx4ti3/i2Vo4rNTil9WhHqyrjuNZadb0PLsdH3qadYykP0FHaZSOjFc27lMaH9Yx1pJjDfjZuuj5Zjyl9g+V+MdWGm2f+oiSoew2KuPPbRD1cy890lu/7jVS+Xd8f3PED9/cOcYIxbOKfYoDAc6FNvIcZ27pv57RpGnWVusWpj7xbtOT6pM5al7jBq753Rp8AAk6rfxe/F/m1zM0WrxHRqBNi9O/xMvUD9lxftUHc9O+atpFZ2/Szq9vWQtU2yqpGtY2r3X7Y//VFvwC6Xir3bLjkeQAAAABJRU5ErkJggg==" alt="Saudia" class="airline-logo">
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary btn-block">RÉSERVER</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

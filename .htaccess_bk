@@ -1,0 +1,11 @@
+# Activer le module de réécriture
+RewriteEngine On
+
+# Rediriger les URL sans extension vers le fichier .php correspondant
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [L]
+
+# Optionnel : Rediriger les anciennes URL avec .php vers les nouvelles URL sans extension
+RewriteCond %{THE_REQUEST} \s/([^.]+)\.php[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
