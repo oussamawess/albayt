@@ -416,8 +416,8 @@
               newVolSection.className = 'vol-section';
               newVolSection.innerHTML = `
               <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
-                <h3>Vols <span class="toggle-icon">+</span></h3>
-                <div class="collapsible-content">
+                
+                <div style="margin-top:30px;">
                   
                   <div class="half-width-inputs">
                     <div class="input-group">
@@ -570,11 +570,11 @@
         <div class="half-width-inputs">
           <div class="input-group">
             <label for="date_checkin">Date Checkin :</label>
-            <input type="date" id="date_checkin" name="date_checkin" class="half-width-input date-checkin" required>
+            <input type="date" id="date_checkin1" name="date_checkin1" class="half-width-input date-checkin" required>
           </div>
           <div class="input-group">
             <label for="date_checkout">Date Checkout :</label>
-            <input type="date" id="date_checkout" name="date_checkout" class="half-width-input date-checkout" required>
+            <input type="date" id="date_checkout1" name="date_checkout1" class="half-width-input date-checkout" required>
           </div>
           <div class="input-group">
             <label for="hotel">Hôtel :</label>
@@ -652,8 +652,8 @@
       newHebergementSection.className = 'hebergement-section';
       newHebergementSection.innerHTML = `
       <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
-        <h3>Hébergement <span class="toggle-icon">+</span></h3>
-        <div class="collapsible-content">
+        
+        <div <div style="margin-top:30px;">
           <br>
           <div class="half-width-inputs">
             <div class="input-group">
