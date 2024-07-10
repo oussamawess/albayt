@@ -651,9 +651,9 @@
       const newHebergementSection = document.createElement('div');
       newHebergementSection.className = 'hebergement-section';
       newHebergementSection.innerHTML = `
-      <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
+      <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">        
         
-        <div <div style="margin-top:30px;">
+        <div style="margin-top:30px;" class="toggle-icon">
           <br>
           <div class="half-width-inputs">
             <div class="input-group">
