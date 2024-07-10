@@ -236,10 +236,10 @@
                     $existingDateCheckout1 = $row['date_checkout1'];
                     $existingHotel1Id = $row['hotel1_id'];
                     $existingNombreNuit1 = $row['nombre_nuit1'];
-                    $existingDateCheckin2 = $row['date_checkin2'];
-                    $existingDateCheckout2 = $row['date_checkout2'];
-                    $existingHotel2Id = $row['hotel2_id'];
-                    $existingNombreNuit2 = $row['nombre_nuit2'];
+                    // $existingDateCheckin2 = $row['date_checkin2'];
+                    // $existingDateCheckout2 = $row['date_checkout2'];
+                    // $existingHotel2Id = $row['hotel2_id'];
+                    // $existingNombreNuit2 = $row['nombre_nuit2'];
                     $existingPrixChambreQuadruple = $row['prix_chambre_quadruple'];
                     $existingPrixChambreTriple = $row['prix_chambre_triple'];
                     $existingPrixChambreDouble = $row['prix_chambre_double'];
@@ -278,6 +278,7 @@
                         ?>
                     </select>
                 </div>
+
                 <div class="input-group">
                     <label for="type">Type de la Formule:</label>
                     <select id="type" name="type" class="half-width-input" required>
@@ -294,6 +295,7 @@
                         ?>
                     </select>
                 </div>
+                
             </div>
             <div class="half-width-inputs">
                 <div class="input-group">
@@ -424,36 +426,7 @@
                         </div>
                     </div>
                     <div class="half-width-inputs">
-                        <div class="input-group">
-                            <label for="date_checkin2">Date Checkin :</label>
-                            <input type="date" id="date_checkin2" name="date_checkin2" class="half-width-input"
-                                value="<?php echo $existingDateCheckin2; ?>" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="date_checkout2">Date Checkout :</label>
-                            <input type="date" id="date_checkout2" name="date_checkout2" class="half-width-input"
-                                value="<?php echo $existingDateCheckout2; ?>" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="hotel2">Hôtel :</label>
-                            <select id="hotel2" name="hotel2" class="half-width-input" required>
-                                <?php
-                                // Fetch and display hotel options from the database
-                                // Ensure to set the selected option based on $existingHotel2Id
-                                $sql_hotels = "SELECT * FROM hotels";
-                                $result_hotels = mysqli_query($conn, $sql_hotels);
-                                while ($row_hotel = mysqli_fetch_assoc($result_hotels)) {
-                                    $selected = ($row_hotel['id'] == $existingHotel2Id) ? 'selected' : '';
-                                    echo "<option value='" . $row_hotel['id'] . "' $selected>" . $row_hotel['nom'] . "</option>";
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="nombre_nuit">Nombre de nuitées :</label>
-                            <input type="number" id="nombre_nuit" name="nombre_nuit" class="half-width-input"
-                                value="<?php echo $existingNombreNuit2; ?>" required>
-                        </div>
+                       
                     </div>
                 </div>
             </div>

@@ -80,13 +80,28 @@
 <?php
 session_start(); // Start session to manage user login state
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Include database connection file
-    include 'db.php'; // Replace with your database connection file
+// Temporary hardcoded credentials
+$temp_username = 'tempuser';
+$temp_password = 'temppass';
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get username and password from form POST data
     $username = $_POST['username'];
     $password = $_POST['password'];
+
+    // Check if the entered credentials match the temporary credentials
+    if ($username === $temp_username && $password === $temp_password) {
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $username;
+        $_SESSION['email'] = 'tempuser@example.com'; // Assign a temporary email
+
+        // Redirect to dashboard or another secure page
+        header("Location: omrapackage.php");
+        exit;
+    }
+
+    // If not, proceed with the regular authentication
+    include 'db.php'; // Replace with your database connection file
 
     // Sanitize username to prevent SQL injection (optional)
     $username = mysqli_real_escape_string($conn, $username);
@@ -155,8 +170,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 </body>
-
-</html>
-
 
 </html>

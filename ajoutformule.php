@@ -606,7 +606,7 @@
           </div>
           <div class="input-group">
             <label for="nombre_nuit">Nombre de nuitées :</label>
-            <input type="number" id="nombre_nuit" name="nombre_nuit" class="half-width-input nombre-nuit" required disabled>
+            <input type="number" id="nombre_nuit" name="nombre_nuit" class="half-width-input nombre-nuit" required >
           </div>
         </div>
         <button type="button" class="delete-hebergement deletebutton" disabled>Supprimer Hébergement</button>
@@ -694,7 +694,7 @@
             </div>
             <div class="input-group">
               <label for="nombre_nuit">Nombre de nuitées :</label>
-              <input type="number" id="nombre_nuit" name="nombre_nuit" class="half-width-input nombre-nuit" required disabled>
+              <input type="number" id="nombre_nuit" name="nombre_nuit" class="half-width-input nombre-nuit" required >
             </div>
           </div>
           <button type="button" class="delete-hebergement deletebutton">Supprimer Hébergement</button>

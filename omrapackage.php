@@ -87,13 +87,13 @@
 
 <body>
     <?php
-    session_start(); // Start session to access session variables
+    // session_start(); // Start session to access session variables
     
     // Check if user is not logged in, redirect to login page
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: login.php");
-        exit;
-    }
+    // if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    //     header("Location: login.php");
+    //     exit;
+    // }
 
 
     ?>
