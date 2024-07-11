@@ -195,6 +195,32 @@
             border-radius: 5px;
             box-sizing: border-box;
         }
+
+        .addbutton {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .addbutton:hover {
+            background-color: #45a049;
+        }
+
+        .deletebutton {
+            background-color: #f44336;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .deletebutton:hover {
+            background-color: #fa190b;
+        }
     </style>
 </head>
 
@@ -224,14 +250,14 @@
                     $existingNom = $row['nom'];
                     $existingStatut = $row['statut'];
                     $existingDureeSejour = $row['duree_sejour'];
-                    $existingVilleDepartId = $row['ville_depart_id'];
-                    $existingCompagnieAerienneId = $row['compagnie_aerienne_id'];
-                    $existingNumVol = $row['num_vol'];
-                    $existingAirportDepart = $row['airport_depart'];
-                    $existingHeureDepart = $row['heure_depart'];
-                    $existingDestination = $row['destination'];
-                    $existingAirportDestination = $row['airport_destination'];
-                    $existingHeureArrivee = $row['heure_arrivee'];
+                    // $existingVilleDepartId = $row['ville_depart_id'];
+                    // $existingCompagnieAerienneId = $row['compagnie_aerienne_id'];
+                    // $existingNumVol = $row['num_vol'];
+                    // $existingAirportDepart = $row['airport_depart'];
+                    // $existingHeureDepart = $row['heure_depart'];
+                    // $existingDestination = $row['destination'];
+                    // $existingAirportDestination = $row['airport_destination'];
+                    // $existingHeureArrivee = $row['heure_arrivee'];
                     $existingDateCheckin1 = $row['date_checkin1'];
                     $existingDateCheckout1 = $row['date_checkout1'];
                     $existingHotel1Id = $row['hotel1_id'];
@@ -251,6 +277,14 @@
                     $existingPrixChambreDoublePromo = $row['prix_chambre_double_promo'];
                     $existingPrixChambreSinglePromo = $row['prix_chambre_single_promo'];
                     $existingDescription = $row['description'];
+
+                    // Retrieve existing vols
+                    $volsSql = "SELECT * FROM vols WHERE formule_id = $formuleId";
+                    $volsResult = mysqli_query($conn, $volsSql);
+                    $volsData = [];
+                    while ($volRow = mysqli_fetch_assoc($volsResult)) {
+                        $volsData[] = $volRow;
+                    }
                 } else {
                     echo "Formule not found.";
                     exit; // Or redirect to an error page
@@ -295,59 +329,135 @@
                         ?>
                     </select>
                 </div>
-                
+
             </div>
             <div class="half-width-inputs">
                 <div class="input-group">
                     <label for="statut">Statut:</label>
                     <select id="statut" name="statut" class="half-width-input" required>
                         <option value="activé" <?php if ($existingStatut == 'activé')
-                            echo 'selected'; ?>>Activé</option>
+                                                    echo 'selected'; ?>>Activé</option>
                         <option value="désactivé" <?php if ($existingStatut == 'désactivé')
-                            echo 'selected'; ?>>Désactivé
+                                                        echo 'selected'; ?>>Désactivé
                         </option>
                     </select>
                 </div>
 
                 <div class="input-group">
                     <label for="duree_sejour">Durée de séjour:</label>
-                    <input type="text" id="duree_sejour" name="duree_sejour" class="half-width-input"
-                        value="<?php echo $existingDureeSejour; ?>" required>
+                    <input type="text" id="duree_sejour" name="duree_sejour" class="half-width-input" value="<?php echo $existingDureeSejour; ?>" required>
                 </div>
             </div>
 
 
+            <!-- ///         Vol Section Starts         //// -->
 
-            <div class="price-inputs">
-                <h3>Vols <span class="toggle-icon">+</span></h3>
-                <div class="collapsible-content">
-                    <br>
-                    <div class="half-width-inputs">
+
+            <div class="price-inputs" id="vols-container">
+
+                <div id="vols-section">
+
+                    <h3>Vols <span class="toggle-icon">+</span></h3>
+                    <div class="collapsible-content">
+                        <br>
+                        <?php foreach ($volsData as $index => $vol) { ?>
+                            <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
+                            <div class="vols-group" style="margin-top:30px;">
+
+                                <div class="half-width-inputs">
+                                    <div class="input-group">
+                                        <label for="ville_depart_<?php echo $index; ?>">Ville de Départ:</label>
+                                        <select id="ville_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][ville_depart]" class="half-width-input" required>
+                                            <?php
+                                            $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+                                            $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+                                            while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                                                $selected = ($row_ville_depart['id'] == $vol['ville_depart_id']) ? 'selected' : '';
+                                                echo "<option value='" . $row_ville_depart['id'] . "' $selected>" . $row_ville_depart['nom'] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="compagnie_aerienne_<?php echo $index; ?>">Compagnie Aérienne:</label>
+                                        <select id="compagnie_aerienne_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][compagnie_aerienne]" class="half-width-input" required>
+                                            <?php
+                                            $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
+                                            $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
+                                            while ($row_compagnie_aerienne = mysqli_fetch_assoc($result_compagnies_aeriennes)) {
+                                                $selected = ($row_compagnie_aerienne['id'] == $vol['compagnie_aerienne_id']) ? 'selected' : '';
+                                                echo "<option value='" . $row_compagnie_aerienne['id'] . "' $selected>" . $row_compagnie_aerienne['nom'] . "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="half-width-inputs">
+                                    <div class="input-group">
+                                        <label for="num_vol_<?php echo $index; ?>">N° Vol:</label>
+                                        <input type="text" id="num_vol_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][num_vol]" class="half-width-input" value="<?php echo $vol['num_vol']; ?>" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="airport_depart_<?php echo $index; ?>">Aéroport de Départ:</label>
+                                        <input type="text" id="airport_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][airport_depart]" class="half-width-input" value="<?php echo $vol['airport_depart']; ?>" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="heure_depart_<?php echo $index; ?>">Heure & Date de Départ:</label>
+                                        <input type="datetime-local" id="heure_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][heure_depart]" class="half-width-input" value="<?php echo $vol['heure_depart']; ?>" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="destination_<?php echo $index; ?>">Destination:</label>
+                                        <input type="text" id="destination_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][destination]" class="half-width-input" value="<?php echo $vol['destination']; ?>" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="airport_destination_<?php echo $index; ?>">Aéroport de Destination:</label>
+                                        <input type="text" id="airport_destination_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][airport_destination]" class="half-width-input" value="<?php echo $vol['airport_destination']; ?>" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="heure_arrivee_<?php echo $index; ?>">Heure & Date d'Arrivée:</label>
+                                        <input type="datetime-local" id="heure_arrivee_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][heure_arrivee]" class="half-width-input" value="<?php echo $vol['heure_arrivee']; ?>" required>
+                                    </div>
+
+                                </div>
+
+                                <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Remove</button>
+                            </div>
+                        <?php } ?>
+                        <button type="button" class="add-button addbutton" style="float: right;" onclick="addVol()">Add Vol</button>
+                    </div>
+
+                    <!-- <input type="submit" value="Update Formule"> -->
+
+
+                    <script>
+                        function addVol() {
+                            const container = document.getElementById('vols-container');
+                            const index = container.children.length;
+                            const volGroup = document.createElement('div');
+                            volGroup.className = 'vols-group';
+                            volGroup.innerHTML = `
+                <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
+                    <div class="half-width-inputs" style="margin-top:30px;">
                         <div class="input-group">
-                            <label for="ville_depart">Ville de Départ:</label>
-                            <select id="ville_depart" name="ville_depart" class="half-width-input" required>
+                            <label for="ville_depart_${index}">Ville de Départ:</label>
+                            <select id="ville_depart_${index}" name="vols[${index}][ville_depart]" class="half-width-input" required>
                                 <?php
-                                // Fetch and display villes de depart from database
                                 $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
                                 $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
                                 while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-                                    $selected = ($row_ville_depart['id'] == $existingVilleDepartId) ? 'selected' : ''; // Pre-select existing value
-                                    echo "<option value='" . $row_ville_depart['id'] . "' $selected>" . $row_ville_depart['nom'] . "</option>";
+                                    echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
                                 }
                                 ?>
                             </select>
                         </div>
                         <div class="input-group">
-                            <label for="compagnie_aerienne">Compagnie Aérienne:</label>
-                            <select id="compagnie_aerienne" name="compagnie_aerienne" class="half-width-input" required>
+                            <label for="compagnie_aerienne_${index}">Compagnie Aérienne:</label>
+                            <select id="compagnie_aerienne_${index}" name="vols[${index}][compagnie_aerienne]" class="half-width-input" required>
                                 <?php
-                                // Fetch and display airline options from database
-                                // Ensure to set the selected option based on $existingCompagnieAerienneId
                                 $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
                                 $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
                                 while ($row_compagnie_aerienne = mysqli_fetch_assoc($result_compagnies_aeriennes)) {
-                                    $selected = ($row_compagnie_aerienne['id'] == $existingCompagnieAerienneId) ? 'selected' : ''; // Pre-select existing value
-                                    echo "<option value='" . $row_compagnie_aerienne['id'] . "' $selected>" . $row_compagnie_aerienne['nom'] . "</option>";
+                                    echo "<option value='" . $row_compagnie_aerienne['id'] . "'>" . $row_compagnie_aerienne['nom'] . "</option>";
                                 }
                                 ?>
                             </select>
@@ -355,40 +465,46 @@
                     </div>
                     <div class="half-width-inputs">
                         <div class="input-group">
-                            <label for="num_vol">N° Vol:</label>
-                            <input type="text" id="num_vol" name="num_vol" class="half-width-input"
-                                value="<?php echo $existingNumVol; ?>" required>
+                            <label for="num_vol_${index}">N° Vol:</label>
+                            <input type="text" id="num_vol_${index}" name="vols[${index}][num_vol]" class="half-width-input" required>
                         </div>
                         <div class="input-group">
-                            <label for="airport_depart">Aéroport de Départ:</label>
-                            <input type="text" id="airport_depart" name="airport_depart" class="half-width-input"
-                                value="<?php echo $existingAirportDepart; ?>" required>
+                            <label for="airport_depart_${index}">Aéroport de Départ:</label>
+                            <input type="text" id="airport_depart_${index}" name="vols[${index}][airport_depart]" class="half-width-input" required>
                         </div>
                         <div class="input-group">
-                            <label for="heure_depart">Heure & Date de Départ:</label>
-                            <input type="datetime-local" id="heure_depart" name="heure_depart" class="half-width-input"
-                                value="<?php echo $existingHeureDepart; ?>" required>
+                            <label for="heure_depart_${index}">Heure & Date de Départ:</label>
+                            <input type="datetime-local" id="heure_depart_${index}" name="vols[${index}][heure_depart]" class="half-width-input" required>
                         </div>
                         <div class="input-group">
-                            <label for="destination">Destination:</label>
-                            <input type="text" id="destination" name="destination" class="half-width-input"
-                                value="<?php echo $existingDestination; ?>" required>
+                            <label for="destination_${index}">Destination:</label>
+                            <input type="text" id="destination_${index}" name="vols[${index}][destination]" class="half-width-input" required>
                         </div>
-
                         <div class="input-group">
-                            <label for="airport_destination">Aéroport de Destination:</label>
-                            <input type="text" id="airport_destination" name="airport_destination"
-                                class="half-width-input" value="<?php echo $existingAirportDestination; ?>" required>
+                            <label for="airport_destination_${index}">Aéroport de Destination:</label>
+                            <input type="text" id="airport_destination_${index}" name="vols[${index}][airport_destination]" class="half-width-input" required>
                         </div>
-
                         <div class="input-group">
-                            <label for="heure_arrivee">Heure & Date d'Arrivée:</label>
-                            <input type="datetime-local" id="heure_arrivee" name="heure_arrivee"
-                                class="half-width-input" value="<?php echo $existingHeureArrivee; ?>" required>
+                            <label for="heure_arrivee_${index}">Heure & Date d'Arrivée:</label>
+                            <input type="datetime-local" id="heure_arrivee_${index}" name="vols[${index}][heure_arrivee]" class="half-width-input" required>
                         </div>
                     </div>
+                    <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Remove</button>
+                `;
+                            container.appendChild(volGroup);
+                        }
+
+                        function removeVol(button) {
+                            const volGroup = button.parentNode;
+                            volGroup.parentNode.removeChild(volGroup);
+                        }
+                    </script>
                 </div>
             </div>
+
+
+            <!-- ///         Vol Section Ends         //// -->
+
             <div class="price-inputs">
                 <h3>Hébergement <span class="toggle-icon">+</span></h3>
                 <div class="collapsible-content">
@@ -396,13 +512,11 @@
                     <div class="half-width-inputs">
                         <div class="input-group">
                             <label for="date_checkin1">Date Checkin :</label>
-                            <input type="date" id="date_checkin1" name="date_checkin1" class="half-width-input"
-                                value="<?php echo $existingDateCheckin1; ?>" required>
+                            <input type="date" id="date_checkin1" name="date_checkin1" class="half-width-input" value="<?php echo $existingDateCheckin1; ?>" required>
                         </div>
                         <div class="input-group">
                             <label for="date_checkout1">Date Checkout :</label>
-                            <input type="date" id="date_checkout1" name="date_checkout1" class="half-width-input"
-                                value="<?php echo $existingDateCheckout1; ?>" required>
+                            <input type="date" id="date_checkout1" name="date_checkout1" class="half-width-input" value="<?php echo $existingDateCheckout1; ?>" required>
                         </div>
                         <div class="input-group">
                             <label for="hotel">Hôtel :</label>
@@ -421,12 +535,11 @@
                         </div>
                         <div class="input-group">
                             <label for="nombre_nuit">Nombre de nuitées :</label>
-                            <input type="number" id="nombre_nuit" name="nombre_nuit" class="half-width-input"
-                                value="<?php echo $existingNombreNuit1; ?>" required>
+                            <input type="number" id="nombre_nuit" name="nombre_nuit" class="half-width-input" value="<?php echo $existingNombreNuit1; ?>" required>
                         </div>
                     </div>
                     <div class="half-width-inputs">
-                       
+
                     </div>
                 </div>
             </div>
@@ -438,40 +551,34 @@
                     <div class="half-width-inputs">
                         <div class="input-group">
                             <label for="prix_chambre_quadruple">Chambre quadruple:</label>
-                            <input type="number" id="prix_chambre_quadruple" name="prix_chambre_quadruple"
-                                class="price-input" value="<?php echo $existingPrixChambreQuadruple; ?>" required>
+                            <input type="number" id="prix_chambre_quadruple" name="prix_chambre_quadruple" class="price-input" value="<?php echo $existingPrixChambreQuadruple; ?>" required>
                         </div>
 
                         <div class="input-group">
                             <label for="prix_chambre_triple">Chambre triple:</label>
-                            <input type="number" id="prix_chambre_triple" name="prix_chambre_triple" class="price-input"
-                                value="<?php echo $existingPrixChambreTriple; ?>" required>
+                            <input type="number" id="prix_chambre_triple" name="prix_chambre_triple" class="price-input" value="<?php echo $existingPrixChambreTriple; ?>" required>
                         </div>
                     </div>
 
                     <div class="half-width-inputs">
                         <div class="input-group">
                             <label for="prix_chambre_double">Chambre double:</label>
-                            <input type="number" id="prix_chambre_double" name="prix_chambre_double" class="price-input"
-                                value="<?php echo $existingPrixChambreDouble; ?>" required>
+                            <input type="number" id="prix_chambre_double" name="prix_chambre_double" class="price-input" value="<?php echo $existingPrixChambreDouble; ?>" required>
                         </div>
                         <div class="input-group">
                             <label for="prix_chambre_single">Chambre single:</label>
-                            <input type="number" id="prix_chambre_single" name="prix_chambre_single" class="price-input"
-                                value="<?php echo $existingPrixChambreSingle; ?>" required>
+                            <input type="number" id="prix_chambre_single" name="prix_chambre_single" class="price-input" value="<?php echo $existingPrixChambreSingle; ?>" required>
                         </div>
                     </div>
 
                     <div class="half-width-inputs">
                         <div class="input-group">
                             <label for="child_discount">Réduction enfant :</label>
-                            <input type="number" id="child_discount" name="child_discount" class="price-input"
-                                value="<?php echo $existingChildDiscount; ?>" required>
+                            <input type="number" id="child_discount" name="child_discount" class="price-input" value="<?php echo $existingChildDiscount; ?>" required>
                         </div>
                         <div class="input-group">
                             <label for="prix_bebe">Tarif bébé :</label>
-                            <input type="number" id="prix_bebe" name="prix_bebe" class="price-input"
-                                value="<?php echo $existingPrixBebe; ?>" required>
+                            <input type="number" id="prix_bebe" name="prix_bebe" class="price-input" value="<?php echo $existingPrixBebe; ?>" required>
                         </div>
                     </div>
                 </div>
@@ -484,25 +591,21 @@
                     <div class="half-width-inputs">
                         <div class="input-group">
                             <label for="prix_chambre_quadruple_promo">Chambre quadruple:</label>
-                            <input type="number" id="prix_chambre_quadruple_promo" name="prix_chambre_quadruple_promo"
-                                class="price-input" value="<?php echo $existingPrixChambreQuadruplePromo; ?>">
+                            <input type="number" id="prix_chambre_quadruple_promo" name="prix_chambre_quadruple_promo" class="price-input" value="<?php echo $existingPrixChambreQuadruplePromo; ?>">
                         </div>
                         <div class="input-group">
                             <label for="prix_chambre_triple_promo">Chambre triple:</label>
-                            <input type="number" id="prix_chambre_triple_promo" name="prix_chambre_triple_promo"
-                                class="price-input" value="<?php echo $existingPrixChambreTriplePromo; ?>">
+                            <input type="number" id="prix_chambre_triple_promo" name="prix_chambre_triple_promo" class="price-input" value="<?php echo $existingPrixChambreTriplePromo; ?>">
                         </div>
                     </div>
                     <div class="half-width-inputs">
                         <div class="input-group">
                             <label for="prix_chambre_double_promo">Chambre double:</label>
-                            <input type="number" id="prix_chambre_double_promo" name="prix_chambre_double_promo"
-                                class="price-input" value="<?php echo $existingPrixChambreDoublePromo; ?>">
+                            <input type="number" id="prix_chambre_double_promo" name="prix_chambre_double_promo" class="price-input" value="<?php echo $existingPrixChambreDoublePromo; ?>">
                         </div>
                         <div class="input-group">
                             <label for="prix_chambre_single_promo">Chambre single:</label>
-                            <input type="number" id="prix_chambre_single_promo" name="prix_chambre_single_promo"
-                                class="price-input" value="<?php echo $existingPrixChambreSinglePromo; ?>">
+                            <input type="number" id="prix_chambre_single_promo" name="prix_chambre_single_promo" class="price-input" value="<?php echo $existingPrixChambreSinglePromo; ?>">
                         </div>
                     </div>
                 </div>
@@ -528,7 +631,7 @@
 
     <script>
         // 1. JavaScript for collapsible sections
-        document.addEventListener('DOMContentLoaded', function () { // Ensure DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() { // Ensure DOM is loaded
 
             const toggleIcons = document.querySelectorAll('.toggle-icon');
             const collapsibleContents = document.querySelectorAll('.collapsible-content');
@@ -571,7 +674,7 @@
         const packageSelect = document.getElementById('package');
         const typeFormuleSelect = document.getElementById('type');
 
-        packageSelect.addEventListener('change', function () {
+        packageSelect.addEventListener('change', function() {
             const packageId = this.value;
             fetchTypeFormules(packageId);
         });

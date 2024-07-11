@@ -47,15 +47,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         for ($i = 0; $i < count($ville_depart); $i++) {
             $ville_depart_id = mysqli_real_escape_string($conn, $ville_depart[$i]);
             $compagnie_aerienne_id = mysqli_real_escape_string($conn, $compagnie_aerienne[$i]);
-            $num_vol = mysqli_real_escape_string($conn, $num_vol[$i]);
-            $airport_depart = mysqli_real_escape_string($conn, $airport_depart[$i]);
-            $heure_depart = mysqli_real_escape_string($conn, $heure_depart[$i]);
-            $destination = mysqli_real_escape_string($conn, $destination[$i]);
-            $airport_destination = mysqli_real_escape_string($conn, $airport_destination[$i]);
-            $heure_arrivee = mysqli_real_escape_string($conn, $heure_arrivee[$i]);
+            $num_vol_value = mysqli_real_escape_string($conn, $num_vol[$i]);
+            $airport_depart_value = mysqli_real_escape_string($conn, $airport_depart[$i]);
+            $heure_depart_value = mysqli_real_escape_string($conn, $heure_depart[$i]);
+            $destination_value = mysqli_real_escape_string($conn, $destination[$i]);
+            $airport_destination_value = mysqli_real_escape_string($conn, $airport_destination[$i]);
+            $heure_arrivee_value = mysqli_real_escape_string($conn, $heure_arrivee[$i]);
 
             $sql_vol = "INSERT INTO vols (formule_id, ville_depart_id, compagnie_aerienne_id, num_vol, airport_depart, heure_depart, destination, airport_destination, heure_arrivee) 
-                        VALUES ('$formule_id', '$ville_depart_id', '$compagnie_aerienne_id', '$num_vol', '$airport_depart', '$heure_depart', '$destination', '$airport_destination', '$heure_arrivee')";
+                        VALUES ('$formule_id', '$ville_depart_id', '$compagnie_aerienne_id', '$num_vol_value', '$airport_depart_value', '$heure_depart_value', '$destination_value', '$airport_destination_value', '$heure_arrivee_value')";
             mysqli_query($conn, $sql_vol);
         }
 
