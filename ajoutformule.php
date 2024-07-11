@@ -293,268 +293,179 @@
 <!-- oussama -->
 
 <div id="vols-container" class="price-inputs">
-      <div  id="vols-section">
-        <h3>Vols <span class="toggle-icon">+</span></h3>
-
-        <div class="collapsible-content">
-          <br>
-          <div class="half-width-inputs">
-          
-       
-             
-            <div class="input-group">
-              <label for="ville_depart">Ville de Départ:</label>
-              <select id="ville_depart" name="ville_depart" class="half-width-input" required>
-                <?php
-                // Inclure le fichier de connexion à la base de données
-                include 'db.php';
-
-                // Requête SQL pour sélectionner les villes de départ avec statut actif
-                $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
-
-                // Exécuter la requête
-                $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
-
-                // Vérifier s'il y a des résultats
-                if (mysqli_num_rows($result_villes_depart) > 0) {
-                  // Afficher les villes de départ
-                  while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-                    echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
-                  }
-                } else {
-                  echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
-                }
-
-                // Fermer la connexion à la base de données
-                mysqli_close($conn);
-                ?>
-              </select>
-            </div>
-
-            <div class="input-group">
-              <label for="compagnie_aerienne">Compagnie Aérienne:</label>
-              <select id="compagnie_aerienne" name="compagnie_aerienne" class="half-width-input" required>
-                <?php
-                // Inclure le fichier de connexion à la base de données
-                include 'db.php';
-
-                // Requête SQL pour sélectionner toutes les compagnies aériennes
-                $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
-
-                // Exécuter la requête
-                $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
-
-                // Vérifier s'il y a des résultats
-                if (mysqli_num_rows($result_compagnies_aeriennes) > 0) {
-                  // Afficher les compagnies aériennes
-                  while ($row_compagnie_aerienne = mysqli_fetch_assoc($result_compagnies_aeriennes)) {
-                    echo "<option value='" . $row_compagnie_aerienne['id'] . "'>" . $row_compagnie_aerienne['nom'] . "</option>";
-                  }
-                } else {
-                  echo "<option value='' disabled>Aucune compagnie aérienne disponible pour le moment.</option>";
-                }
-
-                // Fermer la connexion à la base de données
-                mysqli_close($conn);
-                ?>
-              </select>
-            </div>
-
-          </div>
-          <div class="half-width-inputs">
-            <div class="input-group">
-              <label for="num_vol">N° Vol:</label>
-              <input type="text" id="num_vol" name="num_vol" class="half-width-input" required>
-            </div>
-
-            <div class="input-group">
-              <label for="airport_depart">Aéroport de Départ:</label>
-              <input type="text" id="airport_depart" name="airport_depart" class="half-width-input" required>
-            </div>
-
-            <div class="input-group">
-              <label for="heure_depart">Heure & Date de Départ:</label>
-              <input type="datetime-local" id="heure_depart" name="heure_depart" class="half-width-input" required>
-            </div>
-
-
-            <div class="input-group">
-              <label for="destination">Destination:</label>
-              <input type="text" id="destination" name="destination" class="half-width-input" required>
-            </div>
-
-            <div class="input-group">
-              <label for="airport_destination">Aéroport de Destination:</label>
-              <input type="text" id="airport_destination" name="airport_destination" class="half-width-input" required>
-            </div>
-
-            <div class="input-group">
-              <label for="heure_arrivee">Heure & Date d'Arrivée:</label>
-              <input type="datetime-local" id="heure_arrivee" name="heure_arrivee" class="half-width-input" required>
-            </div>
-            </div>
-            
-            
-            <!-- <div class="delete-button-container"> -->
-              <button type="button" class="delete-vol-button deletebutton" disabled>Supprimer Vol</button>
-              <button type="button" id="add-vol-button" class="addbutton" style="float: right;">Ajouter Vol</button>
-            <!-- </div> -->
-            <!-- oussama  -->
-            </div>
-            </div>
-            
-
-
-          <script>            
-            document.addEventListener('DOMContentLoaded', () => {
-            const volsContainer = document.getElementById('vols-container');
-            const addVolButton = document.getElementById('add-vol-button');
-            let volSectionIndex = 1;
-
-            addVolButton.addEventListener('click', () => {
-              const newVolSection = document.createElement('div');
-              newVolSection.className = 'vol-section';
-              newVolSection.innerHTML = `
-              <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
-                
-                <div style="margin-top:30px;">
-                  
-                  <div class="half-width-inputs">
-                    <div class="input-group">
-                        <label for="ville_depart">Ville de Départ:</label>
-                        <select id="ville_depart" name="ville_depart" class="half-width-input" required>
-                          <?php
-                          // Inclure le fichier de connexion à la base de données
-                          include 'db.php';
-
-                          // Requête SQL pour sélectionner les villes de départ avec statut actif
-                          $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
-
-                          // Exécuter la requête
-                          $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
-
-                          // Vérifier s'il y a des résultats
-                          if (mysqli_num_rows($result_villes_depart) > 0) {
-                            // Afficher les villes de départ
-                            while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-                              echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
-                            }
-                          } else {
-                            echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
-                          }
-
-                          // Fermer la connexion à la base de données
-                          mysqli_close($conn);
-                          ?>
-                        </select>
-                      </div>
-
-                      <div class="input-group">
-                        <label for="compagnie_aerienne">Compagnie Aérienne:</label>
-                        <select id="compagnie_aerienne" name="compagnie_aerienne" class="half-width-input" required>
-                          <?php
-                          // Inclure le fichier de connexion à la base de données
-                          include 'db.php';
-
-                          // Requête SQL pour sélectionner toutes les compagnies aériennes
-                          $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
-
-                          // Exécuter la requête
-                          $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
-
-                          // Vérifier s'il y a des résultats
-                          if (mysqli_num_rows($result_compagnies_aeriennes) > 0) {
-                            // Afficher les compagnies aériennes
-                            while ($row_compagnie_aerienne = mysqli_fetch_assoc($result_compagnies_aeriennes)) {
-                              echo "<option value='" . $row_compagnie_aerienne['id'] . "'>" . $row_compagnie_aerienne['nom'] . "</option>";
-                            }
-                          } else {
-                            echo "<option value='' disabled>Aucune compagnie aérienne disponible pour le moment.</option>";
-                          }
-
-                          // Fermer la connexion à la base de données
-                          mysqli_close($conn);
-                          ?>
-                        </select>
-                        </div>
-                  </div>
-                    
-                  <div class="half-width-inputs">
-                    <div class="input-group">
-                        <label for="num_vol">N° Vol:</label>
-                        <input type="text" id="num_vol" name="num_vol" class="half-width-input" required>
-                      </div>
-
-                      <div class="input-group">
-                        <label for="airport_depart">Aéroport de Départ:</label>
-                        <input type="text" id="airport_depart" name="airport_depart" class="half-width-input" required>
-                      </div>
-
-                      <div class="input-group">
-                        <label for="heure_depart">Heure & Date de Départ:</label>
-                        <input type="datetime-local" id="heure_depart" name="heure_depart" class="half-width-input" required>
-                      </div>
-
-
-                      <div class="input-group">
-                        <label for="destination">Destination:</label>
-                        <input type="text" id="destination" name="destination" class="half-width-input" required>
-                      </div>
-
-                      <div class="input-group">
-                        <label for="airport_destination">Aéroport de Destination:</label>
-                        <input type="text" id="airport_destination" name="airport_destination" class="half-width-input" required>
-                      </div>
-
-                      <div class="input-group">
-                        <label for="heure_arrivee">Heure & Date d'Arrivée:</label>
-                        <input type="datetime-local" id="heure_arrivee" name="heure_arrivee" class="half-width-input" required>
-                      </div>
-                  </div>
-
-                  <div class="delete-button-container">
-                    <button type="button" class="delete-vol-button deletebutton">Supprimer Vol</button>
-                  </div>
-                </div>
-                                
-              `;
-
-              volsContainer.appendChild(newVolSection);
-              addDeleteButtonListener(newVolSection);
-              addToggleFunctionality(newVolSection);
-            });
-
-            function addDeleteButtonListener(section) {
-              const deleteButton = section.querySelector('.delete-vol-button');
-              deleteButton.addEventListener('click', () => {
-                section.remove();
-              });
+  <div id="vols-section">
+    <h3>Vols <span class="toggle-icon">+</span></h3>
+    <div class="collapsible-content">
+      <br>
+      <div class="half-width-inputs">
+        <div class="input-group">
+          <label for="ville_depart">Ville de Départ:</label>
+          <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>
+            <?php
+            include 'db.php';
+            $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+            $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+            if (mysqli_num_rows($result_villes_depart) > 0) {
+              while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+              }
+            } else {
+              echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
             }
-
-            function addToggleFunctionality(section) {
-              const toggleIcon = section.querySelector('.toggle-icon');
-              const collapsibleContent = section.querySelector('.collapsible-content');
-
-              toggleIcon.addEventListener('click', () => {
-                collapsibleContent.classList.toggle('active');
-                toggleIcon.classList.toggle('active');
-                
-                if (collapsibleContent.classList.contains('active')) {
-                  collapsibleContent.style.maxHeight = collapsibleContent.scrollHeight + "px";
-                } else {
-                  collapsibleContent.style.maxHeight = "0";
-                }
-              });
-            }
-
-            // Add the initial delete button listener and toggle functionality
-            const initialVolSection = document.querySelector('.vol-section');
-            addDeleteButtonListener(initialVolSection);
-            addToggleFunctionality(initialVolSection);
-          });
-
-          </script>
+            mysqli_close($conn);
+            ?>
+          </select>
         </div>
+        <div class="input-group">
+          <label for="compagnie_aerienne">Compagnie Aérienne:</label>
+          <select id="compagnie_aerienne" name="compagnie_aerienne[]" class="half-width-input" required>
+            <?php
+            include 'db.php';
+            $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
+            $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
+            if (mysqli_num_rows($result_compagnies_aeriennes) > 0) {
+              while ($row_compagnie_aerienne = mysqli_fetch_assoc($result_compagnies_aeriennes)) {
+                echo "<option value='" . $row_compagnie_aerienne['id'] . "'>" . $row_compagnie_aerienne['nom'] . "</option>";
+              }
+            } else {
+              echo "<option value='' disabled>Aucune compagnie aérienne disponible pour le moment.</option>";
+            }
+            mysqli_close($conn);
+            ?>
+          </select>
+        </div>
+      </div>
+      <div class="half-width-inputs">
+        <div class="input-group">
+          <label for="num_vol">N° Vol:</label>
+          <input type="text" id="num_vol" name="num_vol[]" class="half-width-input" required>
+        </div>
+        <div class="input-group">
+          <label for="airport_depart">Aéroport de Départ:</label>
+          <input type="text" id="airport_depart" name="airport_depart[]" class="half-width-input" required>
+        </div>
+        <div class="input-group">
+          <label for="heure_depart">Heure & Date de Départ:</label>
+          <input type="datetime-local" id="heure_depart" name="heure_depart[]" class="half-width-input" required>
+        </div>
+        <div class="input-group">
+          <label for="destination">Destination:</label>
+          <input type="text" id="destination" name="destination[]" class="half-width-input" required>
+        </div>
+        <div class="input-group">
+          <label for="airport_destination">Aéroport de Destination:</label>
+          <input type="text" id="airport_destination" name="airport_destination[]" class="half-width-input" required>
+        </div>
+        <div class="input-group">
+          <label for="heure_arrivee">Heure & Date d'Arrivée:</label>
+          <input type="datetime-local" id="heure_arrivee" name="heure_arrivee[]" class="half-width-input" required>
+        </div>
+      </div>
+      <button type="button" class="delete-vol-button deletebutton" disabled>Supprimer Vol</button>
+      <button type="button" id="add-vol-button" class="addbutton" style="float: right;">Ajouter Vol</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const volsContainer = document.getElementById('vols-container');
+  const addVolButton = document.getElementById('add-vol-button');
+  let volSectionIndex = 1;
+
+  addVolButton.addEventListener('click', () => {
+    const newVolSection = document.createElement('div');
+    newVolSection.className = 'vol-section';
+    newVolSection.innerHTML = `
+      <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
+      <div style="margin-top:30px;">
+        <div class="half-width-inputs">
+          <div class="input-group">
+            <label for="ville_depart">Ville de Départ:</label>
+            <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>
+              <?php
+              include 'db.php';
+              $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+              $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+              if (mysqli_num_rows($result_villes_depart) > 0) {
+                while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                  echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+                }
+              } else {
+                echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
+              }
+              mysqli_close($conn);
+              ?>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="compagnie_aerienne">Compagnie Aérienne:</label>
+            <select id="compagnie_aerienne" name="compagnie_aerienne[]" class="half-width-input" required>
+              <?php
+              include 'db.php';
+              $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
+              $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
+              if (mysqli_num_rows($result_compagnies_aeriennes) > 0) {
+                while ($row_compagnie_aerienne = mysqli_fetch_assoc($result_compagnies_aeriennes)) {
+                  echo "<option value='" . $row_compagnie_aerienne['id'] . "'>" . $row_compagnie_aerienne['nom'] . "</option>";
+                }
+              } else {
+                echo "<option value='' disabled>Aucune compagnie aérienne disponible pour le moment.</option>";
+              }
+              mysqli_close($conn);
+              ?>
+            </select>
+          </div>
+        </div>
+        <div class="half-width-inputs">
+          <div class="input-group">
+            <label for="num_vol">N° Vol:</label>
+            <input type="text" id="num_vol" name="num_vol[]" class="half-width-input" required>
+          </div>
+          <div class="input-group">
+            <label for="airport_depart">Aéroport de Départ:</label>
+            <input type="text" id="airport_depart" name="airport_depart[]" class="half-width-input" required>
+          </div>
+          <div class="input-group">
+            <label for="heure_depart">Heure & Date de Départ:</label>
+            <input type="datetime-local" id="heure_depart" name="heure_depart[]" class="half-width-input" required>
+          </div>
+          <div class="input-group">
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination[]" class="half-width-input" required>
+          </div>
+          <div class="input-group">
+            <label for="airport_destination">Aéroport de Destination:</label>
+            <input type="text" id="airport_destination" name="airport_destination[]" class="half-width-input" required>
+          </div>
+          <div class="input-group">
+            <label for="heure_arrivee">Heure & Date d'Arrivée:</label>
+            <input type="datetime-local" id="heure_arrivee" name="heure_arrivee[]" class="half-width-input" required>
+          </div>
+        </div>
+        <div class="delete-button-container">
+          <button type="button" class="delete-vol-button deletebutton">Supprimer Vol</button>
+        </div>
+      </div>
+    `;
+    volsContainer.appendChild(newVolSection);
+    addDeleteButtonListener(newVolSection);
+  });
+
+  function addDeleteButtonListener(section) {
+    const deleteButton = section.querySelector('.delete-vol-button');
+    deleteButton.addEventListener('click', () => {
+      section.remove();
+    });
+  }
+
+  const initialVolSection = document.querySelector('.vol-section');
+  if (initialVolSection) {
+    addDeleteButtonListener(initialVolSection);
+  }
+});
+</script>
+
         
          <!-- oussama  -->
       
