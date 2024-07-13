@@ -352,155 +352,173 @@
 
             <!-- ///         Vol Section Starts         //// -->
 
-
             <div class="price-inputs" id="vols-container">
-
-                <div id="vols-section">
-
-                    <h3>Vols <span class="toggle-icon">+</span></h3>
-                    <div class="collapsible-content">
-                        <br>
-                        <?php foreach ($volsData as $index => $vol) { ?>
-                            <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
-                            <div class="vols-group" style="margin-top:30px;">
-
-                                <div class="half-width-inputs">
-                                    <div class="input-group">
-                                        <label for="ville_depart_<?php echo $index; ?>">Ville de Départ:</label>
-                                        <select id="ville_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][ville_depart]" class="half-width-input" required>
-                                            <?php
-                                            $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
-                                            $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
-                                            while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-                                                $selected = ($row_ville_depart['id'] == $vol['ville_depart_id']) ? 'selected' : '';
-                                                echo "<option value='" . $row_ville_depart['id'] . "' $selected>" . $row_ville_depart['nom'] . "</option>";
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="compagnie_aerienne_<?php echo $index; ?>">Compagnie Aérienne:</label>
-                                        <select id="compagnie_aerienne_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][compagnie_aerienne]" class="half-width-input" required>
-                                            <?php
-                                            $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
-                                            $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
-                                            while ($row_compagnie_aerienne = mysqli_fetch_assoc($result_compagnies_aeriennes)) {
-                                                $selected = ($row_compagnie_aerienne['id'] == $vol['compagnie_aerienne_id']) ? 'selected' : '';
-                                                echo "<option value='" . $row_compagnie_aerienne['id'] . "' $selected>" . $row_compagnie_aerienne['nom'] . "</option>";
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
+                <h3>Vols <span class="toggle-icon" onclick="toggleCollapse(this)">+</span></h3>
+                <div class="collapsible-content">
+                    <?php foreach ($volsData as $index => $vol) { ?>
+                        <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
+                        <div class="vols-group" style="margin-top:30px;">
+                            <div class="half-width-inputs">
+                                <div class="input-group">
+                                    <label for="ville_depart_<?php echo $index; ?>">Ville de Départ:</label>
+                                    <select id="ville_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][ville_depart]" class="half-width-input" required>
+                                        <?php
+                                        $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+                                        $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+                                        while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                                            $selected = ($row_ville_depart['id'] == $vol['ville_depart_id']) ? 'selected' : '';
+                                            echo "<option value='" . $row_ville_depart['id'] . "' $selected>" . $row_ville_depart['nom'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
-                                <div class="half-width-inputs">
-                                    <div class="input-group">
-                                        <label for="num_vol_<?php echo $index; ?>">N° Vol:</label>
-                                        <input type="text" id="num_vol_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][num_vol]" class="half-width-input" value="<?php echo $vol['num_vol']; ?>" required>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="airport_depart_<?php echo $index; ?>">Aéroport de Départ:</label>
-                                        <input type="text" id="airport_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][airport_depart]" class="half-width-input" value="<?php echo $vol['airport_depart']; ?>" required>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="heure_depart_<?php echo $index; ?>">Heure & Date de Départ:</label>
-                                        <input type="datetime-local" id="heure_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][heure_depart]" class="half-width-input" value="<?php echo $vol['heure_depart']; ?>" required>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="destination_<?php echo $index; ?>">Destination:</label>
-                                        <input type="text" id="destination_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][destination]" class="half-width-input" value="<?php echo $vol['destination']; ?>" required>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="airport_destination_<?php echo $index; ?>">Aéroport de Destination:</label>
-                                        <input type="text" id="airport_destination_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][airport_destination]" class="half-width-input" value="<?php echo $vol['airport_destination']; ?>" required>
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="heure_arrivee_<?php echo $index; ?>">Heure & Date d'Arrivée:</label>
-                                        <input type="datetime-local" id="heure_arrivee_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][heure_arrivee]" class="half-width-input" value="<?php echo $vol['heure_arrivee']; ?>" required>
-                                    </div>
-
+                                <div class="input-group">
+                                    <label for="compagnie_aerienne_<?php echo $index; ?>">Compagnie Aérienne:</label>
+                                    <select id="compagnie_aerienne_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][compagnie_aerienne]" class="half-width-input" required>
+                                        <?php
+                                        $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
+                                        $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
+                                        while ($row_compagnie_aerienne = mysqli_fetch_assoc($result_compagnies_aeriennes)) {
+                                            $selected = ($row_compagnie_aerienne['id'] == $vol['compagnie_aerienne_id']) ? 'selected' : '';
+                                            echo "<option value='" . $row_compagnie_aerienne['id'] . "' $selected>" . $row_compagnie_aerienne['nom'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
-
-                                <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Remove</button>
                             </div>
-                        <?php } ?>
-                        <button type="button" class="add-button addbutton" style="float: right;" onclick="addVol()">Add Vol</button>
-                    </div>
-
-                    <!-- <input type="submit" value="Update Formule"> -->
-
-
-                    <script>
-                        function addVol() {
-                            const container = document.getElementById('vols-container');
-                            const index = container.children.length;
-                            const volGroup = document.createElement('div');
-                            volGroup.className = 'vols-group';
-                            volGroup.innerHTML = `
-                <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
-                    <div class="half-width-inputs" style="margin-top:30px;">
-                        <div class="input-group">
-                            <label for="ville_depart_${index}">Ville de Départ:</label>
-                            <select id="ville_depart_${index}" name="vols[${index}][ville_depart]" class="half-width-input" required>
-                                <?php
-                                $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
-                                $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
-                                while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-                                    echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
-                                }
-                                ?>
-                            </select>
+                            <div class="half-width-inputs">
+                                <div class="input-group">
+                                    <label for="num_vol_<?php echo $index; ?>">N° Vol:</label>
+                                    <input type="text" id="num_vol_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][num_vol]" class="half-width-input" value="<?php echo $vol['num_vol']; ?>" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="airport_depart_<?php echo $index; ?>">Aéroport de Départ:</label>
+                                    <input type="text" id="airport_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][airport_depart]" class="half-width-input" value="<?php echo $vol['airport_depart']; ?>" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="heure_depart_<?php echo $index; ?>">Heure & Date de Départ:</label>
+                                    <input type="datetime-local" id="heure_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][heure_depart]" class="half-width-input" value="<?php echo $vol['heure_depart']; ?>" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="destination_<?php echo $index; ?>">Destination:</label>
+                                    <input type="text" id="destination_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][destination]" class="half-width-input" value="<?php echo $vol['destination']; ?>" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="airport_destination_<?php echo $index; ?>">Aéroport de Destination:</label>
+                                    <input type="text" id="airport_destination_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][airport_destination]" class="half-width-input" value="<?php echo $vol['airport_destination']; ?>" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="heure_arrivee_<?php echo $index; ?>">Heure & Date d'Arrivée:</label>
+                                    <input type="datetime-local" id="heure_arrivee_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][heure_arrivee]" class="half-width-input" value="<?php echo $vol['heure_arrivee']; ?>" required>
+                                </div>
+                            </div>
+                            <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Remove</button>
                         </div>
-                        <div class="input-group">
-                            <label for="compagnie_aerienne_${index}">Compagnie Aérienne:</label>
-                            <select id="compagnie_aerienne_${index}" name="vols[${index}][compagnie_aerienne]" class="half-width-input" required>
-                                <?php
-                                $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
-                                $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
-                                while ($row_compagnie_aerienne = mysqli_fetch_assoc($result_compagnies_aeriennes)) {
-                                    echo "<option value='" . $row_compagnie_aerienne['id'] . "'>" . $row_compagnie_aerienne['nom'] . "</option>";
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="half-width-inputs">
-                        <div class="input-group">
-                            <label for="num_vol_${index}">N° Vol:</label>
-                            <input type="text" id="num_vol_${index}" name="vols[${index}][num_vol]" class="half-width-input" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="airport_depart_${index}">Aéroport de Départ:</label>
-                            <input type="text" id="airport_depart_${index}" name="vols[${index}][airport_depart]" class="half-width-input" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="heure_depart_${index}">Heure & Date de Départ:</label>
-                            <input type="datetime-local" id="heure_depart_${index}" name="vols[${index}][heure_depart]" class="half-width-input" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="destination_${index}">Destination:</label>
-                            <input type="text" id="destination_${index}" name="vols[${index}][destination]" class="half-width-input" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="airport_destination_${index}">Aéroport de Destination:</label>
-                            <input type="text" id="airport_destination_${index}" name="vols[${index}][airport_destination]" class="half-width-input" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="heure_arrivee_${index}">Heure & Date d'Arrivée:</label>
-                            <input type="datetime-local" id="heure_arrivee_${index}" name="vols[${index}][heure_arrivee]" class="half-width-input" required>
-                        </div>
-                    </div>
-                    <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Remove</button>
-                `;
-                            container.appendChild(volGroup);
-                        }
-
-                        function removeVol(button) {
-                            const volGroup = button.parentNode;
-                            volGroup.parentNode.removeChild(volGroup);
-                        }
-                    </script>
+                    <?php } ?>
+                    <button type="button" class="add-button addbutton" style="float: right;" onclick="addVol()">Add Vol</button>
                 </div>
             </div>
+
+            <script>
+               function toggleCollapse(icon) {
+    const content = icon.parentNode.nextElementSibling;
+    if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+        icon.innerHTML = "+";
+    } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        icon.innerHTML = "-";
+    }
+}
+
+function addVol() {
+    const container = document.querySelector('.collapsible-content');
+    const index = document.querySelectorAll('.vols-group').length;
+    const volGroup = document.createElement('div');
+    volGroup.className = 'vols-group';
+    volGroup.innerHTML = `
+        <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">   
+        <div class="half-width-inputs" style="margin-top:30px;">                                 
+            <div class="input-group">
+                <label for="ville_depart_${index}">Ville de Départ:</label>
+                <select id="ville_depart_${index}" name="vols[${index}][ville_depart]" class="half-width-input" required>
+                    <?php
+                    $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+                    $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+                    while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                        echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="compagnie_aerienne_${index}">Compagnie Aérienne:</label>
+                <select id="compagnie_aerienne_${index}" name="vols[${index}][compagnie_aerienne]" class="half-width-input" required>
+                    <?php
+                    $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
+                    $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
+                    while ($row_compagnie_aerienne = mysqli_fetch_assoc($result_compagnies_aeriennes)) {
+                        echo "<option value='" . $row_compagnie_aerienne['id'] . "'>" . $row_compagnie_aerienne['nom'] . "</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="half-width-inputs">
+            <div class="input-group">
+                <label for="num_vol_${index}">N° Vol:</label>
+                <input type="text" id="num_vol_${index}" name="vols[${index}][num_vol]" class="half-width-input" required>
+            </div>
+            <div class="input-group">
+                <label for="airport_depart_${index}">Aéroport de Départ:</label>
+                <input type="text" id="airport_depart_${index}" name="vols[${index}][airport_depart]" class="half-width-input" required>
+            </div>
+            <div class="input-group">
+                <label for="heure_depart_${index}">Heure & Date de Départ:</label>
+                <input type="datetime-local" id="heure_depart_${index}" name="vols[${index}][heure_depart]" class="half-width-input" required>
+            </div>
+            <div class="input-group">
+                <label for="destination_${index}">Destination:</label>
+                <input type="text" id="destination_${index}" name="vols[${index}][destination]" class="half-width-input" required>
+            </div>
+            <div class="input-group">
+                <label for="airport_destination_${index}">Aéroport de Destination:</label>
+                <input type="text" id="airport_destination_${index}" name="vols[${index}][airport_destination]" class="half-width-input" required>
+            </div>
+            <div class="input-group">
+                <label for="heure_arrivee_${index}">Heure & Date d'Arrivée:</label>
+                <input type="datetime-local" id="heure_arrivee_${index}" name="vols[${index}][heure_arrivee]" class="half-width-input" required>
+            </div>
+        </div>
+        <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Remove</button>
+    `;
+    container.appendChild(volGroup);
+
+    // Automatically expand the collapsible content if it was collapsed
+    const icon = document.querySelector('.toggle-icon');
+    const content = icon.parentNode.nextElementSibling;
+    if (content.style.maxHeight) {
+        content.style.maxHeight = content.scrollHeight + "px";
+    } else {
+        content.style.display = "block";
+        icon.innerHTML = "-";
+        content.style.maxHeight = content.scrollHeight + "px";
+    }
+}
+
+function removeVol(button) {
+    const volGroup = button.closest('.vols-group');
+    volGroup.remove();
+    
+    // Adjust the height of the collapsible content after removing a vol group
+    const content = document.querySelector('.collapsible-content');
+    if (content.style.maxHeight) {
+        content.style.maxHeight = content.scrollHeight + "px";
+    }
+}
+
+            </script>
+
 
 
             <!-- ///         Vol Section Ends         //// -->
