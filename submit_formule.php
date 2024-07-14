@@ -7,10 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $type_id = mysqli_real_escape_string($conn, $_POST['type']); // Get type_id
     $statut = mysqli_real_escape_string($conn, $_POST['statut']);
     $duree_sejour = mysqli_real_escape_string($conn, $_POST['duree_sejour']);
-    $date_checkin1 = mysqli_real_escape_string($conn, $_POST['date_checkin1']);
-    $date_checkout1 = mysqli_real_escape_string($conn, $_POST['date_checkout1']);
-    $hotel1_id = mysqli_real_escape_string($conn, $_POST['hotel']);
-    $nombre_nuit1 = mysqli_real_escape_string($conn, $_POST['nombre_nuit']);
     $prix_chambre_quadruple = mysqli_real_escape_string($conn, $_POST['prix_chambre_quadruple']);
     $prix_chambre_triple = mysqli_real_escape_string($conn, $_POST['prix_chambre_triple']);
     $prix_chambre_double = mysqli_real_escape_string($conn, $_POST['prix_chambre_double']);
@@ -27,11 +23,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ... (Your input validation logic) ...
 
     // 3. Prepare and Execute the SQL INSERT Query
-    $sql_formule = "INSERT INTO formules (package_id, type_id, statut, duree_sejour, date_checkin1, date_checkout1, hotel1_id, nombre_nuit1, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, description)
-        VALUES ('$package_id', '$type_id', '$statut', '$duree_sejour', '$date_checkin1', '$date_checkout1', '$hotel1_id', '$nombre_nuit1', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$description')";
+    $sql_formule = "INSERT INTO formules (package_id, type_id, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, description)
+        VALUES ('$package_id', '$type_id', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$description')";
 
     if (mysqli_query($conn, $sql_formule)) {
         $formule_id = mysqli_insert_id($conn);
+
+        // Retrieve Hébergement data
+        $date_checkin = $_POST['date_checkin'];
+        $date_checkout = $_POST['date_checkout'];
+        $hotel = $_POST['hotel'];
+        $nombre_nuit = $_POST['nombre_nuit'];
+
+        // Insert into hebergement table for each Hébergement block
+        for ($i = 0; $i < count($date_checkin); $i++) {
+            $date_checkin_value = mysqli_real_escape_string($conn, $date_checkin[$i]);
+            $date_checkout_value = mysqli_real_escape_string($conn, $date_checkout[$i]);
+            $hotel_value = mysqli_real_escape_string($conn, $hotel[$i]);
+            $nombre_nuit_value = mysqli_real_escape_string($conn, $nombre_nuit[$i]);
+
+            $sql_hebergement = "INSERT INTO hebergements (formule_id, date_checkin, date_checkout, hotel_id, nombre_nuit) 
+                                VALUES ('$formule_id', '$date_checkin_value', '$date_checkout_value', '$hotel_value', '$nombre_nuit_value')";
+            mysqli_query($conn, $sql_hebergement);
+        }
 
         // Retrieve vol data
         $ville_depart = $_POST['ville_depart'];
