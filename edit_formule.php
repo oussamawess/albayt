@@ -258,10 +258,10 @@
                     // $existingDestination = $row['destination'];
                     // $existingAirportDestination = $row['airport_destination'];
                     // $existingHeureArrivee = $row['heure_arrivee'];
-                    $existingDateCheckin1 = $row['date_checkin1'];
-                    $existingDateCheckout1 = $row['date_checkout1'];
-                    $existingHotel1Id = $row['hotel1_id'];
-                    $existingNombreNuit1 = $row['nombre_nuit1'];
+                    // $existingDateCheckin1 = $row['date_checkin1'];
+                    // $existingDateCheckout1 = $row['date_checkout1'];
+                    // $existingHotel1Id = $row['hotel1_id'];
+                    // $existingNombreNuit1 = $row['nombre_nuit1'];
                     // $existingDateCheckin2 = $row['date_checkin2'];
                     // $existingDateCheckout2 = $row['date_checkout2'];
                     // $existingHotel2Id = $row['hotel2_id'];
@@ -284,6 +284,14 @@
                     $volsData = [];
                     while ($volRow = mysqli_fetch_assoc($volsResult)) {
                         $volsData[] = $volRow;
+                    }
+
+                    // Retrieve existing hebergements
+                    $hebergementsSql = "SELECT * FROM hebergements WHERE formule_id = $formuleId";
+                    $hebergementsResult = mysqli_query($conn, $hebergementsSql);
+                    $hebergementsData = [];
+                    while ($hebergementRow = mysqli_fetch_assoc($hebergementsResult)) {
+                        $hebergementsData[] = $hebergementRow;
                     }
                 } else {
                     echo "Formule not found.";
@@ -356,8 +364,9 @@
                 <h3>Vols <span class="toggle-icon" onclick="toggleCollapse(this)">+</span></h3>
                 <div class="collapsible-content">
                     <?php foreach ($volsData as $index => $vol) { ?>
-                        <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
-                        <div class="vols-group" style="margin-top:30px;">
+                        
+                        <div class="vols-group" >
+                        <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0; margin-bottom:30px;">
                             <div class="half-width-inputs">
                                 <div class="input-group">
                                     <label for="ville_depart_<?php echo $index; ?>">Ville de Départ:</label>
@@ -415,28 +424,28 @@
                             <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Remove</button>
                         </div>
                     <?php } ?>
-                    <button type="button" class="add-button addbutton" style="float: right;" onclick="addVol()">Add Vol</button>
+                    <button type="button" class="add-button addbutton" style="float: right; margin-top: -30px;" onclick="addVol()">Add Vol</button>
                 </div>
             </div>
 
             <script>
-               function toggleCollapse(icon) {
-    const content = icon.parentNode.nextElementSibling;
-    if (content.style.maxHeight) {
-        content.style.maxHeight = null;
-        icon.innerHTML = "+";
-    } else {
-        content.style.maxHeight = content.scrollHeight + "px";
-        icon.innerHTML = "-";
-    }
-}
+                function toggleCollapse(icon) {
+                    const content = icon.parentNode.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        icon.innerHTML = "+";
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        icon.innerHTML = "-";
+                    }
+                }
 
-function addVol() {
-    const container = document.querySelector('.collapsible-content');
-    const index = document.querySelectorAll('.vols-group').length;
-    const volGroup = document.createElement('div');
-    volGroup.className = 'vols-group';
-    volGroup.innerHTML = `
+                function addVol() {
+                    const container = document.querySelector('.collapsible-content');
+                    const index = document.querySelectorAll('.vols-group').length;
+                    const volGroup = document.createElement('div');
+                    volGroup.className = 'vols-group';
+                    volGroup.innerHTML = `
         <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">   
         <div class="half-width-inputs" style="margin-top:30px;">                                 
             <div class="input-group">
@@ -492,75 +501,182 @@ function addVol() {
         </div>
         <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Remove</button>
     `;
-    container.appendChild(volGroup);
+                    container.appendChild(volGroup);
 
-    // Automatically expand the collapsible content if it was collapsed
-    const icon = document.querySelector('.toggle-icon');
-    const content = icon.parentNode.nextElementSibling;
-    if (content.style.maxHeight) {
-        content.style.maxHeight = content.scrollHeight + "px";
-    } else {
-        content.style.display = "block";
-        icon.innerHTML = "-";
-        content.style.maxHeight = content.scrollHeight + "px";
-    }
-}
+                    // Automatically expand the collapsible content if it was collapsed
+                    const icon = document.querySelector('.toggle-icon');
+                    const content = icon.parentNode.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } else {
+                        content.style.display = "block";
+                        icon.innerHTML = "-";
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                }
 
-function removeVol(button) {
-    const volGroup = button.closest('.vols-group');
-    volGroup.remove();
-    
-    // Adjust the height of the collapsible content after removing a vol group
-    const content = document.querySelector('.collapsible-content');
-    if (content.style.maxHeight) {
-        content.style.maxHeight = content.scrollHeight + "px";
-    }
-}
+                function removeVol(button) {
+                    const volGroup = button.closest('.vols-group');
+                    volGroup.remove();
 
+                    // Adjust the height of the collapsible content after removing a vol group
+                    const content = document.querySelector('.collapsible-content');
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                }
             </script>
-
-
 
             <!-- ///         Vol Section Ends         //// -->
 
-            <div class="price-inputs">
-                <h3>Hébergement <span class="toggle-icon">+</span></h3>
-                <div class="collapsible-content">
-                    <br>
-                    <div class="half-width-inputs">
-                        <div class="input-group">
-                            <label for="date_checkin1">Date Checkin :</label>
-                            <input type="date" id="date_checkin1" name="date_checkin1" class="half-width-input" value="<?php echo $existingDateCheckin1; ?>" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="date_checkout1">Date Checkout :</label>
-                            <input type="date" id="date_checkout1" name="date_checkout1" class="half-width-input" value="<?php echo $existingDateCheckout1; ?>" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="hotel">Hôtel :</label>
-                            <select id="hotel" name="hotel" class="half-width-input" required>
-                                <?php
-                                // Fetch and display hotel options from the database
-                                // Ensure to set the selected option based on $existingHotel1Id
-                                $sql_hotels = "SELECT * FROM hotels";
-                                $result_hotels = mysqli_query($conn, $sql_hotels);
-                                while ($row_hotel = mysqli_fetch_assoc($result_hotels)) {
-                                    $selected = ($row_hotel['id'] == $existingHotel1Id) ? 'selected' : '';
-                                    echo "<option value='" . $row_hotel['id'] . "' $selected>" . $row_hotel['nom'] . "</option>";
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="nombre_nuit">Nombre de nuitées :</label>
-                            <input type="number" id="nombre_nuit" name="nombre_nuit" class="half-width-input" value="<?php echo $existingNombreNuit1; ?>" required>
-                        </div>
-                    </div>
-                    <div class="half-width-inputs">
+            <!-- | -->
+            <!-- | -->
+            <!-- | -->
 
+            <!-- Hebergement section Starts  -->
+
+            <div class="price-inputs">
+    <h3>Hébergement <span id="toggle-hebergement" class="toggle-icon" onclick="toggleCollapse(this)">+</span></h3>
+    <div id="hebergement-section" class="collapsible-content">
+        <br>
+        <?php foreach ($hebergementsData as $index => $hebergement) { ?>
+            <div class="hebergement-block" data-index="<?php echo $index; ?>">
+                <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0; margin-bottom: 30px;">
+                <div class="half-width-inputs">
+                    <div class="input-group">
+                        <label for="date_checkin_<?php echo $index; ?>">Date Checkin :</label>
+                        <input type="date" id="date_checkin_<?php echo $index; ?>" name="hebergements[<?php echo $index; ?>][date_checkin]" class="half-width-input" value="<?php echo $hebergement['date_checkin']; ?>" required onchange="calculateNights(<?php echo $index; ?>)">
+                    </div>
+                    <div class="input-group">
+                        <label for="date_checkout_<?php echo $index; ?>">Date Checkout :</label>
+                        <input type="date" id="date_checkout_<?php echo $index; ?>" name="hebergements[<?php echo $index; ?>][date_checkout]" class="half-width-input" value="<?php echo $hebergement['date_checkout']; ?>" required onchange="calculateNights(<?php echo $index; ?>)">
+                    </div>
+                    <div class="input-group">
+                        <label for="hotel_<?php echo $index; ?>">Hôtel :</label>
+                        <select id="hotel_<?php echo $index; ?>" name="hebergements[<?php echo $index; ?>][hotel_id]" class="half-width-input" required>
+                            <?php
+                            // Fetch and display hotel options from the database
+                            $sql_hotels = "SELECT * FROM hotels";
+                            $result_hotels = mysqli_query($conn, $sql_hotels);
+                            while ($row_hotel = mysqli_fetch_assoc($result_hotels)) {
+                                $selected = ($row_hotel['id'] == $hebergement['hotel_id']) ? 'selected' : '';
+                                echo "<option value='" . $row_hotel['id'] . "' $selected>" . $row_hotel['nom'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="nombre_nuit_<?php echo $index; ?>">Nombre de nuitées :</label>
+                        <input type="number" id="nombre_nuit_<?php echo $index; ?>" name="hebergements[<?php echo $index; ?>][nombre_nuit]" class="half-width-input" value="<?php echo $hebergement['nombre_nuit']; ?>" required readonly>
                     </div>
                 </div>
+                <button type="button" class="remove-hebergement deletebutton" onclick="removeHebergement(<?php echo $index; ?>)">Remove</button>
             </div>
+        <?php } ?>
+        <button type="button" id="add-hebergement" class="addbutton" style="float: right; margin-top: -30px;" onclick="addHebergement()">Add Hébergement</button>
+    </div>
+</div>
+
+<script>
+    let hebergementIndex = <?php echo count($hebergementsData); ?>;
+
+    function toggleCollapse(icon) {
+        const content = icon.parentNode.nextElementSibling;
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+            icon.innerHTML = "+";
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+            icon.innerHTML = "-";
+        }
+    }
+
+    function addHebergement() {
+        const hebergementSection = document.getElementById('hebergement-section');
+        const newHebergement = document.createElement('div');
+        newHebergement.classList.add('hebergement-block');
+        newHebergement.setAttribute('data-index', hebergementIndex);
+
+        newHebergement.innerHTML = `
+            <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
+            <div class="half-width-inputs" style="margin-top:30px;">
+                <div class="input-group">
+                    <label for="date_checkin_${hebergementIndex}">Date Checkin :</label>
+                    <input type="date" id="date_checkin_${hebergementIndex}" name="hebergements[${hebergementIndex}][date_checkin]" class="half-width-input" required onchange="calculateNights(${hebergementIndex})">
+                </div>
+                <div class="input-group">
+                    <label for="date_checkout_${hebergementIndex}">Date Checkout :</label>
+                    <input type="date" id="date_checkout_${hebergementIndex}" name="hebergements[${hebergementIndex}][date_checkout]" class="half-width-input" required onchange="calculateNights(${hebergementIndex})">
+                </div>
+                <div class="input-group">
+                    <label for="hotel_${hebergementIndex}">Hôtel :</label>
+                    <select id="hotel_${hebergementIndex}" name="hebergements[${hebergementIndex}][hotel_id]" class="half-width-input" required>
+                        <?php
+                        $sql_hotels = "SELECT * FROM hotels";
+                        $result_hotels = mysqli_query($conn, $sql_hotels);
+                        while ($row_hotel = mysqli_fetch_assoc($result_hotels)) {
+                            echo "<option value='" . $row_hotel['id'] . "'>" . $row_hotel['nom'] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="nombre_nuit_${hebergementIndex}">Nombre de nuitées :</label>
+                    <input type="number" id="nombre_nuit_${hebergementIndex}" name="hebergements[${hebergementIndex}][nombre_nuit]" class="half-width-input" required readonly>
+                </div>
+            </div>
+            <button type="button" class="remove-hebergement deletebutton" onclick="removeHebergement(${hebergementIndex})">Remove</button>
+        `;
+
+        hebergementSection.appendChild(newHebergement);
+        hebergementIndex++;
+
+        // Expand the collapsible content after adding a new hébergement block
+        const icon = document.getElementById('toggle-hebergement');
+        const content = icon.parentNode.nextElementSibling;
+        if (content.style.maxHeight) {
+            content.style.maxHeight = content.scrollHeight + "px";
+        } else {
+            content.style.display = "block";
+            icon.innerHTML = "-";
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    }
+
+    function removeHebergement(index) {
+        const hebergementToRemove = document.querySelector(`.hebergement-block[data-index='${index}']`);
+        if (hebergementToRemove) {
+            hebergementToRemove.remove();
+        }
+    }
+
+    function calculateNights(index) {
+        const checkinInput = document.getElementById(`date_checkin_${index}`);
+        const checkoutInput = document.getElementById(`date_checkout_${index}`);
+        const nightsInput = document.getElementById(`nombre_nuit_${index}`);
+
+        const checkinDate = new Date(checkinInput.value);
+        const checkoutDate = new Date(checkoutInput.value);
+
+        if (checkinDate && checkoutDate && checkoutDate > checkinDate) {
+            const timeDiff = Math.abs(checkoutDate - checkinDate);
+            const nights = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            nightsInput.value = nights;
+        } else {
+            nightsInput.value = 0;
+        }
+    }
+
+    // Initialize night calculation for existing hebergements
+    <?php foreach ($hebergementsData as $index => $hebergement) { ?>
+        calculateNights(<?php echo $index; ?>);
+    <?php } ?>
+</script>
+
+
+
+
+            <!-- Hebergement section Ends  -->
 
             <div class="price-inputs">
                 <h3>Prix Hors Promo <span class="toggle-icon">+</span></h3>
