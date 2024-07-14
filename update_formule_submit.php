@@ -8,8 +8,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom = mysqli_real_escape_string($conn, $_POST['nom']);
     $statut = mysqli_real_escape_string($conn, $_POST['statut']);
     $duree_sejour = mysqli_real_escape_string($conn, $_POST['duree_sejour']);
+
+    // wess
+    $prix_chambre_quadruple = mysqli_real_escape_string($conn, $_POST['prix_chambre_quadruple']);
+    $prix_chambre_triple = mysqli_real_escape_string($conn, $_POST['prix_chambre_triple']);
+    $prix_chambre_double = mysqli_real_escape_string($conn, $_POST['prix_chambre_double']);
+    $prix_chambre_single = mysqli_real_escape_string($conn, $_POST['prix_chambre_single']);
+    $child_discount = mysqli_real_escape_string($conn, $_POST['child_discount']);
+    $prix_bebe = mysqli_real_escape_string($conn, $_POST['prix_bebe']);
+    $prix_chambre_quadruple_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_quadruple_promo']);
+    $prix_chambre_triple_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_triple_promo']);
+    $prix_chambre_double_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_double_promo']);
+    $prix_chambre_single_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_single_promo']);
+    //wess
+
     $description = mysqli_real_escape_string($conn, $_POST['description']);
     // (Other fields...)
+
+    //wess
+    // 2. Input Validation (Example - Check if all price fields are valid numbers)
+    $priceFields = [
+        'prix_chambre_quadruple', 'prix_chambre_triple', 'prix_chambre_double',
+        'prix_chambre_single', 'child_discount', 'prix_bebe',
+        'prix_chambre_quadruple_promo', 'prix_chambre_triple_promo', 'prix_chambre_double_promo',
+        'prix_chambre_single_promo'
+    ];
+
+    foreach ($priceFields as $field) {
+        if (!is_numeric($$field) || $$field < 0) { // Use variable variables to check the value
+            echo "Erreur: Le champ $field doit être un nombre positif.";
+            exit; 
+        }
+    }
+    //wess
 
     // Update the main formules table
     $sql = "UPDATE formules SET 
@@ -17,6 +48,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             nom = '$nom',
             statut = '$statut',
             duree_sejour = '$duree_sejour',
+            -- wess
+            prix_chambre_quadruple = '$prix_chambre_quadruple',
+            prix_chambre_triple = '$prix_chambre_triple',
+            prix_chambre_double = '$prix_chambre_double',
+            prix_chambre_single = '$prix_chambre_single',
+            child_discount = '$child_discount',
+            prix_bebe = '$prix_bebe',
+            prix_chambre_quadruple_promo = '$prix_chambre_quadruple_promo',
+            prix_chambre_triple_promo = '$prix_chambre_triple_promo',
+            prix_chambre_double_promo = '$prix_chambre_double_promo',
+            prix_chambre_single_promo = '$prix_chambre_single_promo',
+            -- wess
             description = '$description'
             -- (Other fields...)
             WHERE id = $formule_id";
