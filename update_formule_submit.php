@@ -53,6 +53,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+    // Delete existing hebergements entries for this formule
+    $deleteSql = "DELETE FROM hebergements WHERE formule_id = $formule_id";
+    if (!mysqli_query($conn, $deleteSql)) {
+        echo "Erreur lors de la suppression des hébergements existants : " . mysqli_error($conn);
+        exit;
+    }
+
+    // Insert new hebergements entries
+    foreach ($_POST['hebergements'] as $hebergement) {
+        $hotel_id = mysqli_real_escape_string($conn, $hebergement['hotel_id']);
+        $date_checkin = mysqli_real_escape_string($conn, $hebergement['date_checkin']);
+        $date_checkout = mysqli_real_escape_string($conn, $hebergement['date_checkout']);
+        $nombre_nuit = mysqli_real_escape_string($conn, $hebergement['nombre_nuit']);
+
+        $insertSql = "INSERT INTO hebergements (formule_id, hotel_id, date_checkin, date_checkout, nombre_nuit) 
+                      VALUES ('$formule_id', '$hotel_id', '$date_checkin', '$date_checkout', '$nombre_nuit')";
+
+        if (!mysqli_query($conn, $insertSql)) {
+            echo "Erreur lors de l'insertion des hébergements : " . mysqli_error($conn);
+            exit;
+        }
+    }
+
     echo "Formule mise à jour avec succès";
     header("Location: omrapackage.php"); // Redirect to a success page
     exit;
