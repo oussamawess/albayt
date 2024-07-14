@@ -292,76 +292,80 @@
 
          <!-- Vol section Starts  -->
 
-<div id="vols-container" class="price-inputs">
+         <div id="vols-container" class="price-inputs">
   <div id="vols-section">
-    <h3>Vols <span class="toggle-icon">+</span></h3>
+    <h3>Vols <span class="toggle-icon" onclick="toggleCollapse(this)">+</span></h3>
     <div class="collapsible-content">
       <br>
-      <div class="half-width-inputs">
-        <div class="input-group">
-          <label for="ville_depart">Ville de Départ:</label>
-          <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>
-            <?php
-            include 'db.php';
-            $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
-            $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
-            if (mysqli_num_rows($result_villes_depart) > 0) {
-              while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-                echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+      <div class="vol-section">
+        <div class="half-width-inputs">
+          <div class="input-group">
+            <label for="ville_depart">Ville de Départ:</label>
+            <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>
+              <?php
+              include 'db.php';
+              $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+              $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+              if (mysqli_num_rows($result_villes_depart) > 0) {
+                while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                  echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+                }
+              } else {
+                echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
               }
-            } else {
-              echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
-            }
-            mysqli_close($conn);
-            ?>
-          </select>
+              mysqli_close($conn);
+              ?>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="compagnie_aerienne">Compagnie Aérienne:</label>
+            <select id="compagnie_aerienne" name="compagnie_aerienne[]" class="half-width-input" required>
+              <?php
+              include 'db.php';
+              $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
+              $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
+              if (mysqli_num_rows($result_compagnies_aeriennes) > 0) {
+                while ($row_compagnie_aerienne = mysqli_fetch_assoc($result_compagnies_aeriennes)) {
+                  echo "<option value='" . $row_compagnie_aerienne['id'] . "'>" . $row_compagnie_aerienne['nom'] . "</option>";
+                }
+              } else {
+                echo "<option value='' disabled>Aucune compagnie aérienne disponible pour le moment.</option>";
+              }
+              mysqli_close($conn);
+              ?>
+            </select>
+          </div>
         </div>
-        <div class="input-group">
-          <label for="compagnie_aerienne">Compagnie Aérienne:</label>
-          <select id="compagnie_aerienne" name="compagnie_aerienne[]" class="half-width-input" required>
-            <?php
-            include 'db.php';
-            $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
-            $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
-            if (mysqli_num_rows($result_compagnies_aeriennes) > 0) {
-              while ($row_compagnie_aerienne = mysqli_fetch_assoc($result_compagnies_aeriennes)) {
-                echo "<option value='" . $row_compagnie_aerienne['id'] . "'>" . $row_compagnie_aerienne['nom'] . "</option>";
-              }
-            } else {
-              echo "<option value='' disabled>Aucune compagnie aérienne disponible pour le moment.</option>";
-            }
-            mysqli_close($conn);
-            ?>
-          </select>
+        <div class="half-width-inputs">
+          <div class="input-group">
+            <label for="num_vol">N° Vol:</label>
+            <input type="text" id="num_vol" name="num_vol[]" class="half-width-input" required>
+          </div>
+          <div class="input-group">
+            <label for="airport_depart">Aéroport de Départ:</label>
+            <input type="text" id="airport_depart" name="airport_depart[]" class="half-width-input" required>
+          </div>
+          <div class="input-group">
+            <label for="heure_depart">Heure & Date de Départ:</label>
+            <input type="datetime-local" id="heure_depart" name="heure_depart[]" class="half-width-input" required>
+          </div>
+          <div class="input-group">
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination[]" class="half-width-input" required>
+          </div>
+          <div class="input-group">
+            <label for="airport_destination">Aéroport de Destination:</label>
+            <input type="text" id="airport_destination" name="airport_destination[]" class="half-width-input" required>
+          </div>
+          <div class="input-group">
+            <label for="heure_arrivee">Heure & Date d'Arrivée:</label>
+            <input type="datetime-local" id="heure_arrivee" name="heure_arrivee[]" class="half-width-input" required>
+          </div>
+        </div>
+        <div class="delete-button-container">
+          <button type="button" class="delete-vol-button deletebutton" disabled>Supprimer Vol</button>
         </div>
       </div>
-      <div class="half-width-inputs">
-        <div class="input-group">
-          <label for="num_vol">N° Vol:</label>
-          <input type="text" id="num_vol" name="num_vol[]" class="half-width-input" required>
-        </div>
-        <div class="input-group">
-          <label for="airport_depart">Aéroport de Départ:</label>
-          <input type="text" id="airport_depart" name="airport_depart[]" class="half-width-input" required>
-        </div>
-        <div class="input-group">
-          <label for="heure_depart">Heure & Date de Départ:</label>
-          <input type="datetime-local" id="heure_depart" name="heure_depart[]" class="half-width-input" required>
-        </div>
-        <div class="input-group">
-          <label for="destination">Destination:</label>
-          <input type="text" id="destination" name="destination[]" class="half-width-input" required>
-        </div>
-        <div class="input-group">
-          <label for="airport_destination">Aéroport de Destination:</label>
-          <input type="text" id="airport_destination" name="airport_destination[]" class="half-width-input" required>
-        </div>
-        <div class="input-group">
-          <label for="heure_arrivee">Heure & Date d'Arrivée:</label>
-          <input type="datetime-local" id="heure_arrivee" name="heure_arrivee[]" class="half-width-input" required>
-        </div>
-      </div>
-      <button type="button" class="delete-vol-button deletebutton" disabled>Supprimer Vol</button>
       <button type="button" id="add-vol-button" class="addbutton" style="float: right;">Ajouter Vol</button>
     </div>
   </div>
@@ -448,15 +452,25 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
     `;
-    volsContainer.appendChild(newVolSection);
+    const collapsibleContent = volsContainer.querySelector('.collapsible-content');
+    collapsibleContent.appendChild(newVolSection);
     addDeleteButtonListener(newVolSection);
+    updateCollapsibleHeight(collapsibleContent);
   });
 
   function addDeleteButtonListener(section) {
     const deleteButton = section.querySelector('.delete-vol-button');
     deleteButton.addEventListener('click', () => {
       section.remove();
+      const collapsibleContent = volsContainer.querySelector('.collapsible-content');
+      updateCollapsibleHeight(collapsibleContent);
     });
+  }
+
+  function updateCollapsibleHeight(content) {
+    if (content.style.maxHeight) {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
   }
 
   const initialVolSection = document.querySelector('.vol-section');
@@ -464,7 +478,23 @@ document.addEventListener('DOMContentLoaded', () => {
     addDeleteButtonListener(initialVolSection);
   }
 });
+
+function toggleCollapse(element) {
+  const content = element.parentElement.nextElementSibling;
+  const icon = element;
+
+  if (content.style.maxHeight) {
+    content.style.maxHeight = null;
+    icon.innerHTML = "+";
+  } else {
+    content.style.maxHeight = content.scrollHeight + "px";
+    icon.innerHTML = "-";
+  }
+}
 </script>
+
+
+
 
         
          <!-- Vol section Ends  -->
@@ -475,9 +505,9 @@ document.addEventListener('DOMContentLoaded', () => {
       
       <!-- Hebergement section Starts  -->
 
-<div id="hebergements-container" class="price-inputs">
+      <div id="hebergements-container" class="price-inputs">
   <div id="hebergements-section">
-    <h3>Hébergement <span class="toggle-icon">+</span></h3>
+    <h3>Hébergement <span class="toggle-icon" onclick="toggleCollapse(this)">+</span></h3>
     <div class="collapsible-content">
       <br>
       <div class="hebergement-section">
@@ -530,7 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
     newHebergementSection.className = 'hebergement-section';
     newHebergementSection.innerHTML = `
       <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
-      <div style="margin-top:30px;" class="toggle-icon">
+      <div style="margin-top:30px;">
         <br>
         <div class="half-width-inputs">
           <div class="input-group">
@@ -568,15 +598,19 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
-    hebergementsContainer.appendChild(newHebergementSection);
+    const collapsibleContent = hebergementsContainer.querySelector('.collapsible-content');
+    collapsibleContent.appendChild(newHebergementSection);
     addDeleteButtonListener(newHebergementSection);
     addCalculateNightsFunctionality(newHebergementSection);
+    updateCollapsibleHeight(collapsibleContent);
   });
 
   function addDeleteButtonListener(section) {
     const deleteButton = section.querySelector('.delete-hebergement');
     deleteButton.addEventListener('click', () => {
       section.remove();
+      const collapsibleContent = hebergementsContainer.querySelector('.collapsible-content');
+      updateCollapsibleHeight(collapsibleContent);
     });
   }
 
@@ -597,11 +631,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function updateCollapsibleHeight(content) {
+    if (content.style.maxHeight) {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  }
+
   const initialHebergementSection = document.querySelector('.hebergement-section');
   addDeleteButtonListener(initialHebergementSection);
   addCalculateNightsFunctionality(initialHebergementSection);
 });
+
+function toggleCollapse(element) {
+  const content = element.parentElement.nextElementSibling;
+  const icon = element;
+
+  if (content.style.maxHeight) {
+    content.style.maxHeight = null;
+    icon.innerHTML = "+";
+  } else {
+    content.style.maxHeight = content.scrollHeight + "px";
+    icon.innerHTML = "-";
+  }
+}
 </script>
+
 
 
 <!-- Hebergement section Ends  -->
