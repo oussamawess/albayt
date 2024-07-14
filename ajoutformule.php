@@ -290,7 +290,7 @@
         </div>
       </div>
 
-<!-- oussama -->
+         <!-- Vol section Starts  -->
 
 <div id="vols-container" class="price-inputs">
   <div id="vols-section">
@@ -467,206 +467,144 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
         
-         <!-- oussama  -->
+         <!-- Vol section Ends  -->
+
+                <!-- | -->
+                <!-- | -->
+                <!-- | -->
       
-      
+      <!-- Hebergement section Starts  -->
 
 <div id="hebergements-container" class="price-inputs">
-  <div  id="hebergements-section">
+  <div id="hebergements-section">
     <h3>Hébergement <span class="toggle-icon">+</span></h3>
-
     <div class="collapsible-content">
       <br>
       <div class="hebergement-section">
         <div class="half-width-inputs">
           <div class="input-group">
             <label for="date_checkin">Date Checkin :</label>
-            <input type="date" id="date_checkin1" name="date_checkin1" class="half-width-input date-checkin" required>
+            <input type="date" id="date_checkin1" name="date_checkin[]" class="half-width-input date-checkin" required>
           </div>
           <div class="input-group">
             <label for="date_checkout">Date Checkout :</label>
-            <input type="date" id="date_checkout1" name="date_checkout1" class="half-width-input date-checkout" required>
+            <input type="date" id="date_checkout1" name="date_checkout[]" class="half-width-input date-checkout" required>
           </div>
           <div class="input-group">
             <label for="hotel">Hôtel :</label>
-            <select id="hotel" name="hotel" class="half-width-input" required>
+            <select id="hotel1" name="hotel[]" class="half-width-input" required>
               <?php
-              // Inclure le fichier de connexion à la base de données
               include 'db.php';
-
-              // Requête SQL pour sélectionner tous les hôtels
               $sql_hotels = "SELECT * FROM hotels";
-
-              // Exécuter la requête
               $result_hotels = mysqli_query($conn, $sql_hotels);
-
-              // Vérifier s'il y a des résultats
               if (mysqli_num_rows($result_hotels) > 0) {
-                // Afficher les hôtels
                 while ($row_hotel = mysqli_fetch_assoc($result_hotels)) {
                   echo "<option value='" . $row_hotel['id'] . "'>" . $row_hotel['nom'] . "</option>";
                 }
               } else {
                 echo "<option value='' disabled>Aucun hôtel disponible pour le moment.</option>";
               }
-
-              // Fermer la connexion à la base de données
               mysqli_close($conn);
               ?>
             </select>
           </div>
           <div class="input-group">
             <label for="nombre_nuit">Nombre de nuitées :</label>
-            <input type="number" id="nombre_nuit" name="nombre_nuit" class="half-width-input nombre-nuit" required >
+            <input type="number" id="nombre_nuit1" name="nombre_nuit[]" class="half-width-input nombre-nuit" required readonly>
           </div>
         </div>
         <button type="button" class="delete-hebergement deletebutton" disabled>Supprimer Hébergement</button>
         <button type="button" id="add-hebergement-button" class="addbutton" style="float: right;">Ajouter Hébergement</button>
       </div>
-      <script>
-    function calculateNights(checkinSelector, checkoutSelector, nightsSelector) {
-      const checkinInput = document.querySelector(checkinSelector);
-      const checkoutInput = document.querySelector(checkoutSelector);
-      const nightsInput = document.querySelector(nightsSelector);
-
-      function updateNights() {
-        const checkinDate = new Date(checkinInput.value);
-        const checkoutDate = new Date(checkoutInput.value);
-        if (!isNaN(checkinDate) && !isNaN(checkoutDate)) {
-          const timeDiff = checkoutDate - checkinDate;
-          const nights = timeDiff / (1000 * 3600 * 24);
-          nightsInput.value = nights > 0 ? nights : 0;
-        } else {
-          nightsInput.value = 0;
-        }
-      }
-
-      checkinInput.addEventListener('input', updateNights);
-      checkoutInput.addEventListener('input', updateNights);
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      calculateNights('.date-checkin', '.date-checkout', '.nombre-nuit');
-    });
-  </script>
     </div>
   </div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const hebergementsContainer = document.getElementById('hebergements-container');
-    const addHebergementButton = document.getElementById('add-hebergement-button');
+document.addEventListener('DOMContentLoaded', () => {
+  const hebergementsContainer = document.getElementById('hebergements-container');
+  const addHebergementButton = document.getElementById('add-hebergement-button');
 
-    addHebergementButton.addEventListener('click', () => {
-      const newHebergementSection = document.createElement('div');
-      newHebergementSection.className = 'hebergement-section';
-      newHebergementSection.innerHTML = `
-      <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">        
-        
-        <div style="margin-top:30px;" class="toggle-icon">
-          <br>
-          <div class="half-width-inputs">
-            <div class="input-group">
-              <label for="date_checkin">Date Checkin :</label>
-              <input type="date" id="date_checkin" name="date_checkin" class="half-width-input date-checkin" required>
-            </div>
-            <div class="input-group">
-              <label for="date_checkout">Date Checkout :</label>
-              <input type="date" id="date_checkout" name="date_checkout" class="half-width-input date-checkout" required>
-            </div>
-            <div class="input-group">
-              <label for="hotel">Hôtel :</label>
-              <select id="hotel" name="hotel" class="half-width-input" required>
-                <?php
-                // Inclure le fichier de connexion à la base de données
-                include 'db.php';
-
-                // Requête SQL pour sélectionner tous les hôtels
-                $sql_hotels = "SELECT * FROM hotels";
-
-                // Exécuter la requête
-                $result_hotels = mysqli_query($conn, $sql_hotels);
-
-                // Vérifier s'il y a des résultats
-                if (mysqli_num_rows($result_hotels) > 0) {
-                  // Afficher les hôtels
-                  while ($row_hotel = mysqli_fetch_assoc($result_hotels)) {
-                    echo "<option value='" . $row_hotel['id'] . "'>" . $row_hotel['nom'] . "</option>";
-                  }
-                } else {
-                  echo "<option value='' disabled>Aucun hôtel disponible pour le moment.</option>";
-                }
-
-                // Fermer la connexion à la base de données
-                mysqli_close($conn);
-                ?>
-              </select>
-            </div>
-            <div class="input-group">
-              <label for="nombre_nuit">Nombre de nuitées :</label>
-              <input type="number" id="nombre_nuit" name="nombre_nuit" class="half-width-input nombre-nuit" required >
-            </div>
+  addHebergementButton.addEventListener('click', () => {
+    const newHebergementSection = document.createElement('div');
+    newHebergementSection.className = 'hebergement-section';
+    newHebergementSection.innerHTML = `
+      <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
+      <div style="margin-top:30px;" class="toggle-icon">
+        <br>
+        <div class="half-width-inputs">
+          <div class="input-group">
+            <label for="date_checkin">Date Checkin :</label>
+            <input type="date" name="date_checkin[]" class="half-width-input date-checkin" required>
           </div>
-          <button type="button" class="delete-hebergement deletebutton">Supprimer Hébergement</button>
+          <div class="input-group">
+            <label for="date_checkout">Date Checkout :</label>
+            <input type="date" name="date_checkout[]" class="half-width-input date-checkout" required>
+          </div>
+          <div class="input-group">
+            <label for="hotel">Hôtel :</label>
+            <select name="hotel[]" class="half-width-input" required>
+              <?php
+              include 'db.php';
+              $sql_hotels = "SELECT * FROM hotels";
+              $result_hotels = mysqli_query($conn, $sql_hotels);
+              if (mysqli_num_rows($result_hotels) > 0) {
+                while ($row_hotel = mysqli_fetch_assoc($result_hotels)) {
+                  echo "<option value='" . $row_hotel['id'] . "'>" . $row_hotel['nom'] . "</option>";
+                }
+              } else {
+                echo "<option value='' disabled>Aucun hôtel disponible pour le moment.</option>";
+              }
+              mysqli_close($conn);
+              ?>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="nombre_nuit">Nombre de nuitées :</label>
+            <input type="number" name="nombre_nuit[]" class="half-width-input nombre-nuit" required readonly>
+          </div>
         </div>
-      `;
+        <button type="button" class="delete-hebergement deletebutton">Supprimer Hébergement</button>
+      </div>
+    `;
 
-      hebergementsContainer.appendChild(newHebergementSection);
-      addDeleteButtonListener(newHebergementSection);
-      addToggleFunctionality(newHebergementSection);
-      addCalculateNightsFunctionality(newHebergementSection);
-    });
-
-    function addDeleteButtonListener(section) {
-      const deleteButton = section.querySelector('.delete-hebergement');
-      deleteButton.addEventListener('click', () => {
-        section.remove();
-      });
-    }
-
-    function addToggleFunctionality(section) {
-      const toggleIcon = section.querySelector('.toggle-icon');
-      const collapsibleContent = section.querySelector('.collapsible-content');
-
-      toggleIcon.addEventListener('click', () => {
-        collapsibleContent.classList.toggle('active');
-        toggleIcon.classList.toggle('active');
-        
-        if (collapsibleContent.classList.contains('active')) {
-          collapsibleContent.style.maxHeight = collapsibleContent.scrollHeight + "px";
-        } else {
-          collapsibleContent.style.maxHeight = "0";
-        }
-      });
-    }
-
-    function addCalculateNightsFunctionality(section) {
-      const checkinInput = section.querySelector('.date-checkin');
-      const checkoutInput = section.querySelector('.date-checkout');
-      const nightsInput = section.querySelector('.nombre-nuit');
-
-      checkinInput.addEventListener('input', calculateNights);
-      checkoutInput.addEventListener('input', calculateNights);
-
-      function calculateNights() {
-        const checkinDate = new Date(checkinInput.value);
-        const checkoutDate = new Date(checkoutInput.value);
-        const timeDiff = checkoutDate - checkinDate;
-        const nights = timeDiff / (1000 * 3600 * 24);
-        nightsInput.value = nights > 0 ? nights : 0;
-      }
-    }
-
-    // Add the initial delete button listener, toggle functionality, and calculate nights functionality
-    const initialHebergementSection = document.querySelector('.hebergement-section');
-    addDeleteButtonListener(initialHebergementSection);
-    addToggleFunctionality(initialHebergementSection);
-    addCalculateNightsFunctionality(initialHebergementSection);
+    hebergementsContainer.appendChild(newHebergementSection);
+    addDeleteButtonListener(newHebergementSection);
+    addCalculateNightsFunctionality(newHebergementSection);
   });
+
+  function addDeleteButtonListener(section) {
+    const deleteButton = section.querySelector('.delete-hebergement');
+    deleteButton.addEventListener('click', () => {
+      section.remove();
+    });
+  }
+
+  function addCalculateNightsFunctionality(section) {
+    const checkinInput = section.querySelector('.date-checkin');
+    const checkoutInput = section.querySelector('.date-checkout');
+    const nightsInput = section.querySelector('.nombre-nuit');
+
+    checkinInput.addEventListener('input', calculateNights);
+    checkoutInput.addEventListener('input', calculateNights);
+
+    function calculateNights() {
+      const checkinDate = new Date(checkinInput.value);
+      const checkoutDate = new Date(checkoutInput.value);
+      const timeDiff = checkoutDate - checkinDate;
+      const nights = timeDiff / (1000 * 3600 * 24);
+      nightsInput.value = nights > 0 ? nights : 0;
+    }
+  }
+
+  const initialHebergementSection = document.querySelector('.hebergement-section');
+  addDeleteButtonListener(initialHebergementSection);
+  addCalculateNightsFunctionality(initialHebergementSection);
+});
 </script>
 
 
+<!-- Hebergement section Ends  -->
 
       <div class="price-inputs">
         <h3>Prix Hors Promo <span class="toggle-icon">+</span></h3>
