@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nom = mysqli_real_escape_string($conn, $_POST['nom']);
     $statut = mysqli_real_escape_string($conn, $_POST['statut']);
     $duree_sejour = mysqli_real_escape_string($conn, $_POST['duree_sejour']);
-
+    $typeId = intval($_POST['type']);
     // wess
     $prix_chambre_quadruple = mysqli_real_escape_string($conn, $_POST['prix_chambre_quadruple']);
     $prix_chambre_triple = mysqli_real_escape_string($conn, $_POST['prix_chambre_triple']);
@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             nom = '$nom',
             statut = '$statut',
             duree_sejour = '$duree_sejour',
+            type_id = $typeId,
             -- wess
             prix_chambre_quadruple = '$prix_chambre_quadruple',
             prix_chambre_triple = '$prix_chambre_triple',
