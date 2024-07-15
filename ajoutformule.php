@@ -515,7 +515,7 @@ function toggleCollapse(element) {
           <div class="input-group">
             <label for="date_checkin">Date Checkin :</label>
             <input type="date" id="date_checkin1" name="date_checkin[]" class="half-width-input date-checkin" required>
-          </div>
+          </div>          
           <div class="input-group">
             <label for="date_checkout">Date Checkout :</label>
             <input type="date" id="date_checkout1" name="date_checkout[]" class="half-width-input date-checkout" required>
@@ -538,6 +538,17 @@ function toggleCollapse(element) {
               ?>
             </select>
           </div>
+          <!-- wess -->
+          <div class="input-group">
+          <label for="type_pension">Type de Pension:</label>
+            <select id="type_pension" name="type_pension[]" required>
+                <option value="">Sélectionnez le type de pension</option>
+                <option value="Pension Complète">Pension Complète</option>
+                <option value="Demi-pension">Demi-pension</option>
+                <option value="Sans pension">Sans pension</option>
+            </select>
+          </div>          
+          <!-- wess -->
           <div class="input-group">
             <label for="nombre_nuit">Nombre de nuitées :</label>
             <input type="number" id="nombre_nuit1" name="nombre_nuit[]" class="half-width-input nombre-nuit" required readonly>
@@ -589,6 +600,17 @@ document.addEventListener('DOMContentLoaded', () => {
               ?>
             </select>
           </div>
+          <!-- wess -->
+          <div class="input-group">
+          <label for="type_pension">Type de Pension:</label>
+            <select id="type_pension" name="type_pension[]" required>
+                <option value="">Sélectionnez le type de pension</option>
+                <option value="Pension Complète">Pension Complète</option>
+                <option value="Demi-pension">Demi-pension</option>
+                <option value="Sans pension">Sans pension</option>
+            </select>
+          </div>  
+          <!-- wess -->
           <div class="input-group">
             <label for="nombre_nuit">Nombre de nuitées :</label>
             <input type="number" name="nombre_nuit[]" class="half-width-input nombre-nuit" required readonly>

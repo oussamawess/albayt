@@ -599,6 +599,17 @@
                                 ?>
                             </select>
                         </div>
+                        <!-- wess -->                          
+                        <div class="input-group">
+                        <label for="type_pension_<?php echo $index; ?>">Type de Pension:</label>
+                        <select id="type_pension_<?php echo $index; ?>" name="hebergements[<?php echo $index; ?>][type_pension]" required>
+                            <option value="">Sélectionnez le type de pension</option>
+                            <option value="Pension Complète" <?php echo ($hebergement['type_pension'] == 'Pension Complète') ? 'selected' : ''; ?>>Pension Complète</option>
+                            <option value="Demi-pension" <?php echo ($hebergement['type_pension'] == 'Demi-pension') ? 'selected' : ''; ?>>Demi-pension</option>
+                            <option value="Sans pension" <?php echo ($hebergement['type_pension'] == 'Sans pension') ? 'selected' : ''; ?>>Sans pension</option>
+                        </select>
+                        </div>
+                        <!-- wess -->
                         <div class="input-group">
                             <label for="nombre_nuit_<?php echo $index; ?>">Nombre de nuitées :</label>
                             <input type="number" id="nombre_nuit_<?php echo $index; ?>" name="hebergements[<?php echo $index; ?>][nombre_nuit]" class="half-width-input" value="<?php echo $hebergement['nombre_nuit']; ?>" required readonly>
@@ -654,6 +665,15 @@
                         ?>
                     </select>
                 </div>
+                <div class="input-group">
+                <label for="type_pension_${hebergementIndex}">Type de Pension:</label>
+                <select id="type_pension_${hebergementIndex}" name="hebergements[${hebergementIndex}][type_pension]" required>
+                    <option value="">Sélectionnez le type de pension</option>
+                    <option value="Pension Complète">Pension Complète</option>
+                    <option value="Demi-pension">Demi-pension</option>
+                    <option value="Sans pension">Sans pension</option>
+                </select>
+            </div>
                 <div class="input-group">
                     <label for="nombre_nuit_${hebergementIndex}">Nombre de nuitées :</label>
                     <input type="number" id="nombre_nuit_${hebergementIndex}" name="hebergements[${hebergementIndex}][nombre_nuit]" class="half-width-input" required readonly>

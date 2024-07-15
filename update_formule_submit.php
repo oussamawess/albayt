@@ -110,9 +110,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $date_checkin = mysqli_real_escape_string($conn, $hebergement['date_checkin']);
         $date_checkout = mysqli_real_escape_string($conn, $hebergement['date_checkout']);
         $nombre_nuit = mysqli_real_escape_string($conn, $hebergement['nombre_nuit']);
+        $type_pension = mysqli_real_escape_string($conn, $hebergement['type_pension']);
 
-        $insertSql = "INSERT INTO hebergements (formule_id, hotel_id, date_checkin, date_checkout, nombre_nuit) 
-                      VALUES ('$formule_id', '$hotel_id', '$date_checkin', '$date_checkout', '$nombre_nuit')";
+        $insertSql = "INSERT INTO hebergements (formule_id, hotel_id, date_checkin, date_checkout, type_pension, nombre_nuit) 
+                      VALUES ('$formule_id', '$hotel_id', '$date_checkin', '$date_checkout', '$type_pension', '$nombre_nuit')";
 
         if (!mysqli_query($conn, $insertSql)) {
             echo "Erreur lors de l'insertion des hébergements : " . mysqli_error($conn);

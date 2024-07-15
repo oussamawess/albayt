@@ -33,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $date_checkin = $_POST['date_checkin'];
         $date_checkout = $_POST['date_checkout'];
         $hotel = $_POST['hotel'];
+        $type_pension = $_POST['type_pension'];
         $nombre_nuit = $_POST['nombre_nuit'];
 
         // Insert into hebergement table for each Hébergement block
@@ -40,10 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $date_checkin_value = mysqli_real_escape_string($conn, $date_checkin[$i]);
             $date_checkout_value = mysqli_real_escape_string($conn, $date_checkout[$i]);
             $hotel_value = mysqli_real_escape_string($conn, $hotel[$i]);
+            $type_pension_value = mysqli_real_escape_string($conn, $type_pension[$i]); //Pension
             $nombre_nuit_value = mysqli_real_escape_string($conn, $nombre_nuit[$i]);
 
-            $sql_hebergement = "INSERT INTO hebergements (formule_id, date_checkin, date_checkout, hotel_id, nombre_nuit) 
-                                VALUES ('$formule_id', '$date_checkin_value', '$date_checkout_value', '$hotel_value', '$nombre_nuit_value')";
+            $sql_hebergement = "INSERT INTO hebergements (formule_id, date_checkin, date_checkout, hotel_id, type_pension, nombre_nuit) 
+                                VALUES ('$formule_id', '$date_checkin_value', '$date_checkout_value', '$hotel_value', '$type_pension_value', '$nombre_nuit_value')";
             mysqli_query($conn, $sql_hebergement);
         }
 
