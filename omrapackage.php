@@ -136,16 +136,18 @@
                         if (mysqli_num_rows($result_formules) > 0) {
                             echo "<td>";
                             while ($row_formule = mysqli_fetch_assoc($result_formules)) {
-                                echo "<span class='icon'>&#128393;</span><a href='edit_formule.php?id=" . $row_formule['id'] . "'>" . $row_formule['type_nom'] . "</a>"; // Use type_nom instead of nom
+                                echo "<span class='icon'>&#128393;</span><a href='edit_formule.php?id=" . $row_formule['id'] . "'>" . $row_formule['type_nom'] . "</a>"; // Use type_nom instead of nom                            
                                 echo "<span class='icon'>&#128465;</span><a href='delete_formule.php?id=" . $row_formule['id'] . "' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette formule?')\">Supprimer</a>";
+                                
 
-                                if (!empty($row_formule['heure_depart'])) {
-                                    $date_depart_formattee = date('d-m-Y', strtotime($row_formule['heure_depart']));
+                                if (!empty($row_formule['date_depart'])) {
+                                    $date_depart_formattee = date('d-m-Y', strtotime($row_formule['date_depart']));
                                     echo "<br><span class='indicator'>Date de départ: " . $date_depart_formattee . "</span>";
                                 }
-
                                 echo "<br>"; // Add a line break after each formule
+                                
                             }
+                            
                             echo "</td>";
                         } else {
                             echo "<td>Aucune formule disponible pour ce package.</td>";
