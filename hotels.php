@@ -91,7 +91,7 @@
                     <th>Nom de l'Hôtel</th>
                     <th>Étoiles</th>
                     <th>Ville</th>
-                    <th>Type de Pension</th>
+                    <!-- <th>Type de Pension</th> -->
                     <th>Détails</th>
                     <th>Monuments à Proximité</th>
                     <th>Action</th>
@@ -116,7 +116,7 @@
                         echo "<td>" . $row_hotel['nom'] . "</td>";
                         echo "<td>" . $row_hotel['etoiles'] . "</td>";
                         echo "<td>" . $row_hotel['ville'] . "</td>";
-                        echo "<td>" . $row_hotel['pension'] . "</td>";
+                        // echo "<td>" . $row_hotel['pension'] . "</td>";
                         echo "<td>" . $row_hotel['details'] . "</td>";
                         echo "<td>" . $row_hotel['monument'] . "</td>";
 

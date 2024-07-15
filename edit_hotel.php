@@ -202,8 +202,8 @@ if (isset($_GET['delete_image'])) {
             <label for="ville">Ville:</label>
             <input type="text" id="ville" name="ville" value="<?php echo $ville; ?>" required>
 
-            <label for="pension">Type de Pension:</label>
-            <input type="text" id="pension" name="pension" value="<?php echo $pension; ?>" required>
+            <!-- <label for="pension">Type de Pension:</label>
+            <input type="text" id="pension" name="pension" value="<?php echo $pension; ?>" required> -->
 
             <label for="details">Détails:</label>
             <textarea id="details" name="details" rows="4" required><?php echo $details; ?></textarea>

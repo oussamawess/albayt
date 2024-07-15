@@ -93,13 +93,13 @@
             <label for="ville">Ville:</label>
             <input type="text" id="ville" name="ville" required>
 
-            <label for="pension">Type de Pension:</label>
+            <!-- <label for="pension">Type de Pension:</label>
             <select id="pension" name="pension" required>
                 <option value="">Sélectionnez le type de pension</option>
                 <option value="Pension Complète">Pension Complète</option>
                 <option value="Demi-pension">Demi-pension</option>
                 <option value="Sans pension">Sans pension</option>
-            </select>
+            </select> -->
 
             <label for="details">Détails:</label>
             <textarea id="details" name="details" rows="4" required></textarea>
