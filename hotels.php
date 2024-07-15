@@ -65,6 +65,20 @@
         .btn-delete {
             background-color: #f44336;
             color: white;
+            text-decoration: none;   
+        }
+
+        .btn-add {
+            background-color: #2595ee;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            right: 155px;
+            top: 90px;            
+            text-decoration: none;            
         }
     </style>
     <?php
@@ -85,6 +99,7 @@
 
     <div class="container">
         <h2>Liste des Hôtels</h2>
+        <a href="ajouthotel.php" class='btn-add'><b>Ajouter un Hôtel</b></a>
         <table>
             <thead>
                 <tr>

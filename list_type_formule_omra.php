@@ -65,6 +65,20 @@
         .btn-delete {
             background-color: #f44336;
             color: white;
+            text-decoration: none;
+        }
+
+        .btn-add {
+            background-color: #2595ee;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            right: 150px;
+            top: 90px;            
+            text-decoration: none;            
         }
     </style>
     <?php
@@ -85,6 +99,7 @@
 
     <div class="container">
         <h2 class="text-center">Liste des Types de Formules Omra</h2>
+        <a href="ajout_type_formule.php" class='btn-add'><b>Ajouter un type de Formule</b></a>
         <table class="table table-bordered">
             <thead>
                 <tr>

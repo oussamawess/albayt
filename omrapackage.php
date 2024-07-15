@@ -62,9 +62,24 @@
             color: white;
         }
 
+        .btn-add {
+            background-color: #2595ee;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            right: 75px;
+            top: 90px;            
+            text-decoration: none;            
+        }
+        
+
         .btn-delete {
             background-color: #f44336;
             color: white;
+            text-decoration: none;  
         }
 
         .icon {
@@ -100,8 +115,10 @@
 
     <?php include 'header.php'; ?>
 
-    <div class="container">
+    <div class="container">        
         <h2 class="text-center">Liste des villes avec Formules</h2>
+        <a href="ajoutomrapackage.php" class='btn-add'><b>Ajouter une Ville</b></a>
+
         <table>
             <thead>
                 <tr>

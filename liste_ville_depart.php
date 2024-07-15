@@ -36,6 +36,19 @@
         .btn-sm {
             margin: 0 2px;
         }
+
+        .btn-add {
+            background-color: #2595ee;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            right: 210px;
+            top: 130px;            
+            text-decoration: none;            
+        }
     </style>
     <?php
     session_start(); // Start session to access session variables
@@ -56,6 +69,7 @@
 
     <div class="container mt-5">
         <h2 class="text-center">Liste des Villes de Départ</h2>
+        <a href="ajouter_ville_depart.php" class='btn-add'><b>Ajouter une Ville de Départ</b></a>
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>

@@ -70,6 +70,19 @@
         .logo {
             width: 100px;
         }
+
+        .btn-add {
+            background-color: #2595ee;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            right: 155px;
+            top: 90px;            
+            text-decoration: none;            
+        }
     </style>
     <?php
     session_start(); // Start session to access session variables
@@ -89,6 +102,7 @@
 
     <div class="container">
         <h2 class="text-center">Liste des Compagnies Aériennes</h2>
+        <a href="add_compagnie.php" class='btn-add'><b>Ajouter une Compagnie Aérienne</b></a>
         <table class="table table-bordered">
             <thead>
                 <tr>

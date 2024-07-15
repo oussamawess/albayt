@@ -66,6 +66,20 @@
             background-color: #f44336;
             color: white;
         }
+
+        .btn-add {
+            background-color: #2595ee;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            right: 155px;
+            top: 100px;            
+            text-decoration: none;            
+        }
+    </style>
     </style>
     <?php
     session_start(); // Start session to access session variables
@@ -85,6 +99,7 @@
 
     <div class="container">
         <h2 class="text-center">Liste des Extras</h2>
+        <a href="ajout_extra.php" class='btn-add'><b>Ajouter un Extra</b></a>
         <table class="table table-bordered">
             <thead>
                 <tr>
