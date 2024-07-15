@@ -271,6 +271,11 @@
           <select id="type" name="type" class="half-width-input" required>
           </select>
         </div>
+
+        <div class="input-group">
+            <label for="date_depart">Date de Départ:</label>
+            <input type="date" id="date_depart" name="date_depart" class="half-width-input" required>
+        </div> 
       </div>
 
 

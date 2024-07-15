@@ -251,6 +251,7 @@
                     $existingNom = $row['nom'];
                     $existingStatut = $row['statut'];
                     $existingDureeSejour = $row['duree_sejour'];
+                    $existingDateDepart = $row['date_depart'];
                     // $existingVilleDepartId = $row['ville_depart_id'];
                     // $existingCompagnieAerienneId = $row['compagnie_aerienne_id'];
                     // $existingNumVol = $row['num_vol'];
@@ -370,9 +371,12 @@
             });
         </script>
 
-
-
+        <div class="input-group">
+            <label for="date_depart">Date de Départ:</label>
+            <input type="date" id="date_depart" name="date_depart" class="half-width-input" value="<?php echo $existingDateDepart; ?>" required>
+        </div> 
     </div>
+
     <div class="half-width-inputs">
         <div class="input-group">
             <label for="statut">Statut:</label>
