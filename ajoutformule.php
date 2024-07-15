@@ -238,9 +238,9 @@
 
 
         <div class="input-group">
-          <label for="package">Sélectionnez le Package Omra:</label>
+          <label for="package">Ville de départ:</label>
           <select id="package" name="package" class="half-width-input" required>
-            <option value="">Sélectionnez un package</option>
+            <option value="">Sélectionnez une ville</option>
             <?php
             // Inclure le fichier de connexion à la base de données
             include 'db.php';

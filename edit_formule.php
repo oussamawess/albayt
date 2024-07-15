@@ -307,9 +307,9 @@
             <input type="hidden" name="formule_id" value="<?php echo $formuleId; ?>">
             <div class="half-width-inputs">
                 <div class="input-group">
-                    <label for="package">Sélectionnez le Package Omra:</label>
+                    <label for="package">Ville de départ:</label>
                     <select id="package" name="package" class="half-width-input" required>
-                        <option value="">Sélectionnez un package</option>
+                        <option value="">Sélectionnez une ville</option>
                         <?php
                         // Fetch and display package options from the database
                         $sql = "SELECT id, nom FROM omra_packages";
@@ -455,10 +455,10 @@
                             <input type="datetime-local" id="heure_arrivee_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][heure_arrivee]" class="half-width-input" value="<?php echo $vol['heure_arrivee']; ?>" required>
                         </div>
                     </div>
-                    <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Remove</button>
+                    <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Supprimer Vol</button>
                 </div>
             <?php } ?>
-            <button type="button" class="add-button addbutton" style="float: right; margin-top: -30px;" onclick="addVol()">Add Vol</button>
+            <button type="button" class="add-button addbutton" style="float: right; margin-top: -30px;" onclick="addVol()">Ajouter Vol</button>
         </div>
     </div>
 
@@ -533,7 +533,7 @@
                 <input type="datetime-local" id="heure_arrivee_${index}" name="vols[${index}][heure_arrivee]" class="half-width-input" required>
             </div>
         </div>
-        <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Remove</button>
+        <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Supprimer Vol</button>
     `;
             container.appendChild(volGroup);
 
@@ -604,10 +604,10 @@
                             <input type="number" id="nombre_nuit_<?php echo $index; ?>" name="hebergements[<?php echo $index; ?>][nombre_nuit]" class="half-width-input" value="<?php echo $hebergement['nombre_nuit']; ?>" required readonly>
                         </div>
                     </div>
-                    <button type="button" class="remove-hebergement deletebutton" onclick="removeHebergement(<?php echo $index; ?>)">Remove</button>
+                    <button type="button" class="remove-hebergement deletebutton" onclick="removeHebergement(<?php echo $index; ?>)">Supprimer Hébergement</button>
                 </div>
             <?php } ?>
-            <button type="button" id="add-hebergement" class="addbutton" style="float: right; margin-top: -30px;" onclick="addHebergement()">Add Hébergement</button>
+            <button type="button" id="add-hebergement" class="addbutton" style="float: right; margin-top: -30px;" onclick="addHebergement()">Ajouter Hébergement</button>
         </div>
     </div>
 
@@ -659,7 +659,7 @@
                     <input type="number" id="nombre_nuit_${hebergementIndex}" name="hebergements[${hebergementIndex}][nombre_nuit]" class="half-width-input" required readonly>
                 </div>
             </div>
-            <button type="button" class="remove-hebergement deletebutton" onclick="removeHebergement(${hebergementIndex})">Remove</button>
+            <button type="button" class="remove-hebergement deletebutton" onclick="removeHebergement(${hebergementIndex})">Supprimer Hébergement</button>
         `;
 
             hebergementSection.appendChild(newHebergement);

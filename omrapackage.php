@@ -105,7 +105,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>Nom du Package</th>
+                    <th>Nom du Ville</th>
                     <th>Description</th>
                     <th>Formules disponibles</th>
                     <th>Action</th>

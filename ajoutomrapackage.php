@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un Package Omra</title>
+    <title>Ajouter une Ville</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -83,9 +83,9 @@
 <body>
 
     <div class="container">
-        <h2>Ajouter un Package Omra</h2>
+        <h2>Ajouter une Ville</h2>
         <form action="submit_omra_package.php" method="POST" enctype="multipart/form-data">
-            <label for="nom">Nom du Package:</label>
+            <label for="nom">Nom du Ville:</label>
             <input type="text" id="nom" name="nom" required>
 
             <label for="description">Description:</label>
@@ -98,7 +98,7 @@
 
 
 
-            <button type="submit">Ajouter Package</button>
+            <button type="submit">Ajouter Ville</button>
         </form>
     </div>
 

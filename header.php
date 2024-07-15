@@ -66,10 +66,10 @@
 <nav>
     <ul>
         <li>
-            <a href="#">Packages Omra</a>
+            <a href="#">Villes</a>
             <ul>
-                <li><a href="omrapackage.php">Liste des Packages</a></li>
-                <li><a href="ajoutomrapackage.php">Ajouter un Package</a></li>
+                <li><a href="omrapackage.php">Liste des Villes</a></li>
+                <li><a href="ajoutomrapackage.php">Ajouter une Ville</a></li>
             </ul>
         </li>
 

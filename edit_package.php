@@ -82,7 +82,7 @@ if (isset($_POST['update_package'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier un Package Omra</title>
+    <title>Modifier une Ville</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -161,9 +161,9 @@ if (isset($_POST['update_package'])) {
 <body>
 
     <div class="container">
-        <h2>Modifier un Package Omra</>
+        <h2>Modifier une Ville</>
             <form action="edit_package.php?id=<?php echo $package_id; ?>" method="POST" enctype="multipart/form-data">
-                <label for="nom">Nom du Package:</label>
+                <label for="nom">Nom du Ville:</label>
                 <input type="text" id="nom" name="nom" value="<?php echo $nom; ?>" required>
 
                 <label for="description">Description:</label>
@@ -178,7 +178,7 @@ if (isset($_POST['update_package'])) {
 
                 <!-- Ajoutez d'autres champs du package ici en fonction de votre structure de base de données -->
 
-                <button type="submit" name="update_package">Modifier Package</button>
+                <button type="submit" name="update_package">Modifier Ville</button>
             </form>
     </div>
 
