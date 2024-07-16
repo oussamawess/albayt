@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 15 juil. 2024 à 21:56
+-- Généré le : mar. 16 juil. 2024 à 16:59
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -69,7 +69,6 @@ INSERT INTO `extras` (`id`, `nom`, `description`, `prix`) VALUES
 CREATE TABLE `formules` (
   `id` int(11) NOT NULL,
   `package_id` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL,
   `date_depart` date DEFAULT NULL,
   `statut` enum('activé','désactivé') NOT NULL,
   `duree_sejour` varchar(255) NOT NULL,
@@ -91,32 +90,32 @@ CREATE TABLE `formules` (
 -- Déchargement des données de la table `formules`
 --
 
-INSERT INTO `formules` (`id`, `package_id`, `nom`, `date_depart`, `statut`, `duree_sejour`, `prix_chambre_quadruple`, `prix_chambre_triple`, `prix_chambre_double`, `prix_chambre_single`, `child_discount`, `prix_bebe`, `prix_chambre_quadruple_promo`, `prix_chambre_triple_promo`, `prix_chambre_double_promo`, `prix_chambre_single_promo`, `description`, `type_id`) VALUES
-(9, 5, '', '2024-07-18', 'activé', '18 jours', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>test firt one</p>\r\n', 10),
-(10, 1, '', '2000-05-05', 'activé', '15 jours', '1500.00', '1500.00', '1500.00', '1500.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>17 OCTOBRE 2024</p>\r\n\r\n<p>D&eacute;part</p>\r\n\r\n<p><strong>PARIS &gt; M&eacute;dine</strong><br />\r\nVol r&eacute;gulier avec la compagnie a&eacute;rienne Royal Jordanian.</p>\r\n\r\n<p>17 OCTOBRE 2024</p>\r\n\r\n<p>Transfert</p>\r\n\r\n<p><strong>A&eacute;roport &gt; H&ocirc;tel</strong><br />\r\nTransfert de l&rsquo;a&eacute;roport vers l&rsquo;h&ocirc;tel en bus confort climatis&eacute;.</p>\r\n\r\n<p>17 OCTOBRE 2024</p>\r\n\r\n<p>Arriv&eacute;e &agrave; l&rsquo;h&ocirc;tel</p>\r\n\r\n<p><strong>BOSPHORUS WAQF AL SAFI 4*</strong><br />\r\nLa premi&egrave;re partie du s&eacute;jour se d&eacute;roulera dans un h&ocirc;tel 4 &eacute;toiles de renomm&eacute;e internationale, situ&eacute; en face du Masjid An&rsquo;Nabawi. Vous y s&eacute;journerez durant 5 nuits.</p>\r\n\r\n<p>18 OCTOBRE 2024</p>\r\n\r\n<p>Visite</p>\r\n\r\n<p><strong>VISITE RELIGIEUSE &Agrave; M&Eacute;DINE</strong><br />\r\nEn d&eacute;but de matin&eacute;e, vous effectuerez une visite religieuse &agrave; Madinah. Vous effectuerez une visite aux Martyrs de Ohoud ainsi que votre pri&egrave;re dans la mosqu&eacute;e de Qoba. Vous serez conduit en bus climatis&eacute;.</p>\r\n\r\n<p>18 OCTOBRE 2024</p>\r\n\r\n<p>Transfert</p>\r\n\r\n<p><strong>M&Eacute;DINE MAKKAH</strong><br />\r\nLe transfert de M&eacute;dine &agrave; Makkah se fera en d&eacute;but de matin&eacute;e dans un bus climatis&eacute;. La distance parcourue est de 480 km environ.</p>\r\n\r\n<p>18 OCTOBRE 2024</p>\r\n\r\n<p>Arriv&eacute;e &agrave; l&rsquo;h&ocirc;tel</p>\r\n\r\n<p><strong>SHERATON 5*</strong><br />\r\nS&eacute;jour dans un h&ocirc;tel 5 &eacute;toiles situ&eacute; en Face du Haram. Vous passerez 5 nuits dans l&rsquo;un des meilleurs h&ocirc;tels de la Mecque.</p>\r\n\r\n<p>19 OCTOBRE 2024</p>\r\n\r\n<p>Omra</p>\r\n\r\n<p><strong>Jour de la OMRA</strong><br />\r\nR&eacute;union &agrave; la r&eacute;ception de l&rsquo;h&ocirc;tel avant d&rsquo;accomplir les rites en groupe. D&eacute;part de l&rsquo;h&ocirc;tel &agrave; 13h00 apr&egrave;s avoir effectu&eacute; ses grandes ablutions et mis son &laquo; ihr&acirc;m &raquo;. Arr&ecirc;t dans le Miq&acirc;t &laquo; Abyar Ali &raquo; pour entrer dans l&rsquo;&eacute;tat de sacralisation et commencer la &laquo; Talbiyah &raquo;.</p>\r\n\r\n<p>20 OCTOBRE 2024</p>\r\n\r\n<p>Visite</p>\r\n\r\n<p><strong>Visite d&eacute;couverte</strong><br />\r\nVisite religieuse &agrave; Makkah en d&eacute;but de matin&eacute;e. Trajet en bus climatis&eacute;. Parcours du Hajj et quelques sites historiques.</p>\r\n\r\n<p>21 OCTOBRE 2024</p>\r\n\r\n<p>Transfert</p>\r\n\r\n<p><strong>MAKKAH JEDDAH</strong><br />\r\nTransfert de l&rsquo;h&ocirc;tel vers l&rsquo;a&eacute;roport de Jeddah en bus confort climatis&eacute;.</p>\r\n\r\n<p>21 MAI 2024</p>\r\n\r\n<p>Retour</p>\r\n\r\n<p><strong>JEDDAH &gt; PARIS</strong><br />\r\nVol r&eacute;gulier avec la compagnie a&eacute;rienne Saudi Airlines.</p>\r\n', 2),
-(11, 1, '', '2024-07-12', 'activé', '15 jours', '1500.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>test</p>\r\n', 3),
-(13, 3, '', '2024-07-02', 'activé', '15', '2000.00', '2000.00', '2000.00', '2000.00', '500.00', '500.00', '1500.00', '1500.00', '1500.00', '1500.00', '<p><strong>Day1 : visite xyz</strong></p>\r\n\r\n<p><strong>Day2 : viste xyz1</strong></p>\r\n', 8),
-(14, 4, '', '2024-07-16', 'activé', '15 jours', '1680.00', '1900.00', '2500.00', '2800.00', '150.00', '500.00', '0.00', '0.00', '0.00', '1500.00', '<p>TEST</p>\r\n', 9),
-(15, 6, '', '2024-07-17', 'activé', '15 jours', '1990.00', '2090.00', '2190.00', '2490.00', '350.00', '150.00', '0.00', '0.00', '0.00', '0.00', '<p>test</p>\r\n', 7),
-(29, 4, '', '2024-07-12', 'désactivé', 'Repudiandae corrupti', '81.00', '99.00', '11.00', '56.00', '61.00', '64.00', '59.00', '83.00', '82.00', '10.00', '', 6),
-(30, 3, '', '2024-07-15', 'activé', 'Sed voluptatem dolor', '91.00', '62.00', '11.00', '19.00', '35.00', '73.00', '97.00', '60.00', '57.00', '18.00', '', 5),
-(33, 1, '', '2024-07-10', 'désactivé', 'Officiis culpa comm', '42.00', '89.00', '32.00', '44.00', '73.00', '17.00', '74.00', '86.00', '58.00', '54.00', '<p>wess 1 octobre comfort</p>\r\n', 2),
-(34, 4, '', '2024-07-12', 'activé', 'Consectetur perferen', '100.00', '47.00', '88.00', '85.00', '5.00', '67.00', '1.00', '86.00', '26.00', '85.00', '<p>avril comfort</p>\r\n', 9),
-(36, 3, '', '2024-07-25', 'désactivé', 'Ratione quia cum lab', '44.00', '42.00', '46.00', '81.00', '13.00', '56.00', '54.00', '10.00', '47.00', '43.00', '', 8),
-(37, 3, '', '2024-07-25', 'activé', 'Modi magni consequat', '53.00', '75.00', '80.00', '79.00', '7.00', '69.00', '53.00', '44.00', '9.00', '61.00', '<p>mars confort</p>\r\n\r\n<p>&nbsp;</p>\r\n', 5),
-(41, 1, '', '2024-07-13', 'activé', 'Non quibusdam illum', '44.00', '47.00', '33.00', '44.00', '1.00', '26.00', '72.00', '87.00', '53.00', '16.00', '<p>omra oct 1</p>\r\n', 3),
-(44, 4, '', NULL, 'activé', 'Perferendis nostrud ', '93.00', '15.00', '61.00', '46.00', '53.00', '44.00', '94.00', '1.00', '67.00', '22.00', '', 6),
-(46, 6, '', '2024-07-25', 'activé', 'Tempora voluptate ni', '37.00', '9.00', '82.00', '57.00', '6.00', '64.00', '43.00', '84.00', '72.00', '90.00', '<p>s1</p>\r\n', 12),
-(49, 1, '', '2024-07-17', 'activé', '10000', '5.00', '10.00', '15.00', '20.00', '25.00', '30.00', '35.00', '40.00', '45.00', '50.00', '<p>55</p>\r\n', 3),
-(50, 1, '', '2024-07-03', 'activé', 'In labore et molliti', '24.00', '12.00', '24.00', '57.00', '44.00', '59.00', '78.00', '93.00', '59.00', '28.00', '<p>volo</p>\r\n', 2),
-(52, 5, '', '2024-07-16', 'activé', 'Fuga Id in vero id ', '49.00', '71.00', '75.00', '64.00', '50.00', '72.00', '81.00', '43.00', '61.00', '37.00', '<p>aa</p>\r\n', 11),
-(54, 5, '', '2024-07-23', 'activé', 'Suscipit soluta ut c', '63.00', '92.00', '32.00', '97.00', '80.00', '76.00', '23.00', '24.00', '18.00', '32.00', '<p>penion</p>\r\n', 10),
-(55, 6, '', '2024-07-17', 'activé', 'Facere assumenda iur', '34.00', '18.00', '82.00', '38.00', '95.00', '47.00', '18.00', '7.00', '95.00', '62.00', '', 7),
-(56, 3, '', '2024-07-12', 'désactivé', 'Fugiat cum et hic e', '61.00', '85.00', '60.00', '83.00', '32.00', '67.00', '36.00', '37.00', '56.00', '100.00', '', 5),
-(57, 6, '', '2024-07-11', 'activé', 'Numquam temporibus q', '10.00', '36.00', '70.00', '14.00', '42.00', '45.00', '82.00', '73.00', '18.00', '79.00', '', 7),
-(58, 3, '', '2024-07-11', 'activé', '1', '38.00', '25.00', '91.00', '44.00', '47.00', '78.00', '49.00', '47.00', '4.00', '6.00', '', 5),
-(59, 3, '', '2024-07-01', 'désactivé', 'Aut ipsum et numqua', '73.00', '51.00', '94.00', '98.00', '47.00', '27.00', '51.00', '75.00', '77.00', '29.00', '', 5),
-(60, 3, '', '1994-12-28', 'activé', 'Atque et molestiae e', '76.00', '88.00', '61.00', '58.00', '19.00', '11.00', '40.00', '89.00', '41.00', '74.00', '<p>date</p>\r\n', 5);
+INSERT INTO `formules` (`id`, `package_id`, `date_depart`, `statut`, `duree_sejour`, `prix_chambre_quadruple`, `prix_chambre_triple`, `prix_chambre_double`, `prix_chambre_single`, `child_discount`, `prix_bebe`, `prix_chambre_quadruple_promo`, `prix_chambre_triple_promo`, `prix_chambre_double_promo`, `prix_chambre_single_promo`, `description`, `type_id`) VALUES
+(9, 5, '2024-07-18', 'activé', '18 jours', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>test firt one</p>\r\n', 10),
+(10, 1, '2000-05-05', 'activé', '15 jours', '1500.00', '1500.00', '1500.00', '1500.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>17 OCTOBRE 2024</p>\r\n\r\n<p>D&eacute;part</p>\r\n\r\n<p><strong>PARIS &gt; M&eacute;dine</strong><br />\r\nVol r&eacute;gulier avec la compagnie a&eacute;rienne Royal Jordanian.</p>\r\n\r\n<p>17 OCTOBRE 2024</p>\r\n\r\n<p>Transfert</p>\r\n\r\n<p><strong>A&eacute;roport &gt; H&ocirc;tel</strong><br />\r\nTransfert de l&rsquo;a&eacute;roport vers l&rsquo;h&ocirc;tel en bus confort climatis&eacute;.</p>\r\n\r\n<p>17 OCTOBRE 2024</p>\r\n\r\n<p>Arriv&eacute;e &agrave; l&rsquo;h&ocirc;tel</p>\r\n\r\n<p><strong>BOSPHORUS WAQF AL SAFI 4*</strong><br />\r\nLa premi&egrave;re partie du s&eacute;jour se d&eacute;roulera dans un h&ocirc;tel 4 &eacute;toiles de renomm&eacute;e internationale, situ&eacute; en face du Masjid An&rsquo;Nabawi. Vous y s&eacute;journerez durant 5 nuits.</p>\r\n\r\n<p>18 OCTOBRE 2024</p>\r\n\r\n<p>Visite</p>\r\n\r\n<p><strong>VISITE RELIGIEUSE &Agrave; M&Eacute;DINE</strong><br />\r\nEn d&eacute;but de matin&eacute;e, vous effectuerez une visite religieuse &agrave; Madinah. Vous effectuerez une visite aux Martyrs de Ohoud ainsi que votre pri&egrave;re dans la mosqu&eacute;e de Qoba. Vous serez conduit en bus climatis&eacute;.</p>\r\n\r\n<p>18 OCTOBRE 2024</p>\r\n\r\n<p>Transfert</p>\r\n\r\n<p><strong>M&Eacute;DINE MAKKAH</strong><br />\r\nLe transfert de M&eacute;dine &agrave; Makkah se fera en d&eacute;but de matin&eacute;e dans un bus climatis&eacute;. La distance parcourue est de 480 km environ.</p>\r\n\r\n<p>18 OCTOBRE 2024</p>\r\n\r\n<p>Arriv&eacute;e &agrave; l&rsquo;h&ocirc;tel</p>\r\n\r\n<p><strong>SHERATON 5*</strong><br />\r\nS&eacute;jour dans un h&ocirc;tel 5 &eacute;toiles situ&eacute; en Face du Haram. Vous passerez 5 nuits dans l&rsquo;un des meilleurs h&ocirc;tels de la Mecque.</p>\r\n\r\n<p>19 OCTOBRE 2024</p>\r\n\r\n<p>Omra</p>\r\n\r\n<p><strong>Jour de la OMRA</strong><br />\r\nR&eacute;union &agrave; la r&eacute;ception de l&rsquo;h&ocirc;tel avant d&rsquo;accomplir les rites en groupe. D&eacute;part de l&rsquo;h&ocirc;tel &agrave; 13h00 apr&egrave;s avoir effectu&eacute; ses grandes ablutions et mis son &laquo; ihr&acirc;m &raquo;. Arr&ecirc;t dans le Miq&acirc;t &laquo; Abyar Ali &raquo; pour entrer dans l&rsquo;&eacute;tat de sacralisation et commencer la &laquo; Talbiyah &raquo;.</p>\r\n\r\n<p>20 OCTOBRE 2024</p>\r\n\r\n<p>Visite</p>\r\n\r\n<p><strong>Visite d&eacute;couverte</strong><br />\r\nVisite religieuse &agrave; Makkah en d&eacute;but de matin&eacute;e. Trajet en bus climatis&eacute;. Parcours du Hajj et quelques sites historiques.</p>\r\n\r\n<p>21 OCTOBRE 2024</p>\r\n\r\n<p>Transfert</p>\r\n\r\n<p><strong>MAKKAH JEDDAH</strong><br />\r\nTransfert de l&rsquo;h&ocirc;tel vers l&rsquo;a&eacute;roport de Jeddah en bus confort climatis&eacute;.</p>\r\n\r\n<p>21 MAI 2024</p>\r\n\r\n<p>Retour</p>\r\n\r\n<p><strong>JEDDAH &gt; PARIS</strong><br />\r\nVol r&eacute;gulier avec la compagnie a&eacute;rienne Saudi Airlines.</p>\r\n', 2),
+(11, 1, '2024-07-12', 'activé', '15 jours', '1500.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>test</p>\r\n', 3),
+(13, 3, '2024-07-02', 'activé', '15', '2000.00', '2000.00', '2000.00', '2000.00', '500.00', '500.00', '1500.00', '1500.00', '1500.00', '1500.00', '<p><strong>Day1 : visite xyz</strong></p>\r\n\r\n<p><strong>Day2 : viste xyz1</strong></p>\r\n', 8),
+(14, 4, '2024-07-16', 'activé', '15 jours', '1680.00', '1900.00', '2500.00', '2800.00', '150.00', '500.00', '0.00', '0.00', '0.00', '1500.00', '<p>TEST</p>\r\n', 9),
+(15, 6, '2024-07-17', 'activé', '15 jours', '1990.00', '2090.00', '2190.00', '2490.00', '350.00', '150.00', '0.00', '0.00', '0.00', '0.00', '<p>test</p>\r\n', 7),
+(29, 4, '2024-07-12', 'désactivé', 'Repudiandae corrupti', '81.00', '99.00', '11.00', '56.00', '61.00', '64.00', '59.00', '83.00', '82.00', '10.00', '', 6),
+(30, 3, '2024-07-15', 'activé', 'Sed voluptatem dolor', '91.00', '62.00', '11.00', '19.00', '35.00', '73.00', '97.00', '60.00', '57.00', '18.00', '', 5),
+(33, 1, '2024-07-10', 'désactivé', 'Officiis culpa comm', '42.00', '89.00', '32.00', '44.00', '73.00', '17.00', '74.00', '86.00', '58.00', '54.00', '<p>wess 1 octobre comfort</p>\r\n', 2),
+(34, 4, '2024-07-12', 'activé', 'Consectetur perferen', '100.00', '47.00', '88.00', '85.00', '5.00', '67.00', '1.00', '86.00', '26.00', '85.00', '<p>avril comfort</p>\r\n', 9),
+(36, 3, '2024-07-25', 'désactivé', 'Ratione quia cum lab', '44.00', '42.00', '46.00', '81.00', '13.00', '56.00', '54.00', '10.00', '47.00', '43.00', '', 8),
+(37, 3, '2024-07-25', 'activé', 'Modi magni consequat', '53.00', '75.00', '80.00', '79.00', '7.00', '69.00', '53.00', '44.00', '9.00', '61.00', '<p>mars confort</p>\r\n\r\n<p>&nbsp;</p>\r\n', 5),
+(41, 1, '2024-07-13', 'activé', 'Non quibusdam illum', '44.00', '47.00', '33.00', '44.00', '1.00', '26.00', '72.00', '87.00', '53.00', '16.00', '<p>omra oct 1</p>\r\n', 3),
+(44, 4, NULL, 'activé', 'Perferendis nostrud ', '93.00', '15.00', '61.00', '46.00', '53.00', '44.00', '94.00', '1.00', '67.00', '22.00', '', 6),
+(46, 6, '2024-07-25', 'activé', 'Tempora voluptate ni', '37.00', '9.00', '82.00', '57.00', '6.00', '64.00', '43.00', '84.00', '72.00', '90.00', '<p>s1</p>\r\n', 12),
+(49, 1, '2024-07-17', 'activé', '10000', '5.00', '10.00', '15.00', '20.00', '25.00', '30.00', '35.00', '40.00', '45.00', '50.00', '<p>55</p>\r\n', 3),
+(50, 1, '2024-07-03', 'activé', 'In labore et molliti', '24.00', '12.00', '24.00', '57.00', '44.00', '59.00', '78.00', '93.00', '59.00', '28.00', '<p>volo</p>\r\n', 2),
+(52, 5, '2024-07-16', 'activé', 'Fuga Id in vero id ', '49.00', '71.00', '75.00', '64.00', '50.00', '72.00', '81.00', '43.00', '61.00', '37.00', '<p>aa</p>\r\n', 11),
+(54, 5, '2024-07-23', 'activé', 'Suscipit soluta ut c', '63.00', '92.00', '32.00', '97.00', '80.00', '76.00', '23.00', '24.00', '18.00', '32.00', '<p>penion</p>\r\n', 10),
+(55, 6, '2024-07-17', 'activé', 'Facere assumenda iur', '34.00', '18.00', '82.00', '38.00', '95.00', '47.00', '18.00', '7.00', '95.00', '62.00', '', 7),
+(56, 3, '2024-07-12', 'désactivé', 'Fugiat cum et hic e', '61.00', '85.00', '60.00', '83.00', '32.00', '67.00', '36.00', '37.00', '56.00', '100.00', '', 5),
+(57, 6, '2024-07-11', 'activé', 'Numquam temporibus q', '10.00', '36.00', '70.00', '14.00', '42.00', '45.00', '82.00', '73.00', '18.00', '79.00', '', 7),
+(58, 3, '2024-07-11', 'activé', '1', '38.00', '25.00', '91.00', '44.00', '47.00', '78.00', '49.00', '47.00', '4.00', '6.00', '', 5),
+(59, 3, '2024-07-01', 'désactivé', 'Aut ipsum et numqua', '73.00', '51.00', '94.00', '98.00', '47.00', '27.00', '51.00', '75.00', '77.00', '29.00', '', 5),
+(60, 3, '1994-12-28', 'activé', 'Atque et molestiae e', '76.00', '88.00', '61.00', '58.00', '19.00', '11.00', '40.00', '89.00', '41.00', '74.00', '<p>date</p>\r\n', 5);
 
 -- --------------------------------------------------------
 
@@ -185,7 +184,6 @@ CREATE TABLE `hotels` (
   `nom` varchar(255) NOT NULL,
   `etoiles` int(11) NOT NULL,
   `ville` varchar(100) NOT NULL,
-  `pension` varchar(50) NOT NULL,
   `details` text NOT NULL,
   `monument` varchar(255) NOT NULL,
   `image_gallery` text DEFAULT NULL
@@ -195,10 +193,10 @@ CREATE TABLE `hotels` (
 -- Déchargement des données de la table `hotels`
 --
 
-INSERT INTO `hotels` (`id`, `nom`, `etoiles`, `ville`, `pension`, `details`, `monument`, `image_gallery`) VALUES
-(4, 'Hotels Hilton Al Madinah', 5, 'Madina', 'Pension Complète', 'hotel 5*', 'en face de haram', NULL),
-(5, 'Hotel Seabel Alhambra', 5, 'Makkah', 'Pension Complète', 'Hotel 5*', 'En Face de haram', NULL),
-(6, 'star', 4, 'medina', '', 'nice', '4', NULL);
+INSERT INTO `hotels` (`id`, `nom`, `etoiles`, `ville`, `details`, `monument`, `image_gallery`) VALUES
+(4, 'Hotels Hilton Al Madinah', 5, 'Madina', 'hotel 5*', 'en face de haram', NULL),
+(5, 'Hotel Seabel Alhambra', 5, 'Makkah', 'Hotel 5*', 'En Face de haram', NULL),
+(6, 'star', 4, 'medina', 'nice', '4', NULL);
 
 -- --------------------------------------------------------
 
