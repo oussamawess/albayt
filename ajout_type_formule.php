@@ -110,10 +110,10 @@
     ?>
 
     <div class="container">
-        <h2>Ajouter un type de Formule Omra</h2>
+        <h2>Ajouter une categorie</h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST"
             enctype="multipart/form-data">
-            <label for="nom">Nom de la Formule:</label>
+            <label for="nom">Categorie de la Formule:</label>
             <input type="text" id="nom" name="nom" required>
 
             <label for="formule_parent">Formule Parent:</label>
@@ -141,7 +141,7 @@
                 <!-- Fin du code PHP pour afficher les options de formule parent -->
             </select>
 
-            <button type="submit">Ajouter Formule</button>
+            <button type="submit">Ajouter categorie</button>
         </form>
     </div>
 

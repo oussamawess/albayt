@@ -5,19 +5,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 1. Get Data from the Form and Sanitize Input
     $package_id = mysqli_real_escape_string($conn, $_POST['package']);
     $type_id = mysqli_real_escape_string($conn, $_POST['type']); // Get type_id
-    $date_depart = mysqli_real_escape_string($conn, $_POST['date_depart']);  
+    $date_depart = mysqli_real_escape_string($conn, $_POST['date_depart']);
     $statut = mysqli_real_escape_string($conn, $_POST['statut']);
-    $duree_sejour = mysqli_real_escape_string($conn, $_POST['duree_sejour']);  
+    $duree_sejour = mysqli_real_escape_string($conn, $_POST['duree_sejour']);
     $prix_chambre_quadruple = mysqli_real_escape_string($conn, $_POST['prix_chambre_quadruple']);
     $prix_chambre_triple = mysqli_real_escape_string($conn, $_POST['prix_chambre_triple']);
     $prix_chambre_double = mysqli_real_escape_string($conn, $_POST['prix_chambre_double']);
     $prix_chambre_single = mysqli_real_escape_string($conn, $_POST['prix_chambre_single']);
     $child_discount = mysqli_real_escape_string($conn, $_POST['child_discount']);
     $prix_bebe = mysqli_real_escape_string($conn, $_POST['prix_bebe']);
-    $prix_chambre_quadruple_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_quadruple_promo']);
-    $prix_chambre_triple_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_triple_promo']);
-    $prix_chambre_double_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_double_promo']);
-    $prix_chambre_single_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_single_promo']);
+    $prix_chambre_quadruple_promo = isset($_POST['prix_chambre_quadruple_promo']) && $_POST['prix_chambre_quadruple_promo'] !== '' ? mysqli_real_escape_string($conn, $_POST['prix_chambre_quadruple_promo']) : 0;
+    $prix_chambre_triple_promo = isset($_POST['prix_chambre_triple_promo']) && $_POST['prix_chambre_triple_promo'] !== '' ? mysqli_real_escape_string($conn, $_POST['prix_chambre_triple_promo']) : 0;
+    $prix_chambre_double_promo = isset($_POST['prix_chambre_double_promo']) && $_POST['prix_chambre_double_promo'] !== '' ? mysqli_real_escape_string($conn, $_POST['prix_chambre_double_promo']) : 0;
+    $prix_chambre_single_promo = isset($_POST['prix_chambre_single_promo']) && $_POST['prix_chambre_single_promo'] !== '' ? mysqli_real_escape_string($conn, $_POST['prix_chambre_single_promo']) : 0;
+
     $description = mysqli_real_escape_string($conn, $_POST['description']);
 
     // 2. Input Validation 

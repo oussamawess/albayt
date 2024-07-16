@@ -77,8 +77,8 @@
             cursor: pointer;
             position: absolute;
             right: 150px;
-            top: 90px;            
-            text-decoration: none;            
+            top: 90px;
+            text-decoration: none;
         }
     </style>
     <?php
@@ -98,12 +98,12 @@
 <body>
 
     <div class="container">
-        <h2 class="text-center">Liste des Types de Formules Omra</h2>
-        <a href="ajout_type_formule.php" class='btn-add'><b>Ajouter un type de Formule</b></a>
+        <h2 class="text-center">Liste des categories de Formules Omra</h2>
+        <a href="ajout_type_formule.php" class='btn-add'><b>Ajouter une categorie</b></a>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Nom du Type de Formule</th>
+                    <th>Categorie de Formule</th>
                     <th>Package Parent</th>
                     <th>Action</th>
                 </tr>
