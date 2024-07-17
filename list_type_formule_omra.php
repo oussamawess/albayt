@@ -80,6 +80,16 @@
             top: 90px;
             text-decoration: none;
         }
+
+        .btn-add:hover {
+            background-color: #0b73f4;
+        }
+        .btn-edit:hover {
+            background-color: #45a049;
+        }
+        .btn-delete:hover {
+            background-color: #fa190b;
+        }
     </style>
     <?php
     session_start(); // Start session to access session variables
@@ -98,13 +108,13 @@
 <body>
 
     <div class="container">
-        <h2 class="text-center">Liste des categories de Formules Omra</h2>
+        <h2 class="text-center">Liste des categories</h2>
         <a href="ajout_type_formule.php" class='btn-add'><b>Ajouter une categorie</b></a>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Categorie de Formule</th>
-                    <th>Package Parent</th>
+                    <th>Nom de la catégorie</th>
+                    <th>Ville</th>
                     <th>Action</th>
                 </tr>
             </thead>

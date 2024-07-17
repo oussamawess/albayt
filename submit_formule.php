@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         echo "Nouvelle formule et vols ajoutés avec succès";
-        header("Location: omrapackage.php"); // Redirect back to the form after successful insertion
+        header("Location: display_formules.php"); // Redirect back to the form after successful insertion
         exit;
     } else {
         echo "Erreur: " . $sql_formule . "<br>" . mysqli_error($conn);

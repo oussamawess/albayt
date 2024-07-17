@@ -80,6 +80,16 @@
             top: 90px;            
             text-decoration: none;            
         }
+
+        .btn-add:hover {
+            background-color: #0b73f4;
+        }
+        .btn-edit:hover {
+            background-color: #45a049;
+        }
+        .btn-delete:hover {
+            background-color: #fa190b;
+        }
     </style>
     <?php
     session_start(); // Start session to access session variables

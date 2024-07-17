@@ -79,7 +79,7 @@
         .btn-delete {
             background-color: #f44336;
             color: white;
-            text-decoration: none;  
+            text-decoration: none;
         }
 
         .icon {
@@ -97,6 +97,47 @@
         .card.cardnew.col-md-3 {
             padding: 0px !important;
         }
+
+        .btn-dup {
+            background-color: #f9c710;            
+            color: black;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .btn-dup:hover {
+            background-color: #eca527;
+        }
+
+        .btn-dup-pack {
+            background-color: #10ced7;            
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .btn-dup-pack:hover {
+            background-color: #00abc0;
+            color: white;
+        }
+
+        .btn-add:hover {
+            background-color: #0b73f4;
+        }
+        .btn-edit:hover {
+            background-color: #45a049;
+        }
+        .btn-delete:hover {
+            background-color: #fa190b;
+        }
+
     </style>
 </head>
 
@@ -159,8 +200,10 @@
 
                                 if (!empty($row_formule['date_depart'])) {
                                     $date_depart_formattee = date('d-m-Y', strtotime($row_formule['date_depart']));
-                                    echo "<br><span class='indicator'>Date de départ: " . $date_depart_formattee . "</span>";
+                                    echo "<br><span class='indicator'>Date de départ: " . $date_depart_formattee . "<a class='btn-dup' href='duplicate_formule.php?id=" . $row_formule['id'] . "'><b>Dupliquer</b></a>" . "</span>";
+                                    // echo "<a class='btn-dup' href='duplicate_formule.php?id=" . $row_formule['id'] . "'>Dupliquer</a>";
                                 }
+                                
                                 echo "<br>"; // Add a line break after each formule
                                 
                             }
@@ -174,8 +217,18 @@
                         echo "<td class='btn-group'>";
                         echo "<button class='btn btn-edit' onclick=\"window.location.href='edit_package.php?id=" . $package_id . "'\">Éditer</button>";
                         echo "<a class='btn btn-delete' href='delete_package.php?id=" . $package_id . "' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer ce package?')\">Supprimer</a>";
-                        echo "</td>";
-                        echo "</tr>";
+                        echo "<br>";
+                        echo "<div style='margin-top:20px;'>";
+                        echo "<a class='btn-dup-pack' href='#'><b>Dupliquer Pack</b></a>";
+                        echo "</div>";
+                        // echo "<div style='margin-top:20px;'>";
+                        // echo "<form action='duplicate_package.php' method='POST'>";
+                        // echo "<input type='hidden' name='package_id' value='" . $package_id . "'>";
+                        // echo "<button type='submit' class='btn-dup-pack'><b>Dupliquer Pack</b></button>";
+                        // echo "</form>";
+                        // echo "</div>";
+                        // echo "</td>";
+                        // echo "</tr>";
                     }
                 } else {
                     echo "<tr><td colspan='4'>Aucun package Omra disponible pour le moment.</td></tr>";

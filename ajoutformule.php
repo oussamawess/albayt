@@ -76,6 +76,7 @@
     .addbutton:hover {
       background-color: #45a049;
     }
+    
 
     .deletebutton {
       background-color: #f44336;
@@ -267,7 +268,7 @@
         </div>
 
         <div class="input-group">
-          <label for="type">Type de la Formule:</label>
+          <label for="type">Catégorie:</label>
           <select id="type" name="type" class="half-width-input" required>
           </select>
         </div>
@@ -305,22 +306,23 @@
             <div class="vol-section">
               <div class="half-width-inputs">
                 <div class="input-group">
-                  <label for="ville_depart">Ville de Départ:</label>
-                  <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>
-                    <?php
-                    include 'db.php';
-                    $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
-                    $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
-                    if (mysqli_num_rows($result_villes_depart) > 0) {
-                      while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-                        echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
-                      }
-                    } else {
-                      echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
-                    }
-                    mysqli_close($conn);
-                    ?>
-                  </select>
+                  <label for="ville_depart">Départ:</label>
+                  <input type="text" id="ville_depart" name="ville_depart[]" class="half-width-input" required>
+                  <!-- <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>
+                    <!-?php
+                    // include 'db.php';
+                    // $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+                    // $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+                    // if (mysqli_num_rows($result_villes_depart) > 0) {
+                    //   while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                    //     echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+                    //   }
+                    // } else {
+                    //   echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
+                    // }
+                    // mysqli_close($conn);
+                    ?> 
+                  </select> -->
                 </div>
                 <div class="input-group">
                   <label for="compagnie_aerienne">Compagnie Aérienne:</label>
@@ -393,22 +395,23 @@
       <div style="margin-top:30px;">
         <div class="half-width-inputs">
           <div class="input-group">
-            <label for="ville_depart">Ville de Départ:</label>
-            <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>
-              <?php
-              include 'db.php';
-              $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
-              $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
-              if (mysqli_num_rows($result_villes_depart) > 0) {
-                while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-                  echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
-                }
-              } else {
-                echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
-              }
-              mysqli_close($conn);
-              ?>
-            </select>
+            <label for="ville_depart">Départ:</label>
+            <input type="text" id="ville_depart" name="ville_depart[]" class="half-width-input" required>
+              <!--<select id="ville_depart" name="ville_depart[]" class="half-width-input" required>            
+               <!-?php
+            //   include 'db.php';
+            //   $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+            //   $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+            //   if (mysqli_num_rows($result_villes_depart) > 0) {
+            //     while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+            //       echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+            //     }
+            //   } else {
+            //     echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
+            //   }
+            //   mysqli_close($conn);
+            //   ?>
+             </select>-->
           </div>
           <div class="input-group">
             <label for="compagnie_aerienne">Compagnie Aérienne:</label>
@@ -793,7 +796,7 @@
       </div>
 
 
-      <button type="submit">Ajouter Formule</button>
+      <button type="submit">Valider</button>
     </form>
   </div>
   <script>

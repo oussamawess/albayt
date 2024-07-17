@@ -248,11 +248,11 @@
                     // Store existing data in variables
                     $existingPackageId = $row['package_id'];
                     $existingTypeId = $row['type_id']; // Make sure to fetch this
-                    $existingNom = $row['nom'];
+                    //$existingNom = $row['nom'];
                     $existingStatut = $row['statut'];
                     $existingDureeSejour = $row['duree_sejour'];
                     $existingDateDepart = $row['date_depart'];
-                    // $existingVilleDepartId = $row['ville_depart_id'];
+                    //$existingVilleDepartId = $row['ville_depart_id'];
                     // $existingCompagnieAerienneId = $row['compagnie_aerienne_id'];
                     // $existingNumVol = $row['num_vol'];
                     // $existingAirportDepart = $row['airport_depart'];
@@ -407,17 +407,18 @@
                     <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0; margin-bottom:30px;">
                     <div class="half-width-inputs">
                         <div class="input-group">
-                            <label for="ville_depart_<?php echo $index; ?>">Ville de Départ:</label>
-                            <select id="ville_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][ville_depart]" class="half-width-input" required>
-                                <?php
+                            <label for="ville_depart_<?php echo $index; ?>">Départ:</label>
+                            <input type="text" id="ville_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][ville_depart]" class="half-width-input" value="<?php echo $vol['ville_depart_id']; ?>" required>                            
+                                  <!-- <select id="ville_depart_<!-?php echo $index; ?>" name="vols[<!-?php echo $index; ?>][ville_depart]" class="half-width-input" required> -->
+                            <!--?php
                                 $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
                                 $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
                                 while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
                                     $selected = ($row_ville_depart['id'] == $vol['ville_depart_id']) ? 'selected' : '';
                                     echo "<option value='" . $row_ville_depart['id'] . "' $selected>" . $row_ville_depart['nom'] . "</option>";
                                 }
-                                ?>
-                            </select>
+                                ?-->
+                            <!-- </select> -->
                         </div>
                         <div class="input-group">
                             <label for="compagnie_aerienne_<?php echo $index; ?>">Compagnie Aérienne:</label>
@@ -487,16 +488,19 @@
         <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">   
         <div class="half-width-inputs" style="margin-top:30px;">                                 
             <div class="input-group">
-                <label for="ville_depart_${index}">Ville de Départ:</label>
-                <select id="ville_depart_${index}" name="vols[${index}][ville_depart]" class="half-width-input" required>
-                    <?php
-                    $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
-                    $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
-                    while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-                        echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
-                    }
-                    ?>
-                </select>
+                <label for="ville_depart_${index}">Départ:</label>
+                <input type="text" id="ville_depart_${index}" name="vols[${index}][ville_depart]" class="half-width-input" required>       
+
+                <!--select id="ville_depart_$ {index}" name="vols[$ {index}][ville_depart]" class="half-width-input" required>
+                       <!-?php
+                //     $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+                //     $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+                //     while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                //         echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+                //     }
+                //     ?>
+                // </select>-->
+                
             </div>
             <div class="input-group">
                 <label for="compagnie_aerienne_${index}">Compagnie Aérienne:</label>

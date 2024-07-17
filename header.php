@@ -78,20 +78,14 @@
     <nav>
         <ul>
             <li>
-                <a href="#">Villes</a>
-                <ul>
-                    <li><a href="omrapackage.php">Liste des Villes</a></li>
-                    <li><a href="ajoutomrapackage.php">Ajouter une Ville</a></li>
-                </ul>
+                <a href="omrapackage.php">Villes</a>               
             </li>
 
             <li>
-                <a href="#">Formules Omra</a>
+                <a href="#">Packages</a>
                 <ul>
-                    <li><a href="ajoutformule.php">Ajouter une Formule</a></li>
-
-                    <li><a href="list_type_formule_omra.php">Liste des categories de Formules Omra</a></li>
-                    <li><a href="ajout_type_formule.php">Ajouter une categorie</a></li>
+                    <li><a href="display_formules.php">Formules</a></li>
+                    <li><a href="list_type_formule_omra.php">Catégories</a></li>
                 </ul>
             </li>
 

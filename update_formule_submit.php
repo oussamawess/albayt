@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get Data from the Form and Sanitize Input
     $formule_id = mysqli_real_escape_string($conn, $_POST['formule_id']);
     $package_id = mysqli_real_escape_string($conn, $_POST['package']);
-    $nom = mysqli_real_escape_string($conn, $_POST['nom']);
+    // $nom = mysqli_real_escape_string($conn, $_POST['nom']);
     $statut = mysqli_real_escape_string($conn, $_POST['statut']);
     $duree_sejour = mysqli_real_escape_string($conn, $_POST['duree_sejour']);
     $typeId = intval($_POST['type']);
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Update the main formules table
     $sql = "UPDATE formules SET 
             package_id = '$package_id', 
-            nom = '$nom',
+            -- nom = '$nom',
             statut = '$statut',
             duree_sejour = '$duree_sejour',
             type_id = $typeId,
@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     echo "Formule mise à jour avec succès";
-    header("Location: omrapackage.php"); // Redirect to a success page
+    header("Location: display_formules.php"); // Redirect to a success page
     exit;
 }
 

@@ -65,6 +65,7 @@
         .btn-delete {
             background-color: #f44336;
             color: white;
+            text-decoration: none;
         }
 
         .btn-add {
@@ -78,6 +79,16 @@
             right: 155px;
             top: 100px;            
             text-decoration: none;            
+        }
+
+        .btn-add:hover {
+            background-color: #0b73f4;
+        }
+        .btn-edit:hover {
+            background-color: #45a049;
+        }
+        .btn-delete:hover {
+            background-color: #fa190b;
         }
     </style>
     </style>
