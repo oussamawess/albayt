@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 16 juil. 2024 à 16:59
+-- Généré le : mer. 17 juil. 2024 à 17:40
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -83,39 +83,52 @@ CREATE TABLE `formules` (
   `prix_chambre_double_promo` decimal(10,2) NOT NULL,
   `prix_chambre_single_promo` decimal(10,2) NOT NULL,
   `description` text NOT NULL,
-  `type_id` int(11) DEFAULT NULL
+  `type_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `formules`
 --
 
-INSERT INTO `formules` (`id`, `package_id`, `date_depart`, `statut`, `duree_sejour`, `prix_chambre_quadruple`, `prix_chambre_triple`, `prix_chambre_double`, `prix_chambre_single`, `child_discount`, `prix_bebe`, `prix_chambre_quadruple_promo`, `prix_chambre_triple_promo`, `prix_chambre_double_promo`, `prix_chambre_single_promo`, `description`, `type_id`) VALUES
-(9, 5, '2024-07-18', 'activé', '18 jours', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>test firt one</p>\r\n', 10),
-(10, 1, '2000-05-05', 'activé', '15 jours', '1500.00', '1500.00', '1500.00', '1500.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>17 OCTOBRE 2024</p>\r\n\r\n<p>D&eacute;part</p>\r\n\r\n<p><strong>PARIS &gt; M&eacute;dine</strong><br />\r\nVol r&eacute;gulier avec la compagnie a&eacute;rienne Royal Jordanian.</p>\r\n\r\n<p>17 OCTOBRE 2024</p>\r\n\r\n<p>Transfert</p>\r\n\r\n<p><strong>A&eacute;roport &gt; H&ocirc;tel</strong><br />\r\nTransfert de l&rsquo;a&eacute;roport vers l&rsquo;h&ocirc;tel en bus confort climatis&eacute;.</p>\r\n\r\n<p>17 OCTOBRE 2024</p>\r\n\r\n<p>Arriv&eacute;e &agrave; l&rsquo;h&ocirc;tel</p>\r\n\r\n<p><strong>BOSPHORUS WAQF AL SAFI 4*</strong><br />\r\nLa premi&egrave;re partie du s&eacute;jour se d&eacute;roulera dans un h&ocirc;tel 4 &eacute;toiles de renomm&eacute;e internationale, situ&eacute; en face du Masjid An&rsquo;Nabawi. Vous y s&eacute;journerez durant 5 nuits.</p>\r\n\r\n<p>18 OCTOBRE 2024</p>\r\n\r\n<p>Visite</p>\r\n\r\n<p><strong>VISITE RELIGIEUSE &Agrave; M&Eacute;DINE</strong><br />\r\nEn d&eacute;but de matin&eacute;e, vous effectuerez une visite religieuse &agrave; Madinah. Vous effectuerez une visite aux Martyrs de Ohoud ainsi que votre pri&egrave;re dans la mosqu&eacute;e de Qoba. Vous serez conduit en bus climatis&eacute;.</p>\r\n\r\n<p>18 OCTOBRE 2024</p>\r\n\r\n<p>Transfert</p>\r\n\r\n<p><strong>M&Eacute;DINE MAKKAH</strong><br />\r\nLe transfert de M&eacute;dine &agrave; Makkah se fera en d&eacute;but de matin&eacute;e dans un bus climatis&eacute;. La distance parcourue est de 480 km environ.</p>\r\n\r\n<p>18 OCTOBRE 2024</p>\r\n\r\n<p>Arriv&eacute;e &agrave; l&rsquo;h&ocirc;tel</p>\r\n\r\n<p><strong>SHERATON 5*</strong><br />\r\nS&eacute;jour dans un h&ocirc;tel 5 &eacute;toiles situ&eacute; en Face du Haram. Vous passerez 5 nuits dans l&rsquo;un des meilleurs h&ocirc;tels de la Mecque.</p>\r\n\r\n<p>19 OCTOBRE 2024</p>\r\n\r\n<p>Omra</p>\r\n\r\n<p><strong>Jour de la OMRA</strong><br />\r\nR&eacute;union &agrave; la r&eacute;ception de l&rsquo;h&ocirc;tel avant d&rsquo;accomplir les rites en groupe. D&eacute;part de l&rsquo;h&ocirc;tel &agrave; 13h00 apr&egrave;s avoir effectu&eacute; ses grandes ablutions et mis son &laquo; ihr&acirc;m &raquo;. Arr&ecirc;t dans le Miq&acirc;t &laquo; Abyar Ali &raquo; pour entrer dans l&rsquo;&eacute;tat de sacralisation et commencer la &laquo; Talbiyah &raquo;.</p>\r\n\r\n<p>20 OCTOBRE 2024</p>\r\n\r\n<p>Visite</p>\r\n\r\n<p><strong>Visite d&eacute;couverte</strong><br />\r\nVisite religieuse &agrave; Makkah en d&eacute;but de matin&eacute;e. Trajet en bus climatis&eacute;. Parcours du Hajj et quelques sites historiques.</p>\r\n\r\n<p>21 OCTOBRE 2024</p>\r\n\r\n<p>Transfert</p>\r\n\r\n<p><strong>MAKKAH JEDDAH</strong><br />\r\nTransfert de l&rsquo;h&ocirc;tel vers l&rsquo;a&eacute;roport de Jeddah en bus confort climatis&eacute;.</p>\r\n\r\n<p>21 MAI 2024</p>\r\n\r\n<p>Retour</p>\r\n\r\n<p><strong>JEDDAH &gt; PARIS</strong><br />\r\nVol r&eacute;gulier avec la compagnie a&eacute;rienne Saudi Airlines.</p>\r\n', 2),
-(11, 1, '2024-07-12', 'activé', '15 jours', '1500.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>test</p>\r\n', 3),
-(13, 3, '2024-07-02', 'activé', '15', '2000.00', '2000.00', '2000.00', '2000.00', '500.00', '500.00', '1500.00', '1500.00', '1500.00', '1500.00', '<p><strong>Day1 : visite xyz</strong></p>\r\n\r\n<p><strong>Day2 : viste xyz1</strong></p>\r\n', 8),
-(14, 4, '2024-07-16', 'activé', '15 jours', '1680.00', '1900.00', '2500.00', '2800.00', '150.00', '500.00', '0.00', '0.00', '0.00', '1500.00', '<p>TEST</p>\r\n', 9),
-(15, 6, '2024-07-17', 'activé', '15 jours', '1990.00', '2090.00', '2190.00', '2490.00', '350.00', '150.00', '0.00', '0.00', '0.00', '0.00', '<p>test</p>\r\n', 7),
-(29, 4, '2024-07-12', 'désactivé', 'Repudiandae corrupti', '81.00', '99.00', '11.00', '56.00', '61.00', '64.00', '59.00', '83.00', '82.00', '10.00', '', 6),
-(30, 3, '2024-07-15', 'activé', 'Sed voluptatem dolor', '91.00', '62.00', '11.00', '19.00', '35.00', '73.00', '97.00', '60.00', '57.00', '18.00', '', 5),
-(33, 1, '2024-07-10', 'désactivé', 'Officiis culpa comm', '42.00', '89.00', '32.00', '44.00', '73.00', '17.00', '74.00', '86.00', '58.00', '54.00', '<p>wess 1 octobre comfort</p>\r\n', 2),
-(34, 4, '2024-07-12', 'activé', 'Consectetur perferen', '100.00', '47.00', '88.00', '85.00', '5.00', '67.00', '1.00', '86.00', '26.00', '85.00', '<p>avril comfort</p>\r\n', 9),
-(36, 3, '2024-07-25', 'désactivé', 'Ratione quia cum lab', '44.00', '42.00', '46.00', '81.00', '13.00', '56.00', '54.00', '10.00', '47.00', '43.00', '', 8),
-(37, 3, '2024-07-25', 'activé', 'Modi magni consequat', '53.00', '75.00', '80.00', '79.00', '7.00', '69.00', '53.00', '44.00', '9.00', '61.00', '<p>mars confort</p>\r\n\r\n<p>&nbsp;</p>\r\n', 5),
-(41, 1, '2024-07-13', 'activé', 'Non quibusdam illum', '44.00', '47.00', '33.00', '44.00', '1.00', '26.00', '72.00', '87.00', '53.00', '16.00', '<p>omra oct 1</p>\r\n', 3),
-(44, 4, NULL, 'activé', 'Perferendis nostrud ', '93.00', '15.00', '61.00', '46.00', '53.00', '44.00', '94.00', '1.00', '67.00', '22.00', '', 6),
-(46, 6, '2024-07-25', 'activé', 'Tempora voluptate ni', '37.00', '9.00', '82.00', '57.00', '6.00', '64.00', '43.00', '84.00', '72.00', '90.00', '<p>s1</p>\r\n', 12),
-(49, 1, '2024-07-17', 'activé', '10000', '5.00', '10.00', '15.00', '20.00', '25.00', '30.00', '35.00', '40.00', '45.00', '50.00', '<p>55</p>\r\n', 3),
-(50, 1, '2024-07-03', 'activé', 'In labore et molliti', '24.00', '12.00', '24.00', '57.00', '44.00', '59.00', '78.00', '93.00', '59.00', '28.00', '<p>volo</p>\r\n', 2),
-(52, 5, '2024-07-16', 'activé', 'Fuga Id in vero id ', '49.00', '71.00', '75.00', '64.00', '50.00', '72.00', '81.00', '43.00', '61.00', '37.00', '<p>aa</p>\r\n', 11),
-(54, 5, '2024-07-23', 'activé', 'Suscipit soluta ut c', '63.00', '92.00', '32.00', '97.00', '80.00', '76.00', '23.00', '24.00', '18.00', '32.00', '<p>penion</p>\r\n', 10),
-(55, 6, '2024-07-17', 'activé', 'Facere assumenda iur', '34.00', '18.00', '82.00', '38.00', '95.00', '47.00', '18.00', '7.00', '95.00', '62.00', '', 7),
-(56, 3, '2024-07-12', 'désactivé', 'Fugiat cum et hic e', '61.00', '85.00', '60.00', '83.00', '32.00', '67.00', '36.00', '37.00', '56.00', '100.00', '', 5),
-(57, 6, '2024-07-11', 'activé', 'Numquam temporibus q', '10.00', '36.00', '70.00', '14.00', '42.00', '45.00', '82.00', '73.00', '18.00', '79.00', '', 7),
-(58, 3, '2024-07-11', 'activé', '1', '38.00', '25.00', '91.00', '44.00', '47.00', '78.00', '49.00', '47.00', '4.00', '6.00', '', 5),
-(59, 3, '2024-07-01', 'désactivé', 'Aut ipsum et numqua', '73.00', '51.00', '94.00', '98.00', '47.00', '27.00', '51.00', '75.00', '77.00', '29.00', '', 5),
-(60, 3, '1994-12-28', 'activé', 'Atque et molestiae e', '76.00', '88.00', '61.00', '58.00', '19.00', '11.00', '40.00', '89.00', '41.00', '74.00', '<p>date</p>\r\n', 5);
+INSERT INTO `formules` (`id`, `package_id`, `date_depart`, `statut`, `duree_sejour`, `prix_chambre_quadruple`, `prix_chambre_triple`, `prix_chambre_double`, `prix_chambre_single`, `child_discount`, `prix_bebe`, `prix_chambre_quadruple_promo`, `prix_chambre_triple_promo`, `prix_chambre_double_promo`, `prix_chambre_single_promo`, `description`, `type_id`, `created_at`) VALUES
+(9, 5, '2024-07-18', 'activé', '18 jours', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>test firt one</p>\r\n', 10, '2024-07-17 12:59:24'),
+(11, 1, '2001-01-01', 'activé', '15 jours', '1500.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>test</p>\r\n', 3, '2024-07-17 12:59:24'),
+(13, 3, '2024-07-02', 'activé', '15', '2000.00', '2000.00', '2000.00', '2000.00', '500.00', '500.00', '1500.00', '1500.00', '1500.00', '1500.00', '<p><strong>Day1 : visite xyz</strong></p>\r\n\r\n<p><strong>Day2 : viste xyz1</strong></p>\r\n', 8, '2024-07-17 12:59:24'),
+(14, 4, '2024-07-16', 'activé', '15 jours', '1680.00', '1900.00', '2500.00', '2800.00', '150.00', '500.00', '0.00', '0.00', '0.00', '1500.00', '<p>TEST</p>\r\n', 9, '2024-07-17 12:59:24'),
+(15, 6, '2024-07-17', 'activé', '15 jours', '1990.00', '2090.00', '2190.00', '2490.00', '350.00', '150.00', '0.00', '0.00', '0.00', '0.00', '<p>test</p>\r\n', 7, '2024-07-17 12:59:24'),
+(29, 4, '2024-07-12', 'désactivé', 'Repudiandae corrupti', '81.00', '99.00', '11.00', '56.00', '61.00', '64.00', '59.00', '83.00', '82.00', '10.00', '', 6, '2024-07-17 12:59:24'),
+(30, 3, '2024-07-15', 'activé', 'Sed voluptatem dolor', '91.00', '62.00', '11.00', '19.00', '35.00', '73.00', '97.00', '60.00', '57.00', '18.00', '', 5, '2024-07-17 12:59:24'),
+(33, 1, '2024-07-10', 'activé', 'Officiis culpa comm', '42.00', '89.00', '32.00', '44.00', '73.00', '17.00', '74.00', '86.00', '58.00', '54.00', '<p>wess 1 octobre comfort</p>\r\n', 2, '2024-07-17 12:59:24'),
+(34, 4, '2024-07-12', 'activé', 'Consectetur perferen', '100.00', '47.00', '88.00', '85.00', '5.00', '67.00', '1.00', '86.00', '26.00', '85.00', '<p>avril comfort</p>\r\n', 9, '2024-07-17 12:59:24'),
+(36, 3, '2024-07-25', 'désactivé', 'Ratione quia cum lab', '44.00', '42.00', '46.00', '81.00', '13.00', '56.00', '54.00', '10.00', '47.00', '43.00', '', 8, '2024-07-17 12:59:24'),
+(37, 3, '2024-07-25', 'activé', 'Modi magni consequat', '53.00', '75.00', '80.00', '79.00', '7.00', '69.00', '53.00', '44.00', '9.00', '61.00', '<p>mars confort</p>\r\n\r\n<p>&nbsp;</p>\r\n', 5, '2024-07-17 12:59:24'),
+(41, 1, '2024-07-13', 'activé', 'Non quibusdam illum', '44.00', '47.00', '33.00', '44.00', '1.00', '26.00', '72.00', '87.00', '53.00', '16.00', '<p>omra oct 1</p>\r\n', 3, '2024-07-17 12:59:24'),
+(44, 4, '2024-07-19', 'activé', 'Perferendis nostrud ', '93.00', '15.00', '61.00', '46.00', '53.00', '44.00', '94.00', '1.00', '67.00', '22.00', '', 6, '2024-07-17 12:59:24'),
+(46, 6, '2024-07-25', 'activé', 'Tempora voluptate ni', '37.00', '9.00', '82.00', '57.00', '6.00', '64.00', '43.00', '84.00', '72.00', '90.00', '<p>s1</p>\r\n', 12, '2024-07-17 12:59:24'),
+(49, 1, '2024-07-17', 'activé', '10000', '5.00', '10.00', '15.00', '20.00', '25.00', '30.00', '35.00', '40.00', '45.00', '50.00', '<p>55</p>\r\n', 3, '2024-07-17 12:59:24'),
+(50, 1, '2024-07-03', 'activé', 'In labore et molliti', '24.00', '12.00', '24.00', '57.00', '44.00', '59.00', '78.00', '93.00', '59.00', '28.00', '<p>volo</p>\r\n', 2, '2024-07-17 12:59:24'),
+(52, 5, '2024-07-16', 'activé', 'Fuga Id in vero id ', '49.00', '71.00', '75.00', '64.00', '50.00', '72.00', '81.00', '43.00', '61.00', '37.00', '<p>aa</p>\r\n', 11, '2024-07-17 12:59:24'),
+(54, 5, '2024-07-23', 'activé', 'Suscipit soluta ut c', '63.00', '92.00', '32.00', '97.00', '80.00', '76.00', '23.00', '24.00', '18.00', '32.00', '<p>penion</p>\r\n', 10, '2024-07-17 12:59:24'),
+(55, 6, '2024-07-17', 'activé', 'Facere assumenda iur', '34.00', '18.00', '82.00', '38.00', '95.00', '47.00', '18.00', '7.00', '95.00', '62.00', '', 7, '2024-07-17 12:59:24'),
+(56, 3, '2024-07-12', 'désactivé', 'Fugiat cum et hic e', '61.00', '85.00', '60.00', '83.00', '32.00', '67.00', '36.00', '37.00', '56.00', '100.00', '', 5, '2024-07-17 12:59:24'),
+(57, 6, '2024-07-11', 'activé', 'Numquam temporibus q', '10.00', '36.00', '70.00', '14.00', '42.00', '45.00', '82.00', '73.00', '18.00', '79.00', '', 7, '2024-07-17 12:59:24'),
+(58, 3, '2024-07-11', 'activé', '1', '38.00', '25.00', '91.00', '44.00', '47.00', '78.00', '49.00', '47.00', '4.00', '6.00', '', 5, '2024-07-17 12:59:24'),
+(59, 3, '2024-07-01', 'désactivé', 'Aut ipsum et numqus', '73.00', '51.00', '94.00', '98.00', '47.00', '27.00', '51.00', '75.00', '77.00', '29.00', '', 5, '2024-07-17 13:25:56'),
+(60, 3, '1994-12-28', 'activé', 'Atque et molestiae e', '76.00', '88.00', '61.00', '58.00', '19.00', '11.00', '40.00', '89.00', '41.00', '74.00', '<p>date</p>\r\n', 5, '2024-07-17 12:59:24'),
+(61, 4, '1994-05-06', 'désactivé', 'Commodi irure sint ', '19.00', '12.00', '28.00', '35.00', '83.00', '88.00', '46.00', '10.00', '90.00', '60.00', '', 6, '2024-07-17 12:59:24'),
+(62, 1, '2001-01-01', 'activé', '15 jours', '1500.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>test</p>\r\n', 3, '2024-07-17 12:59:24'),
+(63, 6, '2024-07-25', 'activé', 'Tempora voluptate ni', '37.00', '9.00', '82.00', '57.00', '6.00', '64.00', '43.00', '84.00', '72.00', '90.00', '<p>s1</p>\r\n', 12, '2024-07-17 12:59:24'),
+(64, 6, '2024-07-25', 'activé', 'Tempora voluptate ni', '37.00', '9.00', '82.00', '57.00', '6.00', '64.00', '43.00', '84.00', '72.00', '90.00', '<p>s1</p>\r\n', 12, '2024-07-17 12:59:24'),
+(65, 6, '2024-07-25', 'désactivé', 'Tempora voluptate ni', '37.00', '9.00', '82.00', '57.00', '6.00', '64.00', '43.00', '84.00', '72.00', '90.00', '<p>s1</p>\r\n', 12, '2024-07-17 12:59:24'),
+(66, 6, '2006-08-11', 'activé', 'Dignissimos autem id', '3.00', '53.00', '42.00', '90.00', '30.00', '20.00', '3.00', '86.00', '81.00', '18.00', '', 7, '2024-07-17 12:59:24'),
+(67, 1, '1979-02-26', 'désactivé', 'Eius excepturi conse', '19.00', '46.00', '14.00', '100.00', '18.00', '90.00', '84.00', '50.00', '93.00', '64.00', '', 2, '2024-07-17 12:59:24'),
+(68, 1, '1986-08-05', 'activé', 'Magni libero aut con', '56.00', '8.00', '85.00', '24.00', '56.00', '11.00', '54.00', '7.00', '44.00', '26.00', '', 2, '2024-07-17 12:59:24'),
+(70, 5, '2001-01-01', 'désactivé', 'Facere dolor fugiat', '84.00', '2.00', '1.00', '77.00', '37.00', '63.00', '21.00', '98.00', '86.00', '46.00', '', 10, '2024-07-17 12:59:24'),
+(71, 4, '1970-04-01', 'désactivé', 'Non nesciunt quasi ', '83.00', '8.00', '76.00', '23.00', '1.00', '78.00', '88.00', '25.00', '29.00', '3.00', '', 6, '2024-07-17 13:10:56'),
+(72, 3, '2024-07-01', 'désactivé', 'Aut ipsum et numqus', '73.00', '51.00', '94.00', '98.00', '47.00', '27.00', '51.00', '75.00', '77.00', '29.00', '', 5, '2024-07-17 13:40:06'),
+(73, 6, '2024-07-25', 'désactivé', 'Tempora voluptate ni', '37.00', '9.00', '82.00', '57.00', '6.00', '64.00', '43.00', '84.00', '72.00', '90.00', '<p>s1</p>\r\n', 12, '2024-07-17 13:46:26'),
+(74, 1, '2001-01-01', 'désactivé', '15 jours', '1500.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '1000.00', '<p>test</p>\r\n', 3, '2024-07-17 14:28:26');
 
 -- --------------------------------------------------------
 
@@ -139,9 +152,6 @@ CREATE TABLE `hebergements` (
 
 INSERT INTO `hebergements` (`id`, `formule_id`, `hotel_id`, `type_pension`, `date_checkin`, `date_checkout`, `nombre_nuit`) VALUES
 (176, 60, 6, 'Sans pension', '1995-05-01', '1973-07-08', 0),
-(177, 59, 4, 'Pension Complète', '2024-07-01', '2024-07-28', 27),
-(178, 59, 4, 'Pension Complète', '2024-07-01', '2024-07-29', 28),
-(179, 59, 4, 'Pension Complète', '2024-07-01', '2024-07-30', 29),
 (180, 56, 5, 'Sans pension', '1976-09-28', '2020-01-10', 15809),
 (181, 58, 4, 'Demi-pension', '2024-07-01', '2024-07-12', 11),
 (182, 58, 4, 'Demi-pension', '2024-07-01', '2024-07-12', 11),
@@ -167,11 +177,27 @@ INSERT INTO `hebergements` (`id`, `formule_id`, `hotel_id`, `type_pension`, `dat
 (202, 34, 4, 'Sans pension', '2024-07-01', '2024-07-23', 22),
 (203, 52, 4, 'Pension Complète', '2014-12-20', '1997-06-20', 0),
 (204, 54, 5, 'Pension Complète', '1984-06-25', '1985-07-30', 400),
-(205, 46, 4, 'Demi-pension', '2024-06-01', '2024-06-30', 29),
 (206, 55, 4, 'Demi-pension', '2023-04-22', '2024-09-03', 500),
 (207, 57, 4, 'Sans pension', '1975-01-22', '2017-02-26', 15376),
 (208, 57, 4, 'Pension Complète', '2024-07-01', '2024-07-16', 15),
-(209, 57, 4, 'Demi-pension', '2024-07-01', '2024-07-21', 20);
+(209, 57, 4, 'Demi-pension', '2024-07-01', '2024-07-21', 20),
+(210, 61, 6, 'Pension Complète', '2015-12-02', '2000-12-27', 0),
+(212, 46, 4, 'Demi-pension', '2024-06-01', '2024-06-30', 29),
+(213, 64, 4, 'Demi-pension', '2024-06-01', '2024-06-30', 29),
+(214, 63, 4, 'Demi-pension', '2024-06-05', '2024-06-22', 17),
+(215, 65, 4, 'Demi-pension', '2024-06-01', '2024-06-30', 29),
+(216, 66, 5, 'Pension Complète', '1990-07-14', '2012-03-02', 7902),
+(217, 67, 4, 'Demi-pension', '2014-12-18', '1987-07-28', 0),
+(221, 68, 5, 'Sans pension', '2009-03-10', '2018-03-13', 3290),
+(225, 70, 5, 'Sans pension', '2015-10-16', '1992-11-09', 0),
+(229, 71, 4, 'Demi-pension', '1989-11-24', '2022-08-05', 11942),
+(236, 59, 4, 'Pension Complète', '2024-07-01', '2024-07-28', 27),
+(237, 59, 4, 'Pension Complète', '2024-07-01', '2024-07-29', 28),
+(238, 59, 4, 'Pension Complète', '2024-07-01', '2024-07-30', 29),
+(239, 72, 4, 'Pension Complète', '2024-07-01', '2024-07-28', 27),
+(240, 72, 4, 'Pension Complète', '2024-07-01', '2024-07-29', 28),
+(241, 72, 4, 'Pension Complète', '2024-07-01', '2024-07-30', 29),
+(242, 73, 4, 'Demi-pension', '2024-06-05', '2024-06-22', 17);
 
 -- --------------------------------------------------------
 
@@ -439,7 +465,7 @@ INSERT INTO `ville_depart` (`id`, `nom`, `statut`) VALUES
 CREATE TABLE `vols` (
   `id` int(11) NOT NULL,
   `formule_id` int(11) NOT NULL,
-  `ville_depart_id` int(11) NOT NULL,
+  `ville_depart_id` varchar(255) NOT NULL,
   `compagnie_aerienne_id` int(11) NOT NULL,
   `num_vol` varchar(255) NOT NULL,
   `airport_depart` varchar(255) NOT NULL,
@@ -454,29 +480,44 @@ CREATE TABLE `vols` (
 --
 
 INSERT INTO `vols` (`id`, `formule_id`, `ville_depart_id`, `compagnie_aerienne_id`, `num_vol`, `airport_depart`, `heure_depart`, `destination`, `airport_destination`, `heure_arrivee`) VALUES
-(14, 44, 3, 1, 'vol n1d', 'vol n1', '1986-06-24 14:28:00', 'vol n1', 'vol n1', '1995-09-27 15:28:00'),
-(15, 44, 2, 1, 'vol n3d', 'vol n3', '2024-07-16 13:43:00', 'vol n3', 'vol n3', '2024-07-22 13:43:00'),
-(416, 60, 3, 1, 'Vel numquam ea et nu', 'Exercitation volupta', '2002-05-27 11:15:00', 'Laudantium et odit ', 'Dicta non voluptates', '2019-01-07 18:10:00'),
-(417, 59, 2, 1, 'Voluptate esse aliq', 'Numquam perspiciatis', '2003-03-22 03:53:00', 'Asperiores iusto mol', 'Molestiae mollit ani', '1977-01-16 11:07:00'),
-(418, 56, 3, 1, 'Odio laborum dolorib', 'Distinctio Velit e', '1981-01-15 03:58:00', 'Fugit optio recusa', 'Dolor amet vel volu', '2005-12-07 03:20:00'),
-(419, 58, 2, 1, '1', '1', '1984-04-04 12:00:00', 'Laboriosam rem blan', 'Magna dolor fuga Hi', '2016-05-06 09:19:00'),
-(420, 58, 2, 1, '1', '1', '1984-04-04 12:00:00', 'Laboriosam rem blan', 'Magna dolor fuga Hi', '2016-05-06 09:19:00'),
-(421, 41, 2, 1, 'Rerum inventore et e', 'Aliquid voluptas vol', '1986-02-25 21:16:00', 'Dolore ullamco harum', 'Libero sed non volup', '1995-07-10 19:31:00'),
-(422, 49, 2, 1, 'z10', 'Ut ut doloremque eu ', '2023-03-23 17:44:00', 'Qui laudantium sed ', 'Eu vel ipsum sapient', '2017-11-19 19:37:00'),
-(423, 49, 2, 1, 'z20', 'vol n5', '2024-08-07 14:59:00', 'vol n6', 'vol n6', '2024-07-25 14:59:00'),
-(424, 50, 3, 1, 'V1', 'Expedita proident q', '1998-12-23 05:17:00', 'Repellendus Officii', 'Accusantium laboris ', '1985-10-14 17:24:00'),
-(425, 50, 2, 1, 'V2', 'Nihil et totam rerum', '2022-03-01 17:36:00', 'Qui velit dolorem mo', 'Aute dolores laboris', '2014-05-25 13:33:00'),
-(426, 50, 3, 1, 'V3', 'Asperiores perferend', '2003-01-21 08:08:00', 'Quisquam accusantium', 'Eos consequatur pla', '2021-11-12 00:50:00'),
-(427, 50, 2, 1, 'V4', 'vol n9', '2024-07-17 15:26:00', 'vol n11', 'vol n10', '2024-07-11 15:26:00'),
-(428, 50, 2, 1, 'V5', 'vol n10', '2024-07-23 15:27:00', 'vol n10', 'vol n10', '2024-08-02 15:27:00'),
-(429, 50, 2, 1, 'V6', 'vol n11', '2024-07-09 15:27:00', 'vol n11', 'vol n11', '2024-07-17 15:27:00'),
-(430, 29, 3, 1, 'z10', '1', '2024-07-30 20:48:00', 'ihih', 'oujguj', '2024-07-26 20:49:00'),
-(431, 34, 2, 1, 'z10', '1', '2024-07-25 20:49:00', 'ihih', 'oujguj', '2024-07-13 20:49:00'),
-(432, 52, 3, 1, 'Dicta tempore lauda', 'Rerum nisi officiis ', '1982-01-13 03:27:00', 'Amet velit eos dolo', 'Quo voluptatem est u', '1990-05-05 09:48:00'),
-(433, 54, 2, 1, 'Amet accusantium re', 'Aliquid possimus ma', '2007-02-06 09:15:00', 'Ut in qui est ipsum ', 'Placeat do iusto vo', '1975-08-17 19:20:00'),
-(434, 46, 3, 1, 's1', 'Animi totam nemo al', '1984-02-21 15:33:00', 'Sint veniam fugiat ', 'Amet voluptas ipsum', '1972-02-12 03:35:00'),
-(435, 55, 2, 1, 'Mollit sit et enim ', 'Quasi sit debitis mi', '1977-06-28 23:44:00', 'Voluptate voluptatem', 'Esse voluptas volup', '1983-12-27 17:11:00'),
-(436, 57, 2, 1, 'Accusamus iusto cons', 'Dolore debitis dolor', '2002-08-19 00:25:00', 'Vero laudantium qui', 'Saepe cupiditate ut ', '2011-02-23 20:43:00');
+(416, 60, '3', 1, 'Vel numquam ea et nu', 'Exercitation volupta', '2002-05-27 11:15:00', 'Laudantium et odit ', 'Dicta non voluptates', '2019-01-07 18:10:00'),
+(418, 56, '3', 1, 'Odio laborum dolorib', 'Distinctio Velit e', '1981-01-15 03:58:00', 'Fugit optio recusa', 'Dolor amet vel volu', '2005-12-07 03:20:00'),
+(419, 58, '2', 1, '1', '1', '1984-04-04 12:00:00', 'Laboriosam rem blan', 'Magna dolor fuga Hi', '2016-05-06 09:19:00'),
+(420, 58, '2', 1, '1', '1', '1984-04-04 12:00:00', 'Laboriosam rem blan', 'Magna dolor fuga Hi', '2016-05-06 09:19:00'),
+(421, 41, '2', 1, 'Rerum inventore et e', 'Aliquid voluptas vol', '1986-02-25 21:16:00', 'Dolore ullamco harum', 'Libero sed non volup', '1995-07-10 19:31:00'),
+(422, 49, '2', 1, 'z10', 'Ut ut doloremque eu ', '2023-03-23 17:44:00', 'Qui laudantium sed ', 'Eu vel ipsum sapient', '2017-11-19 19:37:00'),
+(423, 49, '2', 1, 'z20', 'vol n5', '2024-08-07 14:59:00', 'vol n6', 'vol n6', '2024-07-25 14:59:00'),
+(424, 50, '3', 1, 'V1', 'Expedita proident q', '1998-12-23 05:17:00', 'Repellendus Officii', 'Accusantium laboris ', '1985-10-14 17:24:00'),
+(425, 50, '2', 1, 'V2', 'Nihil et totam rerum', '2022-03-01 17:36:00', 'Qui velit dolorem mo', 'Aute dolores laboris', '2014-05-25 13:33:00'),
+(426, 50, '3', 1, 'V3', 'Asperiores perferend', '2003-01-21 08:08:00', 'Quisquam accusantium', 'Eos consequatur pla', '2021-11-12 00:50:00'),
+(427, 50, '2', 1, 'V4', 'vol n9', '2024-07-17 15:26:00', 'vol n11', 'vol n10', '2024-07-11 15:26:00'),
+(428, 50, '2', 1, 'V5', 'vol n10', '2024-07-23 15:27:00', 'vol n10', 'vol n10', '2024-08-02 15:27:00'),
+(429, 50, '2', 1, 'V6', 'vol n11', '2024-07-09 15:27:00', 'vol n11', 'vol n11', '2024-07-17 15:27:00'),
+(430, 29, '3', 1, 'z10', '1', '2024-07-30 20:48:00', 'ihih', 'oujguj', '2024-07-26 20:49:00'),
+(431, 34, '2', 1, 'z10', '1', '2024-07-25 20:49:00', 'ihih', 'oujguj', '2024-07-13 20:49:00'),
+(432, 52, '3', 1, 'Dicta tempore lauda', 'Rerum nisi officiis ', '1982-01-13 03:27:00', 'Amet velit eos dolo', 'Quo voluptatem est u', '1990-05-05 09:48:00'),
+(433, 54, '2', 1, 'Amet accusantium re', 'Aliquid possimus ma', '2007-02-06 09:15:00', 'Ut in qui est ipsum ', 'Placeat do iusto vo', '1975-08-17 19:20:00'),
+(435, 55, '2', 1, 'Mollit sit et enim ', 'Quasi sit debitis mi', '1977-06-28 23:44:00', 'Voluptate voluptatem', 'Esse voluptas volup', '1983-12-27 17:11:00'),
+(436, 57, '2', 1, 'Accusamus iusto cons', 'Dolore debitis dolor', '2002-08-19 00:25:00', 'Vero laudantium qui', 'Saepe cupiditate ut ', '2011-02-23 20:43:00'),
+(437, 61, '0', 1, 'Dolorum quod sit ni', 'Vel id soluta dolore', '1974-05-11 01:31:00', 'Adipisci necessitati', 'Minus cupidatat cons', '2002-04-28 00:38:00'),
+(438, 61, '0', 1, 'Voluptas id nisi exc', 'Unde sunt est aut ', '1970-03-13 23:56:00', 'Enim animi non inci', 'Fuga Sed voluptatem', '2022-12-23 22:03:00'),
+(439, 44, '3', 1, 'vol n1d', 'vol n1', '1986-06-24 14:28:00', 'vol n1', 'vol n1', '1995-09-27 15:28:00'),
+(440, 44, '2', 1, 'vol n3d', 'vol n3', '2024-07-16 13:43:00', 'vol n3', 'vol n3', '2024-07-22 13:43:00'),
+(442, 46, '3', 1, 'v1', 'Animi totam nemo al', '1984-02-21 15:33:00', 'Sint veniam fugiat ', 'Amet voluptas ipsum', '1972-02-12 03:35:00'),
+(443, 64, '3', 1, 's1', 'Animi totam nemo al', '1984-02-21 15:33:00', 'Sint veniam fugiat ', 'Amet voluptas ipsum', '1972-02-12 03:35:00'),
+(444, 63, '3', 1, 's1', 'Animi totam nemo al', '1984-02-21 15:33:00', 'Sint veniam fugiat ', 'Amet voluptas ipsum', '1972-02-12 03:35:00'),
+(445, 65, '3', 1, 's1', 'Animi totam nemo al', '1984-02-21 15:33:00', 'Sint veniam fugiat ', 'Amet voluptas ipsum', '1972-02-12 03:35:00'),
+(446, 66, 'Amesterdam', 1, 'Odio debitis quas in', 'Voluptas elit nisi ', '1998-10-24 07:19:00', 'Non odit autem fugia', 'Inventore et veritat', '1979-10-06 18:56:00'),
+(447, 67, 'Sousse', 1, 'Tempore nihil vel s', 'Commodi laboriosam ', '1980-07-01 19:46:00', 'Dicta sed eligendi d', 'Sit amet harum ani', '1975-12-14 07:16:00'),
+(448, 67, 'Tunis', 1, 'Recusandae Cumque s', 'Iste optio Nam ut c', '2011-01-13 18:10:00', 'Hic in reprehenderit', 'Pariatur Culpa ab ', '1974-05-03 03:34:00'),
+(460, 68, 'P4', 1, 'Laudantium debitis ', 'Ut magna incididunt ', '2003-08-15 18:26:00', 'Earum et quia dicta ', 'Enim omnis eligendi ', '1986-10-25 14:59:00'),
+(461, 68, 'P6', 1, 'Autem non magnam ape', 'Nihil voluptatem El', '1987-05-07 14:42:00', 'Tempore aliquip ape', 'Nihil at eu qui sit', '1981-09-19 22:19:00'),
+(462, 68, 'P8', 1, 'vol n12', 'vol n12', '2024-07-22 13:18:00', 'vol n11', 'vol n11', '2024-07-19 13:18:00'),
+(466, 70, 'Et recusandae Quam ', 1, 'Proident eveniet e', 'Tempor culpa sit e', '1998-06-07 08:41:00', 'Ut quo et in eius ve', 'Facere id mollitia ', '2000-11-23 01:49:00'),
+(470, 71, 'Totam velit repudian', 1, 'Vel sed et est nesc', 'Velit esse quam au', '1998-10-01 20:55:00', 'Eius delectus optio', 'In voluptatibus moll', '2003-02-25 04:02:00'),
+(473, 59, '3', 1, 'Voluptate esse aliq', 'Numquam perspiciatis', '2003-03-22 03:53:00', 'Asperiores iusto mol', 'Molestiae mollit ani', '1977-01-16 11:07:00'),
+(474, 72, '3', 1, 'Voluptate esse aliq', 'Numquam perspiciatis', '2003-03-22 03:53:00', 'Asperiores iusto mol', 'Molestiae mollit ani', '1977-01-16 11:07:00'),
+(475, 73, '3', 1, 's1', 'Animi totam nemo al', '1984-02-21 15:33:00', 'Sint veniam fugiat ', 'Amet voluptas ipsum', '1972-02-12 03:35:00');
 
 --
 -- Index pour les tables déchargées
@@ -581,13 +622,13 @@ ALTER TABLE `extras`
 -- AUTO_INCREMENT pour la table `formules`
 --
 ALTER TABLE `formules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT pour la table `hebergements`
 --
 ALTER TABLE `hebergements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=243;
 
 --
 -- AUTO_INCREMENT pour la table `hotels`
@@ -635,7 +676,7 @@ ALTER TABLE `ville_depart`
 -- AUTO_INCREMENT pour la table `vols`
 --
 ALTER TABLE `vols`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=437;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=476;
 
 --
 -- Contraintes pour les tables déchargées
