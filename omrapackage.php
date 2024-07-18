@@ -69,9 +69,10 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            position: absolute;
-            right: 75px;
-            top: 90px;            
+            /*position: absolute;*/ 
+            float:right;
+            /* right: 75px; */
+            /* margin-bottom : 20px;*/
             text-decoration: none;            
         }
         
@@ -91,7 +92,7 @@
             display: block;
             font-size: 14px;
             color: #666;
-            margin-top: 5px;
+            margin-top: 5px;           
         }
 
         .card.cardnew.col-md-3 {
@@ -156,15 +157,16 @@
 
     <?php include 'header.php'; ?>
 
-    <div class="container">        
-        <h2 class="text-center">Liste des villes avec Formules</h2>
-        <a href="ajoutomrapackage.php" class='btn-add'><b>Ajouter une Ville</b></a>
-
+    <div class="container">   
+    <a href="ajoutomrapackage.php" class='btn-add'><b>Ajouter une Ville</b></a>
+            <h2 class="text-center">Liste des villes avec Formules</h2>
+            
+        
         <table>
             <thead>
                 <tr>
                     <th>Nom du Ville</th>
-                    <th>Description</th>
+                    <th style="width: 550px;">Description</th>
                     <th>Formules disponibles</th>
                     <th>Action</th>
                 </tr>
@@ -200,7 +202,8 @@
 
                                 if (!empty($row_formule['date_depart'])) {
                                     $date_depart_formattee = date('d-m-Y', strtotime($row_formule['date_depart']));
-                                    echo "<br><span class='indicator'>Date de départ: " . $date_depart_formattee . "<a class='btn-dup' href='duplicate_formule.php?id=" . $row_formule['id'] . "'><b>Dupliquer</b></a>" . "</span>";
+                                    echo "<br><span class='indicator'>Date de départ: " . $date_depart_formattee ;
+                                    echo "<a class='btn-dup' href='duplicate_formule.php?id=" . $row_formule['id'] . "'><b>Dupliquer</b></a></span>";
                                     // echo "<a class='btn-dup' href='duplicate_formule.php?id=" . $row_formule['id'] . "'>Dupliquer</a>";
                                 }
                                 
@@ -215,11 +218,13 @@
 
                         // Buttons for edit and delete package
                         echo "<td class='btn-group'>";
+                        echo "<div style='margin-top:20px; margin-bottom:10px;'>";
                         echo "<button class='btn btn-edit' onclick=\"window.location.href='edit_package.php?id=" . $package_id . "'\">Éditer</button>";
+                        echo "</div>";
                         echo "<a class='btn btn-delete' href='delete_package.php?id=" . $package_id . "' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer ce package?')\">Supprimer</a>";
                         echo "<br>";
-                        echo "<div style='margin-top:20px;'>";
-                        echo "<a class='btn-dup-pack' href='#'><b>Dupliquer Pack</b></a>";
+                        echo "<div style='margin-top:20px; margin-bottom:20px;'>";
+                        echo "<a class='btn-dup-pack' href='duplicate_package.php?id=" . $package_id . "'\"><b>Dupliquer Pack</b></a>";
                         echo "</div>";
                         // echo "<div style='margin-top:20px;'>";
                         // echo "<form action='duplicate_package.php' method='POST'>";
