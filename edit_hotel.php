@@ -47,8 +47,7 @@ if (isset($_POST['update_hotel'])) {
     $sql = "UPDATE hotels SET 
             nom = '$nom', 
             etoiles = '$etoiles', 
-            ville = '$ville', 
-            
+            ville = '$ville',             
             details = '$details', 
             monument = '$monument' 
             WHERE id = $hotel_id";
