@@ -2,33 +2,33 @@
 // Inclure le fichier de connexion à la base de données
 include 'db.php';
 
-// Vérifier si l'identifiant du package est passé en paramètre dans l'URL
+// Vérifier si l'identifiant du programme est passé en paramètre dans l'URL
 if (isset($_GET['id'])) {
-    $package_id = $_GET['id'];
+    $program_id = $_GET['id'];
 
-    // Récupérer les données du package à partir de la base de données
-    $sql = "SELECT * FROM omra_packages WHERE id = $package_id";
+    // Récupérer les données du programme à partir de la base de données
+    $sql = "SELECT * FROM programs WHERE id = $program_id";
     $result = $conn->query($sql);
 
     // Vérifier s'il y a des résultats
     if ($result->num_rows > 0) {
-        // Récupérer les données du package
+        // Récupérer les données du programme
         $row = $result->fetch_assoc();
         $nom = $row['nom'];
         $description = $row['description'];
         $photo = $row['photo']; // Chemin de l'image existante
-        // Ajoutez d'autres champs du package ici en fonction de votre structure de base de données
+        // Ajoutez d'autres champs du programme ici en fonction de votre structure de base de données
     } else {
-        echo "Aucun package trouvé avec cet identifiant.";
+        echo "Aucun programme trouvé avec cet identifiant.";
         exit();
     }
 } else {
-    echo "Identifiant du package non spécifié.";
+    echo "Identifiant du programme non spécifié.";
     exit();
 }
 
 // Vérifier si le formulaire de mise à jour a été soumis
-if (isset($_POST['update_package'])) {
+if (isset($_POST['update_program'])) {
     // Récupérer les données du formulaire
     $nom = $_POST['nom'];
     $description = $_POST['description'];
@@ -60,19 +60,19 @@ if (isset($_POST['update_package'])) {
         }
     }
 
-    // Préparer la requête SQL pour mettre à jour le package
-    $sql = "UPDATE omra_packages SET 
+    // Préparer la requête SQL pour mettre à jour le programme
+    $sql = "UPDATE programs SET 
             nom = '$nom', 
             description = '$description', 
             photo = '$photo' 
-            WHERE id = $package_id";
+            WHERE id = $program_id";
 
-    // Exécuter la requête pour mettre à jour le package
+    // Exécuter la requête pour mettre à jour le programme
     if ($conn->query($sql) === TRUE) {
-        echo "Package mis à jour avec succès.";
+        header("Location: programs.php");
     } else {
-        echo "Erreur lors de la mise à jour du package : " . $conn->error;
-    }
+        echo "Erreur lors de la mise à jour du programme : " . $conn->error;
+    }    
 }
 ?>
 
@@ -82,7 +82,7 @@ if (isset($_POST['update_package'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifier une Ville</title>
+    <title>Modifier un Programme</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -161,24 +161,24 @@ if (isset($_POST['update_package'])) {
 <body>
 
     <div class="container">
-        <h2>Modifier une Ville</h2>
-            <form action="edit_package.php?id=<?php echo $package_id; ?>" method="POST" enctype="multipart/form-data">
-                <label for="nom">Nom du Ville:</label>
+        <h2>Modifier un Programme</h2>
+            <form action="edit_program.php?id=<?php echo $program_id; ?>" method="POST" enctype="multipart/form-data">
+                <label for="nom">Nom du Programme:</label>
                 <input type="text" id="nom" name="nom" value="<?php echo $nom; ?>" required>
 
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" rows="4" required><?php echo $description; ?></textarea>
 
                 <h3><label for="photo">Photo existante:</label></h3>
-                <img src="<?php echo $photo; ?>" alt="Image du package"
+                <img src="<?php echo $photo; ?>" alt="Image du programme"
                     style="max-width: 200px; max-height: 200px;"><br>
 
                 <h3><label for="nouvelle_photo">Télécharger une nouvelle photo:</label></h3>
                 <input type="file" id="nouvelle_photo" name="photo" accept="image/*">
 
-                <!-- Ajoutez d'autres champs du package ici en fonction de votre structure de base de données -->
+                <!-- Ajoutez d'autres champs du programme ici en fonction de votre structure de base de données -->
 
-                <button type="submit" name="update_package">Modifier Ville</button>
+                <button type="submit" name="update_program">Modifier Programme</button>
             </form>
     </div>
 

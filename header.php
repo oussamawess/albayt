@@ -111,6 +111,14 @@
                     <li><a href="ajout_extra.php">Ajouter un Extra</a></li>
                 </ul>
             </li>
+
+            <li>
+                <a href="#">Programmes</a>
+                <ul>
+                    <li><a href="programs.php">Liste des Programmes</a></li>
+                    <li><a href="add_program.php">Ajouter un Programme</a></li>
+                </ul>
+            </li>
             <!-- Nouvelle catégorie -->
 
         </ul>
