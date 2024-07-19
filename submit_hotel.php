@@ -6,7 +6,7 @@ include "db.php";
 $nom = $_POST['nom'];
 $etoiles = $_POST['etoiles'];
 $ville = $_POST['ville'];
-$pension = $_POST['pension'];
+// $pension = $_POST['pension'];
 $details = $_POST['details'];
 $monument = $_POST['monument'];
 
@@ -26,8 +26,8 @@ if (isset($_FILES['gallery'])) {
 }
 
 // Préparer la requête SQL pour ajouter l'hôtel
-$sql = "INSERT INTO hotels (nom, etoiles, ville, pension, details, monument) 
-        VALUES ('$nom', '$etoiles', '$ville', '$pension', '$details', '$monument')";
+$sql = "INSERT INTO hotels (nom, etoiles, ville, details, monument) 
+        VALUES ('$nom', '$etoiles', '$ville', '$details', '$monument')";
 
 // Exécuter la requête pour ajouter l'hôtel
 if ($conn->query($sql) === TRUE) {

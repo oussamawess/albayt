@@ -17,7 +17,7 @@ if (isset($_GET['id'])) {
         $nom = $row['nom'];
         $etoiles = $row['etoiles'];
         $ville = $row['ville'];
-        $pension = $row['pension'];
+        // $pension = $row['pension'];
         $details = $row['details'];
         $monument = $row['monument'];
     } else {
@@ -39,7 +39,7 @@ if (isset($_POST['update_hotel'])) {
     $nom = $_POST['nom'];
     $etoiles = $_POST['etoiles'];
     $ville = $_POST['ville'];
-    $pension = $_POST['pension'];
+    // $pension = $_POST['pension'];
     $details = $_POST['details'];
     $monument = $_POST['monument'];
 
@@ -48,7 +48,7 @@ if (isset($_POST['update_hotel'])) {
             nom = '$nom', 
             etoiles = '$etoiles', 
             ville = '$ville', 
-            pension = '$pension', 
+            
             details = '$details', 
             monument = '$monument' 
             WHERE id = $hotel_id";
@@ -203,7 +203,7 @@ if (isset($_GET['delete_image'])) {
             <input type="text" id="ville" name="ville" value="<?php echo $ville; ?>" required>
 
             <!-- <label for="pension">Type de Pension:</label>
-            <input type="text" id="pension" name="pension" value="<?php echo $pension; ?>" required> -->
+            <input type="text" id="pension" name="pension" value="<!?php echo $pension; ?>" required> -->
 
             <label for="details">Détails:</label>
             <textarea id="details" name="details" rows="4" required><?php echo $details; ?></textarea>
