@@ -98,17 +98,27 @@
         exit;
     }
 
-
+    
     ?>
+
+
     <?php include 'header.php'; ?>
 </head>
 
 <body>
 
     <div class="container">
+      
+    <?php
+    if (isset($_GET['error']) && $_GET['error'] == 'hotel_in_use') {
+        echo "<p id='error-message' style='text-align: center; color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb;
+        padding:10px; transition:  all 0.2s ease-in-out;'><b>
+        Cet hôtel est utilisé dans des formules et ne peut pas être supprimé.</b></p>";
+    }
+    ?>
+
         <a href="ajouthotel.php" class='btn-add'><b>Ajouter un Hôtel</b></a>
-        <h2>Liste des Hôtels</h2>
-        
+        <h2>Liste des Hôtels</h2>        
         <table>
             <thead>
                 <tr>
@@ -162,7 +172,15 @@
             </tbody>
         </table>
     </div>
-
+    <script>
+        // Hide the error message after 5 seconds
+        setTimeout(function() {
+            var errorMessage = document.getElementById('error-message');
+            if (errorMessage) {
+                errorMessage.style.display = 'none';
+            }
+        }, 5000);
+    </script>
 </body>
 
 </html>
