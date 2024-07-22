@@ -96,7 +96,7 @@
 
             // Exécuter la requête
             if (mysqli_query($conn, $sql)) {
-                echo "<div class='container'><h2>Le type de formule Omra a été ajouté avec succès!</h2></div>";
+                echo "<div class='container'><h2>Le type de formule Omra a été ajouté avec succès!</h2></div>";                
             } else {
                 echo "<div class='container'><h2>Erreur lors de l'ajout du type de formule Omra. Veuillez réessayer.</h2></div>";
             }

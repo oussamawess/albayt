@@ -11,6 +11,7 @@ $sql = "DELETE FROM compagnies_aeriennes WHERE id = $compagnie_id";
 // Exécuter la requête
 if ($conn->query($sql) === TRUE) {
     echo "La compagnie aérienne a été supprimée avec succès.";
+    header("location:list_compagnies.php");
 } else {
     echo "Erreur : " . $conn->error;
 }

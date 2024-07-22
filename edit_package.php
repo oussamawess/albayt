@@ -70,6 +70,7 @@ if (isset($_POST['update_package'])) {
     // Exécuter la requête pour mettre à jour le package
     if ($conn->query($sql) === TRUE) {
         echo "Package mis à jour avec succès.";
+        header("Location: omrapackage.php");
     } else {
         echo "Erreur lors de la mise à jour du package : " . $conn->error;
     }

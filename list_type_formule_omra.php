@@ -74,10 +74,8 @@
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
-            position: absolute;
-            right: 150px;
-            top: 90px;
+            cursor: pointer;            
+            float:right;
             text-decoration: none;
         }
 
@@ -108,8 +106,9 @@
 <body>
 
     <div class="container">
-        <h2 class="text-center">Liste des categories</h2>
         <a href="ajout_type_formule.php" class='btn-add'><b>Ajouter une categorie</b></a>
+        <h2 class="text-center">Liste des categories</h2>
+        
         <table class="table table-bordered">
             <thead>
                 <tr>

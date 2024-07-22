@@ -55,6 +55,7 @@ if (isset($_POST['update_hotel'])) {
     // Exécuter la requête pour mettre à jour l'hôtel
     if ($conn->query($sql) === TRUE) {
         echo "Hôtel mis à jour avec succès.";
+        header("Location: hotels.php");
     } else {
         echo "Erreur lors de la mise à jour de l'hôtel : " . $conn->error;
     }
@@ -213,7 +214,7 @@ if (isset($_GET['delete_image'])) {
             <label for="images">Ajouter de nouvelles images:</label>
             <input type="file" id="images" name="images[]" multiple>
 
-            <button type="submit" name="update_hotel">Modifier Hôtel</button>
+            <button type="submit" name="update_hotel">Modifier Hôtel</button>   
         </form>
 
         <h3>Galerie d'Images</h3>

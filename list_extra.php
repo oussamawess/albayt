@@ -74,10 +74,8 @@
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
-            position: absolute;
-            right: 155px;
-            top: 100px;            
+            cursor: pointer;            
+            float:right;
             text-decoration: none;            
         }
 
@@ -109,8 +107,9 @@
 <body>
 
     <div class="container">
-        <h2 class="text-center">Liste des Extras</h2>
         <a href="ajout_extra.php" class='btn-add'><b>Ajouter un Extra</b></a>
+        <h2 class="text-center">Liste des Extras</h2>
+        
         <table class="table table-bordered">
             <thead>
                 <tr>

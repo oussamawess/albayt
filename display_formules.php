@@ -78,6 +78,21 @@
             background-color: #fa190b;
         }
 
+        .btn-display {
+            background-color: #009785;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-display:hover {
+            background-color: #35875b;
+        }
+        
+
         .icon {
             font-size: 18px;
             margin-right: 5px;
@@ -100,10 +115,8 @@
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
-            position: absolute;
-            right: 80px;
-            top: 90px;
+            cursor: pointer;            
+            float:right;
             text-decoration: none;
         }
         .btn-add:hover {
@@ -144,9 +157,10 @@
     <?php include 'header.php'; ?>
 
     <div class="container">
-        <h2 class="text-center">Liste des Formules</h2>
-        <a href="ajoutomrapackage.php" class='btn-add'><b>Ajouter une Ville</b></a>
         <a href="ajoutformule.php" class='btn-add'><b>Ajouter une formule</b></a>
+        <h2 class="text-center">Liste des Formules</h2>
+        
+        
 
         <table>
             <thead>
@@ -189,6 +203,7 @@
                         echo "<a class='btn-edit' href='edit_formule.php?id=" . $row_formule['id'] . "'>Éditer</a>";
                         echo "<a class='btn-delete' href='delete_formule.php?id=" . $row_formule['id'] . "' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette formule?')\">Supprimer</a>";
                         echo "<a class='btn-dup' href='duplicate_formule.php?id=" . $row_formule['id'] . "'>Dupliquer</a>";
+                        echo "<a class='btn-display' href='display_formule.php?id=" . $row_formule['id'] . "'>Afficher</a>";
                         echo "</td>";
                         echo "</tr>";
                     }

@@ -23,8 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prix_chambre_single_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_single_promo']);
     //wess
 
-    $description = mysqli_real_escape_string($conn, $_POST['description']);
-    // (Other fields...)
+    // Fetch and sanitize selected programs
+    $selectedPrograms = isset($_POST['programs']) ? array_map('intval', $_POST['programs']) : [];
+    $programsJson = json_encode($selectedPrograms);
 
     //wess
     // 2. Input Validation (Example - Check if all price fields are valid numbers)
@@ -45,8 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Update the main formules table
     $sql = "UPDATE formules SET 
-            package_id = '$package_id', 
-            -- nom = '$nom',
+            package_id = '$package_id',             
             statut = '$statut',
             duree_sejour = '$duree_sejour',
             type_id = $typeId,
@@ -63,7 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             prix_chambre_double_promo = '$prix_chambre_double_promo',
             prix_chambre_single_promo = '$prix_chambre_single_promo',
             -- wess
-            description = '$description'
+
+            programs_id = '$programsJson'
             -- (Other fields...)
             WHERE id = $formule_id";
 

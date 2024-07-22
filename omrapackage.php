@@ -60,6 +60,14 @@
         .btn-edit {
             background-color: #4CAF50;
             color: white;
+            padding: 10px 40px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: small;
+            
+
         }
 
         .btn-add {
@@ -79,8 +87,13 @@
 
         .btn-delete {
             background-color: #f44336;
-            color: white;
+            color: white;            
+            padding: 10px 26px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             text-decoration: none;
+            font-size: small;
         }
 
         .icon {
@@ -116,12 +129,12 @@
         .btn-dup-pack {
             background-color: #10ced7;            
             color: black;
-            padding: 10px 20px;
+            padding: 10px 13px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
-            margin: 0 15px;
+            font-size: small;
         }
 
         .btn-dup-pack:hover {
@@ -218,13 +231,18 @@
 
                         // Buttons for edit and delete package
                         echo "<td class='btn-group'>";
-                        echo "<div style='margin-top:20px; margin-bottom:10px;'>";
-                        echo "<button class='btn btn-edit' onclick=\"window.location.href='edit_package.php?id=" . $package_id . "'\">Éditer</button>";
+
+                        echo "<div >";
+                        echo "<button class='btn-edit' onclick=\"window.location.href='edit_package.php?id=" . $package_id . "'\">Éditer</button>";
                         echo "</div>";
-                        echo "<a class='btn btn-delete' href='delete_package.php?id=" . $package_id . "' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer ce package?')\">Supprimer</a>";
                         echo "<br>";
-                        echo "<div style='margin-top:20px; margin-bottom:20px;'>";
-                        echo "<a class='btn-dup-pack' href='duplicate_package.php?id=" . $package_id . "'\"><b>Dupliquer Pack</b></a>";
+                        echo "<div >";
+                        echo "<button class='btn-delete' onclick=\"if(confirm('Êtes-vous sûr de vouloir supprimer ce package?')) { window.location.href='delete_package.php?id=" . $package_id . "'; }\">Supprimer</button>";
+                        echo "</div>";
+                        echo "<br>";
+                        
+                        echo "<div >";
+                        echo "<button class='btn-dup-pack' onclick=\"if(confirm('Êtes-vous sûr de vouloir dupliquer ce package?')) { window.location.href='duplicate_package.php?id=" . $package_id . "'; }\">Dupliquer Pack</button>";
                         echo "</div>";
                         // echo "<div style='margin-top:20px;'>";
                         // echo "<form action='duplicate_package.php' method='POST'>";

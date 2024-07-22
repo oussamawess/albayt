@@ -76,7 +76,7 @@
     .addbutton:hover {
       background-color: #45a049;
     }
-    
+
 
     .deletebutton {
       background-color: #f44336;
@@ -217,6 +217,23 @@
       border-radius: 5px;
       box-sizing: border-box;
     }
+
+    .program-item {
+      display: inline-block;
+      /* Ensures items appear inline */
+      margin-right: 10px;
+      /* Adjust spacing between items */
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .program-grid>div {
+      box-sizing: border-box;
+    }
   </style>
 
   <?php include 'header.php'; ?>
@@ -354,8 +371,7 @@
                 </div>
                 <div class="input-group">
                   <label for="heure_depart">Heure & Date de Départ:</label>
-                  <input type="datetime-local" id="heure_depart" name="heure_depart[]" class="half-width-input"
-                    required>
+                  <input type="datetime-local" id="heure_depart" name="heure_depart[]" class="half-width-input" required>
                 </div>
                 <div class="input-group">
                   <label for="destination">Destination:</label>
@@ -363,13 +379,11 @@
                 </div>
                 <div class="input-group">
                   <label for="airport_destination">Aéroport de Destination:</label>
-                  <input type="text" id="airport_destination" name="airport_destination[]" class="half-width-input"
-                    required>
+                  <input type="text" id="airport_destination" name="airport_destination[]" class="half-width-input" required>
                 </div>
                 <div class="input-group">
                   <label for="heure_arrivee">Heure & Date d'Arrivée:</label>
-                  <input type="datetime-local" id="heure_arrivee" name="heure_arrivee[]" class="half-width-input"
-                    required>
+                  <input type="datetime-local" id="heure_arrivee" name="heure_arrivee[]" class="half-width-input" required>
                 </div>
               </div>
               <div class="delete-button-container">
@@ -525,13 +539,11 @@
               <div class="half-width-inputs">
                 <div class="input-group">
                   <label for="date_checkin">Date Checkin :</label>
-                  <input type="date" id="date_checkin1" name="date_checkin[]" class="half-width-input date-checkin"
-                    required>
+                  <input type="date" id="date_checkin1" name="date_checkin[]" class="half-width-input date-checkin" required>
                 </div>
                 <div class="input-group">
                   <label for="date_checkout">Date Checkout :</label>
-                  <input type="date" id="date_checkout1" name="date_checkout[]" class="half-width-input date-checkout"
-                    required>
+                  <input type="date" id="date_checkout1" name="date_checkout[]" class="half-width-input date-checkout" required>
                 </div>
                 <div class="input-group">
                   <label for="hotel">Hôtel :</label>
@@ -564,8 +576,7 @@
                 <!-- wess -->
                 <div class="input-group">
                   <label for="nombre_nuit">Nombre de nuitées :</label>
-                  <input type="number" id="nombre_nuit1" name="nombre_nuit[]" class="half-width-input nombre-nuit"
-                    required readonly>
+                  <input type="number" id="nombre_nuit1" name="nombre_nuit[]" class="half-width-input nombre-nuit" required readonly>
                 </div>
               </div>
               <button type="button" class="delete-hebergement deletebutton" disabled>Supprimer Hébergement</button>
@@ -705,8 +716,7 @@
           <div class="half-width-inputs">
             <div class="input-group">
               <label for="prix_chambre_quadruple">Chambre quadruple:</label>
-              <input type="number" id="prix_chambre_quadruple" name="prix_chambre_quadruple" class="price-input"
-                required>
+              <input type="number" id="prix_chambre_quadruple" name="prix_chambre_quadruple" class="price-input" required>
             </div>
 
             <div class="input-group">
@@ -752,28 +762,24 @@
           <div class="half-width-inputs">
             <div class="input-group">
               <label for="prix_chambre_quadruple_promo">Chambre quadruple:</label>
-              <input type="number" id="prix_chambre_quadruple_promo" name="prix_chambre_quadruple_promo"
-                class="price-input" value="0">
+              <input type="number" id="prix_chambre_quadruple_promo" name="prix_chambre_quadruple_promo" class="price-input" value="0">
             </div>
 
             <div class="input-group">
               <label for="prix_chambre_triple_promo">Chambre triple:</label>
-              <input type="number" id="prix_chambre_triple_promo" name="prix_chambre_triple_promo" class="price-input"
-                value="0">
+              <input type="number" id="prix_chambre_triple_promo" name="prix_chambre_triple_promo" class="price-input" value="0">
             </div>
           </div>
 
           <div class="half-width-inputs">
             <div class="input-group">
               <label for="prix_chambre_double_promo">Chambre double:</label>
-              <input type="number" id="prix_chambre_double_promo" name="prix_chambre_double_promo" class="price-input"
-                value="0">
+              <input type="number" id="prix_chambre_double_promo" name="prix_chambre_double_promo" class="price-input" value="0">
             </div>
 
             <div class="input-group">
               <label for="prix_chambre_single_promo">Chambre single:</label>
-              <input type="number" id="prix_chambre_single_promo" name="prix_chambre_single_promo" class="price-input"
-                value="0">
+              <input type="number" id="prix_chambre_single_promo" name="prix_chambre_single_promo" class="price-input" value="0">
             </div>
           </div>
         </div>
@@ -783,24 +789,36 @@
 
 
       <div class="price-inputs">
-        <h3>Programme <span class="toggle-icon">+</span></h3>
-
-        <div class="collapsible-content">
-          <br>
-          <label for="description">Programme:</label>
-          <textarea id="description" name="description" rows="6" required></textarea>
-          <script>
-            CKEDITOR.replace('description');
-          </script>
+    <h3>Programmes <span class="toggle-icon">+</span></h3>
+    <div class="collapsible-content" style="padding:5px;">
+        <div class="program-grid">
+            <?php
+            include 'db.php';
+            $sql_programs = "SELECT id, nom FROM programs";
+            $result_programs = mysqli_query($conn, $sql_programs);
+            if (mysqli_num_rows($result_programs) > 0) {
+                while ($row = mysqli_fetch_assoc($result_programs)) {
+                    echo '<div>';
+                    echo '<input type="checkbox" name="programs[]" value="' . $row['id'] . '"> ' . $row['nom'];
+                    echo '</div>';
+                }
+            } else {
+                echo "Aucun programme trouvé.";
+            }
+            ?>
         </div>
-      </div>
+    </div>
+</div>
+
+
+
+
 
 
       <button type="submit">Valider</button>
     </form>
   </div>
   <script>
-
     // Get all toggle icons and collapsible contents
     const toggleIcons = document.querySelectorAll('.toggle-icon');
     const collapsibleContents = document.querySelectorAll('.collapsible-content');
@@ -826,7 +844,7 @@
     const packageSelect = document.getElementById('package');
     const typeFormuleSelect = document.getElementById('type');
 
-    packageSelect.addEventListener('change', function () {
+    packageSelect.addEventListener('change', function() {
       const packageId = this.value;
       fetchTypeFormules(packageId);
     });
@@ -857,8 +875,6 @@
         typeFormuleSelect.add(option);
       }
     }
-
-
   </script>
 </body>
 

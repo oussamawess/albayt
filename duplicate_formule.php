@@ -28,11 +28,13 @@ if (isset($_GET['id'])) {
         $prix_chambre_triple_promo = $row_formule['prix_chambre_triple_promo'];
         $prix_chambre_double_promo = $row_formule['prix_chambre_double_promo'];
         $prix_chambre_single_promo = $row_formule['prix_chambre_single_promo'];
-        $description = $row_formule['description'];
+
+        // Get the programs_id from the original formule and encode as JSON
+        $programs_json = $row_formule['programs_id'];
 
         // Insert the duplicated formule as a new record
-        $sql_insert_formule = "INSERT INTO formules (package_id, type_id, date_depart, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, description)
-            VALUES ('$package_id', '$type_id', '$date_depart', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$description')";
+        $sql_insert_formule = "INSERT INTO formules (package_id, type_id, date_depart, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id)
+            VALUES ('$package_id', '$type_id', '$date_depart', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json')";
 
         if (mysqli_query($conn, $sql_insert_formule)) {
             $new_formule_id = mysqli_insert_id($conn);

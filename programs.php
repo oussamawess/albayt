@@ -74,10 +74,8 @@
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
-            position: absolute;
-            right: 155px;
-            top: 90px;            
+            cursor: pointer;            
+            float:right;
             text-decoration: none;            
         }
 
@@ -108,8 +106,9 @@
 <body>
 
     <div class="container">
-        <h2>Liste des Programmes</h2>
         <a href="add_program.php" class='btn-add'><b>Ajouter un Programme</b></a>
+        <h2>Liste des Programmes</h2>
+        
         <table>
             <thead>
                 <tr>

@@ -13,8 +13,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $new_package_id = mysqli_insert_id($conn);
 
         // Step 2: Duplicate formules for the new package
-        $sql_duplicate_formules = "INSERT INTO formules (package_id, date_depart, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, description, type_id, created_at)
-                                   SELECT $new_package_id, date_depart, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, description, type_id, created_at
+        $sql_duplicate_formules = "INSERT INTO formules (package_id, date_depart, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, type_id, created_at, programs_id)
+                                   SELECT $new_package_id, date_depart, 'désactivé', duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, type_id, created_at, programs_id
                                    FROM formules
                                    WHERE package_id = $package_id";
         if (mysqli_query($conn, $sql_duplicate_formules)) {
@@ -73,8 +73,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                        WHERE formule_id = $original_formule_id";
                 mysqli_query($conn, $sql_duplicate_vols);
 
-                $sql_duplicate_hebergements = "INSERT INTO hebergements (formule_id, hotel_id, date_checkin, date_checkout, nombre_nuit)
-                                               SELECT $new_formule_id, hotel_id, date_checkin, date_checkout, nombre_nuit
+                $sql_duplicate_hebergements = "INSERT INTO hebergements (formule_id, hotel_id, type_pension, date_checkin, date_checkout, nombre_nuit)
+                                               SELECT $new_formule_id, hotel_id, type_pension, date_checkin, date_checkout, nombre_nuit
                                                FROM hebergements
                                                WHERE formule_id = $original_formule_id";
                 mysqli_query($conn, $sql_duplicate_hebergements);

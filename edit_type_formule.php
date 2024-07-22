@@ -66,6 +66,7 @@
 </head>
 
 <body>
+    
     <?php
     session_start(); // Start session to access session variables
     
@@ -104,6 +105,8 @@
     // Handle form submission
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // ... (Your existing form submission code with input sanitization and validation) ...
+        $nom = $_POST['nom'] ?? '';
+        $formule_parent = $_POST['formule_parent'] ?? '';
     
         // Update the type de formule
         $sql = "UPDATE type_formule_omra SET 
@@ -113,14 +116,14 @@
 
         if (mysqli_query($conn, $sql)) {
             echo "<div class='container'><h2>Le type de formule Omra a étémis à jour avec succès!</h2></div>";
-            header("Location: update_type_formule.php?id=$typeFormuleId"); // Refresh the page to show updated data
+            header("Location: list_type_formule_omra.php"); // Refresh the page to show updated data
             exit;
         } else {
             echo "<div class='container'><h2>Erreur lors de la mise à jour du type de formule Omra. Veuillez réessayer.</h2></div>";
         }
     }
     ?>
-
+<?php include 'header.php'; ?>
     <div class="container">
         <h2>Modifier un type de Formule Omra</h2>
         <form action="" method="POST">

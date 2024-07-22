@@ -12,7 +12,7 @@ if(isset($_GET['id'])) {
     // Exécuter la requête pour supprimer l'hôtel
     if ($conn->query($sql) === TRUE) {
         // Redirection vers la liste des hôtels après la suppression
-        header("Location: list_hotels.php");
+        header("Location: hotels.php");
         exit();
     } else {
         echo "Erreur lors de la suppression de l'hôtel : " . $conn->error;

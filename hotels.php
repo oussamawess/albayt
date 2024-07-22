@@ -74,11 +74,9 @@
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
-            position: absolute;
-            right: 155px;
-            top: 90px;            
-            text-decoration: none;            
+            cursor: pointer;            
+            float:right;
+            text-decoration: none;           
         }
 
         .btn-add:hover {
@@ -108,8 +106,9 @@
 <body>
 
     <div class="container">
-        <h2>Liste des Hôtels</h2>
         <a href="ajouthotel.php" class='btn-add'><b>Ajouter un Hôtel</b></a>
+        <h2>Liste des Hôtels</h2>
+        
         <table>
             <thead>
                 <tr>

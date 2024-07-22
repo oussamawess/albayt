@@ -94,7 +94,7 @@
 
 
             <label for="photo">Photo:</label>
-            <input type="file" id="photo" name="photo" accept="image/*" required>
+            <input type="file" id="photo" name="photo" accept="image/*" >
 
 
 
