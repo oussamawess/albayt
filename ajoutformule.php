@@ -291,21 +291,26 @@
         </div>
 
         <div class="input-group">
-          <label for="date_depart">Date de Départ:</label>
-          <input type="date" id="date_depart" name="date_depart" class="half-width-input" required>
-        </div>
-      </div>
-
-
-
-      <div class="half-width-inputs">
-        <div class="input-group">
           <label for="statut">Statut:</label>
           <select id="statut" name="statut" class="half-width-input" required>
             <option value="activé">Activé</option>
             <option value="désactivé">Désactivé</option>
           </select>
         </div>
+      </div>
+
+
+
+      <div class="half-width-inputs">
+      <div class="input-group">
+          <label for="date_depart">Date de Départ:</label>
+          <input type="date" id="date_depart" name="date_depart" class="half-width-input" required>
+        </div>
+
+        <div class="input-group">
+          <label for="date_depart">Date de Retour:</label>
+          <input type="date" id="date_retour" name="date_retour" class="half-width-input" required>
+        </div>        
 
         <div class="input-group">
           <label for="duree_sejour">Durée de séjour:</label>

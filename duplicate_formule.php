@@ -16,6 +16,7 @@ if (isset($_GET['id'])) {
         $package_id = $row_formule['package_id'];
         $type_id = $row_formule['type_id'];
         $date_depart = $row_formule['date_depart'];
+        $date_retour = $row_formule['date_retour'];
         $statut = 'désactivé';
         $duree_sejour = $row_formule['duree_sejour'];
         $prix_chambre_quadruple = $row_formule['prix_chambre_quadruple'];
@@ -33,8 +34,8 @@ if (isset($_GET['id'])) {
         $programs_json = $row_formule['programs_id'];
 
         // Insert the duplicated formule as a new record
-        $sql_insert_formule = "INSERT INTO formules (package_id, type_id, date_depart, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id)
-            VALUES ('$package_id', '$type_id', '$date_depart', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json')";
+        $sql_insert_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id)
+            VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json')";
 
         if (mysqli_query($conn, $sql_insert_formule)) {
             $new_formule_id = mysqli_insert_id($conn);

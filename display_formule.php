@@ -194,6 +194,7 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         <th>Ville de départ</th>
                         <th>Catégorie</th>
                         <th>Date de Départ</th>
+                        <th>Date de Retour</th>
                         <th>Statut</th>
                         <th>Durée de séjour</th>
                     </tr>
@@ -201,6 +202,7 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         <td><?php echo $formule['package_name']; ?></td>
                         <td><?php echo $formule['type_name']; ?></td>
                         <td><?php echo $formule['date_depart']; ?></td>
+                        <td><?php echo $formule['date_retour']; ?></td>
                         <td><?php echo $formule['statut']; ?></td>
                         <td><?php echo $formule['duree_sejour']; ?></td>
                     </tr>

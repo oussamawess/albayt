@@ -263,6 +263,7 @@
                     $existingStatut = $row['statut'];
                     $existingDureeSejour = $row['duree_sejour'];
                     $existingDateDepart = $row['date_depart'];
+                    $existingDateRetour = $row['date_retour'];
                     $existingPrixChambreQuadruple = $row['prix_chambre_quadruple'];
                     $existingPrixChambreTriple = $row['prix_chambre_triple'];
                     $existingPrixChambreDouble = $row['prix_chambre_double'];
@@ -345,6 +346,18 @@
                     </select>
                 </div>
 
+                <div class="input-group">
+                    <label for="statut">Statut:</label>
+                    <select id="statut" name="statut" class="half-width-input" required>
+                        <option value="activé" <?php if ($existingStatut == 'activé')
+                                                    echo 'selected'; ?>>Activé</option>
+                        <option value="désactivé" <?php if ($existingStatut == 'désactivé')
+                                                        echo 'selected'; ?>>Désactivé
+                        </option>
+                    </select>
+                </div>
+            </div>
+
                 <!-- Other input fields here -->
 
 
@@ -375,30 +388,22 @@
                         }
                     });
                 </script>
-
-                <div class="input-group">
-                    <label for="date_depart">Date de Départ:</label>
-                    <input type="date" id="date_depart" name="date_depart" class="half-width-input" value="<?php echo $existingDateDepart; ?>" required>
-                </div>
+        <div class="half-width-inputs">
+            <div class="input-group">
+                <label for="date_depart">Date de Départ:</label>
+                <input type="date" id="date_depart" name="date_depart" class="half-width-input" value="<?php echo $existingDateDepart; ?>" required>
             </div>
 
-            <div class="half-width-inputs">
-                <div class="input-group">
-                    <label for="statut">Statut:</label>
-                    <select id="statut" name="statut" class="half-width-input" required>
-                        <option value="activé" <?php if ($existingStatut == 'activé')
-                                                    echo 'selected'; ?>>Activé</option>
-                        <option value="désactivé" <?php if ($existingStatut == 'désactivé')
-                                                        echo 'selected'; ?>>Désactivé
-                        </option>
-                    </select>
-                </div>
-
-                <div class="input-group">
-                    <label for="duree_sejour">Durée de séjour:</label>
-                    <input type="text" id="duree_sejour" name="duree_sejour" class="half-width-input" value="<?php echo $existingDureeSejour; ?>" required>
-                </div>
+            <div class="input-group">
+                <label for="date_retour">Date de Retour:</label>
+                <input type="date" id="date_retour" name="date_retour" class="half-width-input" value="<?php echo $existingDateRetour; ?>" required>
             </div>
+
+            <div class="input-group">
+                <label for="duree_sejour">Durée de séjour:</label>
+                <input type="text" id="duree_sejour" name="duree_sejour" class="half-width-input" value="<?php echo $existingDureeSejour; ?>" required>
+            </div>
+        </div>
 
 
             <!-- ///         Vol Section Starts         //// -->

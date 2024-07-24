@@ -168,6 +168,7 @@
                     <th>Nom du Formule</th>
                     <th>Ville de départ</th>
                     <th>Date de départ</th>
+                    <th>Date de retour</th>
                     <th>Statut</th>
                     <th>Action</th>
                 </tr>
@@ -177,7 +178,7 @@
                 include 'db.php';
 
                 // SQL query to select formules along with related type_nom and package_nom
-                $sql_formules = "SELECT formules.id, formules.date_depart, statut, created_at, type_formule_omra.nom AS type_nom, omra_packages.nom AS package_nom 
+                $sql_formules = "SELECT formules.id, formules.date_depart, formules.date_retour, statut, created_at, type_formule_omra.nom AS type_nom, omra_packages.nom AS package_nom 
                                  FROM formules 
                                  JOIN type_formule_omra ON formules.type_id = type_formule_omra.id 
                                  JOIN omra_packages ON formules.package_id = omra_packages.id
@@ -191,6 +192,8 @@
                         echo "<td>" . $row_formule['package_nom'] . "</td>";
                         $date_depart_formattee = date('d-m-Y', strtotime($row_formule['date_depart']));
                         echo "<td>" . $date_depart_formattee . "</td>";
+                        $date_retour_formattee = date('d-m-Y', strtotime($row_formule['date_retour']));
+                        echo "<td>" . $date_retour_formattee . "</td>";
                         
                         if($row_formule['statut'] == 'désactivé'){
                             echo "<td>" . '<span class="inactive">● </span>' . $row_formule['statut'].  "</td>";

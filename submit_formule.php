@@ -5,7 +5,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // 1. Get Data from the Form and Sanitize Input
     $package_id = mysqli_real_escape_string($conn, $_POST['package']);
     $type_id = mysqli_real_escape_string($conn, $_POST['type']); // Get type_id
-    $date_depart = mysqli_real_escape_string($conn, $_POST['date_depart']);
+    $date_depart = mysqli_real_escape_string($conn, $_POST['date_depart']); 
+    $date_retour = mysqli_real_escape_string($conn, $_POST['date_retour']);
     $statut = mysqli_real_escape_string($conn, $_POST['statut']);
     $duree_sejour = mysqli_real_escape_string($conn, $_POST['duree_sejour']);
     $prix_chambre_quadruple = mysqli_real_escape_string($conn, $_POST['prix_chambre_quadruple']);
@@ -27,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ... (Your input validation logic) ...
 
     // 3. Prepare and Execute the SQL INSERT Query
-    $sql_formule = "INSERT INTO formules (package_id, type_id, date_depart, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id)
-        VALUES ('$package_id', '$type_id', '$date_depart', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json')";
+    $sql_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id)
+        VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json')";
 
     if (mysqli_query($conn, $sql_formule)) {
         $formule_id = mysqli_insert_id($conn);

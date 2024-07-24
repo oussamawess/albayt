@@ -190,7 +190,7 @@
             color: #000 !important;
         }
 
-        }
+        
 
         @media (min-width: 1200px) {
             .container {
@@ -341,6 +341,9 @@
             if (mysqli_num_rows($result) > 0) {
                 while ($row_package = mysqli_fetch_assoc($result)) {
                     $package_id = $row_package['id'];
+                    $package_name = $row_package['nom'];
+                    $package_description = $row_package['description'];
+                    $package_photo = $row_package['photo'];
                     ?>
 
                     <div class="card cardnew col-md-3">
@@ -351,13 +354,9 @@
                                 <span class="card__titlenew"><?php echo $row_package['nom']; ?> <br>
                                     <p style="font-size:15px; margin-top:10px">En savoir plus</p>
                                 </span>
-
                             </figure>
-
-
-
                         </a>
-                    </div>
+                    
 
                     <div class="modal fade" id="formuleModal<?php echo $package_id; ?>" tabindex="-1"
                         aria-labelledby="formuleModalLabel<?php echo $package_id; ?>" aria-hidden="true">
@@ -398,7 +397,7 @@
                                                                     xmlns:xlink="http://www.w3.org/1999/xlink" id="Calque_1" x="0px" y="0px"
                                                                     viewBox="0 0 98 98" style="enable-background:new 0 0 98 98;"
                                                                     xml:space="preserve">
-                                                                    <style type="text/css">
+                                                                    <style type="text/css"> 
                                                                         .st0 {
                                                                             fill: #FFFFFF;
                                                                         }
@@ -470,7 +469,7 @@
                                                                 </svg>
                                                                 <p class="label">
                                                                     <b>Aller:</b>
-                                                                    <?php echo date('d-m-Y', strtotime($formule_moins_chere['heure_depart'])); ?>
+                                                                    <?php echo date('d-m-Y', strtotime($formule_moins_chere['date_depart'])); ?>
                                                                 </p>
                                                             </div>
                                                             <div class="info-group">
@@ -522,7 +521,7 @@
                                                                     </g>
                                                                 </svg>
                                                                 <p class="label"> <b>Retour:</b>
-                                                                    <?php echo date('d-m-Y', strtotime($formule_moins_chere['date_checkout2'])); ?>
+                                                                    <?php echo date('d-m-Y', strtotime($formule_moins_chere['date_retour'])); ?>
                                                                 </p>
                                                             </div>
                                                             <div class="info-group">
@@ -712,48 +711,8 @@
                                                                 foreach ($formules as $row_formule) {
                                                                     ?>
                                                                     <div class="card col-md-12 formule-item">
-                                                                        <a href="showformule.php?formule_id=<?php echo $row_formule['id']; ?>"
-                                                                            class="card-body d-flex justify-content-between align-items-center">
-                                                                            <div class="departure-info ">
-                                                                                <?php
-                                                                                // Fetch city name from ville_depart table
-                                                                                $villeDepartId = $row_formule['ville_depart_id'];
-                                                                                $sqlVilleDepart = "SELECT nom FROM ville_depart WHERE id = $villeDepartId";
-                                                                                $resultVilleDepart = mysqli_query($conn, $sqlVilleDepart);
-                                                                                $villeDepart = mysqli_fetch_assoc($resultVilleDepart);
-                                                                                ?>
-                                                                                <span
-                                                                                    class="city-badge badge bg-secondary"><?php echo $villeDepart['nom']; ?></span>
-                                                                                <span> <i class="fas fa-plane-departure"></i>
-                                                                                    <b class="delete">Aller:</b>
-                                                                                    <?php echo date('d-m-Y', strtotime($row_formule['heure_depart'])); ?><br>
-                                                                                    <i class="fas fa-plane-arrival"></i>
-                                                                                    <b class="delete">Retour:</b>
-                                                                                    <?php echo date('d-m-Y', strtotime($row_formule['date_checkout2'])); ?>
-                                                                                </span>
-                                                                            </div>
-
-                                                                            <div class="price-info  ">
-                                                                                <span> à partir <br><?php
-                                                                                $price = $formule_moins_chere['prix_chambre_quadruple'];
-                                                                                $formatted_price = number_format($price, 0, ',', ' '); // Format price without decimals
-                                                                                echo $formatted_price . " €";
-                                                                                ?></span>
-
-                                                                                <?php
-                                                                                // Fetch airline logo from compagnies_aeriennes table
-                                                                                $airline_id = $row_formule['compagnie_aerienne_id'];
-                                                                                $sql_airline = "SELECT logo FROM compagnies_aeriennes WHERE id = $airline_id";
-                                                                                $result_airline = mysqli_query($conn, $sql_airline);
-                                                                                $airline_data = mysqli_fetch_assoc($result_airline);
-                                                                                ?>
-                                                                                <?php if (!empty($airline_data['logo'])): ?>
-                                                                                    <img src="<?php echo $airline_data['logo']; ?>"
-                                                                                        alt="Airline Logo" class="airline-logo">
-                                                                                <?php endif; ?>
-                                                                            </div>
-                                                                        </a>
-                                                                    </div>
+                                                                        
+                                                                    </div> 
                                                                     <?php
                                                                 } // Fin de la boucle foreach des formules
                                                                 ?>
@@ -777,7 +736,7 @@
                                                         });
                                                     });
                                                 </script>
-
+</div>
                                                 <?php
                                             } else {
                                                 echo "<p>Aucune formule disponible pour ce type.</p>";
@@ -790,7 +749,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        </div>
+                    
                     <?php
                 } // Fin de la boucle while des packages
             } else {
