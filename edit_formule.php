@@ -196,7 +196,7 @@
             box-sizing: border-box;
         }
 
-        .addbutton {
+        /* .addbutton {
             background-color: #4caf50;
             color: #fff;
             padding: 10px 20px;
@@ -207,7 +207,32 @@
 
         .addbutton:hover {
             background-color: #45a049;
+        } */
+
+        .addbutton-container {
+            position: relative;
         }
+
+        .addbutton {
+            position: absolute;
+            right: 0px;
+            /* Adjust as needed to position it properly */
+            background-color: #28a745;
+            /* Green background */
+            color: white;
+            /* White text */
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            float: right;
+        }
+
+        .addbutton:hover {
+            background-color: #218838;
+            /* Darker green on hover */
+        }
+
 
         .deletebutton {
             background-color: #f44336;
@@ -358,63 +383,68 @@
                 </div>
             </div>
 
-                <!-- Other input fields here -->
+            <!-- Other input fields here -->
 
 
 
 
 
-                <script>
-                    document.getElementById('package').addEventListener('change', function() {
-                        var packageId = this.value;
-                        var typeSelect = document.getElementById('type');
-                        typeSelect.innerHTML = '<option value="">Sélectionnez un type</option>'; // Clear current options
+            <script>
+                document.getElementById('package').addEventListener('change', function() {
+                    var packageId = this.value;
+                    var typeSelect = document.getElementById('type');
+                    typeSelect.innerHTML = '<option value="">Sélectionnez un type</option>'; // Clear current options
 
-                        if (packageId) {
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('GET', 'fetch_types.php?package_id=' + packageId, true);
-                            xhr.onreadystatechange = function() {
-                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                    var types = JSON.parse(xhr.responseText);
-                                    types.forEach(function(type) {
-                                        var option = document.createElement('option');
-                                        option.value = type.id;
-                                        option.text = type.nom;
-                                        typeSelect.appendChild(option);
-                                    });
-                                }
-                            };
-                            xhr.send();
-                        }
-                    });
-                </script>
-        <div class="half-width-inputs">
-            <div class="input-group">
-                <label for="date_depart">Date de Départ:</label>
-                <input type="date" id="date_depart" name="date_depart" class="half-width-input" value="<?php echo $existingDateDepart; ?>" required>
+                    if (packageId) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', 'fetch_types.php?package_id=' + packageId, true);
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                var types = JSON.parse(xhr.responseText);
+                                types.forEach(function(type) {
+                                    var option = document.createElement('option');
+                                    option.value = type.id;
+                                    option.text = type.nom;
+                                    typeSelect.appendChild(option);
+                                });
+                            }
+                        };
+                        xhr.send();
+                    }
+                });
+            </script>
+            <div class="half-width-inputs">
+                <div class="input-group">
+                    <label for="date_depart">Date de Départ:</label>
+                    <input type="date" id="date_depart" name="date_depart" class="half-width-input" value="<?php echo $existingDateDepart; ?>" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="date_retour">Date de Retour:</label>
+                    <input type="date" id="date_retour" name="date_retour" class="half-width-input" value="<?php echo $existingDateRetour; ?>" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="duree_sejour">Durée de séjour:</label>
+                    <input type="text" id="duree_sejour" name="duree_sejour" class="half-width-input" value="<?php echo $existingDureeSejour; ?>" required>
+                </div>
             </div>
-
-            <div class="input-group">
-                <label for="date_retour">Date de Retour:</label>
-                <input type="date" id="date_retour" name="date_retour" class="half-width-input" value="<?php echo $existingDateRetour; ?>" required>
-            </div>
-
-            <div class="input-group">
-                <label for="duree_sejour">Durée de séjour:</label>
-                <input type="text" id="duree_sejour" name="duree_sejour" class="half-width-input" value="<?php echo $existingDureeSejour; ?>" required>
-            </div>
-        </div>
 
 
             <!-- ///         Vol Section Starts         //// -->
 
             <div class="price-inputs" id="vols-container">
                 <h3>Vols <span class="toggle-icon" onclick="toggleCollapse(this)">+</span></h3>
+
                 <div class="collapsible-content">
+                    <div class="addbutton-container">
+                        <button type="button" class="add-button addbutton" onclick="addVol()">Ajouter Vol</button>
+                        <!-- <button type="button" class="add-button addbutton" style="float: right; margin-top: -30px;" onclick="addVol()">Ajouter Vol</button>     -->
+                    </div>
                     <?php foreach ($volsData as $index => $vol) { ?>
 
                         <div class="vols-group">
-                            <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0; margin-bottom:30px;">
+                            <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0; margin-bottom:30px; margin-top:50px;">
                             <div class="half-width-inputs">
                                 <div class="input-group">
                                     <label for="ville_depart_<?php echo $index; ?>">Départ:</label>
@@ -473,8 +503,9 @@
                             <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Supprimer Vol</button>
                         </div>
                     <?php } ?>
-                    <button type="button" class="add-button addbutton" style="float: right; margin-top: -30px;" onclick="addVol()">Ajouter Vol</button>
+
                 </div>
+
             </div>
 
             <script>
@@ -489,13 +520,14 @@
                     }
                 }
 
+
                 function addVol() {
                     const container = document.querySelector('.collapsible-content');
                     const index = document.querySelectorAll('.vols-group').length;
                     const volGroup = document.createElement('div');
                     volGroup.className = 'vols-group';
                     volGroup.innerHTML = `
-        <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">   
+        <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;  margin-top:50px;">   
         <div class="half-width-inputs" style="margin-top:30px;">                                 
             <div class="input-group">
                 <label for="ville_depart_${index}">Départ:</label>
@@ -567,14 +599,24 @@
                     }
                 }
 
+                // function removeVol(button) {
+                //     const volGroup = button.closest('.vols-group');
+                //     volGroup.remove();
+
+                //     // Adjust the height of the collapsible content after removing a vol group
+                //     const content = document.querySelector('.collapsible-content');
+                //     if (content.style.maxHeight) {
+                //         content.style.maxHeight = content.scrollHeight + "px";
+                //     }
+                // }
+
                 function removeVol(button) {
                     const volGroup = button.closest('.vols-group');
-                    volGroup.remove();
-
-                    // Adjust the height of the collapsible content after removing a vol group
-                    const content = document.querySelector('.collapsible-content');
-                    if (content.style.maxHeight) {
-                        content.style.maxHeight = content.scrollHeight + "px";
+                    const container = document.querySelectorAll('.vols-group');
+                    if (container.length > 1) {
+                        volGroup.remove();
+                    } else {
+                        alert("Vous ne pouvez pas supprimer le dernier vol.");
                     }
                 }
             </script>
@@ -589,11 +631,15 @@
 
             <div class="price-inputs">
                 <h3>Hébergement <span id="toggle-hebergement" class="toggle-icon" onclick="toggleCollapse(this)">+</span></h3>
+
                 <div id="hebergement-section" class="collapsible-content">
+                    <div class="addbutton-container">
+                        <button type="button" id="add-hebergement" class="addbutton" onclick="addHebergement()">Ajouter Hébergement</button>
+                    </div>
                     <br>
                     <?php foreach ($hebergementsData as $index => $hebergement) { ?>
                         <div class="hebergement-block" data-index="<?php echo $index; ?>">
-                            <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0; margin-bottom: 30px;">
+                            <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0; margin-bottom: 30px; margin-top:50px;">
                             <div class="half-width-inputs">
                                 <div class="input-group">
                                     <label for="date_checkin_<?php echo $index; ?>">Date Checkin :</label>
@@ -636,7 +682,7 @@
                             <button type="button" class="remove-hebergement deletebutton" onclick="removeHebergement(<?php echo $index; ?>)">Supprimer Hébergement</button>
                         </div>
                     <?php } ?>
-                    <button type="button" id="add-hebergement" class="addbutton" style="float: right; margin-top: -30px;" onclick="addHebergement()">Ajouter Hébergement</button>
+
                 </div>
             </div>
 
@@ -661,7 +707,7 @@
                     newHebergement.setAttribute('data-index', hebergementIndex);
 
                     newHebergement.innerHTML = `
-            <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;">
+            <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0;  margin-top:50px;">
             <div class="half-width-inputs" style="margin-top:30px;">
                 <div class="input-group">
                     <label for="date_checkin_${hebergementIndex}">Date Checkin :</label>
@@ -715,12 +761,27 @@
                     }
                 }
 
+                // function removeHebergement(index) {
+                //     const hebergementToRemove = document.querySelector(`.hebergement-block[data-index='${index}']`);
+                //     if (hebergementToRemove) {
+                //         hebergementToRemove.remove();
+                //     }
+                // }
+
                 function removeHebergement(index) {
-                    const hebergementToRemove = document.querySelector(`.hebergement-block[data-index='${index}']`);
-                    if (hebergementToRemove) {
-                        hebergementToRemove.remove();
+                    const hebergementBlocks = document.querySelectorAll('.hebergement-block');
+                    if (hebergementBlocks.length > 1) {
+                        const hebergementToRemove = document.querySelector(`.hebergement-block[data-index='${index}']`);
+                        if (hebergementToRemove) {
+                            hebergementToRemove.remove();
+                        }
+                    } else {
+                        alert("Vous ne pouvez pas supprimer le dernier hébergement.");
                     }
                 }
+
+
+
 
                 function calculateNights(index) {
                     const checkinInput = document.getElementById(`date_checkin_${index}`);
