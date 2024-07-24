@@ -840,11 +840,11 @@
 
                     <div class="half-width-inputs">
                         <div class="input-group">
-                            <label for="child_discount">Réduction enfant :</label>
+                            <label for="child_discount">Tarif enfant:</label>
                             <input type="number" id="child_discount" name="child_discount" class="price-input" value="<?php echo $existingChildDiscount; ?>" required>
                         </div>
                         <div class="input-group">
-                            <label for="prix_bebe">Tarif bébé :</label>
+                            <label for="prix_bebe">Tarif bébé:</label>
                             <input type="number" id="prix_bebe" name="prix_bebe" class="price-input" value="<?php echo $existingPrixBebe; ?>" required>
                         </div>
                     </div>
