@@ -90,34 +90,34 @@
             </li>
 
             <li>
-                <a href="#">Hôtels</a>
-                <ul>
+                <a href="hotels.php">Hôtels</a>
+                <!-- <ul>
                     <li><a href="hotels.php">Liste des Hôtels</a></li>
                     <li><a href="ajouthotel.php">Ajouter un Hôtel</a></li>
-                </ul>
+                </ul> -->
             </li>
             <li>
-                <a href="#">Compagnies Aériennes</a>
-                <ul>
+                <a href="list_compagnies.php">Compagnies Aériennes</a>
+                <!-- <ul>
                     <li><a href="list_compagnies.php">Liste des Compagnies Aériennes</a></li>
                     <li><a href="add_compagnie.php">Ajouter une Compagnie</a></li>
-                </ul>
+                </ul> -->
             </li>
 
             <li>
-                <a href="#">Extras</a>
-                <ul>
+                <a href="list_extra.php">Extras</a>
+                <!-- <ul>
                     <li><a href="list_extra.php">Liste des Extras</a></li>
                     <li><a href="ajout_extra.php">Ajouter un Extra</a></li>
-                </ul>
+                </ul> -->
             </li>
 
             <li>
-                <a href="#">Programmes</a>
-                <ul>
+                <a href="programs.php">Programmes</a>
+                <!-- <ul>
                     <li><a href="programs.php">Liste des Programmes</a></li>
                     <li><a href="add_program.php">Ajouter un Programme</a></li>
-                </ul>
+                </ul> -->
             </li>
             <!-- Nouvelle catégorie -->
 

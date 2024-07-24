@@ -125,14 +125,14 @@
     ?>
 <?php include 'header.php'; ?>
     <div class="container">
-        <h2>Modifier un type de Formule Omra</h2>
+        <h2>Modifier la Catégorie</h2>
         <form action="" method="POST">
             <label for="nom">Nom de la Formule:</label>
             <input type="text" id="nom" name="nom" value="<?php echo $existingNom; ?>" required>
 
-            <label for="formule_parent">Formule Parent:</label>
+            <label for="formule_parent">Ville:</label>
             <select id="formule_parent" name="formule_parent">
-                <option value="">Sélectionner package parent</option>
+                <option value="">Sélectionner une ville</option>
                 <?php
                 // Fetch and display package options from the database
                 $sql = "SELECT * FROM omra_packages";
@@ -144,7 +144,7 @@
                 ?>
             </select>
 
-            <button type="submit">Mettre à jour Formule</button>
+            <button type="submit">Mettre à jour la catégorie</button>
         </form>
     </div>
 
