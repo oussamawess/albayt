@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter une Ville Vol</title>
+    <title>Ajouter un Aéroport</title>
     <link rel="stylesheet" href="">
     <style>
         body {
@@ -94,20 +94,17 @@
 <body>
 
     <div class="container mt-5">
-        <h2 class="text-center">Ajouter une Ville Vol</h2>
-        <form action="submit_ville_depart.php" method="POST">
+        <h2 class="text-center">Ajouter un Aéroport</h2>
+        <form action="submit_aeroport.php" method="POST">
             <div class="form-group">
-                <label for="nom">Nom de la Ville:</label>
+                <label for="nom">Nom de l'Aéroport:</label>
                 <input type="text" class="form-control" id="nom" name="nom" required>
             </div>
             <div class="form-group">
-                <label for="statut">Statut:</label>
-                <select class="form-control" id="statut" name="statut" required>
-                    <option value="activé">Activé</option>
-                    <option value="désactivé">Désactivé</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Ajouter Ville</button>
+                <label for="abrv">Abréviation:</label>
+                <input type="text" class="form-control" id="abrv" name="abrv" required>
+            </div>            
+            <button type="submit" class="btn btn-primary">Ajouter Aéroport</button>
         </form>
     </div>
 

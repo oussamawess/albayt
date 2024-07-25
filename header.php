@@ -119,6 +119,14 @@
                     <li><a href="add_program.php">Ajouter un Programme</a></li>
                 </ul> -->
             </li>
+
+            <li>
+                <a href="liste_ville_depart.php">Villes Vol</a>
+            </li>
+
+            <li>
+                <a href="liste_aeroport.php">Aéroports</a>
+            </li>
             <!-- Nouvelle catégorie -->
 
         </ul>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Villes Vol</title>
+    <title>Liste des Aéroports</title>
     <link rel="stylesheet" href="">
     <!-- https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css -->
     <style>
@@ -122,15 +122,15 @@
 <body>
 
     <div class="container mt-5">
-    <a href="ajouter_ville_depart.php" class='btn-add'><b>Ajouter une Ville Vol</b></a>
-        <h2 class="text-center">Liste des Villes vol</h2>
+    <a href="ajout_aeroport.php" class='btn-add'><b>Ajouter un Aéroport</b></a>
+        <h2 class="text-center">Liste des Aéroports</h2>
         
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>Nom</th>
-                    <th>Statut</th>
+                    <th>Abréviation</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -140,7 +140,7 @@
                 include 'db.php';
 
                 // Requête SQL pour sélectionner toutes les villes de départ
-                $sql = "SELECT * FROM ville_depart";
+                $sql = "SELECT * FROM airports";
                 $result = mysqli_query($conn, $sql);
 
                 // Vérifier s'il y a des résultats
@@ -150,11 +150,11 @@
                         echo "<tr>";
                         echo "<td>" . $row["id"] . "</td>";
                         echo "<td>" . $row["nom"] . "</td>";
-                        echo "<td>" . ucfirst($row["statut"]) . "</td>";
+                        echo "<td>" . $row["abrv"] . "</td>";
                         // echo "<td><a href='supprimer_ville_depart.php?id=" . $row["id"] . "' class='btn btn-danger btn-sm'>Supprimer</a></td>";
                         echo "<td class='btn-group' >";
-                        echo "<a class='btn btn-edit' href='edit_ville_depart.php?id=" . $row["id"] . "'>Editer</a>";
-                        echo "<a class='btn btn-delete' href='supprimer_ville_depart.php?id=" . $row["id"] . "' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette ville?')\">Supprimer</a>";
+                        echo "<a class='btn btn-edit' href='edit_aeroport.php?id=" . $row["id"] . "'>Editer</a>";
+                        echo "<a class='btn btn-delete' href='delete_aeroport.php?id=" . $row["id"] . "' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cet Aeroport?')\">Supprimer</a>";
                         echo "</td>";
                         echo "</tr>";
                     }

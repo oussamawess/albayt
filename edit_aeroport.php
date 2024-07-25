@@ -1,10 +1,40 @@
+<?php
+session_start(); // Start session to access session variables
+
+// Check if user is not logged in, redirect to login page
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.php");
+    exit;
+}
+
+// Include database connection
+include 'db.php';
+
+// Initialize variables
+$nom = $abrv = '';
+$param_id = $_GET['id']; // Assuming id is passed via URL (GET parameter)
+
+// Fetch data from database
+$sql = "SELECT * FROM airports WHERE id = '$param_id'";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) == 1) {
+    $row = mysqli_fetch_assoc($result);
+    $nom = $row['nom'];
+    $abrv = $row['abrv'];
+} else {
+    echo "Aucune aeroport avec cet identifiant.";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter une Ville Vol</title>
+    <title>Modifier Aeroport</title>
     <link rel="stylesheet" href="">
     <style>
         body {
@@ -76,41 +106,30 @@
             background-color: #45a049;
         }
     </style>
-    <?php
-    session_start(); // Start session to access session variables
-    
-    // Check if user is not logged in, redirect to login page
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: login.php");
-        exit;
-    }
-
-
-    ?>
-    <?php include 'header.php'; ?>
-
 </head>
 
 <body>
-
+<?php include 'header.php'; ?>
     <div class="container mt-5">
-        <h2 class="text-center">Ajouter une Ville Vol</h2>
-        <form action="submit_ville_depart.php" method="POST">
+        <h2 class="text-center"><b>Modifier un Aéroport</b></h2>
+        <form action="submit_update_aeroport.php" method="POST">
+            <input type="hidden" name="id" value="<?php echo $param_id; ?>">
             <div class="form-group">
-                <label for="nom">Nom de la Ville:</label>
-                <input type="text" class="form-control" id="nom" name="nom" required>
+                <label for="nom">Nom de l'Aéroport':</label>
+                <input type="text" class="form-control" id="nom" name="nom" value="<?php echo htmlspecialchars($nom); ?>" required>
             </div>
             <div class="form-group">
-                <label for="statut">Statut:</label>
-                <select class="form-control" id="statut" name="statut" required>
-                    <option value="activé">Activé</option>
-                    <option value="désactivé">Désactivé</option>
-                </select>
+                <label for="abrv">Abréviation:</label>
+                <input type="text" class="form-control" id="abrv" name="abrv" value="<?php echo htmlspecialchars($abrv); ?>" required>
             </div>
-            <button type="submit" class="btn btn-primary">Ajouter Ville</button>
+            <button type="submit" class="btn btn-primary">Modifier Aéroport</button>
         </form>
     </div>
-
 </body>
 
 </html>
+
+<?php
+// Close database connection
+mysqli_close($conn);
+?>

@@ -6,11 +6,11 @@ include 'db.php';
 $id = $_GET['id'];
 
 // Préparer et exécuter la requête SQL pour supprimer les données
-$sql = "DELETE FROM ville_depart WHERE id='$id'";
+$sql = "DELETE FROM airports WHERE id='$id'";
 
 if (mysqli_query($conn, $sql)) {
-    header('location:liste_ville_depart.php');
-    echo "Ville de départ supprimée avec succès.";
+    header('location:liste_aeroport.php');
+    echo "Aeroport supprimée avec succès.";
 } else {
     echo "Erreur: " . $sql . "<br>" . mysqli_error($conn);
 }
