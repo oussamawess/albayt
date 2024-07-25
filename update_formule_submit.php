@@ -84,17 +84,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Insert new vols entries
     foreach ($_POST['vols'] as $vol) {
-        $ville_depart_id = mysqli_real_escape_string($conn, $vol['ville_depart']);
+        $ville_depart_id = mysqli_real_escape_string($conn, $vol['ville_depart_id']);
         $compagnie_aerienne_id = mysqli_real_escape_string($conn, $vol['compagnie_aerienne']);
         $num_vol = mysqli_real_escape_string($conn, $vol['num_vol']);
-        $airport_depart = mysqli_real_escape_string($conn, $vol['airport_depart']);
+        $airport_depart_id = mysqli_real_escape_string($conn, $vol['airport_depart_id']);
         $heure_depart = mysqli_real_escape_string($conn, $vol['heure_depart']);
-        $destination = mysqli_real_escape_string($conn, $vol['destination']);
-        $airport_destination = mysqli_real_escape_string($conn, $vol['airport_destination']);
+        $ville_destination_id = mysqli_real_escape_string($conn, $vol['ville_destination_id']);
+        $airport_destination_id = mysqli_real_escape_string($conn, $vol['airport_destination_id']);
         $heure_arrivee = mysqli_real_escape_string($conn, $vol['heure_arrivee']);
 
-        $insertSql = "INSERT INTO vols (formule_id, ville_depart_id, compagnie_aerienne_id, num_vol, airport_depart, heure_depart, destination, airport_destination, heure_arrivee) 
-                      VALUES ('$formule_id', '$ville_depart_id', '$compagnie_aerienne_id', '$num_vol', '$airport_depart', '$heure_depart', '$destination', '$airport_destination', '$heure_arrivee')";
+        $insertSql = "INSERT INTO vols (formule_id, ville_depart_id, compagnie_aerienne_id, num_vol, airport_depart_id, heure_depart, ville_destination_id, airport_destination_id, heure_arrivee) 
+                      VALUES ('$formule_id', '$ville_depart_id', '$compagnie_aerienne_id', '$num_vol', '$airport_depart_id', '$heure_depart', '$ville_destination_id', '$airport_destination_id', '$heure_arrivee')";
 
         if (!mysqli_query($conn, $insertSql)) {
             echo "Erreur lors de l'insertion des vols : " . mysqli_error($conn);

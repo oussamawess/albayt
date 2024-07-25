@@ -1,24 +1,21 @@
 <?php
-// Inclure le fichier de connexion à la base de données
-include 'db.php';
+include 'db.php'; // Include your database connection file
 
-// Vérifier si l'identifiant de la formule est passé en paramètre dans l'URL
-if(isset($_GET['id'])) {
-    $formule_id = $_GET['id'];
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']); // Ensure the ID is an integer
 
-    // Préparer la requête SQL pour supprimer la formule
-    $sql = "DELETE FROM formules WHERE id = $formule_id";
-
-    // Exécuter la requête pour supprimer la formule
-    if ($conn->query($sql) === TRUE) {
-        echo "Formule supprimée avec succès.";
+    // Perform the deletion
+    $sql = "DELETE FROM formules WHERE id = $id";
+    if (mysqli_query($conn, $sql)) {
+        // Redirect to display_formules.php after successful deletion
+        header('Location: display_formules.php');
+        exit;
     } else {
-        echo "Erreur lors de la suppression de la formule : " . $conn->error;
+        echo "Erreur de suppression : " . mysqli_error($conn);
     }
 } else {
-    echo "Identifiant de la formule non spécifié.";
+    echo "ID non spécifié.";
 }
 
-// Rediriger vers la page précédente
-header("Location: ".$_SERVER['HTTP_REFERER']);
+mysqli_close($conn);
 ?>

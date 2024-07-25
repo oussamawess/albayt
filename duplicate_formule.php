@@ -62,13 +62,13 @@ if (isset($_GET['id'])) {
                 $ville_depart_id = $row_vol['ville_depart_id'];
                 $compagnie_aerienne_id = $row_vol['compagnie_aerienne_id'];
                 $num_vol = $row_vol['num_vol'];
-                $airport_depart = $row_vol['airport_depart'];
+                $airport_depart = $row_vol['airport_depart_id'];
                 $heure_depart = $row_vol['heure_depart'];
-                $destination = $row_vol['destination'];
-                $airport_destination = $row_vol['airport_destination'];
+                $destination = $row_vol['ville_destination_id'];
+                $airport_destination = $row_vol['airport_destination_id'];
                 $heure_arrivee = $row_vol['heure_arrivee'];
 
-                $sql_insert_vol = "INSERT INTO vols (formule_id, ville_depart_id, compagnie_aerienne_id, num_vol, airport_depart, heure_depart, destination, airport_destination, heure_arrivee)
+                $sql_insert_vol = "INSERT INTO vols (formule_id, ville_depart_id, compagnie_aerienne_id, num_vol, airport_depart_id, heure_depart, ville_destination_id, airport_destination_id, heure_arrivee)
                     VALUES ('$new_formule_id', '$ville_depart_id', '$compagnie_aerienne_id', '$num_vol', '$airport_depart', '$heure_depart', '$destination', '$airport_destination', '$heure_arrivee')";
                 mysqli_query($conn, $sql_insert_vol);
             }

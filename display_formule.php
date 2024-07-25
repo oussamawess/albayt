@@ -51,6 +51,34 @@ $sql_vols = "
     WHERE v.formule_id = $formule_id
 ";
 $result_vols = mysqli_query($conn, $sql_vols);
+
+
+// SQL query to fetch the data
+$sql_vols = "
+    SELECT 
+        v.*,
+        ca.nom AS compagnie_aerienne,
+        vd_depart.nom AS ville_depart_nom,
+        vd_destination.nom AS ville_destination_nom,
+        ad_depart.nom AS airport_depart_nom,
+        ad_destination.nom AS airport_destination_nom
+    FROM 
+        vols v
+    LEFT JOIN 
+        compagnies_aeriennes ca ON v.compagnie_aerienne_id = ca.id
+    LEFT JOIN 
+        ville_depart vd_depart ON v.ville_depart_id = vd_depart.id
+    LEFT JOIN 
+        ville_depart vd_destination ON v.ville_destination_id = vd_destination.id
+    LEFT JOIN 
+        airports ad_depart ON v.airport_depart_id = ad_depart.id
+    LEFT JOIN 
+        airports ad_destination ON v.airport_destination_id = ad_destination.id
+    WHERE 
+        v.formule_id = $formule_id
+";
+
+$result_vols = mysqli_query($conn, $sql_vols);
 ?>
 
 <!DOCTYPE html>
@@ -228,11 +256,11 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         <tr>
                             <td><?php echo $row['num_vol']; ?></td>
                             <td><?php echo $row['compagnie_aerienne']; ?></td>
-                            <td><?php echo $row['ville_depart_id']; ?></td>
-                            <td><?php echo $row['airport_depart']; ?></td>
+                            <td><?php echo $row['ville_depart_nom']; ?></td>
+                            <td><?php echo $row['airport_depart_nom']; ?></td>
                             <td><?php echo $row['heure_depart']; ?></td>
-                            <td><?php echo $row['destination']; ?></td>
-                            <td><?php echo $row['airport_destination']; ?></td>
+                            <td><?php echo $row['ville_destination_nom']; ?></td>
+                            <td><?php echo $row['airport_destination_nom']; ?></td>
                             <td><?php echo $row['heure_arrivee']; ?></td>
                         </tr>
                     <?php endwhile; ?>
@@ -327,13 +355,14 @@ $result_vols = mysqli_query($conn, $sql_vols);
 
     <script>
         function deleteFormule(id) {
-            if (confirm('Are you sure you want to delete this formule?')) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette formule ?')) {
                 window.location.href = 'delete_formule.php?id=' + id;
+                header('location:display_formules.php')
             }
         }
 
         function duplicateFormule(id) {
-            if (confirm('Are you sure you want to duplicate this formule?')) {
+            if (confirm('Êtes-vous sûr de vouloir dupliquer cette formule ?')) {
                 window.location.href = 'duplicate_formule.php?id=' + id;
             }
         }

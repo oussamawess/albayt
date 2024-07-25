@@ -67,8 +67,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
             // Step 5: Duplicate vols and hebergements for the new formules
             foreach ($original_to_new_formule_ids as $original_formule_id => $new_formule_id) {
-                $sql_duplicate_vols = "INSERT INTO vols (formule_id, ville_depart_id, compagnie_aerienne_id, num_vol, airport_depart, heure_depart, destination, airport_destination, heure_arrivee)
-                                       SELECT $new_formule_id, ville_depart_id, compagnie_aerienne_id, num_vol, airport_depart, heure_depart, destination, airport_destination, heure_arrivee
+                $sql_duplicate_vols = "INSERT INTO vols (formule_id, ville_depart_id, compagnie_aerienne_id, num_vol, airport_depart_id, heure_depart, ville_destination_id, airport_destination_id, heure_arrivee)
+                                       SELECT $new_formule_id, ville_depart_id, compagnie_aerienne_id, num_vol, airport_depart_id, heure_depart, ville_destination_id, airport_destination_id, heure_arrivee
                                        FROM vols
                                        WHERE formule_id = $original_formule_id";
                 mysqli_query($conn, $sql_duplicate_vols);

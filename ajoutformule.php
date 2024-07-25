@@ -328,23 +328,24 @@
             <div class="vol-section">
               <div class="half-width-inputs">
                 <div class="input-group">
-                  <label for="ville_depart">Départ:</label>
-                  <input type="text" id="ville_depart" name="ville_depart[]" class="half-width-input" required>
-                  <!-- <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>
-                    <!-?php
-                    // include 'db.php';
-                    // $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
-                    // $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
-                    // if (mysqli_num_rows($result_villes_depart) > 0) {
-                    //   while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-                    //     echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
-                    //   }
-                    // } else {
-                    //   echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
-                    // }
-                    // mysqli_close($conn);
+                  <label for="ville_depart">Départ:</label>                  
+                  <!-- <input type="text" id="ville_depart" name="ville_depart[]" class="half-width-input" required> -->
+                  <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>
+                  <option value="">Sélectionnez une Ville</option>
+                    <?php
+                    include 'db.php';
+                    $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+                    $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+                    if (mysqli_num_rows($result_villes_depart) > 0) {
+                      while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                        echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+                      }
+                    } else {
+                      echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
+                    }
+                    mysqli_close($conn);
                     ?> 
-                  </select> -->
+                  </select>
                 </div>
                 <div class="input-group">
                   <label for="compagnie_aerienne">Compagnie Aérienne:</label>
@@ -372,19 +373,67 @@
                 </div>
                 <div class="input-group">
                   <label for="airport_depart">Aéroport de Départ:</label>
-                  <input type="text" id="airport_depart" name="airport_depart[]" class="half-width-input" required>
+                  <!-- <input type="text" id="airport_depart" name="airport_depart[]" class="half-width-input" required> -->
+                  <select id="airport_depart" name="airport_depart[]" class="half-width-input" required>
+                  <option value="">Sélectionnez un Aéroport</option>                  
+                    <?php
+                    include 'db.php';
+                    $sql_airports_depart = "SELECT * FROM airports";
+                    $result_airports_depart = mysqli_query($conn, $sql_airports_depart);
+                    if (mysqli_num_rows($result_airports_depart) > 0) {
+                      while ($row_airport_depart = mysqli_fetch_assoc($result_airports_depart)) {
+                        echo "<option value='" . $row_airport_depart['id'] . "'>" . $row_airport_depart['abrv'] . "</option>";
+                      }
+                    } else {
+                      echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
+                    }
+                    mysqli_close($conn);
+                    ?> 
+                  </select>
                 </div>
                 <div class="input-group">
                   <label for="heure_depart">Heure & Date de Départ:</label>
                   <input type="datetime-local" id="heure_depart" name="heure_depart[]" class="half-width-input" required>
                 </div>
                 <div class="input-group">
-                  <label for="destination">Destination:</label>
-                  <input type="text" id="destination" name="destination[]" class="half-width-input" required>
+                  <label for="ville_destination">Destination:</label>                  
+                  <!-- <input type="text" id="destination" name="destination[]" class="half-width-input" required> -->
+                  <select id="ville_destination" name="ville_destination[]" class="half-width-input" required>
+                  <option value="">Sélectionnez une Ville</option>
+                    <?php
+                    include 'db.php';
+                    $sql_villes_destination = "SELECT * FROM ville_depart WHERE statut='activé'";
+                    $result_villes_destination = mysqli_query($conn, $sql_villes_destination);
+                    if (mysqli_num_rows($result_villes_destination) > 0) {
+                      while ($row_ville_destination = mysqli_fetch_assoc($result_villes_destination)) {
+                        echo "<option value='" . $row_ville_destination['id'] . "'>" . $row_ville_destination['nom'] . "</option>";
+                      }
+                    } else {
+                      echo "<option value='' disabled>Aucune ville de destination active disponible</option>";
+                    }
+                    mysqli_close($conn);
+                    ?> 
+                  </select>
                 </div>
                 <div class="input-group">
                   <label for="airport_destination">Aéroport de Destination:</label>
-                  <input type="text" id="airport_destination" name="airport_destination[]" class="half-width-input" required>
+                  <!-- <input type="text" id="airport_destination" name="airport_destination[]" class="half-width-input" required> -->
+                  <select id="airport_destination" name="airport_destination[]" class="half-width-input" required>
+                  <option value="">Sélectionnez un Aéroport</option>
+                    <?php
+                    include 'db.php';
+                    $sql_airports_destination = "SELECT * FROM airports";
+                    $result_airports_destination = mysqli_query($conn, $sql_airports_depart);
+                    if (mysqli_num_rows($result_airports_destination) > 0) {
+                      while ($row_airport_destination = mysqli_fetch_assoc($result_airports_destination)) {
+                        echo "<option value='" . $row_airport_destination['id'] . "'>" . $row_airport_destination['abrv'] . "</option>";
+                      }
+                    } else {
+                      echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
+                    }
+                    mysqli_close($conn);
+                    ?> 
+                  </select>
                 </div>
                 <div class="input-group">
                   <label for="heure_arrivee">Heure & Date d'Arrivée:</label>
@@ -415,22 +464,23 @@
         <div class="half-width-inputs">
           <div class="input-group">
             <label for="ville_depart">Départ:</label>
-            <input type="text" id="ville_depart" name="ville_depart[]" class="half-width-input" required>
-              <!--<select id="ville_depart" name="ville_depart[]" class="half-width-input" required>            
-               <!-?php
-            //   include 'db.php';
-            //   $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
-            //   $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
-            //   if (mysqli_num_rows($result_villes_depart) > 0) {
-            //     while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-            //       echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
-            //     }
-            //   } else {
-            //     echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
-            //   }
-            //   mysqli_close($conn);
-            //   ?>
-             </select>-->
+            <!--input type="text" id="ville_depart" name="ville_depart[]" class="half-width-input" required-->
+              <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>    
+              <option value="">Sélectionnez une ville</option>        
+               <?php
+              include 'db.php';
+              $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+              $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+              if (mysqli_num_rows($result_villes_depart) > 0) {
+                while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                  echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+                }
+              } else {
+                echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
+              }
+              mysqli_close($conn);
+              ?>
+             </select>
           </div>
           <div class="input-group">
             <label for="compagnie_aerienne">Compagnie Aérienne:</label>
@@ -457,21 +507,69 @@
             <input type="text" id="num_vol" name="num_vol[]" class="half-width-input" required>
           </div>
           <div class="input-group">
-            <label for="airport_depart">Aéroport de Départ:</label>
-            <input type="text" id="airport_depart" name="airport_depart[]" class="half-width-input" required>
-          </div>
+                  <label for="airport_depart">Aéroport de Départ:</label>
+                  <!-- <input type="text" id="airport_depart" name="airport_depart[]" class="half-width-input" required> -->
+                  <select id="airport_depart" name="airport_depart[]" class="half-width-input" required>
+                  <option value="">Sélectionnez un Aéroport</option>                  
+                    <?php
+                    include 'db.php';
+                    $sql_airports_depart = "SELECT * FROM airports";
+                    $result_airports_depart = mysqli_query($conn, $sql_airports_depart);
+                    if (mysqli_num_rows($result_airports_depart) > 0) {
+                      while ($row_airport_depart = mysqli_fetch_assoc($result_airports_depart)) {
+                        echo "<option value='" . $row_airport_depart['id'] . "'>" . $row_airport_depart['abrv'] . "</option>";
+                      }
+                    } else {
+                      echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
+                    }
+                    mysqli_close($conn);
+                    ?> 
+                  </select>
+                </div>
           <div class="input-group">
             <label for="heure_depart">Heure & Date de Départ:</label>
             <input type="datetime-local" id="heure_depart" name="heure_depart[]" class="half-width-input" required>
           </div>
           <div class="input-group">
-            <label for="destination">Destination:</label>
-            <input type="text" id="destination" name="destination[]" class="half-width-input" required>
-          </div>
+                  <label for="ville_destination">Destination:</label>                  
+                  <!-- <input type="text" id="destination" name="destination[]" class="half-width-input" required> -->
+                  <select id="ville_destination" name="ville_destination[]" class="half-width-input" required>
+                  <option value="">Sélectionnez une Ville</option>
+                    <?php
+                    include 'db.php';
+                    $sql_villes_destination = "SELECT * FROM ville_depart WHERE statut='activé'";
+                    $result_villes_destination = mysqli_query($conn, $sql_villes_destination);
+                    if (mysqli_num_rows($result_villes_destination) > 0) {
+                      while ($row_ville_destination = mysqli_fetch_assoc($result_villes_destination)) {
+                        echo "<option value='" . $row_ville_destination['id'] . "'>" . $row_ville_destination['nom'] . "</option>";
+                      }
+                    } else {
+                      echo "<option value='' disabled>Aucune ville de destination active disponible</option>";
+                    }
+                    mysqli_close($conn);
+                    ?> 
+                  </select>
+                </div>
           <div class="input-group">
-            <label for="airport_destination">Aéroport de Destination:</label>
-            <input type="text" id="airport_destination" name="airport_destination[]" class="half-width-input" required>
-          </div>
+                  <label for="airport_destination">Aéroport de Destination:</label>
+                  <!-- <input type="text" id="airport_destination" name="airport_destination[]" class="half-width-input" required> -->
+                  <select id="airport_destination" name="airport_destination[]" class="half-width-input" required>
+                  <option value="">Sélectionnez un Aéroport</option>
+                    <?php
+                    include 'db.php';
+                    $sql_airports_destination = "SELECT * FROM airports";
+                    $result_airports_destination = mysqli_query($conn, $sql_airports_depart);
+                    if (mysqli_num_rows($result_airports_destination) > 0) {
+                      while ($row_airport_destination = mysqli_fetch_assoc($result_airports_destination)) {
+                        echo "<option value='" . $row_airport_destination['id'] . "'>" . $row_airport_destination['abrv'] . "</option>";
+                      }
+                    } else {
+                      echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
+                    }
+                    mysqli_close($conn);
+                    ?> 
+                  </select>
+                </div>
           <div class="input-group">
             <label for="heure_arrivee">Heure & Date d'Arrivée:</label>
             <input type="datetime-local" id="heure_arrivee" name="heure_arrivee[]" class="half-width-input" required>
