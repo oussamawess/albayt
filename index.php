@@ -190,7 +190,7 @@
             color: #000 !important;
         }
 
-        
+        }
 
         @media (min-width: 1200px) {
             .container {
@@ -341,9 +341,6 @@
             if (mysqli_num_rows($result) > 0) {
                 while ($row_package = mysqli_fetch_assoc($result)) {
                     $package_id = $row_package['id'];
-                    $package_name = $row_package['nom'];
-                    $package_description = $row_package['description'];
-                    $package_photo = $row_package['photo'];
                     ?>
 
                     <div class="card cardnew col-md-3">
@@ -354,38 +351,60 @@
                                 <span class="card__titlenew"><?php echo $row_package['nom']; ?> <br>
                                     <p style="font-size:15px; margin-top:10px">En savoir plus</p>
                                 </span>
+
                             </figure>
+
+
+
                         </a>
-                    
+                    </div>
 
                     <div class="modal fade" id="formuleModal<?php echo $package_id; ?>" tabindex="-1"
                         aria-labelledby="formuleModalLabel<?php echo $package_id; ?>" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="formuleModalLabel<?php echo $package_id; ?>">Formules
-                                        <?php echo $row_package['nom']; ?>
+                                <div class="modal-header" <h5 class="modal-title"
+                                    id="formuleModalLabel<?php echo $package_id; ?>">
+                                    Formules <?php echo $row_package['nom']; ?>
                                     </h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body row text-center">
+
                                     <?php
-                                    $sql_types_formules = "SELECT * FROM type_formule_omra WHERE formule_parent_id = $package_id";
-                                    $result_types_formules = mysqli_query($conn, $sql_types_formules);
+                                    $sql_types_formules = "SELECT * FROM type_formule_omra WHERE formule_parent_id = ?";
+                                    $stmt_types_formules = mysqli_prepare($conn, $sql_types_formules);
+                                    mysqli_stmt_bind_param($stmt_types_formules, "i", $package_id);
+                                    mysqli_stmt_execute($stmt_types_formules);
+                                    $result_types_formules = mysqli_stmt_get_result($stmt_types_formules);
 
                                     if (mysqli_num_rows($result_types_formules) > 0) {
                                         while ($row_type_formule = mysqli_fetch_assoc($result_types_formules)) {
                                             $type_id = $row_type_formule['id'];
 
-                                            $sql_formules = "SELECT * FROM formules WHERE type_id = $type_id AND package_id = $package_id AND statut = 'activé' ORDER BY prix_chambre_quadruple ASC";
-                                            $result_formules = mysqli_query($conn, $sql_formules);
+                                            // Fetch formulas with specific type, package, and active status
+                                            $sql_formules = "SELECT * FROM formules WHERE type_id = ? AND package_id = ? AND statut = 'activé' ORDER BY prix_chambre_quadruple ASC";
+                                            $stmt_formules = mysqli_prepare($conn, $sql_formules);
+
+                                            // Error checking for prepared statement
+                                            if (!$stmt_formules) {
+                                                die("Error in preparing statement: " . mysqli_error($conn));
+                                            }
+
+                                            mysqli_stmt_bind_param($stmt_formules, "ii", $type_id, $package_id);
+
+                                            // Error checking for statement execution
+                                            if (!mysqli_stmt_execute($stmt_formules)) {
+                                                die("Error in executing statement: " . mysqli_stmt_error($stmt_formules));
+                                            }
+
+                                            $result_formules = mysqli_stmt_get_result($stmt_formules);
+
+
 
                                             if (mysqli_num_rows($result_formules) > 0) {
-                                                $formules = [];
-                                                while ($row_formule = mysqli_fetch_assoc($result_formules)) {
-                                                    $formules[] = $row_formule;
-                                                }
-                                                $formule_moins_chere = $formules[0];
+                                                $formules = mysqli_fetch_all($result_formules, MYSQLI_ASSOC);
+                                                $formule_moins_chere = $formules[0]; // Get the cheapest formula
                                                 ?>
                                                 <div class="card col-md-5 justify-content-center">
                                                     <div class=" card-body ">
@@ -397,7 +416,7 @@
                                                                     xmlns:xlink="http://www.w3.org/1999/xlink" id="Calque_1" x="0px" y="0px"
                                                                     viewBox="0 0 98 98" style="enable-background:new 0 0 98 98;"
                                                                     xml:space="preserve">
-                                                                    <style type="text/css"> 
+                                                                    <style type="text/css">
                                                                         .st0 {
                                                                             fill: #FFFFFF;
                                                                         }
@@ -686,33 +705,103 @@
                                                                     aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="form-group mb-4">
-                                                                    <label for="departureCity<?php echo $type_id; ?>"
-                                                                        class="form-label">Ville de départ</label>
-                                                                    <select id="departureCity<?php echo $type_id; ?>" class="form-control">
-                                                                        <option value="">Toutes les villes</option>
-                                                                        <?php
-                                                                        // Fetch the list of active cities from the ville_depart table
-                                                                        $sql_villes = "SELECT id, nom FROM ville_depart WHERE statut = 'activé'";
-                                                                        $result_villes = mysqli_query($conn, $sql_villes);
 
-                                                                        if ($result_villes && mysqli_num_rows($result_villes) > 0) {
-                                                                            while ($ville = mysqli_fetch_assoc($result_villes)) {
-                                                                                echo '<option value="' . $ville['nom'] . '">' . $ville['nom'] . '</option>';
-                                                                            }
-                                                                        } else {
-                                                                            echo '<option value="">Aucune ville disponible</option>';
-                                                                        }
-                                                                        ?>
-                                                                    </select>
-                                                                </div>
 
                                                                 <?php
                                                                 foreach ($formules as $row_formule) {
                                                                     ?>
                                                                     <div class="card col-md-12 formule-item">
-                                                                        
-                                                                    </div> 
+                                                                        <a href="showformule.php?formule_id=<?php echo $row_formule['id']; ?>"
+                                                                            class="card-body d-flex justify-content-between align-items-center">
+                                                                            <div class="departure-info ">
+
+
+                                                                                <?php
+                                                                                // Fetch and display package name
+                                                                                $package_id = $row_formule['package_id'];
+                                                                                $query_package = "SELECT nom FROM omra_packages WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                                                $stmt_package = $conn->prepare($query_package);
+                                                                                $stmt_package->bind_param("i", $package_id);
+                                                                                $stmt_package->execute();
+                                                                                $result_package = $stmt_package->get_result();
+                                                                                $package = $result_package->fetch_assoc();
+                                                                                ?>
+                                                                                <span class="city-badge badge bg-secondary">
+                                                                                    <?php echo $package['nom'] ?? "Package #" . $package_id; ?>
+                                                                                </span>
+
+
+
+
+                                                                                <span> <i class="fas fa-plane-departure"></i>
+                                                                                    <b class="delete">Aller:</b>
+                                                                                    <?php echo $row_formule['date_depart']; ?><br>
+                                                                                    <i class="fas fa-plane-arrival"></i>
+                                                                                    <b class="delete">Retour:</b>
+                                                                                    <?php echo $row_formule['date_retour']; ?>
+                                                                                </span>
+                                                                            </div>
+
+                                                                            <div class="price-info  ">
+                                                                                <span> <?php echo $row_formule['prix_chambre_quadruple']; ?> €
+                                                                                </span>
+
+
+                                                                                <?php
+                                                                                // Assuming $conn is your database connection
+                                                        
+                                                                                // Fetch the first compagnie_aerienne_id for the given formule
+                                                                                $formule_id = $row_formule['id'];
+
+                                                                                // Prepare and execute the query to get the first matching vol's compagnie_aerienne_id
+                                                                                $query_vols = "
+    SELECT compagnie_aerienne_id
+    FROM vols
+    WHERE formule_id = ?
+    LIMIT 1
+";
+                                                                                $stmt_vols = $conn->prepare($query_vols);
+                                                                                $stmt_vols->bind_param("i", $formule_id);
+                                                                                $stmt_vols->execute();
+                                                                                $result_vols = $stmt_vols->get_result();
+                                                                                $vol = $result_vols->fetch_assoc();
+
+                                                                                if ($vol) {
+                                                                                    $compagnie_aerienne_id = $vol['compagnie_aerienne_id'];
+
+                                                                                    // Query to get the logo from compagnies_aeriennes table
+                                                                                    $query_logo = "
+        SELECT logo
+        FROM compagnies_aeriennes
+        WHERE id = ?
+    ";
+                                                                                    $stmt_logo = $conn->prepare($query_logo);
+                                                                                    $stmt_logo->bind_param("i", $compagnie_aerienne_id);
+                                                                                    $stmt_logo->execute();
+                                                                                    $result_logo = $stmt_logo->get_result();
+                                                                                    $compagnie = $result_logo->fetch_assoc();
+
+                                                                                    if ($compagnie) {
+                                                                                        // Display the logo
+                                                                                        $logo_path = htmlspecialchars($compagnie['logo']);
+                                                                                        echo '<img src="' . $logo_path . '" alt="Company Logo" class="airline-logo">';
+                                                                                    } else {
+                                                                                        echo 'No logo found for the compagnie_aerienne_id.';
+                                                                                    }
+                                                                                } else {
+                                                                                    echo 'No compagnie_aerienne_id found for this formule.';
+                                                                                }
+
+                                                                                // Debugging: Check for SQL errors
+                                                                                if ($conn->error) {
+                                                                                    echo 'SQL Error: ' . $conn->error;
+                                                                                }
+                                                                                ?>
+
+
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
                                                                     <?php
                                                                 } // Fin de la boucle foreach des formules
                                                                 ?>
@@ -736,21 +825,21 @@
                                                         });
                                                     });
                                                 </script>
-</div>
-                                                <?php
-                                            } else {
-                                                echo "<p>Aucune formule disponible pour ce type.</p>";
+
+                                            <?php } else {
+                                                // Specific error message if no formulas found for this type and package
+                                                // echo "<p>No active formulas found for type: " . $row_type_formule['nom'] . " and package ID: " . $package_id . "</p>";
                                             }
-                                        } // Fin de la boucle while des types de formules
+                                        }
                                     } else {
-                                        echo "<p>Aucun type de formule disponible pour ce package pour le moment.</p>";
+                                        // Specific error message if no formula types found for the package
+                                        echo "<p>No formula types available for this package at this time.</p>";
                                     }
                                     ?>
                                 </div>
                             </div>
                         </div>
-                        </div>
-                    
+                    </div>
                     <?php
                 } // Fin de la boucle while des packages
             } else {
