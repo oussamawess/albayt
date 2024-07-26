@@ -51,7 +51,7 @@
       box-sizing: border-box;
     }
 
-    button[type="submit"] {
+    /* button[type="submit"] {
       background-color: #4caf50;
       color: #fff;
       padding: 10px 20px;
@@ -62,7 +62,7 @@
 
     button[type="submit"]:hover {
       background-color: #45a049;
-    }
+    } */
 
     .addbutton {
       background-color: #4caf50;
@@ -89,6 +89,19 @@
 
     .deletebutton:hover {
       background-color: #fa190b;
+    }
+
+    .draftbutton {
+      background-color: #12cdd4;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .draftbutton:hover {
+      background-color: #0d949a;
     }
 
     input[type="date"] {
@@ -918,7 +931,9 @@
 
 
 
-      <button type="submit">Valider</button>
+      <button type="submit" name="action" value="valider" class="addbutton">Valider</button>
+      <!-- <button type="button" id="add-vol-button" class="draftbutton" style="margin-left:30px">Enregistrer le Brouillon</button> -->
+      <button type="submit" name="action" value="draft" class="draftbutton" style="margin-left:30px">Enregistrer le Brouillon</button>
     </form>
   </div>
   <script>

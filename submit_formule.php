@@ -2,12 +2,21 @@
 include 'db.php'; // Include your database connection file
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Determine the action based on the button clicked
+    $action = isset($_POST['action']) ? $_POST['action'] : '';
+
+    // Set the status based on the button clicked
+    if ($action === 'draft') {
+        $statut = 'desactivé'; // Status for draft
+    } else {
+        $statut = 'activé'; // Default status for validation
+    }
+
     // 1. Get Data from the Form and Sanitize Input
     $package_id = mysqli_real_escape_string($conn, $_POST['package']);
-    $type_id = mysqli_real_escape_string($conn, $_POST['type']); // Get type_id
+    $type_id = mysqli_real_escape_string($conn, $_POST['type']);
     $date_depart = mysqli_real_escape_string($conn, $_POST['date_depart']);
     $date_retour = mysqli_real_escape_string($conn, $_POST['date_retour']);
-    $statut = mysqli_real_escape_string($conn, $_POST['statut']);
     $duree_sejour = mysqli_real_escape_string($conn, $_POST['duree_sejour']);
     $prix_chambre_quadruple = mysqli_real_escape_string($conn, $_POST['prix_chambre_quadruple']);
     $prix_chambre_triple = mysqli_real_escape_string($conn, $_POST['prix_chambre_triple']);
@@ -46,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $date_checkin_value = mysqli_real_escape_string($conn, $date_checkin[$i]);
             $date_checkout_value = mysqli_real_escape_string($conn, $date_checkout[$i]);
             $hotel_value = mysqli_real_escape_string($conn, $hotel[$i]);
-            $type_pension_value = mysqli_real_escape_string($conn, $type_pension[$i]); //Pension
+            $type_pension_value = mysqli_real_escape_string($conn, $type_pension[$i]);
             $nombre_nuit_value = mysqli_real_escape_string($conn, $nombre_nuit[$i]);
 
             $sql_hebergement = "INSERT INTO hebergements (formule_id, date_checkin, date_checkout, hotel_id, type_pension, nombre_nuit) 
@@ -80,9 +89,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_query($conn, $sql_vol);
         }
 
-
-        echo "Nouvelle formule et vols ajoutés avec succès";
-        header("Location: display_formules.php"); // Redirect back to the form after successful insertion
+        // Redirect to display_formules.php after successful insertion
+        header("Location: display_formules.php");
         exit;
     } else {
         echo "Erreur: " . $sql_formule . "<br>" . mysqli_error($conn);
