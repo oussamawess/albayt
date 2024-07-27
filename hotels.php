@@ -47,11 +47,12 @@
 
         .btn-group {
             text-align: center;
+            padding-bottom: 15px;
         }
 
         .btn {
             padding: 8px 20px;
-            margin: 0 5px;
+            margin: 0px 0px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -60,12 +61,14 @@
         .btn-edit {
             background-color: #4CAF50;
             color: white;
+            margin-bottom: 15px;
         }
 
         .btn-delete {
             background-color: #f44336;
             color: white;
-            text-decoration: none;   
+            text-decoration: none;  
+             
         }
 
         .btn-add {
