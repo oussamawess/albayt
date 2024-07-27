@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +13,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         .container {
             width: 80%;
             margin: auto;
@@ -23,22 +21,18 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
         h2 {
             text-align: center;
             color: #333;
         }
-
         form {
             margin-top: 20px;
         }
-
         label {
             display: block;
             margin-bottom: 5px;
             color: #555;
         }
-
         input[type="text"],
         input[type="file"],
         select {
@@ -49,7 +43,6 @@
             border-radius: 5px;
             box-sizing: border-box;
         }
-
         button[type="submit"] {
             background-color: #4CAF50;
             color: white;
@@ -58,13 +51,14 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         button[type="submit"]:hover {
             background-color: #45a049;
         }
     </style>
+</head>
+<body>
     <?php
-    session_start(); // Start session to access session variables
+    session_start();
     
     // Check if user is not logged in, redirect to login page
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
@@ -72,14 +66,6 @@
         exit;
     }
 
-
-    ?>
-    <?php include 'header.php'; ?>
-</head>
-
-<body>
-
-    <?php
     // Vérifier si le formulaire a été soumis
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Vérifier si tous les champs sont remplis
@@ -96,28 +82,34 @@
 
             // Exécuter la requête
             if (mysqli_query($conn, $sql)) {
-                echo "<div class='container'><h2>Le type de formule Omra a été ajouté avec succès!</h2></div>";                
+                // Redirect to list_type_formule_omra.php after successful insertion
+                header("Location: list_type_formule_omra.php");
+                exit;
             } else {
-                echo "<div class='container'><h2>Erreur lors de l'ajout du type de formule Omra. Veuillez réessayer.</h2></div>";
+                $error_message = "Erreur lors de l'ajout du type de formule Omra. Veuillez réessayer.";
             }
 
             // Fermer la connexion à la base de données
             mysqli_close($conn);
         } else {
-            echo "<div class='container'><h2>Tous les champs sont obligatoires. Veuillez remplir tous les champs.</h2></div>";
+            $error_message = "Tous les champs sont obligatoires. Veuillez remplir tous les champs.";
         }
     }
     ?>
-
+    
+    <?php include 'header.php'; ?>
+    
     <div class="container">
         <h2>Ajouter une categorie</h2>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST"
-            enctype="multipart/form-data">
+        <?php if (isset($error_message)): ?>
+            <div class="alert alert-danger"><?php echo $error_message; ?></div>
+        <?php endif; ?>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
             <label for="nom">Categorie de la Formule:</label>
             <input type="text" id="nom" name="nom" required>
 
             <label for="formule_parent">Formule Parent:</label>
-            <select id="formule_parent" name="formule_parent">
+            <select id="formule_parent" name="formule_parent" required>
                 <option value="">Sélectionner package parent</option>
                 <!-- Code PHP pour afficher les options de formule parent -->
                 <?php
@@ -126,8 +118,6 @@
 
                 // Requête SQL pour sélectionner tous les packages Omra
                 $sql = "SELECT * FROM omra_packages";
-
-                // Exécuter la requête
                 $result = mysqli_query($conn, $sql);
 
                 // Vérifier s'il y a des résultats
@@ -144,7 +134,5 @@
             <button type="submit">Ajouter categorie</button>
         </form>
     </div>
-
 </body>
-
 </html>
