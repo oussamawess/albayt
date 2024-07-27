@@ -1384,7 +1384,139 @@ Boarding Pass
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Optional: Add a subtle triangle to the bottom of the ribbon */
+        /* Option 1: Simple Gold Stars */
+        .title .star {
+            color: gold;
+            font-size: 24px;
+            /* Adjust size as needed */
+            margin-right: 2px;
+            /* Add spacing between stars */
+        }
+
+        /* Option 2: Gradient Stars */
+        .title .star {
+            font-size: 24px;
+            background: linear-gradient(to right, #FFD700, #FFA500);
+            /* Gold gradient */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Option 3: 3D-ish Stars */
+        .title .star {
+            font-size: 24px;
+            color: gold;
+            text-shadow: 2px 2px 2px #888;
+            /* Subtle shadow */
+        }
+
+        /* Option 4: Stars with Outline */
+        .title .star {
+            font-size: 24px;
+            color: #FFD700;
+            -webkit-text-stroke: 1px #FFA500;
+            /* Outline color */
+        }
+
+        .product_card {
+            width: 280px;
+            height: 400px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 20px;
+            transition: 0.3s;
+            border: 2px solid rgb(236, 236, 236);
+            position: relative;
+        }
+
+        .product_card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .product_card .product_info {
+            padding: 10px;
+            font: 14px 'Poppins', sans-serif;
+        }
+
+        .colors {
+            display: flex;
+            gap: 5px;
+            margin: 5px 0;
+            align-items: center;
+        }
+
+        .colors .color {
+            width: 15px;
+            height: 15px;
+            border-radius: 10px;
+        }
+
+        .colors .color:nth-child(1) {
+            border: 2px solid rgb(252, 252, 252);
+            box-shadow: 0 0 0 1px rgba(37, 37, 37, 0.505);
+        }
+
+        .bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .bottom .price {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .bottom .add_to_cart {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: none;
+            background: #fff;
+            color: #111111;
+            font-size: 14px;
+            cursor: pointer;
+            border: 3px solid rgba(0, 0, 0, 0.17);
+            transition: 0.3s ease;
+        }
+
+        .add_to_cart:hover {
+            background: #111111b8;
+            color: #fff;
+        }
+
+        .add_to_wishlist {
+            position: absolute;
+            padding: 5px;
+            border-radius: 20px;
+            width: 20px;
+            height: 20px;
+            background: #ffffff9b;
+            color: #111111;
+            border: none;
+            right: 5px;
+            top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product_name {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .product_description {
+            font-size: 14px;
+            color: #292828;
+            margin-top: 5px;
+        }
     </style>
 </head>
 
@@ -1407,59 +1539,57 @@ Boarding Pass
             // Récupérer les données de la formule
             $formule_data = mysqli_fetch_assoc($result);
 
-            // Requête pour récupérer le nom de la ville de départ à partir de la table ville_depart
-            $sql_ville_depart = "SELECT nom FROM ville_depart WHERE id = " . $formule_data['ville_depart_id'];
-            $result_ville_depart = mysqli_query($conn, $sql_ville_depart);
-
-            // Vérifier si la requête a renvoyé des résultats pour la ville de départ
-            if (mysqli_num_rows($result_ville_depart) > 0) {
-                // Récupérer le nom de la ville de départ
-                $ville_depart_data = mysqli_fetch_assoc($result_ville_depart);
-                $nom_ville_depart = $ville_depart_data['nom'];
 
 
-                // Requête pour récupérer le nom du package à partir de la table packages
-                $sql_package = "SELECT nom FROM omra_packages WHERE id = " . $formule_data['package_id'];
-                $result_package = mysqli_query($conn, $sql_package);
 
-                // Vérifier si la requête a renvoyé des résultats pour le package
-                if (mysqli_num_rows($result_package) > 0) {
-                    // Récupérer le nom du package
-                    $package_data = mysqli_fetch_assoc($result_package);
-                    $nom_package = $package_data['nom'];
+            // Requête pour récupérer le nom du package à partir de la table packages
+            $sql_package = "SELECT nom FROM omra_packages WHERE id = " . $formule_data['package_id'];
+            $result_package = mysqli_query($conn, $sql_package);
 
-                    // Maintenant vous pouvez afficher le nom du package dans le code HTML
+            // Vérifier si la requête a renvoyé des résultats pour le package
+            if (mysqli_num_rows($result_package) > 0) {
+                // Récupérer le nom du package
+                $package_data = mysqli_fetch_assoc($result_package);
+                $nom_package = $package_data['nom'];
+
+                // Maintenant vous pouvez afficher le nom du package dans le code HTML
     
-                    $sql_type_formule = "SELECT nom FROM type_formule_omra WHERE id = " . $formule_data['type_id'];
-                    $result_type_formule = mysqli_query($conn, $sql_type_formule);
+                $sql_type_formule = "SELECT nom FROM type_formule_omra WHERE id = " . $formule_data['type_id'];
+                $result_type_formule = mysqli_query($conn, $sql_type_formule);
 
-                    // Vérifier si la requête a renvoyé des résultats pour le type de formule
-                    if (mysqli_num_rows($result_type_formule) > 0) {
-                        // Récupérer le nom du type de formule
-                        $type_formule_data = mysqli_fetch_assoc($result_type_formule);
-                        $nom_type_formule = $type_formule_data['nom'];
-                    } else {
-                        echo "<p>Erreur: Type de formule non trouvé.</p>";
-                    }
+                // Vérifier si la requête a renvoyé des résultats pour le type de formule
+                if (mysqli_num_rows($result_type_formule) > 0) {
+                    // Récupérer le nom du type de formule
+                    $type_formule_data = mysqli_fetch_assoc($result_type_formule);
+                    $nom_type_formule = $type_formule_data['nom'];
                 } else {
-                    echo "<p>Erreur: Package non trouvé.</p>";
+                    echo "<p>Erreur: Type de formule non trouvé.</p>";
                 }
-
             } else {
-                echo "<p>Erreur: Ville de départ non trouvée.</p>";
+                echo "<p>Erreur: Package non trouvé.</p>";
             }
+
+
             ?>
 
             <header>
                 <div class="container">
-                    <div class="badge-custom">Départ de <?php echo $nom_ville_depart; ?></div>
+                    <div class="badge-custom">Départ de </div>
                     <h1><?php echo $nom_package; ?></h1>
                     <h2> <?php echo $nom_type_formule; ?></h2>
                     <div class="flight-details">
                         <div class="detail-item">
+                            <i class="fas fa-hotel"></i> <span class="label">Séjour:</span>
+                            <?php echo $formule_data['duree_sejour']; ?> Jours
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-euro"></i> <span class="label">à partir de:</span>
+                            <?php echo $formule_data['prix_chambre_quadruple']; ?> €
+                        </div>
+                        <div class="detail-item">
                             <i class="fas fa-plane-departure"></i> <span class="label">Aller:</span>
                             <?php
-                            $originalDate = $formule_data['heure_depart'];
+                            $originalDate = $formule_data['date_depart'];
                             $dateObject = new DateTime($originalDate);
                             $formattedDate = $dateObject->format('d/m/Y');
                             echo $formattedDate;
@@ -1468,27 +1598,14 @@ Boarding Pass
                         <div class="detail-item">
                             <i class="fas fa-plane-arrival"></i> <span class="label">Retour:</span>
                             <?php
-                            $originalDate = $formule_data['heure_arrivee'];
+                            $originalDate = $formule_data['date_retour'];
                             $dateObject = new DateTime($originalDate);
                             $formattedDate = $dateObject->format('d/m/Y');
                             echo $formattedDate;
                             ?>
                         </div>
-                        <div class="detail-item">
-                            <i class="fas fa-plane"></i> <span class="label">Compagnie:</span>
-                            <?php
-                            // Fetch airline name from compagnies_aeriennes table
-                            $airline_id = $formule_data['compagnie_aerienne_id'];
-                            $sql_airline = "SELECT nom FROM compagnies_aeriennes WHERE id = $airline_id";
-                            $result_airline = mysqli_query($conn, $sql_airline);
-                            $airline_data = mysqli_fetch_assoc($result_airline);
-                            echo $airline_data['nom']; // Display the airline name
-                            ?>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-map-marker-alt"></i> <span class="label">Ville de départ:</span>
-                            <?php echo $nom_ville_depart; ?>
-                        </div>
+
+
                     </div>
 
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stepperModal">
@@ -1542,717 +1659,309 @@ Boarding Pass
                     <div class="tab-pane fade" id="hebergements" role="tabpanel" aria-labelledby="hebergements-tab">
                         <div class="row">
                             <?php
-                            // Verify if the necessary fields are present in the "formule" table
-                            if (isset($formule_data['date_checkin1']) && isset($formule_data['date_checkout1']) && isset($formule_data['hotel1_id']) && isset($formule_data['nombre_nuit1']) && isset($formule_data['date_checkin2']) && isset($formule_data['date_checkout2']) && isset($formule_data['hotel2_id']) && isset($formule_data['nombre_nuit2'])) {
-                                // Function to get hotel details by its ID
-                                function getHotelDetails($hotel_id, $conn)
-                                {
-                                    // SQL query to get hotel details by its ID
-                                    $sql_hotel_details = "SELECT nom, ville, pension, details, monument FROM hotels WHERE id = $hotel_id";
-                                    $result_hotel_details = mysqli_query($conn, $sql_hotel_details);
-                                    // Check if any results are returned
-                                    if (mysqli_num_rows($result_hotel_details) > 0) {
-                                        // Fetch hotel details
-                                        $hotel_details = mysqli_fetch_assoc($result_hotel_details);
-                                        return $hotel_details;
-                                    } else {
-                                        return false;
-                                    }
-                                }
+                            // Assuming $conn is your existing database connection
+                            $sql_hebergements = "SELECT * FROM hebergements WHERE formule_id = ?";
+                            $stmt_hebergements = mysqli_prepare($conn, $sql_hebergements);
+                            mysqli_stmt_bind_param($stmt_hebergements, "i", $formule_data['id']);
+                            mysqli_stmt_execute($stmt_hebergements);
+                            $result_hebergements = mysqli_stmt_get_result($stmt_hebergements);
 
-                                // Display accommodation details
-                                $hotel1_details = getHotelDetails($formule_data['hotel1_id'], $conn);
-                                if ($hotel1_details) {
+                            if (mysqli_num_rows($result_hebergements) > 0) {
+                                while ($hotel = mysqli_fetch_assoc($result_hebergements)) {
                                     ?>
-
-
-
-
-                                    <div class="col-md-12 mb-4">
-
-
-                                        <div class="card-container">
-                                            <div class="hotel-image">
-                                                <div id="carousel1" class="carousel slide" data-ride="carousel">
-                                                    <div class="carousel-inner">
-                                                        <?php
-                                                        // Display gallery images for hotel 1
-                                                        $sql_gallery1 = "SELECT image_path FROM hotel_gallery WHERE hotel_id = {$formule_data['hotel1_id']}";
-                                                        $result_gallery1 = mysqli_query($conn, $sql_gallery1);
-                                                        $active = true;
-                                                        while ($row = mysqli_fetch_assoc($result_gallery1)) {
-                                                            echo "<div class='carousel-item" . ($active ? " active" : "") . "'>";
-                                                            echo "<div class='image-container'><img  src='" . $row['image_path'] . "' alt='Hotel Image'></div>";
-                                                            echo "</div>";
-                                                            $active = false;
-                                                        }
-                                                        ?>
-                                                    </div>
+                                    <div class="card-container">
+                                        <div class="hotel-image">
+                                            <div id="carousel1" class="carousel slide" data-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    <?php
+                                                    // Display gallery images for hotel 1
+                                                    $sql_gallery1 = "SELECT image_path FROM hotel_gallery WHERE hotel_id = {$hotel['hotel_id']}";
+                                                    $result_gallery1 = mysqli_query($conn, $sql_gallery1);
+                                                    $active = true;
+                                                    while ($row = mysqli_fetch_assoc($result_gallery1)) {
+                                                        echo "<div class='carousel-item" . ($active ? " active" : "") . "'>";
+                                                        echo "<div class='image-container'><img  src='" . $row['image_path'] . "' alt='Hotel Image'></div>";
+                                                        echo "</div>";
+                                                        $active = false;
+                                                    }
+                                                    ?>
                                                 </div>
-                                            </div>
-                                            <div class="hotel-info">
-                                                <div class="heading">
-                                                    <h3 style="color:#000" class="hidden"> <strong>
-                                                            <?php echo $hotel1_details['ville']; ?> </strong></h3>
-                                                    <h3 class="title"><?php echo $hotel1_details['nom']; ?> </h3>
-                                                    <h4 class="subtitle"><?php echo $hotel1_details['details']; ?></h4>
-                                                </div>
-                                                <div class="reviews">
-                                                    <ul class="stars">
-                                                        <p> <svg style="width:30px;height:30px;margin-right:10px"
-                                                                xmlns="http://www.w3.org/2000/svg" width="67.255" height="67.255"
-                                                                viewBox="0 0 67.255 67.255">
-                                                                <g id="Groupe_23" data-name="Groupe 23"
-                                                                    transform="translate(-1011 -7560)">
-                                                                    <circle id="Oval_Copy_12" data-name="Oval Copy 12" cx="33.627"
-                                                                        cy="33.627" r="33.627" transform="translate(1011 7560)"
-                                                                        fill="#f7f2e8"></circle>
-                                                                    <g id="Group_3" data-name="Group 3"
-                                                                        transform="translate(1025 7578)">
-                                                                        <path id="Fill_1" data-name="Fill 1"
-                                                                            d="M39.2,32H35.081a.8.8,0,0,1-.8-.789V28.051H5.719V31.21a.8.8,0,0,1-.8.789H.8A.8.8,0,0,1,0,31.21V20.154a3.975,3.975,0,0,1,3.2-3.869V2.779a.792.792,0,0,1,.6-.765,66.144,66.144,0,0,1,32.4,0,.792.792,0,0,1,.6.765V16.285A3.975,3.975,0,0,1,40,20.154V31.21A.8.8,0,0,1,39.2,32ZM4.918,26.471H35.082a.8.8,0,0,1,.8.79v3.158H38.4V23.312H1.6v7.107h5.118V27.26A.8.8,0,0,1,4.918,26.471ZM4,17.783a2.388,2.388,0,0,0-2.4,2.37v1.58H38.4v-1.58A2.387,2.387,0,0,0,36,17.784h5Zm20.225-5.971h6.649A2.711,2.711,0,0,1,33.6,14.5v1.7h1.6V3.4a64.51,64.51,0,0,0-30.4,0v12.81H6.4V14.5a2.711,2.711,0,0,1,2.725-2.69h6.65A2.711,2.711,0,0,1,18.5,14.5v1.7h3V14.5A2.711,2.711,0,0,1,24.224,11.813Zm0,1.579A1.119,1.119,0,0,0,23.1,14.5v1.7H32V14.5a1.119,1.119,0,0,0-1.125-1.111Zm-15.1,0A1.119,1.119,0,0,0,8,14.5v1.7h8.9V14.5a1.119,1.119,0,0,0-1.125-1.111Z"
-                                                                            stroke="#000" stroke-miterlimit="10" stroke-width="0.4">
-                                                                        </path>
-                                                                    </g>
-                                                                </g>
-                                                            </svg>
-                                                            Durée du séjour: <?php echo $formule_data['nombre_nuit1']; ?> nights</p>
-                                                    </ul>
-                                                    <ul class="trip-advisor">
-                                                        <p> <svg style="width:30px;height:30px;margin-right:10px"
-                                                                xmlns="http://www.w3.org/2000/svg" width="67.255" height="67.255"
-                                                                viewBox="0 0 67.255 67.255">
-                                                                <g id="Groupe_21" data-name="Groupe 21"
-                                                                    transform="translate(-1011 -7706)">
-                                                                    <circle id="Oval_Copy_14" data-name="Oval Copy 14" cx="33.627"
-                                                                        cy="33.627" r="33.627" transform="translate(1011 7706)"
-                                                                        fill="#f7f2e8"></circle>
-                                                                    <g id="Group_13" data-name="Group 13"
-                                                                        transform="translate(1032 7725)">
-                                                                        <path id="Fill_1" data-name="Fill 1"
-                                                                            d="M6.265,15H5.783a5.3,5.3,0,0,1-4.115-2.066,8.131,8.131,0,0,1-1.4-7.082L.514,4.9C1.285,1.969,3.489,0,6,0c2.535,0,4.74,1.969,5.486,4.9l.24.952a8.133,8.133,0,0,1-1.4,7.082A5.18,5.18,0,0,1,6.265,15ZM6.025,2.3c-1.407,0-2.674,1.26-3.153,3.135l-.241.952a6,6,0,0,0,.963,5.108,2.9,2.9,0,0,0,2.214,1.184h.506a2.9,2.9,0,0,0,2.214-1.184,6,6,0,0,0,.963-5.108l-.241-.952C8.691,3.558,7.395,2.3,6.025,2.3Z"
-                                                                            transform="translate(15)"></path>
-                                                                        <path id="Line_2" data-name="Line 2" d="M.5.432V18.568"
-                                                                            transform="translate(6 14)" fill="none" stroke="#000"
-                                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                                            stroke-miterlimit="10" stroke-width="2"></path>
-                                                                        <path id="Line_2_Copy" data-name="Line 2 Copy"
-                                                                            d="M.5.432V18.568" transform="translate(21 14)" fill="none"
-                                                                            stroke="#000" stroke-linecap="round" stroke-linejoin="round"
-                                                                            stroke-miterlimit="10" stroke-width="2"></path>
-                                                                        <path id="Fill_7" data-name="Fill 7"
-                                                                            d="M6,7A5.926,5.926,0,0,1,0,1.166V0H12V1.166A5.925,5.925,0,0,1,6,7ZM2.616,2.334A3.618,3.618,0,0,0,6,4.667,3.571,3.571,0,0,0,9.384,2.334Z"
-                                                                            transform="translate(0 8)"></path>
-                                                                        <path id="Fill_9" data-name="Fill 9" d="M0,8H2V0H0Z"></path>
-                                                                        <path id="Fill_11" data-name="Fill 11" d="M0,8H2V0H0Z"
-                                                                            transform="translate(5)"></path>
-                                                                        <path id="Fill_12" data-name="Fill 12" d="M0,8H2V0H0Z"
-                                                                            transform="translate(10)"></path>
-                                                                    </g>
-                                                                </g>
-                                                            </svg>
-                                                            <?php echo $hotel1_details['pension']; ?></p>
-
-                                                    </ul>
-                                                </div>
-
-                                                <div class="reviews">
-                                                    <ul class="stars">
-                                                        <p><svg style="width:30px;height:30px;margin-right:10px"
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="67.255"
-                                                                height="67.255" viewBox="0 0 67.255 67.255">
-                                                                <defs>
-                                                                    <clipPath id="clip-path">
-                                                                        <path id="Clip_2" data-name="Clip 2" d="M0,0H31.491V31.491H0Z"
-                                                                            fill="none"></path>
-                                                                    </clipPath>
-                                                                </defs>
-                                                                <g id="Groupe_24" data-name="Groupe 24"
-                                                                    transform="translate(-1350.792 -7406)">
-                                                                    <circle id="Oval_Copy_3" data-name="Oval Copy 3" cx="33.627"
-                                                                        cy="33.627" r="33.627" transform="translate(1350.792 7406)"
-                                                                        fill="#f7f2e8"></circle>
-                                                                    <g id="Group_8" data-name="Group 8"
-                                                                        transform="translate(1368.792 7424)">
-                                                                        <path id="Clip_2-2" data-name="Clip 2" d="M0,0H31.491V31.491H0Z"
-                                                                            fill="none"></path>
-                                                                        <g id="Group_8-2" data-name="Group 8"
-                                                                            clip-path="url(#clip-path)">
-                                                                            <path id="Fill_1" data-name="Fill 1"
-                                                                                d="M30.367,26.993H1.125A1.126,1.126,0,0,1,0,25.868V1.125A1.126,1.126,0,0,1,1.125,0H30.367a1.126,1.126,0,0,1,1.124,1.125V25.868A1.126,1.126,0,0,1,30.367,26.993ZM2.249,2.25V24.744H29.242V2.25Z"
-                                                                                transform="translate(0 4.498)"></path>
-                                                                            <path id="Fill_3" data-name="Fill 3"
-                                                                                d="M30.367,2.249H1.125A1.125,1.125,0,1,1,1.125,0H30.367a1.125,1.125,0,1,1,0,2.249"
-                                                                                transform="translate(0 11.247)"></path>
-                                                                            <path id="Fill_4" data-name="Fill 4"
-                                                                                d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748"
-                                                                                transform="translate(4.499 0)"></path>
-                                                                            <path id="Fill_5" data-name="Fill 5"
-                                                                                d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748"
-                                                                                transform="translate(20.245 0)"></path>
-                                                                            <path id="Fill_6" data-name="Fill 6"
-                                                                                d="M7.873,9a1.129,1.129,0,0,1-.8-.328L.329,1.918A1.124,1.124,0,0,1,1.919.329L8.667,7.076A1.124,1.124,0,0,1,7.873,9Z"
-                                                                                transform="translate(17.995 17.997)"></path>
-                                                                            <path id="Fill_7" data-name="Fill 7"
-                                                                                d="M1.125,9a1.124,1.124,0,0,1-.8-1.919L7.077.329a1.124,1.124,0,0,1,1.59,1.59L1.919,8.667A1.121,1.121,0,0,1,1.125,9Z"
-                                                                                transform="translate(17.995 17.997)"></path>
-                                                                        </g>
-                                                                    </g>
-                                                                </g>
-                                                            </svg>
-                                                            Check-in :
-                                                            <?php
-                                                            // Example date string from the array
-                                                            $date_checkout = $formule_data['date_checkin1']; // Assuming this is in "Y-m-d" format
-                                            
-                                                            // Convert the date string to a timestamp
-                                                            $timestamp = strtotime($date_checkout);
-
-                                                            // Array of French month names
-                                                            $months = [
-                                                                'January' => 'janvier',
-                                                                'February' => 'février',
-                                                                'March' => 'mars',
-                                                                'April' => 'avril',
-                                                                'May' => 'mai',
-                                                                'June' => 'juin',
-                                                                'July' => 'juillet',
-                                                                'August' => 'août',
-                                                                'September' => 'septembre',
-                                                                'October' => 'octobre',
-                                                                'November' => 'novembre',
-                                                                'December' => 'décembre'
-                                                            ];
-
-                                                            // Get the day, month, and year
-                                                            $day = date('d', $timestamp);
-                                                            $month = date('F', $timestamp);
-                                                            $year = date('Y', $timestamp);
-
-                                                            // Translate the month to French
-                                                            $french_month = $months[$month];
-
-                                                            // Format the date in "d m y" format with the month in French
-                                                            $formatted_date = "$day $french_month $year";
-                                                            ?>
-                                                            <?php echo $formatted_date; ?>
-                                                        </p>
-
-                                                    </ul>
-                                                    <ul class="trip-advisor">
-                                                        <p><svg style="width:30px;height:30px;margin-right:10px"
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="67.255"
-                                                                height="67.255" viewBox="0 0 67.255 67.255">
-                                                                <defs>
-                                                                    <clipPath id="clip-path">
-                                                                        <path id="Clip_2" data-name="Clip 2" d="M0,0H31.491V31.491H0Z"
-                                                                            fill="none"></path>
-                                                                    </clipPath>
-                                                                </defs>
-                                                                <g id="Groupe_24" data-name="Groupe 24"
-                                                                    transform="translate(-1350.792 -7406)">
-                                                                    <circle id="Oval_Copy_3" data-name="Oval Copy 3" cx="33.627"
-                                                                        cy="33.627" r="33.627" transform="translate(1350.792 7406)"
-                                                                        fill="#f7f2e8"></circle>
-                                                                    <g id="Group_8" data-name="Group 8"
-                                                                        transform="translate(1368.792 7424)">
-                                                                        <path id="Clip_2-2" data-name="Clip 2" d="M0,0H31.491V31.491H0Z"
-                                                                            fill="none"></path>
-                                                                        <g id="Group_8-2" data-name="Group 8"
-                                                                            clip-path="url(#clip-path)">
-                                                                            <path id="Fill_1" data-name="Fill 1"
-                                                                                d="M30.367,26.993H1.125A1.126,1.126,0,0,1,0,25.868V1.125A1.126,1.126,0,0,1,1.125,0H30.367a1.126,1.126,0,0,1,1.124,1.125V25.868A1.126,1.126,0,0,1,30.367,26.993ZM2.249,2.25V24.744H29.242V2.25Z"
-                                                                                transform="translate(0 4.498)"></path>
-                                                                            <path id="Fill_3" data-name="Fill 3"
-                                                                                d="M30.367,2.249H1.125A1.125,1.125,0,1,1,1.125,0H30.367a1.125,1.125,0,1,1,0,2.249"
-                                                                                transform="translate(0 11.247)"></path>
-                                                                            <path id="Fill_4" data-name="Fill 4"
-                                                                                d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748"
-                                                                                transform="translate(4.499 0)"></path>
-                                                                            <path id="Fill_5" data-name="Fill 5"
-                                                                                d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748"
-                                                                                transform="translate(20.245 0)"></path>
-                                                                            <path id="Fill_6" data-name="Fill 6"
-                                                                                d="M7.873,9a1.129,1.129,0,0,1-.8-.328L.329,1.918A1.124,1.124,0,0,1,1.919.329L8.667,7.076A1.124,1.124,0,0,1,7.873,9Z"
-                                                                                transform="translate(17.995 17.997)"></path>
-                                                                            <path id="Fill_7" data-name="Fill 7"
-                                                                                d="M1.125,9a1.124,1.124,0,0,1-.8-1.919L7.077.329a1.124,1.124,0,0,1,1.59,1.59L1.919,8.667A1.121,1.121,0,0,1,1.125,9Z"
-                                                                                transform="translate(17.995 17.997)"></path>
-                                                                        </g>
-                                                                    </g>
-                                                                </g>
-                                                            </svg>
-                                                            Check-out :
-
-
-                                                            <?php
-                                                            // Example date string from the array
-                                                            $date_checkout = $formule_data['date_checkout1']; // Assuming this is in "Y-m-d" format
-                                            
-                                                            // Convert the date string to a timestamp
-                                                            $timestamp = strtotime($date_checkout);
-
-                                                            // Array of French month names
-                                                            $months = [
-                                                                'January' => 'janvier',
-                                                                'February' => 'février',
-                                                                'March' => 'mars',
-                                                                'April' => 'avril',
-                                                                'May' => 'mai',
-                                                                'June' => 'juin',
-                                                                'July' => 'juillet',
-                                                                'August' => 'août',
-                                                                'September' => 'septembre',
-                                                                'October' => 'octobre',
-                                                                'November' => 'novembre',
-                                                                'December' => 'décembre'
-                                                            ];
-
-                                                            // Get the day, month, and year
-                                                            $day = date('d', $timestamp);
-                                                            $month = date('F', $timestamp);
-                                                            $year = date('Y', $timestamp);
-
-                                                            // Translate the month to French
-                                                            $french_month = $months[$month];
-
-                                                            // Format the date in "d m y" format with the month in French
-                                                            $formatted_date2 = "$day $french_month $year";
-                                                            ?>
-
-                                                            <?php echo $formatted_date2; ?>
-                                                        </p>
-
-                                                    </ul>
-                                                </div>
-
-                                                <div class="reviews">
-                                                    <ul class="stars">
-                                                        <p><svg style="width:30px;height:30px;margin-right:10px"
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="67.255"
-                                                                height="67.255" viewBox="0 0 67.255 67.255">
-                                                                <defs>
-                                                                    <clipPath id="clip-path">
-                                                                        <path id="Clip_4" data-name="Clip 4" d="M0,0H24.745V20.248H0Z"
-                                                                            fill="none"></path>
-                                                                    </clipPath>
-                                                                </defs>
-                                                                <g id="Groupe_22" data-name="Groupe 22"
-                                                                    transform="translate(-1350.792 -7560)">
-                                                                    <circle id="Oval_Copy_11" data-name="Oval Copy 11" cx="33.627"
-                                                                        cy="33.627" r="33.627" transform="translate(1350.792 7560)"
-                                                                        fill="#f7f2e8"></circle>
-                                                                    <g id="Group_6" data-name="Group 6"
-                                                                        transform="translate(1377.792 7580)">
-                                                                        <path id="Fill_1" data-name="Fill 1"
-                                                                            d="M1.125,31.491A1.125,1.125,0,0,1,0,30.366V1.124a1.125,1.125,0,0,1,2.25,0V30.366a1.125,1.125,0,0,1-1.125,1.125"
-                                                                            transform="translate(0.001 0.004)"></path>
-                                                                        <g id="Group_5" data-name="Group 5">
-                                                                            <path id="Clip_4-2" data-name="Clip 4"
-                                                                                d="M0,0H24.745V20.248H0Z" fill="none"></path>
-                                                                            <g id="Group_5-2" data-name="Group 5"
-                                                                                clip-path="url(#clip-path)">
-                                                                                <path id="Fill_3" data-name="Fill 3"
-                                                                                    d="M1.126,20.248A1.124,1.124,0,0,1,.708,18.08L20.59,10.126.708,2.172A1.125,1.125,0,1,1,1.542.082l22.494,9a1.125,1.125,0,0,1,0,2.09l-22.493,9A1.147,1.147,0,0,1,1.126,20.248Z"
-                                                                                    transform="translate(0)"></path>
-                                                                            </g>
-                                                                        </g>
-                                                                    </g>
-                                                                </g>
-                                                            </svg>
-                                                            <?php echo $hotel1_details['monument']; ?></p>
-
-                                                    </ul>
-
-                                                </div>
-
-                                            </div>
-
-
-                                            <div class="hotel-price">
-                                                <div class="pricing-content">
-                                                    <div class="guarantee">
-
-                                                        <img style="width:30px;height:30px "
-                                                            src="https://preprod4.digietab.tn/storage/2024/03/distance.png"></img>
-                                                        <h3 style="color:#000"> <strong> <?php echo $hotel1_details['ville']; ?>
-                                                            </strong></h3>
-
-                                                    </div>
-
-                                                </div>
-
                                             </div>
                                         </div>
+                                        <div class="hotel-info">
+                                            <div class="heading">
 
-                                        <?php
-                                }
+                                                <?php
+                                                // Fetch and display package name
+                                                $hoteluni_id = $hotel['hotel_id'];
+                                                $query_hoteluni = "SELECT ville FROM hotels WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                $stmt_hoteluni = $conn->prepare($query_hoteluni);
+                                                $stmt_hoteluni->bind_param("i", $hoteluni_id);
+                                                $stmt_hoteluni->execute();
+                                                $result_hoteluni = $stmt_hoteluni->get_result();
+                                                $hoteluni = $result_hoteluni->fetch_assoc();
+                                                ?>
 
-                                $hotel2_details = getHotelDetails($formule_data['hotel2_id'], $conn);
-                                if ($hotel2_details) {
-                                    ?>
-
-
-                                        <div class="col-md-12 mb-4">
-
-
-                                            <div class="card-container">
-                                                <div class="hotel-image">
-                                                    <div id="carousel2" class="carousel slide" data-ride="carousel">
-                                                        <div class="carousel-inner">
-                                                            <?php
-                                                            // Display gallery images for hotel 2
-                                                            $sql_gallery2 = "SELECT image_path FROM hotel_gallery WHERE hotel_id = {$formule_data['hotel2_id']}";
-                                                            $result_gallery2 = mysqli_query($conn, $sql_gallery2);
-                                                            $active = true;
-                                                            while ($row = mysqli_fetch_assoc($result_gallery2)) {
-                                                                echo "<div class='carousel-item" . ($active ? " active" : "") . "'>";
-                                                                echo "<div class='image-container'><img  src='" . $row['image_path'] . "' alt='Hotel Image'></div>";
-                                                                echo "</div>";
-                                                                $active = false;
-                                                            }
-                                                            ?>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="hotel-info">
+                                                <h3 style="color:#000" class="hidden"> <strong>
+                                                        <?php echo $hoteluni['ville']; ?></strong></h3>
 
 
+                                                <?php
+                                                // Fetch and display package name
+                                                $hoteluni_id = $hotel['hotel_id'];
+                                                $query_hoteluni = "SELECT nom,etoiles,details,monument FROM hotels WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                $stmt_hoteluni = $conn->prepare($query_hoteluni);
+                                                $stmt_hoteluni->bind_param("i", $hoteluni_id);
+                                                $stmt_hoteluni->execute();
+                                                $result_hoteluni = $stmt_hoteluni->get_result();
+                                                $hoteluni = $result_hoteluni->fetch_assoc();
+                                                ?>
 
-                                                    <div class="heading">
 
-                                                        <h3 style="color:#000" class="hidden"> <strong>
-                                                                <?php echo $hotel2_details['ville']; ?> </strong></h3>
-                                                        <h1 class="title"><?php echo $hotel2_details['nom']; ?> </h1>
-                                                        <h4 class="subtitle"><?php echo $hotel2_details['details']; ?></h4>
-                                                    </div>
-                                                    <div class="reviews">
-                                                        <ul class="stars">
-                                                            <p> <svg style="width:30px;height:30px;margin-right:10px"
-                                                                    xmlns="http://www.w3.org/2000/svg" width="67.255" height="67.255"
-                                                                    viewBox="0 0 67.255 67.255">
-                                                                    <g id="Groupe_23" data-name="Groupe 23"
-                                                                        transform="translate(-1011 -7560)">
-                                                                        <circle id="Oval_Copy_12" data-name="Oval Copy 12" cx="33.627"
-                                                                            cy="33.627" r="33.627" transform="translate(1011 7560)"
-                                                                            fill="#f7f2e8"></circle>
-                                                                        <g id="Group_3" data-name="Group 3"
-                                                                            transform="translate(1025 7578)">
-                                                                            <path id="Fill_1" data-name="Fill 1"
-                                                                                d="M39.2,32H35.081a.8.8,0,0,1-.8-.789V28.051H5.719V31.21a.8.8,0,0,1-.8.789H.8A.8.8,0,0,1,0,31.21V20.154a3.975,3.975,0,0,1,3.2-3.869V2.779a.792.792,0,0,1,.6-.765,66.144,66.144,0,0,1,32.4,0,.792.792,0,0,1,.6.765V16.285A3.975,3.975,0,0,1,40,20.154V31.21A.8.8,0,0,1,39.2,32ZM4.918,26.471H35.082a.8.8,0,0,1,.8.79v3.158H38.4V23.312H1.6v7.107h5.118V27.26A.8.8,0,0,1,4.918,26.471ZM4,17.783a2.388,2.388,0,0,0-2.4,2.37v1.58H38.4v-1.58A2.387,2.387,0,0,0,36,17.784h5Zm20.225-5.971h6.649A2.711,2.711,0,0,1,33.6,14.5v1.7h1.6V3.4a64.51,64.51,0,0,0-30.4,0v12.81H6.4V14.5a2.711,2.711,0,0,1,2.725-2.69h6.65A2.711,2.711,0,0,1,18.5,14.5v1.7h3V14.5A2.711,2.711,0,0,1,24.224,11.813Zm0,1.579A1.119,1.119,0,0,0,23.1,14.5v1.7H32V14.5a1.119,1.119,0,0,0-1.125-1.111Zm-15.1,0A1.119,1.119,0,0,0,8,14.5v1.7h8.9V14.5a1.119,1.119,0,0,0-1.125-1.111Z"
-                                                                                stroke="#000" stroke-miterlimit="10" stroke-width="0.4">
-                                                                            </path>
+                                                <h3 class="title">
+                                                    <?php echo $hoteluni['nom']; ?>
+
+                                                    <?php
+                                                    $numStars = (int) $hoteluni['etoiles']; // Ensure it's a number
+                                                    for ($i = 0; $i < $numStars; $i++) {
+                                                        echo "★"; // Use Unicode star for consistent display
+                                                    }
+                                                    ?>
+                                                </h3>
+
+                                                <h4 class="subtitle"> <?php echo $hoteluni['details']; ?></h4>
+                                            </div>
+                                            <div class="reviews">
+                                                <ul class="stars">
+                                                    <p> <svg style="width:30px;height:30px;margin-right:10px"
+                                                            xmlns="http://www.w3.org/2000/svg" width="67.255" height="67.255"
+                                                            viewBox="0 0 67.255 67.255">
+                                                            <g id="Groupe_23" data-name="Groupe 23" transform="translate(-1011 -7560)">
+                                                                <circle id="Oval_Copy_12" data-name="Oval Copy 12" cx="33.627"
+                                                                    cy="33.627" r="33.627" transform="translate(1011 7560)"
+                                                                    fill="#f7f2e8"></circle>
+                                                                <g id="Group_3" data-name="Group 3" transform="translate(1025 7578)">
+                                                                    <path id="Fill_1" data-name="Fill 1"
+                                                                        d="M39.2,32H35.081a.8.8,0,0,1-.8-.789V28.051H5.719V31.21a.8.8,0,0,1-.8.789H.8A.8.8,0,0,1,0,31.21V20.154a3.975,3.975,0,0,1,3.2-3.869V2.779a.792.792,0,0,1,.6-.765,66.144,66.144,0,0,1,32.4,0,.792.792,0,0,1,.6.765V16.285A3.975,3.975,0,0,1,40,20.154V31.21A.8.8,0,0,1,39.2,32ZM4.918,26.471H35.082a.8.8,0,0,1,.8.79v3.158H38.4V23.312H1.6v7.107h5.118V27.26A.8.8,0,0,1,4.918,26.471ZM4,17.783a2.388,2.388,0,0,0-2.4,2.37v1.58H38.4v-1.58A2.387,2.387,0,0,0,36,17.784h5Zm20.225-5.971h6.649A2.711,2.711,0,0,1,33.6,14.5v1.7h1.6V3.4a64.51,64.51,0,0,0-30.4,0v12.81H6.4V14.5a2.711,2.711,0,0,1,2.725-2.69h6.65A2.711,2.711,0,0,1,18.5,14.5v1.7h3V14.5A2.711,2.711,0,0,1,24.224,11.813Zm0,1.579A1.119,1.119,0,0,0,23.1,14.5v1.7H32V14.5a1.119,1.119,0,0,0-1.125-1.111Zm-15.1,0A1.119,1.119,0,0,0,8,14.5v1.7h8.9V14.5a1.119,1.119,0,0,0-1.125-1.111Z"
+                                                                        stroke="#000" stroke-miterlimit="10" stroke-width="0.4">
+                                                                    </path>
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+                                                        <?php echo $hotel['nombre_nuit']; ?> Jours </p>
+                                                </ul>
+                                                <ul class="trip-advisor">
+                                                    <p> <svg style="width:30px;height:30px;margin-right:10px"
+                                                            xmlns="http://www.w3.org/2000/svg" width="67.255" height="67.255"
+                                                            viewBox="0 0 67.255 67.255">
+                                                            <g id="Groupe_21" data-name="Groupe 21" transform="translate(-1011 -7706)">
+                                                                <circle id="Oval_Copy_14" data-name="Oval Copy 14" cx="33.627"
+                                                                    cy="33.627" r="33.627" transform="translate(1011 7706)"
+                                                                    fill="#f7f2e8"></circle>
+                                                                <g id="Group_13" data-name="Group 13" transform="translate(1032 7725)">
+                                                                    <path id="Fill_1" data-name="Fill 1"
+                                                                        d="M6.265,15H5.783a5.3,5.3,0,0,1-4.115-2.066,8.131,8.131,0,0,1-1.4-7.082L.514,4.9C1.285,1.969,3.489,0,6,0c2.535,0,4.74,1.969,5.486,4.9l.24.952a8.133,8.133,0,0,1-1.4,7.082A5.18,5.18,0,0,1,6.265,15ZM6.025,2.3c-1.407,0-2.674,1.26-3.153,3.135l-.241.952a6,6,0,0,0,.963,5.108,2.9,2.9,0,0,0,2.214,1.184h.506a2.9,2.9,0,0,0,2.214-1.184,6,6,0,0,0,.963-5.108l-.241-.952C8.691,3.558,7.395,2.3,6.025,2.3Z"
+                                                                        transform="translate(15)"></path>
+                                                                    <path id="Line_2" data-name="Line 2" d="M.5.432V18.568"
+                                                                        transform="translate(6 14)" fill="none" stroke="#000"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-miterlimit="10" stroke-width="2"></path>
+                                                                    <path id="Line_2_Copy" data-name="Line 2 Copy" d="M.5.432V18.568"
+                                                                        transform="translate(21 14)" fill="none" stroke="#000"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-miterlimit="10" stroke-width="2"></path>
+                                                                    <path id="Fill_7" data-name="Fill 7"
+                                                                        d="M6,7A5.926,5.926,0,0,1,0,1.166V0H12V1.166A5.925,5.925,0,0,1,6,7ZM2.616,2.334A3.618,3.618,0,0,0,6,4.667,3.571,3.571,0,0,0,9.384,2.334Z"
+                                                                        transform="translate(0 8)"></path>
+                                                                    <path id="Fill_9" data-name="Fill 9" d="M0,8H2V0H0Z"></path>
+                                                                    <path id="Fill_11" data-name="Fill 11" d="M0,8H2V0H0Z"
+                                                                        transform="translate(5)"></path>
+                                                                    <path id="Fill_12" data-name="Fill 12" d="M0,8H2V0H0Z"
+                                                                        transform="translate(10)"></path>
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+                                                        <?php echo $hotel['type_pension']; ?> </p>
+
+                                                </ul>
+                                            </div>
+
+                                            <div class="reviews">
+                                                <ul class="stars">
+                                                    <p><svg style="width:30px;height:30px;margin-right:10px"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="67.255" height="67.255"
+                                                            viewBox="0 0 67.255 67.255">
+                                                            <defs>
+                                                                <clipPath id="clip-path">
+                                                                    <path id="Clip_2" data-name="Clip 2" d="M0,0H31.491V31.491H0Z"
+                                                                        fill="none"></path>
+                                                                </clipPath>
+                                                            </defs>
+                                                            <g id="Groupe_24" data-name="Groupe 24"
+                                                                transform="translate(-1350.792 -7406)">
+                                                                <circle id="Oval_Copy_3" data-name="Oval Copy 3" cx="33.627" cy="33.627"
+                                                                    r="33.627" transform="translate(1350.792 7406)" fill="#f7f2e8">
+                                                                </circle>
+                                                                <g id="Group_8" data-name="Group 8"
+                                                                    transform="translate(1368.792 7424)">
+                                                                    <path id="Clip_2-2" data-name="Clip 2" d="M0,0H31.491V31.491H0Z"
+                                                                        fill="none"></path>
+                                                                    <g id="Group_8-2" data-name="Group 8" clip-path="url(#clip-path)">
+                                                                        <path id="Fill_1" data-name="Fill 1"
+                                                                            d="M30.367,26.993H1.125A1.126,1.126,0,0,1,0,25.868V1.125A1.126,1.126,0,0,1,1.125,0H30.367a1.126,1.126,0,0,1,1.124,1.125V25.868A1.126,1.126,0,0,1,30.367,26.993ZM2.249,2.25V24.744H29.242V2.25Z"
+                                                                            transform="translate(0 4.498)"></path>
+                                                                        <path id="Fill_3" data-name="Fill 3"
+                                                                            d="M30.367,2.249H1.125A1.125,1.125,0,1,1,1.125,0H30.367a1.125,1.125,0,1,1,0,2.249"
+                                                                            transform="translate(0 11.247)"></path>
+                                                                        <path id="Fill_4" data-name="Fill 4"
+                                                                            d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748"
+                                                                            transform="translate(4.499 0)"></path>
+                                                                        <path id="Fill_5" data-name="Fill 5"
+                                                                            d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748"
+                                                                            transform="translate(20.245 0)"></path>
+                                                                        <path id="Fill_6" data-name="Fill 6"
+                                                                            d="M7.873,9a1.129,1.129,0,0,1-.8-.328L.329,1.918A1.124,1.124,0,0,1,1.919.329L8.667,7.076A1.124,1.124,0,0,1,7.873,9Z"
+                                                                            transform="translate(17.995 17.997)"></path>
+                                                                        <path id="Fill_7" data-name="Fill 7"
+                                                                            d="M1.125,9a1.124,1.124,0,0,1-.8-1.919L7.077.329a1.124,1.124,0,0,1,1.59,1.59L1.919,8.667A1.121,1.121,0,0,1,1.125,9Z"
+                                                                            transform="translate(17.995 17.997)"></path>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+                                                        Check-in : <?php echo $hotel['date_checkin']; ?>
+
+                                                    </p>
+
+                                                </ul>
+                                                <ul class="trip-advisor">
+                                                    <p><svg style="width:30px;height:30px;margin-right:10px"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="67.255" height="67.255"
+                                                            viewBox="0 0 67.255 67.255">
+                                                            <defs>
+                                                                <clipPath id="clip-path">
+                                                                    <path id="Clip_2" data-name="Clip 2" d="M0,0H31.491V31.491H0Z"
+                                                                        fill="none"></path>
+                                                                </clipPath>
+                                                            </defs>
+                                                            <g id="Groupe_24" data-name="Groupe 24"
+                                                                transform="translate(-1350.792 -7406)">
+                                                                <circle id="Oval_Copy_3" data-name="Oval Copy 3" cx="33.627" cy="33.627"
+                                                                    r="33.627" transform="translate(1350.792 7406)" fill="#f7f2e8">
+                                                                </circle>
+                                                                <g id="Group_8" data-name="Group 8"
+                                                                    transform="translate(1368.792 7424)">
+                                                                    <path id="Clip_2-2" data-name="Clip 2" d="M0,0H31.491V31.491H0Z"
+                                                                        fill="none"></path>
+                                                                    <g id="Group_8-2" data-name="Group 8" clip-path="url(#clip-path)">
+                                                                        <path id="Fill_1" data-name="Fill 1"
+                                                                            d="M30.367,26.993H1.125A1.126,1.126,0,0,1,0,25.868V1.125A1.126,1.126,0,0,1,1.125,0H30.367a1.126,1.126,0,0,1,1.124,1.125V25.868A1.126,1.126,0,0,1,30.367,26.993ZM2.249,2.25V24.744H29.242V2.25Z"
+                                                                            transform="translate(0 4.498)"></path>
+                                                                        <path id="Fill_3" data-name="Fill 3"
+                                                                            d="M30.367,2.249H1.125A1.125,1.125,0,1,1,1.125,0H30.367a1.125,1.125,0,1,1,0,2.249"
+                                                                            transform="translate(0 11.247)"></path>
+                                                                        <path id="Fill_4" data-name="Fill 4"
+                                                                            d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748"
+                                                                            transform="translate(4.499 0)"></path>
+                                                                        <path id="Fill_5" data-name="Fill 5"
+                                                                            d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748"
+                                                                            transform="translate(20.245 0)"></path>
+                                                                        <path id="Fill_6" data-name="Fill 6"
+                                                                            d="M7.873,9a1.129,1.129,0,0,1-.8-.328L.329,1.918A1.124,1.124,0,0,1,1.919.329L8.667,7.076A1.124,1.124,0,0,1,7.873,9Z"
+                                                                            transform="translate(17.995 17.997)"></path>
+                                                                        <path id="Fill_7" data-name="Fill 7"
+                                                                            d="M1.125,9a1.124,1.124,0,0,1-.8-1.919L7.077.329a1.124,1.124,0,0,1,1.59,1.59L1.919,8.667A1.121,1.121,0,0,1,1.125,9Z"
+                                                                            transform="translate(17.995 17.997)"></path>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+                                                        Check-out : <?php echo $hotel['date_checkout']; ?>
+
+
+
+                                                    </p>
+
+                                                </ul>
+                                            </div>
+
+                                            <div class="reviews">
+                                                <ul class="stars">
+                                                    <p><svg style="width:30px;height:30px;margin-right:10px"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="67.255" height="67.255"
+                                                            viewBox="0 0 67.255 67.255">
+                                                            <defs>
+                                                                <clipPath id="clip-path">
+                                                                    <path id="Clip_4" data-name="Clip 4" d="M0,0H24.745V20.248H0Z"
+                                                                        fill="none"></path>
+                                                                </clipPath>
+                                                            </defs>
+                                                            <g id="Groupe_22" data-name="Groupe 22"
+                                                                transform="translate(-1350.792 -7560)">
+                                                                <circle id="Oval_Copy_11" data-name="Oval Copy 11" cx="33.627"
+                                                                    cy="33.627" r="33.627" transform="translate(1350.792 7560)"
+                                                                    fill="#f7f2e8"></circle>
+                                                                <g id="Group_6" data-name="Group 6"
+                                                                    transform="translate(1377.792 7580)">
+                                                                    <path id="Fill_1" data-name="Fill 1"
+                                                                        d="M1.125,31.491A1.125,1.125,0,0,1,0,30.366V1.124a1.125,1.125,0,0,1,2.25,0V30.366a1.125,1.125,0,0,1-1.125,1.125"
+                                                                        transform="translate(0.001 0.004)"></path>
+                                                                    <g id="Group_5" data-name="Group 5">
+                                                                        <path id="Clip_4-2" data-name="Clip 4" d="M0,0H24.745V20.248H0Z"
+                                                                            fill="none"></path>
+                                                                        <g id="Group_5-2" data-name="Group 5"
+                                                                            clip-path="url(#clip-path)">
+                                                                            <path id="Fill_3" data-name="Fill 3"
+                                                                                d="M1.126,20.248A1.124,1.124,0,0,1,.708,18.08L20.59,10.126.708,2.172A1.125,1.125,0,1,1,1.542.082l22.494,9a1.125,1.125,0,0,1,0,2.09l-22.493,9A1.147,1.147,0,0,1,1.126,20.248Z"
+                                                                                transform="translate(0)"></path>
                                                                         </g>
                                                                     </g>
-                                                                </svg>
-                                                                Durée du séjour: <?php echo $formule_data['nombre_nuit2']; ?> nights</p>
-                                                        </ul>
-                                                        <ul class="trip-advisor">
-                                                            <p> <svg style="width:30px;height:30px;margin-right:10px"
-                                                                    xmlns="http://www.w3.org/2000/svg" width="67.255" height="67.255"
-                                                                    viewBox="0 0 67.255 67.255">
-                                                                    <g id="Groupe_21" data-name="Groupe 21"
-                                                                        transform="translate(-1011 -7706)">
-                                                                        <circle id="Oval_Copy_14" data-name="Oval Copy 14" cx="33.627"
-                                                                            cy="33.627" r="33.627" transform="translate(1011 7706)"
-                                                                            fill="#f7f2e8"></circle>
-                                                                        <g id="Group_13" data-name="Group 13"
-                                                                            transform="translate(1032 7725)">
-                                                                            <path id="Fill_1" data-name="Fill 1"
-                                                                                d="M6.265,15H5.783a5.3,5.3,0,0,1-4.115-2.066,8.131,8.131,0,0,1-1.4-7.082L.514,4.9C1.285,1.969,3.489,0,6,0c2.535,0,4.74,1.969,5.486,4.9l.24.952a8.133,8.133,0,0,1-1.4,7.082A5.18,5.18,0,0,1,6.265,15ZM6.025,2.3c-1.407,0-2.674,1.26-3.153,3.135l-.241.952a6,6,0,0,0,.963,5.108,2.9,2.9,0,0,0,2.214,1.184h.506a2.9,2.9,0,0,0,2.214-1.184,6,6,0,0,0,.963-5.108l-.241-.952C8.691,3.558,7.395,2.3,6.025,2.3Z"
-                                                                                transform="translate(15)"></path>
-                                                                            <path id="Line_2" data-name="Line 2" d="M.5.432V18.568"
-                                                                                transform="translate(6 14)" fill="none" stroke="#000"
-                                                                                stroke-linecap="round" stroke-linejoin="round"
-                                                                                stroke-miterlimit="10" stroke-width="2"></path>
-                                                                            <path id="Line_2_Copy" data-name="Line 2 Copy"
-                                                                                d="M.5.432V18.568" transform="translate(21 14)"
-                                                                                fill="none" stroke="#000" stroke-linecap="round"
-                                                                                stroke-linejoin="round" stroke-miterlimit="10"
-                                                                                stroke-width="2"></path>
-                                                                            <path id="Fill_7" data-name="Fill 7"
-                                                                                d="M6,7A5.926,5.926,0,0,1,0,1.166V0H12V1.166A5.925,5.925,0,0,1,6,7ZM2.616,2.334A3.618,3.618,0,0,0,6,4.667,3.571,3.571,0,0,0,9.384,2.334Z"
-                                                                                transform="translate(0 8)"></path>
-                                                                            <path id="Fill_9" data-name="Fill 9" d="M0,8H2V0H0Z"></path>
-                                                                            <path id="Fill_11" data-name="Fill 11" d="M0,8H2V0H0Z"
-                                                                                transform="translate(5)"></path>
-                                                                            <path id="Fill_12" data-name="Fill 12" d="M0,8H2V0H0Z"
-                                                                                transform="translate(10)"></path>
-                                                                        </g>
-                                                                    </g>
-                                                                </svg>
-                                                                <?php echo $hotel2_details['pension']; ?></p>
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+                                                        <?php echo $hoteluni['monument']; ?> </p>
 
-                                                        </ul>
-                                                    </div>
-
-                                                    <div class="reviews">
-                                                        <ul class="stars">
-                                                            <p><svg style="width:30px;height:30px;margin-right:10px"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="67.255"
-                                                                    height="67.255" viewBox="0 0 67.255 67.255">
-                                                                    <defs>
-                                                                        <clipPath id="clip-path">
-                                                                            <path id="Clip_2" data-name="Clip 2"
-                                                                                d="M0,0H31.491V31.491H0Z" fill="none"></path>
-                                                                        </clipPath>
-                                                                    </defs>
-                                                                    <g id="Groupe_24" data-name="Groupe 24"
-                                                                        transform="translate(-1350.792 -7406)">
-                                                                        <circle id="Oval_Copy_3" data-name="Oval Copy 3" cx="33.627"
-                                                                            cy="33.627" r="33.627" transform="translate(1350.792 7406)"
-                                                                            fill="#f7f2e8"></circle>
-                                                                        <g id="Group_8" data-name="Group 8"
-                                                                            transform="translate(1368.792 7424)">
-                                                                            <path id="Clip_2-2" data-name="Clip 2"
-                                                                                d="M0,0H31.491V31.491H0Z" fill="none"></path>
-                                                                            <g id="Group_8-2" data-name="Group 8"
-                                                                                clip-path="url(#clip-path)">
-                                                                                <path id="Fill_1" data-name="Fill 1"
-                                                                                    d="M30.367,26.993H1.125A1.126,1.126,0,0,1,0,25.868V1.125A1.126,1.126,0,0,1,1.125,0H30.367a1.126,1.126,0,0,1,1.124,1.125V25.868A1.126,1.126,0,0,1,30.367,26.993ZM2.249,2.25V24.744H29.242V2.25Z"
-                                                                                    transform="translate(0 4.498)"></path>
-                                                                                <path id="Fill_3" data-name="Fill 3"
-                                                                                    d="M30.367,2.249H1.125A1.125,1.125,0,1,1,1.125,0H30.367a1.125,1.125,0,1,1,0,2.249"
-                                                                                    transform="translate(0 11.247)"></path>
-                                                                                <path id="Fill_4" data-name="Fill 4"
-                                                                                    d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748"
-                                                                                    transform="translate(4.499 0)"></path>
-                                                                                <path id="Fill_5" data-name="Fill 5"
-                                                                                    d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748"
-                                                                                    transform="translate(20.245 0)"></path>
-                                                                                <path id="Fill_6" data-name="Fill 6"
-                                                                                    d="M7.873,9a1.129,1.129,0,0,1-.8-.328L.329,1.918A1.124,1.124,0,0,1,1.919.329L8.667,7.076A1.124,1.124,0,0,1,7.873,9Z"
-                                                                                    transform="translate(17.995 17.997)"></path>
-                                                                                <path id="Fill_7" data-name="Fill 7"
-                                                                                    d="M1.125,9a1.124,1.124,0,0,1-.8-1.919L7.077.329a1.124,1.124,0,0,1,1.59,1.59L1.919,8.667A1.121,1.121,0,0,1,1.125,9Z"
-                                                                                    transform="translate(17.995 17.997)"></path>
-                                                                            </g>
-                                                                        </g>
-                                                                    </g>
-                                                                </svg>
-
-
-
-
-                                                                Check-in :
-
-
-                                                                <?php
-                                                                // Example date string from the array
-                                                                $date_checkout4 = $formule_data['date_checkin2']; // Assuming this is in "Y-m-d" format
-                                                
-                                                                // Convert the date string to a timestamp
-                                                                $timestamp = strtotime($date_checkout4);
-
-                                                                // Array of French month names
-                                                                $months = [
-                                                                    'January' => 'janvier',
-                                                                    'February' => 'février',
-                                                                    'March' => 'mars',
-                                                                    'April' => 'avril',
-                                                                    'May' => 'mai',
-                                                                    'June' => 'juin',
-                                                                    'July' => 'juillet',
-                                                                    'August' => 'août',
-                                                                    'September' => 'septembre',
-                                                                    'October' => 'octobre',
-                                                                    'November' => 'novembre',
-                                                                    'December' => 'décembre'
-                                                                ];
-
-                                                                // Get the day, month, and year
-                                                                $day = date('d', $timestamp);
-                                                                $month = date('F', $timestamp);
-                                                                $year = date('Y', $timestamp);
-
-                                                                // Translate the month to French
-                                                                $french_month = $months[$month];
-
-                                                                // Format the date in "d m y" format with the month in French
-                                                                $formatted_date4 = "$day $french_month $year";
-                                                                ?>
-
-                                                                <?php echo $formatted_date4; ?>
-
-
-
-                                                            </p>
-
-                                                        </ul>
-                                                        <ul class="trip-advisor">
-                                                            <p><svg style="width:30px;height:30px;margin-right:10px"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="67.255"
-                                                                    height="67.255" viewBox="0 0 67.255 67.255">
-                                                                    <defs>
-                                                                        <clipPath id="clip-path">
-                                                                            <path id="Clip_2" data-name="Clip 2"
-                                                                                d="M0,0H31.491V31.491H0Z" fill="none"></path>
-                                                                        </clipPath>
-                                                                    </defs>
-                                                                    <g id="Groupe_24" data-name="Groupe 24"
-                                                                        transform="translate(-1350.792 -7406)">
-                                                                        <circle id="Oval_Copy_3" data-name="Oval Copy 3" cx="33.627"
-                                                                            cy="33.627" r="33.627" transform="translate(1350.792 7406)"
-                                                                            fill="#f7f2e8"></circle>
-                                                                        <g id="Group_8" data-name="Group 8"
-                                                                            transform="translate(1368.792 7424)">
-                                                                            <path id="Clip_2-2" data-name="Clip 2"
-                                                                                d="M0,0H31.491V31.491H0Z" fill="none"></path>
-                                                                            <g id="Group_8-2" data-name="Group 8"
-                                                                                clip-path="url(#clip-path)">
-                                                                                <path id="Fill_1" data-name="Fill 1"
-                                                                                    d="M30.367,26.993H1.125A1.126,1.126,0,0,1,0,25.868V1.125A1.126,1.126,0,0,1,1.125,0H30.367a1.126,1.126,0,0,1,1.124,1.125V25.868A1.126,1.126,0,0,1,30.367,26.993ZM2.249,2.25V24.744H29.242V2.25Z"
-                                                                                    transform="translate(0 4.498)"></path>
-                                                                                <path id="Fill_3" data-name="Fill 3"
-                                                                                    d="M30.367,2.249H1.125A1.125,1.125,0,1,1,1.125,0H30.367a1.125,1.125,0,1,1,0,2.249"
-                                                                                    transform="translate(0 11.247)"></path>
-                                                                                <path id="Fill_4" data-name="Fill 4"
-                                                                                    d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748"
-                                                                                    transform="translate(4.499 0)"></path>
-                                                                                <path id="Fill_5" data-name="Fill 5"
-                                                                                    d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748"
-                                                                                    transform="translate(20.245 0)"></path>
-                                                                                <path id="Fill_6" data-name="Fill 6"
-                                                                                    d="M7.873,9a1.129,1.129,0,0,1-.8-.328L.329,1.918A1.124,1.124,0,0,1,1.919.329L8.667,7.076A1.124,1.124,0,0,1,7.873,9Z"
-                                                                                    transform="translate(17.995 17.997)"></path>
-                                                                                <path id="Fill_7" data-name="Fill 7"
-                                                                                    d="M1.125,9a1.124,1.124,0,0,1-.8-1.919L7.077.329a1.124,1.124,0,0,1,1.59,1.59L1.919,8.667A1.121,1.121,0,0,1,1.125,9Z"
-                                                                                    transform="translate(17.995 17.997)"></path>
-                                                                            </g>
-                                                                        </g>
-                                                                    </g>
-                                                                </svg>
-                                                                Check-out :
-
-                                                                <?php
-                                                                // Example date string from the array
-                                                                $date_checkout3 = $formule_data['date_checkout2']; // Assuming this is in "Y-m-d" format
-                                                
-                                                                // Convert the date string to a timestamp
-                                                                $timestamp = strtotime($date_checkout3);
-
-                                                                // Array of French month names
-                                                                $months = [
-                                                                    'January' => 'janvier',
-                                                                    'February' => 'février',
-                                                                    'March' => 'mars',
-                                                                    'April' => 'avril',
-                                                                    'May' => 'mai',
-                                                                    'June' => 'juin',
-                                                                    'July' => 'juillet',
-                                                                    'August' => 'août',
-                                                                    'September' => 'septembre',
-                                                                    'October' => 'octobre',
-                                                                    'November' => 'novembre',
-                                                                    'December' => 'décembre'
-                                                                ];
-
-                                                                // Get the day, month, and year
-                                                                $day = date('d', $timestamp);
-                                                                $month = date('F', $timestamp);
-                                                                $year = date('Y', $timestamp);
-
-                                                                // Translate the month to French
-                                                                $french_month = $months[$month];
-
-                                                                // Format the date in "d m y" format with the month in French
-                                                                $formatted_date3 = "$day $french_month $year";
-                                                                ?>
-
-                                                                <?php echo $formatted_date3; ?>
-
-
-
-
-                                                            </p>
-
-                                                        </ul>
-                                                    </div>
-
-
-                                                    <div class="reviews">
-                                                        <ul class="stars">
-                                                            <p><svg style="width:30px;height:30px;margin-right:10px"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="67.255"
-                                                                    height="67.255" viewBox="0 0 67.255 67.255">
-                                                                    <defs>
-                                                                        <clipPath id="clip-path">
-                                                                            <path id="Clip_4" data-name="Clip 4"
-                                                                                d="M0,0H24.745V20.248H0Z" fill="none"></path>
-                                                                        </clipPath>
-                                                                    </defs>
-                                                                    <g id="Groupe_22" data-name="Groupe 22"
-                                                                        transform="translate(-1350.792 -7560)">
-                                                                        <circle id="Oval_Copy_11" data-name="Oval Copy 11" cx="33.627"
-                                                                            cy="33.627" r="33.627" transform="translate(1350.792 7560)"
-                                                                            fill="#f7f2e8"></circle>
-                                                                        <g id="Group_6" data-name="Group 6"
-                                                                            transform="translate(1377.792 7580)">
-                                                                            <path id="Fill_1" data-name="Fill 1"
-                                                                                d="M1.125,31.491A1.125,1.125,0,0,1,0,30.366V1.124a1.125,1.125,0,0,1,2.25,0V30.366a1.125,1.125,0,0,1-1.125,1.125"
-                                                                                transform="translate(0.001 0.004)"></path>
-                                                                            <g id="Group_5" data-name="Group 5">
-                                                                                <path id="Clip_4-2" data-name="Clip 4"
-                                                                                    d="M0,0H24.745V20.248H0Z" fill="none"></path>
-                                                                                <g id="Group_5-2" data-name="Group 5"
-                                                                                    clip-path="url(#clip-path)">
-                                                                                    <path id="Fill_3" data-name="Fill 3"
-                                                                                        d="M1.126,20.248A1.124,1.124,0,0,1,.708,18.08L20.59,10.126.708,2.172A1.125,1.125,0,1,1,1.542.082l22.494,9a1.125,1.125,0,0,1,0,2.09l-22.493,9A1.147,1.147,0,0,1,1.126,20.248Z"
-                                                                                        transform="translate(0)"></path>
-                                                                                </g>
-                                                                            </g>
-                                                                        </g>
-                                                                    </g>
-                                                                </svg>
-                                                                <?php echo $hotel2_details['monument']; ?></p>
-
-                                                        </ul>
-
-                                                    </div>
-
-                                                </div>
-
-
-                                                <div class="hotel-price">
-                                                    <div class="pricing-content">
-                                                        <div class="guarantee"><span>
-                                                            </span>
-                                                            <img style="width:30px;height:30px "
-                                                                src="https://preprod4.digietab.tn/storage/2024/03/distance.png"></img>
-
-                                                            <h3 style="color:#000"> <strong> <?php echo $hotel2_details['ville']; ?>
-                                                                </strong></h3>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-
-
+                                                </ul>
 
                                             </div>
+
+                                        </div>
+
+
+                                        <div class="hotel-price">
+                                            <div class="pricing-content">
+                                                <div class="guarantee">
+
+                                                    <img style="width:30px;height:30px "
+                                                        src="https://preprod4.digietab.tn/storage/2024/03/distance.png"></img>
+
+                                                    <?php
+                                                    // Fetch and display package name
+                                                    $hoteluni_id = $hotel['hotel_id'];
+                                                    $query_hoteluni = "SELECT ville FROM hotels WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                    $stmt_hoteluni = $conn->prepare($query_hoteluni);
+                                                    $stmt_hoteluni->bind_param("i", $hoteluni_id);
+                                                    $stmt_hoteluni->execute();
+                                                    $result_hoteluni = $stmt_hoteluni->get_result();
+                                                    $hoteluni = $result_hoteluni->fetch_assoc();
+                                                    ?>
+
+                                                    <h3 style="color:#000"> <strong> <?php echo $hoteluni['ville']; ?>
+                                                        </strong></h3>
+
+                                                </div>
+
+                                            </div>
+
                                         </div>
                                     </div>
-
-
-
-
-
-
                                     <?php
                                 }
                             } else {
-                                echo "<p class='col-md-12'>Accommodation details are not available for this package.</p>";
+                                echo "No hotels found for this formula.";
                             }
                             ?>
                         </div>
@@ -2263,317 +1972,231 @@ Boarding Pass
 
 
 
-                        <?php
-                        // Check if the necessary fields are present in the "formule" table
-                        if (isset($formule_data['heure_depart']) && isset($formule_data['heure_arrivee']) && isset($formule_data['compagnie_aerienne_id']) && isset($formule_data['num_vol']) && isset($formule_data['airport_depart']) && isset($formule_data['destination']) && isset($formule_data['airport_destination']) && isset($formule_data['ville_depart_id'])) {
 
-                            // Fetch airline name and logo from compagnies_aeriennes table
-                            $airline_id = $formule_data['compagnie_aerienne_id'];
-                            $sql_airline = "SELECT nom, logo FROM compagnies_aeriennes WHERE id = $airline_id";
-                            $result_airline = mysqli_query($conn, $sql_airline);
-                            $airline_data = mysqli_fetch_assoc($result_airline);
+                        <div class="row">
 
-                            // Fetch departure city name from ville_depart table
-                            $ville_depart_id = $formule_data['ville_depart_id'];
-                            $sql_ville_depart = "SELECT nom FROM ville_depart WHERE id = $ville_depart_id";
-                            $result_ville_depart = mysqli_query($conn, $sql_ville_depart);
-                            $ville_depart_data = mysqli_fetch_assoc($result_ville_depart);
-
-                            ?>
-                            <div class="row">
-                                <div class="col-md-6 mb-4">
-
-
-                                    <div class="boarding-pass">
-                                        <header>
-                                            <div class="desc">
-                                                <strong>Aller</strong>
-                                            </div>
-
-
-                                            <div class="flight">
-                                                <small>flight</small>
-                                                <strong><?php echo $formule_data['num_vol']; ?></strong>
-                                            </div>
-                                        </header>
-                                        <section class="cities">
-                                            <div class="city">
-                                                <small> <?php echo $ville_depart_data['nom']; ?></small>
-
-                                                <strong><?php echo $formule_data['airport_depart']; ?></strong>
-                                            </div>
-                                            <div class="city">
-                                                <small><?php echo $formule_data['destination']; ?></small>
-
-                                                <strong> <?php echo $formule_data['airport_destination']; ?></strong>
-                                            </div>
-                                            <svg class="airplane" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                <path
-                                                    d="M482.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64l-116.6 0L265.2 495.9c-5.7 10-16.3 16.1-27.8 16.1l-56.2 0c-10.6 0-18.3-10.2-15.4-20.4l49-171.6L112 320 68.8 377.6c-3 4-7.8 6.4-12.8 6.4l-42 0c-7.8 0-14-6.3-14-14c0-1.3 .2-2.6 .5-3.9L32 256 .5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-7.8 6.3-14 14-14l42 0c5 0 9.8 2.4 12.8 6.4L112 192l102.9 0-49-171.6C162.9 10.2 170.6 0 181.2 0l56.2 0c11.5 0 22.1 6.2 27.8 16.1L365.7 192l116.6 0z" />
-                                            </svg>
-
-                                        </section>
-                                        <section class="infos">
-                                            <div class="places">
-                                                <div class="box">
-                                                    <small>Terminal</small>
-                                                    <strong><em>W</em></strong>
-                                                </div>
-                                                <div class="box">
-                                                    <small>Portail</small>
-                                                    <strong><em>C3</em></strong>
-                                                </div>
-                                                <div class="box">
-                                                    <small>Siège</small>
-                                                    <strong>14B</strong>
-                                                </div>
-                                                <div class="box">
-                                                    <small>Classe</small>
-                                                    <strong>E</strong>
-                                                </div>
-                                            </div>
-                                            <div class="times">
-                                                <div class="box">
-                                                    <small>Embarquement</small>
-                                                    <strong>
-                                                        <?php
-                                                        // Assuming $formule_data['heure_depart'] is a timestamp or a string that can be converted to a timestamp
-                                                        $timestamp = strtotime($formule_data['heure_depart']);
-                                                        echo date('H:i', $timestamp);
-                                                        ?>
-                                                    </strong>
-
-                                                </div>
-                                                <div class="box">
-                                                    <small>Départ</small>
-                                                    <strong>
-                                                        <?php
-                                                        // Assuming $formule_data['heure_depart'] is a timestamp or a string that can be converted to a timestamp
-                                                        $timestamp = strtotime($formule_data['heure_depart']);
-                                                        echo date('H:i', $timestamp);
-                                                        ?>
-                                                    </strong>
-                                                </div>
-                                                <div class="box">
-                                                    <small>Durée</small>
-                                                    <strong>09:38</strong>
-                                                </div>
-                                                <div class="box">
-                                                    <small>Arrivée</small>
-                                                    <strong>
-                                                        <?php
-                                                        // Assuming $formule_data['heure_depart'] is a timestamp or a string that can be converted to a timestamp
-                                                        $timestamp = strtotime($formule_data['heure_depart']);
-
-                                                        // Create a DateTime object from the timestamp
-                                                        $dateTime = new DateTime();
-                                                        $dateTime->setTimestamp($timestamp);
-
-                                                        // Create a DateInterval for the time to add (9 hours and 38 minutes)
-                                                        $interval = new DateInterval('PT9H38M');
-
-                                                        // Add the interval to the DateTime object
-                                                        $dateTime->add($interval);
-
-                                                        // Output the resulting time in H:i format
-                                                        echo $dateTime->format('H:i');
-                                                        ?>
-                                                    </strong>
-                                                </div>
-                                            </div>
-                                        </section>
-                                        <section class="strap">
-                                            <div class="box">
-                                                <div class="passenger">
-                                                    <small>Formules</small>
-                                                    <strong><?php echo $nom_package; ?>             <?php echo $nom_type_formule; ?></strong>
-
-                                                </div>
-                                                <div class="date">
-                                                    <small>Date</small>
-                                                    <strong>
-                                                        <?php
-                                                        // Set the locale to French
-                                                        setlocale(LC_TIME, 'fr_FR.UTF-8');
-
-                                                        // Assuming $formule_data['heure_depart'] is a timestamp or a string that can be converted to a timestamp
-                                                        $timestamp = strtotime($formule_data['heure_depart']);
-
-                                                        // Format the date in French
-                                                        echo strftime('%a %d/%m/%Y', $timestamp);
-                                                        ?>
-                                                    </strong>
-                                                </div>
-                                            </div>
-                                            <?php if (!empty($airline_data['logo'])): ?>
-                                                <img src="<?php echo $airline_data['logo']; ?>" alt="Logo de la compagnie aérienne"
-                                                    style=" position: absolute;
-    bottom: 20px;
-    right: 10px;" width="70px">
-                                            <?php endif; ?>
-                                        </section>
-                                    </div>
-
-
-
-                                </div>
-
-
-                                <div class="col-md-6 mb-4">
-
-                                    <div class="boarding-pass">
-                                        <header>
-
-                                            <div class="desc">
-                                                <strong>Retour</strong>
-                                            </div>
-
-
-                                            <div class="flight">
-                                                <small>Vol</small>
-                                                <strong><?php echo $formule_data['num_vol']; ?></strong>
-                                            </div>
-                                        </header>
-                                        <section class="cities">
-                                            <div class="city">
-                                                <small> <?php echo $formule_data['destination']; ?></small>
-
-                                                <strong><?php echo $formule_data['airport_destination']; ?></strong>
-                                            </div>
-                                            <div class="city">
-                                                <small><?php echo $ville_depart_data['nom']; ?></small>
-
-                                                <strong> <?php echo $formule_data['airport_depart']; ?></strong>
-                                            </div>
-
-                                            <svg class="airplane" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                <path
-                                                    d="M482.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64l-116.6 0L265.2 495.9c-5.7 10-16.3 16.1-27.8 16.1l-56.2 0c-10.6 0-18.3-10.2-15.4-20.4l49-171.6L112 320 68.8 377.6c-3 4-7.8 6.4-12.8 6.4l-42 0c-7.8 0-14-6.3-14-14c0-1.3 .2-2.6 .5-3.9L32 256 .5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-7.8 6.3-14 14-14l42 0c5 0 9.8 2.4 12.8 6.4L112 192l102.9 0-49-171.6C162.9 10.2 170.6 0 181.2 0l56.2 0c11.5 0 22.1 6.2 27.8 16.1L365.7 192l116.6 0z" />
-                                            </svg>
-                                        </section>
-                                        <section class="infos">
-                                            <div class="places">
-                                                <div class="box">
-                                                    <small>Terminal</small>
-                                                    <strong><em>W</em></strong>
-                                                </div>
-                                                <div class="box">
-                                                    <small>Portail</small>
-                                                    <strong><em>C3</em></strong>
-                                                </div>
-                                                <div class="box">
-                                                    <small>Siège</small>
-                                                    <strong>14B</strong>
-                                                </div>
-                                                <div class="box">
-                                                    <small>Classe</small>
-                                                    <strong>E</strong>
-                                                </div>
-                                            </div>
-                                            <div class="times">
-                                                <div class="box">
-                                                    <small>Embarquement</small>
-                                                    <strong> <?php
-                                                    // Assuming $formule_data['heure_depart'] is a timestamp or a string that can be converted to a timestamp
-                                                    $timestamp = strtotime($formule_data['heure_arrivee']);
-                                                    echo date('H:i', $timestamp);
-                                                    ?></strong>
-
-                                                </div>
-                                                <div class="box">
-                                                    <small>Départ</small>
-                                                    <strong> <?php
-                                                    // Assuming $formule_data['heure_depart'] is a timestamp or a string that can be converted to a timestamp
-                                                    $timestamp = strtotime($formule_data['heure_arrivee']);
-                                                    echo date('H:i', $timestamp);
-                                                    ?></strong>
-
-                                                </div>
-                                                <div class="box">
-                                                    <small>Durée </small>
-                                                    <strong>09:38</strong>
-                                                </div>
-                                                <div class="box">
-                                                    <small>Arrivée</small>
-                                                    <strong>
-                                                        <?php
-                                                        // Assuming $formule_data['heure_depart'] is a timestamp or a string that can be converted to a timestamp
-                                                        $timestamp = strtotime($formule_data['heure_arrivee']);
-
-                                                        // Create a DateTime object from the timestamp
-                                                        $dateTime = new DateTime();
-                                                        $dateTime->setTimestamp($timestamp);
-
-                                                        // Create a DateInterval for the time to add (9 hours and 38 minutes)
-                                                        $interval = new DateInterval('PT9H38M');
-
-                                                        // Add the interval to the DateTime object
-                                                        $dateTime->add($interval);
-
-                                                        // Output the resulting time in H:i format
-                                                        echo $dateTime->format('H:i');
-                                                        ?>
-                                                    </strong>
-                                                </div>
-                                            </div>
-                                        </section>
-                                        <section class="strap">
-                                            <div class="box">
-                                                <div class="passenger">
-                                                    <small>Formules</small>
-                                                    <strong><?php echo $nom_package; ?>             <?php echo $nom_type_formule; ?></strong>
-
-                                                </div>
-                                                <div class="date">
-                                                    <small>Date</small>
-
-
-                                                    <strong>
-                                                        <?php
-                                                        // Set the locale to French
-                                                        setlocale(LC_TIME, 'fr_FR.UTF-8');
-
-                                                        // Assuming $formule_data['heure_depart'] is a timestamp or a string that can be converted to a timestamp
-                                                        $timestamp = strtotime($formule_data['heure_arrivee']);
-
-                                                        // Format the date in French
-                                                        echo strftime('%a %d/%m/%Y', $timestamp);
-                                                        ?>
-                                                    </strong>
-
-                                                </div>
-                                            </div>
-                                            <?php if (!empty($airline_data['logo'])): ?>
-                                                <img src="<?php echo $airline_data['logo']; ?>" alt="Logo de la compagnie aérienne"
-                                                    style=" position: absolute;
-    bottom: 20px;
-    right: 10px;" width="70px">
-                                            <?php endif; ?>
-
-
-                                        </section>
-                                    </div>
-
-
-                                </div>
-
-
-                            </div>
                             <?php
-                        } else {
-                            echo "<p>Les détails des vols ne sont pas disponibles pour cette formule.</p>";
-                        }
-                        ?>
+                            // Assuming $conn is your existing database connection
+                            $sql_vols = "SELECT * FROM vols WHERE formule_id = ?";
+                            $stmt_vols = mysqli_prepare($conn, $sql_vols);
+                            mysqli_stmt_bind_param($stmt_vols, "i", $formule_data['id']);
+                            mysqli_stmt_execute($stmt_vols);
+                            $result_vols = mysqli_stmt_get_result($stmt_vols);
+
+                            if (mysqli_num_rows($result_vols) > 0) {
+                                while ($vols = mysqli_fetch_assoc($result_vols)) {
+                                    ?>
+                                    <div class="col-md-6 mb-4">
+
+
+                                        <div class="boarding-pass">
+                                            <header>
+                                                <div class="desc">
+                                                    <small>Heure départ</small>
+
+                                                    <strong>
+                                                        <?php
+                                                        $time = strtotime($vols['heure_depart']); // Convert to timestamp
+                                                        echo date('H:i', $time); // Format into hours and minutes
+                                                        ?>
+                                                    </strong>
+                                                </div>
+
+
+                                                <div class="flight">
+
+
+                                                    <small>Heure Arrivée</small>
+                                                    <strong>
+                                                        <?php
+                                                        $time = strtotime($vols['heure_arrivee']); // Convert to timestamp
+                                                        echo date('H:i', $time); // Format into hours and minutes
+                                                        ?>
+                                                    </strong>
+                                                </div>
+                                            </header>
+                                            <section class="cities">
+
+                                                <?php
+                                                // Fetch and display package name
+                                                $villed_id = $vols['ville_depart_id'];
+                                                $query_villed = "SELECT nom FROM ville_depart WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                $stmt_villed = $conn->prepare($query_villed);
+                                                $stmt_villed->bind_param("i", $villed_id);
+                                                $stmt_villed->execute();
+                                                $result_villed = $stmt_villed->get_result();
+                                                $villed = $result_villed->fetch_assoc();
+                                                ?>
+
+
+
+                                                <div class="city">
+                                                    <small> <?php echo $villed['nom']; ?></small>
+
+
+                                                    <?php
+                                                    // Fetch and display package name
+                                                    $airp_id = $vols['airport_depart_id'];
+                                                    $query_airp = "SELECT abrv FROM airports WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                    $stmt_airp = $conn->prepare($query_airp);
+                                                    $stmt_airp->bind_param("i", $airp_id);
+                                                    $stmt_airp->execute();
+                                                    $result_airp = $stmt_airp->get_result();
+                                                    $airp = $result_airp->fetch_assoc();
+                                                    ?>
+
+
+
+                                                    <strong><?php echo $airp['abrv']; ?></strong>
+                                                </div>
+
+                                                <?php
+                                                // Fetch and display package name
+                                                $villed_id = $vols['ville_destination_id'];
+                                                $query_villed = "SELECT nom FROM ville_depart WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                $stmt_villed = $conn->prepare($query_villed);
+                                                $stmt_villed->bind_param("i", $villed_id);
+                                                $stmt_villed->execute();
+                                                $result_villed = $stmt_villed->get_result();
+                                                $villed = $result_villed->fetch_assoc();
+                                                ?>
+
+
+                                                <div class="city">
+                                                    <small> <?php echo $villed['nom']; ?></small>
+
+                                                    <?php
+                                                    // Fetch and display package name
+                                                    $airp_id = $vols['airport_destination_id'];
+                                                    $query_airp = "SELECT abrv FROM airports WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                    $stmt_airp = $conn->prepare($query_airp);
+                                                    $stmt_airp->bind_param("i", $airp_id);
+                                                    $stmt_airp->execute();
+                                                    $result_airp = $stmt_airp->get_result();
+                                                    $airp = $result_airp->fetch_assoc();
+                                                    ?>
+
+
+                                                    <strong> <?php echo $airp['abrv']; ?></strong>
+                                                </div>
+                                                <svg class="airplane" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                    <path
+                                                        d="M482.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64l-116.6 0L265.2 495.9c-5.7 10-16.3 16.1-27.8 16.1l-56.2 0c-10.6 0-18.3-10.2-15.4-20.4l49-171.6L112 320 68.8 377.6c-3 4-7.8 6.4-12.8 6.4l-42 0c-7.8 0-14-6.3-14-14c0-1.3 .2-2.6 .5-3.9L32 256 .5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-7.8 6.3-14 14-14l42 0c5 0 9.8 2.4 12.8 6.4L112 192l102.9 0-49-171.6C162.9 10.2 170.6 0 181.2 0l56.2 0c11.5 0 22.1 6.2 27.8 16.1L365.7 192l116.6 0z" />
+                                                </svg>
+
+                                            </section>
+
+                                            <section class="strap">
+                                                <div class="box">
+                                                    <div class="passenger">
+                                                        <small>N° Vol</small>
+                                                        <strong> <?php echo $vols['num_vol']; ?></strong>
+                                                    </div>
+                                                    <div class="date">
+                                                        <small>Date</small>
+                                                        <strong>
+                                                            <?php
+                                                            $date = strtotime($vols['heure_depart']); // Convert to timestamp
+                                                            echo date('d/m/Y', $date);
+                                                            ?>
+                                                        </strong>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                                <?php
+                                                // Fetch and display package name
+                                                $comp_id = $vols['compagnie_aerienne_id'];
+                                                $query_comp = "SELECT logo FROM compagnies_aeriennes WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                $stmt_comp = $conn->prepare($query_comp);
+                                                $stmt_comp->bind_param("i", $comp_id);
+                                                $stmt_comp->execute();
+                                                $result_comp = $stmt_comp->get_result();
+                                                $comp = $result_comp->fetch_assoc();
+                                                ?>
+
+
+                                                <img src=" <?php echo $comp['logo']; ?>" alt="Logo de la compagnie aérienne"
+                                                    style=" position: absolute;bottom: 20px;right: 10px;"
+                                                    width="200px">
+
+                                            </section>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <?php
+                                }
+                            } else {
+                                echo "No Vols found for this formula.";
+                            }
+                            ?>
+
+
+                        </div>
+
                     </div>
 
 
 
-                    <div class="tab-pane fade shadow" id="programme" role="tabpanel" aria-labelledby="programme-tab">
+                    <div class="tab-pane fade " id="programme" role="tabpanel" aria-labelledby="programme-tab">
 
 
-                        <p><?php echo $formule_data['description']; ?></p>
+                        <div class="row">
+                            <?php
+                            // Fetch the JSON program IDs from the database
+                            $programIdsJson = $formule_data['programs_id'];  // Assuming the column name is 'programme'
+                    
+                            // Convert JSON string to an array
+                            $programIds = json_decode($programIdsJson, true);
+
+                            // Check if the conversion was successful
+                            if (is_array($programIds)) {
+                                // Query to fetch program details
+                                $sql_programs = "SELECT * FROM programs WHERE id IN (" . implode(',', $programIds) . ")";
+                                $result_programs = mysqli_query($conn, $sql_programs);
+
+                                if (mysqli_num_rows($result_programs) > 0) {
+                                    // Start looping through the programs
+                                    while ($program = mysqli_fetch_assoc($result_programs)) {
+                                        ?>
+
+
+
+                                        <div class="product_card">
+
+                                            <div class="image">
+                                                <img src="<?php echo $program['photo']; ?>" alt="">
+                                            </div>
+                                            <div class="product_info">
+                                                <h2 class="product_name">
+                                                    <?php echo $program['nom']; ?>
+                                                </h2>
+                                                <p class="product_description">
+                                                    <?php echo $program['description']; ?>
+                                                </p>
+
+
+
+                                            </div>
+                                        </div>
+
+
+                                        <?php
+                                    }
+                                } else {
+                                    echo "<p>No programs found.</p>";
+                                }
+                            } else {
+                                echo "<p>Invalid program data.</p>";
+                            }
+                            ?>
+                        </div>
 
                     </div>
 
@@ -2811,25 +2434,7 @@ Boarding Pass
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body row text-center">
-                                <div class="form-group mb-4">
-                                    <label for="departureCity" class="form-label">Ville de départ</label>
-                                    <select id="departureCity" class="form-control">
-                                        <option value="">Toutes les villes</option>
-                                        <?php
-                                        // Fetch the list of active cities from the ville_depart table
-                                        $sql_villes = "SELECT id, nom FROM ville_depart WHERE statut = 'activé'";
-                                        $result_villes = mysqli_query($conn, $sql_villes);
 
-                                        if ($result_villes && mysqli_num_rows($result_villes) > 0) {
-                                            while ($ville = mysqli_fetch_assoc($result_villes)) {
-                                                echo '<option value="' . $ville['nom'] . '">' . $ville['nom'] . '</option>';
-                                            }
-                                        } else {
-                                            echo '<option value="">Aucune ville disponible</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
 
                                 <?php
                                 // Fetch the first formule shown in the first modal to get its type_id and package_id
@@ -2841,13 +2446,12 @@ Boarding Pass
                                     $type_id = $firstFormuleRow['type_id'];
                                     $package_id = $firstFormuleRow['package_id'];
 
-                                    // Fetch other formulas with the same type_id and package_id, excluding the current one
-                                    $sql_autres_formules = "SELECT f.*, vd.nom as ville_depart_nom, tf.nom as type_nom, ca.logo AS airline_logo
+                                    $sql_autres_formules = "SELECT f.*, tf.nom as type_nom
                                     FROM formules f
-                                    INNER JOIN ville_depart vd ON f.ville_depart_id = vd.id 
                                     INNER JOIN type_formule_omra tf ON f.type_id = tf.id
-                                    INNER JOIN compagnies_aeriennes ca ON f.compagnie_aerienne_id = ca.id
                                     WHERE f.type_id = $type_id AND f.package_id = $package_id AND f.id != $formule_id AND f.statut = 'activé'";
+
+
 
                                     $result_autres_formules = mysqli_query($conn, $sql_autres_formules);
 
@@ -2861,14 +2465,25 @@ Boarding Pass
                                                     <div class="card-body justify-content-between ">
                                                         <div>
                                                             <div class="departure-info">
-                                                                <span
-                                                                    class="city-badge badge bg-secondary"><?php echo $row['ville_depart_nom']; ?></span>
+                                                                <?php
+                                                                // Fetch and display package name
+                                                                $package_id = $row['package_id'];
+                                                                $query_package = "SELECT nom FROM omra_packages WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                                $stmt_package = $conn->prepare($query_package);
+                                                                $stmt_package->bind_param("i", $package_id);
+                                                                $stmt_package->execute();
+                                                                $result_package = $stmt_package->get_result();
+                                                                $package = $result_package->fetch_assoc();
+                                                                ?>
+                                                                <span class="city-badge badge bg-secondary">
+                                                                    <?php echo $package['nom'] ?? "Package #" . $package_id; ?>
+                                                                </span>
                                                                 <strong><i class="fas fa-plane-departure"></i> <b class="delete">Aller:</b>
-                                                                    <?php echo date('d M Y', strtotime($row['heure_depart'])); ?></strong>
+                                                                    <?php echo date('d M Y', strtotime($row['date_depart'])); ?></strong>
                                                             </div>
                                                             <div class="arrival-info">
                                                                 <strong><i class="fas fa-plane-arrival"></i> <b class="delete">Retour:</b>
-                                                                    <?php echo date('d M Y', strtotime($row['heure_arrivee'])); ?></strong>
+                                                                    <?php echo date('d M Y', strtotime($row['date_retour'])); ?></strong>
                                                             </div>
                                                         </div>
                                                         <div class="price-info">
@@ -2879,8 +2494,56 @@ Boarding Pass
                                                                 echo $formatted_price . " €";
                                                                 ?>
                                                             </span>
-                                                            <img src="<?php echo $row['airline_logo']; ?>" alt="Airline Logo"
-                                                                class="airline-logo">
+                                                            <?php
+                                                            // Assuming $conn is your database connection
+                                        
+                                                            // Fetch the first compagnie_aerienne_id for the given formule
+                                                            $formule_id = $row['id'];
+
+                                                            // Prepare and execute the query to get the first matching vol's compagnie_aerienne_id
+                                                            $query_vols = "
+    SELECT compagnie_aerienne_id
+    FROM vols
+    WHERE formule_id = ?
+    LIMIT 1
+";
+                                                            $stmt_vols = $conn->prepare($query_vols);
+                                                            $stmt_vols->bind_param("i", $formule_id);
+                                                            $stmt_vols->execute();
+                                                            $result_vols = $stmt_vols->get_result();
+                                                            $vol = $result_vols->fetch_assoc();
+
+                                                            if ($vol) {
+                                                                $compagnie_aerienne_id = $vol['compagnie_aerienne_id'];
+
+                                                                // Query to get the logo from compagnies_aeriennes table
+                                                                $query_logo = "
+        SELECT logo
+        FROM compagnies_aeriennes
+        WHERE id = ?
+    ";
+                                                                $stmt_logo = $conn->prepare($query_logo);
+                                                                $stmt_logo->bind_param("i", $compagnie_aerienne_id);
+                                                                $stmt_logo->execute();
+                                                                $result_logo = $stmt_logo->get_result();
+                                                                $compagnie = $result_logo->fetch_assoc();
+
+                                                                if ($compagnie) {
+                                                                    // Display the logo
+                                                                    $logo_path = htmlspecialchars($compagnie['logo']);
+                                                                    echo '<img src="' . $logo_path . '" alt="Company Logo" class="airline-logo">';
+                                                                } else {
+                                                                    echo 'No logo found for the compagnie_aerienne_id.';
+                                                                }
+                                                            } else {
+                                                                echo 'No compagnie_aerienne_id found for this formule.';
+                                                            }
+
+                                                            // Debugging: Check for SQL errors
+                                                            if ($conn->error) {
+                                                                echo 'SQL Error: ' . $conn->error;
+                                                            }
+                                                            ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3131,7 +2794,7 @@ Boarding Pass
 
 
                         $("#step-2").append(`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     `);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             `);
 
                         // Initialize your variables with the hidden input values on page load
                         var prixQuadruple = parseFloat($('#prixQuadruple').val()) || 0;
@@ -3235,94 +2898,17 @@ Boarding Pass
                                 }
                             }
 
-
-
-                            if (curStepBtn === 'step-3' && isValid) {
-                                // Room Quantities and Prices (using promo prices if available)
-                                var quadrupleRooms = parseInt($('#quadruple').val()) || 0;
-                                var tripleRooms = parseInt($('#triple').val()) || 0;
-                                var doubleRooms = parseInt($('#double').val()) || 0;
-                                var singleRooms = parseInt($('#single').val()) || 0;
-
-                                var prixQuadruple = parseFloat(<?php echo ($prix_quadruple_promo != 0.00 && $prix_quadruple_promo != null) ? $prix_quadruple_promo : $prix_quadruple; ?>) || 0;
-                                var prixTriple = parseFloat(<?php echo ($prix_triple_promo != 0.00 && $prix_triple_promo != null) ? $prix_triple_promo : $prix_triple; ?>) || 0;
-                                var prixDouble = parseFloat(<?php echo ($prix_double_promo != 0.00 && $prix_double_promo != null) ? $prix_double_promo : $prix_double; ?>) || 0;
-                                var prixSingle = parseFloat(<?php echo ($prix_single_promo != 0.00 && $prix_single_promo != null) ? $prix_single_promo : $prix_single; ?>) || 0;
-                                var fraisBebe = parseFloat(<?php echo $prix_bebe; ?>) || 0;
-                                var childDiscount = parseFloat(<?php echo $child_discount; ?>) || 0;
-
-                                // Baby Fee Calculation
-                                var babiesCount = parseInt($('#babies').val(), 10) || 0;
-                                var totalFraisBebe = fraisBebe * babiesCount;
-
-                                // Extra Costs Calculation
-                                var totalExtras = 0;
-                                $('.extra-input').each(function () {
-                                    var quantity = parseInt($(this).val(), 10) || 0;
-                                    var price = parseFloat($(this).data('price'));
-
-                                    if (quantity > 0) {
-                                        totalExtras += quantity * price;
-                                        recapExtras += '- ' + $(this).prev('label').text() + ' - ' + price.toFixed(2) + ' € x ' + quantity + '<br>';
-                                    }
-                                });
-
-                                // Child Discount Calculation
-                                var childrenCount = parseInt($('#children').val(), 10) || 0;
-                                var discountEnfants = childrenCount * childDiscount;
-
-                                // Calculate Total Reservation
-                                calculateTotalReservation(); // Now calls the external function
-
-                                // Build Reservation Summary
-                                var recapReservation = '<br>';
-                                recapReservation += '<strong>Chambres :</strong><br>';
-                                if (quadrupleRooms > 0) {
-                                    recapReservation += '- Chambre Quadruple - ' + prixQuadruple.toFixed(2) + ' € x ' + quadrupleRooms + '<br>';
-                                }
-                                if (tripleRooms > 0) {
-                                    recapReservation += '- Chambre Triple - ' + prixTriple.toFixed(2) + ' € x ' + tripleRooms + '<br>';
-                                }
-                                if (doubleRooms > 0) {
-                                    recapReservation += '- Chambre Double - ' + prixDouble.toFixed(2) + ' € x ' + doubleRooms + '<br>';
-                                }
-                                if (singleRooms > 0) {
-                                    recapReservation += '- Chambre Simple - ' + prixSingle.toFixed(2) + ' € x ' + singleRooms + '<br>';
-                                }
-
-                                if (recapExtras !== '') {
-                                    recapReservation += '<strong>Extras :</strong><br>';
-                                    recapReservation += recapExtras;
-                                    recapReservation += '<br>';
-                                }
-
-                                if (babiesCount > 0) {
-                                    recapReservation += '<strong>Frais bébé :</strong><br>';
-                                    recapReservation += '- Frais bébé - ' + fraisBebe.toFixed(2) + ' € x ' + babiesCount + '<br>';
-                                }
-
-                                recapReservation += '<strong>Coûts :</strong><br>';
-                                // recapReservation += '- Total chambres : ' + totalChambres.toFixed(2) + ' €<br>';
-                                recapReservation += '- Total extras : ' + totalExtras.toFixed(2) + ' €<br>';
-                                recapReservation += '- Total frais bébé : ' + totalFraisBebe.toFixed(2) + ' €<br>';
-                                recapReservation += '- Réduction enfants : -' + discountEnfants.toFixed(2) + ' €<br><br>';
-                                recapReservation += '<strong>Total à payer :</strong><br>';
-                                recapReservation += '<h3>' + totalReservation.toFixed(2) + ' €</h3>';
-
-
-                                // Display and Proceed
-                                $('#total-reservation').html(recapReservation);
-                                nextStepWizard.removeAttr('disabled').trigger('click');
-                            }
+                            var totalExtras = 0;
+                            var recapExtras = '';
 
                             function calculateTotalReservation() {
-                                // Room Quantities and Prices 
-                                // Directly get the values from the inputs, instead of using local variables
+                                // Room Quantities and Prices
                                 var quadrupleRooms = parseInt($('#quadruple').val()) || 0;
                                 var tripleRooms = parseInt($('#triple').val()) || 0;
                                 var doubleRooms = parseInt($('#double').val()) || 0;
                                 var singleRooms = parseInt($('#single').val()) || 0;
                                 var babiesCount = parseInt($('#babies').val()) || 0;
+                                var childrenCount = parseInt($('#children').val(), 10) || 0;
 
                                 var prixQuadruple = parseFloat(<?php echo ($prix_quadruple_promo != 0.00 && $prix_quadruple_promo != null) ? $prix_quadruple_promo : $prix_quadruple; ?>) || 0;
                                 var prixTriple = parseFloat(<?php echo ($prix_triple_promo != 0.00 && $prix_triple_promo != null) ? $prix_triple_promo : $prix_triple; ?>) || 0;
@@ -3330,19 +2916,17 @@ Boarding Pass
                                 var prixSingle = parseFloat(<?php echo ($prix_single_promo != 0.00 && $prix_single_promo != null) ? $prix_single_promo : $prix_single; ?>) || 0;
                                 var fraisBebe = parseFloat(<?php echo $prix_bebe; ?>) || 0;
                                 var childDiscount = parseFloat(<?php echo $child_discount; ?>) || 0;
+
                                 // Baby Fee Calculation
-
                                 var totalFraisBebe = fraisBebe * babiesCount;
-                                console.log(totalFraisBebe);
-
-
 
                                 // Child Discount Calculation
-                                var childrenCount = parseInt($('#children').val(), 10) || 0;
                                 var discountEnfants = childrenCount * childDiscount;
 
-                                // Total Costs
+                                // Total Room Costs
                                 var totalChambres = (quadrupleRooms * prixQuadruple) + (tripleRooms * prixTriple) + (doubleRooms * prixDouble) + (singleRooms * prixSingle);
+
+                                // Total Reservation Calculation
                                 totalReservation = totalChambres + totalFraisBebe + totalExtras - discountEnfants;
 
                                 // Build Reservation Summary
@@ -3375,16 +2959,37 @@ Boarding Pass
                                 }
 
                                 recapReservation += '<strong>Coûts :</strong><br>';
+                                recapReservation += '- Total des chambres : ' + totalChambres.toFixed(2) + ' €<br>';
                                 recapReservation += '- Total extras : ' + totalExtras.toFixed(2) + ' €<br>';
                                 recapReservation += '- Total frais bébé : ' + totalFraisBebe.toFixed(2) + ' €<br>';
                                 recapReservation += '- Réduction enfants : -' + discountEnfants.toFixed(2) + ' €<br><br>';
                                 recapReservation += '<strong>Total à payer :</strong><br>';
                                 recapReservation += '<h3>' + totalReservation.toFixed(2) + ' €</h3>';
 
-
                                 // Display the updated summary
                                 $('#total-reservation').html(recapReservation);
                             }
+
+                            if (curStepBtn === 'step-3' && isValid) {
+                                // Room Quantities and Prices (using promo prices if available)
+                                $('.extra-input').each(function () {
+                                    var quantity = parseInt($(this).val(), 10) || 0;
+                                    var price = parseFloat($(this).data('price'));
+
+                                    if (quantity > 0) {
+                                        totalExtras += quantity * price;
+                                        recapExtras += '- ' + $(this).prev('label').text() + ' - ' + price.toFixed(2) + ' € x ' + quantity + '<br>';
+                                    }
+                                });
+
+                                // Calculate Total Reservation
+                                calculateTotalReservation();
+
+                                // Display and Proceed
+                                nextStepWizard.removeAttr('disabled').trigger('click');
+                            }
+
+
 
 
                             if (curStepBtn === 'step-4' && isValid) {
@@ -3415,7 +3020,6 @@ Boarding Pass
                                     packageName: "<?php echo $nom_package; ?>",
                                     formulaName: "<?php echo $nom_type_formule; ?>",
                                     departureDate: "<?php echo $formattedDate; ?>",
-                                    departureCity: "<?php echo $nom_ville_depart; ?>"
                                 };
 
 
