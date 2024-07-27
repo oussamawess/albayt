@@ -80,7 +80,7 @@
             margin-bottom: 0.5em;
         }
 
-        .card__thumbnailnew {
+        /* .card__thumbnailnew {
             position: relative;
             overflow: hidden;
             display: flex;
@@ -88,7 +88,7 @@
             align-items: center;
             width: 100%;
             height: 100%;
-        }
+        } */
 
         .card__thumbnailnew::before {
             content: "";
@@ -190,7 +190,7 @@
             color: #000 !important;
         }
 
-        }
+        
 
         @media (min-width: 1200px) {
             .container {
@@ -343,19 +343,16 @@
                     $package_id = $row_package['id'];
                     ?>
 
-                    <div class="card cardnew col-md-3">
+                    <div class="card cardnew col-md-3" style="width: 320px; height: 360px;">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#formuleModal<?php echo $package_id; ?>">
-                            <figure class="card__thumbnailnew">
-                                <img src="<?php echo $row_package['photo']; ?>" class="card-img-top"
+                            <figure class="card__thumbnailnew" >
+                                <img src="<?php echo $row_package['photo']; ?>" 
+                                style="object-fit:cover; width: 320px; height: 360px; border-radius:2px;" class="card-img-top"
                                     alt="<?php echo $row_package['nom']; ?>">
                                 <span class="card__titlenew"><?php echo $row_package['nom']; ?> <br>
                                     <p style="font-size:15px; margin-top:10px">En savoir plus</p>
                                 </span>
-
                             </figure>
-
-
-
                         </a>
                     </div>
 
