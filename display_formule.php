@@ -61,7 +61,9 @@ $sql_vols = "
         vd_depart.nom AS ville_depart_nom,
         vd_destination.nom AS ville_destination_nom,
         ad_depart.nom AS airport_depart_nom,
-        ad_destination.nom AS airport_destination_nom
+        ad_depart.abrv AS airport_depart_abrv,
+        ad_destination.nom AS airport_destination_nom,
+        ad_destination.abrv AS airport_destination_abrv
     FROM 
         vols v
     LEFT JOIN 
@@ -257,10 +259,10 @@ $result_vols = mysqli_query($conn, $sql_vols);
                             <td><?php echo $row['num_vol']; ?></td>
                             <td><?php echo $row['compagnie_aerienne']; ?></td>
                             <td><?php echo $row['ville_depart_nom']; ?></td>
-                            <td><?php echo $row['airport_depart_nom']; ?></td>
+                            <td><?php echo $row['airport_depart_nom']." - ".$row['airport_depart_abrv']; ?></td>
                             <td><?php echo $row['heure_depart']; ?></td>
                             <td><?php echo $row['ville_destination_nom']; ?></td>
-                            <td><?php echo $row['airport_destination_nom']; ?></td>
+                            <td><?php echo $row['airport_destination_nom']." - ".$row['airport_destination_abrv']; ?></td>
                             <td><?php echo $row['heure_arrivee']; ?></td>
                         </tr>
                     <?php endwhile; ?>

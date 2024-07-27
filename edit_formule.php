@@ -489,7 +489,7 @@
                                         $result_airports_depart = mysqli_query($conn, $sql_airports_depart);
                                         while ($row_airport_depart = mysqli_fetch_assoc($result_airports_depart)) {
                                             $selected = ($row_airport_depart['id'] == $vol['airport_depart_id']) ? 'selected' : '';
-                                            echo "<option value='" . $row_airport_depart['id'] . "' $selected>" . $row_airport_depart['abrv'] . "</option>";
+                                            echo "<option value='" . $row_airport_depart['id'] . "' $selected>". $row_airport_depart['nom']. " - " . $row_airport_depart['abrv'] . "</option>";
                                         }
                                     ?>
                                     </select> 
@@ -522,7 +522,7 @@
                                         $result_airports_destination = mysqli_query($conn, $sql_airports_destination);
                                         while ($row_airport_destination = mysqli_fetch_assoc($result_airports_destination)) {
                                             $selected = ($row_airport_destination['id'] == $vol['airport_destination_id']) ? 'selected' : '';
-                                            echo "<option value='" . $row_airport_destination['id'] . "' $selected>" . $row_airport_destination['abrv'] . "</option>";
+                                            echo "<option value='" . $row_airport_destination['id'] . "' $selected>" . $row_airport_destination['nom']. " - " . $row_airport_destination['abrv'] . "</option>";
                                         }
                                     ?>
                                     </select> 
@@ -601,7 +601,7 @@
                     $sql_airports_depart = "SELECT * FROM airports";
                     $result_airports_depart = mysqli_query($conn, $sql_airports_depart);
                     while ($row_airport_depart = mysqli_fetch_assoc($result_airports_depart)) {
-                        echo "<option value='" . $row_airport_depart['id'] . "'>" . $row_airport_depart['abrv'] . "</option>";
+                        echo "<option value='" . $row_airport_depart['id'] . "'>" . $row_airport_depart['nom']. " - " . $row_airport_depart['abrv'] . "</option>";
                     }
                     ?>
                 </select>
@@ -633,7 +633,7 @@
                     $sql_airports_destination = "SELECT * FROM airports";
                     $result_airports_destination = mysqli_query($conn, $sql_airports_destination);
                     while ($row_airport_destination = mysqli_fetch_assoc($result_airports_destination)) {
-                        echo "<option value='" . $row_airport_destination['id'] . "'>" . $row_airport_destination['abrv'] . "</option>";
+                        echo "<option value='" . $row_airport_destination['id'] . "'>" . $row_airport_destination['nom']. " - " . $row_airport_destination['abrv'] . "</option>";
                     }
                     ?>
                 </select>

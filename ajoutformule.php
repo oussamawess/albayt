@@ -395,7 +395,7 @@
                     $result_airports_depart = mysqli_query($conn, $sql_airports_depart);
                     if (mysqli_num_rows($result_airports_depart) > 0) {
                       while ($row_airport_depart = mysqli_fetch_assoc($result_airports_depart)) {
-                        echo "<option value='" . $row_airport_depart['id'] . "'>" . $row_airport_depart['abrv'] . "</option>";
+                        echo "<option value='" . $row_airport_depart['id'] . "'>". $row_airport_depart['nom'] . " - " . $row_airport_depart['abrv'] . "</option>";
                       }
                     } else {
                       echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
@@ -439,7 +439,7 @@
                     $result_airports_destination = mysqli_query($conn, $sql_airports_depart);
                     if (mysqli_num_rows($result_airports_destination) > 0) {
                       while ($row_airport_destination = mysqli_fetch_assoc($result_airports_destination)) {
-                        echo "<option value='" . $row_airport_destination['id'] . "'>" . $row_airport_destination['abrv'] . "</option>";
+                        echo "<option value='" . $row_airport_destination['id'] . "'>". $row_airport_destination['nom'] . " - " . $row_airport_destination['abrv'] . "</option>";
                       }
                     } else {
                       echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
@@ -530,7 +530,7 @@
                     $result_airports_depart = mysqli_query($conn, $sql_airports_depart);
                     if (mysqli_num_rows($result_airports_depart) > 0) {
                       while ($row_airport_depart = mysqli_fetch_assoc($result_airports_depart)) {
-                        echo "<option value='" . $row_airport_depart['id'] . "'>" . $row_airport_depart['abrv'] . "</option>";
+                        echo "<option value='" . $row_airport_depart['id'] . "'>" . $row_airport_depart['nom'] . " - " . $row_airport_depart['abrv'] . "</option>";
                       }
                     } else {
                       echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
@@ -574,7 +574,7 @@
                     $result_airports_destination = mysqli_query($conn, $sql_airports_depart);
                     if (mysqli_num_rows($result_airports_destination) > 0) {
                       while ($row_airport_destination = mysqli_fetch_assoc($result_airports_destination)) {
-                        echo "<option value='" . $row_airport_destination['id'] . "'>" . $row_airport_destination['abrv'] . "</option>";
+                        echo "<option value='" . $row_airport_destination['id'] . "'>" . $row_airport_destination['nom'] . " - " . $row_airport_destination['abrv'] . "</option>";
                       }
                     } else {
                       echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
