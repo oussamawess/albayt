@@ -31,7 +31,6 @@ $message .= "\nTotal de la réservation : " . $data['totalReservation'] . "\n";
 $message .= "Nom du package : " . $data['packageName'] . "\n";
 $message .= "Nom de la formule : " . $data['formulaName'] . "\n";
 $message .= "Date de départ : " . $data['departureDate'] . "\n";
-$message .= "Ville de départ : " . $data['departureCity'] . "\n";
 
 // Entêtes de l'email
 $headers = "From: amin@digietab.tn\r\n";

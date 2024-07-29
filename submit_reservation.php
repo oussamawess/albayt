@@ -42,8 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         package_name,
         formula_name,
         departure_date,
-        departure_city
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
 
@@ -65,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $package_name = $formData['packageName'];
         $formula_name = $formData['formulaName'];
         $departure_date = $formData['departureDate'];
-        $departure_city = $formData['departureCity'];
 
         // Binder les paramètres à la requête
         $stmt->bind_param(
@@ -86,7 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $package_name,
             $formula_name,
             $departure_date,
-            $departure_city
         );
 
         // Exécuter la requête

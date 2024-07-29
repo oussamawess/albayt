@@ -731,6 +731,11 @@
                                         <option value="Pension Complète" <?php echo ($hebergement['type_pension'] == 'Pension Complète') ? 'selected' : ''; ?>>Pension Complète</option>
                                         <option value="Demi-pension" <?php echo ($hebergement['type_pension'] == 'Demi-pension') ? 'selected' : ''; ?>>Demi-pension</option>
                                         <option value="Sans pension" <?php echo ($hebergement['type_pension'] == 'Sans pension') ? 'selected' : ''; ?>>Sans pension</option>
+                                        <option value="Petit déjeuner" <?php echo ($hebergement['type_pension'] == 'Petit déjeuner') ? 'selected' : ''; ?>>Petit déjeuner</option>
+                                        <option value="Sahour" <?php echo ($hebergement['type_pension'] == 'Sahour') ? 'selected' : ''; ?>>Sahour</option>
+                                        <option value="Iftar" <?php echo ($hebergement['type_pension'] == 'Iftar') ? 'selected' : ''; ?>>Iftar</option>
+                                        <option value="Sahour et Iftar" <?php echo ($hebergement['type_pension'] == 'Sahour et Iftar') ? 'selected' : ''; ?>>Sahour et Iftar</option>
+                                        <option value="Petit déjeuner ensuite Iftar" <?php echo ($hebergement['type_pension'] == 'Petit déjeuner ensuite Iftar') ? 'selected' : ''; ?>>Petit déjeuner ensuite Iftar</option>
                                     </select>
                                 </div>
                                 <!-- wess -->
@@ -796,6 +801,11 @@
                     <option value="Pension Complète">Pension Complète</option>
                     <option value="Demi-pension">Demi-pension</option>
                     <option value="Sans pension">Sans pension</option>
+                    <option value="Petit déjeuner">Petit déjeuner</option>
+                    <option value="Sahour">Sahour</option>
+                    <option value="Iftar">Iftar</option>
+                    <option value="Sahour et Iftar">Sahour et Iftar</option>
+                    <option value="Petit déjeuner ensuite Iftar">Petit déjeuner ensuite Iftar</option>
                 </select>
             </div>
                 <div class="input-group">

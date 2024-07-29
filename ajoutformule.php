@@ -687,6 +687,12 @@
                     <option value="Pension Complète">Pension Complète</option>
                     <option value="Demi-pension">Demi-pension</option>
                     <option value="Sans pension">Sans pension</option>
+                    <option value="Petit déjeuner">Petit déjeuner</option>
+                    <option value="Sahour">Sahour</option>
+                    <option value="Iftar">Iftar</option>
+                    <option value="Sahour et Iftar">Sahour et Iftar</option>
+                    <option value="Petit déjeuner ensuite Iftar">Petit déjeuner ensuite Iftar</option>
+                    
                   </select>
                 </div>
                 <!-- wess -->
@@ -750,6 +756,11 @@
                 <option value="Pension Complète">Pension Complète</option>
                 <option value="Demi-pension">Demi-pension</option>
                 <option value="Sans pension">Sans pension</option>
+                <option value="Petit déjeuner">Petit déjeuner</option>
+                <option value="Sahour">Sahour</option>
+                <option value="Iftar">Iftar</option>
+                <option value="Sahour et Iftar">Sahour et Iftar</option>
+                <option value="Petit déjeuner ensuite Iftar">Petit déjeuner ensuite Iftar</option>
             </select>
           </div>  
           <!-- wess -->

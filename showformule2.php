@@ -9,10 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
-
-
 
     <style>
         /* General Styles */
@@ -773,6 +769,7 @@ Boarding Pass
                         transform: translate(-50%, -50%);
                         animation: move 4s infinite;
                         color: #F7F2E8;
+                        display: none
                     }
 
                     @keyframes move {
@@ -1520,88 +1517,6 @@ Boarding Pass
             color: #292828;
             margin-top: 5px;
         }
-
-        .row>* {
-
-            padding-right: 0px !important;
-            padding-left: 0px !important;
-        }
-
-        .col-md-6.mb-4 {
-            padding-right: 1em !important;
-        }
-
-        .col-md-3 {
-            padding-right: 1em !important;
-            padding-left: 1em !important;
-        }
-
-
-
-
-        @media (min-width: 768px) {
-            div#programme {
-                margin-left: 8em;
-                /* margin-right: 5em; */
-            }
-        }
-
-        .product_card {
-            width: 280px;
-            height: 350px;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            margin: 20px;
-            transition: 0.3s;
-            border: 2px solid rgb(236, 236, 236);
-            position: relative;
-        }
-
-        .btn-cnfrm{
-            background-color: #2fc681;
-            color: white;
-            padding: 8px 20px;
-            border: 0px;
-            border-radius: 5px;
-        }
-
-        @media only screen and (max-width: 600px) {
-            .boarding-pass {
-                & .cities {
-                    .airplane {
-                        position: absolute;
-                        width: 61px;
-                        height: 19px;
-                        left: 43%;
-                        transform: translate(-50%, -50%);
-                        animation: move 4s infinite;
-                        color: #F7F2E8;
-                        top: 62% !important;
-                        /* display: none; */
-                    }
-                }
-            }
-
-            .city {
-                margin-right: 1em !important;
-            }
-
-            .tab-content {
-                background-color: white;
-                padding: 15px !important;
-                border-radius: 10px;
-            }
-        }
-
-        .product_info {
-            margin-top: 1em;
-        }
-
-        .product_info {
-            margin-left: 1em;
-        }
     </style>
 </head>
 
@@ -1669,11 +1584,7 @@ Boarding Pass
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-euro"></i> <span class="label">à partir de:</span>
-                            <?php
-                            $price = $formule_data['prix_chambre_quadruple'];
-                            $formatted_price = number_format($price, 0, ',', ' '); // Format price without decimals
-                            echo $formatted_price . " €";
-                            ?>
+                            <?php echo $formule_data['prix_chambre_quadruple']; ?> €
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-plane-departure"></i> <span class="label">Aller:</span>
@@ -1709,7 +1620,6 @@ Boarding Pass
 
             <div class="container details-section" style="margin-top:2em">
 
-
                 <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="formule-tab" data-bs-toggle="tab" data-bs-target="#formule"
@@ -1723,7 +1633,7 @@ Boarding Pass
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="vols-tab" data-bs-toggle="tab" data-bs-target="#vols" type="button"
-                            role="tab" aria-controls="vols" aria-selected="false"><b>Vols</b></button>
+                            role="tab" aria-controls="vols" aria-selected="false"><b>Vols CONFIRMÉ</b></button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="programme-tab" data-bs-toggle="tab" data-bs-target="#programme"
@@ -1732,7 +1642,6 @@ Boarding Pass
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-
                     <div class="tab-pane fade show active shadow" id="formule" role="tabpanel" aria-labelledby="formule-tab">
                         <b>Vols </b><br>
                         <p>Compagnies aériennes prestigieuses : Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.
@@ -2059,126 +1968,179 @@ Boarding Pass
                     </div>
 
 
-                    <!-- start the vols table -->
                     <div class="tab-pane fade" id="vols" role="tabpanel" aria-labelledby="vols-tab">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                    <?php
-    // Fetch the logo once based on the first record in vols
-    $sql_logo = "SELECT c.logo 
-                 FROM vols v 
-                 JOIN compagnies_aeriennes c ON v.compagnie_aerienne_id = c.id 
-                 WHERE v.formule_id = ? 
-                 LIMIT 1";
-    $stmt_logo = mysqli_prepare($conn, $sql_logo);
-    mysqli_stmt_bind_param($stmt_logo, "i", $formule_data['id']);
-    mysqli_stmt_execute($stmt_logo);
-    $result_logo = mysqli_stmt_get_result($stmt_logo);
-    $comp_logo = mysqli_fetch_assoc($result_logo);
-    ?>
-    <!-- <div class="d-flex justify-content-between align-items-center mb-3"> -->
-        <img src="<?php echo $comp_logo['logo']; ?>" alt="Logo de la compagnie aérienne" 
-        style="width: 100px; margin-left: auto; margin-right: 0;">
-        <button class="btn-cnfrm" style="margin-left: 15px;" disabled>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
-  <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599"/>
-</svg>&nbsp;&nbsp;<b>CONFIRMÉ</b></button>
-        
-    <!-- </div> -->
+
+
+
+
+                        <div class="row">
+
+                            <?php
+                            // Assuming $conn is your existing database connection
+                            $sql_vols = "SELECT * FROM vols WHERE formule_id = ?";
+                            $stmt_vols = mysqli_prepare($conn, $sql_vols);
+                            mysqli_stmt_bind_param($stmt_vols, "i", $formule_data['id']);
+                            mysqli_stmt_execute($stmt_vols);
+                            $result_vols = mysqli_stmt_get_result($stmt_vols);
+
+                            if (mysqli_num_rows($result_vols) > 0) {
+                                while ($vols = mysqli_fetch_assoc($result_vols)) {
+                                    ?>
+                                    <div class="col-md-6 mb-4">
+
+
+                                        <div class="boarding-pass">
+                                            <header>
+                                                <div class="desc">
+                                                    <small>Heure départ</small>
+
+                                                    <strong>
+                                                        <?php
+                                                        $time = strtotime($vols['heure_depart']); // Convert to timestamp
+                                                        echo date('H:i', $time); // Format into hours and minutes
+                                                        ?>
+                                                    </strong>
+                                                </div>
+
+
+                                                <div class="flight">
+
+
+                                                    <small>Heure Arrivée</small>
+                                                    <strong>
+                                                        <?php
+                                                        $time = strtotime($vols['heure_arrivee']); // Convert to timestamp
+                                                        echo date('H:i', $time); // Format into hours and minutes
+                                                        ?>
+                                                    </strong>
+                                                </div>
+                                            </header>
+                                            <section class="cities">
+
+                                                <?php
+                                                // Fetch and display package name
+                                                $villed_id = $vols['ville_depart_id'];
+                                                $query_villed = "SELECT nom FROM ville_depart WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                $stmt_villed = $conn->prepare($query_villed);
+                                                $stmt_villed->bind_param("i", $villed_id);
+                                                $stmt_villed->execute();
+                                                $result_villed = $stmt_villed->get_result();
+                                                $villed = $result_villed->fetch_assoc();
+                                                ?>
+
+
+
+                                                <div class="city">
+                                                    <small> <?php echo $villed['nom']; ?></small>
+
+
+                                                    <?php
+                                                    // Fetch and display package name
+                                                    $airp_id = $vols['airport_depart_id'];
+                                                    $query_airp = "SELECT abrv FROM airports WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                    $stmt_airp = $conn->prepare($query_airp);
+                                                    $stmt_airp->bind_param("i", $airp_id);
+                                                    $stmt_airp->execute();
+                                                    $result_airp = $stmt_airp->get_result();
+                                                    $airp = $result_airp->fetch_assoc();
+                                                    ?>
+
+
+
+                                                    <strong><?php echo $airp['abrv']; ?></strong>
+                                                </div>
+
+                                                <?php
+                                                // Fetch and display package name
+                                                $villed_id = $vols['ville_destination_id'];
+                                                $query_villed = "SELECT nom FROM ville_depart WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                $stmt_villed = $conn->prepare($query_villed);
+                                                $stmt_villed->bind_param("i", $villed_id);
+                                                $stmt_villed->execute();
+                                                $result_villed = $stmt_villed->get_result();
+                                                $villed = $result_villed->fetch_assoc();
+                                                ?>
+
+
+                                                <div class="city">
+                                                    <small> <?php echo $villed['nom']; ?></small>
+
+                                                    <?php
+                                                    // Fetch and display package name
+                                                    $airp_id = $vols['airport_destination_id'];
+                                                    $query_airp = "SELECT abrv FROM airports WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                    $stmt_airp = $conn->prepare($query_airp);
+                                                    $stmt_airp->bind_param("i", $airp_id);
+                                                    $stmt_airp->execute();
+                                                    $result_airp = $stmt_airp->get_result();
+                                                    $airp = $result_airp->fetch_assoc();
+                                                    ?>
+
+
+                                                    <strong> <?php echo $airp['abrv']; ?></strong>
+                                                </div>
+                                                <svg class="airplane" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                    <path
+                                                        d="M482.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64l-116.6 0L265.2 495.9c-5.7 10-16.3 16.1-27.8 16.1l-56.2 0c-10.6 0-18.3-10.2-15.4-20.4l49-171.6L112 320 68.8 377.6c-3 4-7.8 6.4-12.8 6.4l-42 0c-7.8 0-14-6.3-14-14c0-1.3 .2-2.6 .5-3.9L32 256 .5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-7.8 6.3-14 14-14l42 0c5 0 9.8 2.4 12.8 6.4L112 192l102.9 0-49-171.6C162.9 10.2 170.6 0 181.2 0l56.2 0c11.5 0 22.1 6.2 27.8 16.1L365.7 192l116.6 0z" />
+                                                </svg>
+
+                                            </section>
+
+                                            <section class="strap">
+                                                <div class="box">
+                                                    <div class="passenger">
+                                                        <small>N° Vol</small>
+                                                        <strong> <?php echo $vols['num_vol']; ?></strong>
+                                                    </div>
+                                                    <div class="date">
+                                                        <small>Date</small>
+                                                        <strong>
+                                                            <?php
+                                                            $date = strtotime($vols['heure_depart']); // Convert to timestamp
+                                                            echo date('d/m/Y', $date);
+                                                            ?>
+                                                        </strong>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                                <?php
+                                                // Fetch and display package name
+                                                $comp_id = $vols['compagnie_aerienne_id'];
+                                                $query_comp = "SELECT logo FROM compagnies_aeriennes WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                $stmt_comp = $conn->prepare($query_comp);
+                                                $stmt_comp->bind_param("i", $comp_id);
+                                                $stmt_comp->execute();
+                                                $result_comp = $stmt_comp->get_result();
+                                                $comp = $result_comp->fetch_assoc();
+                                                ?>
+
+
+                                                <img src=" <?php echo $comp['logo']; ?>" alt="Logo de la compagnie aérienne"
+                                                    style=" position: absolute;bottom: 20px;right: 10px;height: 60px;width: 60px;"
+                                                    width="70px">
+
+                                            </section>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <?php
+                                }
+                            } else {
+                                echo "No Vols found for this formula.";
+                            }
+                            ?>
+
+
+                        </div>
+
                     </div>
-
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>N° Vol</th>
-                    <th>From</th>
-                    <th>Airport</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>To</th>
-                    <th>Airport</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                // Assuming $conn is your existing database connection
-                $sql_vols = "SELECT * FROM vols WHERE formule_id = ?";
-                $stmt_vols = mysqli_prepare($conn, $sql_vols);
-                mysqli_stmt_bind_param($stmt_vols, "i", $formule_data['id']);
-                mysqli_stmt_execute($stmt_vols);
-                $result_vols = mysqli_stmt_get_result($stmt_vols);
-
-                if (mysqli_num_rows($result_vols) > 0) {
-                    while ($vols = mysqli_fetch_assoc($result_vols)) {
-                        // Fetch departure city
-                        $villed_id = $vols['ville_depart_id'];
-                        $query_villed = "SELECT nom FROM ville_depart WHERE id = ?";
-                        $stmt_villed = $conn->prepare($query_villed);
-                        $stmt_villed->bind_param("i", $villed_id);
-                        $stmt_villed->execute();
-                        $result_villed = $stmt_villed->get_result();
-                        $villed = $result_villed->fetch_assoc();
-
-                        // Fetch departure airport
-                        $airp_id = $vols['airport_depart_id'];
-                        $query_airp = "SELECT abrv FROM airports WHERE id = ?";
-                        $stmt_airp = $conn->prepare($query_airp);
-                        $stmt_airp->bind_param("i", $airp_id);
-                        $stmt_airp->execute();
-                        $result_airp = $stmt_airp->get_result();
-                        $airp_depart = $result_airp->fetch_assoc();
-
-                        // Fetch destination city
-                        $villed_dest_id = $vols['ville_destination_id'];
-                        $query_villed_dest = "SELECT nom FROM ville_depart WHERE id = ?";
-                        $stmt_villed_dest = $conn->prepare($query_villed_dest);
-                        $stmt_villed_dest->bind_param("i", $villed_dest_id);
-                        $stmt_villed_dest->execute();
-                        $result_villed_dest = $stmt_villed_dest->get_result();
-                        $villed_dest = $result_villed_dest->fetch_assoc();
-
-                        // Fetch destination airport
-                        $airp_dest_id = $vols['airport_destination_id'];
-                        $query_airp_dest = "SELECT abrv FROM airports WHERE id = ?";
-                        $stmt_airp_dest = $conn->prepare($query_airp_dest);
-                        $stmt_airp_dest->bind_param("i", $airp_dest_id);
-                        $stmt_airp_dest->execute();
-                        $result_airp_dest = $stmt_airp_dest->get_result();
-                        $airp_dest = $result_airp_dest->fetch_assoc();
-
-                        // Convert times and dates
-                        $heure_depart = date('H:i', strtotime($vols['heure_depart']));
-                        $heure_arrivee = date('H:i', strtotime($vols['heure_arrivee']));
-                        $date_depart = date('d/m/Y', strtotime($vols['heure_depart']));
-                        $date_arrivee = date('d/m/Y', strtotime($vols['heure_arrivee']));
-                        ?>
-                        <tr>
-                            <td><?php echo $vols['num_vol']; ?></td>
-                            <td><?php echo $villed['nom']; ?></td>
-                            <td><?php echo $airp_depart['abrv']; ?></td>
-                            <td><?php echo $date_depart; ?></td>
-                            <td><?php echo $heure_depart; ?></td>
-                            <td><?php echo $villed_dest['nom']; ?></td>
-                            <td><?php echo $airp_dest['abrv']; ?></td>
-                            <td><?php echo $date_arrivee; ?></td>
-                            <td><?php echo $heure_arrivee; ?></td>
-                        </tr>
-                        <?php
-                    }
-                } else {
-                    echo "<tr><td colspan='9'>No Vols found for this formula.</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
-    
-</div>
-
-                    <!-- end the vols table -->
-
 
 
 
@@ -2244,19 +2206,10 @@ Boarding Pass
 
             </div>
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stepperModal" 
-                style="display: block; margin-left: auto; margin-right: auto;">
-                        Réserver Maintenant
-            </button>
-
             <div class="container details-section" style="margin-top:2em">
-                
                 <div class="row mb-4">
-                    
                     <div class="col-md-12 text-center">
-                    
-                
-           
+
                         <h1>Tarifs</h1>
                     </div>
                 </div>
@@ -2267,7 +2220,7 @@ Boarding Pass
                     <div class="col-md-3">
                         <div class="card">
 
-                            <div class="card-body text-center" data-toggle="modal" data-target="#stepperModal">
+                            <div class="card-body text-center">
                                 <h6><B>Quadruple</B></h6>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43">
@@ -2313,7 +2266,7 @@ Boarding Pass
                     <div class="col-md-3">
                         <div class="card">
 
-                            <div class="card-body text-center" data-toggle="modal" data-target="#stepperModal">
+                            <div class="card-body text-center">
                                 <h6><B>Triple</B></h6>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43">
@@ -2338,8 +2291,8 @@ Boarding Pass
                                         <?php echo number_format($formule_data['prix_chambre_triple'], 0, ',', ' '); ?>€
                                     </div>
                                     <div class="price">
-                                        <?php echo number_format($formule_data['prix_chambre_triple_promo'], 0, ',', ' '); ?>€
-                                        <span class="badge bg-danger">Promo</span>
+                                        <?php echo number_format($formule_data['prix_chambre_triple_promo'], 0, ',', ' '); ?>€ <span
+                                            class="badge bg-danger">Promo</span>
                                     </div>
                                 <?php else: ?>
                                     <div class="price">
@@ -2353,7 +2306,7 @@ Boarding Pass
                     <div class="col-md-3">
                         <div class="card">
 
-                            <div class="card-body text-center" data-toggle="modal" data-target="#stepperModal">
+                            <div class="card-body text-center">
                                 <h6><B>Double</B></h6>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43">
@@ -2372,8 +2325,8 @@ Boarding Pass
                                         <?php echo number_format($formule_data['prix_chambre_double'], 0, ',', ' '); ?>€
                                     </div>
                                     <div class="price">
-                                        <?php echo number_format($formule_data['prix_chambre_double_promo'], 0, ',', ' '); ?>€
-                                        <span class="badge bg-danger">Promo</span>
+                                        <?php echo number_format($formule_data['prix_chambre_double_promo'], 0, ',', ' '); ?>€ <span
+                                            class="badge bg-danger">Promo</span>
                                     </div>
                                 <?php else: ?>
                                     <div class="price">
@@ -2389,7 +2342,7 @@ Boarding Pass
                         <div class="card">
 
 
-                            <div class="card-body text-center" data-toggle="modal" data-target="#stepperModal">
+                            <div class="card-body text-center">
                                 <h6><B>Individuelle</B></h6>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43">
                                     <g id="icon-simple" transform="translate(-44 -17)">
@@ -2425,7 +2378,7 @@ Boarding Pass
                         <div class="card">
 
 
-                            <div class="card-body text-center" data-toggle="modal" data-target="#stepperModal">
+                            <div class="card-body text-center">
                                 <h6><B>Bébé</B></h6>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" id="Calque_1" x="0px" y="0px"
@@ -2440,8 +2393,7 @@ Boarding Pass
                                             fill: #C7A150;
                                         }
                                     </style>
-                                    <ellipse id="Oval_Copy" class="st0" cx="55.8" cy="55.7" rx="55.8" ry="55.7">
-                                    </ellipse>
+                                    <ellipse id="Oval_Copy" class="st0" cx="55.8" cy="55.7" rx="55.8" ry="55.7"></ellipse>
                                     <g id="Group_3-2">
                                         <path id="Fill_1" class="st1"
                                             d="M91.7,111.4c-0.9,0-1.7-0.8-1.7-1.7V108H21.6v1.7c0,0.9-0.7,1.7-1.7,1.7c-0.9,0-1.7-0.7-1.7-1.7  c0,0,0-0.1,0-0.1V61.6c-2-0.7-3.4-2.7-3.4-4.8c0-1.1,0.4-2.2,1-3.1c0.7-0.9,1.6-1.5,2.6-1.8c0.4-1.9,1.1-3.7,2-5.4  c1.5-2.7,3.4-5.2,5.7-7.2c3.3-2.9,7-5.1,11.1-6.5c5.9-2.1,12.2-3.2,18.4-3.3c0.5,0,0.9,0.2,1.2,0.5c0.3,0.3,0.5,0.8,0.5,1.2V36  l1.5,4.7h5.2c0.7,0,1.4,0.5,1.6,1.2c0.2,0.7,0,1.5-0.6,1.9L61,46.8l1.6,5c0.3,0.9-0.2,1.9-1.1,2.2C61,54.1,60.5,54,60,53.7  l-4.2-3.1l-4.2,3.1c-0.6,0.4-1.4,0.4-2,0c-0.6-0.4-0.8-1.2-0.6-1.9l1.6-5l-4.2-3.1c-0.6-0.4-0.8-1.2-0.6-1.9  c0.2-0.7,0.9-1.2,1.6-1.2h5.2l1.5-4.7v-3.1c-11,0.7-19.6,3.5-25.3,8.5c-3.3,2.7-5.7,6.5-6.9,10.6c2.6,1.1,3.9,4.1,2.8,6.7  c-0.6,1.3-1.7,2.4-3,2.9v2H90v-2c-2.7-0.9-4.1-3.9-3.1-6.5c0.9-2.7,3.9-4.1,6.5-3.1s4.1,3.9,3.1,6.5c-0.5,1.5-1.7,2.6-3.1,3.1v48.1  C93.4,110.7,92.6,111.4,91.7,111.4z M81.4,67v37.6H90V67H81.4z M33.6,67v37.6h8.5V67H33.6z M69.5,67v37.6H78V67H69.5z M57.5,67  v37.6H66V67H57.5z M45.5,67v37.6h8.5V67H45.5z M21.6,67v37.6h8.5V67H21.6z M91.7,55c-0.9,0-1.7,0.8-1.7,1.7s0.8,1.7,1.7,1.7  c0.9,0,1.7-0.8,1.7-1.7C93.4,55.8,92.6,55,91.7,55z M19.9,55c-0.9,0-1.7,0.8-1.7,1.7s0.8,1.7,1.7,1.7c0.9,0,1.7-0.8,1.7-1.7  C21.6,55.8,20.9,55,19.9,55L19.9,55z M55.8,46.8c0.4,0,0.7,0.1,1,0.3l1,0.7l-0.4-1.1c-0.2-0.7,0-1.5,0.6-1.9l1-0.7h-1.2  c-0.7,0-1.4-0.5-1.6-1.2l-0.4-1.1l-0.4,1.1c-0.2,0.7-0.9,1.2-1.6,1.2h-1.2l1,0.7c0.6,0.4,0.8,1.2,0.6,1.9l-0.4,1.1l1-0.7  C55.1,46.9,55.4,46.8,55.8,46.8z">
@@ -2467,19 +2419,11 @@ Boarding Pass
 
 
                         </div>
-                        
                     </div>
 
-                    <div style="margin-bottom: 20px;">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stepperModal" 
-                        style="display: block; margin-left: auto; margin-right: auto;">
-                                Réserver Maintenant
-                        </button>
-                    </div>
+
 
                 </div>
-
-                
 
                 <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
                     tabindex="-1">
@@ -2740,8 +2684,7 @@ Boarding Pass
                                         <h3>Étape 3 : Sélection des extras</h3>
                                         <?php foreach ($extras as $extra) { ?>
                                             <div class="form-group">
-                                                <label><?php echo $extra['nom']; ?> - <?php echo $extra['prix']; ?>
-                                                    €</label>
+                                                <label><?php echo $extra['nom']; ?> - <?php echo $extra['prix']; ?> €</label>
                                                 <input type="number" class="form-control extra-input"
                                                     data-price="<?php echo $extra['prix']; ?>" min="0">
                                             </div>
@@ -2851,7 +2794,7 @@ Boarding Pass
 
 
                         $("#step-2").append(`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     `);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             `);
 
                         // Initialize your variables with the hidden input values on page load
                         var prixQuadruple = parseFloat($('#prixQuadruple').val()) || 0;
@@ -2990,16 +2933,16 @@ Boarding Pass
                                 var recapReservation = '<br>';
                                 recapReservation += '<strong>Chambres :</strong><br>';
                                 if (quadrupleRooms > 0) {
-                                    recapReservation += '- Chambre Quadruple: ' + prixQuadruple.toFixed(2) + ' € x ' + quadrupleRooms + '<br>';
+                                    recapReservation += '- Chambre Quadruple - ' + prixQuadruple.toFixed(2) + ' € x ' + quadrupleRooms + '<br>';
                                 }
                                 if (tripleRooms > 0) {
-                                    recapReservation += '- Chambre Triple: ' + prixTriple.toFixed(2) + ' € x ' + tripleRooms + '<br>';
+                                    recapReservation += '- Chambre Triple - ' + prixTriple.toFixed(2) + ' € x ' + tripleRooms + '<br>';
                                 }
                                 if (doubleRooms > 0) {
-                                    recapReservation += '- Chambre Double: ' + prixDouble.toFixed(2) + ' € x ' + doubleRooms + '<br>';
+                                    recapReservation += '- Chambre Double - ' + prixDouble.toFixed(2) + ' € x ' + doubleRooms + '<br>';
                                 }
                                 if (singleRooms > 0) {
-                                    recapReservation += '- Chambre Simple: ' + prixSingle.toFixed(2) + ' € x ' + singleRooms + '<br>';
+                                    recapReservation += '- Chambre Simple - ' + prixSingle.toFixed(2) + ' € x ' + singleRooms + '<br>';
                                 }
                                 recapReservation += '<br>';
 
@@ -3011,7 +2954,7 @@ Boarding Pass
 
                                 if (babiesCount > 0) {
                                     recapReservation += '<strong>Frais bébé :</strong><br>';
-                                    recapReservation += '- Frais bébé: ' + fraisBebe.toFixed(2) + ' € x ' + babiesCount + '<br>';
+                                    recapReservation += '- Frais bébé - ' + fraisBebe.toFixed(2) + ' € x ' + babiesCount + '<br>';
                                     recapReservation += '<br>';
                                 }
 
@@ -3063,7 +3006,7 @@ Boarding Pass
                                 var formData = {
                                     fullName: $('#fullName').val(),
                                     address: $('#address').val(),
-                                    phoneNumber: $('.dropdown-toggle').text().trim() + $('#phoneNumber').val(), // Inclure le code pays
+                                    phoneNumber: $('.dropdown-toggle').text().trim() + $('#phoneNumber').val(),  // Inclure le code pays
                                     email: $('#email').val(),
                                     adults: parseInt($('#adults').val(), 10),
                                     children: parseInt($('#children').val(), 10) || 0,
@@ -3115,9 +3058,9 @@ Boarding Pass
                                 });
 
                                 $.ajax({
-                                    url: 'send_email.php', // Script PHP pour l'envoi d'email
+                                    url: 'send_email.php',  // Script PHP pour l'envoi d'email
                                     type: 'POST',
-                                    data: JSON.stringify(formData), // Les mêmes données que celles envoyées précédemment
+                                    data: JSON.stringify(formData),  // Les mêmes données que celles envoyées précédemment
                                     contentType: 'application/json',
                                     success: function (emailResponse) {
                                         console.log('Email envoyé avec succès :', emailResponse);
@@ -3220,6 +3163,7 @@ Boarding Pass
                         var countryDialCode = countryCodes[countryCode];
                         $(this).closest('.input-group').find('.dropdown-toggle').html('<span class="flag-icon flag-icon-' + countryCode + '"></span> ' + countryDialCode);
                     });
+
                 </script>
 
 
