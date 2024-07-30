@@ -352,6 +352,18 @@ $result_vols = mysqli_query($conn, $sql_vols);
                 </table>
             </div>
 
+            <div class="section">
+                <h3>Pourquoi choisir la Formule?</h3>
+                <table>
+                    <tr>
+                        <th>Raison</th>
+                    </tr>                    
+                        <tr>
+                            <td><?php echo $formule['description']; ?></td>
+                        </tr>
+                </table>
+            </div>
+
         </div>
     </div>
 

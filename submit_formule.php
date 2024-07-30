@@ -33,12 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $selected_programs = isset($_POST['programs']) ? $_POST['programs'] : [];
     $programs_json = json_encode($selected_programs);
 
+     // Get the description from the hidden input
+     $description = mysqli_real_escape_string($conn, $_POST['description']);
+
     // 2. Input Validation 
     // ... (Your input validation logic) ...
 
     // 3. Prepare and Execute the SQL INSERT Query
-    $sql_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id)
-        VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json')";
+    $sql_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id, description)
+        VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json', '$description')";
 
     if (mysqli_query($conn, $sql_formule)) {
         $formule_id = mysqli_insert_id($conn);

@@ -6,7 +6,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ajouter une Formule</title>
   <link rel="stylesheet" href="styles.css">
+
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+
+
+
+
+
   <style>
+    /* text aditor style  */
+    .price-inputs {
+      font-family: Arial, sans-serif;
+    }
+
+    /* Custom styles for the editor */
+    .editor-container {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 10px;
+      width: 100%;
+      /* Full width */
+    }
+
+    .ql-toolbar {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .ql-container {
+      height: 300px;
+      /* Adjust height as needed */
+    }
+
+
+    /* text aditor style  */
+
     body {
       font-family: Arial, sans-serif;
       background-color: #f4f4f4;
@@ -250,7 +286,7 @@
   </style>
 
   <?php include 'header.php'; ?>
-  <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js">
+  <!-- <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"> -->
 
 
   </script>
@@ -315,7 +351,7 @@
 
 
       <div class="half-width-inputs">
-      <div class="input-group">
+        <div class="input-group">
           <label for="date_depart">Date de Départ:</label>
           <input type="date" id="date_depart" name="date_depart" class="half-width-input" required>
         </div>
@@ -323,7 +359,7 @@
         <div class="input-group">
           <label for="date_depart">Date de Retour:</label>
           <input type="date" id="date_retour" name="date_retour" class="half-width-input" required>
-        </div>        
+        </div>
 
         <div class="input-group">
           <label for="duree_sejour">Durée de séjour:</label>
@@ -341,10 +377,10 @@
             <div class="vol-section">
               <div class="half-width-inputs">
                 <div class="input-group">
-                  <label for="ville_depart">Départ:</label>                  
+                  <label for="ville_depart">Départ:</label>
                   <!-- <input type="text" id="ville_depart" name="ville_depart[]" class="half-width-input" required> -->
                   <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>
-                  <option value="">Sélectionnez une Ville</option>
+                    <option value="">Sélectionnez une Ville</option>
                     <?php
                     include 'db.php';
                     $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
@@ -357,7 +393,7 @@
                       echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
                     }
                     mysqli_close($conn);
-                    ?> 
+                    ?>
                   </select>
                 </div>
                 <div class="input-group">
@@ -388,20 +424,20 @@
                   <label for="airport_depart">Aéroport de Départ:</label>
                   <!-- <input type="text" id="airport_depart" name="airport_depart[]" class="half-width-input" required> -->
                   <select id="airport_depart" name="airport_depart[]" class="half-width-input" required>
-                  <option value="">Sélectionnez un Aéroport</option>                  
+                    <option value="">Sélectionnez un Aéroport</option>
                     <?php
                     include 'db.php';
                     $sql_airports_depart = "SELECT * FROM airports";
                     $result_airports_depart = mysqli_query($conn, $sql_airports_depart);
                     if (mysqli_num_rows($result_airports_depart) > 0) {
                       while ($row_airport_depart = mysqli_fetch_assoc($result_airports_depart)) {
-                        echo "<option value='" . $row_airport_depart['id'] . "'>". $row_airport_depart['nom'] . " - " . $row_airport_depart['abrv'] . "</option>";
+                        echo "<option value='" . $row_airport_depart['id'] . "'>" . $row_airport_depart['nom'] . " - " . $row_airport_depart['abrv'] . "</option>";
                       }
                     } else {
                       echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
                     }
                     mysqli_close($conn);
-                    ?> 
+                    ?>
                   </select>
                 </div>
                 <div class="input-group">
@@ -409,10 +445,10 @@
                   <input type="datetime-local" id="heure_depart" name="heure_depart[]" class="half-width-input" required>
                 </div>
                 <div class="input-group">
-                  <label for="ville_destination">Destination:</label>                  
+                  <label for="ville_destination">Destination:</label>
                   <!-- <input type="text" id="destination" name="destination[]" class="half-width-input" required> -->
                   <select id="ville_destination" name="ville_destination[]" class="half-width-input" required>
-                  <option value="">Sélectionnez une Ville</option>
+                    <option value="">Sélectionnez une Ville</option>
                     <?php
                     include 'db.php';
                     $sql_villes_destination = "SELECT * FROM ville_depart WHERE statut='activé'";
@@ -425,27 +461,27 @@
                       echo "<option value='' disabled>Aucune ville de destination active disponible</option>";
                     }
                     mysqli_close($conn);
-                    ?> 
+                    ?>
                   </select>
                 </div>
                 <div class="input-group">
                   <label for="airport_destination">Aéroport de Destination:</label>
                   <!-- <input type="text" id="airport_destination" name="airport_destination[]" class="half-width-input" required> -->
                   <select id="airport_destination" name="airport_destination[]" class="half-width-input" required>
-                  <option value="">Sélectionnez un Aéroport</option>
+                    <option value="">Sélectionnez un Aéroport</option>
                     <?php
                     include 'db.php';
                     $sql_airports_destination = "SELECT * FROM airports";
                     $result_airports_destination = mysqli_query($conn, $sql_airports_depart);
                     if (mysqli_num_rows($result_airports_destination) > 0) {
                       while ($row_airport_destination = mysqli_fetch_assoc($result_airports_destination)) {
-                        echo "<option value='" . $row_airport_destination['id'] . "'>". $row_airport_destination['nom'] . " - " . $row_airport_destination['abrv'] . "</option>";
+                        echo "<option value='" . $row_airport_destination['id'] . "'>" . $row_airport_destination['nom'] . " - " . $row_airport_destination['abrv'] . "</option>";
                       }
                     } else {
                       echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
                     }
                     mysqli_close($conn);
-                    ?> 
+                    ?>
                   </select>
                 </div>
                 <div class="input-group">
@@ -481,18 +517,18 @@
               <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>    
               <option value="">Sélectionnez une ville</option>        
                <?php
-              include 'db.php';
-              $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
-              $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
-              if (mysqli_num_rows($result_villes_depart) > 0) {
-                while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-                  echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+                include 'db.php';
+                $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+                $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+                if (mysqli_num_rows($result_villes_depart) > 0) {
+                  while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                    echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+                  }
+                } else {
+                  echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
                 }
-              } else {
-                echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
-              }
-              mysqli_close($conn);
-              ?>
+                mysqli_close($conn);
+                ?>
              </select>
           </div>
           <div class="input-group">
@@ -692,7 +728,7 @@
                     <option value="Iftar">Iftar</option>
                     <option value="Sahour et Iftar">Sahour et Iftar</option>
                     <option value="Petit déjeuner ensuite Iftar">Petit déjeuner ensuite Iftar</option>
-                    
+
                   </select>
                 </div>
                 <!-- wess -->
@@ -916,27 +952,103 @@
 
 
       <div class="price-inputs">
-    <h3>Programmes <span class="toggle-icon">+</span></h3>
-    <div class="collapsible-content" style="padding:5px;">
-        <div class="program-grid">
+        <h3>Programmes <span class="toggle-icon">+</span></h3>
+        <div class="collapsible-content" style="padding:5px;">
+          <div class="program-grid">
             <?php
             include 'db.php';
             $sql_programs = "SELECT id, nom FROM programs";
             $result_programs = mysqli_query($conn, $sql_programs);
             if (mysqli_num_rows($result_programs) > 0) {
-                while ($row = mysqli_fetch_assoc($result_programs)) {
-                    echo '<div>';
-                    echo '<input type="checkbox" name="programs[]" value="' . $row['id'] . '"> ' . $row['nom'];
-                    echo '</div>';
-                }
+              while ($row = mysqli_fetch_assoc($result_programs)) {
+                echo '<div>';
+                echo '<input type="checkbox" name="programs[]" value="' . $row['id'] . '"> ' . $row['nom'];
+                echo '</div>';
+              }
             } else {
-                echo "Aucun programme trouvé.";
+              echo "Aucun programme trouvé.";
             }
             ?>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
+
+      <div class="price-inputs">
+        <h3>Pourquoi choisir la Formule? <span class="toggle-icon">+</span></h3>
+        <div class="collapsible-content" style="padding:5px; border:0px;">
+          <div class="">
+            <!-- Container for the Quill editor -->
+            <div class="editor-container">
+              <!-- Toolbar container -->
+              <div id="toolbar">
+                <!-- Toolbar options -->
+                <span class="ql-formats">
+                  <button class="ql-bold">Bold</button>
+                  <button class="ql-italic">Italic</button>
+                  <button class="ql-underline">Underline</button>
+                  <button class="ql-strike">Strike</button>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-align">
+                    <option value=""></option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                  </select>
+                  <select class="ql-header">
+                    <option value="1">Heading 1</option>
+                    <option value="2">Heading 2</option>
+                    <option value="3">Heading 3</option>
+                    <option selected>Normal</option>
+                  </select>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-color">
+                    <option value="#ff0000">Red</option>
+                    <option value="#00ff00">Green</option>
+                    <option value="#0000ff">Blue</option>
+                    <option value="#000000" selected>Black</option>
+                  </select>
+                  <select class="ql-background">
+                    <option value="#ffff00">Yellow</option>
+                    <option value="#00ffff">Cyan</option>
+                    <option value="#ff00ff">Magenta</option>
+                    <option value="#ffffff" selected>White</option>
+                  </select>
+                </span>
+                <!-- List options -->
+                <span class="ql-formats">
+                  <button class="ql-list" value="ordered">Ordered List</button>
+                  <button class="ql-list" value="bullet">Bullet List</button>
+                </span>
+              </div>
+              <!-- Editor container -->
+              <div id="editor"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden input field to store the Quill editor content -->
+      <input type="hidden" name="description" id="description">
+
+      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+      <script>
+        var quill = new Quill('#editor', {
+          theme: 'snow',
+          modules: {
+            toolbar: '#toolbar'
+          }
+        });
+
+        // Add an event listener to the form submission
+        document.querySelector('form').addEventListener('submit', function() {
+          // Get the Quill editor content
+          var description = quill.root.innerHTML;
+          // Set the content to the hidden input field
+          document.getElementById('description').value = description;
+        });
+      </script>
 
 
 

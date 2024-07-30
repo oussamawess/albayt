@@ -22,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prix_chambre_triple_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_triple_promo']);
     $prix_chambre_double_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_double_promo']);
     $prix_chambre_single_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_single_promo']);
+    $description = mysqli_real_escape_string($conn, $_POST['description']); // Get and sanitize the description
     //wess
 
     // Fetch and sanitize selected programs
@@ -64,6 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             prix_chambre_triple_promo = '$prix_chambre_triple_promo',
             prix_chambre_double_promo = '$prix_chambre_double_promo',
             prix_chambre_single_promo = '$prix_chambre_single_promo',
+            description = '$description', -- Include the description in the update statement
             -- wess
 
             programs_id = '$programsJson'
