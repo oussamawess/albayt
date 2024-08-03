@@ -51,7 +51,7 @@
 
         .btn {
             padding: 8px 20px;
-            margin: 0 5px;
+            margin: 5px 5px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -60,6 +60,7 @@
         .btn-edit {
             background-color: #4CAF50;
             color: white;
+            margin-bottom: 20px;
         }
 
         .btn-delete {
@@ -142,7 +143,7 @@
 
 
                         // Boutons pour éditer et supprimer le programme
-                        echo "<td class='btn-group'>";
+                        echo "<td class='btn-group' style='padding:20px;'>";
                         echo "<button class='btn btn-edit' onclick=\"window.location.href='edit_program.php?id=" . $row_program['id'] . "'\">Éditer</button>";
                         echo "<a class='btn btn-delete' href='delete_program.php?id=" . $row_program['id'] . "' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer ce Programme?')\">Supprimer</a>";
                         echo "</td>";
