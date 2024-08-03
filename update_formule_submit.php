@@ -1,4 +1,13 @@
 <?php
+    session_start(); // Start session to access session variables
+    
+    // Check if user is not logged in, redirect to login page
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+?>
+<?php
 include 'db.php'; // Include your database connection file
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -25,9 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = mysqli_real_escape_string($conn, $_POST['description']); // Get and sanitize the description
     //wess
 
-    // Fetch and sanitize selected programs
-    $selectedPrograms = isset($_POST['programs']) ? array_map('intval', $_POST['programs']) : [];
-    $programsJson = json_encode($selectedPrograms);
+   // Fetch and sanitize selected programs
+   $selectedPrograms = isset($_POST['programs']) ? array_map('intval', $_POST['programs']) : [];
+   $programsJson = json_encode($selectedPrograms);
+
+   // Fetch and sanitize program order
+   $programOrder = isset($_POST['program_order']) ? $_POST['program_order'] : '[]';
 
     //wess
     // 2. Input Validation (Example - Check if all price fields are valid numbers)
@@ -68,7 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             description = '$description', -- Include the description in the update statement
             -- wess
 
-            programs_id = '$programsJson'
+            programs_id = '$programsJson',
+            program_order = '$programOrder'
             -- (Other fields...)
             WHERE id = $formule_id";
 

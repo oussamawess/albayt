@@ -1,4 +1,13 @@
 <?php
+    session_start(); // Start session to access session variables
+    
+    // Check if user is not logged in, redirect to login page
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+?>
+<?php
 // Vérifier si l'ID de l'extra est défini dans l'URL
 if (isset($_GET['id']) && !empty(trim($_GET['id']))) {
     // Inclure le fichier de connexion à la base de données

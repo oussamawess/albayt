@@ -1,4 +1,13 @@
 <?php
+    session_start(); // Start session to access session variables
+    
+    // Check if user is not logged in, redirect to login page
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+?>
+<?php
 include 'db.php';
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -13,8 +22,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $new_package_id = mysqli_insert_id($conn);
 
         // Step 2: Duplicate formules for the new package
-        $sql_duplicate_formules = "INSERT INTO formules (package_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, type_id, created_at, programs_id, description)
-                                   SELECT $new_package_id, date_depart, date_retour, 'désactivé', duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, type_id, created_at, programs_id, description
+        $sql_duplicate_formules = "INSERT INTO formules (package_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, type_id, created_at, programs_id, program_order, description)
+                                   SELECT $new_package_id, date_depart, date_retour, 'désactivé', duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, type_id, created_at, programs_id, program_order, description
                                    FROM formules
                                    WHERE package_id = $package_id";
         if (mysqli_query($conn, $sql_duplicate_formules)) {

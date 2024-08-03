@@ -1,3 +1,12 @@
+<?php
+    session_start(); // Start session to access session variables
+    
+    // Check if user is not logged in, redirect to login page
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,9 +18,15 @@
 
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet"/> -->
 
 
 
+<!-- for programs -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<!-- End for programs -->
 
 
 
@@ -283,6 +298,13 @@
     .program-grid>div {
       box-sizing: border-box;
     }
+
+    .checkinputs{
+      padding: 10px 10px;
+      border-radius: 5px;
+      background-color: white;
+    }
+
   </style>
 
   <?php include 'header.php'; ?>
@@ -514,8 +536,8 @@
           <div class="input-group">
             <label for="ville_depart">Départ:</label>
             <!--input type="text" id="ville_depart" name="ville_depart[]" class="half-width-input" required-->
-              <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>    
-              <option value="">Sélectionnez une ville</option>        
+              <select id="ville_depart" name="ville_depart[]" class="half-width-input" required>
+              <option value="">Sélectionnez une ville</option>
                <?php
                 include 'db.php';
                 $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
@@ -559,7 +581,7 @@
                   <label for="airport_depart">Aéroport de Départ:</label>
                   <!-- <input type="text" id="airport_depart" name="airport_depart[]" class="half-width-input" required> -->
                   <select id="airport_depart" name="airport_depart[]" class="half-width-input" required>
-                  <option value="">Sélectionnez un Aéroport</option>                  
+                  <option value="">Sélectionnez un Aéroport</option>
                     <?php
                     include 'db.php';
                     $sql_airports_depart = "SELECT * FROM airports";
@@ -572,7 +594,7 @@
                       echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
                     }
                     mysqli_close($conn);
-                    ?> 
+                    ?>
                   </select>
                 </div>
           <div class="input-group">
@@ -580,7 +602,7 @@
             <input type="datetime-local" id="heure_depart" name="heure_depart[]" class="half-width-input" required>
           </div>
           <div class="input-group">
-                  <label for="ville_destination">Destination:</label>                  
+                  <label for="ville_destination">Destination:</label>
                   <!-- <input type="text" id="destination" name="destination[]" class="half-width-input" required> -->
                   <select id="ville_destination" name="ville_destination[]" class="half-width-input" required>
                   <option value="">Sélectionnez une Ville</option>
@@ -596,7 +618,7 @@
                       echo "<option value='' disabled>Aucune ville de destination active disponible</option>";
                     }
                     mysqli_close($conn);
-                    ?> 
+                    ?>
                   </select>
                 </div>
           <div class="input-group">
@@ -616,7 +638,7 @@
                       echo "<option value='' disabled>Aucune ville de départ active disponible</option>";
                     }
                     mysqli_close($conn);
-                    ?> 
+                    ?>
                   </select>
                 </div>
           <div class="input-group">
@@ -798,7 +820,7 @@
                 <option value="Sahour et Iftar">Sahour et Iftar</option>
                 <option value="Petit déjeuner ensuite Iftar">Petit déjeuner ensuite Iftar</option>
             </select>
-          </div>  
+          </div>
           <!-- wess -->
           <div class="input-group">
             <label for="nombre_nuit">Nombre de nuitées :</label>
@@ -950,18 +972,18 @@
       </div>
 
 
-
+      <!-- Start programs -->
       <div class="price-inputs">
         <h3>Programmes <span class="toggle-icon">+</span></h3>
         <div class="collapsible-content" style="padding:5px;">
-          <div class="program-grid">
+          <div class="program-grid" id="sortable-programs">
             <?php
             include 'db.php';
             $sql_programs = "SELECT id, nom FROM programs";
             $result_programs = mysqli_query($conn, $sql_programs);
             if (mysqli_num_rows($result_programs) > 0) {
               while ($row = mysqli_fetch_assoc($result_programs)) {
-                echo '<div>';
+                echo '<div class="ui-state-default checkinputs" data-id="' . $row['id'] . '">';
                 echo '<input type="checkbox" name="programs[]" value="' . $row['id'] . '"> ' . $row['nom'];
                 echo '</div>';
               }
@@ -973,82 +995,102 @@
         </div>
       </div>
 
-
-      <div class="price-inputs">
-        <h3>Pourquoi choisir la Formule? <span class="toggle-icon">+</span></h3>
-        <div class="collapsible-content" style="padding:5px; border:0px;">
-          <div class="">
-            <!-- Container for the Quill editor -->
-            <div class="editor-container">
-              <!-- Toolbar container -->
-              <div id="toolbar">
-                <!-- Toolbar options -->
-                <span class="ql-formats">
-                  <button class="ql-bold">Bold</button>
-                  <button class="ql-italic">Italic</button>
-                  <button class="ql-underline">Underline</button>
-                  <button class="ql-strike">Strike</button>
-                </span>
-                <span class="ql-formats">
-                  <select class="ql-align">
-                    <option value=""></option>
-                    <option value="center">Center</option>
-                    <option value="right">Right</option>
-                  </select>
-                  <select class="ql-header">
-                    <option value="1">Heading 1</option>
-                    <option value="2">Heading 2</option>
-                    <option value="3">Heading 3</option>
-                    <option selected>Normal</option>
-                  </select>
-                </span>
-                <span class="ql-formats">
-                  <select class="ql-color">
-                    <option value="#ff0000">Red</option>
-                    <option value="#00ff00">Green</option>
-                    <option value="#0000ff">Blue</option>
-                    <option value="#000000" selected>Black</option>
-                  </select>
-                  <select class="ql-background">
-                    <option value="#ffff00">Yellow</option>
-                    <option value="#00ffff">Cyan</option>
-                    <option value="#ff00ff">Magenta</option>
-                    <option value="#ffffff" selected>White</option>
-                  </select>
-                </span>
-                <!-- List options -->
-                <span class="ql-formats">
-                  <button class="ql-list" value="ordered">Ordered List</button>
-                  <button class="ql-list" value="bullet">Bullet List</button>
-                </span>
-              </div>
-              <!-- Editor container -->
-              <div id="editor"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hidden input field to store the Quill editor content -->
-      <input type="hidden" name="description" id="description">
-
-      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
       <script>
-        var quill = new Quill('#editor', {
-          theme: 'snow',
-          modules: {
-            toolbar: '#toolbar'
-          }
+        $(function() {
+          $("#sortable-programs").sortable();
+          $("#sortable-programs").disableSelection();
         });
 
-        // Add an event listener to the form submission
-        document.querySelector('form').addEventListener('submit', function() {
-          // Get the Quill editor content
-          var description = quill.root.innerHTML;
-          // Set the content to the hidden input field
-          document.getElementById('description').value = description;
+        function getProgramOrder() {
+          var order = [];
+          $('#sortable-programs div').each(function() {
+            order.push($(this).data('id'));
+          });
+          return order;
+        }
+
+        $('form').on('submit', function() {
+          var programOrder = getProgramOrder();
+          $('input[name="program_order"]').val(JSON.stringify(programOrder));
         });
       </script>
+      <input type="hidden" name="program_order" value="">
+      <!-- End programs -->
+
+      <div class="price-inputs">
+  <h3>Pourquoi choisir la Formule? <span class="toggle-icon">+</span></h3>
+  <div class="collapsible-content" style="padding:5px; border:0px;">
+    <div class="">
+      <!-- Container for the Quill editor -->
+      <div class="editor-container">
+        <!-- Toolbar container -->
+        <div id="toolbar">
+          <!-- Toolbar options -->
+          <span class="ql-formats">
+            <button class="ql-bold">Bold</button>
+            <button class="ql-italic">Italic</button>
+            <button class="ql-underline">Underline</button>
+            <button class="ql-strike">Strike</button>
+          </span>
+          <span class="ql-formats">
+            <select class="ql-align">
+              <option value=""></option>
+              <option value="center">Center</option>
+              <option value="right">Right</option>
+            </select>
+            <select class="ql-header">
+              <option value="1">Heading 1</option>
+              <option value="2">Heading 2</option>
+              <option value="3">Heading 3</option>
+              <option selected>Normal</option>
+            </select>
+          </span>
+          <span class="ql-formats">
+            <select class="ql-color">
+              <option value="#ff0000">Red</option>
+              <option value="#00ff00">Green</option>
+              <option value="#0000ff">Blue</option>
+              <option value="#000000" selected>Black</option>
+            </select>
+            <select class="ql-background">
+              <option value="#ffff00">Yellow</option>
+              <option value="#00ffff">Cyan</option>
+              <option value="#ff00ff">Magenta</option>
+              <option value="#ffffff" selected>White</option>
+            </select>
+          </span>
+          <!-- List options -->
+          <span class="ql-formats">
+            <button class="ql-list" value="ordered">Ordered List</button>
+            <button class="ql-list" value="bullet">Bullet List</button>
+          </span>
+        </div>
+        <!-- Editor container -->
+        <div id="editor"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden input field to store the Quill editor content -->
+<input type="hidden" name="description" id="description">
+
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow',
+    modules: {
+      toolbar: '#toolbar'
+    }
+  });
+
+  // Add an event listener to the form submission
+  document.querySelector('form').addEventListener('submit', function() {
+    // Get the Quill editor content
+    var description = quill.root.innerHTML;
+    // Set the content to the hidden input field
+    document.getElementById('description').value = description;
+  });
+</script>
 
 
 

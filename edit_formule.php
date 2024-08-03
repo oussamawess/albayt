@@ -1,3 +1,12 @@
+<?php
+    session_start(); // Start session to access session variables
+    
+    // Check if user is not logged in, redirect to login page
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -12,7 +21,13 @@
     <!-- <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script> -->
 
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <!-- for programs -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- End for programs -->
 
     <style>
         /* text aditor style  */
@@ -286,6 +301,12 @@
         .program-grid>div {
             box-sizing: border-box;
         }
+
+        .checkinputs {
+            padding: 10px 10px;
+            border-radius: 5px;
+            background-color: white;
+        }
     </style>
 </head>
 
@@ -314,7 +335,6 @@
                     // Store existing data in variables
                     $existingPackageId = $row['package_id'];
                     $existingTypeId = $row['type_id']; // Make sure to fetch this
-                    //$existingNom = $row['nom'];
                     $existingStatut = $row['statut'];
                     $existingDureeSejour = $row['duree_sejour'];
                     $existingDateDepart = $row['date_depart'];
@@ -331,15 +351,15 @@
                     $existingPrixChambreSinglePromo = $row['prix_chambre_single_promo'];
                     $existingDescription = $row['description'];
 
-
                     // Fetch current programs
                     $currentPrograms = json_decode($row['programs_id'], true) ?? [];
+                    $currentProgramOrder = json_decode($row['program_order'], true) ?? [];
 
                     // Fetch all available programs
                     $programsResult = mysqli_query($conn, "SELECT * FROM programs");
                     $programs = [];
-                    while ($row = mysqli_fetch_assoc($programsResult)) {
-                        $programs[] = $row;
+                    while ($program = mysqli_fetch_assoc($programsResult)) {
+                        $programs[] = $program;
                     }
 
                     // Retrieve existing vols
@@ -356,6 +376,24 @@
                     $hebergementsData = [];
                     while ($hebergementRow = mysqli_fetch_assoc($hebergementsResult)) {
                         $hebergementsData[] = $hebergementRow;
+                    }
+
+                    // Sort the programs based on the saved order
+                    $orderedPrograms = [];
+                    foreach ($currentProgramOrder as $programId) {
+                        foreach ($programs as $program) {
+                            if ($program['id'] == $programId) {
+                                $orderedPrograms[] = $program;
+                                break;
+                            }
+                        }
+                    }
+
+                    // Add any missing programs that are not in the order array
+                    foreach ($programs as $program) {
+                        if (!in_array($program, $orderedPrograms)) {
+                            $orderedPrograms[] = $program;
+                        }
                     }
                 } else {
                     echo "Formule not found.";
@@ -979,12 +1017,14 @@
                 </div>
             </div>
 
+
+            <!-- programs start -->
             <div class="price-inputs">
                 <h3>Programmes <span class="toggle-icon">+</span></h3>
                 <div class="collapsible-content" style="padding:5px;">
-                    <div class="program-grid">
-                        <?php foreach ($programs as $program) : ?>
-                            <div>
+                    <div class="program-grid" id="sortable-programs">
+                        <?php foreach ($orderedPrograms as $program) : ?>
+                            <div class="ui-state-default checkinputs" data-id="<?php echo $program['id']; ?>">
                                 <input type="checkbox" name="programs[]" value="<?php echo $program['id']; ?>" <?php echo in_array($program['id'], $currentPrograms) ? 'checked' : ''; ?>>
                                 <?php echo $program['nom']; ?>
                             </div>
@@ -993,84 +1033,107 @@
                 </div>
             </div>
 
+            <script>
+                $(function() {
+                    $("#sortable-programs").sortable();
+                    $("#sortable-programs").disableSelection();
+                });
+
+                function getProgramOrder() {
+                    var order = [];
+                    $('#sortable-programs div').each(function() {
+                        order.push($(this).data('id'));
+                    });
+                    return order;
+                }
+
+                $('form').on('submit', function() {
+                    var programOrder = getProgramOrder();
+                    $('input[name="program_order"]').val(JSON.stringify(programOrder));
+                });
+            </script>
+
+            <input type="hidden" name="program_order" value="">
+            <!--programs end -->
+
             <div class="price-inputs">
-    <h3>Pourquoi choisir la Formule? <span class="toggle-icon">+</span></h3>
-    <div class="collapsible-content" style="padding:5px; border:0px;">
-        <div class="">
-            <!-- Container for the Quill editor -->
-            <div class="editor-container">
-                <!-- Toolbar container -->
-                <div id="toolbar">
-                    <!-- Toolbar options -->
-                    <span class="ql-formats">
-                        <button class="ql-bold">Bold</button>
-                        <button class="ql-italic">Italic</button>
-                        <button class="ql-underline">Underline</button>
-                        <button class="ql-strike">Strike</button>
-                    </span>
-                    <span class="ql-formats">
-                        <select class="ql-align">
-                            <option value=""></option>
-                            <option value="center">Center</option>
-                            <option value="right">Right</option>
-                        </select>
-                        <select class="ql-header">
-                            <option value="1">Heading 1</option>
-                            <option value="2">Heading 2</option>
-                            <option value="3">Heading 3</option>
-                            <option selected>Normal</option>
-                        </select>
-                    </span>
-                    <span class="ql-formats">
-                        <select class="ql-color">
-                            <option value="#ff0000">Red</option>
-                            <option value="#00ff00">Green</option>
-                            <option value="#0000ff">Blue</option>
-                            <option value="#000000" selected>Black</option>
-                        </select>
-                        <select class="ql-background">
-                            <option value="#ffff00">Yellow</option>
-                            <option value="#00ffff">Cyan</option>
-                            <option value="#ff00ff">Magenta</option>
-                            <option value="#ffffff" selected>White</option>
-                        </select>
-                    </span>
-                    <!-- List options -->
-                    <span class="ql-formats">
-                        <button class="ql-list" value="ordered">Ordered List</button>
-                        <button class="ql-list" value="bullet">Bullet List</button>
-                    </span>
+                <h3>Pourquoi choisir la Formule? <span class="toggle-icon">+</span></h3>
+                <div class="collapsible-content" style="padding:5px; border:0px;">
+                    <div class="">
+                        <!-- Container for the Quill editor -->
+                        <div class="editor-container">
+                            <!-- Toolbar container -->
+                            <div id="toolbar">
+                                <!-- Toolbar options -->
+                                <span class="ql-formats">
+                                    <button class="ql-bold">Bold</button>
+                                    <button class="ql-italic">Italic</button>
+                                    <button class="ql-underline">Underline</button>
+                                    <button class="ql-strike">Strike</button>
+                                </span>
+                                <span class="ql-formats">
+                                    <select class="ql-align">
+                                        <option value=""></option>
+                                        <option value="center">Center</option>
+                                        <option value="right">Right</option>
+                                    </select>
+                                    <select class="ql-header">
+                                        <option value="1">Heading 1</option>
+                                        <option value="2">Heading 2</option>
+                                        <option value="3">Heading 3</option>
+                                        <option selected>Normal</option>
+                                    </select>
+                                </span>
+                                <span class="ql-formats">
+                                    <select class="ql-color">
+                                        <option value="#ff0000">Red</option>
+                                        <option value="#00ff00">Green</option>
+                                        <option value="#0000ff">Blue</option>
+                                        <option value="#000000" selected>Black</option>
+                                    </select>
+                                    <select class="ql-background">
+                                        <option value="#ffff00">Yellow</option>
+                                        <option value="#00ffff">Cyan</option>
+                                        <option value="#ff00ff">Magenta</option>
+                                        <option value="#ffffff" selected>White</option>
+                                    </select>
+                                </span>
+                                <!-- List options -->
+                                <span class="ql-formats">
+                                    <button class="ql-list" value="ordered">Ordered List</button>
+                                    <button class="ql-list" value="bullet">Bullet List</button>
+                                </span>
+                            </div>
+                            <!-- Editor container -->
+                            <div id="editor" value="<?php echo htmlspecialchars($existingDescription); ?>"></div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Editor container -->
-                <div id="editor" value="<?php echo htmlspecialchars($existingDescription); ?>"></div>
             </div>
-        </div>
-    </div>
-</div>
 
-<!-- Hidden input field to store the Quill editor content -->
-<input type="hidden" name="description" id="description">
+            <!-- Hidden input field to store the Quill editor content -->
+            <input type="hidden" name="description" id="description">
 
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-<script>
-    var quill = new Quill('#editor', {
-        theme: 'snow',
-        modules: {
-            toolbar: '#toolbar'
-        }
-    });
+            <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+            <script>
+                var quill = new Quill('#editor', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: '#toolbar'
+                    }
+                });
 
-    // Set initial content of the editor
-    quill.root.innerHTML = <?php echo json_encode($existingDescription); ?>;
+                // Set initial content of the editor
+                quill.root.innerHTML = <?php echo json_encode($existingDescription); ?>;
 
-    // Add an event listener to the form submission
-    document.querySelector('form').addEventListener('submit', function() {
-        // Get the Quill editor content
-        var description = quill.root.innerHTML;
-        // Set the content to the hidden input field
-        document.getElementById('description').value = description;
-    });
-</script>
+                // Add an event listener to the form submission
+                document.querySelector('form').addEventListener('submit', function() {
+                    // Get the Quill editor content
+                    var description = quill.root.innerHTML;
+                    // Set the content to the hidden input field
+                    document.getElementById('description').value = description;
+                });
+            </script>
 
             <button type="submit">Mettre à jour Formule</button>
         </form>

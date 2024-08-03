@@ -1266,6 +1266,18 @@ Boarding Pass
                 margin-left: 1em;
                 margin-bottom: 1em;
             }
+
+            .carousel-inner {
+                position: relative;
+                width: 100%;
+                overflow: hidden;
+                height: 100% !important;
+            }
+
+            .carousel {
+                position: relative;
+                height: 100% !important;
+            }
         }
 
         .stepwizard-step p {
@@ -1539,13 +1551,6 @@ Boarding Pass
 
 
 
-        @media (min-width: 768px) {
-            div#programme {
-                margin-left: 8em;
-                /* margin-right: 5em; */
-            }
-        }
-
         .product_card {
             width: 280px;
             height: 350px;
@@ -1559,7 +1564,7 @@ Boarding Pass
             position: relative;
         }
 
-        .btn-cnfrm{
+        .btn-cnfrm {
             background-color: #2fc681;
             color: white;
             padding: 8px 20px;
@@ -1568,6 +1573,32 @@ Boarding Pass
         }
 
         @media only screen and (max-width: 600px) {
+            .wrapper {
+
+                width: 100% !important;
+                margin: 0px !important;
+                overflow-x: scroll !important;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+
+            }
+
+            .row {
+
+                margin-right: 0px !important;
+                margin-left: 0px !important;
+            }
+
+
+
+            .cardprog {
+                scroll-snap-align: center;
+                box-sizing: border-box;
+                padding: 20px 30px;
+                flex-shrink: 0;
+                width: 100% !important;
+            }
+
             .boarding-pass {
                 & .cities {
                     .airplane {
@@ -1601,6 +1632,239 @@ Boarding Pass
 
         .product_info {
             margin-left: 1em;
+        }
+
+
+
+
+
+
+
+        .wrapper {
+            display: flex;
+            gap: 20px;
+            width: 900px;
+            border-radius: 14px;
+            overflow-x: hidden;
+            /* Hide the scrollbar */
+            scroll-snap-type: x mandatory;
+            margin-left: 10em;
+            scroll-behavior: smooth;
+            /* Smooth scrolling */
+        }
+
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            margin: 0 5px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #333;
+        }
+
+        .cardprog {
+            scroll-snap-align: center;
+            box-sizing: border-box;
+            padding: 20px 30px;
+            flex-shrink: 0;
+            width: 40%;
+            background-color: white;
+            border-radius: 14px;
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        .card-img {
+            max-width: 100%;
+            border-radius: 8px 8px 0 0;
+            height: auto;
+        }
+
+        .card-title {
+            font-size: 24px;
+            margin: 16px 0;
+            color: #333;
+        }
+
+        .card-description {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .subtitle {
+            text-transform: none;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .carousel-item .image-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding-top: 100%;
+        }
+
+        .carousel-item {
+            position: relative;
+            display: none;
+            float: left;
+            width: 100%;
+            height: 100%;
+            margin-right: -100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transition: transform .6s ease-in-out;
+        }
+
+        @media (max-width: 600px) {
+            .hotel-info {
+                background-color: #fff;
+                padding: 30 30px 0px 30px !important;
+            }
+        }
+
+        body {
+            position: relative;
+            /* This is important for positioning the arrows */
+        }
+
+        .wrapper {
+            position: relative;
+            scroll-behavior: smooth;
+        }
+
+        .prev-btn,
+        .next-btn {
+            position: sticky;
+            /* Now sticky inside the carousel */
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 10;
+            background-color: #DAC392 !important;
+            border-radius: 50%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+            width: 30px;
+        }
+
+        .prev-btn {
+            left: 0;
+            margin-left: 10px;
+            margin-top: 10em;
+
+            /* Adjust spacing to move closer to the carousel */
+        }
+
+        .next-btn {
+            right: 0;
+            margin-right: 10px;
+            margin-top: 10em;
+            /* Adjust spacing to move closer to the carousel */
+        }
+
+        .non-clickable {
+            pointer-events: none;
+            /* Disable clicks */
+            cursor: default;
+            /* Change cursor to default (arrow) */
+        }
+
+        .wrapper {
+            display: flex;
+            /* Ensure items are arranged horizontally */
+            overflow-x: auto;
+            /* Enable horizontal scrolling */
+            scroll-snap-type: x mandatory;
+            /* For snapping (optional) */
+        }
+
+        .wrapper {
+            display: flex;
+            /* or inline-flex */
+            overflow-x: auto;
+        }
+
+        #programme .wrapper {
+            overflow-x: hidden;
+            /* Allow horizontal scrolling if needed */
+            scroll-snap-type: x mandatory;
+            /* For snap-scrolling to each card */
+        }
+
+
+        #programme .dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            /* Adjust as needed */
+        }
+
+        #programme .dot {
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #programme .dot.active {
+            background-color: #333;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            /* Adjust as needed */
+            left: 10px;
+            /* Adjust as needed */
+            background-color: #fff;
+            /* Or match your header background */
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Optional subtle shadow */
+        }
+
+        .back-button i {
+            /* Style the icon */
+            margin-right: 5px;
+        }
+
+        /* Optional: Larger back button for better visibility */
+        @media (min-width: 768px) {
+
+            /* Adjust breakpoint as needed */
+            .back-button {
+                padding: 15px;
+            }
+
+            .back-button i {
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
@@ -1659,6 +1923,8 @@ Boarding Pass
 
             <header>
                 <div class="container">
+                    <button onclick="window.location.href = document.referrer || 'index.php';" class="back-button">
+                        <i class="fas fa-arrow-left"></i> </button>
                     <div class="badge-custom">Départ de </div>
                     <h1><?php echo $nom_package; ?></h1>
                     <h2> <?php echo $nom_type_formule; ?></h2>
@@ -1734,17 +2000,7 @@ Boarding Pass
                 <div class="tab-content" id="myTabContent">
 
                     <div class="tab-pane fade show active shadow" id="formule" role="tabpanel" aria-labelledby="formule-tab">
-                        <b>Vols </b><br>
-                        <p>Compagnies aériennes prestigieuses : Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.
-                        </p>
-                        <b>Distance du Haram </b><br>
-                        <p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de
-                            Ramadan
-                        </p>
-                        <b>Standing des hôtels </b><br>
-                        <p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane,
-                            Bosphorus, Sheraton, Ramada, etc.)
-                        </p>
+                        <?php echo $formule_data['description']; ?>
                     </div>
 
                     <div class="tab-pane fade" id="hebergements" role="tabpanel" aria-labelledby="hebergements-tab">
@@ -2061,182 +2317,178 @@ Boarding Pass
 
                     <!-- start the vols table -->
                     <div class="tab-pane fade" id="vols" role="tabpanel" aria-labelledby="vols-tab">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                    <?php
-    // Fetch the logo once based on the first record in vols
-    $sql_logo = "SELECT c.logo 
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <?php
+                            // Fetch the logo once based on the first record in vols
+                            $sql_logo = "SELECT c.logo 
                  FROM vols v 
                  JOIN compagnies_aeriennes c ON v.compagnie_aerienne_id = c.id 
                  WHERE v.formule_id = ? 
                  LIMIT 1";
-    $stmt_logo = mysqli_prepare($conn, $sql_logo);
-    mysqli_stmt_bind_param($stmt_logo, "i", $formule_data['id']);
-    mysqli_stmt_execute($stmt_logo);
-    $result_logo = mysqli_stmt_get_result($stmt_logo);
-    $comp_logo = mysqli_fetch_assoc($result_logo);
-    ?>
-    <!-- <div class="d-flex justify-content-between align-items-center mb-3"> -->
-        <img src="<?php echo $comp_logo['logo']; ?>" alt="Logo de la compagnie aérienne" 
-        style="width: 100px; margin-left: auto; margin-right: 0;">
-        <button class="btn-cnfrm" style="margin-left: 15px;" disabled>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
-  <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599"/>
-</svg>&nbsp;&nbsp;<b>CONFIRMÉ</b></button>
-        
-    <!-- </div> -->
+                            $stmt_logo = mysqli_prepare($conn, $sql_logo);
+                            mysqli_stmt_bind_param($stmt_logo, "i", $formule_data['id']);
+                            mysqli_stmt_execute($stmt_logo);
+                            $result_logo = mysqli_stmt_get_result($stmt_logo);
+                            $comp_logo = mysqli_fetch_assoc($result_logo);
+                            ?>
+                            <!-- <div class="d-flex justify-content-between align-items-center mb-3"> -->
+                            <img src="<?php echo $comp_logo['logo']; ?>" alt="Logo de la compagnie aérienne"
+                                style="width: 100px; margin-left: auto; margin-right: 0;">
+                            <button class="btn-cnfrm" style="margin-left: 15px;" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    class="bi bi-airplane" viewBox="0 0 16 16">
+                                    <path
+                                        d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599" />
+                                </svg>&nbsp;&nbsp;<b>CONFIRMÉ</b></button>
+
+                            <!-- </div> -->
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>N° Vol</th>
+                                        <th>Départ</th>
+                                        <th>Aéroport</th>
+                                        <th>Date</th>
+                                        <th>Heure</th>
+                                        <th>Destination</th>
+                                        <th>Aéroport</th>
+                                        <th>Date</th>
+                                        <th>Heure</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    // Assuming $conn is your existing database connection
+                                    $sql_vols = "SELECT * FROM vols WHERE formule_id = ?";
+                                    $stmt_vols = mysqli_prepare($conn, $sql_vols);
+                                    mysqli_stmt_bind_param($stmt_vols, "i", $formule_data['id']);
+                                    mysqli_stmt_execute($stmt_vols);
+                                    $result_vols = mysqli_stmt_get_result($stmt_vols);
+
+                                    if (mysqli_num_rows($result_vols) > 0) {
+                                        while ($vols = mysqli_fetch_assoc($result_vols)) {
+                                            // Fetch departure city
+                                            $villed_id = $vols['ville_depart_id'];
+                                            $query_villed = "SELECT nom FROM ville_depart WHERE id = ?";
+                                            $stmt_villed = $conn->prepare($query_villed);
+                                            $stmt_villed->bind_param("i", $villed_id);
+                                            $stmt_villed->execute();
+                                            $result_villed = $stmt_villed->get_result();
+                                            $villed = $result_villed->fetch_assoc();
+
+                                            // Fetch departure airport
+                                            $airp_id = $vols['airport_depart_id'];
+                                            $query_airp = "SELECT abrv FROM airports WHERE id = ?";
+                                            $stmt_airp = $conn->prepare($query_airp);
+                                            $stmt_airp->bind_param("i", $airp_id);
+                                            $stmt_airp->execute();
+                                            $result_airp = $stmt_airp->get_result();
+                                            $airp_depart = $result_airp->fetch_assoc();
+
+                                            // Fetch destination city
+                                            $villed_dest_id = $vols['ville_destination_id'];
+                                            $query_villed_dest = "SELECT nom FROM ville_depart WHERE id = ?";
+                                            $stmt_villed_dest = $conn->prepare($query_villed_dest);
+                                            $stmt_villed_dest->bind_param("i", $villed_dest_id);
+                                            $stmt_villed_dest->execute();
+                                            $result_villed_dest = $stmt_villed_dest->get_result();
+                                            $villed_dest = $result_villed_dest->fetch_assoc();
+
+                                            // Fetch destination airport
+                                            $airp_dest_id = $vols['airport_destination_id'];
+                                            $query_airp_dest = "SELECT abrv FROM airports WHERE id = ?";
+                                            $stmt_airp_dest = $conn->prepare($query_airp_dest);
+                                            $stmt_airp_dest->bind_param("i", $airp_dest_id);
+                                            $stmt_airp_dest->execute();
+                                            $result_airp_dest = $stmt_airp_dest->get_result();
+                                            $airp_dest = $result_airp_dest->fetch_assoc();
+
+                                            // Convert times and dates
+                                            $heure_depart = date('H:i', strtotime($vols['heure_depart']));
+                                            $heure_arrivee = date('H:i', strtotime($vols['heure_arrivee']));
+                                            $date_depart = date('d/m/Y', strtotime($vols['heure_depart']));
+                                            $date_arrivee = date('d/m/Y', strtotime($vols['heure_arrivee']));
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $vols['num_vol']; ?></td>
+                                                <td><?php echo $villed['nom']; ?></td>
+                                                <td><?php echo $airp_depart['abrv']; ?></td>
+                                                <td><?php echo $date_depart; ?></td>
+                                                <td><?php echo $heure_depart; ?></td>
+                                                <td><?php echo $villed_dest['nom']; ?></td>
+                                                <td><?php echo $airp_dest['abrv']; ?></td>
+                                                <td><?php echo $date_arrivee; ?></td>
+                                                <td><?php echo $heure_arrivee; ?></td>
+                                            </tr>
+                                            <?php
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='9'>No Vols found for this formula.</td></tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
-
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>N° Vol</th>
-                    <th>From</th>
-                    <th>Airport</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>To</th>
-                    <th>Airport</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                // Assuming $conn is your existing database connection
-                $sql_vols = "SELECT * FROM vols WHERE formule_id = ?";
-                $stmt_vols = mysqli_prepare($conn, $sql_vols);
-                mysqli_stmt_bind_param($stmt_vols, "i", $formule_data['id']);
-                mysqli_stmt_execute($stmt_vols);
-                $result_vols = mysqli_stmt_get_result($stmt_vols);
-
-                if (mysqli_num_rows($result_vols) > 0) {
-                    while ($vols = mysqli_fetch_assoc($result_vols)) {
-                        // Fetch departure city
-                        $villed_id = $vols['ville_depart_id'];
-                        $query_villed = "SELECT nom FROM ville_depart WHERE id = ?";
-                        $stmt_villed = $conn->prepare($query_villed);
-                        $stmt_villed->bind_param("i", $villed_id);
-                        $stmt_villed->execute();
-                        $result_villed = $stmt_villed->get_result();
-                        $villed = $result_villed->fetch_assoc();
-
-                        // Fetch departure airport
-                        $airp_id = $vols['airport_depart_id'];
-                        $query_airp = "SELECT abrv FROM airports WHERE id = ?";
-                        $stmt_airp = $conn->prepare($query_airp);
-                        $stmt_airp->bind_param("i", $airp_id);
-                        $stmt_airp->execute();
-                        $result_airp = $stmt_airp->get_result();
-                        $airp_depart = $result_airp->fetch_assoc();
-
-                        // Fetch destination city
-                        $villed_dest_id = $vols['ville_destination_id'];
-                        $query_villed_dest = "SELECT nom FROM ville_depart WHERE id = ?";
-                        $stmt_villed_dest = $conn->prepare($query_villed_dest);
-                        $stmt_villed_dest->bind_param("i", $villed_dest_id);
-                        $stmt_villed_dest->execute();
-                        $result_villed_dest = $stmt_villed_dest->get_result();
-                        $villed_dest = $result_villed_dest->fetch_assoc();
-
-                        // Fetch destination airport
-                        $airp_dest_id = $vols['airport_destination_id'];
-                        $query_airp_dest = "SELECT abrv FROM airports WHERE id = ?";
-                        $stmt_airp_dest = $conn->prepare($query_airp_dest);
-                        $stmt_airp_dest->bind_param("i", $airp_dest_id);
-                        $stmt_airp_dest->execute();
-                        $result_airp_dest = $stmt_airp_dest->get_result();
-                        $airp_dest = $result_airp_dest->fetch_assoc();
-
-                        // Convert times and dates
-                        $heure_depart = date('H:i', strtotime($vols['heure_depart']));
-                        $heure_arrivee = date('H:i', strtotime($vols['heure_arrivee']));
-                        $date_depart = date('d/m/Y', strtotime($vols['heure_depart']));
-                        $date_arrivee = date('d/m/Y', strtotime($vols['heure_arrivee']));
-                        ?>
-                        <tr>
-                            <td><?php echo $vols['num_vol']; ?></td>
-                            <td><?php echo $villed['nom']; ?></td>
-                            <td><?php echo $airp_depart['abrv']; ?></td>
-                            <td><?php echo $date_depart; ?></td>
-                            <td><?php echo $heure_depart; ?></td>
-                            <td><?php echo $villed_dest['nom']; ?></td>
-                            <td><?php echo $airp_dest['abrv']; ?></td>
-                            <td><?php echo $date_arrivee; ?></td>
-                            <td><?php echo $heure_arrivee; ?></td>
-                        </tr>
-                        <?php
-                    }
-                } else {
-                    echo "<tr><td colspan='9'>No Vols found for this formula.</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
-    
-</div>
 
                     <!-- end the vols table -->
 
 
 
 
-                    <div class="tab-pane fade " id="programme" role="tabpanel" aria-labelledby="programme-tab">
+                    <div class="tab-pane fade" id="programme" role="tabpanel" aria-labelledby="programme-tab">
+                        <section class="wrapper">
+                            <button class="prev-btn">&#10094;</button>
 
-
-                        <div class="row">
                             <?php
-                            // Fetch the JSON program IDs from the database
-                            $programIdsJson = $formule_data['programs_id'];  // Assuming the column name is 'programme'
-                    
-                            // Convert JSON string to an array
+                            // Fetch the JSON program IDs and order from the database
+                            $programIdsJson = $formule_data['programs_id'];
+                            $programOrderJson = $formule_data['program_order'];
+
+                            // Convert JSON strings to arrays
                             $programIds = json_decode($programIdsJson, true);
+                            $programOrder = json_decode($programOrderJson, true);
 
                             // Check if the conversion was successful
-                            if (is_array($programIds)) {
+                            if (is_array($programIds) && is_array($programOrder)) {
                                 // Query to fetch program details
                                 $sql_programs = "SELECT * FROM programs WHERE id IN (" . implode(',', $programIds) . ")";
                                 $result_programs = mysqli_query($conn, $sql_programs);
 
-                                if (mysqli_num_rows($result_programs) > 0) {
-                                    // Start looping through the programs
-                                    while ($program = mysqli_fetch_assoc($result_programs)) {
-                                        ?>
+                                // Create an associative array of programs
+                                $programs = [];
+                                while ($program = mysqli_fetch_assoc($result_programs)) {
+                                    $programs[$program['id']] = $program;
+                                }
 
-
-
-                                        <div class="product_card">
-
-                                            <div class="image">
-                                                <img src="<?php echo $program['photo']; ?>" alt="">
-                                            </div>
-                                            <div class="product_info">
-                                                <h2 class="product_name">
-                                                    <?php echo $program['nom']; ?>
-                                                </h2>
-                                                <p class="product_description">
-                                                    <?php echo $program['description']; ?>
-                                                </p>
-
-
-
-                                            </div>
+                                // Display programs in the specified order
+                                foreach ($programOrder as $programId) {
+                                    if (isset($programs[$programId])) {
+                                        $program = $programs[$programId];
+                            ?>
+                                        <div class="card cardprog">
+                                            <img src="<?php echo $program['photo']; ?>" alt="<?php echo $program['nom']; ?>" class="card-img">
+                                            <h2 class="card-title"><?php echo $program['nom']; ?></h2>
+                                            <p class="card-description"><?php echo $program['description']; ?></p>
                                         </div>
-
-
-                                        <?php
+                            <?php
                                     }
-                                } else {
-                                    echo "<p>No programs found.</p>";
                                 }
                             } else {
                                 echo "<p>Invalid program data.</p>";
                             }
                             ?>
-                        </div>
 
+                            <button class="next-btn">&#10095;</button>
+                        </section>
+
+                        <div class="dots-container"></div>
                     </div>
+
 
 
                 </div>
@@ -2244,19 +2496,19 @@ Boarding Pass
 
             </div>
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stepperModal" 
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stepperModal"
                 style="display: block; margin-left: auto; margin-right: auto;">
-                        Réserver Maintenant
+                Réserver Maintenant
             </button>
 
             <div class="container details-section" style="margin-top:2em">
-                
+
                 <div class="row mb-4">
-                    
+
                     <div class="col-md-12 text-center">
-                    
-                
-           
+
+
+
                         <h1>Tarifs</h1>
                     </div>
                 </div>
@@ -2467,19 +2719,19 @@ Boarding Pass
 
 
                         </div>
-                        
+
                     </div>
 
                     <div style="margin-bottom: 20px;">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stepperModal" 
-                        style="display: block; margin-left: auto; margin-right: auto;">
-                                Réserver Maintenant
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#stepperModal"
+                            style="display: block; margin-left: auto; margin-right: auto;">
+                            Réserver Maintenant
                         </button>
                     </div>
 
                 </div>
 
-                
+
 
                 <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
                     tabindex="-1">
@@ -2516,7 +2768,7 @@ Boarding Pass
                                             ?>
                                             <a href="showformule.php?formule_id=<?php echo $row['id']; ?>"
                                                 class="col-md-12 justify-content-center text-decoration-none formule-item"
-                                                style="color:inherit;">
+                                                style="color:inherit;" target="_blank">
                                                 <div class="card card-container">
                                                     <div class="card-body justify-content-between ">
                                                         <div>
@@ -2652,29 +2904,27 @@ Boarding Pass
                                 <div class="stepwizard">
                                     <div class="stepwizard-row setup-panel">
                                         <div class="stepwizard-step">
-                                            <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
+                                            <a href="#step-1" type="button"
+                                                class="btn btn-primary btn-circle non-clickable">1</a>
                                             <p>Étape 1</p>
                                         </div>
                                         <div class="stepwizard-step">
-                                            <a href="#step-2" type="button" class="btn btn-default btn-circle"
+                                            <a href="#step-2" type="button" class="btn btn-default btn-circle non-clickable"
                                                 disabled="disabled">2</a>
+
                                             <p>Étape 2</p>
                                         </div>
                                         <div class="stepwizard-step">
-                                            <a href="#step-3" type="button" class="btn btn-default btn-circle"
+                                            <a href="#step-3" type="button" class="btn btn-default btn-circle non-clickable"
                                                 disabled="disabled">3</a>
                                             <p>Étape 3</p>
                                         </div>
                                         <div class="stepwizard-step">
-                                            <a href="#step-4" type="button" class="btn btn-default btn-circle"
+                                            <a href="#step-4" type="button" class="btn btn-default btn-circle non-clickable"
                                                 disabled="disabled">4</a>
                                             <p>Étape 4</p>
                                         </div>
-                                        <div class="stepwizard-step">
-                                            <a href="#step-5" type="button" class="btn btn-default btn-circle"
-                                                disabled="disabled">5</a>
-                                            <p>Étape 5</p>
-                                        </div>
+
                                     </div>
                                 </div>
 
@@ -2721,38 +2971,9 @@ Boarding Pass
 
                                         <button class="btn btn-primary nextBtn" type="button">Suivant</button>
                                     </div>
-                                    <?php
-                                    include 'db.php';
 
-                                    $query = "SELECT * FROM extras";
-                                    $result = mysqli_query($conn, $query);
 
-                                    $extras = array();
-                                    if ($result) {
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            $extras[] = $row;
-                                        }
-                                    }
-
-                                    mysqli_close($conn);
-                                    ?>
                                     <div class="setup-content" id="step-3" style="display: none;">
-                                        <h3>Étape 3 : Sélection des extras</h3>
-                                        <?php foreach ($extras as $extra) { ?>
-                                            <div class="form-group">
-                                                <label><?php echo $extra['nom']; ?> - <?php echo $extra['prix']; ?>
-                                                    €</label>
-                                                <input type="number" class="form-control extra-input"
-                                                    data-price="<?php echo $extra['prix']; ?>" min="0">
-                                            </div>
-                                        <?php } ?>
-                                        <button class="btn btn-secondary prevBtn" type="button">Précedent</button>
-
-                                        <button class="btn btn-primary nextBtn" type="button">Suivant</button>
-
-                                    </div>
-
-                                    <div class="setup-content" id="step-4" style="display: none;">
                                         <h3>Récapitulatif de la Réservation</h3>
                                         <p id="total-reservation">Total de la réservation : Calcul en cours...</p>
                                         <button class="btn btn-secondary prevBtn" type="button">Précedent</button>
@@ -2761,7 +2982,7 @@ Boarding Pass
                                     </div>
 
 
-                                    <div class="setup-content" id="step-5" style="display: none;">
+                                    <div class="setup-content" id="step-4" style="display: none;">
                                         <h3>Comment pouvons-nous vous contacter ?</h3>
 
                                         <div class="form-group">
@@ -2812,6 +3033,51 @@ Boarding Pass
 
 
 
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        const wrapper = document.querySelector("#programme .wrapper");
+                        const cards = document.querySelectorAll("#programme .cardprog");
+                        const prevBtn = document.querySelector("#programme .prev-btn");
+                        const nextBtn = document.querySelector("#programme .next-btn");
+                        const dotsContainer = document.createElement("div");
+
+                        // Create dots and set up initial state
+                        cards.forEach((_, index) => {
+                            const dot = document.createElement("span");
+                            dot.classList.add("dot");
+                            if (index === 0) dot.classList.add("active"); // First dot active initially
+                            dotsContainer.appendChild(dot);
+
+                            dot.addEventListener("click", () => {
+                                const scrollAmount = index * cards[0].offsetWidth;
+                                wrapper.scrollTo({ left: scrollAmount, behavior: "smooth" });
+                                updateActiveDot(index);
+                            });
+                        });
+
+                        dotsContainer.classList.add("dots");
+                        wrapper.after(dotsContainer); // Add dots container after wrapper
+
+                        prevBtn.addEventListener("click", () => scrollWithButton(-1));
+                        nextBtn.addEventListener("click", () => scrollWithButton(1));
+
+                        function scrollWithButton(direction) {
+                            const currentActive = document.querySelector(".dot.active");
+                            let newIndex = Array.from(dotsContainer.children).indexOf(currentActive) + direction;
+                            newIndex = Math.max(0, Math.min(newIndex, dotsContainer.children.length - 1));
+                            dotsContainer.children[newIndex].click(); // Simulate dot click
+                        }
+
+                        function updateActiveDot(index) {
+                            dotsContainer.querySelectorAll(".dot").forEach(dot => dot.classList.remove("active"));
+                            dotsContainer.children[index].classList.add("active");
+                        }
+                    });
+
+
+
+                </script>
+
 
 
                 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -2851,7 +3117,7 @@ Boarding Pass
 
 
                         $("#step-2").append(`
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     `);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     `);
 
                         // Initialize your variables with the hidden input values on page load
                         var prixQuadruple = parseFloat($('#prixQuadruple').val()) || 0;
@@ -2926,34 +3192,7 @@ Boarding Pass
                                 nextStepWizard.removeAttr('disabled').trigger('click');
                             }
 
-                            if (curStepBtn === 'step-2' && isValid) {
-                                var quadrupleRooms = parseInt($('#quadruple').val()) || 0;
-                                var tripleRooms = parseInt($('#triple').val()) || 0;
-                                var doubleRooms = parseInt($('#double').val()) || 0;
-                                var singleRooms = parseInt($('#single').val()) || 0;
-                                var totalRooms = quadrupleRooms + tripleRooms + doubleRooms + singleRooms;
 
-                                // Calculate how many passengers have been assigned to rooms
-                                var passengersAssignedToRooms = totalPassengers - passengersToAssign;
-
-                                // Check if all passengers are assigned AND that some rooms have been filled
-                                if (passengersAssignedToRooms < totalPassengers && totalPassengers > 0) {
-                                    isValid = false;
-                                    $('#error-message').text('Veuillez attribuer tous les passagers aux chambres avant de continuer.');
-                                } else if (passengersToAssign == totalPassengers && totalPassengers > 0) { // Check if any rooms have been filled
-                                    isValid = false;
-                                    $('#error-message').text('Veuillez remplir le nombre de chambres.');
-                                } else if (totalRooms > totalPassengers && totalPassengers > 0) {
-                                    isValid = false;
-                                    $('#error-message').text('Le nombre total de chambres ne peut pas dépasser le nombre total de passagers.');
-                                } else {
-                                    // If all passengers are assigned, proceed to next step
-                                    passengersToAssign = totalPassengers - totalRooms;
-                                    updatePassengerCount();
-                                    $('#error-message').text('');
-                                    nextStepWizard.removeAttr('disabled').trigger('click');
-                                }
-                            }
 
                             var totalExtras = 0;
                             var recapExtras = '';
@@ -3017,7 +3256,6 @@ Boarding Pass
 
                                 recapReservation += '<strong>Coûts :</strong><br>';
                                 recapReservation += '- Total des chambres : ' + totalChambres.toFixed(2) + ' €<br>';
-                                recapReservation += '- Total extras : ' + totalExtras.toFixed(2) + ' €<br>';
                                 recapReservation += '- Total frais bébé : ' + totalFraisBebe.toFixed(2) + ' €<br>';
                                 recapReservation += '- Réduction enfants : -' + discountEnfants.toFixed(2) + ' €<br><br>';
                                 recapReservation += '<strong>Total à payer :</strong><br>';
@@ -3025,31 +3263,44 @@ Boarding Pass
 
                                 // Display the updated summary
                                 $('#total-reservation').html(recapReservation);
+
+                            }
+
+
+
+
+                            if (curStepBtn === 'step-2' && isValid) {
+                                var quadrupleRooms = parseInt($('#quadruple').val()) || 0;
+                                var tripleRooms = parseInt($('#triple').val()) || 0;
+                                var doubleRooms = parseInt($('#double').val()) || 0;
+                                var singleRooms = parseInt($('#single').val()) || 0;
+                                var totalRooms = quadrupleRooms + tripleRooms + doubleRooms + singleRooms;
+
+                                // Calculate how many passengers have been assigned to rooms
+                                var passengersAssignedToRooms = totalPassengers - passengersToAssign;
+
+                                // Check if all passengers are assigned AND that some rooms have been filled
+                                if (passengersAssignedToRooms < totalPassengers && totalPassengers > 0) {
+                                    isValid = false;
+                                    $('#error-message').text('Veuillez attribuer tous les passagers aux chambres avant de continuer.');
+                                } else if (passengersToAssign == totalPassengers && totalPassengers > 0) { // Check if any rooms have been filled
+                                    isValid = false;
+                                    $('#error-message').text('Veuillez remplir le nombre de chambres.');
+                                } else if (totalRooms > totalPassengers && totalPassengers > 0) {
+                                    isValid = false;
+                                    $('#error-message').text('Le nombre total de chambres ne peut pas dépasser le nombre total de passagers.');
+                                } else {
+                                    // If all passengers are assigned, proceed to next step
+                                    passengersToAssign = totalPassengers - totalRooms;
+                                    updatePassengerCount();
+                                    $('#error-message').text('');
+                                    nextStepWizard.removeAttr('disabled').trigger('click');
+                                }
+                                calculateTotalReservation();
+
                             }
 
                             if (curStepBtn === 'step-3' && isValid) {
-                                // Room Quantities and Prices (using promo prices if available)
-                                $('.extra-input').each(function () {
-                                    var quantity = parseInt($(this).val(), 10) || 0;
-                                    var price = parseFloat($(this).data('price'));
-
-                                    if (quantity > 0) {
-                                        totalExtras += quantity * price;
-                                        recapExtras += '- ' + $(this).prev('label').text() + ' - ' + price.toFixed(2) + ' € x ' + quantity + '<br>';
-                                    }
-                                });
-
-                                // Calculate Total Reservation
-                                calculateTotalReservation();
-
-                                // Display and Proceed
-                                nextStepWizard.removeAttr('disabled').trigger('click');
-                            }
-
-
-
-
-                            if (curStepBtn === 'step-4' && isValid) {
                                 $('#error-message-step4').text('');
                                 nextStepWizard.removeAttr('disabled').trigger('click');
 
@@ -3059,7 +3310,7 @@ Boarding Pass
                             console.log(typeof totalReservation);
 
 
-                            if (curStepBtn === 'step-5' && isValid) {
+                            if (curStepBtn === 'step-4' && isValid) {
                                 var formData = {
                                     fullName: $('#fullName').val(),
                                     address: $('#address').val(),
@@ -3072,7 +3323,6 @@ Boarding Pass
                                     tripleRooms: parseInt($('#triple').val(), 10) || 0,
                                     doubleRooms: parseInt($('#double').val(), 10) || 0,
                                     singleRooms: parseInt($('#single').val(), 10) || 0,
-                                    extras: recapExtras,
                                     totalReservation: totalReservation.toFixed(2), // Supposant que totalReservation est calculé correctement à l'étape-3
                                     packageName: "<?php echo $nom_package; ?>",
                                     formulaName: "<?php echo $nom_type_formule; ?>",
@@ -3094,7 +3344,7 @@ Boarding Pass
                                             if (data.success) {
                                                 // Réservation réussie
                                                 $('#total-reservation').html('<h3>Réservation réussie !</h3>');
-                                                window.location.href = "index.php";
+                                                window.parent.location.href = "https://www.albayt.fr/merci-etre-rappele/";
 
                                                 // Optionnel : Réinitialiser le formulaire ou fermer la modal
                                                 // $('#stepperModal').modal('hide');
@@ -3130,7 +3380,27 @@ Boarding Pass
                                         // Gérer l'erreur d'envoi d'email si nécessaire
                                     }
                                 });
+                                $.ajax({
+                                    url: 'send_mailclient.php',
+                                    type: 'POST',
+                                    data: JSON.stringify(formData),
+                                    contentType: 'application/json',
+                                    success: function (response) {
+                                        console.log('Réponse du serveur :', response);
 
+                                        if (response.success) {
+                                            console.log('Email envoyé avec succès au client :', response.clientEmail);
+                                            // Optionnel : Réinitialiser le formulaire, fermer la modal, etc.
+                                        } else {
+                                            console.error('Erreur lors de l\'envoi de l\'email au client :', response.error);
+                                            // Gérer l'erreur d'envoi d'email (afficher un message à l'utilisateur, etc.)
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('Erreur AJAX lors de l\'envoi de l\'email au client :', xhr.responseText);
+                                        // Gérer l'erreur AJAX (problème de réseau, etc.)
+                                    }
+                                });
 
                             }
 

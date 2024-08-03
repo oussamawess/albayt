@@ -1,4 +1,13 @@
 <?php
+    session_start(); // Start session to access session variables
+    
+    // Check if user is not logged in, redirect to login page
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header("Location: login.php");
+        exit;
+    }
+?>
+<?php
 include 'db.php';
 
 if (!isset($_GET['id'])) {
@@ -22,17 +31,29 @@ if (!$formule) {
     die('Formule not found.');
 }
 
+
 // Fetch related programs
 $programs = json_decode($formule['programs_id'], true);
-$program_data = [];
+$programOrder = json_decode($formule['program_order'], true);
+$programData = [];
+
 if (!empty($programs)) {
-    $program_ids = implode(',', $programs);
-    $sql_programs = "SELECT nom, description FROM programs WHERE id IN ($program_ids)";
-    $result_programs = mysqli_query($conn, $sql_programs);
-    while ($row = mysqli_fetch_assoc($result_programs)) {
-        $program_data[] = $row;
+    $programIds = implode(',', $programs);
+    $sqlPrograms = "SELECT id, nom, description FROM programs WHERE id IN ($programIds)";
+    $resultPrograms = mysqli_query($conn, $sqlPrograms);
+    while ($row = mysqli_fetch_assoc($resultPrograms)) {
+        $programData[$row['id']] = $row;
+    }
+
+    // Sort the programs based on the saved order
+    $orderedProgramData = [];
+    foreach ($programOrder as $programId) {
+        if (isset($programData[$programId])) {
+            $orderedProgramData[] = $programData[$programId];
+        }
     }
 }
+
 
 // Fetch hebergements
 $sql_hebergements = "
@@ -197,7 +218,7 @@ $result_vols = mysqli_query($conn, $sql_vols);
             background-color: #751e84;
         }
 
-        h3{
+        h3 {
             text-align: center;
         }
     </style>
@@ -259,10 +280,10 @@ $result_vols = mysqli_query($conn, $sql_vols);
                             <td><?php echo $row['num_vol']; ?></td>
                             <td><?php echo $row['compagnie_aerienne']; ?></td>
                             <td><?php echo $row['ville_depart_nom']; ?></td>
-                            <td><?php echo $row['airport_depart_nom']." - ".$row['airport_depart_abrv']; ?></td>
+                            <td><?php echo $row['airport_depart_nom'] . " - " . $row['airport_depart_abrv']; ?></td>
                             <td><?php echo $row['heure_depart']; ?></td>
                             <td><?php echo $row['ville_destination_nom']; ?></td>
-                            <td><?php echo $row['airport_destination_nom']." - ".$row['airport_destination_abrv']; ?></td>
+                            <td><?php echo $row['airport_destination_nom'] . " - " . $row['airport_destination_abrv']; ?></td>
                             <td><?php echo $row['heure_arrivee']; ?></td>
                         </tr>
                     <?php endwhile; ?>
@@ -343,7 +364,7 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         <th>Nom du Programme</th>
                         <th>Description</th>
                     </tr>
-                    <?php foreach ($program_data as $program) : ?>
+                    <?php foreach ($orderedProgramData as $program) : ?>
                         <tr>
                             <td><?php echo $program['nom']; ?></td>
                             <td><?php echo $program['description']; ?></td>
@@ -352,15 +373,17 @@ $result_vols = mysqli_query($conn, $sql_vols);
                 </table>
             </div>
 
+
+
             <div class="section">
                 <h3>Pourquoi choisir la Formule?</h3>
                 <table>
                     <tr>
                         <th>Raison</th>
-                    </tr>                    
-                        <tr>
-                            <td><?php echo $formule['description']; ?></td>
-                        </tr>
+                    </tr>
+                    <tr>
+                        <td><?php echo $formule['description']; ?></td>
+                    </tr>
                 </table>
             </div>
 

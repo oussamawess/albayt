@@ -190,7 +190,7 @@
             color: #000 !important;
         }
 
-        
+
 
         @media (min-width: 1200px) {
             .container {
@@ -249,6 +249,23 @@
 
             .modal-content.modal-updates {
                 height: 50em !important;
+            }
+
+            .modal .card-body {
+                padding: 0px;
+            }
+
+            .card.col-md-12 {
+                margin-bottom: 1em;
+                color: #000 !important;
+                border-color: #ceab63;
+                font-size: 12px !important;
+            }
+
+            .modal .price-info span {
+                font-size: 15px !important;
+                font-weight: 500;
+                margin-right: 10px;
             }
         }
 
@@ -345,10 +362,10 @@
 
                     <div class="card cardnew col-md-3" style="width: 320px; height: 360px;">
                         <a href="#" data-bs-toggle="modal" data-bs-target="#formuleModal<?php echo $package_id; ?>">
-                            <figure class="card__thumbnailnew" >
-                                <img src="<?php echo $row_package['photo']; ?>" 
-                                style="object-fit:cover; width: 320px; height: 360px; border-radius:2px;" class="card-img-top"
-                                    alt="<?php echo $row_package['nom']; ?>">
+                            <figure class="card__thumbnailnew">
+                                <img src="<?php echo $row_package['photo']; ?>"
+                                    style="object-fit:cover; width: 320px; height: 360px; border-radius:2px;"
+                                    class="card-img-top" alt="<?php echo $row_package['nom']; ?>">
                                 <span class="card__titlenew"><?php echo $row_package['nom']; ?> <br>
                                     <p style="font-size:15px; margin-top:10px">En savoir plus</p>
                                 </span>
@@ -380,8 +397,9 @@
                                             $type_id = $row_type_formule['id'];
 
                                             // Fetch formulas with specific type, package, and active status
-                                            $sql_formules = "SELECT * FROM formules WHERE type_id = ? AND package_id = ? AND statut = 'activé' ORDER BY prix_chambre_quadruple ASC";
+                                            $sql_formules = "SELECT * FROM formules WHERE type_id = ? AND package_id = ? AND statut = 'activé' ORDER BY date_depart ASC";
                                             $stmt_formules = mysqli_prepare($conn, $sql_formules);
+
 
                                             // Error checking for prepared statement
                                             if (!$stmt_formules) {
@@ -599,7 +617,38 @@
                                                                         </g>
                                                                     </g>
                                                                 </svg>
-                                                                <p class="label"> <b>Hotels: </b> 5 & 4 Etoiles</p>
+
+
+                                                                <?php
+                                                                // ... other PHP code ...
+                                            
+                                                                // 1. Fetch Formula Name
+                                                                $typeId = $formule_moins_chere['type_id'];
+                                                                $query10 = "SELECT nom FROM type_formule_omra WHERE id = $typeId";
+                                                                $result10 = $conn->query($query10);
+
+                                                                if ($result10->num_rows > 0) {
+                                                                    $row10 = $result10->fetch_assoc();
+                                                                    $nomFormule = strtolower(trim($row10['nom'])); // Trim and convert to lowercase for comparison
+                                                                } else {
+                                                                    $nomFormule = ""; // Set a default value if no formula is found
+                                                                }
+
+                                                                // 2. Display Hotel Information (Case-Insensitive Comparison)
+                                                                if ($nomFormule === "formule essentielle") {
+                                                                    echo "<p class=\"label\"><b>Hotels:</b> 4 et 5 Etoiles - Distance: Moins de 250 m</p>";
+                                                                } elseif ($nomFormule === "formule confort") {
+                                                                    echo "<p class=\"label\"><b>Hotels:</b> 5 Etoiles - Distance: En face du Haram</p>";
+                                                                } else {
+                                                                    // This will display if the value of $nomFormule doesn't match either option
+                                                                    echo "<p class=\"label\">Invalid Formula Type: $nomFormule</p>";
+                                                                }
+
+                                                                // ... rest of your PHP code ...
+                                                                ?>
+
+
+
                                                             </div>
                                                             <div class="info-group">
                                                                 <svg class="icon" xmlns="http://www.w3.org/2000/svg"
@@ -649,7 +698,7 @@
                                                                 <p class="label"> <b>Guides: </b>Bilingue</p>
                                                             </div>
                                                         </div>
-
+                                                                                                
                                                         <div class="info-group">
                                                             <p class="price"> <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43"
                                                                     viewBox="0 0 43 43">
@@ -732,10 +781,21 @@
 
                                                                                 <span> <i class="fas fa-plane-departure"></i>
                                                                                     <b class="delete">Aller:</b>
-                                                                                    <?php echo $row_formule['date_depart']; ?><br>
+                                                                                    <?php
+                                                                                    setlocale(LC_TIME, 'fr_FR.utf8'); // Set locale to French
+                                                                                    $date_depart = $row_formule['date_depart'];
+                                                                                    $date = new DateTime($date_depart);
+                                                                                    echo strftime('%d %B', $date->getTimestamp());
+                                                                                    ?>
+                                                                                    <br>
                                                                                     <i class="fas fa-plane-arrival"></i>
                                                                                     <b class="delete">Retour:</b>
-                                                                                    <?php echo $row_formule['date_retour']; ?>
+                                                                                    <?php
+                                                                                    setlocale(LC_TIME, 'fr_FR.utf8'); // Set locale to French
+                                                                                    $date_retour = $row_formule['date_retour'];
+                                                                                    $date = new DateTime($date_retour);
+                                                                                    echo strftime('%d %B', $date->getTimestamp());
+                                                                                    ?>
                                                                                 </span>
                                                                             </div>
 
