@@ -190,7 +190,7 @@
             color: #000 !important;
         }
 
-        }
+        
 
         @media (min-width: 1200px) {
             .container {
