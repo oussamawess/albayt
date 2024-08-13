@@ -12,15 +12,21 @@ if ($packagesResult->num_rows > 0) {
     $packageId = $package['id'];
 
     // Fetch formules for the current package
+    // Fetch formules for the current package
     $formulesQuery = "
-            SELECT f.*, t.nom as type_nom, h.etoiles 
-            FROM formules f
-            LEFT JOIN type_formule_omra t ON f.type_id = t.id
-            LEFT JOIN hebergements e ON f.id = e.formule_id
-            LEFT JOIN hotels h ON e.hotel_id = h.id
-            WHERE f.package_id = $packageId AND f.statut = 'activé'
-            GROUP BY f.id
-        ";
+SELECT f.*, t.nom as type_nom, h.etoiles 
+FROM formules f
+LEFT JOIN type_formule_omra t ON f.type_id = t.id
+LEFT JOIN hebergements e ON f.id = e.formule_id
+LEFT JOIN hotels h ON e.hotel_id = h.id
+WHERE f.package_id = $packageId AND f.statut = 'activé'
+GROUP BY f.type_id
+ORDER BY f.date_depart ASC
+";
+
+
+
+
     $formulesResult = $conn->query($formulesQuery);
 
     $formules = [];
@@ -95,6 +101,11 @@ if ($packagesResult->num_rows > 0) {
       display: flex;
     }
 
+    .btn-offre:hover{
+      color: black;
+      text-decoration: none;
+    }
+
     .card-body {
       position: relative;
       color: white;
@@ -117,30 +128,32 @@ if ($packagesResult->num_rows > 0) {
       justify-content: center;
       margin-top: 50px;
     }
-
+/* the problem is here*/
     .formule-card {
-      flex: 0 0 30%;
-      /* Adjust flex basis */
-      width: 500px;
-      margin: 10px;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      background-color: white;
-      text-align: left;
+      flex: auto;
+  max-width: 500px;
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+  text-align: left;
     }
 
     .collapse-container {
       display: flex;
-      flex-wrap: initial;
-      justify-content: center;
-      width: 1300px;
-      margin-bottom: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+  margin-bottom: 15px;
+      
     }
 
     .collapse-wrapper {
       width: 100%;
     }
+/*the problem is here */
+
 
     .collapse-full-width {
       width: 100%;
@@ -225,7 +238,6 @@ if ($packagesResult->num_rows > 0) {
                           <p style="color: #d9c294;"><i class="fa-solid fa-sun">&nbsp;</i><?php echo $formule['duree_sejour']; ?> Jour(s)</p>
 
                           <div style="margin-bottom:5px;">
-
                             <p><span style="color: #d9c294; font-size:20px;">•</span><b>Départ:</b></p>
                             <div class="depret">
                               <?php
@@ -245,9 +257,6 @@ if ($packagesResult->num_rows > 0) {
                               <p style="margin-left: 10px;">
                                 <?php echo $dayNames[$dayOfWeek] . ' ' . $formattedDate; ?>
                               </p>
-
-
-
                             </div>
                             <p><span style="color: #d9c294;  font-size:20px;">•</span><b>Retour:</b></p>
                             <p style="margin-left: 19px; margin-top:-10px;"><?php echo $dayNames[$dayOfWeekret] . ' ' . $formattedDateret; ?></p>
@@ -259,14 +268,16 @@ if ($packagesResult->num_rows > 0) {
 
                             <p><i style="color: #d9c294;" class="fa-solid fa-hotel"></i> <b>Hotel: <?php echo $formule['etoiles']; ?></b><i style="color: #d9c294;" class="fa-solid fa-star"></i></p>
 
-                            <button class="btn"><i class="fa-solid fa-calendar-days"></i><b> AUTRES DATES</b></button>
+                            <button class="btn" data-type-id="<?php echo $formule['type_id']; ?>" data-package-id="<?php echo $package['id']; ?>">
+                              <i class="fa-solid fa-calendar-days"></i><b> AUTRES DATES</b>
+                            </button>
+
                           </div>
-
                         </div>
-                        <a href="formule.php"><button class="btn-offre"><b>VOIR L'OFFRE</b>
-                          <i style="font-size: 20px; margin-top:2px;" class="fa-solid fa-circle-chevron-right"></i></button></a>
-
-
+                        
+                        <a href="formule.php?id=<?php echo $formule['id']; ?>" class="btn-offre"><b>VOIR L'OFFRE</b>
+                        <i style="font-size: 20px; margin-top:2px;" class="fa-solid fa-circle-chevron-right"></i></button></a> 
+                        
                       </div>
                     <?php endforeach; ?>
                   <?php else : ?>
@@ -281,17 +292,64 @@ if ($packagesResult->num_rows > 0) {
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
   <script>
     $(document).ready(function() {
-      $('.city-card').on('click', function() {
-        $('.collapse').collapse('hide');
-        $($(this).data('target')).collapse('toggle');
-      });
+  // Collapse functionality
+  $('.city-card').on('click', function() {
+    var target = $(this).data('target');
+
+    // Close all other collapses
+    $('.collapse').not(target).collapse('hide');
+
+    // Toggle the clicked collapse
+    $(target).collapse('toggle');
+  });
+
+  // Handle the "AUTRES DATES" button click using event delegation
+  $(document).on('click', '.btn[data-type-id]', function() {
+    var typeId = $(this).data('type-id');
+    var packageId = $(this).data('package-id');
+
+    $.ajax({
+      url: 'fetch_formules.php',
+      type: 'GET',
+      data: {
+        type_id: typeId,
+        package_id: packageId
+      },
+      success: function(response) {
+        $('#formulesContent').html(response);
+        $('#formulesModal').modal('show');
+      }
     });
+  });
+});
+
   </script>
+
+  <div class="modal fade" id="formulesModal" tabindex="-1" role="dialog" aria-labelledby="formulesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formulesModalLabel">AUTRES DATES</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- This will be dynamically populated -->
+          <div id="formulesContent"></div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
 
 </body>
 
