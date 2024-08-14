@@ -1001,7 +1001,8 @@ $hebergements_result = $hebergements_stmt->get_result();
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+            box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;            
+            border-radius: 10px;
         }
 
         .price-container {
@@ -1580,7 +1581,7 @@ $hebergements_result = $hebergements_stmt->get_result();
 
                 <div class="container ">
                     <h1 class="mt-3 mb-3" style="text-align:center; font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Tarifs</h1>
-                    <div class="row justify-content-md-center mt-1">
+                    <div class="row justify-content-md-center mt-1" >
                         <div class="col col-lg-8 border flex-container">
                             <div style="display:flex; border-bottom: 1px solid grey; width:50%;" class="p-2">
                                 <h3>Quadriple&nbsp;</h3>
@@ -1601,7 +1602,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                     </div>
 
 
-                    <div class="row justify-content-md-center mt-1">
+                    <div class="row justify-content-md-center mt-3">
                         <div class="col col-lg-8 border flex-container">
                             <div style="display:flex; border-bottom: 1px solid grey; width:50%;" class="p-2">
                                 <h3>Triple&nbsp;</h3>
@@ -1620,7 +1621,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                         </div>
                     </div>
 
-                    <div class="row justify-content-md-center mt-1">
+                    <div class="row justify-content-md-center mt-3">
                         <div class="col col-lg-8 border flex-container">
                             <div style="display:flex; border-bottom: 1px solid grey; width:50%;" class="p-2">
                                 <h3>Double&nbsp;</h3>
@@ -1638,7 +1639,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                         </div>
                     </div>
 
-                    <div class="row justify-content-md-center mt-1">
+                    <div class="row justify-content-md-center mt-3">
                         <div class="col col-lg-8 border flex-container">
                             <div style="display:flex; border-bottom: 1px solid grey; width:50%;" class="p-2">
                                 <h3>Individuelle&nbsp;</h3>
@@ -1673,6 +1674,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                     </ul>
                 </div>
             </div>
+        </div>    
 </body>
 
 </html>
@@ -1684,7 +1686,7 @@ $hebergements_result = $hebergements_stmt->get_result();
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 <!-- jQuery (nécessaire pour les plugins JavaScript de Bootstrap) -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!-- Incluez tous les plugins compilés (ci-dessous), ou incluez-les singlement selon les besoins -->
