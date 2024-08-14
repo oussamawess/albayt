@@ -70,6 +70,9 @@ $hebergements_result = $hebergements_stmt->get_result();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <style>
         * {
             box-sizing: border-box;
@@ -508,31 +511,6 @@ $hebergements_result = $hebergements_stmt->get_result();
 
         }
 
-        /* .reviews {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-} */
-
-        /* .reviews ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-} */
-
-        /* .reviews ul p {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    color: #555;
-}
-
-.reviews ul p svg {
-    margin-right: 8px;
-} */
 
         .stars,
         .trip-advisor {
@@ -543,7 +521,6 @@ $hebergements_result = $hebergements_stmt->get_result();
         }
 
         @media (max-width: 900px) {
-
 
             .card-container {
                 display: grid;
@@ -572,9 +549,60 @@ $hebergements_result = $hebergements_stmt->get_result();
                 font-size: 16px;
                 color: #aaa;
             }
+        }
 
-            .hotel-info .title {}
+        @media only screen and (max-width: 600px) {
+            .wrapper {
 
+                width: 100% !important;
+                margin: 0px !important;
+                overflow-x: scroll !important;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+
+            }
+
+            .row {
+
+                margin-right: 0px !important;
+                margin-left: 0px !important;
+            }
+
+
+
+            .cardprog {
+                scroll-snap-align: center;
+                box-sizing: border-box;
+                padding: 20px 30px;
+                flex-shrink: 0;
+                width: 100% !important;
+            }
+
+            .boarding-pass {
+                & .cities {
+                    .airplane {
+                        position: absolute;
+                        width: 61px;
+                        height: 19px;
+                        left: 43%;
+                        transform: translate(-50%, -50%);
+                        animation: move 4s infinite;
+                        color: #F7F2E8;
+                        top: 62% !important;
+                        /* display: none; */
+                    }
+                }
+            }
+
+            .city {
+                margin-right: 1em !important;
+            }
+
+            .tab-content {
+                background-color: white;
+                padding: 15px !important;
+                border-radius: 10px;
+            }
         }
 
         @media (max-width: 600px) {
@@ -774,6 +802,240 @@ $hebergements_result = $hebergements_stmt->get_result();
             margin-left: 10em;
             scroll-behavior: smooth;
             /* Smooth scrolling */
+        }
+
+        .wrapper {
+            position: relative;
+            scroll-behavior: smooth;
+        }
+
+        .wrapper {
+            display: flex;
+            /* Ensure items are arranged horizontally */
+            overflow-x: auto;
+            /* Enable horizontal scrolling */
+            scroll-snap-type: x mandatory;
+            /* For snapping (optional) */
+        }
+
+        .wrapper {
+            display: flex;
+            /* or inline-flex */
+            overflow-x: auto;
+        }
+
+        #programme .wrapper {
+            overflow-x: hidden;
+            /* Allow horizontal scrolling if needed */
+            scroll-snap-type: x mandatory;
+            /* For snap-scrolling to each card */
+        }
+
+        #programme .dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            /* Adjust as needed */
+        }
+
+        #programme .dot {
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #programme .dot.active {
+            background-color: #333;
+        }
+
+        .cardprog {
+            scroll-snap-align: center;
+            box-sizing: border-box;
+            padding: 20px 30px;
+            flex-shrink: 0;
+            width: 40%;
+            background-color: white;
+            border-radius: 14px;
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            margin: 16px 0;
+            color: #333;
+        }
+
+        .card {
+            border: none;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .card {
+            border-color: #DDC395;
+            margin-bottom: 2em;
+        }
+
+        .card:hover {
+            border-color: #DDC395;
+            background-color: #F7F2E8;
+        }
+
+        .card {
+            /* ... other card styles ... */
+            position: relative;
+            /* Necessary for absolute positioning of the badge */
+        }
+
+        .card .badge.bg-danger {
+            position: absolute;
+            top: 10px;
+            /* Adjust for positioning */
+            right: -10px;
+            /* Adjust for positioning */
+            transform: rotate(45deg);
+            padding: 5px 10px;
+            /* Smaller padding */
+            background-color: #50D28F;
+            color: white;
+            font-weight: bold;
+            z-index: 1;
+            font-size: 0.8rem;
+            /* Smaller font size */
+        }
+
+        .prev-btn,
+        .next-btn {
+            position: sticky;
+            /* Now sticky inside the carousel */
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 10;
+            background-color: #DAC392 !important;
+            border-radius: 50%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+            width: 30px;
+        }
+
+        .prev-btn {
+            left: 0;
+            margin-left: 10px;
+            margin-top: 10em;
+
+            /* Adjust spacing to move closer to the carousel */
+        }
+
+        .next-btn {
+            right: 0;
+            margin-right: 10px;
+            margin-top: 10em;
+            /* Adjust spacing to move closer to the carousel */
+        }
+
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            margin: 0 5px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #333;
+        }
+
+
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+        }
+
+        .price-container {
+            text-align: right;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .flex-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .flex-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .flex-left .bed-icons {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .flex-left hr {
+            width: 50%;
+            border-top: 2px solid #000;
         }
     </style>
 </head>
@@ -1211,87 +1473,216 @@ $hebergements_result = $hebergements_stmt->get_result();
                     </button>
                 </h2>
                 <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-                    <section class="wrapper">
-    <button class="prev-btn">&#10094;</button>
+                    <div class="accordion-body" id="programme">
+                        <section class="wrapper">
+                            <button class="prev-btn">&#10094;</button>
 
-    <?php
-    // Fetch the data for the specified formule_id
-    $sql = "SELECT programs_id, program_order FROM formules WHERE id = $formule_id";
-    $result = mysqli_query($conn, $sql);
+                            <?php
+                            // Fetch the data for the specified formule_id
+                            $sql = "SELECT programs_id, program_order FROM formules WHERE id = $formule_id";
+                            $result = mysqli_query($conn, $sql);
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $formule_data = mysqli_fetch_assoc($result); // Fetch the row as an associative array
+                            if ($result && mysqli_num_rows($result) > 0) {
+                                $formule_data = mysqli_fetch_assoc($result); // Fetch the row as an associative array
 
-        // Fetch the JSON program IDs and order from the database
-        $programIdsJson = $formule_data['programs_id'];
-        $programOrderJson = $formule_data['program_order'];
+                                // Fetch the JSON program IDs and order from the database
+                                $programIdsJson = $formule_data['programs_id'];
+                                $programOrderJson = $formule_data['program_order'];
 
-        // Convert JSON strings to arrays
-        $programIds = json_decode($programIdsJson, true);
-        $programOrder = json_decode($programOrderJson, true);
+                                // Convert JSON strings to arrays
+                                $programIds = json_decode($programIdsJson, true);
+                                $programOrder = json_decode($programOrderJson, true);
 
-        // Check if the conversion was successful
-        if (is_array($programIds) && is_array($programOrder)) {
-            // Query to fetch program details
-            $sql_programs = "SELECT * FROM programs WHERE id IN (" . implode(',', $programIds) . ")";
-            $result_programs = mysqli_query($conn, $sql_programs);
+                                // Check if the conversion was successful
+                                if (is_array($programIds) && is_array($programOrder)) {
+                                    // Query to fetch program details
+                                    $sql_programs = "SELECT * FROM programs WHERE id IN (" . implode(',', $programIds) . ")";
+                                    $result_programs = mysqli_query($conn, $sql_programs);
 
-            // Create an associative array of programs
-            $programs = [];
-            while ($program = mysqli_fetch_assoc($result_programs)) {
-                $programs[$program['id']] = $program;
-            }
+                                    // Create an associative array of programs
+                                    $programs = [];
+                                    while ($program = mysqli_fetch_assoc($result_programs)) {
+                                        $programs[$program['id']] = $program;
+                                    }
 
-            // Display programs in the specified order
-            foreach ($programOrder as $programId) {
-                if (isset($programs[$programId])) {
-                    $program = $programs[$programId];
-                    ?>
-                    <div class="card cardprog">
-                        <img src="../<?php echo $program['photo']; ?>" alt="<?php echo $program['nom']; ?>" class="card-img">
-                        <h2 class="card-title"><?php echo $program['nom']; ?></h2>
-                        <p class="card-description"><?php echo $program['description']; ?></p>
+                                    // Display programs in the specified order
+                                    foreach ($programOrder as $programId) {
+                                        if (isset($programs[$programId])) {
+                                            $program = $programs[$programId];
+                            ?>
+                                            <div class="card cardprog">
+                                                <img src="../<?php echo $program['photo']; ?>" alt="<?php echo $program['nom']; ?>" class="card-img">
+                                                <h2 class="card-title"><?php echo $program['nom']; ?></h2>
+                                                <p class="card-description"><?php echo $program['description']; ?></p>
+                                            </div>
+                            <?php
+                                        }
+                                    }
+                                } else {
+                                    echo "<p>Invalid program data.</p>";
+                                }
+                            } else {
+                                echo "<p>No data found for formule_id: 442.</p>";
+                            }
+                            ?>
+
+                            <button class="next-btn">&#10095;</button>
+                        </section>
+
+                        <div class="dots-container"></div>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", () => {
+                                const wrapper = document.querySelector("#programme .wrapper");
+                                const cards = document.querySelectorAll("#programme .cardprog");
+                                const prevBtn = document.querySelector("#programme .prev-btn");
+                                const nextBtn = document.querySelector("#programme .next-btn");
+                                const dotsContainer = document.createElement("div");
+
+                                // Create dots and set up initial state
+                                cards.forEach((_, index) => {
+                                    const dot = document.createElement("span");
+                                    dot.classList.add("dot");
+                                    if (index === 0) dot.classList.add("active"); // First dot active initially
+                                    dotsContainer.appendChild(dot);
+
+                                    dot.addEventListener("click", () => {
+                                        const scrollAmount = index * cards[0].offsetWidth;
+                                        wrapper.scrollTo({
+                                            left: scrollAmount,
+                                            behavior: "smooth"
+                                        });
+                                        updateActiveDot(index);
+                                    });
+                                });
+
+                                dotsContainer.classList.add("dots");
+                                wrapper.after(dotsContainer); // Add dots container after wrapper
+
+                                prevBtn.addEventListener("click", () => scrollWithButton(-1));
+                                nextBtn.addEventListener("click", () => scrollWithButton(1));
+
+                                function scrollWithButton(direction) {
+                                    const currentActive = document.querySelector(".dot.active");
+                                    let newIndex = Array.from(dotsContainer.children).indexOf(currentActive) + direction;
+                                    newIndex = Math.max(0, Math.min(newIndex, dotsContainer.children.length - 1));
+                                    dotsContainer.children[newIndex].click(); // Simulate dot click
+                                }
+
+                                function updateActiveDot(index) {
+                                    dotsContainer.querySelectorAll(".dot").forEach(dot => dot.classList.remove("active"));
+                                    dotsContainer.children[index].classList.add("active");
+                                }
+                            });
+                        </script>
                     </div>
-                    <?php
-                }
-            }
-        } else {
-            echo "<p>Invalid program data.</p>";
-        }
-    } else {
-        echo "<p>No data found for formule_id: 442.</p>";
-    }
-    ?>
+                </div>
+                <!------ PRICES ------------------->
 
-    <button class="next-btn">&#10095;</button>
-</section>
+                <div class="container ">
+                    <h1 class="mt-3 mb-3" style="text-align:center; font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Tarifs</h1>
+                    <div class="row justify-content-md-center mt-1">
+                        <div class="col col-lg-8 border flex-container">
+                            <div style="display:flex; border-bottom: 1px solid grey; width:50%;" class="p-2">
+                                <h3>Quadriple&nbsp;</h3>
+                                <div>
+                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
+                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
+                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
+                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
+                                </div>
+                            </div>
 
-<div class="dots-container"></div>
+                            <div class="price-container p-2">
+                                <h5 style="text-decoration: line-through red;"><?php echo htmlspecialchars($formule['prix_chambre_quadruple']); ?>&euro;</h5>
+                                <h3><b><?php echo htmlspecialchars($formule['prix_chambre_quadruple_promo']); ?>&euro;</b></h3>
+                                <h5 style="background-color: #f14726; color:white; padding:2px 10px;"><b>PROMOTION</b></h5>
+                            </div>
+                        </div>
+                    </div>
 
+
+                    <div class="row justify-content-md-center mt-1">
+                        <div class="col col-lg-8 border flex-container">
+                            <div style="display:flex; border-bottom: 1px solid grey; width:50%;" class="p-2">
+                                <h3>Triple&nbsp;</h3>
+                                <div>
+                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
+                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
+                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
+                                </div>
+                            </div>
+
+                            <div class="price-container p-2">
+                                <h5 style="text-decoration: line-through red;"><?php echo htmlspecialchars($formule['prix_chambre_triple']); ?>&euro;</h5>
+                                <h3><b><?php echo htmlspecialchars($formule['prix_chambre_triple_promo']); ?>&euro;</b></h3>
+                                <h5 style="background-color: #f14726; color:white; padding:2px 10px;"><b>PROMOTION</b></h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-md-center mt-1">
+                        <div class="col col-lg-8 border flex-container">
+                            <div style="display:flex; border-bottom: 1px solid grey; width:50%;" class="p-2">
+                                <h3>Double&nbsp;</h3>
+                                <div>
+                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
+                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>                                    
+                                </div>
+                            </div>
+
+                            <div class="price-container p-2">
+                                <h5 style="text-decoration: line-through red;"><?php echo htmlspecialchars($formule['prix_chambre_double']); ?>&euro;</h5>
+                                <h3><b><?php echo htmlspecialchars($formule['prix_chambre_double_promo']); ?>&euro;</b></h3>
+                                <h5 style="background-color: #f14726; color:white; padding:2px 10px;"><b>PROMOTION</b></h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-md-center mt-1">
+                        <div class="col col-lg-8 border flex-container">
+                            <div style="display:flex; border-bottom: 1px solid grey; width:50%;" class="p-2">
+                                <h3>Individuelle&nbsp;</h3>
+                                <div>
+                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
+                                </div>
+                            </div>
+
+                            <div class="price-container p-2">
+                                <h5 style="text-decoration: line-through red;"><?php echo htmlspecialchars($formule['prix_chambre_single']); ?>&euro;</h5>
+                                <h3><b><?php echo htmlspecialchars($formule['prix_chambre_single_promo']); ?>&euro;</b></h3>
+                                <h5 style="background-color: #f14726; color:white; padding:2px 10px;"><b>PROMOTION</b></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Display Pricing Details -->
+                <div class="pricing-details">
+                    <h3>Pricing Details</h3>
+                    <ul>
+                        <li>Quadruple Room Price: <?php echo htmlspecialchars($formule['prix_chambre_quadruple']); ?> USD</li>
+                        <li>Triple Room Price: <?php echo htmlspecialchars($formule['prix_chambre_triple']); ?> USD</li>
+                        <li>Double Room Price: <?php echo htmlspecialchars($formule['prix_chambre_double']); ?> USD</li>
+                        <li>Single Room Price: <?php echo htmlspecialchars($formule['prix_chambre_single']); ?> USD</li>
+                        <li>Child Discount: <?php echo htmlspecialchars($formule['child_discount']); ?> USD</li>
+                        <li>Baby Price: <?php echo htmlspecialchars($formule['prix_bebe']); ?> USD</li>
+                        <li>Quadruple Room Promo Price: <?php echo htmlspecialchars($formule['prix_chambre_quadruple_promo']); ?> USD</li>
+                        <li>Triple Room Promo Price: <?php echo htmlspecialchars($formule['prix_chambre_triple_promo']); ?> USD</li>
+                        <li>Double Room Promo Price: <?php echo htmlspecialchars($formule['prix_chambre_double_promo']); ?> USD</li>
+                        <li>Single Room Promo Price: <?php echo htmlspecialchars($formule['prix_chambre_single_promo']); ?> USD</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-
-        <!-- Display Pricing Details -->
-        <div class="pricing-details">
-            <h3>Pricing Details</h3>
-            <ul>
-                <li>Quadruple Room Price: <?php echo htmlspecialchars($formule['prix_chambre_quadruple']); ?> USD</li>
-                <li>Triple Room Price: <?php echo htmlspecialchars($formule['prix_chambre_triple']); ?> USD</li>
-                <li>Double Room Price: <?php echo htmlspecialchars($formule['prix_chambre_double']); ?> USD</li>
-                <li>Single Room Price: <?php echo htmlspecialchars($formule['prix_chambre_single']); ?> USD</li>
-                <li>Child Discount: <?php echo htmlspecialchars($formule['child_discount']); ?> USD</li>
-                <li>Baby Price: <?php echo htmlspecialchars($formule['prix_bebe']); ?> USD</li>
-                <li>Quadruple Room Promo Price: <?php echo htmlspecialchars($formule['prix_chambre_quadruple_promo']); ?> USD</li>
-                <li>Triple Room Promo Price: <?php echo htmlspecialchars($formule['prix_chambre_triple_promo']); ?> USD</li>
-                <li>Double Room Promo Price: <?php echo htmlspecialchars($formule['prix_chambre_double_promo']); ?> USD</li>
-                <li>Single Room Promo Price: <?php echo htmlspecialchars($formule['prix_chambre_single_promo']); ?> USD</li>
-            </ul>
-        </div>
-    </div>
 </body>
 
 </html>
+
+
+
+
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- jQuery (nécessaire pour les plugins JavaScript de Bootstrap) -->
