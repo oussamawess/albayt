@@ -73,6 +73,7 @@ $hebergements_result = $hebergements_stmt->get_result();
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+
     <style>
         * {
             box-sizing: border-box;
@@ -85,25 +86,75 @@ $hebergements_result = $hebergements_stmt->get_result();
             background-color: white;
         }
 
+        header {
+            position: relative;
+            background-image: url('https://www.albayt.fr/wp-content/uploads/shutterstock_1339215521.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0;
+            /* Adjust as needed */
+            text-align: center;
+            display: flex;
+            /* Use Flexbox to center content */
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            height: 100vh;
+            /* Full viewport height for demonstration */
+            z-index: 1;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            /* Black color with 50% opacity */
+            z-index: -1;
+            /* Place behind the header content */
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+
+        header h1 {
+            font-family: 'Bely Display', sans-serif;
+            /* Ensure you use quotes for font names with spaces */
+            font-size: 6rem;
+            /* Adjust as needed */
+            margin: 0;
+            /* Remove default margin */
+            z-index: 1;
+            /* Ensure text is above the overlay */
+            font-weight: bold;
+        }
+
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 100px 100px;
+            background-color: #f5f5f5;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            width: 100vw;
+            height: 30vw;
+            margin-left: calc(50% - 50vw);
+        }
+
+
         .container {
             max-width: 1200px;
             margin: auto;
             padding: 0px;
         }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 100px 100px;
-            background-color: #f5f5f5;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            width: 100vw;
-            /* Make the header full-width */
-            margin-left: calc(50% - 50vw);
-            /* Center the header relative to the viewport */
-        }
 
         .header-content {
             max-width: 50%;
@@ -156,6 +207,8 @@ $hebergements_result = $hebergements_stmt->get_result();
             max-width: fit-content;
             height: 100px;
             margin: -50px auto 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .date-box {
@@ -603,6 +656,11 @@ $hebergements_result = $hebergements_stmt->get_result();
                 padding: 15px !important;
                 border-radius: 10px;
             }
+
+            .icons {
+                font-size: 15px;
+            }
+
         }
 
         @media (max-width: 600px) {
@@ -1001,7 +1059,7 @@ $hebergements_result = $hebergements_stmt->get_result();
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;            
+            box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
             border-radius: 10px;
         }
 
@@ -1038,25 +1096,231 @@ $hebergements_result = $hebergements_stmt->get_result();
             width: 50%;
             border-top: 2px solid #000;
         }
+
+        .icons {
+            font-size: 35px;
+        }
+
+        .btn-primary {
+            background-color: #dac392;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+
+        /**************************  TEST HEBERGEMENT ******************************/
+
+        .card-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #f8f9fa;
+        }
+
+        .hotel-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hotel-info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 2;
+            color: white;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .hotel-name,
+        .hotel-stars,
+        .hotel-details {
+            margin: 0;
+            padding: 0;
+        }
+
+        .hotel-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 3;
+            font-size: 14px;
+        }
+
+        .hotel-footer div {
+            flex: 1;
+            text-align: left;
+        }
+
+        .hotel_info {
+            display: flex;
+            align-items: left;
+            gap: 5px;
+            /* Adds space between the icon and text */
+        }
+
+        .hotel-icons {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px
+        }
+
+        /* Tablets */
+        @media (max-width: 768px) {
+            .card-container {
+                flex-direction: column;
+                width: 100%;
+                height: auto;
+                /* Adjust height to auto */
+            }
+
+            .hotel-image,
+            .hotel-info {
+                width: 100%;
+                height: auto;
+                /* Adjust height to auto */
+            }
+
+            .hotel-info {
+                position: relative;
+                top: auto;
+                left: auto;
+                padding: 10px;
+                background-color: rgba(0, 0, 0, 0.5);
+                /* Semi-transparent background */
+            }
+
+            .hotel-footer {
+                position: static;
+                /* Removes absolute positioning */
+                flex-direction: row;
+                flex-wrap: wrap;
+                background-color: white;
+                padding: 10px;
+            }
+
+            .hotel-footer div {
+                width: 48%;
+                /* Two beside each other */
+                margin-bottom: 10px;
+            }
+
+            .hotel-icons {
+                width: 40px;
+                height: 40px;
+                margin-right: 10px
+            }
+
+            .h5,
+            h5 {
+                font-size: 1rem;
+            }
+
+            .h5,
+            h5 {
+                font-size: 1rem;
+            }
+
+        }
+
+        /* Mobile screens */
+        @media (max-width: 576px) {
+            .card-container {
+                height: auto;
+                /* Adjust height to auto */
+            }
+
+            .hotel-info {
+                position: relative;
+                top: auto;
+                left: auto;
+                padding: 10px;
+                background-color: rgba(0, 0, 0, 0.5);
+                /* Semi-transparent background */
+            }
+
+            .hotel-footer {
+                position: static;
+                /* Ensure it’s placed after the image */
+                padding: 5px;
+                flex-direction: row;
+                /* Stack the items vertically */
+                align-items: center;
+                text-align: center;
+            }
+
+            .hotel-footer div {
+                width: 48%;
+                /* Two beside each other */
+                margin-bottom: 10px;
+            }
+
+            svg {
+                width: 30px;
+                height: 30px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <header class="header">
-            <div class="header-content">
-                <h1>Pourquoi choisir la formule ?</h1>
 
-                <p>
-                    <?php echo ($formule['description']); ?>
-                </p>
-                <div class="buttons">
-                    <button>Plus d'info</button>
-                    <button>Brochure</button>
-                </div>
-            </div>
-            <div class="image-slider">
-                <img src="..\uploads\66a4beb9348b42.27248419_medina3.jpg" alt="Charlevoix">
+        <header class="header">
+            <?php
+            // Fetch the type_id from the formules table using formule_id
+            $sql_formule = "SELECT type_id FROM formules WHERE id = " . $formule_id;
+            $result_formule = mysqli_query($conn, $sql_formule);
+
+            if (mysqli_num_rows($result_formule) > 0) {
+                $formule_data = mysqli_fetch_assoc($result_formule);
+                $type_id = $formule_data['type_id'];
+
+                // Now, fetch the nom from type_formule_omra table using type_id
+                $sql_type_formule = "SELECT nom FROM type_formule_omra WHERE id = " . $type_id;
+                $result_type_formule = mysqli_query($conn, $sql_type_formule);
+
+                if (mysqli_num_rows($result_type_formule) > 0) {
+                    $type_formule_data = mysqli_fetch_assoc($result_type_formule);
+                    $nom_type_formule = $type_formule_data['nom'];
+                } else {
+                    echo "<p>Erreur: Type de formule non trouvé.</p>";
+                }
+            } else {
+                echo "<p>Erreur: Formule non trouvée.</p>";
+            }
+            ?>
+            <h1 style="font-family:bely display;"><?php echo $nom_type_formule; ?></h1>
+
+
+            <div style="margin-bottom: 20px;">
+                <button id="btn-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#stepperModal"
+                    style="display: block; margin-left: auto; margin-right: auto; background-color:#d9c391; border:0px;">
+                    Réserver Maintenant
+                </button>
             </div>
         </header>
 
@@ -1092,6 +1356,247 @@ $hebergements_result = $hebergements_stmt->get_result();
         </div>
 
         <div class="accordion accordion-flush" id="accordionFlushExample">
+            <!-- test hebergement Section -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingzero">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsezero" aria-expanded="false" aria-controls="flush-collapsezero">
+                        TEST
+                    </button>
+                </h2>
+                <div id="flush-collapsezero" class="accordion-collapse collapse" aria-labelledby="flush-headingzero" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+<!-- 
+                        <section class="wrapper">
+                            <button class="prev-btn">&#10094;</button> -->
+
+                        <div class="row">
+                            <?php
+                            // Assuming $conn is your existing database connection
+                            $sql_hebergements = "SELECT * FROM hebergements WHERE formule_id = ?";
+                            $stmt_hebergements = mysqli_prepare($conn, $sql_hebergements);
+                            mysqli_stmt_bind_param($stmt_hebergements, "i", $formule_id);
+                            mysqli_stmt_execute($stmt_hebergements);
+                            $result_hebergements = mysqli_stmt_get_result($stmt_hebergements);
+
+                            if (mysqli_num_rows($result_hebergements) > 0) {
+                                while ($hotel = mysqli_fetch_assoc($result_hebergements)) {
+                            ?>
+                                    <div class="card-container">
+                                        <div class="hotel-image">
+                                            <div id="carousel1" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                                                <div class="carousel-inner">
+                                                    <?php
+                                                    // Display gallery images for hotel 1
+                                                    $sql_gallery1 = "SELECT image_path FROM hotel_gallery WHERE hotel_id = {$hotel['hotel_id']}";
+                                                    $result_gallery1 = mysqli_query($conn, $sql_gallery1);
+                                                    $active = true;
+                                                    while ($row = mysqli_fetch_assoc($result_gallery1)) {
+                                                        echo "<div class='carousel-item" . ($active ? " active" : "") . "'>";
+                                                        echo "<div class='image-container' style='background-image: url(../" . $row['image_path'] . ");'></div>";
+                                                        echo "</div>";
+                                                        $active = false;
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="hotel-info">
+
+
+
+
+
+                                            <?php
+                                            // Fetch and display package name, stars, and details
+                                            $hoteluni_id = $hotel['hotel_id'];
+                                            $query_hoteluni = "SELECT nom, etoiles, details,monument,ville FROM hotels WHERE id = ?";
+                                            $stmt_hoteluni = $conn->prepare($query_hoteluni);
+                                            $stmt_hoteluni->bind_param("i", $hoteluni_id);
+                                            $stmt_hoteluni->execute();
+                                            $result_hoteluni = $stmt_hoteluni->get_result();
+                                            $hoteluni = $result_hoteluni->fetch_assoc();
+                                            ?>
+
+
+                                            <div class="hotel-details"><?php echo $hoteluni['ville']; ?></div>
+                                            <div class="hotel-name">
+                                                <h3 style="font-family: Bely Display;"><b><?php echo $hoteluni['nom']; ?></b></h3>
+                                            </div>
+                                            <div class="hotel-stars">
+                                                <?php
+                                                $numStars = (int) $hoteluni['etoiles'];
+                                                for ($i = 0; $i < $numStars; $i++) {
+                                                    echo '<i class="fa-solid fa-star" style="color: #FFD700;"></i>'; // Use Unicode star for consistent display
+                                                }
+                                                ?>
+                                                <?php
+                                                // Fetch and display package name
+                                                $hoteluni_id = $hotel['hotel_id'];
+                                                $query_hoteluni = "SELECT nom,etoiles,details,monument,ville FROM hotels WHERE id = ?";  // Querying the correct table (assuming package names are stored here)
+                                                $stmt_hoteluni = $conn->prepare($query_hoteluni);
+                                                $stmt_hoteluni->bind_param("i", $hoteluni_id);
+                                                $stmt_hoteluni->execute();
+                                                $result_hoteluni = $stmt_hoteluni->get_result();
+                                                $hoteluni = $result_hoteluni->fetch_assoc();
+                                                ?>
+
+                                            </div>
+                                            <!-- <div class="hotel-details"><!?php echo $hoteluni['details']; ?></div> -->
+
+                                        </div>
+                                        <div class="hotel-footer">
+
+
+                                            <div class="hotel-checkin hotel_info">
+                                                <svg class="hotel-icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="67.255" height="67.255" viewBox="0 0 67.255 67.255">
+                                                    <defs>
+                                                        <clipPath id="clip-path">
+                                                            <path id="Clip_2" data-name="Clip 2" d="M0,0H31.491V31.491H0Z" fill="none"></path>
+                                                        </clipPath>
+                                                    </defs>
+                                                    <g id="Groupe_24" data-name="Groupe 24" transform="translate(-1350.792 -7406)">
+                                                        <circle id="Oval_Copy_3" data-name="Oval Copy 3" cx="33.627" cy="33.627" r="33.627" transform="translate(1350.792 7406)" fill="#f7f2e8">
+                                                        </circle>
+                                                        <g id="Group_8" data-name="Group 8" transform="translate(1368.792 7424)">
+                                                            <path id="Clip_2-2" data-name="Clip 2" d="M0,0H31.491V31.491H0Z" fill="none"></path>
+                                                            <g id="Group_8-2" data-name="Group 8" clip-path="url(#clip-path)">
+                                                                <path id="Fill_1" data-name="Fill 1" d="M30.367,26.993H1.125A1.126,1.126,0,0,1,0,25.868V1.125A1.126,1.126,0,0,1,1.125,0H30.367a1.126,1.126,0,0,1,1.124,1.125V25.868A1.126,1.126,0,0,1,30.367,26.993ZM2.249,2.25V24.744H29.242V2.25Z" transform="translate(0 4.498)"></path>
+                                                                <path id="Fill_3" data-name="Fill 3" d="M30.367,2.249H1.125A1.125,1.125,0,1,1,1.125,0H30.367a1.125,1.125,0,1,1,0,2.249" transform="translate(0 11.247)"></path>
+                                                                <path id="Fill_4" data-name="Fill 4" d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748" transform="translate(4.499 0)"></path>
+                                                                <path id="Fill_5" data-name="Fill 5" d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748" transform="translate(20.245 0)"></path>
+                                                                <path id="Fill_6" data-name="Fill 6" d="M7.873,9a1.129,1.129,0,0,1-.8-.328L.329,1.918A1.124,1.124,0,0,1,1.919.329L8.667,7.076A1.124,1.124,0,0,1,7.873,9Z" transform="translate(17.995 17.997)"></path>
+                                                                <path id="Fill_7" data-name="Fill 7" d="M1.125,9a1.124,1.124,0,0,1-.8-1.919L7.077.329a1.124,1.124,0,0,1,1.59,1.59L1.919,8.667A1.121,1.121,0,0,1,1.125,9Z" transform="translate(17.995 17.997)"></path>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                <div class="hotel-checkin-text">
+                                                    <h5>Check-in</h5><?php echo $hotel['date_checkin']; ?>
+                                                </div>
+                                            </div>
+
+                                            <div class="hotel-checkout hotel_info">
+                                                <svg class="hotel-icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="67.255" height="67.255" viewBox="0 0 67.255 67.255">
+                                                    <defs>
+                                                        <clipPath id="clip-path">
+                                                            <path id="Clip_2" data-name="Clip 2" d="M0,0H31.491V31.491H0Z" fill="none"></path>
+                                                        </clipPath>
+                                                    </defs>
+                                                    <g id="Groupe_24" data-name="Groupe 24" transform="translate(-1350.792 -7406)">
+                                                        <circle id="Oval_Copy_3" data-name="Oval Copy 3" cx="33.627" cy="33.627" r="33.627" transform="translate(1350.792 7406)" fill="#f7f2e8">
+                                                        </circle>
+                                                        <g id="Group_8" data-name="Group 8" transform="translate(1368.792 7424)">
+                                                            <path id="Clip_2-2" data-name="Clip 2" d="M0,0H31.491V31.491H0Z" fill="none"></path>
+                                                            <g id="Group_8-2" data-name="Group 8" clip-path="url(#clip-path)">
+                                                                <path id="Fill_1" data-name="Fill 1" d="M30.367,26.993H1.125A1.126,1.126,0,0,1,0,25.868V1.125A1.126,1.126,0,0,1,1.125,0H30.367a1.126,1.126,0,0,1,1.124,1.125V25.868A1.126,1.126,0,0,1,30.367,26.993ZM2.249,2.25V24.744H29.242V2.25Z" transform="translate(0 4.498)"></path>
+                                                                <path id="Fill_3" data-name="Fill 3" d="M30.367,2.249H1.125A1.125,1.125,0,1,1,1.125,0H30.367a1.125,1.125,0,1,1,0,2.249" transform="translate(0 11.247)"></path>
+                                                                <path id="Fill_4" data-name="Fill 4" d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748" transform="translate(4.499 0)"></path>
+                                                                <path id="Fill_5" data-name="Fill 5" d="M5.623,6.748A1.125,1.125,0,0,1,4.5,5.623V2.249H2.249V5.623A1.125,1.125,0,1,1,0,5.623v-4.5A1.125,1.125,0,0,1,1.124,0h5.5A1.125,1.125,0,0,1,6.748,1.125v4.5A1.125,1.125,0,0,1,5.623,6.748" transform="translate(20.245 0)"></path>
+                                                                <path id="Fill_6" data-name="Fill 6" d="M7.873,9a1.129,1.129,0,0,1-.8-.328L.329,1.918A1.124,1.124,0,0,1,1.919.329L8.667,7.076A1.124,1.124,0,0,1,7.873,9Z" transform="translate(17.995 17.997)"></path>
+                                                                <path id="Fill_7" data-name="Fill 7" d="M1.125,9a1.124,1.124,0,0,1-.8-1.919L7.077.329a1.124,1.124,0,0,1,1.59,1.59L1.919,8.667A1.121,1.121,0,0,1,1.125,9Z" transform="translate(17.995 17.997)"></path>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                <div class="hotel-checkin-text">
+                                                    <h5>Check-out</h5><?php echo $hotel['date_checkout']; ?>
+                                                </div>
+                                            </div>
+
+                                            <div class="hotel-nights hotel_info">
+                                                <svg class="hotel-icons" xmlns="http://www.w3.org/2000/svg" width="67.255" height="67.255" viewBox="0 0 67.255 67.255">
+                                                    <g id="Groupe_23" data-name="Groupe 23" transform="translate(-1011 -7560)">
+                                                        <circle id="Oval_Copy_12" data-name="Oval Copy 12" cx="33.627" cy="33.627" r="33.627" transform="translate(1011 7560)" fill="#f7f2e8"></circle>
+                                                        <g id="Group_3" data-name="Group 3" transform="translate(1025 7578)">
+                                                            <path id="Fill_1" data-name="Fill 1" d="M39.2,32H35.081a.8.8,0,0,1-.8-.789V28.051H5.719V31.21a.8.8,0,0,1-.8.789H.8A.8.8,0,0,1,0,31.21V20.154a3.975,3.975,0,0,1,3.2-3.869V2.779a.792.792,0,0,1,.6-.765,66.144,66.144,0,0,1,32.4,0,.792.792,0,0,1,.6.765V16.285A3.975,3.975,0,0,1,40,20.154V31.21A.8.8,0,0,1,39.2,32ZM4.918,26.471H35.082a.8.8,0,0,1,.8.79v3.158H38.4V23.312H1.6v7.107h5.118V27.26A.8.8,0,0,1,4.918,26.471ZM4,17.783a2.388,2.388,0,0,0-2.4,2.37v1.58H38.4v-1.58A2.387,2.387,0,0,0,36,17.784h5Zm20.225-5.971h6.649A2.711,2.711,0,0,1,33.6,14.5v1.7h1.6V3.4a64.51,64.51,0,0,0-30.4,0v12.81H6.4V14.5a2.711,2.711,0,0,1,2.725-2.69h6.65A2.711,2.711,0,0,1,18.5,14.5v1.7h3V14.5A2.711,2.711,0,0,1,24.224,11.813Zm0,1.579A1.119,1.119,0,0,0,23.1,14.5v1.7H32V14.5a1.119,1.119,0,0,0-1.125-1.111Zm-15.1,0A1.119,1.119,0,0,0,8,14.5v1.7h8.9V14.5a1.119,1.119,0,0,0-1.125-1.111Z" stroke="#000" stroke-miterlimit="10" stroke-width="0.4">
+                                                            </path>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                <div class="hotel-checkin-text">
+                                                    <h6><b>Durée du séjour</b></h6><?php echo $hotel['nombre_nuit']; ?> nuitées
+                                                </div>
+                                            </div>
+
+                                            <div class="hotel-monument hotel_info">
+                                                <svg class="hotel-icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="67.255" height="67.255" viewBox="0 0 67.255 67.255">
+                                                    <defs>
+                                                        <clipPath id="clip-path">
+                                                            <path id="Clip_4" data-name="Clip 4" d="M0,0H24.745V20.248H0Z" fill="none"></path>
+                                                        </clipPath>
+                                                    </defs>
+                                                    <g id="Groupe_22" data-name="Groupe 22" transform="translate(-1350.792 -7560)">
+                                                        <circle id="Oval_Copy_11" data-name="Oval Copy 11" cx="33.627" cy="33.627" r="33.627" transform="translate(1350.792 7560)" fill="#f7f2e8"></circle>
+                                                        <g id="Group_6" data-name="Group 6" transform="translate(1377.792 7580)">
+                                                            <path id="Fill_1" data-name="Fill 1" d="M1.125,31.491A1.125,1.125,0,0,1,0,30.366V1.124a1.125,1.125,0,0,1,2.25,0V30.366a1.125,1.125,0,0,1-1.125,1.125" transform="translate(0.001 0.004)"></path>
+                                                            <g id="Group_5" data-name="Group 5">
+                                                                <path id="Clip_4-2" data-name="Clip 4" d="M0,0H24.745V20.248H0Z" fill="none"></path>
+                                                                <g id="Group_5-2" data-name="Group 5" clip-path="url(#clip-path)">
+                                                                    <path id="Fill_3" data-name="Fill 3" d="M1.126,20.248A1.124,1.124,0,0,1,.708,18.08L20.59,10.126.708,2.172A1.125,1.125,0,1,1,1.542.082l22.494,9a1.125,1.125,0,0,1,0,2.09l-22.493,9A1.147,1.147,0,0,1,1.126,20.248Z" transform="translate(0)"></path>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                <div class="hotel-checkin-text">
+                                                    <h5>Distance</h5><?php echo $hoteluni['monument']; ?>
+                                                </div>
+                                            </div>
+
+                                            <div class="hotel-pension hotel_info">
+                                                <svg class="hotel-icons" xmlns="http://www.w3.org/2000/svg" width="67.255" height="67.255" viewBox="0 0 67.255 67.255">
+                                                    <g id="Groupe_21" data-name="Groupe 21" transform="translate(-1011 -7706)">
+                                                        <circle id="Oval_Copy_14" data-name="Oval Copy 14" cx="33.627" cy="33.627" r="33.627" transform="translate(1011 7706)" fill="#f7f2e8"></circle>
+                                                        <g id="Group_13" data-name="Group 13" transform="translate(1032 7725)">
+                                                            <path id="Fill_1" data-name="Fill 1" d="M6.265,15H5.783a5.3,5.3,0,0,1-4.115-2.066,8.131,8.131,0,0,1-1.4-7.082L.514,4.9C1.285,1.969,3.489,0,6,0c2.535,0,4.74,1.969,5.486,4.9l.24.952a8.133,8.133,0,0,1-1.4,7.082A5.18,5.18,0,0,1,6.265,15ZM6.025,2.3c-1.407,0-2.674,1.26-3.153,3.135l-.241.952a6,6,0,0,0,.963,5.108,2.9,2.9,0,0,0,2.214,1.184h.506a2.9,2.9,0,0,0,2.214-1.184,6,6,0,0,0,.963-5.108l-.241-.952C8.691,3.558,7.395,2.3,6.025,2.3Z" transform="translate(15)"></path>
+                                                            <path id="Line_2" data-name="Line 2" d="M.5.432V18.568" transform="translate(6 14)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"></path>
+                                                            <path id="Line_2_Copy" data-name="Line 2 Copy" d="M.5.432V18.568" transform="translate(21 14)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2"></path>
+                                                            <path id="Fill_7" data-name="Fill 7" d="M6,7A5.926,5.926,0,0,1,0,1.166V0H12V1.166A5.925,5.925,0,0,1,6,7ZM2.616,2.334A3.618,3.618,0,0,0,6,4.667,3.571,3.571,0,0,0,9.384,2.334Z" transform="translate(0 8)"></path>
+                                                            <path id="Fill_9" data-name="Fill 9" d="M0,8H2V0H0Z"></path>
+                                                            <path id="Fill_11" data-name="Fill 11" d="M0,8H2V0H0Z" transform="translate(5)"></path>
+                                                            <path id="Fill_12" data-name="Fill 12" d="M0,8H2V0H0Z" transform="translate(10)"></path>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                <div class="hotel-checkin-text">
+                                                    <h5>Pension</h5><?php echo $hotel['type_pension']; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            <?php
+                                }
+                            } else {
+                                echo "No hotels found for this formula.";
+                            }
+                            ?>
+                        </div>
+
+
+
+<!-- 
+                        <button class="next-btn">&#10095;</button>
+                        </section>
+                        <div class="dots-container"></div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- Pourquoi Section -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Pourquoi choisir la formule?
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <p>
+                            <?php echo ($formule['description']); ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Hébergements Section -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingTwo">
@@ -1101,6 +1606,9 @@ $hebergements_result = $hebergements_stmt->get_result();
                 </h2>
                 <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
+
+                        <!-- <section class="wrapper">
+                            <button class="prev-btn">&#10094;</button> -->
 
                         <div class="row">
                             <?php
@@ -1326,15 +1834,25 @@ $hebergements_result = $hebergements_stmt->get_result();
                                             </div>
 
                                         </div>
+
+
+
                                     </div>
+
                             <?php
                                 }
                             } else {
                                 echo "No hotels found for this formula.";
                             }
                             ?>
+
                         </div>
 
+
+
+                        <!-- <button class="next-btn">&#10095;</button>
+                        </section>
+                        <div class="dots-container"></div> -->
 
                     </div>
                 </div>
@@ -1581,15 +2099,15 @@ $hebergements_result = $hebergements_stmt->get_result();
 
                 <div class="container ">
                     <h1 class="mt-3 mb-3" style="text-align:center; font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Tarifs</h1>
-                    <div class="row justify-content-md-center mt-1" >
+                    <div class="row justify-content-md-center mt-1">
                         <div class="col col-lg-8 border flex-container">
                             <div style="display:flex; border-bottom: 1px solid grey; width:50%;" class="p-2">
                                 <h3>Quadriple&nbsp;</h3>
                                 <div>
-                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
-                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
-                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
-                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
+                                    <span class="material-icons icons">king_bed</span>
+                                    <span class="material-icons icons">king_bed</span>
+                                    <span class="material-icons icons">king_bed</span>
+                                    <span class="material-icons icons">king_bed</span>
                                 </div>
                             </div>
 
@@ -1627,7 +2145,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                                 <h3>Double&nbsp;</h3>
                                 <div>
                                     <span style="font-size: 35px;" class="material-icons">king_bed</span>
-                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>                                    
+                                    <span style="font-size: 35px;" class="material-icons">king_bed</span>
                                 </div>
                             </div>
 
@@ -1673,8 +2191,80 @@ $hebergements_result = $hebergements_stmt->get_result();
                         <li>Single Room Promo Price: <?php echo htmlspecialchars($formule['prix_chambre_single_promo']); ?> USD</li>
                     </ul>
                 </div>
+
+
+
+
+
+
+
+<!-- Bootstrap Carousel Wrapper -->
+<div id="cardCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#cardCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#cardCarousel" data-slide-to="1"></li>
+        <li data-target="#cardCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Carousel Inner -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="d-flex justify-content-center">
+                <!-- Card 1 -->
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-image" style="background-image: url('path-to-image1.jpg');">
+                            <div class="overlay-content">
+                                <h3>Hotel Name</h3>
+                                <p>5 Stars</p>
+                                <p>Hotel Details</p>
+                            </div>
+                            <div class="card-info">
+                                <span>3 Nights</span>
+                                <span>All Inclusive</span>
+                                <span>Check-in: 2024-08-20</span>
+                                <span>Check-out: 2024-08-23</span>
+                                <span>Monument: XYZ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more card-containers as needed -->
             </div>
-        </div>    
+        </div>
+        <div class="carousel-item">
+            <div class="d-flex justify-content-center">
+                <!-- Card 2 -->
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-image" style="background-image: url('path-to-image2.jpg');">
+                            <div class="overlay-content">
+                                <h3>Hotel Name</h3>
+                                <p>4 Stars</p>
+                                <p>Hotel Details</p>
+                            </div>
+                            <div class="card-info">
+                                <span>2 Nights</span>
+                                <span>Half Board</span>
+                                <span>Check-in: 2024-08-21</span>
+                                <span>Check-out: 2024-08-23</span>
+                                <span>Monument: ABC</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more card-containers as needed -->
+            </div>
+        </div>
+        <!-- Add more carousel items if needed -->
+    </div>
+
+
+
+
+            </div>
+        </div>
 </body>
 
 </html>
@@ -1691,3 +2281,20 @@ $hebergements_result = $hebergements_stmt->get_result();
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!-- Incluez tous les plugins compilés (ci-dessous), ou incluez-les singlement selon les besoins -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
+<!--START HEBERGEMENT TEST-->
+<!-- Swiper JS -->
+<script src="//cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/swiper-bundle.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/freeps2/a7rarpress@main/script.js"></script>
+<!-- JavaScript -->
+<!--Uncomment this line-->
+
+
+
+<!--END HEBERGEMENT TEST-->
+<!-- Add Bootstrap CSS and JS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
