@@ -14,6 +14,7 @@ if (isset($_GET['id'])) {
     if ($result->num_rows > 0) {
         // Récupérer les données du package
         $row = $result->fetch_assoc();
+        $category_parent_id = $row['category_parent_id'];
         $nom = $row['nom'];
         $description = $row['description'];
         $photo = $row['photo']; // Chemin de l'image existante
@@ -30,6 +31,7 @@ if (isset($_GET['id'])) {
 // Vérifier si le formulaire de mise à jour a été soumis
 if (isset($_POST['update_package'])) {
     // Récupérer les données du formulaire
+    $category_parent_id =  $_POST['category_parent_id'];
     $nom = $_POST['nom'];
     $description = $_POST['description'];
 
@@ -62,6 +64,7 @@ if (isset($_POST['update_package'])) {
 
     // Préparer la requête SQL pour mettre à jour le package
     $sql = "UPDATE omra_packages SET 
+            category_parent_id = '$category_parent_id',
             nom = '$nom', 
             description = '$description', 
             photo = '$photo' 
@@ -146,7 +149,7 @@ if (isset($_POST['update_package'])) {
     </style>
     <?php
     session_start(); // Start session to access session variables
-    
+
     // Check if user is not logged in, redirect to login page
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         header("Location: login.php");
@@ -163,24 +166,43 @@ if (isset($_POST['update_package'])) {
 
     <div class="container">
         <h2>Modifier une Ville</h2>
-            <form action="edit_package.php?id=<?php echo $package_id; ?>" method="POST" enctype="multipart/form-data">
-                <label for="nom">Nom du Ville:</label>
-                <input type="text" id="nom" name="nom" value="<?php echo $nom; ?>" required>
+        <form action="edit_package.php?id=<?php echo $package_id; ?>" method="POST" enctype="multipart/form-data">
 
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" rows="4" required><?php echo $description; ?></textarea>
+            
+                <div class="input-group">
+                    <label for="category_parent_id">Catégorie parent:</label>
+                    <select id="category_parent_id" name="category_parent_id" class="half-width-input" required>
+                        <option value="">Sélectionnez une catégorie parent</option>
+                        <?php
+                        // Fetch and display package options from the database
+                        $sql = "SELECT id, nom FROM category_parent";
+                        $result = mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $selected = ($row["id"] == $category_parent_id) ? 'selected' : '';
+                            echo "<option value='" . $row["id"] . "' $selected>" . $row["nom"] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
 
-                <h3><label for="photo">Photo existante:</label></h3>
-                <img src="<?php echo $photo; ?>" alt="Image du package"
-                    style="max-width: 200px; max-height: 200px;"><br>
 
-                <h3><label for="nouvelle_photo">Télécharger une nouvelle photo:</label></h3>
-                <input type="file" id="nouvelle_photo" name="photo" accept="image/*">
+            <label for="nom">Nom du Ville:</label>
+            <input type="text" id="nom" name="nom" value="<?php echo $nom; ?>" required>
 
-                <!-- Ajoutez d'autres champs du package ici en fonction de votre structure de base de données -->
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required><?php echo $description; ?></textarea>
 
-                <button type="submit" name="update_package">Modifier Ville</button>
-            </form>
+            <h3><label for="photo">Photo existante:</label></h3>
+            <img src="<?php echo $photo; ?>" alt="Image du package"
+                style="max-width: 200px; max-height: 200px;"><br>
+
+            <h3><label for="nouvelle_photo">Télécharger une nouvelle photo:</label></h3>
+            <input type="file" id="nouvelle_photo" name="photo" accept="image/*">
+
+            <!-- Ajoutez d'autres champs du package ici en fonction de votre structure de base de données -->
+
+            <button type="submit" name="update_package">Modifier Ville</button>
+        </form>
     </div>
 
 </body>

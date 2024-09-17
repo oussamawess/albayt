@@ -14,6 +14,7 @@ include "db.php";
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupérer les données du formulaire
+    $category_parent_id = mysqli_real_escape_string($conn, $_POST['category_parent_id']);
     $nom = $_POST["nom"];
     $description = $_POST["description"];
     $target_file = ""; // Initialiser la variable target_file
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Requête SQL pour insérer les données dans la table des packages Omra
-    $sql = "INSERT INTO omra_packages (nom, description, photo) VALUES ('$nom', '$description', '$target_file')";
+    $sql = "INSERT INTO omra_packages (category_parent_id, nom, description, photo) VALUES ('$category_parent_id', '$nom', '$description', '$target_file')";
 
     // Exécuter la requête
     if ($conn->query($sql) === TRUE) {

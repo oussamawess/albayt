@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <style>
+        body {
+            background: url("https://i.ibb.co/pKHMGjk/background-g4f2e0eca6-1920.jpg");
+        }
+
+        #gallery {
+            width: 350px;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .fa-solid {
+            color: black;
+            cursor: pointer;
+            font-size: 30px;
+            opacity: 0.5;
+            transition: opacity 0.15s ease-out;
+
+            &:hover,
+            &:focus {
+                color: black;
+                text-decoration: none;
+                outline: 0;
+                opacity: 0.9;
+            }
+        }
+
+        .slider-container {
+            height: 380px;
+        }
+
+        .slider-position {
+            position: absolute;
+            top: 350px;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+
+        .prev,
+        .next {
+            display: inline;
+        }
+
+        .prev {
+            margin-right: 100px;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            margin: 0px -60px;
+            color: black;
+        }
+
+        .carousel-control-next:focus,
+        .carousel-control-next:hover,
+        .carousel-control-prev:focus,
+        .carousel-control-prev:hover {
+            color: black;
+            text-decoration: none;
+            outline: 0;
+            opacity: 0.9;
+        }
+
+        @media only screen and (min-width: 768px) {
+
+            .carousel-control-prev,
+            .carousel-control-next {
+                margin: 0px -100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="gallery" class="carousel slide" data-bs-ride="false" data-bs-touch="true">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="slider-container">
+                    <div id="project-slider">
+                        <img src="https://plchldr.co/i/350x350?bg=DC2E3F&fc=fffaf0&text= " alt="placeholder image"
+                            width="350px" />
+                        <img src="https://plchldr.co/i/350x350?bg=C02130&fc=fffaf0&text= " alt="placeholder image"
+                            width="350px" />
+                        <img src="https://plchldr.co/i/350x350?bg=9D1B28&fc=fffaf0&text= " alt="placeholder image"
+                            width="350px" />
+                    </div>
+                    <div id="slider-arrows" class="slider-position">
+                        <div class="prev" aria-controls="customize" tabindex="-1" data-controls="prev">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </div>
+                        <div class="next" aria-controls="customize" tabindex="-1" data-controls="next">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="slider-container">
+                    <div id="project-slider2">
+                        <img src="https://plchldr.co/i/350x350?bg=079FB0&fc=fffaf0&text= " alt="placeholder image"
+                            width="350px" />
+                        <img src="https://plchldr.co/i/350x350?bg=067C89&fc=fffaf0&text= " alt="placeholder image"
+                            width="350px" />
+                        <img src="https://plchldr.co/i/350x350?bg=045962&fc=fffaf0&text= " alt="placeholder image"
+                            width="350px" />
+                    </div>
+                    <div id="slider-arrows2" class="slider-position">
+                        <div class="prev" aria-controls="customize" tabindex="-1" data-controls="prev">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </div>
+                        <div class="next" aria-controls="customize" tabindex="-1" data-controls="next">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="slider-container">
+                    <div id="project-slider3">
+                        <img src="https://plchldr.co/i/350x350?bg=89FAE9&fc=000&text= " alt="placeholder image"
+                            width="350px" />
+                        <img src="https://plchldr.co/i/350x350?bg=62F8E2&fc=fffaf0&text= " alt="placeholder image"
+                            width="350px" />
+                        <img src="https://plchldr.co/i/350x350?bg=3CF6DA&fc=fffaf0&text= " alt="placeholder image"
+                            width="350px" />
+                    </div>
+                    <div id="slider-arrows3" class="slider-position">
+                        <div class="prev" aria-controls="customize" tabindex="-1" data-controls="prev">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </div>
+                        <div class="next" aria-controls="customize" tabindex="-1" data-controls="next">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#gallery" data-bs-slide="prev">
+            <h3 id="prev-proj">Prev</h3>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#gallery" data-bs-slide="next">
+            <h3 id="next-proj">Next</h3>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+    <script>
+        const slider = tns({
+            container: "#project-slider",
+            controlsContainer: "#slider-arrows",
+            items: 1,
+            fixedWidth: 350,
+            slideBy: 1,
+            autoplay: false,
+            loop: true,
+            touch: true,
+            center: true,
+            nav: false
+        });
+
+        const slider2 = tns({
+            container: "#project-slider2",
+            controlsContainer: "#slider-arrows2",
+            items: 1,
+            fixedWidth: 350,
+            slideBy: 1,
+            autoplay: false,
+            loop: true,
+            touch: true,
+            center: true,
+            nav: false
+        });
+
+        const slider3 = tns({
+            container: "#project-slider3",
+            controlsContainer: "#slider-arrows3",
+            items: 1,
+            fixedWidth: 350,
+            slideBy: 1,
+            autoplay: false,
+            loop: true,
+            touch: true,
+            center: true,
+            nav: false
+        });
+
+    </script>
+</body>
+
+</html>

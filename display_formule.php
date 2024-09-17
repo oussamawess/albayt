@@ -1,11 +1,11 @@
 <?php
-    session_start(); // Start session to access session variables
-    
-    // Check if user is not logged in, redirect to login page
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: login.php");
-        exit;
-    }
+session_start(); // Start session to access session variables
+
+// Check if user is not logged in, redirect to login page
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.php");
+    exit;
+}
 ?>
 <?php
 include 'db.php';
@@ -237,6 +237,7 @@ $result_vols = mysqli_query($conn, $sql_vols);
         </div>
         <div class="content">
             <h1 style="text-align:center;">Détails</h1>
+            <h3 style="text-align: left;"><?php echo "ID Formule: " . $formule_id ?></h3>
             <hr>
             <div class="section">
                 <h3>Informations générales</h3>
@@ -376,7 +377,7 @@ $result_vols = mysqli_query($conn, $sql_vols);
 
 
             <div class="section">
-                <h3>Pourquoi choisir la Formule?</h3>
+                <h3>Description</h3>
                 <table>
                     <tr>
                         <th>Raison</th>
@@ -386,6 +387,101 @@ $result_vols = mysqli_query($conn, $sql_vols);
                     </tr>
                 </table>
             </div>
+
+            <?php
+            // Check if s1t is empty and s1d equals "<p><br></p>"
+            if (!empty($formule['s1t']) && $formule['s1d'] != '<p><br></p>') {
+            ?>
+                <div class="section">
+                    <h3>Section 1</h3>
+                    <table>
+                        <tr>
+                            <th><?php echo $formule['s1t']; ?></th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $formule['s1d']; ?></td>
+                        </tr>
+                    </table>
+                </div>
+            <?php
+            }
+            ?>
+
+            <?php
+            // Check if s1t is empty and s1d equals "<p><br></p>"
+            if (!empty($formule['s2t']) && $formule['s2d'] != '<p><br></p>') {
+            ?>
+                <div class="section">
+                    <h3>Section 2</h3>
+                    <table>
+                        <tr>
+                            <th><?php echo $formule['s2t']; ?></th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $formule['s2d']; ?></td>
+                        </tr>
+                    </table>
+                </div>
+            <?php
+            }
+            ?>
+
+            <?php
+            // Check if s1t is empty and s1d equals "<p><br></p>"
+            if (!empty($formule['s3t']) && $formule['s3d'] != '<p><br></p>') {
+            ?>
+                <div class="section">
+                    <h3>Section 3</h3>
+                    <table>
+                        <tr>
+                            <th><?php echo $formule['s3t']; ?></th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $formule['s3d']; ?></td>
+                        </tr>
+                    </table>
+                </div>
+            <?php
+            }
+            ?>
+
+            <?php
+            // Check if s1t is empty and s1d equals "<p><br></p>"
+            if (!empty($formule['s4t']) && $formule['s4d'] != '<p><br></p>') {
+            ?>
+                <div class="section">
+                    <h3>Section 4</h3>
+                    <table>
+                        <tr>
+                            <th><?php echo $formule['s4t']; ?></th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $formule['s4d']; ?></td>
+                        </tr>
+                    </table>
+                </div>
+            <?php
+            }
+            ?>
+
+            <?php
+            // Check if s1t is empty and s1d equals "<p><br></p>"
+            if (!empty($formule['s5t']) && $formule['s5d'] != '<p><br></p>') {
+            ?>
+                <div class="section">
+                    <h3>Section 5</h3>
+                    <table>
+                        <tr>
+                            <th><?php echo $formule['s5t']; ?></th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $formule['s5d']; ?></td>
+                        </tr>
+                    </table>
+                </div>
+            <?php
+            }
+            ?>
 
         </div>
     </div>

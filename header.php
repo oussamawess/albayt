@@ -78,7 +78,11 @@
     <nav>
         <ul>
             <li>
-                <a href="omrapackage.php">Villes</a>               
+                <a href="categorie_parent.php">Catégories Parent</a>
+            </li>
+
+            <li>
+                <a href="omrapackage.php">Villes</a>
             </li>
 
             <li>

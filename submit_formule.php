@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $statut = 'activé'; // Default status for validation
     }
 
-    // 1. Get Data from the Form and Sanitize Input
+    // 1. Get Data from the Form and Sanitize Input    
     $package_id = mysqli_real_escape_string($conn, $_POST['package']);
     $type_id = mysqli_real_escape_string($conn, $_POST['type']);
     $date_depart = mysqli_real_escape_string($conn, $_POST['date_depart']);
@@ -48,9 +48,27 @@ $program_order = isset($_POST['program_order']) ? $_POST['program_order'] : '[]'
 // Get the description from the hidden input
 $description = mysqli_real_escape_string($conn, $_POST['description']);
 
+// Get the form data
+$s1t = $_POST['titre_section1'];  // Title for Section 1
+$s1d = $_POST['section1'];        // Description for Section 1 (Quill editor content)
+
+$s2t = $_POST['titre_section2'];  // Title for Section 2
+$s2d = $_POST['section2'];        // Description for Section 2 (Quill editor content)
+
+$s3t = $_POST['titre_section3'];  // Title for Section 3
+$s3d = $_POST['section3'];        // Description for Section 3 (Quill editor content)
+
+$s4t = $_POST['titre_section4'];  // Title for Section 4
+$s4d = $_POST['section4'];        // Description for Section 4 (Quill editor content)
+
+$s5t = $_POST['titre_section5'];  // Title for Section 5
+$s5d = $_POST['section5'];        // Description for Section 5 (Quill editor content)
+
+
+
 // Prepare and Execute the SQL INSERT Query
-$sql_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id, program_order, description)
-                VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json', '$program_order', '$description')";
+$sql_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id, program_order, description, s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d)
+                VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json', '$program_order', '$description', '$s1t', '$s1d', '$s2t', '$s2d', '$s3t', '$s3d', '$s4t', '$s4d', '$s5t', '$s5d')";
 
 
 

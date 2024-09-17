@@ -1,11 +1,11 @@
 <?php
-    session_start(); // Start session to access session variables
-    
-    // Check if user is not logged in, redirect to login page
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: login.php");
-        exit;
-    }
+session_start(); // Start session to access session variables
+
+// Check if user is not logged in, redirect to login page
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.php");
+    exit;
+}
 ?>
 <?php
 include 'db.php'; // Include your database connection file
@@ -40,14 +40,25 @@ if (isset($_GET['id'])) {
         $prix_chambre_single_promo = $row_formule['prix_chambre_single_promo'];
         $description = $row_formule['description'];
 
+        $s1t = $row_formule['s1t'];
+        $s1d = $row_formule['s1d'];
+        $s2t = $row_formule['s2t'];
+        $s2d = $row_formule['s2d'];
+        $s3t = $row_formule['s3t'];
+        $s3d = $row_formule['s3d'];
+        $s4t = $row_formule['s4t'];
+        $s4d = $row_formule['s4d'];
+        $s5t = $row_formule['s5t'];
+        $s5d = $row_formule['s5d'];
+
         // Get the programs_id from the original formule and encode as JSON
         $programs_json = $row_formule['programs_id'];
 
         $program_order_json = $row_formule['program_order'];
-                           
+
         // Insert the duplicated formule as a new record
-        $sql_insert_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id, program_order, description)
-            VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json', '$program_order_json', '$description')";
+        $sql_insert_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id, program_order, description, s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d)
+            VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json', '$program_order_json', '$description', '$s1t', '$s1d', '$s2t', '$s2d', '$s3t', '$s3d', '$s4t', '$s4d', '$s5t', '$s5d')";
 
         if (mysqli_query($conn, $sql_insert_formule)) {
             $new_formule_id = mysqli_insert_id($conn);

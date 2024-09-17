@@ -172,60 +172,72 @@
         
 
         <table>
-            <thead>
-                <tr>
-                    <th>Nom du Formule</th>
-                    <th>Ville de départ</th>
-                    <th>Date de départ</th>
-                    <th>Date de retour</th>
-                    <th>Statut</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                include 'db.php';
+    <thead>
+        <tr>
+            <th>Catégorie parent</th>
+            <th>Nom du Formule</th>
+            <th>Ville de départ</th>
+            <th>Date de départ</th>
+            <th>Date de retour</th>
+            <th>Statut</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        include 'db.php';
 
-                // SQL query to select formules along with related type_nom and package_nom
-                $sql_formules = "SELECT formules.id, formules.date_depart, formules.date_retour, statut, created_at, type_formule_omra.nom AS type_nom, omra_packages.nom AS package_nom 
-                                 FROM formules 
-                                 JOIN type_formule_omra ON formules.type_id = type_formule_omra.id 
-                                 JOIN omra_packages ON formules.package_id = omra_packages.id
-                                 ORDER BY created_at DESC";
-                $result_formules = mysqli_query($conn, $sql_formules);
+        // SQL query to select formules along with related category parent, type_nom, and package_nom
+        $sql_formules = "
+            SELECT formules.id, formules.date_depart, formules.date_retour, formules.statut, formules.created_at,
+                   type_formule_omra.nom AS type_nom, omra_packages.nom AS package_nom,
+                   category_parent.nom AS categorie_parent
+            FROM formules
+            JOIN type_formule_omra ON formules.type_id = type_formule_omra.id
+            JOIN omra_packages ON formules.package_id = omra_packages.id
+            JOIN category_parent ON omra_packages.category_parent_id = category_parent.id
+            ORDER BY formules.created_at DESC
+        ";
 
-                if (mysqli_num_rows($result_formules) > 0) {
-                    while ($row_formule = mysqli_fetch_assoc($result_formules)) {
-                        echo "<tr>";
-                        echo "<td>" . $row_formule['type_nom'] . "</td>";
-                        echo "<td>" . $row_formule['package_nom'] . "</td>";
-                        $date_depart_formattee = date('d-m-Y', strtotime($row_formule['date_depart']));
-                        echo "<td>" . $date_depart_formattee . "</td>";
-                        $date_retour_formattee = date('d-m-Y', strtotime($row_formule['date_retour']));
-                        echo "<td>" . $date_retour_formattee . "</td>";
-                        
-                        if($row_formule['statut'] == 'désactivé'){
-                            echo "<td>" . '<span class="inactive">● </span>' . $row_formule['statut'].  "</td>";
-                        }else{
-                            echo "<td>". '<span class="active">● </span>' . $row_formule['statut'] . "</td>";
-                        }
+        $result_formules = mysqli_query($conn, $sql_formules);
 
-                        // Buttons for edit, delete, and duplicate formule
-                        echo "<td class='btn-group'>";
-                        echo "<a class='btn-edit' href='edit_formule.php?id=" . $row_formule['id'] . "'>Éditer</a>";
-                        echo "<a class='btn-delete' href='delete_formule.php?id=" . $row_formule['id'] . "' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette formule?')\">Supprimer</a>";
-                        echo "<a class='btn-dup' href='duplicate_formule.php?id=" . $row_formule['id'] . "'>Dupliquer</a>";
-                        echo "<a class='btn-display' href='display_formule.php?id=" . $row_formule['id'] . "'>Afficher</a>";
-                        echo "</td>";
-                        echo "</tr>";
-                    }
+        if (mysqli_num_rows($result_formules) > 0) {
+            while ($row_formule = mysqli_fetch_assoc($result_formules)) {
+                echo "<tr>";
+                // Display the category parent name
+                echo "<td>" . $row_formule['categorie_parent'] . "</td>";
+                echo "<td>" . $row_formule['type_nom'] . "</td>";
+                echo "<td>" . $row_formule['package_nom'] . "</td>";
+                $date_depart_formattee = date('d-m-Y', strtotime($row_formule['date_depart']));
+                echo "<td>" . $date_depart_formattee . "</td>";
+                $date_retour_formattee = date('d-m-Y', strtotime($row_formule['date_retour']));
+                echo "<td>" . $date_retour_formattee . "</td>";
+                
+                // Display the status with an icon
+                if($row_formule['statut'] == 'désactivé'){
+                    echo "<td>" . '<span class="inactive">● </span>' . $row_formule['statut'] . "</td>";
                 } else {
-                    echo "<tr><td colspan='4'>Aucune formule disponible pour le moment.</td></tr>";
+                    echo "<td>" . '<span class="active">● </span>' . $row_formule['statut'] . "</td>";
                 }
-                mysqli_close($conn);
-                ?>
-            </tbody>
-        </table>
+
+                // Buttons for edit, delete, and duplicate formule
+                echo "<td class='btn-group'>";
+                echo "<a class='btn-edit' href='edit_formule.php?id=" . $row_formule['id'] . "'>Éditer</a>";
+                echo "<a class='btn-delete' href='delete_formule.php?id=" . $row_formule['id'] . "' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette formule?')\">Supprimer</a>";
+                echo "<a class='btn-dup' href='duplicate_formule.php?id=" . $row_formule['id'] . "'>Dupliquer</a>";
+                echo "<a class='btn-display' href='display_formule.php?id=" . $row_formule['id'] . "'>Afficher</a>";
+                echo "</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='7'>Aucune formule disponible pour le moment.</td></tr>";
+        }
+
+        mysqli_close($conn);
+        ?>
+    </tbody>
+</table>
+
     </div>
 </body>
 

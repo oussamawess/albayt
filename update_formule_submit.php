@@ -1,11 +1,11 @@
 <?php
-    session_start(); // Start session to access session variables
-    
-    // Check if user is not logged in, redirect to login page
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: login.php");
-        exit;
-    }
+session_start(); // Start session to access session variables
+
+// Check if user is not logged in, redirect to login page
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.php");
+    exit;
+}
 ?>
 <?php
 include 'db.php'; // Include your database connection file
@@ -31,29 +31,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prix_chambre_triple_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_triple_promo']);
     $prix_chambre_double_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_double_promo']);
     $prix_chambre_single_promo = mysqli_real_escape_string($conn, $_POST['prix_chambre_single_promo']);
-    $description = mysqli_real_escape_string($conn, $_POST['description']); // Get and sanitize the description
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
+    $s1t = mysqli_real_escape_string($conn, $_POST['titre_section1']);
+    $s1d = mysqli_real_escape_string($conn, $_POST['section1']);
+    $s2t = mysqli_real_escape_string($conn, $_POST['titre_section2']);
+    $s2d = mysqli_real_escape_string($conn, $_POST['section2']);
+    $s3t = mysqli_real_escape_string($conn, $_POST['titre_section3']);
+    $s3d = mysqli_real_escape_string($conn, $_POST['section3']);
+    $s4t = mysqli_real_escape_string($conn, $_POST['titre_section4']);
+    $s4d = mysqli_real_escape_string($conn, $_POST['section4']);
+    $s5t = mysqli_real_escape_string($conn, $_POST['titre_section5']);
+    $s5d = mysqli_real_escape_string($conn, $_POST['section5']);
     //wess
 
-   // Fetch and sanitize selected programs
-   $selectedPrograms = isset($_POST['programs']) ? array_map('intval', $_POST['programs']) : [];
-   $programsJson = json_encode($selectedPrograms);
+    // Fetch and sanitize selected programs
+    $selectedPrograms = isset($_POST['programs']) ? array_map('intval', $_POST['programs']) : [];
+    $programsJson = json_encode($selectedPrograms);
 
-   // Fetch and sanitize program order
-   $programOrder = isset($_POST['program_order']) ? $_POST['program_order'] : '[]';
+    // Fetch and sanitize program order
+    $programOrder = isset($_POST['program_order']) ? $_POST['program_order'] : '[]';
 
     //wess
     // 2. Input Validation (Example - Check if all price fields are valid numbers)
     $priceFields = [
-        'prix_chambre_quadruple', 'prix_chambre_triple', 'prix_chambre_double',
-        'prix_chambre_single', 'child_discount', 'prix_bebe',
-        'prix_chambre_quadruple_promo', 'prix_chambre_triple_promo', 'prix_chambre_double_promo',
+        'prix_chambre_quadruple',
+        'prix_chambre_triple',
+        'prix_chambre_double',
+        'prix_chambre_single',
+        'child_discount',
+        'prix_bebe',
+        'prix_chambre_quadruple_promo',
+        'prix_chambre_triple_promo',
+        'prix_chambre_double_promo',
         'prix_chambre_single_promo'
     ];
 
     foreach ($priceFields as $field) {
         if (!is_numeric($$field) || $$field < 0) { // Use variable variables to check the value
             echo "Erreur: Le champ $field doit être un nombre positif.";
-            exit; 
+            exit;
         }
     }
     //wess
@@ -78,6 +94,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             prix_chambre_double_promo = '$prix_chambre_double_promo',
             prix_chambre_single_promo = '$prix_chambre_single_promo',
             description = '$description', -- Include the description in the update statement
+            s1t = '$s1t',
+            s1d = '$s1d',
+            s2t = '$s2t',
+            s2d = '$s2d',
+            s3t = '$s3t',
+            s3d = '$s3d',
+            s4t = '$s4t',
+            s4d = '$s4d',
+            s5t = '$s5t',
+            s5d = '$s5d',
             -- wess
 
             programs_id = '$programsJson',

@@ -1,11 +1,11 @@
 <?php
-    session_start(); // Start session to access session variables
-    
-    // Check if user is not logged in, redirect to login page
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: login.php");
-        exit;
-    }
+session_start(); // Start session to access session variables
+
+// Check if user is not logged in, redirect to login page
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  header("Location: login.php");
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -22,11 +22,11 @@
 
 
 
-<!-- for programs -->
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<!-- End for programs -->
+  <!-- for programs -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <!-- End for programs -->
 
 
 
@@ -299,12 +299,11 @@
       box-sizing: border-box;
     }
 
-    .checkinputs{
+    .checkinputs {
       padding: 10px 10px;
       border-radius: 5px;
       background-color: white;
     }
-
   </style>
 
   <?php include 'header.php'; ?>
@@ -321,11 +320,7 @@
     <form action="submit_formule.php" method="POST">
       <div class="half-width-inputs">
 
-
-
-
-
-
+        
         <div class="input-group">
           <label for="package">Ville de départ:</label>
           <select id="package" name="package" class="half-width-input" required>
@@ -1017,82 +1012,478 @@
       <input type="hidden" name="program_order" value="">
       <!-- End programs -->
 
+
+      <!-- Start Description -->
       <div class="price-inputs">
-  <h3>Pourquoi choisir la Formule? <span class="toggle-icon">+</span></h3>
-  <div class="collapsible-content" style="padding:5px; border:0px;">
-    <div class="">
-      <!-- Container for the Quill editor -->
-      <div class="editor-container">
-        <!-- Toolbar container -->
-        <div id="toolbar">
-          <!-- Toolbar options -->
-          <span class="ql-formats">
-            <button class="ql-bold">Bold</button>
-            <button class="ql-italic">Italic</button>
-            <button class="ql-underline">Underline</button>
-            <button class="ql-strike">Strike</button>
-          </span>
-          <span class="ql-formats">
-            <select class="ql-align">
-              <option value=""></option>
-              <option value="center">Center</option>
-              <option value="right">Right</option>
-            </select>
-            <select class="ql-header">
-              <option value="1">Heading 1</option>
-              <option value="2">Heading 2</option>
-              <option value="3">Heading 3</option>
-              <option selected>Normal</option>
-            </select>
-          </span>
-          <span class="ql-formats">
-            <select class="ql-color">
-              <option value="#ff0000">Red</option>
-              <option value="#00ff00">Green</option>
-              <option value="#0000ff">Blue</option>
-              <option value="#000000" selected>Black</option>
-            </select>
-            <select class="ql-background">
-              <option value="#ffff00">Yellow</option>
-              <option value="#00ffff">Cyan</option>
-              <option value="#ff00ff">Magenta</option>
-              <option value="#ffffff" selected>White</option>
-            </select>
-          </span>
-          <!-- List options -->
-          <span class="ql-formats">
-            <button class="ql-list" value="ordered">Ordered List</button>
-            <button class="ql-list" value="bullet">Bullet List</button>
-          </span>
+        <h3>Description <span class="toggle-icon">+</span></h3>
+        <div class="collapsible-content" style="padding:5px; border:0px;">
+          <div class="">
+            <!-- Container for the Quill editor -->
+            <div class="editor-container">
+              <!-- Toolbar container -->
+              <div id="toolbar">
+                <!-- Toolbar options -->
+                <span class="ql-formats">
+                  <button class="ql-bold">Bold</button>
+                  <button class="ql-italic">Italic</button>
+                  <button class="ql-underline">Underline</button>
+                  <button class="ql-strike">Strike</button>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-align">
+                    <option value=""></option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                  </select>
+                  <select class="ql-header">
+                    <option value="1">Heading 1</option>
+                    <option value="2">Heading 2</option>
+                    <option value="3">Heading 3</option>
+                    <option selected>Normal</option>
+                  </select>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-color">
+                    <option value="#ff0000">Red</option>
+                    <option value="#00ff00">Green</option>
+                    <option value="#0000ff">Blue</option>
+                    <option value="#000000" selected>Black</option>
+                  </select>
+                  <select class="ql-background">
+                    <option value="#ffff00">Yellow</option>
+                    <option value="#00ffff">Cyan</option>
+                    <option value="#ff00ff">Magenta</option>
+                    <option value="#ffffff" selected>White</option>
+                  </select>
+                </span>
+                <!-- List options -->
+                <span class="ql-formats">
+                  <button class="ql-list" value="ordered">Ordered List</button>
+                  <button class="ql-list" value="bullet">Bullet List</button>
+                </span>
+              </div>
+              <!-- Editor container -->
+              <div id="editor"></div>
+            </div>
+          </div>
         </div>
-        <!-- Editor container -->
-        <div id="editor"></div>
       </div>
-    </div>
-  </div>
-</div>
 
-<!-- Hidden input field to store the Quill editor content -->
-<input type="hidden" name="description" id="description">
+      <!-- Hidden input field to store the Quill editor content -->
+      <input type="hidden" name="description" id="description">
 
-<script>
-  var quill = new Quill('#editor', {
-    theme: 'snow',
-    modules: {
-      toolbar: '#toolbar'
-    }
-  });
+      <script>
+        var quill = new Quill('#editor', {
+          theme: 'snow',
+          modules: {
+            toolbar: '#toolbar'
+          }
+        });
 
-  // Add an event listener to the form submission
-  document.querySelector('form').addEventListener('submit', function() {
-    // Get the Quill editor content
-    var description = quill.root.innerHTML;
-    // Set the content to the hidden input field
-    document.getElementById('description').value = description;
-  });
-</script>
+        // Add an event listener to the form submission
+        document.querySelector('form').addEventListener('submit', function() {
+          // Get the Quill editor content
+          var description = quill.root.innerHTML;
+          // Set the content to the hidden input field
+          document.getElementById('description').value = description;
+        });
+      </script>
+      <!-- End Description -->
 
+      <!-- Start section 1 -->
+      <div class="price-inputs">
+        <h3>Section 1 <span class="toggle-icon">+</span></h3>
+        <div class="collapsible-content" style="padding:5px; border:0px;">
+          <label for="titre_section1">Titre:</label>
+          <input type="text" id="titre_section1" name="titre_section1" class="half-width-input" style="width:30%;">
+          <div class="">
+            <!-- Container for the Quill editor -->
+            <div class="editor-container">
+              <!-- Toolbar container -->
+              <div id="toolbar-section1">
+                <!-- Toolbar options -->
+                <span class="ql-formats">
+                  <button class="ql-bold">Bold</button>
+                  <button class="ql-italic">Italic</button>
+                  <button class="ql-underline">Underline</button>
+                  <button class="ql-strike">Strike</button>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-align">
+                    <option value=""></option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                  </select>
+                  <select class="ql-header">
+                    <option value="1">Heading 1</option>
+                    <option value="2">Heading 2</option>
+                    <option value="3">Heading 3</option>
+                    <option selected>Normal</option>
+                  </select>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-color">
+                    <option value="#ff0000">Red</option>
+                    <option value="#00ff00">Green</option>
+                    <option value="#0000ff">Blue</option>
+                    <option value="#000000" selected>Black</option>
+                  </select>
+                  <select class="ql-background">
+                    <option value="#ffff00">Yellow</option>
+                    <option value="#00ffff">Cyan</option>
+                    <option value="#ff00ff">Magenta</option>
+                    <option value="#ffffff" selected>White</option>
+                  </select>
+                </span>
+                <!-- List options -->
+                <span class="ql-formats">
+                  <button class="ql-list" value="ordered">Ordered List</button>
+                  <button class="ql-list" value="bullet">Bullet List</button>
+                </span>
+              </div>
+              <!-- Editor container -->
+              <div id="editor-section1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Hidden input field to store the Quill editor content -->
+      <input type="hidden" name="section1" id="section1">
+
+      <script>
+        var quillSection1 = new Quill('#editor-section1', {
+          theme: 'snow',
+          modules: {
+            toolbar: '#toolbar-section1'
+          }
+        });
+
+        // Add an event listener to the form submission
+        document.querySelector('form').addEventListener('submit', function() {
+          // Get the Quill editor content
+          var section1 = quillSection1.root.innerHTML;
+          // Set the content to the hidden input field
+          document.getElementById('section1').value = section1;
+        });
+      </script>
+      <!-- End section 1 -->
+
+      <!-- Start section 2 -->
+      <div class="price-inputs">
+        <h3>Section 2 <span class="toggle-icon">+</span></h3>
+        <div class="collapsible-content" style="padding:5px; border:0px;">
+          <label for="titre_section2">Titre:</label>
+          <input type="text" id="titre_section2" name="titre_section2" class="half-width-input" style="width:30%;">
+          <div class="">
+            <!-- Container for the Quill editor -->
+            <div class="editor-container">
+              <!-- Toolbar container -->
+              <div id="toolbar-section2">
+                <!-- Toolbar options -->
+                <span class="ql-formats">
+                  <button class="ql-bold">Bold</button>
+                  <button class="ql-italic">Italic</button>
+                  <button class="ql-underline">Underline</button>
+                  <button class="ql-strike">Strike</button>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-align">
+                    <option value=""></option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                  </select>
+                  <select class="ql-header">
+                    <option value="1">Heading 1</option>
+                    <option value="2">Heading 2</option>
+                    <option value="3">Heading 3</option>
+                    <option selected>Normal</option>
+                  </select>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-color">
+                    <option value="#ff0000">Red</option>
+                    <option value="#00ff00">Green</option>
+                    <option value="#0000ff">Blue</option>
+                    <option value="#000000" selected>Black</option>
+                  </select>
+                  <select class="ql-background">
+                    <option value="#ffff00">Yellow</option>
+                    <option value="#00ffff">Cyan</option>
+                    <option value="#ff00ff">Magenta</option>
+                    <option value="#ffffff" selected>White</option>
+                  </select>
+                </span>
+                <!-- List options -->
+                <span class="ql-formats">
+                  <button class="ql-list" value="ordered">Ordered List</button>
+                  <button class="ql-list" value="bullet">Bullet List</button>
+                </span>
+              </div>
+              <!-- Editor container -->
+              <div id="editor-section2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden input field to store the Quill editor content -->
+      <input type="hidden" name="section2" id="section2">
+
+      <script>
+        var quillSection2 = new Quill('#editor-section2', {
+          theme: 'snow',
+          modules: {
+            toolbar: '#toolbar-section2'
+          }
+        });
+
+        // Add an event listener to the form submission
+        document.querySelector('form').addEventListener('submit', function() {
+          // Get the Quill editor content
+          var section2 = quillSection2.root.innerHTML;
+          // Set the content to the hidden input field
+          document.getElementById('section2').value = section2;
+        });
+      </script>
+      <!-- End section 2 -->
+
+      <!-- Start section 3 -->
+      <div class="price-inputs">
+        <h3>Section 3 <span class="toggle-icon">+</span></h3>
+        <div class="collapsible-content" style="padding:5px; border:0px;">
+          <label for="titre_section3">Titre:</label>
+          <input type="text" id="titre_section3" name="titre_section3" class="half-width-input" style="width:30%;">
+          <div class="">
+            <!-- Container for the Quill editor -->
+            <div class="editor-container">
+              <!-- Toolbar container -->
+              <div id="toolbar-section3">
+                <!-- Toolbar options -->
+                <span class="ql-formats">
+                  <button class="ql-bold">Bold</button>
+                  <button class="ql-italic">Italic</button>
+                  <button class="ql-underline">Underline</button>
+                  <button class="ql-strike">Strike</button>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-align">
+                    <option value=""></option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                  </select>
+                  <select class="ql-header">
+                    <option value="1">Heading 1</option>
+                    <option value="2">Heading 2</option>
+                    <option value="3">Heading 3</option>
+                    <option selected>Normal</option>
+                  </select>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-color">
+                    <option value="#ff0000">Red</option>
+                    <option value="#00ff00">Green</option>
+                    <option value="#0000ff">Blue</option>
+                    <option value="#000000" selected>Black</option>
+                  </select>
+                  <select class="ql-background">
+                    <option value="#ffff00">Yellow</option>
+                    <option value="#00ffff">Cyan</option>
+                    <option value="#ff00ff">Magenta</option>
+                    <option value="#ffffff" selected>White</option>
+                  </select>
+                </span>
+                <!-- List options -->
+                <span class="ql-formats">
+                  <button class="ql-list" value="ordered">Ordered List</button>
+                  <button class="ql-list" value="bullet">Bullet List</button>
+                </span>
+              </div>
+              <!-- Editor container -->
+              <div id="editor-section3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden input field to store the Quill editor content -->
+      <input type="hidden" name="section3" id="section3">
+
+      <script>
+        var quillSection3 = new Quill('#editor-section3', {
+          theme: 'snow',
+          modules: {
+            toolbar: '#toolbar-section3'
+          }
+        });
+
+        // Add an event listener to the form submission
+        document.querySelector('form').addEventListener('submit', function() {
+          // Get the Quill editor content
+          var section3 = quillSection3.root.innerHTML;
+          // Set the content to the hidden input field
+          document.getElementById('section3').value = section3;
+        });
+      </script>
+      <!-- End section 3 -->
+
+      <!-- Start section 4 -->
+      <div class="price-inputs">
+        <h3>Section 4 <span class="toggle-icon">+</span></h3>
+        <div class="collapsible-content" style="padding:5px; border:0px;">
+          <label for="titre_section4">Titre:</label>
+          <input type="text" id="titre_section4" name="titre_section4" class="half-width-input" style="width:30%;">
+          <div class="">
+            <!-- Container for the Quill editor -->
+            <div class="editor-container">
+              <!-- Toolbar container -->
+              <div id="toolbar-section4">
+                <!-- Toolbar options -->
+                <span class="ql-formats">
+                  <button class="ql-bold">Bold</button>
+                  <button class="ql-italic">Italic</button>
+                  <button class="ql-underline">Underline</button>
+                  <button class="ql-strike">Strike</button>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-align">
+                    <option value=""></option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                  </select>
+                  <select class="ql-header">
+                    <option value="1">Heading 1</option>
+                    <option value="2">Heading 2</option>
+                    <option value="3">Heading 3</option>
+                    <option selected>Normal</option>
+                  </select>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-color">
+                    <option value="#ff0000">Red</option>
+                    <option value="#00ff00">Green</option>
+                    <option value="#0000ff">Blue</option>
+                    <option value="#000000" selected>Black</option>
+                  </select>
+                  <select class="ql-background">
+                    <option value="#ffff00">Yellow</option>
+                    <option value="#00ffff">Cyan</option>
+                    <option value="#ff00ff">Magenta</option>
+                    <option value="#ffffff" selected>White</option>
+                  </select>
+                </span>
+                <!-- List options -->
+                <span class="ql-formats">
+                  <button class="ql-list" value="ordered">Ordered List</button>
+                  <button class="ql-list" value="bullet">Bullet List</button>
+                </span>
+              </div>
+              <!-- Editor container -->
+              <div id="editor-section4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden input field to store the Quill editor content -->
+      <input type="hidden" name="section4" id="section4">
+
+      <script>
+        var quillSection4 = new Quill('#editor-section4', {
+          theme: 'snow',
+          modules: {
+            toolbar: '#toolbar-section4'
+          }
+        });
+
+        // Add an event listener to the form submission
+        document.querySelector('form').addEventListener('submit', function() {
+          // Get the Quill editor content
+          var section4 = quillSection4.root.innerHTML;
+          // Set the content to the hidden input field
+          document.getElementById('section4').value = section4;
+        });
+      </script>
+      <!-- End section 4 -->
+
+      <!-- Start section 5 -->
+      <div class="price-inputs">
+        <h3>Section 5 <span class="toggle-icon">+</span></h3>
+        <div class="collapsible-content" style="padding:5px; border:0px;">
+          <label for="titre_section5">Titre:</label>
+          <input type="text" id="titre_section5" name="titre_section5" class="half-width-input" style="width:30%;">
+          <div class="">
+            <!-- Container for the Quill editor -->
+            <div class="editor-container">
+              <!-- Toolbar container -->
+              <div id="toolbar-section5">
+                <!-- Toolbar options -->
+                <span class="ql-formats">
+                  <button class="ql-bold">Bold</button>
+                  <button class="ql-italic">Italic</button>
+                  <button class="ql-underline">Underline</button>
+                  <button class="ql-strike">Strike</button>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-align">
+                    <option value=""></option>
+                    <option value="center">Center</option>
+                    <option value="right">Right</option>
+                  </select>
+                  <select class="ql-header">
+                    <option value="1">Heading 1</option>
+                    <option value="2">Heading 2</option>
+                    <option value="3">Heading 3</option>
+                    <option selected>Normal</option>
+                  </select>
+                </span>
+                <span class="ql-formats">
+                  <select class="ql-color">
+                    <option value="#ff0000">Red</option>
+                    <option value="#00ff00">Green</option>
+                    <option value="#0000ff">Blue</option>
+                    <option value="#000000" selected>Black</option>
+                  </select>
+                  <select class="ql-background">
+                    <option value="#ffff00">Yellow</option>
+                    <option value="#00ffff">Cyan</option>
+                    <option value="#ff00ff">Magenta</option>
+                    <option value="#ffffff" selected>White</option>
+                  </select>
+                </span>
+                <!-- List options -->
+                <span class="ql-formats">
+                  <button class="ql-list" value="ordered">Ordered List</button>
+                  <button class="ql-list" value="bullet">Bullet List</button>
+                </span>
+              </div>
+              <!-- Editor container -->
+              <div id="editor-section5"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hidden input field to store the Quill editor content -->
+      <input type="hidden" name="section5" id="section5">
+
+      <script>
+        var quillSection5 = new Quill('#editor-section5', {
+          theme: 'snow',
+          modules: {
+            toolbar: '#toolbar-section5'
+          }
+        });
+
+        // Add an event listener to the form submission
+        document.querySelector('form').addEventListener('submit', function() {
+          // Get the Quill editor content
+          var section5 = quillSection5.root.innerHTML;
+          // Set the content to the hidden input field
+          document.getElementById('section5').value = section5;
+        });
+      </script>
+      <!-- End section 5 -->
 
 
 
