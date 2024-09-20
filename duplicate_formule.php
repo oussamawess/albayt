@@ -56,9 +56,30 @@ if (isset($_GET['id'])) {
 
         $program_order_json = $row_formule['program_order'];
 
+        // Check if there is a file associated with the formule (e.g., file_path column)
+        $file_path = $row_formule['uploaded_file']; // Assuming this is the column name where file paths are stored
+
+        $new_file_path = '';
+        if (!empty($file_path)) {
+            // Define the new file path, you can modify this logic to fit your folder structure
+            $new_file_name = "x". basename($file_path);
+            $new_file_path = "files/" . $new_file_name; // Define the path for the duplicated file
+
+            // Copy the file to the new path
+            if (file_exists($file_path)) {
+                if (!copy($file_path, $new_file_path)) {
+                    echo "Failed to duplicate the file.";
+                    exit;
+                }
+            } else {
+                echo "Original file does not exist.";
+                exit;
+            }
+        }
+
         // Insert the duplicated formule as a new record
-        $sql_insert_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id, program_order, description, s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d)
-            VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json', '$program_order_json', '$description', '$s1t', '$s1d', '$s2t', '$s2d', '$s3t', '$s3d', '$s4t', '$s4d', '$s5t', '$s5d')";
+        $sql_insert_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id, program_order, description, s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d, uploaded_file)
+            VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json', '$program_order_json', '$description', '$s1t', '$s1d', '$s2t', '$s2d', '$s3t', '$s3d', '$s4t', '$s4d', '$s5t', '$s5d', '$new_file_path')";
 
         if (mysqli_query($conn, $sql_insert_formule)) {
             $new_formule_id = mysqli_insert_id($conn);

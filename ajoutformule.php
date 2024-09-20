@@ -18,6 +18,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
   <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
   <!-- <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet"/> -->
 
 
@@ -317,10 +318,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
   <div class="container">
     <h2>Ajouter une Formule</h2>
-    <form action="submit_formule.php" method="POST">
+    <form action="submit_formule.php" method="POST" enctype="multipart/form-data">
       <div class="half-width-inputs">
 
-        
+
         <div class="input-group">
           <label for="package">Ville de départ:</label>
           <select id="package" name="package" class="half-width-input" required>
@@ -1484,6 +1485,19 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         });
       </script>
       <!-- End section 5 -->
+
+
+      <!-- Start download file -->
+      <div class="price-inputs" style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+        <div class="input-group" style="display: flex; flex-direction: column; align-items: center;">
+          <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Fichier</h3>
+          <input type="file" name="uploaded_file" id="uploaded_file" class="form-control" style="padding: 10px; border: 1px solid #ababab; border-radius: 5px; transition: border-color 0.3s; width: 100%; max-width: 300px;"
+            onfocus="this.style.borderColor='#32363b'; this.style.outline='none';"
+            onblur="this.style.borderColor='#32363b';">
+        </div>
+      </div>
+      <!-- End download file -->
+
 
 
 

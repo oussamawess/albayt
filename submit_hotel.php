@@ -14,7 +14,9 @@ include "db.php";
 // Récupérer les données du formulaire
 $nom = $_POST['nom'];
 $etoiles = $_POST['etoiles'];
-$ville = $_POST['ville'];
+// $ville = $_POST['ville'];
+$ville = $_POST['ville_depart'];
+
 // $pension = $_POST['pension'];
 $details = $_POST['details'];
 $monument = $_POST['monument'];

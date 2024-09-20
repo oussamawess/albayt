@@ -23,8 +23,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $new_package_id = mysqli_insert_id($conn);
 
         // Step 2: Duplicate formules for the new package
-        $sql_duplicate_formules = "INSERT INTO formules (package_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, type_id, created_at, programs_id, program_order, description, s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d)
-                                   SELECT $new_package_id, date_depart, date_retour, 'désactivé', duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, type_id, created_at, programs_id, program_order, description, s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d
+        $sql_duplicate_formules = "INSERT INTO formules (package_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, type_id, created_at, programs_id, program_order, description, s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d, uploaded_file)
+                                   SELECT $new_package_id, date_depart, date_retour, 'désactivé', duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, type_id, created_at, programs_id, program_order, description, s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d, uploaded_file
                                    FROM formules
                                    WHERE package_id = $package_id";
         if (mysqli_query($conn, $sql_duplicate_formules)) {
@@ -33,13 +33,14 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             $type_id_map = [];
 
             // Step 3: Map original formules IDs to new formules IDs
-            $sql_get_original_formules = "SELECT id, type_id FROM formules WHERE package_id = $package_id";
+            $sql_get_original_formules = "SELECT id, uploaded_file, type_id FROM formules WHERE package_id = $package_id";
             $result_original_formules = mysqli_query($conn, $sql_get_original_formules);
             if (mysqli_num_rows($result_original_formules) > 0) {
                 while ($row_original_formule = mysqli_fetch_assoc($result_original_formules)) {
                     $original_formule_id = $row_original_formule['id'];
+                    $original_uploaded_file = $row_original_formule['uploaded_file'];
                     $original_type_id = $row_original_formule['type_id'];
-
+                    
                     // Fetch the new formule ID
                     $sql_get_new_formule = "SELECT id FROM formules WHERE package_id = $new_package_id";
                     if (!empty($new_formule_ids)) {
@@ -70,6 +71,18 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                             $new_type_formule_id = $type_id_map[$original_type_id];
                             $sql_update_new_formule = "UPDATE formules SET type_id = $new_type_formule_id WHERE id = $new_formule_id";
                             mysqli_query($conn, $sql_update_new_formule);
+                        }
+
+                        // Step 5: Copy uploaded file (photo) if exists
+                        if (!empty($original_uploaded_file) && file_exists('files/' . $original_uploaded_file)) {
+                            $new_photo_name = 'copy_' . basename($original_uploaded_file);
+                            $new_photo_path = 'files/' . $new_photo_name;
+
+                            if (copy('files/' . $original_uploaded_file, $new_photo_path)) {
+                                // Update new formule with new photo path
+                                $sql_update_photo = "UPDATE formules SET uploaded_file = '$new_photo_name' WHERE id = $new_formule_id";
+                                mysqli_query($conn, $sql_update_photo);
+                            }
                         }
                     }
                 }

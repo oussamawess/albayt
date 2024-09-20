@@ -44,6 +44,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $s5d = mysqli_real_escape_string($conn, $_POST['section5']);
     //wess
 
+       // Handle file upload (if any)
+       $uploaded_file_path = ''; // Initialize variable for the file path
+       if (isset($_FILES['uploaded_file']) && $_FILES['uploaded_file']['error'] === UPLOAD_ERR_OK) {
+           $target_dir = "files/"; // Directory for uploaded files
+           $file_name = basename($_FILES["uploaded_file"]["name"]);
+           $target_file = $target_dir . uniqid() . "_" . $file_name;
+   
+           // Check if file size is within the limit (e.g., 5MB)
+           if ($_FILES['uploaded_file']['size'] <= 5000000) {
+               $file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+               $allowed_types = ['jpg', 'jpeg', 'png', 'gif', 'pdf'];
+   
+               if (in_array($file_type, $allowed_types)) {
+                   if (!file_exists($target_dir)) {
+                       mkdir($target_dir, 0777, true); // Create directory if it doesn't exist
+                   }
+   
+                   // Move file to target directory
+                   if (move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], $target_file)) {
+                       $uploaded_file_path = mysqli_real_escape_string($conn, $target_file); // Store file path for database
+                   }
+               }
+           }
+       }
+   
+       // If a new file is uploaded, update the uploaded_file field
+       $file_update_query = "";
+       if (!empty($uploaded_file_path)) {
+           $file_update_query = ", uploaded_file = '$uploaded_file_path'";
+       }
+   
+
     // Fetch and sanitize selected programs
     $selectedPrograms = isset($_POST['programs']) ? array_map('intval', $_POST['programs']) : [];
     $programsJson = json_encode($selectedPrograms);
@@ -104,11 +136,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             s4d = '$s4d',
             s5t = '$s5t',
             s5d = '$s5d',
+            
             -- wess
 
             programs_id = '$programsJson',
             program_order = '$programOrder'
             -- (Other fields...)
+            $file_update_query
             WHERE id = $formule_id";
 
     if (!mysqli_query($conn, $sql)) {

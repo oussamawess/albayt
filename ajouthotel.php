@@ -66,7 +66,7 @@
     </style>
     <?php
     session_start(); // Start session to access session variables
-    
+
     // Check if user is not logged in, redirect to login page
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         header("Location: login.php");
@@ -90,8 +90,27 @@
             <label for="etoiles">Nombre d'Étoiles:</label>
             <input type="number" id="etoiles" name="etoiles" min="1" max="5" required>
 
-            <label for="ville">Ville:</label>
-            <input type="text" id="ville" name="ville" required>
+            <!-- <label for="ville">Ville:</label>
+            <input type="text" id="ville" name="ville" required> -->
+            <div class="input-group">
+                <label for="ville_depart">Ville:</label>
+                <select id="ville_depart" name="ville_depart" class="half-width-input" required>
+                    <option value="">Sélectionnez une Ville</option>
+                    <?php
+                    include 'db.php';
+                    $sql_villes_depart = "SELECT * FROM ville_depart";
+                    $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+                    if (mysqli_num_rows($result_villes_depart) > 0) {
+                        while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                            echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+                        }
+                    } else {
+                        echo "<option value='' disabled>Aucune ville de départ disponible</option>";
+                    }
+                    mysqli_close($conn);
+                    ?>
+                </select>
+            </div>
 
             <!-- <label for="pension">Type de Pension:</label>
             <select id="pension" name="pension" required>

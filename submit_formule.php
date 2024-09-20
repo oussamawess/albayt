@@ -1,11 +1,11 @@
 <?php
-    session_start(); // Start session to access session variables
-    
-    // Check if user is not logged in, redirect to login page
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: login.php");
-        exit;
-    }
+session_start(); // Start session to access session variables
+
+// Check if user is not logged in, redirect to login page
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.php");
+    exit;
+}
 ?>
 <?php
 include 'db.php'; // Include your database connection file
@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $statut = 'activé'; // Default status for validation
     }
+
 
     // 1. Get Data from the Form and Sanitize Input    
     $package_id = mysqli_real_escape_string($conn, $_POST['package']);
@@ -38,37 +39,63 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prix_chambre_double_promo = isset($_POST['prix_chambre_double_promo']) && $_POST['prix_chambre_double_promo'] !== '' ? mysqli_real_escape_string($conn, $_POST['prix_chambre_double_promo']) : 0;
     $prix_chambre_single_promo = isset($_POST['prix_chambre_single_promo']) && $_POST['prix_chambre_single_promo'] !== '' ? mysqli_real_escape_string($conn, $_POST['prix_chambre_single_promo']) : 0;
 
-   // Get selected programs and encode as JSON
-$selected_programs = isset($_POST['programs']) ? $_POST['programs'] : [];
-$programs_json = json_encode($selected_programs);
+    // Get selected programs and encode as JSON
+    $selected_programs = isset($_POST['programs']) ? $_POST['programs'] : [];
+    $programs_json = json_encode($selected_programs);
 
-// Get program order and encode as JSON
-$program_order = isset($_POST['program_order']) ? $_POST['program_order'] : '[]';
+    // Get program order and encode as JSON
+    $program_order = isset($_POST['program_order']) ? $_POST['program_order'] : '[]';
 
-// Get the description from the hidden input
-$description = mysqli_real_escape_string($conn, $_POST['description']);
+    // Get the description from the hidden input
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
 
-// Get the form data
-$s1t = $_POST['titre_section1'];  // Title for Section 1
-$s1d = $_POST['section1'];        // Description for Section 1 (Quill editor content)
+    // Get the form data
+    $s1t = $_POST['titre_section1'];  // Title for Section 1
+    $s1d = $_POST['section1'];        // Description for Section 1 (Quill editor content)
 
-$s2t = $_POST['titre_section2'];  // Title for Section 2
-$s2d = $_POST['section2'];        // Description for Section 2 (Quill editor content)
+    $s2t = $_POST['titre_section2'];  // Title for Section 2
+    $s2d = $_POST['section2'];        // Description for Section 2 (Quill editor content)
 
-$s3t = $_POST['titre_section3'];  // Title for Section 3
-$s3d = $_POST['section3'];        // Description for Section 3 (Quill editor content)
+    $s3t = $_POST['titre_section3'];  // Title for Section 3
+    $s3d = $_POST['section3'];        // Description for Section 3 (Quill editor content)
 
-$s4t = $_POST['titre_section4'];  // Title for Section 4
-$s4d = $_POST['section4'];        // Description for Section 4 (Quill editor content)
+    $s4t = $_POST['titre_section4'];  // Title for Section 4
+    $s4d = $_POST['section4'];        // Description for Section 4 (Quill editor content)
 
-$s5t = $_POST['titre_section5'];  // Title for Section 5
-$s5d = $_POST['section5'];        // Description for Section 5 (Quill editor content)
+    $s5t = $_POST['titre_section5'];  // Title for Section 5
+    $s5d = $_POST['section5'];        // Description for Section 5 (Quill editor content)
+
+    
+    // Handle file upload
+    $uploaded_file_path = ''; // Initialize variable for file path
+    if (isset($_FILES['uploaded_file']) && $_FILES['uploaded_file']['error'] === UPLOAD_ERR_OK) {
+        $target_dir = "files/"; // Directory for uploaded files
+        $file_name = basename($_FILES["uploaded_file"]["name"]);
+        $target_file = $target_dir . uniqid() . "_" . $file_name;
+
+        // Check if file size is within the limit (e.g., 5MB)
+        if ($_FILES['uploaded_file']['size'] <= 5000000) {
+            $file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+            $allowed_types = ['jpg', 'jpeg', 'png', 'gif', 'pdf'];
+
+            if (in_array($file_type, $allowed_types)) {
+                if (!file_exists($target_dir)) {
+                    mkdir($target_dir, 0777, true); // Create directory if it doesn't exist
+                }
+
+                // Move file to target directory
+                if (move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], $target_file)) {
+                    $uploaded_file_path = mysqli_real_escape_string($conn, $target_file); // Store file path for database
+                }
+            }
+        }
+    }
+    
 
 
-
-// Prepare and Execute the SQL INSERT Query
-$sql_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id, program_order, description, s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d)
-                VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json', '$program_order', '$description', '$s1t', '$s1d', '$s2t', '$s2d', '$s3t', '$s3d', '$s4t', '$s4d', '$s5t', '$s5d')";
+    // Prepare and Execute the SQL INSERT Query
+    $sql_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id, program_order, description, s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d, uploaded_file)
+                    VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json', '$program_order', '$description', '$s1t', '$s1d', '$s2t', '$s2d', '$s3t', '$s3d', '$s4t', '$s4d', '$s5t', '$s5d', '$uploaded_file_path')";
 
 
 

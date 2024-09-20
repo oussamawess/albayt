@@ -6,8 +6,11 @@ include 'db.php';
 if (isset($_GET['id'])) {
     $hotel_id = $_GET['id'];
 
-    // Récupérer les données de l'hôtel à partir de la base de données
-    $sql = "SELECT * FROM hotels WHERE id = $hotel_id";
+    // Récupérer les données de l'hôtel et le nom de la ville depuis la table ville_depart
+    $sql = "SELECT hotels.*, ville_depart.nom AS ville_nom 
+            FROM hotels 
+            LEFT JOIN ville_depart ON hotels.ville = ville_depart.id 
+            WHERE hotels.id = $hotel_id";
     $result = $conn->query($sql);
 
     // Vérifier s'il y a des résultats
@@ -16,10 +19,11 @@ if (isset($_GET['id'])) {
         $row = $result->fetch_assoc();
         $nom = $row['nom'];
         $etoiles = $row['etoiles'];
-        $ville = $row['ville'];
-        // $pension = $row['pension'];
+        $ville_id = $row['ville'];  // This is the 'ville' ID from the hotels table
+        $ville_nom = $row['ville_nom'];  // This is the actual 'nom' from the ville_depart table
         $details = $row['details'];
         $monument = $row['monument'];
+        
     } else {
         echo "Aucun hôtel trouvé avec cet identifiant.";
         exit();
@@ -39,7 +43,6 @@ if (isset($_POST['update_hotel'])) {
     $nom = $_POST['nom'];
     $etoiles = $_POST['etoiles'];
     $ville = $_POST['ville'];
-    // $pension = $_POST['pension'];
     $details = $_POST['details'];
     $monument = $_POST['monument'];
 
@@ -176,7 +179,7 @@ if (isset($_GET['delete_image'])) {
     </style>
     <?php
     session_start(); // Start session to access session variables
-    
+
     // Check if user is not logged in, redirect to login page
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         header("Location: login.php");
@@ -189,7 +192,6 @@ if (isset($_GET['delete_image'])) {
 </head>
 
 <body>
-
     <div class="container">
         <h2>Modifier un Hôtel</h2>
         <form action="edit_hotel.php?id=<?php echo $hotel_id; ?>" method="POST" enctype="multipart/form-data">
@@ -199,11 +201,28 @@ if (isset($_GET['delete_image'])) {
             <label for="etoiles">Étoiles:</label>
             <input type="number" id="etoiles" name="etoiles" value="<?php echo $etoiles; ?>" required>
 
-            <label for="ville">Ville:</label>
-            <input type="text" id="ville" name="ville" value="<?php echo $ville; ?>" required>
-
-            <!-- <label for="pension">Type de Pension:</label>
-            <input type="text" id="pension" name="pension" value="<!?php echo $pension; ?>" required> -->
+            <!-- Dropdown for selecting Ville -->
+            <div class="input-group">
+                <label for="ville">Ville:</label>
+                <select id="ville" name="ville" class="half-width-input" required>
+                    <option value="">Sélectionnez une Ville</option>
+                    <?php
+                    include 'db.php';
+                    $sql_villes = "SELECT * FROM ville_depart";
+                    $result_villes = mysqli_query($conn, $sql_villes);
+                    if (mysqli_num_rows($result_villes) > 0) {
+                        while ($row_ville = mysqli_fetch_assoc($result_villes)) {
+                            // Preselect the correct ville
+                            $selected = ($row_ville['id'] == $ville_id) ? 'selected' : '';
+                            echo "<option value='" . $row_ville['id'] . "' $selected>" . $row_ville['nom'] . "</option>";
+                        }
+                    } else {
+                        echo "<option value='' disabled>Aucune ville de départ disponible</option>";
+                    }
+                    mysqli_close($conn);
+                    ?>
+                </select>
+            </div>
 
             <label for="details">Détails:</label>
             <textarea id="details" name="details" rows="4" required><?php echo $details; ?></textarea>
@@ -214,7 +233,7 @@ if (isset($_GET['delete_image'])) {
             <label for="images">Ajouter de nouvelles images:</label>
             <input type="file" id="images" name="images[]" multiple>
 
-            <button type="submit" name="update_hotel">Modifier Hôtel</button>   
+            <button type="submit" name="update_hotel">Modifier Hôtel</button>
         </form>
 
         <h3>Galerie d'Images</h3>
@@ -233,7 +252,6 @@ if (isset($_GET['delete_image'])) {
             ?>
         </div>
     </div>
-
 </body>
 
 </html>

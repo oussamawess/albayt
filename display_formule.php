@@ -483,6 +483,37 @@ $result_vols = mysqli_query($conn, $sql_vols);
             }
             ?>
 
+            <?php
+            if (!empty($formule['uploaded_file'])) {
+            ?>
+                <div class="section">
+                    <h3>Fichier</h3>
+                    <table>
+                        <tr>
+                        <?php
+                    $existingFiles = $formule['uploaded_file'];
+
+                    // Get the filename with the unique ID
+                    $filenameWithId = basename($existingFiles);
+
+                    // Split the filename at the underscore
+                    $parts = explode('_', $filenameWithId);
+
+                    // Remove the first part (the unique ID)
+                    array_shift($parts);
+
+                    // Join the remaining parts back together
+                    $cleanFilename = implode('_', $parts);
+                    
+                    ?>
+                            <th><?php echo $cleanFilename; ?></th>
+                        </tr>
+                    </table>
+                </div>
+            <?php
+            }
+            ?>
+
         </div>
     </div>
 

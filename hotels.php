@@ -93,19 +93,16 @@
         }
     </style>
     <?php
-    session_start(); // Start session to access session variables
-    
-    // Check if user is not logged in, redirect to login page
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: login.php");
-        exit;
-    }
+session_start(); // Start session to access session variables
 
-    
-    ?>
+// Check if user is not logged in, redirect to login page
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: login.php");
+    exit;
+}
+?>
 
-
-    <?php include 'header.php'; ?>
+<?php include 'header.php'; ?>
 </head>
 
 <body>
@@ -128,7 +125,6 @@
                     <th>Nom de l'Hôtel</th>
                     <th>Étoiles</th>
                     <th>Ville</th>
-                    <!-- <th>Type de Pension</th> -->
                     <th>Détails</th>
                     <th>Monuments à Proximité</th>
                     <th>Action</th>
@@ -139,8 +135,10 @@
                 // Inclure le fichier de connexion à la base de données
                 include 'db.php';
 
-                // Requête SQL pour sélectionner tous les hôtels
-                $sql_hotels = "SELECT * FROM hotels";
+                // Requête SQL pour sélectionner tous les hôtels avec le nom de la ville
+                $sql_hotels = "SELECT hotels.*, ville_depart.nom AS ville_nom 
+                               FROM hotels 
+                               JOIN ville_depart ON hotels.ville = ville_depart.id";
 
                 // Exécuter la requête
                 $result_hotels = mysqli_query($conn, $sql_hotels);
@@ -152,8 +150,7 @@
                         echo "<tr>";
                         echo "<td>" . $row_hotel['nom'] . "</td>";
                         echo "<td>" . $row_hotel['etoiles'] . "</td>";
-                        echo "<td>" . $row_hotel['ville'] . "</td>";
-                        // echo "<td>" . $row_hotel['pension'] . "</td>";
+                        echo "<td>" . $row_hotel['ville_nom'] . "</td>"; // Use the city name (nom)
                         echo "<td>" . $row_hotel['details'] . "</td>";
                         echo "<td>" . $row_hotel['monument'] . "</td>";
 
@@ -185,5 +182,6 @@
         }, 5000);
     </script>
 </body>
+
 
 </html>

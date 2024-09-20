@@ -316,7 +316,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     <div class="container">
 
-        <form action="update_formule_submit.php" method="POST">
+        <form action="update_formule_submit.php" method="POST" enctype="multipart/form-data">
             <?php
             include 'db.php';
 
@@ -350,16 +350,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     $existingPrixChambreDoublePromo = $row['prix_chambre_double_promo'];
                     $existingPrixChambreSinglePromo = $row['prix_chambre_single_promo'];
                     $existingDescription = $row['description'];
-                    $existingS1t = $row['s1t'];  
-                    $existingS1d = $row['s1d'];        
-                    $existingS2t = $row['s2t'];  
-                    $existingS2d = $row['s2d'];        
-                    $existingS3t = $row['s3t'];  
-                    $existingS3d = $row['s3d'];        
-                    $existingS4t = $row['s4t'];  
-                    $existingS4d = $row['s4d'];        
-                    $existingS5t = $row['s5t'];  
-                    $existingS5d = $row['s5d'];        
+                    $existingS1t = $row['s1t'];
+                    $existingS1d = $row['s1d'];
+                    $existingS2t = $row['s2t'];
+                    $existingS2d = $row['s2d'];
+                    $existingS3t = $row['s3t'];
+                    $existingS3d = $row['s3d'];
+                    $existingS4t = $row['s4t'];
+                    $existingS4d = $row['s4d'];
+                    $existingS5t = $row['s5t'];
+                    $existingS5d = $row['s5d'];
+                    $existingFile = $row['uploaded_file'];
 
                     // Fetch current programs
                     $currentPrograms = json_decode($row['programs_id'], true) ?? [];
@@ -1151,8 +1152,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="price-inputs">
                 <h3>Section 1 <span class="toggle-icon">+</span></h3>
                 <div class="collapsible-content" style="padding:5px; border:0px;">
-                    <label for="titre_section1">Titre:</label>                    
-                    <input type="text" id="titre_section1" name="titre_section1" class="half-width-input" style="width:30%;" value="<?php echo $existingS1t; ?>" >
+                    <label for="titre_section1">Titre:</label>
+                    <input type="text" id="titre_section1" name="titre_section1" class="half-width-input" style="width:30%;" value="<?php echo $existingS1t; ?>">
                     <div class="">
                         <!-- Container for the Quill editor -->
                         <div class="editor-container">
@@ -1234,7 +1235,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <h3>Section 2 <span class="toggle-icon">+</span></h3>
                 <div class="collapsible-content" style="padding:5px; border:0px;">
                     <label for="titre_section2">Titre:</label>
-                    <input type="text" id="titre_section2" name="titre_section2" class="half-width-input" style="width:30%;" value="<?php echo $existingS2t; ?>" >
+                    <input type="text" id="titre_section2" name="titre_section2" class="half-width-input" style="width:30%;" value="<?php echo $existingS2t; ?>">
                     <div class="">
                         <!-- Container for the Quill editor -->
                         <div class="editor-container">
@@ -1316,7 +1317,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <h3>Section 3 <span class="toggle-icon">+</span></h3>
                 <div class="collapsible-content" style="padding:5px; border:0px;">
                     <label for="titre_section3">Titre:</label>
-                    <input type="text" id="titre_section3" name="titre_section3" class="half-width-input" style="width:30%;" value="<?php echo $existingS3t; ?>" >
+                    <input type="text" id="titre_section3" name="titre_section3" class="half-width-input" style="width:30%;" value="<?php echo $existingS3t; ?>">
                     <div class="">
                         <!-- Container for the Quill editor -->
                         <div class="editor-container">
@@ -1398,7 +1399,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <h3>Section 4 <span class="toggle-icon">+</span></h3>
                 <div class="collapsible-content" style="padding:5px; border:0px;">
                     <label for="titre_section4">Titre:</label>
-                    <input type="text" id="titre_section4" name="titre_section4" class="half-width-input" style="width:30%;" value="<?php echo $existingS4t; ?>" >
+                    <input type="text" id="titre_section4" name="titre_section4" class="half-width-input" style="width:30%;" value="<?php echo $existingS4t; ?>">
                     <div class="">
                         <!-- Container for the Quill editor -->
                         <div class="editor-container">
@@ -1480,7 +1481,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <h3>Section 5 <span class="toggle-icon">+</span></h3>
                 <div class="collapsible-content" style="padding:5px; border:0px;">
                     <label for="titre_section5">Titre:</label>
-                    <input type="text" id="titre_section5" name="titre_section5" class="half-width-input" style="width:30%;" value="<?php echo $existingS5t; ?>" >
+                    <input type="text" id="titre_section5" name="titre_section5" class="half-width-input" style="width:30%;" value="<?php echo $existingS5t; ?>">
                     <div class="">
                         <!-- Container for the Quill editor -->
                         <div class="editor-container">
@@ -1556,6 +1557,35 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 });
             </script>
             <!-- End section 5 -->
+
+            <!-- Start download file -->
+            <div class="price-inputs" style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+                <div class="input-group" style="display: flex; flex-direction: column; align-items: center;">
+                    <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Fichier</h3>
+                    <input type="file" name="uploaded_file" id="uploaded_file" class="form-control" style="padding: 10px; border: 1px solid #ababab; border-radius: 5px; transition: border-color 0.3s; width: 100%; max-width: 300px;"
+                        onfocus="this.style.borderColor='#32363b'; this.style.outline='none';"
+                        onblur="this.style.borderColor='#32363b';">   
+
+                    <?php
+                    $existingFiles = $existingFile;
+
+                    // Get the filename with the unique ID
+                    $filenameWithId = basename($existingFiles);
+
+                    // Split the filename at the underscore
+                    $parts = explode('_', $filenameWithId);
+
+                    // Remove the first part (the unique ID)
+                    array_shift($parts);
+
+                    // Join the remaining parts back together
+                    $cleanFilename = implode('_', $parts);
+                    
+                    ?>
+                    <p><b>Fichier actuel:</b> <?php echo $cleanFilename; ?></p>
+                </div>
+            </div>
+            <!-- End download file -->
 
             <button type="submit">Mettre à jour Formule</button>
         </form>
