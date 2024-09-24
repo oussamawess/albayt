@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prix_chambre_triple_promo = isset($_POST['prix_chambre_triple_promo']) && $_POST['prix_chambre_triple_promo'] !== '' ? mysqli_real_escape_string($conn, $_POST['prix_chambre_triple_promo']) : 0;
     $prix_chambre_double_promo = isset($_POST['prix_chambre_double_promo']) && $_POST['prix_chambre_double_promo'] !== '' ? mysqli_real_escape_string($conn, $_POST['prix_chambre_double_promo']) : 0;
     $prix_chambre_single_promo = isset($_POST['prix_chambre_single_promo']) && $_POST['prix_chambre_single_promo'] !== '' ? mysqli_real_escape_string($conn, $_POST['prix_chambre_single_promo']) : 0;
+    $statut_vol = mysqli_real_escape_string($conn, $_POST['statut_vol']);
 
     // Get selected programs and encode as JSON
     $selected_programs = isset($_POST['programs']) ? $_POST['programs'] : [];
@@ -65,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $s5t = $_POST['titre_section5'];  // Title for Section 5
     $s5d = $_POST['section5'];        // Description for Section 5 (Quill editor content)
 
-    
+
     // Handle file upload
     $uploaded_file_path = ''; // Initialize variable for file path
     if (isset($_FILES['uploaded_file']) && $_FILES['uploaded_file']['error'] === UPLOAD_ERR_OK) {
@@ -90,12 +91,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-    
+
+    // Handle image upload
+    $image_formule = '';  // Initialize with an empty value
+    if (isset($_FILES['image_formule']) && $_FILES['image_formule']['error'] == 0) {
+        $tmpFilePath = $_FILES['image_formule']['tmp_name'];
+        $newFilePath = "uploads/" . uniqid() . "_" . $_FILES['image_formule']['name'];
+        if (move_uploaded_file($tmpFilePath, $newFilePath)) {
+            $image_formule = $newFilePath;  // Use $image_formule instead of $logo
+        } else {
+            echo "Erreur lors de l'upload de l'image.";
+            exit();
+        }
+    }
+
+
+
 
 
     // Prepare and Execute the SQL INSERT Query
-    $sql_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id, program_order, description, s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d, uploaded_file)
-                    VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json', '$program_order', '$description', '$s1t', '$s1d', '$s2t', '$s2d', '$s3t', '$s3d', '$s4t', '$s4d', '$s5t', '$s5d', '$uploaded_file_path')";
+    $sql_formule = "INSERT INTO formules (package_id, type_id, date_depart, date_retour, statut, duree_sejour, prix_chambre_quadruple, prix_chambre_triple, prix_chambre_double, prix_chambre_single, child_discount, prix_bebe, prix_chambre_quadruple_promo, prix_chambre_triple_promo, prix_chambre_double_promo, prix_chambre_single_promo, programs_id, program_order, description, s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d, uploaded_file, image_formule, statut_vol)
+                    VALUES ('$package_id', '$type_id', '$date_depart', '$date_retour', '$statut', '$duree_sejour', '$prix_chambre_quadruple', '$prix_chambre_triple', '$prix_chambre_double', '$prix_chambre_single', '$child_discount', '$prix_bebe', '$prix_chambre_quadruple_promo', '$prix_chambre_triple_promo', '$prix_chambre_double_promo', '$prix_chambre_single_promo', '$programs_json', '$program_order', '$description', '$s1t', '$s1d', '$s2t', '$s2d', '$s3t', '$s3d', '$s4t', '$s4d', '$s5t', '$s5d', '$uploaded_file_path', '$image_formule', '$statut_vol')";
 
 
 

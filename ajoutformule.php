@@ -322,34 +322,40 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
       <div class="half-width-inputs">
 
 
-        <div class="input-group">
-          <label for="package">Ville de départ:</label>
-          <select id="package" name="package" class="half-width-input" required>
-            <option value="">Sélectionnez une ville</option>
-            <?php
-            // Inclure le fichier de connexion à la base de données
-            include 'db.php';
+      <div class="input-group">
+    <label for="package">Ville de départ:</label>
+    <select id="package" name="package" class="half-width-input" required>
+        <option value="">Sélectionnez une ville</option>
+        <?php
+        // Inclure le fichier de connexion à la base de données
+        include 'db.php';
 
-            // Requête SQL pour sélectionner tous les packages Omra
-            $sql = "SELECT id, nom FROM omra_packages";
+        // Requête SQL pour sélectionner les packages Omra et leurs catégories associées
+        $sql = "
+        SELECT omra_packages.id, omra_packages.nom, category_parent.nom AS category_nom
+        FROM omra_packages
+        JOIN category_parent ON omra_packages.category_parent_id = category_parent.id";
 
-            // Exécuter la requête
-            $result = mysqli_query($conn, $sql);
+        // Exécuter la requête
+        $result = mysqli_query($conn, $sql);
 
-            // Vérifier s'il y a des résultats
-            if (mysqli_num_rows($result) > 0) {
-              // Afficher les options dans le menu déroulant
-              while ($row = mysqli_fetch_assoc($result)) {
-                echo "<option value='" . $row["id"] . "'>" . $row["nom"] . "</option>";
-              }
-            } else {
-              echo "<option disabled>Aucun package Omra disponible</option>";
+        // Vérifier s'il y a des résultats
+        if (mysqli_num_rows($result) > 0) {
+            // Afficher les options dans le menu déroulant
+            while ($row = mysqli_fetch_assoc($result)) {
+                // Inclure le nom du package et le nom de la catégorie dans l'option
+                echo "<option value='" . $row["id"] . "'>" . $row["nom"] . " - " . $row["category_nom"] . "</option>";
             }
+        } else {
+            echo "<option disabled>Aucun package Omra disponible</option>";
+        }
 
-            // Fermer la connexion à la base de données
-            mysqli_close($conn); ?>
-          </select>
-        </div>
+        // Fermer la connexion à la base de données
+        mysqli_close($conn);
+        ?>
+    </select>
+</div>
+
 
         <div class="input-group">
           <label for="type">Catégorie:</label>
@@ -360,8 +366,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         <div class="input-group">
           <label for="statut">Statut:</label>
           <select id="statut" name="statut" class="half-width-input" required>
-            <option value="activé">Activé</option>
-            <option value="désactivé">Désactivé</option>
+            <option value="activé">En vente</option>
+            <option value="désactivé">Épuisé</option>
           </select>
         </div>
       </div>
@@ -392,6 +398,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
           <h3>Vols <span class="toggle-icon" onclick="toggleCollapse(this)">+</span></h3>
           <div class="collapsible-content">
             <br>
+            <div class="input-group">
+              <label for="statut_vol">Statut Vol:</label>
+              <select id="statut_vol" name="statut_vol" class="half-width-input" style="width: 30%; background-color: #91d44a;" required onchange="changeBackgroundColor(this)">
+                <option style="background-color: #91d44a;" value="CONFIRMÉ">CONFIRMÉ</option>
+                <option style="background-color: #fac611;" value="EN ATTENTE">EN ATTENTE</option>
+              </select>
+            </div>
+            <script>
+              function changeBackgroundColor(selectElement) {
+                if (selectElement.value === 'CONFIRMÉ') {
+                  selectElement.style.backgroundColor = '#91d44a';
+                } else {
+                  selectElement.style.backgroundColor = '#fac611';
+                }
+              }
+            </script>
             <div class="vol-section">
               <div class="half-width-inputs">
                 <div class="input-group">
@@ -1497,6 +1519,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         </div>
       </div>
       <!-- End download file -->
+
+      <!-- Start Image -->
+      <div class="price-inputs" style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+        <div class="input-group" style="display: flex; flex-direction: column; align-items: center;">
+          <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Image</h3>
+          <input required type="file" name="image_formule" id="image_formule" class="form-control" style="padding: 10px; border: 1px solid #ababab; border-radius: 5px; transition: border-color 0.3s; width: 100%; max-width: 300px;"
+            onfocus="this.style.borderColor='#32363b'; this.style.outline='none';"
+            onblur="this.style.borderColor='#32363b';">
+        </div>
+      </div>
+      <!-- End Image -->
 
 
 

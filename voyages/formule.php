@@ -111,7 +111,7 @@ $hebergements_result = $hebergements_stmt->get_result();
 
         header {
             position: relative;
-            background-image: url('https://www.albayt.fr/wp-content/uploads/shutterstock_1339215521.jpg');
+            /* background-image: url('https://www.albayt.fr/wp-content/uploads/shutterstock_1339215521.jpg'); */
             background-size: cover;
             background-position: center;
             color: white;
@@ -136,7 +136,7 @@ $hebergements_result = $hebergements_stmt->get_result();
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            /* background: rgba(0, 0, 0, 0.5); */
             /* Black color with 50% opacity */
             z-index: -1;
             /* Place behind the header content */
@@ -172,7 +172,7 @@ $hebergements_result = $hebergements_stmt->get_result();
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
             width: 100vw;
-            height: 30vw;
+            height: 35vw;
             margin-left: calc(50% - 50vw);
         }
 
@@ -281,6 +281,7 @@ $hebergements_result = $hebergements_stmt->get_result();
             font-family: Verdana;
             font-size: 15px;
             text-decoration: none;
+            cursor: pointer;
         }
 
         /* Round Button End*/
@@ -397,7 +398,15 @@ $hebergements_result = $hebergements_stmt->get_result();
         }
 
         .btn-cnfrm {
-            background-color: #2fc681;
+            background-color: #8bd145;
+            color: white;
+            padding: 8px 20px;
+            border: 0px;
+            border-radius: 5px;
+        }
+
+        .btn-hold {
+            background-color: #fac611;
             color: white;
             padding: 8px 20px;
             border: 0px;
@@ -1944,6 +1953,10 @@ $hebergements_result = $hebergements_stmt->get_result();
             font-size: 15px !important;
         }
 
+        button.btn-hold {
+            font-size: 15px !important;
+        }
+
 
 
         .wrapper {
@@ -1965,53 +1978,271 @@ $hebergements_result = $hebergements_stmt->get_result();
         .hotel-footer {
             z-index: 0;
         }
+
+        /* NEW HEADER */
+        /* Container for the header */
+        .custom-header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f5f5f5;
+            padding-bottom: 60px;
+            /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px; */
+        }
+
+        /* Text section */
+        .custom-text-section {
+            flex: 1;
+            padding-right: 20px;
+            text-align: left;
+        }
+
+        .custom-country-name {
+            color: black;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .custom-header-title {
+            font-size: 2rem;
+            margin: 10px 0;
+            color: burlywood;
+        }
+
+        .custom-description {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .custom-highlight {
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        /* Buttons */
+        .custom-buttons {
+            margin-top: 20px;
+        }
+
+        .custom-btn {
+            border: none;
+            padding: 5px 10px;
+            font-size: 0.85rem;
+            border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .custom-info-btn {
+            background-color: #0078FF;
+            color: white;
+        }
+
+        .custom-brochure-btn {
+            background-color: #00C5A8;
+            color: white;
+        }
+
+        .custom-brochure-btn:hover {
+            color: white;
+        }
+
+        /* Image section */
+        .custom-image-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .custom-image {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            .custom-header-container {
+                flex-direction: column;
+            }
+
+            .custom-text-section {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            /* .custom-description {
+                 margin-top: -25px; 
+            } */
+
+            .custom-image-section {
+                margin-top: 20px;
+            }
+
+            .custom-buttons {
+                display: flex;
+                /* Use flex for alignment */
+                flex-wrap: wrap;
+                justify-content: center;
+                /* Allow wrapping if needed */
+                /* margin-top: -50px; */
+            }
+
+            .custom-btn {
+                margin-right: 10px;
+                /* Remove margin-right for right-alignment */
+                margin-bottom: 10px;
+                /* Add margin-bottom for spacing */
+
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container" tabindex="-1">
 
-        <header class="header">
-            <?php
-            // Fetch the type_id from the formules table using formule_id
-            $sql_formule = "SELECT type_id FROM formules WHERE id = " . $formule_id;
-            $result_formule = mysqli_query($conn, $sql_formule);
+        <?php
+        // Fetch the type_id from the formules table using formule_id
+        $sql_formule = "SELECT type_id FROM formules WHERE id = " . $formule_id;
+        $result_formule = mysqli_query($conn, $sql_formule);
 
-            if (mysqli_num_rows($result_formule) > 0) {
-                $formule_data = mysqli_fetch_assoc($result_formule);
-                $type_id = $formule_data['type_id'];
+        if (mysqli_num_rows($result_formule) > 0) {
+            $formule_data = mysqli_fetch_assoc($result_formule);
+            $type_id = $formule_data['type_id'];
 
-                // Now, fetch the nom from type_formule_omra table using type_id
-                $sql_type_formule = "SELECT nom FROM type_formule_omra WHERE id = " . $type_id;
-                $result_type_formule = mysqli_query($conn, $sql_type_formule);
+            // Now, fetch the nom from type_formule_omra table using type_id
+            $sql_type_formule = "SELECT nom FROM type_formule_omra WHERE id = " . $type_id;
+            $result_type_formule = mysqli_query($conn, $sql_type_formule);
 
-                if (mysqli_num_rows($result_type_formule) > 0) {
-                    $type_formule_data = mysqli_fetch_assoc($result_type_formule);
-                    $nom_type_formule = $type_formule_data['nom'];
-                } else {
-                    echo "<p>Erreur: Type de formule non trouvé.</p>";
-                }
+            if (mysqli_num_rows($result_type_formule) > 0) {
+                $type_formule_data = mysqli_fetch_assoc($result_type_formule);
+                $nom_type_formule = $type_formule_data['nom'];
             } else {
-                echo "<p>Erreur: Formule non trouvée.</p>";
+                echo "<p>Erreur: Type de formule non trouvé.</p>";
             }
-            ?>
-            <h1 style="font-family:bely display;"><?php echo $nom_type_formule; ?></h1>
+        } else {
+            echo "<p>Erreur: Formule non trouvée.</p>";
+        }
+        ?>
+        <!-- <h1 style="font-family:bely display;"><--?php echo $nom_type_formule; ?></h1> -->
 
 
-            <div style="margin-bottom: 20px;">
+
+        <!-- <div style="margin-bottom: 20px;">
                 <a href="#booking" style="text-decoration: none;">
                     <button id="btn-primary" type="button" class="btn btn-primary"
                         style="display: block; margin-left: auto; margin-right: auto; background-color:#d9c391; border:0px;">
                         Réserver Maintenant
                     </button>
                 </a>
+            </div> -->
+
+
+        <div class="custom-header-container">
+            <div class="custom-text-section">
+                <?php
+                // Requête pour récupérer le nom du package à partir de la table packages
+                $sql_package = "SELECT nom FROM omra_packages WHERE id = " . $formule['package_id'];
+                $result_package = mysqli_query($conn, $sql_package);
+
+                // Vérifier si la requête a renvoyé des résultats pour le package
+                if (mysqli_num_rows($result_package) > 0) {
+                    // Récupérer le nom du package
+                    $package_data = mysqli_fetch_assoc($result_package);
+                    $nom_package = $package_data['nom'];
+                } ?>
+                <h1 class="custom-country-name" style="font-family:bely display;"><?php echo $nom_package; ?></h1>
+                <h1 class="custom-header-title"><?php echo $nom_type_formule; ?></h1>
+                <!-- <p class="custom-description">
+                    <!-?php echo (strlen($formule['description']) > 12) ? substr($formule['description'], 0, 12) : $formule['description']; ?>
+                </p> -->
+                <p class="custom-description" ><?php echo $formule['description']; ?></p>
+                
+
+
+
+                <div class="custom-buttons" style="display: flex; align-items: center;">
+                    <button class="custom-btn custom-info-btn" data-toggle="modal" data-target="#infoModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                        </svg>
+                        Plus d'infos
+                    </button>
+                    <a href="../<?php echo $formule['uploaded_file']; ?>" download class="custom-btn custom-brochure-btn" style="text-decoration:none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                            <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293z" />
+                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
+                        </svg>
+                        Brochure
+                    </a>
+
+                    <div>
+                        <a href="#booking" style="text-decoration: none;">
+                            <button type="button" class="custom-btn custom-brochure-btn"
+                                style="background-color:#d9c391;">
+                                Réserver Maintenant
+                            </button>
+                        </a>
+                    </div>
+                </div>
             </div>
-        </header>
+            <div class="custom-image-section">
+                <img src="../<?php echo $formule['image_formule']; ?>" alt="Formule Image" class="custom-image">
+            </div>
+        </div>
+
+        <!-- POP-UP Modal Structure -->
+        <div id="infoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="descriptionModalLabel">Description</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><?php echo ($formule['description']); ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="date-selection">
+            <?php
+            // Array mapping English day names to French
+            $dayNames = [
+                'Mon' => 'Lun',
+                'Tue' => 'Mar',
+                'Wed' => 'Mer',
+                'Thu' => 'Jeu',
+                'Fri' => 'Ven',
+                'Sat' => 'Sam',
+                'Sun' => 'Dim'
+            ];
+
+            // Format the dates using the desired format
+            $date_depart = htmlspecialchars(date('D d-m-Y', strtotime($formule['date_depart'])));
+            $date_retour = htmlspecialchars(date('D d-m-Y', strtotime($formule['date_retour'])));
+
+            // Replace English day names with French equivalents
+            $formatted_depart = str_replace(array_keys($dayNames), array_values($dayNames), $date_depart);
+            $formatted_retour = str_replace(array_keys($dayNames), array_values($dayNames), $date_retour);
+            ?>
+
             <div class="date-box" style="text-align: right; padding:0 10px; margin-top:7px">
                 <label>Départ</label>
-                <span><?php echo htmlspecialchars(date('D d-m-Y', strtotime($formule['date_depart']))); ?></span>
+                <span><?php echo $formatted_depart; ?></span>
             </div>
             <div class="date-box" style="margin: 20px 0px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="30" viewBox="0 0 1000 300">
@@ -2022,19 +2253,17 @@ $hebergements_result = $hebergements_stmt->get_result();
                             }
                         </style>
                     </defs>
-                    <circle id="Ellipse_1_copy" data-name="Ellipse 1 copy" class="cls-1" cx="78.75" cy="250"
-                        r="44.75" />
-                    <circle id="Ellipse_1_copy_2" data-name="Ellipse 1 copy 2" class="cls-1" cx="918.75" cy="250"
-                        r="44.75" />
+                    <circle id="Ellipse_1_copy" data-name="Ellipse 1 copy" class="cls-1" cx="78.75" cy="250" r="44.75" />
+                    <circle id="Ellipse_1_copy_2" data-name="Ellipse 1 copy 2" class="cls-1" cx="918.75" cy="250" r="44.75" />
                     <rect class="cls-1" x="164" y="238" width="669" height="25" />
                 </svg>
-                <label style="font-size: 13px;">Durée<br
-                        style="display: block;"><?php echo htmlspecialchars($formule['duree_sejour']); ?></label>
+                <label style="font-size: 13px;">Durée<br style="display: block;"><?php echo htmlspecialchars($formule['duree_sejour']); ?> Jour(s)</label>
             </div>
-            <div class="date-box" style="text-align: left;  padding:0 10px; margin-top:7px">
+            <div class="date-box" style="text-align: left; padding:0 10px; margin-top:7px">
                 <label>Arrivée</label>
-                <span><?php echo htmlspecialchars(date('D d-m-Y', strtotime($formule['date_retour']))); ?></span>
+                <span><?php echo $formatted_retour; ?></span>
             </div>
+
 
 
             <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -2069,9 +2298,9 @@ $hebergements_result = $hebergements_stmt->get_result();
 
             <!-- jQuery Script -->
             <script>
-                $(document).ready(function () {
+                $(document).ready(function() {
                     // Handle the "AUTRES DATES" button click using event delegation
-                    $(document).on('click', '.round-button[data-type-id]', function () {
+                    $(document).on('click', '.round-button[data-type-id]', function() {
                         var typeId = $(this).data('type-id');
                         var packageId = $(this).data('package-id');
 
@@ -2082,11 +2311,11 @@ $hebergements_result = $hebergements_stmt->get_result();
                                 type_id: typeId,
                                 package_id: packageId
                             },
-                            success: function (response) {
+                            success: function(response) {
                                 $('#formulesContent').html(response);
                                 $('#formulesModal').modal('show');
                             },
-                            error: function (xhr, status, error) {
+                            error: function(xhr, status, error) {
                                 console.error("An error occurred: " + error);
                             }
                         });
@@ -2120,11 +2349,12 @@ $hebergements_result = $hebergements_stmt->get_result();
                     </div>
                 </div>
             </div>
+
             <!--- hebergement --->
             <div class="accordion-item">
                 <?php
                 include '../db.php'; // Include your database connection file
-                
+
                 $formule_id = $_GET['id'];
 
                 // Fetch the main formule data
@@ -2191,19 +2421,19 @@ $hebergements_result = $hebergements_stmt->get_result();
                             <div class="card-container">
                                 <?php if ($hebergements_result->num_rows > 0) { ?>
 
-                                <div id="myCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
-                                    <div class="carousel-inner">
-                                        <?php
-                                        $isActive = true;
-                                        while ($hotel = $hebergements_result->fetch_assoc()) {
-                                            // Fetch hotel gallery images
-                                            $hotel_id = $hotel['hotel_id'];
-                                            $gallery_query = "SELECT image_path FROM hotel_gallery WHERE hotel_id = $hotel_id";
-                                            $gallery_result = $conn->query($gallery_query);
+                                    <div id="myCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <?php
+                                            $isActive = true;
+                                            while ($hotel = $hebergements_result->fetch_assoc()) {
+                                                // Fetch hotel gallery images
+                                                $hotel_id = $hotel['hotel_id'];
+                                                $gallery_query = "SELECT image_path FROM hotel_gallery WHERE hotel_id = $hotel_id";
+                                                $gallery_result = $conn->query($gallery_query);
                                             ?>
-                                        <div class="carousel-item <?php echo $isActive ? 'active' : ''; ?>">
-                                            <div id="neoidea">
-                                                <!-- <ol class="carousel-indicators">
+                                                <div class="carousel-item <?php echo $isActive ? 'active' : ''; ?>">
+                                                    <div id="neoidea">
+                                                        <!-- <ol class="carousel-indicators">
                                                             <!?php for ($i = 0; $i < $gallery_result->num_rows; $i++) { ?>
                                                                 <li data-bs-target="#step<!?php echo $hotel_id; ?>" data-bs-slide-to="<!?php echo $i; ?>" class="<!?php echo $i === 0 ? 'active' : ''; ?>"></li>
                                                             <!?php } ?>
@@ -2545,16 +2775,16 @@ $hebergements_result = $hebergements_stmt->get_result();
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <?php
+                                                            <?php
                                                                 $tabIndex++;
                                                             } ?>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <?php
+                                            <?php
                                                 $isActive = false; // Only the first item should be active
-                                        }
-                                        ?>
+                                            }
+                                            ?>
                                         </div>
                                         <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel"
                                             data-bs-slide="prev">
@@ -2602,20 +2832,23 @@ $hebergements_result = $hebergements_stmt->get_result();
                             mysqli_stmt_execute($stmt_logo);
                             $result_logo = mysqli_stmt_get_result($stmt_logo);
                             $comp_logo = mysqli_fetch_assoc($result_logo);
-
                             ?>
-
-                            <!-- <div class="d-flex justify-content-between align-items-center mb-3"> -->
-
-                            <img src="../<?php echo $comp_logo['logo']; ?>" alt="Logo de la compagnie aérienne"
+                            <img src="../<?php echo $comp_logo["logo"] ?>" alt="Logo de la compagnie aérienne"
                                 style="width: 100px; margin-left: auto; margin-right: 0;">
-
-                            <button class="btn-cnfrm" style="margin-left: 15px;" disabled>
+                            <?php if ($formule['statut_vol'] === 'CONFIRMÉ') {
+                                echo '<button class="btn-cnfrm" style="margin-left: 15px;" disabled>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                     class="bi bi-airplane" viewBox="0 0 16 16">
-                                    <path
-                                        d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599" />
-                                </svg>&nbsp;&nbsp;<b>CONFIRMÉ</b></button>
+                                    <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849m.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1s-.458.158-.678.599" />
+                                </svg>&nbsp;&nbsp;<b>CONFIRMÉ</b></button>';
+                            } else {
+                                echo '<button class="btn-hold" style="margin-left: 15px;" disabled>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pause-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0z"/>
+                                </svg>&nbsp;&nbsp;<b>EN ATTENTE</b></button>';
+                            }
+                            ?>
 
                             <!-- </div> -->
                         </div>
@@ -2686,7 +2919,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                                             $heure_arrivee = date('H:i', strtotime($vols['heure_arrivee']));
                                             $date_depart = date('d/m/Y', strtotime($vols['heure_depart']));
                                             $date_arrivee = date('d/m/Y', strtotime($vols['heure_arrivee']));
-                                            ?>
+                                    ?>
                                             <tr>
                                                 <td><?php echo $vols['num_vol']; ?></td>
                                                 <td><?php echo $villed['nom']; ?></td>
@@ -2698,7 +2931,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                                                 <td><?php echo $date_arrivee; ?></td>
                                                 <td><?php echo $heure_arrivee; ?></td>
                                             </tr>
-                                            <?php
+                                    <?php
                                         }
                                     } else {
                                         echo "<tr><td colspan='9'>No Vols found for this formula.</td></tr>";
@@ -2731,7 +2964,7 @@ $hebergements_result = $hebergements_stmt->get_result();
 
                             if ($result && mysqli_num_rows($result) > 0) {
                                 $formule_data = mysqli_fetch_assoc($result); // Fetch the row as an associative array
-                            
+
                                 // Fetch the JSON program IDs and order from the database
                                 $programIdsJson = $formule_data['programs_id'];
                                 $programOrderJson = $formule_data['program_order'];
@@ -2756,7 +2989,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                                     foreach ($programOrder as $programId) {
                                         if (isset($programs[$programId])) {
                                             $program = $programs[$programId];
-                                            ?>
+                            ?>
                                             <div class="card cardprog">
                                                 <img src="../<?php echo $program['photo']; ?>" alt="<?php echo $program['nom']; ?>"
                                                     class="card-img">
@@ -2774,9 +3007,9 @@ $hebergements_result = $hebergements_stmt->get_result();
                                                 <button class="read-more-btn">En savoir plus</button>
                                             </div>
                                             <script>
-                                                document.addEventListener('DOMContentLoaded', function () {
-                                                    document.querySelectorAll('.read-more-btn').forEach(function (button) {
-                                                        button.addEventListener('click', function () {
+                                                document.addEventListener('DOMContentLoaded', function() {
+                                                    document.querySelectorAll('.read-more-btn').forEach(function(button) {
+                                                        button.addEventListener('click', function() {
                                                             const cardDescription = this.previousElementSibling;
                                                             const dots = cardDescription.querySelector('.dots');
                                                             const moreText = cardDescription.querySelector('.more-text');
@@ -2793,9 +3026,8 @@ $hebergements_result = $hebergements_stmt->get_result();
                                                         });
                                                     });
                                                 });
-
                                             </script>
-                                            <?php
+                            <?php
                                         }
                                     }
                                 } else {
@@ -2814,19 +3046,144 @@ $hebergements_result = $hebergements_stmt->get_result();
                     </div>
                 </div>
             </div>
+
+            <!-- Start accordion section 1 -->
+            <?php
+            if (!empty($formule['s1t']) && $formule['s1d'] != '<p><br></p>') {
+            ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSection1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSection1" aria-expanded="false" aria-controls="flush-collapseSection1">
+                            <?php echo $formule['s1t']; ?>
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSection1" class="accordion-collapse collapse" aria-labelledby="flush-headingSection1"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p>
+                                <?php echo $formule['s1d']; ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+            <!-- End accordion section 1 -->
+
+            <!-- Start accordion section 2 -->
+            <?php
+            if (!empty($formule['s2t']) && $formule['s2d'] != '<p><br></p>') {
+            ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSection2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSection2" aria-expanded="false" aria-controls="flush-collapseSection2">
+                            <?php echo $formule['s2t']; ?>
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSection2" class="accordion-collapse collapse" aria-labelledby="flush-headingSection2"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p>
+                                <?php echo $formule['s2d']; ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+            <!-- End accordion section 2 -->
+
+            <!-- Start accordion section 3 -->
+            <?php
+            if (!empty($formule['s3t']) && $formule['s3d'] != '<p><br></p>') {
+            ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSection3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSection3" aria-expanded="false" aria-controls="flush-collapseSection3">
+                            <?php echo $formule['s3t']; ?>
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSection3" class="accordion-collapse collapse" aria-labelledby="flush-headingSection3"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p>
+                                <?php echo $formule['s3d']; ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+            <!-- End accordion section 3 -->
+
+            <!-- Start accordion section 4 -->
+            <?php
+            if (!empty($formule['s4t']) && $formule['s4d'] != '<p><br></p>') {
+            ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSection4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSection4" aria-expanded="false" aria-controls="flush-collapseSection4">
+                            <?php echo $formule['s4t']; ?>
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSection4" class="accordion-collapse collapse" aria-labelledby="flush-headingSection4"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p>
+                                <?php echo $formule['s4d']; ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+            <!-- End accordion section 4 -->
+
+            <!-- Start accordion section 5 -->
+            <?php
+            if (!empty($formule['s5t']) && $formule['s5d'] != '<p><br></p>') {
+            ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSection5">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSection5" aria-expanded="false" aria-controls="flush-collapseSection5">
+                            <?php echo $formule['s5t']; ?>
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSection5" class="accordion-collapse collapse" aria-labelledby="flush-headingSection5"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p>
+                                <?php echo $formule['s5d']; ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+            <!-- End accordion section 5 -->
         </div>
 
 
         <?php
         // Inclure le fichier de connexion à la base de données
-        
+
         // Vérifier si l'ID de la formule est présent dans l'URL
         if (isset($_GET['id'])) {
             // Récupérer l'ID de la formule depuis l'URL
             $formule_id = $_GET['id'];
 
             // Requête pour récupérer les détails de la formule à partir de la base de données
-            $sql = "SELECT * FROM formules WHERE id = $formule_id AND statut = 'activé'";
+            $sql = "SELECT * FROM formules WHERE id = $formule_id";
             $result = mysqli_query($conn, $sql);
 
             // Vérifier si la requête a renvoyé des résultats
@@ -2848,7 +3205,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                     $nom_package = $package_data['nom'];
 
                     // Maintenant vous pouvez afficher le nom du package dans le code HTML
-        
+
                     $sql_type_formule = "SELECT nom FROM type_formule_omra WHERE id = " . $formule_data['type_id'];
                     $result_type_formule = mysqli_query($conn, $sql_type_formule);
 
@@ -2865,7 +3222,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                 }
 
 
-                ?>
+        ?>
 
 
 
@@ -2880,25 +3237,12 @@ $hebergements_result = $hebergements_stmt->get_result();
                     ?>
                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <script>
-                    document.getElementById('departureCity').addEventListener('change', function () {
+                    document.getElementById('departureCity').addEventListener('change', function() {
                         var selectedCity = this.value.toLowerCase();
                         var formuleItems = document.querySelectorAll('.formule-item');
 
-                        formuleItems.forEach(function (item) {
+                        formuleItems.forEach(function(item) {
                             var cityBadge = item.querySelector('.city-badge').textContent.toLowerCase();
                             if (selectedCity === "" || cityBadge.includes(selectedCity)) {
                                 item.style.display = "";
@@ -3249,7 +3593,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                 ?>
 
                 <script>
-                    $(document).ready(function () {
+                    $(document).ready(function() {
                         var navListItems = $('div.setup-panel div a'),
                             allWells = $('.setup-content'),
                             allNextBtn = $('.nextBtn'),
@@ -3277,7 +3621,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                         allWells.hide();
 
                         // Gestion du clic sur les étapes de la réservation
-                        navListItems.click(function (e) {
+                        navListItems.click(function(e) {
                             e.preventDefault();
                             var $target = $($(this).attr('href')),
                                 $item = $(this);
@@ -3315,7 +3659,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                             }
                         }
                         // Gestion du clic sur le bouton "Suivant"
-                        allNextBtn.click(function () {
+                        allNextBtn.click(function() {
                             var curStep = $(this).closest(".setup-content"),
                                 curStepBtn = curStep.attr("id"),
                                 nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
@@ -3485,7 +3829,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                                     type: 'POST',
                                     data: JSON.stringify(formData),
                                     contentType: 'application/json',
-                                    success: function (response) {
+                                    success: function(response) {
                                         try {
                                             var data = JSON.parse(response);
                                             console.log('AJAX response:', data); // Log the response
@@ -3501,7 +3845,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                                             $('#error-message-step5').text("Erreur inattendue. Veuillez contacter l'administrateur.");
                                         }
                                     },
-                                    error: function (xhr, status, error) {
+                                    error: function(xhr, status, error) {
                                         console.error("Erreur AJAX :", xhr.responseText);
                                         $('#error-message-step5').text("Erreur lors de l'envoi de la réservation. Veuillez contacter l'administrateur du site. (Détails : " + error + ")");
                                     }
@@ -3512,13 +3856,13 @@ $hebergements_result = $hebergements_stmt->get_result();
                                     type: 'POST',
                                     data: JSON.stringify(formData), // Les mêmes données que celles envoyées précédemment
                                     contentType: 'application/json',
-                                    success: function (emailResponse) {
+                                    success: function(emailResponse) {
                                         console.log('Email envoyé avec succès :', emailResponse);
                                         // Optionnel : Réinitialiser le formulaire ou fermer la modal
                                         // $('#stepperModal').modal('hide');
                                         // goToStep(1);
                                     },
-                                    error: function (xhr, status, error) {
+                                    error: function(xhr, status, error) {
                                         console.error("Erreur lors de l'envoi de l'email :", xhr.responseText);
                                         // Gérer l'erreur d'envoi d'email si nécessaire
                                     }
@@ -3528,7 +3872,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                                     type: 'POST',
                                     data: JSON.stringify(formData),
                                     contentType: 'application/json',
-                                    success: function (response) {
+                                    success: function(response) {
                                         console.log('Réponse du serveur :', response);
 
                                         if (response.success) {
@@ -3539,7 +3883,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                                             // Gérer l'erreur d'envoi d'email (afficher un message à l'utilisateur, etc.)
                                         }
                                     },
-                                    error: function (xhr, status, error) {
+                                    error: function(xhr, status, error) {
                                         console.error('Erreur AJAX lors de l\'envoi de l\'email au client :', xhr.responseText);
                                         // Gérer l'erreur AJAX (problème de réseau, etc.)
                                     }
@@ -3550,7 +3894,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                         });
 
                         // Gestion du clic sur le bouton "Précédent"
-                        allPrevBtn.click(function () {
+                        allPrevBtn.click(function() {
                             var curStep = $(this).closest(".setup-content"),
                                 curStepBtn = curStep.attr("id"),
                                 prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
@@ -3579,7 +3923,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                         }
 
                         // Gérer les événements de changement des champs d'entrée
-                        $('.room-input').on('change', function () {
+                        $('.room-input').on('change', function() {
                             var quadrupleRooms = parseInt($('#quadruple').val()) || 0;
                             var tripleRooms = parseInt($('#triple').val()) || 0;
                             var doubleRooms = parseInt($('#double').val()) || 0;
@@ -3619,7 +3963,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                     }
 
                     // Gérer la sélection du pays
-                    dropdownMenu.on('click', '.dropdown-item', function (e) {
+                    dropdownMenu.on('click', '.dropdown-item', function(e) {
                         e.preventDefault();
                         var countryCode = $(this).data('country');
                         var countryDialCode = countryCodes[countryCode];
@@ -3627,7 +3971,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                     });
                 </script>
 
-                <?php
+        <?php
             } else {
                 // Si aucune formule correspondante n'a été trouvée dans la base de données
                 echo "<p>Aucune formule trouvée avec cet identifiant.</p>";

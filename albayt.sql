@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 18 sep. 2024 à 01:35
+-- Généré le : mar. 24 sep. 2024 à 19:46
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -67,9 +67,9 @@ CREATE TABLE `category_parent` (
 --
 
 INSERT INTO `category_parent` (`id`, `nom`, `description`, `photo`) VALUES
-(4, 'a', 'a', 'uploads/planet 4.jpeg'),
-(6, 'b', 'b', 'uploads/planet 3.jpeg'),
-(7, 'c', 'c', 'uploads/flower 2.jpeg');
+(4, 'Hajj', 'a', 'uploads/planet 4.jpeg'),
+(6, 'Omra', 'b', 'uploads/planet 3.jpeg'),
+(7, 'Omra Ramadhan', 'c', 'uploads/flower 2.jpeg');
 
 -- --------------------------------------------------------
 
@@ -149,41 +149,77 @@ CREATE TABLE `formules` (
   `s4t` varchar(255) NOT NULL,
   `s4d` text NOT NULL,
   `s5t` varchar(255) NOT NULL,
-  `s5d` text NOT NULL
+  `s5d` text NOT NULL,
+  `uploaded_file` varchar(255) DEFAULT NULL,
+  `image_formule` varchar(255) DEFAULT NULL,
+  `statut_vol` varchar(20) NOT NULL DEFAULT 'CONFIRMÉ'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `formules`
 --
 
-INSERT INTO `formules` (`id`, `package_id`, `date_depart`, `date_retour`, `statut`, `duree_sejour`, `prix_chambre_quadruple`, `prix_chambre_triple`, `prix_chambre_double`, `prix_chambre_single`, `child_discount`, `prix_bebe`, `prix_chambre_quadruple_promo`, `prix_chambre_triple_promo`, `prix_chambre_double_promo`, `prix_chambre_single_promo`, `type_id`, `created_at`, `programs_id`, `program_order`, `description`, `s1t`, `s1d`, `s2t`, `s2d`, `s3t`, `s3d`, `s4t`, `s4d`, `s5t`, `s5d`) VALUES
-(373, 1, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '0.00', '1200.00', '900.00', '600.00', 3, '2024-09-15 18:24:58', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(442, 1, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 2, '2024-09-15 18:25:03', '[5,7,2,6]', '[5,7,2,4,6,1]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(443, 3, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 5, '2024-09-15 18:25:08', '[7,2,6,1,4,5]', '[7,2,6,1,4,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(444, 3, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 8, '2024-09-15 18:25:12', '[1,2,4,5,6,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(445, 4, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 9, '2024-09-15 18:25:16', '[1,2,4,5,6,7]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(446, 4, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 6, '2024-09-15 18:25:19', '[1,2,4,5,6,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(447, 5, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 10, '2024-09-15 18:25:22', '[1,2,4,5,6,7]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(448, 5, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 11, '2024-09-15 18:25:26', '[1,2,4,5,6,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(449, 34, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 199, '2024-09-15 18:25:29', '[1,2,4,5,6,7]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(450, 34, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 160, '2024-09-15 18:25:32', '[1,2,4,5,6,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(451, 40, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 201, '2024-09-15 18:25:36', '[7,6,5,4,2,1]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(452, 40, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 173, '2024-09-15 18:25:39', '[1,4,5,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(453, 43, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 198, '2024-09-15 18:25:42', '[1,4,5,7]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(454, 43, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 179, '2024-09-15 18:25:46', '[1,2,4,5,6,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(455, 52, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 185, '2024-09-15 18:25:49', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(456, 52, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 186, '2024-09-15 18:25:53', '[1,2,4,5,6,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(479, 52, '2024-09-01', '2024-09-30', 'activé', '29', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 185, '2024-09-15 18:26:02', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(480, 52, '2024-09-01', '2024-09-30', 'activé', '29', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 186, '2024-09-15 18:26:05', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(481, 52, '2024-10-01', '2024-10-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 185, '2024-09-15 18:26:09', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(482, 52, '2024-10-01', '2024-10-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 186, '2024-09-15 18:26:12', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(483, 52, '2024-08-13', '2024-08-30', 'activé', '22', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 225, '2024-09-15 18:26:15', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong style=\"color: rgb(255, 0, 0);\">Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', ''),
-(484, 5, '1982-01-02', '1973-06-09', 'activé', 'In laboriosam nihil', '27.00', '17.00', '84.00', '47.00', '48.00', '54.00', '32.00', '44.00', '9.00', '3.00', 10, '2024-09-15 18:26:18', '[\"1\",\"2\"]', '[1,2,4,5,6,7]', '<p>d1</p>', 't1', '', 't2', '<p>d2</p>', 't3', '<p>d3</p>', 't4', '<p>d4</p>', 't5', '<p>d5</p>'),
-(485, 52, '2007-12-25', '1979-09-26', 'activé', 'Porro eos similique', '73.00', '75.00', '68.00', '61.00', '23.00', '38.00', '3.00', '24.00', '99.00', '49.00', 185, '2024-09-16 20:06:28', '[2,5,6]', '[1,2,4,5,6,7]', '<p>description  MOD</p>', 'title 1 MOD', '<p>description 1 MOD</p>', 'title 2 MOD', '<p>description 2 MOD</p>', 'title 3 MOD', '<p>description 3 MOD</p>', 'title 4 MOD', '<p>description 4 MOD</p>', 'title 5 MOD', '<p>description 5 MOD</p>'),
-(486, 3, '1994-08-31', '2006-11-22', 'désactivé', 'Consequat Aspernatu', '86.00', '71.00', '31.00', '68.00', '72.00', '44.00', '4.00', '98.00', '11.00', '38.00', 5, '2024-09-16 14:23:38', '[2,4,7]', '[1,2,4,5,6,7]', '<p>DESCRIPTION</p>', 'title 1', '<p>SECTION 1</p>', 'title 2', '<p>SECTION 2</p>', 'title 3', '<p>SECTION 3</p>', 'title 4', '<p>SECTION 4</p>', 'title 5', '<p>SECTION 5</p>'),
-(505, 3, '2024-09-14', '2024-09-19', 'activé', '5', '2.00', '1.00', '2.00', '2.00', '1.00', '1.00', '0.00', '0.00', '0.00', '0.00', 8, '2024-09-17 23:32:33', '[2,1]', '[2,1,4,5,6,7]', '<p>hola</p><p><br></p>', '-', '<p>+<br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>'),
-(506, 52, '2007-12-25', '1979-09-26', 'désactivé', 'Porro eos similique', '73.00', '75.00', '68.00', '61.00', '23.00', '38.00', '3.00', '24.00', '99.00', '49.00', 185, '2024-09-17 09:18:46', '[2,5,6]', '[1,2,4,5,6,7]', '<p>description  MOD</p>', '', '', '', '', '', '', '', '', '', ''),
-(508, 52, '2007-12-25', '1979-09-26', 'désactivé', 'Porro eos similique', '73.00', '75.00', '68.00', '61.00', '23.00', '38.00', '3.00', '24.00', '99.00', '49.00', 185, '2024-09-17 10:57:22', '[2,5,6]', '[1,2,4,5,6,7]', '<p>description  MOD</p>', 'title 1 MOD', '<p>description 1 MOD</p>', 'title 2 MOD', '<p>description 2 MOD</p>', 'title 3 MOD', '<p>description 3 MOD</p>', 'title 4 MOD', '<p>description 4 MOD</p>', 'title 5 MOD', '<p>description 5 MOD</p>');
+INSERT INTO `formules` (`id`, `package_id`, `date_depart`, `date_retour`, `statut`, `duree_sejour`, `prix_chambre_quadruple`, `prix_chambre_triple`, `prix_chambre_double`, `prix_chambre_single`, `child_discount`, `prix_bebe`, `prix_chambre_quadruple_promo`, `prix_chambre_triple_promo`, `prix_chambre_double_promo`, `prix_chambre_single_promo`, `type_id`, `created_at`, `programs_id`, `program_order`, `description`, `s1t`, `s1d`, `s2t`, `s2d`, `s3t`, `s3d`, `s4t`, `s4d`, `s5t`, `s5d`, `uploaded_file`, `image_formule`, `statut_vol`) VALUES
+(373, 1, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '0.00', '1200.00', '900.00', '600.00', 3, '2024-09-15 18:24:58', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(442, 1, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 2, '2024-09-15 18:25:03', '[5,7,2,6]', '[5,7,2,4,6,1]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(443, 3, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 5, '2024-09-15 18:25:08', '[7,2,6,1,4,5]', '[7,2,6,1,4,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(444, 3, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 8, '2024-09-15 18:25:12', '[1,2,4,5,6,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(445, 4, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 9, '2024-09-15 18:25:16', '[1,2,4,5,6,7]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(446, 4, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 6, '2024-09-15 18:25:19', '[1,2,4,5,6,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(447, 5, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 10, '2024-09-15 18:25:22', '[1,2,4,5,6,7]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(448, 5, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 11, '2024-09-15 18:25:26', '[1,2,4,5,6,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(449, 34, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 199, '2024-09-24 13:28:01', '[1,7,4,6,2,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', 'files/66f2be61dd63e_July-to-December-2022-Calendar.pdf', 'uploads/2151457384.jpg', 'CONFIRMÉ'),
+(450, 34, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 160, '2024-09-24 13:29:21', '[1,4,6,2,7,5]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', 'files/66f2beb1caf63_guide_anb.pdf', 'uploads/early-care-and-urgency-of-a-patient-with-symptoms-of-a-stroke-here-EHN4HN.jpg', 'CONFIRMÉ'),
+(451, 40, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 201, '2024-09-15 18:25:36', '[7,6,5,4,2,1]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(452, 40, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 173, '2024-09-15 18:25:39', '[1,4,5,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(453, 43, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 198, '2024-09-15 18:25:42', '[1,4,5,7]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(454, 43, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 179, '2024-09-15 18:25:46', '[1,2,4,5,6,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(455, 52, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 185, '2024-09-15 18:25:49', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(456, 52, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 186, '2024-09-15 18:25:53', '[1,2,4,5,6,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(479, 52, '2024-09-01', '2024-09-30', 'activé', '29', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 185, '2024-09-15 18:26:02', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(480, 52, '2024-09-01', '2024-09-30', 'activé', '29', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 186, '2024-09-15 18:26:05', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(481, 52, '2024-10-01', '2024-10-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 185, '2024-09-15 18:26:09', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(482, 52, '2024-10-01', '2024-10-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 186, '2024-09-15 18:26:12', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(483, 52, '2024-08-13', '2024-08-30', 'activé', '22', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 225, '2024-09-15 18:26:15', '[1,7,4,5]', '[1,7,4,6,2,5]', '<p><strong style=\"color: rgb(255, 0, 0);\">Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
+(484, 5, '1982-01-02', '1973-06-09', 'activé', 'In laboriosam nihil', '27.00', '17.00', '84.00', '47.00', '48.00', '54.00', '32.00', '44.00', '9.00', '3.00', 10, '2024-09-15 18:26:18', '[\"1\",\"2\"]', '[1,2,4,5,6,7]', '<p>d1</p>', 't1', '', 't2', '<p>d2</p>', 't3', '<p>d3</p>', 't4', '<p>d4</p>', 't5', '<p>d5</p>', NULL, NULL, 'CONFIRMÉ'),
+(485, 52, '2007-12-25', '1979-09-26', 'activé', 'Porro eos similique', '73.00', '75.00', '68.00', '61.00', '23.00', '38.00', '3.00', '24.00', '99.00', '49.00', 185, '2024-09-16 20:06:28', '[2,5,6]', '[1,2,4,5,6,7]', '<p>description  MOD</p>', 'title 1 MOD', '<p>description 1 MOD</p>', 'title 2 MOD', '<p>description 2 MOD</p>', 'title 3 MOD', '<p>description 3 MOD</p>', 'title 4 MOD', '<p>description 4 MOD</p>', 'title 5 MOD', '<p>description 5 MOD</p>', NULL, NULL, 'CONFIRMÉ'),
+(486, 3, '1994-08-31', '2006-11-22', 'désactivé', 'Consequat Aspernatu', '86.00', '71.00', '31.00', '68.00', '72.00', '44.00', '4.00', '98.00', '11.00', '38.00', 5, '2024-09-16 14:23:38', '[2,4,7]', '[1,2,4,5,6,7]', '<p>DESCRIPTION</p>', 'title 1', '<p>SECTION 1</p>', 'title 2', '<p>SECTION 2</p>', 'title 3', '<p>SECTION 3</p>', 'title 4', '<p>SECTION 4</p>', 'title 5', '<p>SECTION 5</p>', NULL, NULL, 'CONFIRMÉ'),
+(505, 3, '2024-09-14', '2024-09-19', 'activé', '5', '2.00', '1.00', '2.00', '2.00', '1.00', '1.00', '0.00', '0.00', '0.00', '0.00', 8, '2024-09-17 23:32:33', '[2,1]', '[2,1,4,5,6,7]', '<p>hola</p><p><br></p>', '-', '<p>+<br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', NULL, NULL, 'CONFIRMÉ'),
+(506, 82, '2007-12-25', '1979-09-26', 'activé', 'Porro eos similique', '73.00', '75.00', '68.00', '61.00', '23.00', '38.00', '3.00', '24.00', '99.00', '49.00', 233, '2024-09-20 14:02:46', '[2,5,6]', '[1,2,4,5,6,7]', '<p>description  MOD</p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', NULL, NULL, 'EN ATTENTE'),
+(508, 82, '2007-12-25', '1979-09-26', 'activé', 'Porro eos similique', '73.00', '75.00', '68.00', '61.00', '23.00', '38.00', '3.00', '24.00', '99.00', '49.00', 232, '2024-09-20 14:02:30', '[2,5,6]', '[1,2,4,5,6,7]', '<p>description  MOD</p>', 'title 1 MOD', '<p>description 1 MOD</p>', 'title 2 MOD', '<p>description 2 MOD</p>', 'title 3 MOD', '<p>description 3 MOD</p>', 'title 4 MOD', '<p>description 4 MOD</p>', 'title 5 MOD', '<p>description 5 MOD</p>', NULL, NULL, 'CONFIRMÉ'),
+(526, 4, '1982-04-04', '1982-07-09', 'activé', 'Consequat In doloru', '100.00', '76.00', '55.00', '69.00', '43.00', '56.00', '13.00', '83.00', '26.00', '74.00', 6, '2024-09-19 11:39:21', '[\"2\",\"4\",\"6\"]', '[1,2,4,5,6,7]', '<p>Id, est odio reprehe.</p>', '', '<p>Id, inventore ut tem.</p>', '', '<p>Perferendis velit vo.</p>', '', '<p>Duis voluptatem, qui.</p>', '', '<p>Architecto aut nulla.</p>', '', '<p>Dolor necessitatibus.</p>', '', NULL, 'CONFIRMÉ'),
+(527, 1, '1994-11-27', '1985-02-08', 'activé', 'Id nulla ut sed eaqu', '87.00', '90.00', '41.00', '1.00', '73.00', '65.00', '5.00', '15.00', '75.00', '86.00', 2, '2024-09-19 11:50:41', '[\"1\",\"6\"]', '[1,2,4,5,6,7]', '<p>Adipisicing dolorum .</p>', '', '<p>Irure et dolor perfe.</p>', '', '<p>Ad rerum et non est.</p>', '', '<p>Voluptatem. Vitae mi.</p>', '', '<p>Ex excepteur assumen.</p>', '', '<p>Rem dolorem eligendi.</p>', '', NULL, 'CONFIRMÉ'),
+(528, 40, '1982-08-12', '1983-05-27', 'activé', 'Dicta molestiae aliq', '83.00', '57.00', '95.00', '67.00', '79.00', '39.00', '51.00', '56.00', '15.00', '61.00', 172, '2024-09-19 12:21:24', '[\"4\",\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p>Necessitatibus quos .</p>', '', '<p>Proident, excepturi .</p>', '', '<p>Irure aliquid accusa.</p>', '', '<p>Qui at voluptas fuga.</p>', '', '<p>Eum beatae ad provid.</p>', '', '<p>Iste ducimus, volupt.</p>', '', NULL, 'CONFIRMÉ'),
+(529, 4, '1995-11-18', '1997-04-13', 'activé', 'Atque ut nostrud deb', '44.00', '97.00', '27.00', '59.00', '76.00', '38.00', '81.00', '52.00', '24.00', '12.00', 6, '2024-09-19 12:24:08', '[\"1\",\"5\"]', '[1,2,4,5,6,7]', '<p>Distinctio. Dolores .</p>', '', '<p>Accusamus eum volupt.</p>', '', '<p>Deserunt sed sint, e.</p>', '', '<p>Quia quis est, omnis.</p>', '', '<p>Consequatur, id veli.</p>', '', '<p>In praesentium unde .</p>', '', NULL, 'CONFIRMÉ'),
+(530, 40, '2008-02-18', '2019-03-03', 'activé', 'Quas alias voluptate', '25.00', '91.00', '31.00', '32.00', '30.00', '72.00', '72.00', '94.00', '60.00', '17.00', 172, '2024-09-19 12:54:06', '[\"5\",\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p>Sit reiciendis maior.</p>', '', '<p>Voluptates amet, off.</p>', '', '<p>Est et corrupti, in .</p>', '', '<p>Nostrud consequatur.</p>', '', '<p>Temporibus qui velit.</p>', '', '<p>Dicta temporibus ab .</p>', '', NULL, 'CONFIRMÉ'),
+(531, 1, '1980-03-29', '1970-09-20', 'activé', 'Quasi architecto deb', '32.00', '49.00', '68.00', '13.00', '96.00', '46.00', '25.00', '99.00', '33.00', '22.00', 2, '2024-09-19 13:00:32', '[\"1\",\"2\",\"4\",\"5\",\"6\"]', '[1,2,4,5,6,7]', '<p>Cillum eos, accusamu.</p>', '', '<p>Id, ad reprehenderit.</p>', '', '<p>Optio, ex et in inve.</p>', '', '<p>Tempora fugiat, ea d.</p>', '', '<p>Enim velit, reprehen.</p>', '', '<p>Voluptate cumque vol.</p>', '', NULL, 'CONFIRMÉ'),
+(533, 43, '1983-09-09', '2008-05-17', 'activé', 'Excepteur sapiente d', '97.00', '77.00', '77.00', '11.00', '73.00', '95.00', '90.00', '90.00', '37.00', '49.00', 179, '2024-09-19 13:08:15', '[\"4\",\"5\",\"7\"]', '[1,2,4,5,6,7]', '<p>Dolor ratione quod f.</p>', '', '<p>Aut error quidem des.</p>', '', '<p>Cum eveniet, dolorum.</p>', '', '<p>Fuga. Fuga. Odit et .</p>', '', '<p>Ipsum, repudiandae l.</p>', '', '<p>Suscipit illo pariat.</p>', '', NULL, 'CONFIRMÉ'),
+(534, 43, '2012-07-27', '1993-02-02', 'activé', 'Qui cumque error dol', '29.00', '59.00', '12.00', '44.00', '49.00', '98.00', '17.00', '93.00', '32.00', '48.00', 179, '2024-09-19 13:22:12', '[\"1\",\"2\",\"6\"]', '[1,2,4,5,6,7]', '<p>Officia voluptatem v.</p>', '', '<p>Sit, deleniti illum.</p>', '', '<p>Laborum. Velit quasi.</p>', '', '<p>Voluptatum sed fugit.</p>', '', '<p>Quae incidunt, tenet.</p>', '', '<p>Fugiat porro volupta.</p>', '', NULL, 'CONFIRMÉ'),
+(535, 3, '2000-07-07', '1970-12-11', 'activé', 'In incididunt non au', '7.00', '73.00', '42.00', '25.00', '19.00', '88.00', '2.00', '14.00', '98.00', '48.00', 5, '2024-09-19 13:30:27', '[\"5\"]', '[1,2,4,5,6,7]', '<p>Vel non nostrud iust.</p>', '', '<p>Labore sint, ab prae.</p>', '', '<p>Delectus, eum aut qu.</p>', '', '<p>Ullam sunt, itaque o.</p>', '', '<p>Pariatur. Incidunt, .</p>', '', '<p>Quisquam repellendus.</p>', '', NULL, 'CONFIRMÉ'),
+(536, 3, '2022-08-20', '1973-01-16', 'activé', 'Cillum adipisicing r', '66.00', '35.00', '19.00', '1.00', '77.00', '13.00', '91.00', '60.00', '49.00', '41.00', 5, '2024-09-19 13:38:56', '[\"2\",\"5\",\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p>Voluptas commodo cup.</p>', '', '<p>Distinctio. Itaque b.</p>', '', '<p>Magna eligendi cum n.</p>', '', '<p>Eveniet, ducimus, qu.</p>', '', '<p>Odio voluptatem, est.</p>', '', '<p>Quisquam non eligend.</p>', '', NULL, 'CONFIRMÉ'),
+(537, 4, '2016-10-27', '2008-03-14', 'activé', 'Ullam inventore dolo', '52.00', '3.00', '25.00', '41.00', '66.00', '67.00', '76.00', '50.00', '7.00', '95.00', 6, '2024-09-19 13:49:52', '[\"1\",\"4\",\"5\",\"7\"]', '[1,2,4,5,6,7]', '<p>Cupiditate sit, dolo.</p>', '', '<p>Velit, nihil lorem o.</p>', '', '<p>Rerum in atque elit.</p>', '', '<p>Quis vel et mollit e.</p>', '', '<p>Qui eius mollit omni.</p>', '', '<p>Voluptatum inventore.</p>', '', NULL, 'CONFIRMÉ'),
+(538, 3, '1995-01-18', '2010-02-16', 'activé', 'Atque dolor molestia', '20.00', '44.00', '4.00', '41.00', '82.00', '77.00', '98.00', '78.00', '33.00', '13.00', 5, '2024-09-19 13:51:54', '[\"4\",\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p>Beatae iusto pariatu.</p>', '', '<p>Velit cupidatat aliq.</p>', '', '<p>Pariatur. Officia eu.</p>', '', '<p>Dignissimos harum bl.</p>', '', '<p>Alias perspiciatis, .</p>', '', '<p>Sapiente excepteur i.</p>', '', NULL, 'CONFIRMÉ'),
+(539, 5, '2014-08-03', '2014-10-24', 'activé', '20', '94.00', '73.00', '42.00', '99.00', '28.00', '64.00', '96.00', '8.00', '98.00', '31.00', 10, '2024-09-23 15:13:49', '[2,4,6]', '[1,2,4,5,6,7]', '<p class=\"ql-align-center\"><br></p><p class=\"ql-align-center\"><strong style=\"color: var( --e-global-color-51f7311 );\">Distance du Haram</strong></p><p class=\"ql-align-center\"><span style=\"color: var( --e-global-color-primary );\">Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</span></p><p class=\"ql-align-center\"><strong style=\"color: var( --e-global-color-51f7311 );\">Standing des hôtels</strong></p><p class=\"ql-align-center\"><span style=\"color: var( --e-global-color-primary );\">Standing supérieur avec petit déjeuner : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</span></p><p class=\"ql-align-center\"><br></p><p><br></p>', '', '<p>Dolores in voluptatu.</p>', '', '<p>Veritatis voluptatib.</p>', '', '<p>Maiores voluptate vo.</p>', '', '<p>Laboriosam, impedit.</p>', '', '<p>Ut in est dolore est.</p>', 'files/66f185ad3a072_manuel d\'utilisation_plateforme_equivalence_web_2.pdf', NULL, 'CONFIRMÉ'),
+(564, 5, '1971-02-11', '1984-06-07', 'activé', 'Qui aliquip culpa ev', '89.00', '68.00', '62.00', '97.00', '11.00', '61.00', '99.00', '67.00', '47.00', '23.00', 10, '2024-09-20 13:24:27', '[\"2\",\"5\",\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', NULL, 'EN ATTENTE'),
+(565, 43, '2019-07-18', '2005-04-21', 'activé', 'Dolor quasi commodi ', '1.00', '59.00', '25.00', '22.00', '24.00', '96.00', '86.00', '57.00', '9.00', '16.00', 179, '2024-09-20 13:38:32', '[1,4,5]', '[1,2,4,5,6,7]', '<p>Aut optio, cumque ip.</p>', '', '<p>Qui unde eum autem o.</p>', '', '<p>Sit, excepteur dolor.</p>', '', '<p>Aut voluptas ex temp.</p>', '', '<p>Dolorem provident, e.</p>', '', '<p>Explicabo. Velit dig.</p>', '', NULL, 'CONFIRMÉ'),
+(569, 5, '1971-02-11', '1984-06-07', 'désactivé', 'Qui aliquip culpa ev', '89.00', '68.00', '62.00', '97.00', '11.00', '61.00', '99.00', '67.00', '47.00', '23.00', 10, '2024-09-20 13:58:34', '[\"2\",\"5\",\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', NULL, 'EN ATTENTE'),
+(570, 43, '2019-07-18', '2005-04-21', 'désactivé', 'Dolor quasi commodi ', '1.00', '59.00', '25.00', '22.00', '24.00', '96.00', '86.00', '57.00', '9.00', '16.00', 179, '2024-09-20 13:58:49', '[1,4,5]', '[1,2,4,5,6,7]', '<p>Aut optio, cumque ip.</p>', '', '<p>Qui unde eum autem o.</p>', '', '<p>Sit, excepteur dolor.</p>', '', '<p>Aut voluptas ex temp.</p>', '', '<p>Dolorem provident, e.</p>', '', '<p>Explicabo. Velit dig.</p>', '', NULL, 'CONFIRMÉ'),
+(571, 86, '2007-12-25', '1979-09-26', 'activé', 'Porro eos similique', '73.00', '75.00', '68.00', '61.00', '23.00', '38.00', '3.00', '24.00', '99.00', '49.00', 240, '2024-09-21 23:07:49', '[2,5,6]', '[1,2,4,5,6,7]', '<p>description  MOD</p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', NULL, NULL, 'EN ATTENTE'),
+(572, 86, '2007-12-25', '1979-09-26', 'désactivé', 'Porro eos similique', '73.00', '75.00', '68.00', '61.00', '23.00', '38.00', '3.00', '24.00', '99.00', '49.00', 241, '2024-09-20 14:36:56', '[2,5,6]', '[1,2,4,5,6,7]', '<p>description  MOD</p>', 'title 1 MOD', '<p>description 1 MOD</p>', 'title 2 MOD', '<p>description 2 MOD</p>', 'title 3 MOD', '<p>description 3 MOD</p>', 'title 4 MOD', '<p>description 4 MOD</p>', 'title 5 MOD', '<p>description 5 MOD</p>', NULL, NULL, 'EN ATTENTE'),
+(574, 86, '2007-12-25', '1979-09-26', 'activé', 'Porro eos similique', '73.00', '75.00', '68.00', '61.00', '23.00', '38.00', '3.00', '24.00', '99.00', '49.00', 241, '2024-09-21 23:10:36', '[2,5,6]', '[1,2,4,5,6,7]', '<p>description  MOD</p>', 'title 1 MOD', '<p>description 1 MOD</p>', 'title 2 MOD', '<p>description 2 MOD</p>', 'title 3 MOD', '<p>description 3 MOD</p>', 'title 4 MOD', '<p>description 4 MOD</p>', 'title 5 MOD', '<p>description 5 MOD</p>', '', NULL, 'EN ATTENTE'),
+(575, 82, '2012-07-27', '1993-02-02', 'activé', 'Qui cumque error dol', '29.00', '59.00', '12.00', '44.00', '49.00', '98.00', '17.00', '93.00', '32.00', '48.00', 232, '2024-09-21 23:09:37', '[1,2,6]', '[1,2,4,5,6,7]', '<p>Officia voluptatem v.</p>', '', '<p>Sit, deleniti illum.</p>', '', '<p>Laborum. Velit quasi.</p>', '', '<p>Voluptatum sed fugit.</p>', '', '<p>Quae incidunt, tenet.</p>', '', '<p>Fugiat porro volupta.</p>', '', NULL, 'CONFIRMÉ'),
+(576, 3, '2024-09-06', '2024-09-26', 'désactivé', '5', '1.00', '1.00', '1.00', '1.00', '1.00', '1.00', '5.00', '5.00', '5.00', '5.00', 5, '2024-09-22 15:27:44', '[4,2]', '[1,4,5,6,2,7]', '<p><br></p>', '', '<p>section 1</p><p><br></p>', 'title 2', '<p><br></p>', 'title 3', '<p>section 3</p><p><br></p>', '', '<p><br></p>', 'title 5', '<p>section 5</p><p><br></p>', '', NULL, 'CONFIRMÉ'),
+(577, 5, '2003-09-19', '1998-07-15', 'activé', 'Deleniti eligendi su', '62.00', '68.00', '59.00', '59.00', '19.00', '61.00', '37.00', '77.00', '91.00', '15.00', 10, '2024-09-24 11:16:58', '[\"1\",\"2\",\"4\",\"5\",\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', 'Odio suscipit qui qu', '<p><br></p>', 'Est dolores rerum qu', '<p><br></p>', 'files/66f29faa22208_a-nostalgic-t-shirt-graphic-design-with-the-phrase-vlpIl4ZBS8-3Ce3qVQaCeg-Rp3iJy1hSu2I4ALJBrwT-Q.jpeg', '', 'EN ATTENTE'),
+(578, 43, '1993-11-27', '2016-06-02', 'activé', 'Adipisci consequatur', '93.00', '44.00', '94.00', '81.00', '77.00', '18.00', '49.00', '42.00', '59.00', '80.00', 179, '2024-09-24 11:19:29', '[\"1\",\"2\",\"4\",\"5\",\"7\"]', '[1,2,4,5,6,7]', '<p>Aut ea voluptatum qu.</p>', '', '<p>Dolore est molestiae.</p>', '', '<p>Quis consequuntur vo.</p>', '', '<p>Recusandae. Consecte.</p>', '', '<p>Ab unde labore exped.</p>', '', '<p>Vero cillum voluptat.</p>', 'files/66f2a041dd30c_a-nostalgic-t-shirt-graphic-design-with-the-phrase-vlpIl4ZBS8-3Ce3qVQaCeg-Rp3iJy1hSu2I4ALJBrwT-Q.jpeg', '', 'EN ATTENTE'),
+(579, 52, '2015-03-30', '1977-06-05', 'activé', 'Laborum numquam id ', '3.00', '78.00', '93.00', '74.00', '78.00', '37.00', '49.00', '26.00', '56.00', '50.00', 185, '2024-09-24 11:29:04', '[\"1\",\"4\",\"5\"]', '[1,2,4,5,6,7]', '<p>Ab sint, exercitatio.</p>', '', '<p>Quis incididunt eius.</p>', '', '<p>Iusto laboriosam, co.</p>', '', '<p>Aperiam quis cumque .</p>', '', '<p>Eos, natus elit, mod.</p>', '', '<p>Iure autem qui facil.</p>', 'files/66f2a2802f6b8_a-nostalgic-t-shirt-graphic-design-with-the-phrase-vlpIl4ZBS8-3Ce3qVQaCeg-Rp3iJy1hSu2I4ALJBrwT-Q.jpeg', '', 'CONFIRMÉ'),
+(580, 4, '1992-05-22', '1992-10-08', 'activé', 'Autem excepteur nihi', '59.00', '71.00', '73.00', '50.00', '47.00', '22.00', '52.00', '4.00', '3.00', '39.00', 6, '2024-09-24 11:35:31', '[\"2\",\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p>Minus est consequunt.</p>', '', '<p>Eligendi earum volup.</p>', '', '<p>Iure perferendis ame.</p>', '', '<p>Occaecat occaecat do.</p>', '', '<p>Earum adipisicing se.</p>', '', '<p>Assumenda occaecat s.</p>', 'files/66f2a40343b70_66f185ad3a072_manuel d\'utilisation_plateforme_equivalence_web_2 (2).pdf', '', 'CONFIRMÉ'),
+(581, 1, '1973-10-10', '1973-04-02', 'activé', 'Recusandae Fugit v', '59.00', '82.00', '44.00', '82.00', '57.00', '82.00', '86.00', '35.00', '51.00', '17.00', 2, '2024-09-24 11:39:06', '[\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p>Sunt et consequatur.</p>', '', '<p>Veritatis velit, eni.</p>', '', '<p>Eius perspiciatis, m.</p>', '', '<p>Illo est eligendi ut.</p>', '', '<p>Dignissimos temporib.</p>', '', '<p>Dolorum similique au.</p>', 'files/66f2a4da7d86f_66f185ad3a072_manuel d\'utilisation_plateforme_equivalence_web_2 (2).pdf', 'uploads/66f2a4da7dc7a__11286dc2-1536-4f47-895c-cf481e8684b6.jpeg', 'CONFIRMÉ'),
+(582, 86, '2024-02-13', '2018-05-19', 'activé', 'Illum et aliquam qu', '78.00', '86.00', '69.00', '2.00', '80.00', '59.00', '3.00', '16.00', '70.00', '1.00', 240, '2024-09-24 11:45:14', '[\"1\",\"2\"]', '[1,2,4,5,6,7]', '<p>Et dolores est velit.</p>', '', '<p>Ut quod fugit, irure.</p>', '', '<p>Deleniti aut aut min.</p>', '', '<p>Porro dolore consect.</p>', '', '<p>Odio nisi lorem fuga.</p>', '', '<p>Pariatur. Excepteur .</p>', 'files/66f2a64ab44db_66f185ad3a072_manuel d\'utilisation_plateforme_equivalence_web_2 (2).pdf', 'uploads/66f2a64ab48f9_Seminar-amico.png', 'CONFIRMÉ'),
+(583, 3, '1994-08-31', '2006-11-22', 'activé', 'Consequat Aspernatu', '86.00', '71.00', '31.00', '68.00', '72.00', '44.00', '4.00', '98.00', '11.00', '38.00', 5, '2024-09-24 15:47:44', '[2,4,7]', '[1,2,4,5,6,7]', '<p>DESCRIPTION</p>', 'title 1', '<p>SECTION 1</p>', 'title 2', '<p>SECTION 2</p>', 'title 3', '<p>SECTION 3</p>', 'title 4', '<p>SECTION 4</p>', 'title 5', '<p>SECTION 5</p>', 'files/66f2b93450053_66f185ad3a072_manuel d\'utilisation_plateforme_equivalence_web_2 (2).pdf', '', 'CONFIRMÉ'),
+(584, 3, '1994-08-31', '2006-11-22', 'désactivé', 'Consequat Aspernatu', '86.00', '71.00', '31.00', '68.00', '72.00', '44.00', '4.00', '98.00', '11.00', '38.00', 5, '2024-09-24 13:26:21', '[2,4,7]', '[1,2,4,5,6,7]', '<p>DESCRIPTION</p>', 'title 1', '<p>SECTION 1</p>', 'title 2', '<p>SECTION 2</p>', 'title 3', '<p>SECTION 3</p>', 'title 4', '<p>SECTION 4</p>', 'title 5', '<p>SECTION 5</p>', 'files/66f2bb2d4627f_CV professionnel gris simple.pdf', 'uploads/a-professional-design-of-a-purple-and-pink-gradien-Gc4UdF_nT2qX_14ZEdarDA-73kMud6zQzCOLcRstZ5anA.jpeg', 'CONFIRMÉ'),
+(585, 86, '2024-02-13', '2018-05-19', 'désactivé', 'Illum et aliquam qu', '78.00', '86.00', '69.00', '2.00', '80.00', '59.00', '3.00', '16.00', '70.00', '1.00', 240, '2024-09-24 13:14:51', '[\"1\",\"2\"]', '[1,2,4,5,6,7]', '<p>Et dolores est velit.</p>', '', '<p>Ut quod fugit, irure.</p>', '', '<p>Deleniti aut aut min.</p>', '', '<p>Porro dolore consect.</p>', '', '<p>Odio nisi lorem fuga.</p>', '', '<p>Pariatur. Excepteur .</p>', 'files/66f2a64ab44db_66f185ad3a072_manuel d\'utilisation_plateforme_equivalence_web_2 (2).pdf', 'uploads/66f2a64ab48f9_Seminar-amico.png', 'CONFIRMÉ'),
+(589, 88, '2024-08-01', '2024-08-31', 'désactivé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 244, '2024-09-24 17:45:50', '[1,7,4,6,2,5]', '[1,7,4,6,2,5]', '<p>hola</p><p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', 'files/66f2be61dd63e_July-to-December-2022-Calendar.pdf', 'uploads/66f2f6c09237e_medina.jpg', 'CONFIRMÉ'),
+(590, 88, '2024-08-01', '2024-08-31', 'désactivé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 245, '2024-09-24 17:02:37', '[1,4,6,2,7,5]', '[1,4,6,2,7,5]', '<p><br></p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', 'files/66f2beb1caf63_guide_anb.pdf', 'uploads/66f2f05baf687_35440.jpg', 'CONFIRMÉ');
 
 -- --------------------------------------------------------
 
@@ -224,12 +260,6 @@ INSERT INTO `hebergements` (`id`, `formule_id`, `hotel_id`, `type_pension`, `dat
 (1017, 448, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
 (1018, 448, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
 (1019, 448, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
-(1020, 450, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
-(1021, 450, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
-(1022, 450, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
-(1023, 449, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
-(1024, 449, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
-(1025, 449, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
 (1026, 452, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
 (1027, 452, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
 (1028, 452, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
@@ -270,11 +300,54 @@ INSERT INTO `hebergements` (`id`, `formule_id`, `hotel_id`, `type_pension`, `dat
 (1214, 373, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
 (1215, 373, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
 (1216, 484, 5, 'Sahour et Iftar', '2000-12-09', '2016-09-06', 5750),
-(1226, 486, 6, 'Iftar', '1985-09-26', '1997-09-16', 4373),
 (1228, 485, 6, 'Pension Complète', '2006-09-04', '1989-07-13', 0),
-(1233, 506, 6, 'Pension Complète', '2006-09-04', '1989-07-13', 0),
-(1235, 508, 6, 'Pension Complète', '2006-09-04', '1989-07-13', 0),
-(1266, 505, 5, 'Sans pension', '2024-09-27', '2024-09-29', 2);
+(1266, 505, 5, 'Sans pension', '2024-09-27', '2024-09-29', 2),
+(1267, 526, 19, 'Sahour et Iftar', '2010-03-19', '1998-02-05', 0),
+(1268, 527, 18, 'Sahour', '2012-08-01', '1993-09-20', 0),
+(1269, 528, 6, 'Iftar', '1973-03-05', '1991-02-27', 6568),
+(1270, 529, 5, 'Sans pension', '2003-06-27', '1990-05-31', 0),
+(1271, 530, 18, 'Sans pension', '2015-05-22', '2020-02-19', 1734),
+(1272, 531, 5, 'Iftar', '2015-05-21', '2015-07-29', 69),
+(1273, 533, 18, 'Demi-pension', '1984-09-14', '1979-09-12', 0),
+(1274, 534, 7, 'Petit déjeuner', '1996-04-28', '2006-09-20', 3797),
+(1275, 535, 7, 'Pension Complète', '1991-11-10', '1987-12-23', 0),
+(1276, 536, 5, 'Petit déjeuner', '2002-03-05', '2019-03-26', 6230),
+(1277, 537, 18, 'Petit déjeuner', '1979-10-05', '2001-11-30', 8092),
+(1278, 538, 18, 'Pension Complète', '1997-01-24', '2019-02-15', 8057),
+(1326, 564, 4, 'Iftar', '1980-03-08', '2013-11-05', 0),
+(1329, 565, 7, 'Sahour et Iftar', '1994-07-16', '1975-06-04', 0),
+(1333, 569, 4, 'Iftar', '1980-03-08', '2013-11-05', 0),
+(1334, 570, 7, 'Sahour et Iftar', '1994-07-16', '1975-06-04', 0),
+(1335, 508, 6, 'Pension Complète', '2006-09-04', '1989-07-13', 0),
+(1336, 506, 6, 'Pension Complète', '2006-09-04', '1989-07-13', 0),
+(1339, 572, 6, 'Pension Complète', '2006-09-04', '1989-07-13', 0),
+(1342, 571, 6, 'Pension Complète', '2006-09-04', '1989-07-13', 0),
+(1343, 575, 7, 'Petit déjeuner', '1996-04-28', '2006-09-20', 3797),
+(1344, 574, 6, 'Pension Complète', '2006-09-04', '1989-07-13', 0),
+(1348, 576, 18, 'Sahour et Iftar', '2024-09-26', '2024-09-30', 4),
+(1354, 539, 5, 'Iftar', '1998-06-13', '1979-04-06', 0),
+(1355, 577, 18, 'Petit déjeuner', '2003-12-19', '2019-07-17', 0),
+(1356, 578, 18, 'Petit déjeuner ensuite Iftar', '1990-08-05', '1976-09-20', 0),
+(1357, 579, 18, 'Pension Complète', '2008-12-08', '1977-05-21', 0),
+(1358, 580, 4, 'Petit déjeuner', '1972-12-08', '2012-06-01', 14420),
+(1359, 581, 18, 'Pension Complète', '1989-02-15', '2007-09-29', 6800),
+(1360, 582, 7, 'Demi-pension', '2013-04-08', '2017-04-25', 1478),
+(1361, 486, 6, 'Iftar', '1985-09-26', '1997-09-16', 4373),
+(1368, 585, 7, 'Demi-pension', '2013-04-08', '2017-04-25', 1478),
+(1372, 584, 6, 'Iftar', '1985-09-26', '1997-09-16', 4373),
+(1373, 449, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
+(1374, 449, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
+(1375, 449, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
+(1376, 450, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
+(1377, 450, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
+(1378, 450, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
+(1407, 583, 6, 'Iftar', '1985-09-26', '1997-09-16', 4373),
+(1450, 590, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
+(1451, 590, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
+(1452, 590, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
+(1462, 589, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
+(1463, 589, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
+(1464, 589, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8);
 
 -- --------------------------------------------------------
 
@@ -297,10 +370,12 @@ CREATE TABLE `hotels` (
 --
 
 INSERT INTO `hotels` (`id`, `nom`, `etoiles`, `ville`, `details`, `monument`, `image_gallery`) VALUES
-(4, 'Hotels Hilton Al Madinah', 5, 'Madina', 'hotel 5*', 'en face de haram', NULL),
-(5, 'Hotel Seabel Alhambra', 5, 'Makkah', 'Hotel 5*', 'En Face de haram', NULL),
-(6, 'New Medinah Hotel', 4, 'Medina', 'Hôtels économiques à Medina les mieux notés', '3km', NULL),
-(7, 'Pullan ZamZam Makkah ', 4, 'Makkah', 'Pullman ZamZam Makkah stands as a distinctive landmark in Makkah', '3.8km', NULL);
+(4, 'Hotels Hilton Al Madinah', 5, '19', 'hotel 5*', 'en face de haram', NULL),
+(5, 'Hotel Seabel Alhambra', 5, '18', 'Hotel 5*', 'En Face de haram', NULL),
+(6, 'New Medinah Hotel', 4, '19', 'Hôtels économiques à Medina les mieux notés', '3km', NULL),
+(7, 'Pullan ZamZam Makkah ', 4, '18', 'Pullman ZamZam Makkah stands as a distinctive landmark in Makkah', '3.8km', NULL),
+(18, 'Recusandae Cupidata', 1, '2', 'Enim est ut quod nih', 'Dolores non exercita', NULL),
+(19, 'Dignissimos totam cu', 1, '2', 'Vero consequat Nihi', 'Ratione dolorem pers', NULL);
 
 -- --------------------------------------------------------
 
@@ -342,7 +417,9 @@ INSERT INTO `hotel_gallery` (`id`, `hotel_id`, `image_path`) VALUES
 (51, 7, 'uploads/hotel 4.jpg'),
 (52, 7, 'uploads/hotel1.jpg'),
 (53, 7, 'uploads/hotel3.jpg'),
-(54, 7, 'uploads/151616.jpg');
+(54, 7, 'uploads/151616.jpg'),
+(58, 18, 'uploads/flower 2.jpeg'),
+(59, 19, 'uploads/flower 1.jpeg');
 
 -- --------------------------------------------------------
 
@@ -370,7 +447,10 @@ INSERT INTO `omra_packages` (`id`, `category_parent_id`, `nom`, `description`, `
 (34, 6, 'Nice', 'OMRA Nice Vivez une expérience riche en émotion. et revenez le cœur apaisé.	', 'uploads/66a3f922899cd4.45974857_nice.jpg'),
 (40, 7, 'Marseille', 'OMRA Marseille Vivez une expérience riche en émotion. et revenez le cœur apaisé.	', 'uploads/66a3f92f534d85.06641322_marseille.jpg'),
 (43, 6, 'Lille', 'OMRA Lille 2024\r\nVivez une expérience riche en émotion.\r\net revenez le cœur apaisé.', 'uploads/66a3f93eee9527.29928469_lille.jpg'),
-(52, 7, 'Brest', 'OMRA Brest 2024\r\nVivez une expérience riche en émotion.\r\net revenez le cœur apaisé.', 'uploads/66b1eb213fbe19.64012434_brest.jpg');
+(52, 7, 'Brest', 'OMRA Brest 2024\r\nVivez une expérience riche en émotion.\r\net revenez le cœur apaisé.', 'uploads/66b1eb213fbe19.64012434_brest.jpg'),
+(82, 6, 'London', 'london', 'uploads/66a3f922899cd4.45974857_nice.jpg'),
+(86, 6, 'London', 'london', 'uploads/66a3f922899cd4.45974857_nice.jpg'),
+(88, 6, 'Nice', 'OMRA Nice Vivez une expérience riche en émotion. et revenez le cœur apaisé.	', 'uploads/66a3f922899cd4.45974857_nice.jpg');
 
 -- --------------------------------------------------------
 
@@ -550,7 +630,13 @@ INSERT INTO `type_formule_omra` (`id`, `nom`, `formule_parent_id`) VALUES
 (198, 'Formule Simple', 43),
 (199, 'Formule Confort', 34),
 (201, 'Formule Confort', 40),
-(225, 'formule test', 52);
+(225, 'formule test', 52),
+(232, 'Formule Confort', 82),
+(233, 'Formule Simple', 82),
+(240, 'Formule Simple', 86),
+(241, 'Formule Confort', 86),
+(244, 'Formule Confort', 88),
+(245, 'Formule Simple', 88);
 
 -- --------------------------------------------------------
 
@@ -656,16 +742,6 @@ INSERT INTO `vols` (`id`, `formule_id`, `ville_depart_id`, `ville_destination_id
 (1403, 448, '20', 19, 12, 13, 6, 'PS3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
 (1404, 448, '19', 2, 13, 4, 6, 'PS4', '2024-07-31 08:00:00', '2024-08-31 20:00:00'),
 (1405, 448, '2', 11, 4, 5, 6, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00'),
-(1406, 450, '11', 2, 5, 4, 6, 'PS1', '2024-08-01 06:00:00', '2024-08-01 08:00:00'),
-(1407, 450, '2', 20, 4, 12, 6, 'PS2', '2024-08-01 10:00:00', '2024-08-01 20:00:00'),
-(1408, 450, '20', 19, 12, 13, 6, 'PS3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
-(1409, 450, '19', 2, 13, 4, 6, 'PS4', '2024-07-31 08:00:00', '2024-08-31 20:00:00'),
-(1410, 450, '2', 11, 4, 5, 6, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00'),
-(1411, 449, '11', 2, 5, 4, 6, 'PS1', '2024-08-01 06:00:00', '2024-08-01 08:00:00'),
-(1412, 449, '2', 20, 4, 12, 6, 'PS2', '2024-08-01 10:00:00', '2024-08-01 20:00:00'),
-(1413, 449, '20', 19, 12, 13, 6, 'PS3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
-(1414, 449, '19', 2, 13, 4, 6, 'PS4', '2024-07-31 08:00:00', '2024-08-31 20:00:00'),
-(1415, 449, '2', 11, 4, 5, 6, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00'),
 (1416, 452, '11', 2, 5, 4, 6, 'PC1', '2024-08-01 06:00:00', '2024-08-01 08:00:00'),
 (1417, 452, '2', 20, 4, 12, 6, 'PC2', '2024-08-01 10:00:00', '2024-08-01 20:00:00'),
 (1418, 452, '20', 19, 12, 13, 6, 'PC3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
@@ -732,11 +808,62 @@ INSERT INTO `vols` (`id`, `formule_id`, `ville_depart_id`, `ville_destination_id
 (1677, 373, '19', 2, 13, 4, 7, 'PS4', '2024-07-31 08:00:00', '2024-08-31 20:00:00'),
 (1678, 373, '2', 11, 4, 5, 7, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00'),
 (1679, 484, '17', 11, 2, 9, 7, 'Voluptatem Rerum od', '1982-01-16 00:16:00', '2010-10-22 00:16:00'),
-(1689, 486, '20', 13, 5, 7, 7, 'Et voluptate qui eum', '2007-10-14 23:58:00', '1975-01-03 11:22:00'),
 (1691, 485, '16', 11, 8, 13, 6, 'Voluptas cupiditate ', '2023-06-18 10:15:00', '1972-01-11 20:27:00'),
-(1696, 506, '16', 11, 8, 13, 6, 'Voluptas cupiditate ', '2023-06-18 10:15:00', '1972-01-11 20:27:00'),
-(1698, 508, '16', 11, 8, 13, 6, 'Voluptas cupiditate ', '2023-06-18 10:15:00', '1972-01-11 20:27:00'),
-(1757, 505, '18', 16, 11, 10, 6, '5', '2024-09-24 05:11:00', '2024-09-28 05:11:00');
+(1757, 505, '18', 16, 11, 10, 6, '5', '2024-09-24 05:11:00', '2024-09-28 05:11:00'),
+(1758, 526, '11', 18, 10, 12, 7, 'Aut ullam consectetu', '1970-08-26 17:44:00', '1974-01-09 08:57:00'),
+(1759, 527, '16', 16, 9, 2, 6, 'Ab occaecat minus ad', '1994-12-17 15:00:00', '1993-08-03 09:03:00'),
+(1760, 528, '11', 13, 9, 11, 7, 'Consequuntur delectu', '2021-01-21 09:38:00', '2020-02-19 10:57:00'),
+(1761, 529, '16', 19, 11, 11, 6, 'Aut beatae incididun', '2023-07-17 09:06:00', '1982-06-17 00:18:00'),
+(1762, 530, '13', 14, 11, 13, 6, 'Error nostrud ration', '2008-11-28 11:29:00', '1995-07-13 19:31:00'),
+(1763, 531, '13', 15, 7, 10, 7, 'Incidunt dolore bla', '2014-02-13 08:42:00', '2005-03-14 04:25:00'),
+(1764, 533, '13', 13, 2, 13, 7, 'Voluptas ut ipsum cu', '2008-12-25 22:08:00', '2007-01-23 19:57:00'),
+(1765, 534, '15', 2, 4, 13, 6, 'Amet ut qui volupta', '2001-08-22 22:54:00', '2019-01-20 12:44:00'),
+(1766, 535, '2', 12, 11, 13, 7, 'Culpa inventore vel ', '1977-12-23 08:22:00', '1977-04-11 04:15:00'),
+(1767, 536, '15', 18, 8, 13, 6, 'Nam irure at explica', '1994-10-09 20:28:00', '1998-12-14 01:26:00'),
+(1768, 537, '16', 17, 12, 7, 6, 'Optio aliquid labor', '1983-09-25 15:29:00', '1982-05-06 07:45:00'),
+(1769, 538, '13', 18, 2, 11, 6, 'Incidunt adipisicin', '2004-11-05 06:04:00', '2021-01-06 04:59:00'),
+(1855, 564, '15', 18, 8, 8, 6, 'Velit corporis saepe', '1979-10-27 22:19:00', '1998-11-28 14:11:00'),
+(1858, 565, '14', 14, 11, 7, 6, 'Sit quidem nobis et', '2008-08-25 14:26:00', '2017-05-24 09:21:00'),
+(1862, 569, '15', 18, 8, 8, 6, 'Velit corporis saepe', '1979-10-27 22:19:00', '1998-11-28 14:11:00'),
+(1863, 570, '14', 14, 11, 7, 6, 'Sit quidem nobis et', '2008-08-25 14:26:00', '2017-05-24 09:21:00'),
+(1864, 508, '16', 11, 8, 13, 6, 'Voluptas cupiditate ', '2023-06-18 10:15:00', '1972-01-11 20:27:00'),
+(1865, 506, '16', 11, 8, 13, 6, 'Voluptas cupiditate ', '2023-06-18 10:15:00', '1972-01-11 20:27:00'),
+(1868, 572, '16', 11, 8, 13, 6, 'Voluptas cupiditate ', '2023-06-18 10:15:00', '1972-01-11 20:27:00'),
+(1871, 571, '16', 11, 8, 13, 7, 'Voluptas cupiditate ', '2023-06-18 10:15:00', '1972-01-11 20:27:00'),
+(1872, 575, '15', 2, 4, 13, 7, 'Amet ut qui volupta', '2001-08-22 22:54:00', '2019-01-20 12:44:00'),
+(1873, 574, '16', 11, 8, 13, 7, 'Voluptas cupiditate ', '2023-06-18 10:15:00', '1972-01-11 20:27:00'),
+(1877, 576, '14', 15, 11, 10, 7, 's1', '2024-09-16 09:46:00', '2024-09-25 09:46:00'),
+(1883, 539, '14', 13, 4, 5, 6, 'Aut magni nisi neque', '1971-11-08 05:57:00', '1992-11-03 13:40:00'),
+(1884, 577, '20', 2, 12, 12, 7, 'Qui in incididunt im', '1995-09-26 13:51:00', '2002-09-02 15:27:00'),
+(1885, 578, '14', 14, 11, 8, 7, 'Ratione at officia n', '2013-10-28 14:59:00', '1984-09-14 10:05:00'),
+(1886, 579, '14', 15, 7, 2, 7, 'Pariatur Sapiente e', '1986-10-21 06:37:00', '2019-06-13 07:00:00'),
+(1887, 580, '11', 14, 2, 5, 7, 'Laboriosam eius sed', '2005-08-13 04:02:00', '2005-09-27 13:58:00'),
+(1888, 581, '18', 18, 10, 4, 6, 'Commodo cupiditate u', '2004-05-03 05:50:00', '2016-10-05 23:24:00'),
+(1889, 582, '2', 13, 11, 11, 7, 'Delectus exercitati', '1989-08-02 01:13:00', '2016-10-11 06:33:00'),
+(1890, 486, '20', 13, 5, 7, 7, 'Et voluptate qui eum', '2007-10-14 23:58:00', '1975-01-03 11:22:00'),
+(1897, 585, '2', 13, 11, 11, 7, 'Delectus exercitati', '1989-08-02 01:13:00', '2016-10-11 06:33:00'),
+(1901, 584, '20', 13, 5, 7, 7, 'Et voluptate qui eum', '2007-10-14 23:58:00', '1975-01-03 11:22:00'),
+(1902, 449, '11', 2, 5, 4, 6, 'PS1', '2024-08-01 06:00:00', '2024-08-01 08:00:00'),
+(1903, 449, '2', 20, 4, 12, 6, 'PS2', '2024-08-01 10:00:00', '2024-08-01 20:00:00'),
+(1904, 449, '20', 19, 12, 13, 6, 'PS3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
+(1905, 449, '19', 2, 13, 4, 6, 'PS4', '2024-07-31 08:00:00', '2024-08-31 20:00:00'),
+(1906, 449, '2', 11, 4, 5, 6, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00'),
+(1907, 450, '11', 2, 5, 4, 6, 'PS1', '2024-08-01 06:00:00', '2024-08-01 08:00:00'),
+(1908, 450, '2', 20, 4, 12, 6, 'PS2', '2024-08-01 10:00:00', '2024-08-01 20:00:00'),
+(1909, 450, '20', 19, 12, 13, 6, 'PS3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
+(1910, 450, '19', 2, 13, 4, 6, 'PS4', '2024-07-31 08:00:00', '2024-08-31 20:00:00'),
+(1911, 450, '2', 11, 4, 5, 6, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00'),
+(1962, 583, '20', 13, 5, 7, 7, 'Et voluptate qui eum', '2007-10-14 23:58:00', '1975-01-03 11:22:00'),
+(2033, 590, '11', 2, 5, 4, 6, 'PS1', '2024-08-01 06:00:00', '2024-08-01 08:00:00'),
+(2034, 590, '2', 20, 4, 12, 6, 'PS2', '2024-08-01 10:00:00', '2024-08-01 20:00:00'),
+(2035, 590, '20', 19, 12, 13, 6, 'PS3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
+(2036, 590, '19', 2, 13, 4, 6, 'PS4', '2024-07-31 08:00:00', '2024-08-31 20:00:00'),
+(2037, 590, '2', 11, 4, 5, 6, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00'),
+(2053, 589, '11', 2, 5, 4, 6, 'PS1', '2024-08-01 06:00:00', '2024-08-01 08:00:00'),
+(2054, 589, '2', 20, 4, 12, 6, 'PS2', '2024-08-01 10:00:00', '2024-08-01 20:00:00'),
+(2055, 589, '20', 19, 12, 13, 6, 'PS3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
+(2056, 589, '19', 2, 13, 4, 6, 'PS4', '2024-07-31 08:00:00', '2024-08-31 20:00:00'),
+(2057, 589, '2', 11, 4, 5, 6, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00');
 
 --
 -- Index pour les tables déchargées
@@ -872,31 +999,31 @@ ALTER TABLE `extras`
 -- AUTO_INCREMENT pour la table `formules`
 --
 ALTER TABLE `formules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=526;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=592;
 
 --
 -- AUTO_INCREMENT pour la table `hebergements`
 --
 ALTER TABLE `hebergements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1267;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1465;
 
 --
 -- AUTO_INCREMENT pour la table `hotels`
 --
 ALTER TABLE `hotels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `hotel_gallery`
 --
 ALTER TABLE `hotel_gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT pour la table `omra_packages`
 --
 ALTER TABLE `omra_packages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT pour la table `programs`
@@ -914,7 +1041,7 @@ ALTER TABLE `reservations`
 -- AUTO_INCREMENT pour la table `type_formule_omra`
 --
 ALTER TABLE `type_formule_omra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
 
 --
 -- AUTO_INCREMENT pour la table `users`
@@ -932,7 +1059,7 @@ ALTER TABLE `ville_depart`
 -- AUTO_INCREMENT pour la table `vols`
 --
 ALTER TABLE `vols`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1758;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2058;
 
 --
 -- Contraintes pour les tables déchargées

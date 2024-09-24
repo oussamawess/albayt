@@ -215,9 +215,9 @@
                 
                 // Display the status with an icon
                 if($row_formule['statut'] == 'désactivé'){
-                    echo "<td>" . '<span class="inactive">● </span>' . $row_formule['statut'] . "</td>";
+                    echo "<td><span class='inactive'>● </span>Épuisé</td>";
                 } else {
-                    echo "<td>" . '<span class="active">● </span>' . $row_formule['statut'] . "</td>";
+                    echo "<td><span class='active'>● </span>En vente</td>";
                 }
 
                 // Buttons for edit, delete, and duplicate formule

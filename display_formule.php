@@ -18,12 +18,17 @@ $formule_id = intval($_GET['id']);
 
 // Fetch formule details
 $sql_formule = "
-    SELECT f.*, p.nom AS package_name, t.nom AS type_name
+    SELECT f.*, 
+           p.nom AS package_name, 
+           t.nom AS type_name, 
+           c.nom AS category_parent_name
     FROM formules f
     LEFT JOIN omra_packages p ON f.package_id = p.id
     LEFT JOIN type_formule_omra t ON f.type_id = t.id
+    LEFT JOIN category_parent c ON p.category_parent_id = c.id
     WHERE f.id = $formule_id
 ";
+
 $result_formule = mysqli_query($conn, $sql_formule);
 $formule = mysqli_fetch_assoc($result_formule);
 
@@ -221,6 +226,18 @@ $result_vols = mysqli_query($conn, $sql_vols);
         h3 {
             text-align: center;
         }
+
+        .active {
+            color: #62d75e;
+            /* float:right; */
+            font-size: 20px;
+        }
+
+        .inactive {
+            color: #f90600;
+            /* float:right; */
+            font-size: 20px;
+        }
     </style>
 </head>
 
@@ -237,7 +254,10 @@ $result_vols = mysqli_query($conn, $sql_vols);
         </div>
         <div class="content">
             <h1 style="text-align:center;">Détails</h1>
-            <h3 style="text-align: left;"><?php echo "ID Formule: " . $formule_id ?></h3>
+            <div style="display: flex; justify-content: space-around;">
+                <h3><?php echo "ID Formule: " . $formule_id ?></h3>
+                <h3><?php echo "Catégorie parent: " . $formule['category_parent_name']; ?></h3>
+            </div>
             <hr>
             <div class="section">
                 <h3>Informations générales</h3>
@@ -255,7 +275,13 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         <td><?php echo $formule['type_name']; ?></td>
                         <td><?php echo $formule['date_depart']; ?></td>
                         <td><?php echo $formule['date_retour']; ?></td>
-                        <td><?php echo $formule['statut']; ?></td>
+                        <?php
+                        if ($formule['statut'] === 'activé') {
+                            echo "<td><span class='active'>● </span>En vente</td>";
+                        } else {
+                            echo "<td><span class='inactive'>● </span>Épuisé</td>";
+                        }
+                        ?>
                         <td><?php echo $formule['duree_sejour']; ?></td>
                     </tr>
                 </table>
@@ -266,6 +292,11 @@ $result_vols = mysqli_query($conn, $sql_vols);
             <div class="section">
                 <h3>Vols</h3>
                 <table>
+                    <tr>
+                        <th colspan="8" style="text-align:center; background-color:<?php echo ($formule['statut_vol'] == 'CONFIRMÉ') ? '#91d44a' : '#fac611' ?>;">
+                            <?php echo $formule['statut_vol']; ?>
+                        </th>
+                    </tr>
                     <tr>
                         <th>N° Vol</th>
                         <th>Compagnie Aérienne</th>
@@ -490,22 +521,22 @@ $result_vols = mysqli_query($conn, $sql_vols);
                     <h3>Fichier</h3>
                     <table>
                         <tr>
-                        <?php
-                    $existingFiles = $formule['uploaded_file'];
+                            <?php
+                            $existingFiles = $formule['uploaded_file'];
 
-                    // Get the filename with the unique ID
-                    $filenameWithId = basename($existingFiles);
+                            // Get the filename with the unique ID
+                            $filenameWithId = basename($existingFiles);
 
-                    // Split the filename at the underscore
-                    $parts = explode('_', $filenameWithId);
+                            // Split the filename at the underscore
+                            $parts = explode('_', $filenameWithId);
 
-                    // Remove the first part (the unique ID)
-                    array_shift($parts);
+                            // Remove the first part (the unique ID)
+                            array_shift($parts);
 
-                    // Join the remaining parts back together
-                    $cleanFilename = implode('_', $parts);
-                    
-                    ?>
+                            // Join the remaining parts back together
+                            $cleanFilename = implode('_', $parts);
+
+                            ?>
                             <th><?php echo $cleanFilename; ?></th>
                         </tr>
                     </table>
@@ -513,6 +544,22 @@ $result_vols = mysqli_query($conn, $sql_vols);
             <?php
             }
             ?>
+
+            <div class="section" >
+                <h3>Image</h3>
+                <table style="text-align: center;">
+                    <tr>
+                        <th style="text-align: center;">
+                            Image actuel 
+                        </th>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <img src="<?php echo $formule['image_formule']; ?>" alt="image_formule" style="width:300px; "></p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
         </div>
     </div>

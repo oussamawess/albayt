@@ -42,39 +42,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $s4d = mysqli_real_escape_string($conn, $_POST['section4']);
     $s5t = mysqli_real_escape_string($conn, $_POST['titre_section5']);
     $s5d = mysqli_real_escape_string($conn, $_POST['section5']);
+    $statut_vol = mysqli_real_escape_string($conn, $_POST['statut_vol']);
     //wess
 
-       // Handle file upload (if any)
-       $uploaded_file_path = ''; // Initialize variable for the file path
-       if (isset($_FILES['uploaded_file']) && $_FILES['uploaded_file']['error'] === UPLOAD_ERR_OK) {
-           $target_dir = "files/"; // Directory for uploaded files
-           $file_name = basename($_FILES["uploaded_file"]["name"]);
-           $target_file = $target_dir . uniqid() . "_" . $file_name;
-   
-           // Check if file size is within the limit (e.g., 5MB)
-           if ($_FILES['uploaded_file']['size'] <= 5000000) {
-               $file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-               $allowed_types = ['jpg', 'jpeg', 'png', 'gif', 'pdf'];
-   
-               if (in_array($file_type, $allowed_types)) {
-                   if (!file_exists($target_dir)) {
-                       mkdir($target_dir, 0777, true); // Create directory if it doesn't exist
-                   }
-   
-                   // Move file to target directory
-                   if (move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], $target_file)) {
-                       $uploaded_file_path = mysqli_real_escape_string($conn, $target_file); // Store file path for database
-                   }
-               }
-           }
-       }
-   
-       // If a new file is uploaded, update the uploaded_file field
-       $file_update_query = "";
-       if (!empty($uploaded_file_path)) {
-           $file_update_query = ", uploaded_file = '$uploaded_file_path'";
-       }
-   
+    // Handle file upload (if any)
+    $uploaded_file_path = ''; // Initialize variable for the file path
+    if (isset($_FILES['uploaded_file']) && $_FILES['uploaded_file']['error'] === UPLOAD_ERR_OK) {
+        $target_dir = "files/"; // Directory for uploaded files
+        $file_name = basename($_FILES["uploaded_file"]["name"]);
+        $target_file = $target_dir . uniqid() . "_" . $file_name;
+
+        // Check if file size is within the limit (e.g., 5MB)
+        if ($_FILES['uploaded_file']['size'] <= 5000000) {
+            $file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+            $allowed_types = ['jpg', 'jpeg', 'png', 'gif', 'pdf'];
+
+            if (in_array($file_type, $allowed_types)) {
+                if (!file_exists($target_dir)) {
+                    mkdir($target_dir, 0777, true); // Create directory if it doesn't exist
+                }
+
+                // Move file to target directory
+                if (move_uploaded_file($_FILES["uploaded_file"]["tmp_name"], $target_file)) {
+                    $uploaded_file_path = mysqli_real_escape_string($conn, $target_file); // Store file path for database
+                }
+            }
+        }
+    }
+
+    // If a new file is uploaded, update the uploaded_file field
+    $file_update_query = "";
+    if (!empty($uploaded_file_path)) {
+        $file_update_query = ", uploaded_file = '$uploaded_file_path'";
+    }
+
+
+    // Image Formule
+    $image_formule = mysqli_real_escape_string($conn, $_POST['image_actuel']); // Default to the current image
+
+    if (isset($_FILES['image_formule']) && $_FILES['image_formule']['error'] === UPLOAD_ERR_OK) {
+        // Only process the image if a new file is uploaded
+        $tmpFilePath = $_FILES['image_formule']['tmp_name'];
+        $newFilePath = "uploads/" . uniqid() . "_" . $_FILES['image_formule']['name']; // Give the file a unique name
+        if (move_uploaded_file($tmpFilePath, $newFilePath)) {
+            $image_formule = mysqli_real_escape_string($conn, $newFilePath); // Update image path only if the upload is successful
+        } else {
+            echo "Erreur lors de l'upload de l'image.";
+            exit();
+        }
+    }
+
+
 
     // Fetch and sanitize selected programs
     $selectedPrograms = isset($_POST['programs']) ? array_map('intval', $_POST['programs']) : [];
@@ -126,6 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             prix_chambre_double_promo = '$prix_chambre_double_promo',
             prix_chambre_single_promo = '$prix_chambre_single_promo',
             description = '$description', -- Include the description in the update statement
+            image_formule = '$image_formule',
             s1t = '$s1t',
             s1d = '$s1d',
             s2t = '$s2t',
@@ -136,7 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             s4d = '$s4d',
             s5t = '$s5t',
             s5d = '$s5d',
-            
+            statut_vol = '$statut_vol',
             -- wess
 
             programs_id = '$programsJson',

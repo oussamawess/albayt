@@ -48,7 +48,7 @@
 
     }
 
-    img {
+    .img-logo {
         width: 100px;
         margin-left: auto;
         margin-right: 0;
@@ -57,7 +57,7 @@
     .top-bar {
         background-color: #d9c294;
         color: #000;
-        padding: 7px 15px 5px 15px;
+        padding: 7px 15px;
         border-radius: 5px;
         font-weight: bold;
         display: flex;
@@ -78,11 +78,25 @@
         margin: 0px;
     }
 
+    .statut-title{
+        flex: 1; 
+        text-align: end; 
+        margin-bottom: 0 !important;
+    }
+
     @media (max-width:768px) {
         .formule-dates {
             flex: 1;
             text-align: left;
             display: grid;
+            font-size: 0.75rem;
+        }
+
+        .statut{
+            font-size: 0.75rem;
+        }
+
+        .statut-title{
             font-size: 0.75rem;
         }
 
@@ -108,7 +122,7 @@
     }
 
     @media (max-width:400px) {
-        img {
+        .img-logo {
             width: 60px;
             margin-left: auto;
             margin-right: 0;
@@ -118,6 +132,10 @@
             flex: 1;
             text-align: left;
             display: grid;
+            font-size: 0.65rem;
+        }
+
+        .statut{
             font-size: 0.65rem;
         }
 
@@ -135,13 +153,18 @@
         .comar {
             font-size: 0.65rem;
         }
+
+        .statut-title{
+            font-size: 0.65rem;
+        }
     }
 </style>
 <div class="top-bar">
-    <p class="formule-dates">• Depart</p>
-    <p class="formule-date-returns">• Retour</p>
-    <p class="comar">• Compagnie Aérienne</p>
-    <p class="formule-prices">&euro; Prix</p>
+    <p class="formule-dates">•Depart</p>
+    <p class="formule-date-returns">•Retour</p>
+    <p class="comar" style="margin-bottom: 0 !important;">•Compagnie</p>
+    <p class="statut-title">•Statut</p>
+    <p class="formule-prices" style="margin-bottom: 0 !important;">&euro; Prix</p>
 </div>
 <?php
 include '../db.php'; // Include your database connection file
@@ -160,7 +183,7 @@ if (isset($_GET['type_id']) && isset($_GET['package_id'])) {
     LEFT JOIN type_formule_omra t ON f.type_id = t.id
     LEFT JOIN hebergements e ON f.id = e.formule_id
     LEFT JOIN hotels h ON e.hotel_id = h.id
-    WHERE f.package_id = $packageId AND f.type_id = $typeId AND f.statut = 'activé'
+    WHERE f.package_id = $packageId AND f.type_id = $typeId 
     ORDER BY f.date_depart ASC
     ";
 
@@ -209,9 +232,16 @@ if (isset($_GET['type_id']) && isset($_GET['package_id'])) {
                 <a href="formule.php?id=' . $formule['id'] . '">
                 <div class="formule-cards">           
                     <p class="formule-dates"><b>' . $dayNames[$dayOfWeek] . '</b> ' . $formattedDate . '</p>
-                    <p class="formule-date-returns"><b>' . $dayNames[$dayOfWeekret] . '</b> ' . $formattedDateret . '</p>
-                    <img src="../' . $logo_path . '" alt="Logo de la compagnie aérienne">
-                    <h5 class="formule-prices" style="color: #000;">' . intval($formule['prix_chambre_quadruple']) . ' &euro;</h5>
+                    <p class="formule-date-returns"><b>' . $dayNames[$dayOfWeekret] . '</b> ' . $formattedDateret . '</p>                    
+                    <img class="img-logo" src="../' . $logo_path . '" alt="Logo de la compagnie aérienne">';
+                    
+                        if ($formule['statut'] === 'activé'){
+                           echo "<p class='statut' style='color: #62d75e; flex: 1; text-align: end;'>En vente</p>";
+                        }else {
+                            echo "<p class='statut' style='color: #f90600; flex: 1; text-align: end;'>Épuisé</p>";
+                        }
+                       
+                  echo  '<h5 class="formule-prices" style="color: #000;">' . intval($formule['prix_chambre_quadruple']) . ' &euro;</h5>
                 </div></a>';
             }
         }

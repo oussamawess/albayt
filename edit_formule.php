@@ -361,6 +361,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     $existingS5t = $row['s5t'];
                     $existingS5d = $row['s5d'];
                     $existingFile = $row['uploaded_file'];
+                    $existingImage = $row['image_formule'];
+                    $existingStatutVol = $row['statut_vol'];
 
                     // Fetch current programs
                     $currentPrograms = json_decode($row['programs_id'], true) ?? [];
@@ -419,21 +421,30 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <h2>Modifier une Formule</h2>
             <input type="hidden" name="formule_id" value="<?php echo $formuleId; ?>">
             <div class="half-width-inputs">
-                <div class="input-group">
-                    <label for="package">Ville de départ:</label>
-                    <select id="package" name="package" class="half-width-input" required>
-                        <option value="">Sélectionnez une ville</option>
-                        <?php
-                        // Fetch and display package options from the database
-                        $sql = "SELECT id, nom FROM omra_packages";
-                        $result = mysqli_query($conn, $sql);
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $selected = ($row["id"] == $existingPackageId) ? 'selected' : '';
-                            echo "<option value='" . $row["id"] . "' $selected>" . $row["nom"] . "</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
+            <div class="input-group">
+        <label for="package">Ville de départ:</label>
+        <select id="package" name="package" class="half-width-input" required>
+            <option value="">Sélectionnez une ville</option>
+            <?php
+            // Fetch and display package options along with their category from the database
+            $sql = "
+            SELECT omra_packages.id, omra_packages.nom, category_parent.nom AS category_nom
+            FROM omra_packages
+            JOIN category_parent ON omra_packages.category_parent_id = category_parent.id";
+
+            // Execute the query
+            $result = mysqli_query($conn, $sql);
+
+            // Loop through the result and populate the dropdown
+            while ($row = mysqli_fetch_assoc($result)) {
+                // Check if the package is the existing one (to pre-select it)
+                $selected = ($row["id"] == $existingPackageId) ? 'selected' : '';
+                // Display the package name and category name
+                echo "<option value='" . $row["id"] . "' $selected>" . $row["nom"] . " - " . $row["category_nom"] . "</option>";
+            }
+            ?>
+        </select>
+    </div>
 
                 <div class="input-group">
                     <label for="type">Type de la Formule:</label>
@@ -456,9 +467,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <label for="statut">Statut:</label>
                     <select id="statut" name="statut" class="half-width-input" required>
                         <option value="activé" <?php if ($existingStatut == 'activé')
-                                                    echo 'selected'; ?>>Activé</option>
+                                                    echo 'selected'; ?>>En vente</option>
                         <option value="désactivé" <?php if ($existingStatut == 'désactivé')
-                                                        echo 'selected'; ?>>Désactivé
+                                                        echo 'selected'; ?>>Épuisé
                         </option>
                     </select>
                 </div>
@@ -518,6 +529,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <h3>Vols <span class="toggle-icon" onclick="toggleCollapse(this)">+</span></h3>
 
                 <div class="collapsible-content">
+                    <div class="input-group">
+                        <label for="statut_vol">Statut Vol:</label>
+                        <select id="statut_vol" name="statut_vol" class="half-width-input" style="width: 30%; background-color: <?php echo ($existingStatutVol == 'CONFIRMÉ') ? '#91d44a' : '#fac611'; ?>;" required onchange="changeBackgroundColor(this)">
+                            <option style="background-color: #91d44a"; value="CONFIRMÉ" <?php if ($existingStatutVol == 'CONFIRMÉ') echo 'selected'; ?>>CONFIRMÉ</option>
+                            <option style="background-color: #fac611" value="EN ATTENTE" <?php if ($existingStatutVol == 'EN ATTENTE') echo 'selected'; ?>>EN ATTENTE</option>
+                        </select>
+                    </div>
+                    <script>
+                        function changeBackgroundColor(selectElement) {
+                            if (selectElement.value === 'CONFIRMÉ') {
+                                selectElement.style.backgroundColor = '#91d44a';
+                            } else {
+                                selectElement.style.backgroundColor = '#fac611';
+                            }
+                        }
+                    </script>
+
                     <div class="addbutton-container">
                         <button type="button" class="add-button addbutton" onclick="addVol()">Ajouter Vol</button>
                         <!-- <button type="button" class="add-button addbutton" style="float: right; margin-top: -30px;" onclick="addVol()">Ajouter Vol</button>     -->
@@ -1564,7 +1592,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Fichier</h3>
                     <input type="file" name="uploaded_file" id="uploaded_file" class="form-control" style="padding: 10px; border: 1px solid #ababab; border-radius: 5px; transition: border-color 0.3s; width: 100%; max-width: 300px;"
                         onfocus="this.style.borderColor='#32363b'; this.style.outline='none';"
-                        onblur="this.style.borderColor='#32363b';">   
+                        onblur="this.style.borderColor='#32363b';">
 
                     <?php
                     $existingFiles = $existingFile;
@@ -1580,12 +1608,27 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
                     // Join the remaining parts back together
                     $cleanFilename = implode('_', $parts);
-                    
+
                     ?>
                     <p><b>Fichier actuel:</b> <?php echo $cleanFilename; ?></p>
                 </div>
             </div>
-            <!-- End download file -->
+            <!-- End download file -->            
+            
+            <!-- Hidden input to hold the current image path -->
+<input type="hidden" name="image_actuel" value="<?php echo $existingImage; ?>">
+
+<!-- Start image -->
+<div class="price-inputs" style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+    <div class="input-group" style="display: flex; flex-direction: column; align-items: center;">
+        <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Image</h3>
+        <input type="file" name="image_formule" id="image_formule" class="form-control" style="padding: 10px; border: 1px solid #ababab; border-radius: 5px;">
+        <!-- Display current image preview -->
+        <img src="<?php echo $existingImage; ?>" alt="Current Image" style="margin-top: 15px; max-width: 200px;">
+    </div>
+</div>
+
+            <!-- End image -->
 
             <button type="submit">Mettre à jour Formule</button>
         </form>
