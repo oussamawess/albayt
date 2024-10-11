@@ -203,7 +203,7 @@ ORDER BY f.date_depart ASC
     .modal-content {
       width: 100%;
       min-height: 30em;
-      max-width: 60%;
+      max-width: 80%;
       margin: auto;
       /* Center horizontally */
     }
@@ -481,6 +481,32 @@ ORDER BY f.date_depart ASC
         margin-left: -40px;
       }
     } */
+
+    @media (max-width: 1000px) {
+  .rox-desktop {
+    display: none;
+  }
+
+  .rox-mobile {
+    display: block;
+  }
+}
+
+@media (min-width: 1001px) {
+  .rox-mobile {
+    display: none;
+  }
+
+  .hidedx{
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .rox-desktop {
+    display: flex;
+  }
+}
   </style>
 </head>
 

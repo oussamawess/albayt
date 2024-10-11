@@ -70,21 +70,43 @@
         nav ul ul li a:hover {
             background-color: #444;
         }
+
+        /* Style for the Prev button */
+        .prev-btn {
+            position: absolute;
+            top: 80px;
+            /* Adjust this value if you want more space under the navbar */
+            left: 10px;
+            /* Aligns it to the left side */
+            background-color: white;
+            color: black;
+            padding: 5px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            border: 1px solid black;
+
+        }
+
+        .prev-btn:hover {
+            background-color: #444;
+            color: white;
+            border: 2px solid white;
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- Navigation Bar -->
     <nav>
         <ul>
             <li>
                 <a href="categorie_parent.php">Catégories Parent</a>
             </li>
-
             <li>
                 <a href="omrapackage.php">Villes</a>
             </li>
-
             <li>
                 <a href="#">Packages</a>
                 <ul>
@@ -92,49 +114,31 @@
                     <li><a href="list_type_formule_omra.php">Catégories</a></li>
                 </ul>
             </li>
-
             <li>
                 <a href="hotels.php">Hôtels</a>
-                <!-- <ul>
-                    <li><a href="hotels.php">Liste des Hôtels</a></li>
-                    <li><a href="ajouthotel.php">Ajouter un Hôtel</a></li>
-                </ul> -->
             </li>
             <li>
                 <a href="list_compagnies.php">Compagnies Aériennes</a>
-                <!-- <ul>
-                    <li><a href="list_compagnies.php">Liste des Compagnies Aériennes</a></li>
-                    <li><a href="add_compagnie.php">Ajouter une Compagnie</a></li>
-                </ul> -->
             </li>
-
             <li>
                 <a href="list_extra.php">Extras</a>
-                <!-- <ul>
-                    <li><a href="list_extra.php">Liste des Extras</a></li>
-                    <li><a href="ajout_extra.php">Ajouter un Extra</a></li>
-                </ul> -->
             </li>
-
             <li>
                 <a href="programs.php">Programmes</a>
-                <!-- <ul>
-                    <li><a href="programs.php">Liste des Programmes</a></li>
-                    <li><a href="add_program.php">Ajouter un Programme</a></li>
-                </ul> -->
             </li>
-
             <li>
                 <a href="liste_ville_depart.php">Villes Vol</a>
             </li>
-
             <li>
                 <a href="liste_aeroport.php">Aéroports</a>
             </li>
-            <!-- Nouvelle catégorie -->
-
         </ul>
     </nav>
+
+    <!-- 'Prev' Button -->
+    <a href="javascript:void(0);" class="prev-btn" onclick="history.back();"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+        </svg></a>
 
 </body>
 

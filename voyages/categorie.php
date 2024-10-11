@@ -416,7 +416,33 @@ if ($packagesResult->num_rows > 0) {
     .city-card-desktop .overlay:hover {
       box-shadow: inset 0px 0px 0px 10px #D9C391;
     }
+  
+    @media (max-width: 1000px) {
+  .rox-desktop {
+    display: none;
+  }
+
+  .rox-mobile {
+    display: block;
+  }
+}
+
+@media (min-width: 1001px) {
+  .rox-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .rox-desktop {
+    display: flex;
+  }
+}
+
+
   </style>
+
+  
 </head>
 
 <body>
@@ -446,20 +472,23 @@ if ($packagesResult->num_rows > 0) {
     <div class="rox-mobile">
       <?php foreach ($packages as $package): ?>
         <div class="col-12 col-sm-6 col-md-4">
-          <div class="city-card" style="background-image: url('../<?php echo $package['photo']; ?>');"
-            onclick="showModal('packageModal<?php echo $package['id']; ?>')">
-            <div class="overlay">
-              <div class="card-body-mobile">
-                <h1 class="card-title-mobile"><?php echo $package['nom']; ?></h1>
-                <p>EN SAVOIR PLUS&nbsp;&nbsp;<i class="fa-solid fa-angle-down"></i></p>
+          <a href="villes.php?category_parent_id=<?php echo $package['id']; ?>">
+            <div class="city-card" style="background-image: url('../<?php echo $package['photo']; ?>');">
+              <div class="overlay">
+                <div class="card-body-mobile">
+                  <h1 class="card-title-mobile"><?php echo $package['nom']; ?></h1>
+                  <p>EN SAVOIR PLUS&nbsp;&nbsp;<i class="fa-solid fa-angle-down"></i></p>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       <?php endforeach; ?>
     </div>
   </div>
-<!-- 
+
+
+  <!-- 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->

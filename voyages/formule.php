@@ -811,108 +811,108 @@ $hebergements_result = $hebergements_stmt->get_result();
 
         @media (max-width: 767px) {
 
-            br {
-                display: block;
-            }
+br {
+    display: block;
+}
 
-            .header {
-                flex-direction: column;
-                /* align-items: center; */
+.header {
+    flex-direction: column;
+    /* align-items: center; */
 
 
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 100px 15px;
-                background-color: #f5f5f5;
-                border-bottom-left-radius: 0px;
-                border-bottom-right-radius: 0px;
-                width: 100vw;
-                /* Make the header full-width */
-                margin-left: calc(50% - 50vw);
-                /* Center the header relative to the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 15px;
+    background-color: #f5f5f5;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    width: 100vw;
+    /* Make the header full-width */
+    margin-left: calc(50% - 50vw);
+    /* Center the header relative to the viewport */
 
-            }
+}
 
-            .header-content {
-                max-width: 100%;
-            }
+.header-content {
+    max-width: 100%;
+}
 
-            .image-slider {
-                max-width: 100%;
-                margin-top: 20px;
-            }
+.image-slider {
+    max-width: 100%;
+    margin-top: 20px;
+}
 
-            .date-selection {
-                /* display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background-color: white;
-                padding: 10px;
-                border-radius: 15px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                max-width: fit-content;
-                height: 200px;
-                margin: -50px 15px 0 15px;
-             */
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                height: auto;
-                /* padding: 20px; */
-                flex-wrap: wrap;
-                border-radius: 15px;
-                margin-left: 15px;
-                margin-right: 15px;
-                justify-content: center;
+.date-selection {
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: fit-content;
+    height: 200px;
+    margin: -50px 15px 0 15px;
+ */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: auto;
+    /* padding: 20px; */
+    flex-wrap: wrap;
+    border-radius: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    justify-content: center;
 
-            }
+}
 
-            .date-box {
-                /* display: flex;
-                justify-content: space-between;
-                width:100%; */
-                font-size: 12px !important;
+.date-box {
+    /* display: flex;
+    justify-content: space-between;
+    width:100%; */
+    font-size: 12px !important;
 
-            }
+}
 
-            .round-button {
-                margin-top: 20px;
-                align-self: center;
-                margin: auto;
-            }
+.round-button {
+    margin-top: 20px;
+    align-self: center;
+    margin: auto;
+}
 
-            .round-button a {
-                font-size: 11px;
-            }
+.round-button a {
+    font-size: 11px;
+}
 
-            .round-button-circle {
-                width: auto;
-                height: auto;
-                border-radius: 5%;
-                background: #22c1f9;
-                box-shadow: 0 0 3px gray;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                overflow: hidden;
-                padding: 5px 20px;
-            }
+.round-button-circle {
+    width: auto;
+    height: auto;
+    border-radius: 5%;
+    background: #22c1f9;
+    box-shadow: 0 0 3px gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 5px 20px;
+}
 
-            .date-selection button {
-                margin-top: 10px;
-                width: 100%;
-            }
+.date-selection button {
+    margin-top: 10px;
+    width: 100%;
+}
 
-            .tabs {
-                flex-direction: column;
-            }
+.tabs {
+    flex-direction: column;
+}
 
-            .tabs button {
-                width: 100%;
-                margin: 5px 0;
-            }
-        }
+.tabs button {
+    width: 100%;
+    margin: 5px 0;
+}
+}
 
         .wrapper {
             display: flex;
@@ -1170,7 +1170,9 @@ $hebergements_result = $hebergements_stmt->get_result();
             background-color: #dac392;
             border: none;
             transition: background-color 0.3s ease;
-            margin-top: 2em;
+            /* margin-top: 2em; */
+            border-bottom: 3px solid #dac392;
+            border-radius: 0px;
         }
 
 
@@ -1454,6 +1456,7 @@ $hebergements_result = $hebergements_stmt->get_result();
             display: table;
             width: 100%;
             position: relative;
+            margin-bottom: 30px;
         }
 
         .stepwizard-row {
@@ -2100,7 +2103,130 @@ $hebergements_result = $hebergements_stmt->get_result();
 
             }
         }
+
+        @media (max-width: 440px) {
+            .reservation-steps {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 370px) {
+            .reservation-steps {
+                font-size: 0.70rem;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .reservation-steps {
+                font-size: 0.65rem;
+            }
+        }
+
+        @media (max-width: 330px) {
+            .reservation-steps {
+                font-size: 0.6rem;
+            }
+        }
+
+        /*Inc and dec */
+        .custom-number-input {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #d9c391;
+            border-radius: 20px;
+            width: fit-content;
+            padding: 2px 0px;
+            background-color: #f8f8f8;
+            Box-shadow: .3rem .3rem .4rem .1rem hsla(0, 0%, 58%, .2);
+        }
+
+        .number-input {
+            text-align: center;
+            border: none;
+            font-size: 18px;
+            width: 50px;
+            background-color: transparent;
+            pointer-events: none;
+            color: gray;
+            margin-left: 14px;
+        }
+
+        .custom-number-input button {
+            border: none;
+            background: none;
+            font-size: 18px;
+            color: #00a0df;
+            cursor: pointer;
+        }
+
+        .custom-number-input button:focus {
+            outline: none;
+        }
+
+        @media(max-width:510px) {
+            .custom-number-input {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 20px;
+                width: 100px;
+                padding: 0px 0px;
+                background-color: #f8f8f8;
+                Box-shadow: .3rem .3rem .4rem .1rem hsla(0, 0%, 58%, .2);
+            }
+
+
+            .number-input {
+                text-align: center;
+                border: none;
+                font-size: 15px;
+                width: 40px;
+                background-color: transparent;
+                pointer-events: none;
+                color: gray;
+                margin-left: -10px;
+            }
+        }
+
+        .first-step {
+            display: inline-block;
+            margin: 0px 25px;
+        }
+
+        @media (max-width:976px) {
+            .first-step {
+                margin: 10px 0px;
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        /* Gallery POP-UP */
+        .modal-gallery {
+            height: 500px !important;
+            /* width: 800px !important; */
+        }
+
+        @media (max-width:991px) {
+            .modal-gallery {
+                height: 400px !important;
+                /* width: 800px !important; */
+            }
+        }
+
+        @media (max-width:767px) {
+            .modal-gallery {
+                height: 300px !important;
+                /* width: 800px !important; */
+            }
+
+            .carousel-gallery {
+                height: 200px;
+            }
+        }
     </style>
+
 </head>
 
 <body>
@@ -2161,8 +2287,8 @@ $hebergements_result = $hebergements_stmt->get_result();
                 <!-- <p class="custom-description">
                     <!-?php echo (strlen($formule['description']) > 12) ? substr($formule['description'], 0, 12) : $formule['description']; ?>
                 </p> -->
-                <p class="custom-description" ><?php echo $formule['description']; ?></p>
-                
+                <p class="custom-description"><?php echo $formule['description']; ?></p>
+
 
 
 
@@ -2186,7 +2312,13 @@ $hebergements_result = $hebergements_stmt->get_result();
                         <a href="#booking" style="text-decoration: none;">
                             <button type="button" class="custom-btn custom-brochure-btn"
                                 style="background-color:#d9c391;">
-                                Réserver Maintenant
+                                <?php
+                                            if ($formule['statut'] == 'activé') {
+                                                echo 'Réserver Maintenant';
+                                            } else {
+                                                echo '<b>Formule Épuisé</b>';
+                                            }
+                                            ?>
                             </button>
                         </a>
                     </div>
@@ -2386,23 +2518,26 @@ $hebergements_result = $hebergements_stmt->get_result();
                 $result = $stmt->get_result();
                 $formule = $result->fetch_assoc();
 
-                // Fetch all hebergements for the formule
+                // Fetch all hebergements for the formule, including city names
                 $hebergements_query = "
-                    SELECT 
-                        hb.*, 
-                        h.nom AS hotel_name, 
-                        h.etoiles AS hotel_stars, 
-                        h.ville AS hotel_city, 
-                        h.details AS hotel_details,
-                        h.monument AS hotel_distance,
-                        h.id AS hotel_id
-                    FROM 
-                        hebergements hb
-                    LEFT JOIN 
-                        hotels h ON hb.hotel_id = h.id
-                    WHERE 
-                        hb.formule_id = ?
-                    ";
+                SELECT 
+                    hb.*, 
+                    h.nom AS hotel_name, 
+                    h.etoiles AS hotel_stars, 
+                    h.details AS hotel_details,
+                    h.monument AS hotel_distance,
+                    h.id AS hotel_id,
+                    vd.nom AS city_name  -- Fetch city name from ville_depart
+                FROM 
+                    hebergements hb
+                LEFT JOIN 
+                    hotels h ON hb.hotel_id = h.id
+                LEFT JOIN 
+                    ville_depart vd ON h.ville = vd.id  -- Join ville_depart using the 'ville' column
+                WHERE 
+                    hb.formule_id = ?
+                ";
+
                 $hebergements_stmt = $conn->prepare($hebergements_query);
                 $hebergements_stmt->bind_param("i", $formule_id);
                 $hebergements_stmt->execute();
@@ -2421,6 +2556,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                             <div class="card-container">
                                 <?php if ($hebergements_result->num_rows > 0) { ?>
 
+
                                     <div id="myCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
                                         <div class="carousel-inner">
                                             <?php
@@ -2431,7 +2567,8 @@ $hebergements_result = $hebergements_stmt->get_result();
                                                 $gallery_query = "SELECT image_path FROM hotel_gallery WHERE hotel_id = $hotel_id";
                                                 $gallery_result = $conn->query($gallery_query);
                                             ?>
-                                                <div class="carousel-item <?php echo $isActive ? 'active' : ''; ?>">
+
+                                                <div class="carousel-item <?php echo $isActive ? 'active' : ''; ?>" data-hotel-id="<?php echo $hotel_id; ?>" onclick="openGalleryModal(<?php echo $hotel_id; ?>)">
                                                     <div id="neoidea">
                                                         <!-- <ol class="carousel-indicators">
                                                             <!?php for ($i = 0; $i < $gallery_result->num_rows; $i++) { ?>
@@ -2462,8 +2599,10 @@ $hebergements_result = $hebergements_stmt->get_result();
 
 
                                                                                 <div class="hotel-details">
-                                                                                    <?php echo $hoteluni['ville']; ?>
+
+                                                                                    <?php echo htmlspecialchars($hotel['city_name']); ?>
                                                                                 </div>
+
                                                                                 <div class="hotel-name">
                                                                                     <h3 style="font-family: Bely Display;">
                                                                                         <b><?php echo $hoteluni['nom']; ?></b>
@@ -2627,6 +2766,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                                                                                             </g>
                                                                                         </g>
                                                                                     </svg>
+
                                                                                     <div class="hotel-checkin-text">
                                                                                         <h6><b>Check-out</b></h6>
                                                                                         <?php echo $hotel['date_checkout']; ?>
@@ -2805,9 +2945,70 @@ $hebergements_result = $hebergements_stmt->get_result();
                     </div>
                 </div>
             </div>
+            <!-- Modal Structure -->
+            <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content modal-gallery">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="galleryModalLabel">Hotel Gallery</h5>
+                            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style="padding: 10px;">
+                            <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner carousel-gallery" id="galleryImages" style="border-radius: 10px;">
+                                    <!-- Gallery images will be dynamically loaded here -->
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function openGalleryModal(hotelId) {
+                    // Clear previous images
+                    document.getElementById('galleryImages').innerHTML = '';
+
+                    // Fetch gallery images for the selected hotel
+                    fetch('fetch_hotel_gallery.php?hotel_id=' + hotelId)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success && data.images.length > 0) {
+                                const galleryImages = document.getElementById('galleryImages');
+                                data.images.forEach((imagePath, index) => {
+                                    const isActive = index === 0 ? 'active' : '';
+                                    const imageItem = `
+                        <div class="carousel-item ${isActive}">
+                            <img src="../${imagePath}" class="w-100" alt="Hotel Image" style="object-fit: fill;" >
+                        </div>
+                    `;
+                                    galleryImages.innerHTML += imageItem;
+                                });
+
+                                // Show the modal
+                                var myModal = new bootstrap.Modal(document.getElementById('galleryModal'));
+                                myModal.show();
+                            } else {
+                                alert('No images found for this hotel.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching hotel gallery:', error);
+                        });
+                }
+            </script>
             <script>
                 $('#myCarousel').carousel();
             </script>
+
+
             <!-- Vols Section -->
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingThree">
@@ -3375,8 +3576,16 @@ $hebergements_result = $hebergements_stmt->get_result();
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header" style="justify-content: center;">
-                                            <h4 class="modal-title" id="exampleModalLabel"
-                                                style="margin-top: 10px; color:#028ae1">Réservez Votre Omra</h4>
+                                            <?php
+                                            if ($formule['statut'] == 'activé') {
+                                                echo '<h4 class="modal-title" id="exampleModalLabel"
+                                                style="margin-top: 10px; color:#028ae1">Réservez Votre Omra</h4>';
+                                            } else {
+                                                echo '<h4 class="modal-title" id="exampleModalLabel"
+                                                style="margin-top: 10px; color:red !important;">Formule Épuisé</h4>';
+                                            }
+                                            ?>
+
                                             <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button> -->
@@ -3386,77 +3595,425 @@ $hebergements_result = $hebergements_stmt->get_result();
                                                 <div class="stepwizard-row setup-panel">
                                                     <div class="stepwizard-step">
                                                         <a href="#step-1" type="button"
-                                                            class="btn btn-primary btn-circle non-clickable">1</a>
-                                                        <p>Étape 1</p>
+                                                            class="btn btn-primary  non-clickable reservation-steps" style="background-color: #ffffff00; color: black;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags-fill" viewBox="0 0 16 16">
+                                                                <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
+                                                                <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043z" />
+                                                            </svg>
+                                                            Forfait</a>
+                                                        <!-- <p>Forfait</p> -->
                                                     </div>
                                                     <div class="stepwizard-step">
                                                         <a href="#step-2" type="button"
-                                                            class="btn btn-default btn-circle non-clickable"
-                                                            disabled="disabled">2</a>
-
-                                                        <p>Étape 2</p>
+                                                            class="btn btn-default  non-clickable reservation-steps" style="background-color: #ffffff00; color: black; "
+                                                            disabled="disabled">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                                                            </svg>
+                                                            Passagers</a>
+                                                        <!-- <p>Passagers</p> -->
                                                     </div>
                                                     <div class="stepwizard-step">
                                                         <a href="#step-3" type="button"
-                                                            class="btn btn-default btn-circle non-clickable"
-                                                            disabled="disabled">3</a>
-                                                        <p>Étape 3</p>
+                                                            class="btn btn-default  non-clickable reservation-steps" style="background-color: #ffffff00; color: black;"
+                                                            disabled="disabled">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card-2-front-fill" viewBox="0 0 16 16">
+                                                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z" />
+                                                            </svg>
+                                                            Paiments</a>
+                                                        <!-- <p>Paiments</p> -->
                                                     </div>
                                                     <div class="stepwizard-step">
                                                         <a href="#step-4" type="button"
-                                                            class="btn btn-default btn-circle non-clickable"
-                                                            disabled="disabled">4</a>
-                                                        <p>Étape 4</p>
+                                                            class="btn btn-default  non-clickable reservation-steps" style="background-color: #ffffff00; color: black;"
+                                                            disabled="disabled">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                                            </svg>
+                                                            Confirmation</a>
+                                                        <!-- <p>Confirmation</p> -->
                                                     </div>
-
                                                 </div>
                                             </div>
 
                                             <form role="form">
                                                 <div class="setup-content" id="step-1">
-                                                    <h3>Étape 1 : Nombre de passagers</h3>
-                                                    <div class="form-group">
-                                                        <label for="adults">Adultes :</label>
-                                                        <input type="number" class="form-control" id="adults" min="0" required>
+                                                    <h3 style="margin-bottom: 20px;">Étape 1 : Nombre de passagers</h3>
+                                                    <div class="form-group first-step">
+                                                        <label for="" style="text-align: center;">Nombre d'adultes</label>
+                                                        <div class="custom-number-input">
+                                                            <button class="minus-btn-adults" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                                                </svg></button>
+                                                            <input type="number" id="adults" value="0" min="0" class="number-input number-input-adults" required>
+                                                            <button class="plus-btn-adults" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                                </svg></button>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="children">Enfants :</label>
-                                                        <input type="number" class="form-control" id="children" min="0">
+                                                    </table>
+                                                    <script>
+                                                        const minusBtnAdults = document.querySelector('.minus-btn-adults');
+                                                        const plusBtnAdults = document.querySelector('.plus-btn-adults');
+                                                        const numberInputAdults = document.querySelector('.number-input-adults');
+
+                                                        minusBtnAdults.addEventListener('click', () => {
+                                                            let currentValue = parseInt(numberInputAdults.value);
+                                                            if (currentValue > parseInt(numberInputAdults.min)) {
+                                                                numberInputAdults.value = currentValue - 1;
+                                                            }
+                                                        });
+
+                                                        plusBtnAdults.addEventListener('click', () => {
+                                                            let currentValue = parseInt(numberInputAdults.value);
+                                                            numberInputAdults.value = currentValue + 1;
+                                                        });
+                                                    </script>
+                                                    <div class="form-group first-step">
+                                                        <label for="" style="text-align: center;">Nombre d'Enfants</label>
+                                                        <div class="custom-number-input">
+                                                            <button class="minus-btn-children" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                                                </svg></button>
+                                                            <input type="number" id="children" value="0" min="0" class="number-input number-input-children" required>
+                                                            <button class="plus-btn-children" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                                </svg></button>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="babies">Bébés :</label>
-                                                        <input type="number" class="form-control" id="babies" min="0">
+                                                    <script>
+                                                        const minusBtnChildre = document.querySelector('.minus-btn-children');
+                                                        const plusBtnChildren = document.querySelector('.plus-btn-children');
+                                                        const numberInputChildren = document.querySelector('.number-input-children');
+
+                                                        minusBtnChildre.addEventListener('click', () => {
+                                                            let currentValue = parseInt(numberInputChildren.value);
+                                                            if (currentValue > parseInt(numberInputChildren.min)) {
+                                                                numberInputChildren.value = currentValue - 1;
+                                                            }
+                                                        });
+
+                                                        plusBtnChildren.addEventListener('click', () => {
+                                                            let currentValue = parseInt(numberInputChildren.value);
+                                                            numberInputChildren.value = currentValue + 1;
+                                                        });
+                                                    </script>
+                                                    <div class="form-group first-step">
+                                                        <label for="" style="text-align: center;">Nombre de bébés</label>
+                                                        <div class="custom-number-input">
+                                                            <button class="minus-btn-babies" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                                                </svg></button>
+                                                            <input type="number" id="babies" value="0" min="0" class="number-input number-input-babies" required>
+                                                            <button class="plus-btn-babies" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                                </svg></button>
+                                                        </div>
                                                     </div>
-                                                    <button class="btn btn-primary nextBtn" type="button">Suivant</button>
+                                                    <script>
+                                                        const minusBtn = document.querySelector('.minus-btn-babies');
+                                                        const plusBtn = document.querySelector('.plus-btn-babies');
+                                                        const numberInput = document.querySelector('.number-input-babies');
+
+                                                        minusBtn.addEventListener('click', () => {
+                                                            let currentValue = parseInt(numberInput.value);
+                                                            if (currentValue > parseInt(numberInput.min)) {
+                                                                numberInput.value = currentValue - 1;
+                                                            }
+                                                        });
+
+                                                        plusBtn.addEventListener('click', () => {
+                                                            let currentValue = parseInt(numberInput.value);
+                                                            numberInput.value = currentValue + 1;
+                                                        });
+                                                    </script>
+                                                    <?php
+                                                    if ($formule['statut'] == 'activé') {
+                                                        echo '<button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem; margin-top:20px !important; display: block;">Suivant</button>';
+                                                    } else {
+                                                        echo '<button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem; margin-top:20px !important; display: block; background-color:#dac392; border:none;" disabled>Suivant</button>';
+                                                    }
+                                                    ?>
+                                                    <!-- <button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem; margin-top:20px !important; display: block;">Suivant</button> -->
                                                 </div>
 
                                                 <div class="setup-content" id="step-2" style="display: none;">
                                                     <h3>Étape 2 : Affectation des chambres</h3>
                                                     <p id="passenger-count"></p>
-                                                    <div class="form-group">
+                                                    <!-- <div class="form-group">
                                                         <label for="quadruple">Chambres Quadruples :</label>
                                                         <input type="number" class="form-control room-input" id="quadruple"
                                                             min="0" required>
-                                                    </div>
-                                                    <div class="form-group">
+                                                    </div> -->
+
+                                                    <table class="table">
+
+                                                        <tbody>
+
+                                                            <div class="form-group">
+                                                                <tr>
+                                                                    <td>
+                                                                        <label for="">Quadruples</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                                                            <path d="M280-200h-40l-26-80h-54v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T320-760h320q33 0 56.5 23.5T720-680v120q33 0 56.5 23.5T800-480v200h-54l-26 80h-40l-26-80H306l-26 80Zm240-360h120v-120H520v120Zm-200 0h120v-120H320v120Zm-80 200h480v-120H240v120Zm480 0H240h480Z" />
+                                                                        </svg>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                                                            <path d="M280-200h-40l-26-80h-54v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T320-760h320q33 0 56.5 23.5T720-680v120q33 0 56.5 23.5T800-480v200h-54l-26 80h-40l-26-80H306l-26 80Zm240-360h120v-120H520v120Zm-200 0h120v-120H320v120Zm-80 200h480v-120H240v120Zm480 0H240h480Z" />
+                                                                        </svg>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                                                            <path d="M280-200h-40l-26-80h-54v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T320-760h320q33 0 56.5 23.5T720-680v120q33 0 56.5 23.5T800-480v200h-54l-26 80h-40l-26-80H306l-26 80Zm240-360h120v-120H520v120Zm-200 0h120v-120H320v120Zm-80 200h480v-120H240v120Zm480 0H240h480Z" />
+                                                                        </svg>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                                                            <path d="M280-200h-40l-26-80h-54v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T320-760h320q33 0 56.5 23.5T720-680v120q33 0 56.5 23.5T800-480v200h-54l-26 80h-40l-26-80H306l-26 80Zm240-360h120v-120H520v120Zm-200 0h120v-120H320v120Zm-80 200h480v-120H240v120Zm480 0H240h480Z" />
+                                                                        </svg>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-number-input">
+                                                                            <button class="minus-btn-quadruple" type="button">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <input type="number" id="quadruple" value="0" min="0" class="number-input form-control room-input number-input-quadruple" required>
+                                                                            <button class="plus-btn-quadruple" type="button">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                                                </svg>
+                                                                            </button>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>Pers.</p>
+                                                                    </td>
+                                                                </tr>
+                                                            </div>
+
+                                                            <script>
+                                                                const minusBtnQuadruple = document.querySelector('.minus-btn-quadruple');
+                                                                const plusBtnQuadruple = document.querySelector('.plus-btn-quadruple');
+                                                                const numberInputQuadruple = document.querySelector('.number-input-quadruple');
+
+                                                                minusBtnQuadruple.addEventListener('click', () => {
+                                                                    let currentValue = Number(numberInputQuadruple.value);
+                                                                    if (currentValue > Number(numberInputQuadruple.min)) {
+                                                                        numberInputQuadruple.value = currentValue - 1;
+                                                                        numberInputQuadruple.dispatchEvent(new Event('change')); // Trigger change event
+                                                                    }
+                                                                });
+
+                                                                plusBtnQuadruple.addEventListener('click', () => {
+                                                                    let currentValue = Number(numberInputQuadruple.value);
+                                                                    numberInputQuadruple.value = currentValue + 1;
+                                                                    numberInputQuadruple.dispatchEvent(new Event('change')); // Trigger change event
+                                                                });
+
+                                                                // Similar logic for the triple, double, and single rooms
+                                                            </script>
+
+                                                            
+
+
+                                                            <!-- <div class="form-group">
                                                         <label for="triple">Chambres Triples :</label>
                                                         <input type="number" class="form-control room-input" id="triple"
                                                             min="0">
-                                                    </div>
-                                                    <div class="form-group">
+                                                    </div> -->
+
+                                                            <div class="form-group">
+                                                                <tr>
+                                                                    <td>
+                                                                        <label for="">Triples</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                                                            <path d="M280-200h-40l-26-80h-54v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T320-760h320q33 0 56.5 23.5T720-680v120q33 0 56.5 23.5T800-480v200h-54l-26 80h-40l-26-80H306l-26 80Zm240-360h120v-120H520v120Zm-200 0h120v-120H320v120Zm-80 200h480v-120H240v120Zm480 0H240h480Z" />
+                                                                        </svg>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                                                            <path d="M280-200h-40l-26-80h-54v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T320-760h320q33 0 56.5 23.5T720-680v120q33 0 56.5 23.5T800-480v200h-54l-26 80h-40l-26-80H306l-26 80Zm240-360h120v-120H520v120Zm-200 0h120v-120H320v120Zm-80 200h480v-120H240v120Zm480 0H240h480Z" />
+                                                                        </svg>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                                                            <path d="M280-200h-40l-26-80h-54v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T320-760h320q33 0 56.5 23.5T720-680v120q33 0 56.5 23.5T800-480v200h-54l-26 80h-40l-26-80H306l-26 80Zm240-360h120v-120H520v120Zm-200 0h120v-120H320v120Zm-80 200h480v-120H240v120Zm480 0H240h480Z" />
+                                                                        </svg>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-number-input">
+                                                                            <button class="minus-btn-triple" type="button">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <input type="number" id="triple" value="0" min="0" class="number-input form-control room-input number-input-triple" required>
+                                                                            <button class="plus-btn-triple" type="button">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                                                </svg>
+                                                                            </button>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>Pers.</p>
+                                                                    </td>
+                                                                </tr>
+                                                            </div>
+
+                                                            <script>
+                                                                const minusBtnTriple = document.querySelector('.minus-btn-triple');
+                                                                const plusBtnTriple = document.querySelector('.plus-btn-triple');
+                                                                const numberInputTriple = document.querySelector('.number-input-triple');
+
+                                                                minusBtnTriple.addEventListener('click', () => {
+                                                                    let currentValue = Number(numberInputTriple.value);
+                                                                    if (currentValue > Number(numberInputTriple.min)) {
+                                                                        numberInputTriple.value = currentValue - 1;
+                                                                        numberInputTriple.dispatchEvent(new Event('change'));
+                                                                    }
+                                                                });
+
+                                                                plusBtnTriple.addEventListener('click', () => {
+                                                                    let currentValue = Number(numberInputTriple.value);
+                                                                    numberInputTriple.value = currentValue + 1;
+                                                                    numberInputTriple.dispatchEvent(new Event('change'));
+                                                                });
+                                                            </script>
+                                                            <!-- <div class="form-group">
                                                         <label for="double">Chambres Doubles :</label>
                                                         <input type="number" class="form-control room-input" id="double"
                                                             min="0">
-                                                    </div>
-                                                    <div class="form-group">
+                                                    </div> -->
+
+                                                            <div class="form-group">
+                                                                <tr>
+                                                                    <td>
+                                                                        <label for="">Double</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                                                            <path d="M280-200h-40l-26-80h-54v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T320-760h320q33 0 56.5 23.5T720-680v120q33 0 56.5 23.5T800-480v200h-54l-26 80h-40l-26-80H306l-26 80Zm240-360h120v-120H520v120Zm-200 0h120v-120H320v120Zm-80 200h480v-120H240v120Zm480 0H240h480Z" />
+                                                                        </svg>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                                                            <path d="M280-200h-40l-26-80h-54v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T320-760h320q33 0 56.5 23.5T720-680v120q33 0 56.5 23.5T800-480v200h-54l-26 80h-40l-26-80H306l-26 80Zm240-360h120v-120H520v120Zm-200 0h120v-120H320v120Zm-80 200h480v-120H240v120Zm480 0H240h480Z" />
+                                                                        </svg>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-number-input">
+                                                                            <button class="minus-btn-double" type="button">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <input type="number" id="double" value="0" min="0" class="number-input form-control room-input number-input-double" required>
+                                                                            <button class="plus-btn-double" type="button">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                                                </svg>
+                                                                            </button>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>Pers.</p>
+                                                                    </td>
+                                                                </tr>
+                                                            </div>
+
+                                                            <script>
+                                                                const minusBtnDouble = document.querySelector('.minus-btn-double');
+                                                                const plusBtnDouble = document.querySelector('.plus-btn-double');
+                                                                const numberInputDouble = document.querySelector('.number-input-double');
+
+                                                                minusBtnDouble.addEventListener('click', () => {
+                                                                    let currentValue = Number(numberInputDouble.value);
+                                                                    if (currentValue > Number(numberInputDouble.min)) {
+                                                                        numberInputDouble.value = currentValue - 1;
+                                                                        numberInputDouble.dispatchEvent(new Event('change'));
+                                                                    }
+                                                                });
+
+                                                                plusBtnDouble.addEventListener('click', () => {
+                                                                    let currentValue = Number(numberInputDouble.value);
+                                                                    numberInputDouble.value = currentValue + 1;
+                                                                    numberInputDouble.dispatchEvent(new Event('change'));
+                                                                });
+                                                            </script>
+                                                            <!-- <div class="form-group">
                                                         <label for="single">Chambres Simples :</label>
                                                         <input type="number" class="form-control room-input" id="single"
                                                             min="0">
-                                                    </div>
+                                                    </div> -->
+
+                                                            <div class="form-group">
+                                                                <tr>
+                                                                    <td>
+                                                                        <label for="">Individuelle</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
+                                                                            <path d="M280-200h-40l-26-80h-54v-201q0-33 23.5-56t56.5-23v-120q0-33 23.5-56.5T320-760h320q33 0 56.5 23.5T720-680v120q33 0 56.5 23.5T800-480v200h-54l-26 80h-40l-26-80H306l-26 80Zm240-360h120v-120H520v120Zm-200 0h120v-120H320v120Zm-80 200h480v-120H240v120Zm480 0H240h480Z" />
+                                                                        </svg>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="custom-number-input">
+                                                                            <button class="minus-btn-single" type="button">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            <input type="number" id="single" value="0" min="0" class="number-input form-control room-input number-input-single" required>
+                                                                            <button class="plus-btn-single" type="button">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#d9c391" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                                                                </svg>
+                                                                            </button>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p>Pers.</p>
+                                                                    </td>
+                                                                </tr>
+                                                            </div>
+
+
+                                                            <script>
+                                                                const minusBtnSingle = document.querySelector('.minus-btn-single');
+                                                                const plusBtnSingle = document.querySelector('.plus-btn-single');
+                                                                const numberInputSingle = document.querySelector('.number-input-single');
+
+                                                                minusBtnSingle.addEventListener('click', () => {
+                                                                    let currentValue = Number(numberInputSingle.value);
+                                                                    if (currentValue > Number(numberInputSingle.min)) {
+                                                                        numberInputSingle.value = currentValue - 1;
+                                                                        numberInputSingle.dispatchEvent(new Event('change'));
+                                                                    }
+                                                                });
+
+                                                                plusBtnSingle.addEventListener('click', () => {
+                                                                    let currentValue = Number(numberInputSingle.value);
+                                                                    numberInputSingle.value = currentValue + 1;
+                                                                    numberInputSingle.dispatchEvent(new Event('change'));
+                                                                });
+                                                            </script>
+
+                                                        </tbody>
+                                                    </table>
                                                     <div id="error-message" class="text-danger"></div>
                                                     <button class="btn btn-secondary prevBtn" type="button">Précedent</button>
 
-                                                    <button class="btn btn-primary nextBtn" type="button">Suivant</button>
+                                                    <button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem;">Suivant</button>
                                                 </div>
 
 
@@ -3465,7 +4022,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                                                     <p id="total-reservation">Total de la réservation : Calcul en cours...</p>
                                                     <button class="btn btn-secondary prevBtn" type="button">Précedent</button>
 
-                                                    <button class="btn btn-primary nextBtn" type="button">Suivant</button>
+                                                    <button class="btn btn-primary nextBtn" type="button" style="border-bottom: none; border-radius: 0.375rem;">Suivant</button>
                                                 </div>
 
 
@@ -3506,7 +4063,7 @@ $hebergements_result = $hebergements_stmt->get_result();
                                                     <div id="error-message-step5" class="text-danger"></div>
 
                                                     <button class="btn btn-secondary prevBtn" type="button">Précédent</button>
-                                                    <button class="btn btn-primary nextBtn" type="button">Envoyer</button>
+                                                    <button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem;">Envoyer</button>
                                                 </div>
 
 
@@ -3719,7 +4276,7 @@ $hebergements_result = $hebergements_stmt->get_result();
 
                                 // Build Reservation Summary
                                 var recapReservation = '<br>';
-                                recapReservation += '<strong>Chambres :</strong><br style="display:block;">';
+                                recapReservation += '<strong></strong><br style="display:block;">';
                                 if (quadrupleRooms > 0) {
                                     recapReservation += '- Chambre Quadruple: ' + prixQuadruple.toFixed(2) + ' € x ' + quadrupleRooms + '<br style="display:block;">';
                                 }
@@ -3737,18 +4294,18 @@ $hebergements_result = $hebergements_stmt->get_result();
                                 if (recapExtras !== '') {
                                     recapReservation += '<strong>Extras :</strong><br style="display:block;">';
                                     recapReservation += recapExtras;
-                                    recapReservation += '<br style="display:block;">';
+                                    // recapReservation += '<br style="display:block;">';
                                 }
 
                                 if (babiesCount > 0) {
-                                    recapReservation += '<strong>Frais bébé :</strong><br style="display:block;">';
+                                    // recapReservation += '<strong></strong><br style="display:block;">';
                                     recapReservation += '- Frais bébé: ' + fraisBebe.toFixed(2) + ' € x ' + babiesCount + '<br style="display:block;">';
-                                    recapReservation += '<br style="display:block;">';
+                                    // recapReservation += '<br style="display:block;">';
                                 }
 
-                                recapReservation += '<strong>Coûts :</strong><br style="display:block;">';
-                                recapReservation += '- Total des chambres : ' + totalChambres.toFixed(2) + ' €<br style="display:block;">';
-                                recapReservation += '- Total frais bébé : ' + totalFraisBebe.toFixed(2) + ' €<br style="display:block;">';
+                                // recapReservation += '<strong></strong><br style="display:block;">';
+                                // recapReservation += '- Total des chambres : ' + totalChambres.toFixed(2) + ' €<br style="display:block;">';
+                                // recapReservation += '- Total frais bébé : ' + totalFraisBebe.toFixed(2) + ' €<br style="display:block;">';
                                 recapReservation += '- Réduction enfants : -' + discountEnfants.toFixed(2) + ' €<br style="display:block;"><br style="display:block;">';
                                 recapReservation += '<strong>Total à payer :</strong><br style="display:block;">';
                                 recapReservation += '<h3>' + totalReservation.toFixed(2) + ' €</h3>';
