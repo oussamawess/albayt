@@ -154,20 +154,10 @@
             display: none;
         }
 
-        .carousel.pointer-event {
-            margin-left: 3vw;
-            /* Relative to viewport width */
-        }
 
-        /* General Styles */
-        .carousel-control-next,
-        .carousel-control-prev {
-            margin-right: 3vw;
-            /* Relative to viewport width */
-            margin-left: -5vw;
-            /* Relative to viewport width */
-            opacity: .7;
-        }
+
+
+
 
         @media (max-width: 1160px) {
             .navbar {
@@ -210,9 +200,6 @@
                 transform: none;
             }
 
-            /* .carousel {
-                margin-top: -52px;
-            } */
 
             /* For screens 991px and below, make everything 100% width */
             .content,
@@ -221,25 +208,9 @@
                 position: static;
             }
 
-            .carousel {
-                margin-top: -19vh;
-                /* Responsive top margin */
-                margin-right: -5vw;
-                /* Responsive right margin */
-                margin-left: 8vw;
-                /* Responsive left margin */
-            }
 
-            .carousel-control-next,
-            .carousel-control-prev {
-                margin-right: 3vw;
-                margin-left: -8vw;
-                opacity: .7;
-            }
 
-            .carousel.pointer-event {
-                margin-left: 7vw;
-            }
+
 
         }
 
@@ -269,15 +240,7 @@
             border-radius: 8px;
         }
 
-        /* Style for thumbnails */
-        /* .thumbnail img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            cursor: pointer;
-            border-radius: 4px;
-            border: 4px solid white;
-        } */
+
         .thumbnail img {
             width: 20vw;
             /* Width relative to viewport width */
@@ -293,14 +256,14 @@
             border: 2px solid white;
         }
 
-        @media (max-width: 1199px) {
+        /* @media (max-width: 1199px) {
             .thumbnail img {
                 width: 20vw;
                 height: 20vw;
                 max-width: 90px;
                 max-height: 90px;
             }
-        }
+        } */
 
 
 
@@ -325,203 +288,76 @@
             padding: 8px;
         }
 
-        /* .carousel-control-next,
-        .carousel-control-prev {
-            margin-right: 65px;
-            margin-left: -52px;
-            opacity: .7;
-        }       
 
-        .carousel.pointer-event {
-            margin-left: 37px;
-        }
-
-        .carousel-control-prev-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
-        }
-
-        .carousel-control-next-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
-        }       
-
-        .carousel {
-            margin-top: -120px;
-            margin-right: -87px;
-            margin-left: 30px;
-        }
-
-        .carousel-control-next-icon,
-        .carousel-control-prev-icon {
-            width: 1rem;
-            height: 1rem;
-            background-size: 60% 100%;
-            background-color: white;
-            border-radius: 50%;
-            padding: 10px;
+        /*---------------------------------Test------------------------*/
+        /* .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         } */
 
-
-
-
-
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            width: 1.5rem;
-            /* Consistent size using rem */
-            height: 1.5rem;
-            /* Consistent size using rem */
-            background-size: 60% 100%;
-            background-color: white;
-            border-radius: 50%;
-            padding: 0.6rem;
-            /* Consistent padding using rem */
+        .thumbnail-carousel-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            overflow: hidden;
+            margin-top: -120px;
         }
 
-        /* Icon background SVG */
-        .carousel-control-prev-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
-        }
-
-        .carousel-control-next-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
-        }
-
-        /* Carousel container styles */
-        .carousel {
-            margin-top: -19vh;
-            /* Responsive top margin */
-            margin-right: -5vw;
-            /* Responsive right margin */
-            margin-left: 3vw;
-            /* Responsive left margin */
-        }
-
-        /* Media Queries for Specific Breakpoints */
-        @media (max-width: 767px) {
-            .thumbnail img {
-                width: 25vw;
-                /* Adjust for tablets */
-                height: 25vw;
-                /* Adjust for tablets */
-                max-width: 80px;
-                /* Maximum width for smaller screens */
-                max-height: 80px;
-                /* Maximum height for smaller screens */
-            }
-
-
-            .carousel-control-next,
-            .carousel-control-prev {
-                margin-right: 3vw;
-                /* Adjusted for smaller screens */
-                margin-left: -6vw;
-                /* Adjusted for smaller screens */
-            }
-
-            .carousel.pointer-event {
-                margin-left: 5vw;
-                /* Adjusted for smaller screens */
-            }
-
-            .carousel-control-prev-icon,
-            .carousel-control-next-icon {
-                width: 1.5rem;
-                /* Slightly smaller icons for mobile */
-                height: 1.5rem;
-                padding: 0.5rem;
-            }
-
-            .carousel {
-                margin-top: -17vh;
-                /* Less negative margin on smaller screens */
-                margin-right: -5vw;
-                margin-left: 3vw;
-                /* Adjusted for smaller screens */
+        @media (min-width: 1200px) {
+            .thumbnail-carousel-container {
+                margin-left: 30px;
             }
         }
 
-        @media (max-width: 480px) {
-
-            .thumbnail img {
-                width: 30vw;
-                /* Adjust for small mobile screens */
-                height: 30vw;
-                /* Adjust for small mobile screens */
-                max-width: 70px;
-                /* Maximum width for small screens */
-                max-height: 70px;
-                /* Maximum height for small screens */
-            }
-
-            .carousel-control-next,
-            .carousel-control-prev {
-                margin-right: 2vw;
-                margin-left: -10vw;
-            }
-
-            .carousel.pointer-event {
-                margin-left: 7.5vw;
-                /* More compact margin for very small screens */
-            }
-
-            .carousel-control-prev-icon,
-            .carousel-control-next-icon {
-                width: 1.25rem;
-                /* Even smaller icons for small screens */
-                height: 1.25rem;
-                padding: 0.4rem;
-            }
-
-            .carousel {
-                margin-top: -6vh;
-                /* Further reduced margin for small screens */
-                margin-right: -4vw;
-                margin-left: 2vw;
+        @media (min-width: 768px) and (max-width: 991px) {
+            .thumbnail-carousel-container {
+                margin-left: 40px;
             }
         }
 
-        @media (max-width: 375px) {
+        .thumbnail-carousel {
+            display: flex;
+            transition: transform 0.3s ease;
+        }
 
-            .thumbnail{
-                margin-right: 2px;
-            }
+        .thumbnail {
+            flex: 0 0 20%;
+            /* Each thumbnail takes up 20% of the row, so 5 fit in one row */
+            padding: 5px;
+            box-sizing: border-box;
+        }
 
-            .thumbnail img {
-                width: 30vw;
-                /* Adjust for small mobile screens */
-                height: 30vw;
-                /* Adjust for small mobile screens */
-                max-width: 60px;
-                /* Maximum width for small screens */
-                max-height: 60px;
-                /* Maximum height for small screens */
-            }
+        .thumbnail img {
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+        }
 
-            .carousel-control-next,
-            .carousel-control-prev {
-                margin-right: 2vw;
-                margin-left: -6vw;
-            }
+        .carousel-control {
+            background-color: rgb(255 255 255 / 76%);
+            border: none;
+            color: #000000;
+            font-size: 15px;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 10px;
+            z-index: 1;
+            border-radius: 50px;
+            padding-top: 2px;
+            padding-bottom: 3px;
+        }
 
-            .carousel.pointer-event {
-                margin-left: 3.5vw;
-                /* More compact margin for very small screens */
-            }
+        .carousel-control.prev {
+            left: 0;
+        }
 
-            .carousel-control-prev-icon,
-            .carousel-control-next-icon {
-                width: 1.25rem;
-                /* Even smaller icons for small screens */
-                height: 1.25rem;
-                padding: 0.4rem;
-            }
-
-            .carousel {
-                margin-top: -6vh;
-                /* Further reduced margin for small screens */
-                margin-right: -4vw;
-                margin-left: 2vw;
-            }
+        .carousel-control.next {
+            right: 0;
         }
     </style>
 </head>
@@ -604,62 +440,46 @@
                 </div>
 
                 <!-- Thumbnails Carousel -->
-                <div id="thumbnailCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <!-- First row of thumbnails -->
-                        <div class="carousel-item active">
-                            <div class="row">
-                                <div class="col-2 thumbnail" onclick="changeImage('../uploads/66f2f05baf687_35440.jpg')">
-                                    <img src="../uploads/66f2f05baf687_35440.jpg" alt="Thumbnail 1">
-                                </div>
-                                <div class="col-2 thumbnail" onclick="changeImage('../uploads/66f2f6c09237e_medina.jpg')">
-                                    <img src="../uploads/66f2f6c09237e_medina.jpg" alt="Thumbnail 2">
-                                </div>
-                                <div class="col-2 thumbnail" onclick="changeImage('../uploads/66f2ef10db645_makkah.jpg')">
-                                    <img src="../uploads/66f2ef10db645_makkah.jpg" alt="Thumbnail 3">
-                                </div>
-                                <div class="col-2 thumbnail" onclick="changeImage('../uploads/12.jpeg')">
-                                    <img src="../uploads/12.jpeg" alt="Thumbnail 4">
-                                </div>
-                                <div class="col-2 thumbnail" onclick="changeImage('../uploads/13.jpeg')">
-                                    <img src="../uploads/13.jpeg" alt="Thumbnail 5">
-                                </div>
-                            </div>
+                <div class="thumbnail-carousel-container">
+                    <button class="carousel-control prev" onclick="slideThumbnails(-1)">&#10094;</button>
+                    <div class="thumbnail-carousel">
+                        <!-- Thumbnail Images -->
+                        <div class="thumbnail" onclick="changeImage('../uploads/66f2f05baf687_35440.jpg')">
+                            <img src="../uploads/66f2f05baf687_35440.jpg" alt="Thumbnail 1">
                         </div>
-                        <!-- Second row of thumbnails -->
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-2 thumbnail" onclick="changeImage('../uploads/14.jpeg')">
-                                    <img src="../uploads/14.jpeg" alt="Thumbnail 6">
-                                </div>
-                                <div class="col-2 thumbnail" onclick="changeImage('../uploads/66a4be20d6ab92.07264307_makkah2.jpg')">
-                                    <img src="../uploads/66a4be20d6ab92.07264307_makkah2.jpg" alt="Thumbnail 7">
-                                </div>
-                                <div class="col-2 thumbnail" onclick="changeImage('../uploads/_a8485bb6-70b8-4b89-8dc7-7bac93e187aa.jpeg')">
-                                    <img src="../uploads/_a8485bb6-70b8-4b89-8dc7-7bac93e187aa.jpeg" alt="Thumbnail 8">
-                                </div>
-                                <div class="col-2 thumbnail" onclick="changeImage('../uploads/66a3f90a16e2e2.85837181_toulouse.jpg')">
-                                    <img src="../uploads/66a3f90a16e2e2.85837181_toulouse.jpg" alt="Thumbnail 9">
-                                </div>
-                                <div class="col-2 thumbnail" onclick="changeImage('../uploads/669fc2c9eae660.84115768_669f9f314b68b7.29168108_omra-octobre-formule-confort-17-2.jpg')">
-                                    <img src="../uploads/669fc2c9eae660.84115768_669f9f314b68b7.29168108_omra-octobre-formule-confort-17-2.jpg" alt="Thumbnail 10">
-                                </div>
-                            </div>
+                        <div class="thumbnail" onclick="changeImage('../uploads/66f2f6c09237e_medina.jpg')">
+                            <img src="../uploads/66f2f6c09237e_medina.jpg" alt="Thumbnail 2">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('../uploads/66f2ef10db645_makkah.jpg')">
+                            <img src="../uploads/66f2ef10db645_makkah.jpg" alt="Thumbnail 3">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('../uploads/12.jpeg')">
+                            <img src="../uploads/12.jpeg" alt="Thumbnail 4">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('../uploads/13.jpeg')">
+                            <img src="../uploads/13.jpeg" alt="Thumbnail 5">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('../uploads/14.jpeg')">
+                            <img src="../uploads/14.jpeg" alt="Thumbnail 6">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('../uploads/66a4be20d6ab92.07264307_makkah2.jpg')">
+                            <img src="../uploads/66a4be20d6ab92.07264307_makkah2.jpg" alt="Thumbnail 7">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('../uploads/_a8485bb6-70b8-4b89-8dc7-7bac93e187aa.jpeg')">
+                            <img src="../uploads/_a8485bb6-70b8-4b89-8dc7-7bac93e187aa.jpeg" alt="Thumbnail 8">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('../uploads/66a3f90a16e2e2.85837181_toulouse.jpg')">
+                            <img src="../uploads/66a3f90a16e2e2.85837181_toulouse.jpg" alt="Thumbnail 9">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage('../uploads/669fc2c9eae660.84115768_669f9f314b68b7.29168108_omra-octobre-formule-confort-17-2.jpg')">
+                            <img src="../uploads/669fc2c9eae660.84115768_669f9f314b68b7.29168108_omra-octobre-formule-confort-17-2.jpg" alt="Thumbnail 10">
                         </div>
                     </div>
-
-                    <!-- Carousel controls -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#thumbnailCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#thumbnailCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                    <button class="carousel-control next" onclick="slideThumbnails(1)">&#10095;</button>
                 </div>
             </div>
         </div>
+
 
 
 
@@ -696,7 +516,7 @@
 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function changeImage(imagePath) {
             // Change the main image source
@@ -709,6 +529,33 @@
 
             // Add active class to the clicked thumbnail
             event.currentTarget.classList.add('active');
+        }
+    </script>
+
+    <script>
+        let currentIndex = 0;
+
+        function slideThumbnails(direction) {
+            const carousel = document.querySelector('.thumbnail-carousel');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const visibleThumbnails = 5; // Number of thumbnails visible at one time
+
+            // Calculate the maximum number of slides
+            const maxIndex = thumbnails.length - visibleThumbnails;
+
+            // Update the current index based on the direction (-1 for prev, +1 for next)
+            currentIndex += direction;
+
+            // Ensure the index is within bounds
+            if (currentIndex < 0) {
+                currentIndex = 0;
+            } else if (currentIndex > maxIndex) {
+                currentIndex = maxIndex;
+            }
+
+            // Slide by adjusting the transform property
+            const offset = currentIndex * -20; // Each thumbnail is 20% of the container width
+            carousel.style.transform = `translateX(${offset}%)`;
         }
     </script>
 
