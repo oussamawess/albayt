@@ -8,10 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" rel="stylesheet">
-
+    <!-- Include the icons.php file -->
+    <?php include('icons.php'); ?>
     <style>
         :root {
-            --primary-color: #c89e54;
+            --primary-color: #C89D54;
         }
 
         body {
@@ -36,14 +37,14 @@
         .sticky-sidebar {
             flex: 0 0 40%;
             /* 40% width on large screens */
-            padding: 10px;
+            /* padding: 10px; */
             box-sizing: border-box;
             position: -webkit-sticky;
             position: sticky;
-            top: 0;
+            top: 95px;
             background-color: white;
             border-radius: 8px;
-            height: 500px;
+            height: fit-content;
             margin-top: 10px;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
             /* Adjust the value based on your layout */
@@ -359,6 +360,122 @@
         .carousel-control.next {
             right: 0;
         }
+
+        @media (min-width: 450px) and (max-width: 991px) {
+            .first-bolck {
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (min-width: 350px) and (max-width: 450px) {
+            .first-bolck {
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (min-width: 250px) and (max-width: 350px) {
+            .first-bolck {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        /*---------------------------------Test sticky sidebar------------------------*/
+        /* .sticky-sidebar {
+            flex: 0 0 40%;
+            padding: 20px;
+            box-sizing: border-box;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 95px;
+            background-color: white;
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        } */
+
+        .formula {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .formula-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon {
+            font-size: 20px;
+            color: #B89A5A;
+            margin-right: 10px;
+        }
+
+        .text h4 {
+            font-size: 14px;
+            font-weight: 100;
+            margin: 0;
+            color: #555;
+        }
+
+        .text p {
+            font-size: 12px;
+            color: #333;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 5px;
+            margin-top: 20px;
+            background-color: #595651;
+            color: white;
+            text-align: center;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px 5px 0px 0px;
+        }
+
+        .price-reservation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 10px 0px 10px;
+        }
+
+        .price {
+            font-size: .8rem;
+            color: #555;
+        }
+
+        .price-number {
+            font-size: 1.5rem;
+        }
+
+        .reserve-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2% 20%;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .icon-container {
+            margin: 0px 15px 15px 15px;
+        }
+
+        .icon-arrow{
+            margin: -5px;
+        }
+
+        .top-sidebar {
+            width: 100%;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -430,7 +547,7 @@
     </nav>
 
     <div class="container mt-3">
-        <div class="content">
+        <div class="content first-bolck">
             <div class="main-block">
                 <div class="position-relative">
                     <!-- Main Display Image -->
@@ -484,12 +601,113 @@
 
 
         <div class="sticky-sidebar">
-            <!-- Sticky sidebar content (e.g., the formula) taking up 40% of the screen -->
+            <div class="top-sidebar">
+                <div class="icon-container">
+                    <?php echo $top_sidebar; ?>
+                </div>
+            </div>
             <div class="formula">
-                <h2>Sticky Formula</h2>
-                <p>This sidebar will stay on the side and occupy 40% of the width.</p>
+                <div class="formula-item">
+                    <div class="icon-container">
+                        <?php echo $Type_de_Voyage; ?>
+                    </div>
+
+                    <div class="text">
+                        <h4>Type de Voyage</h4>
+                        <p>Omra</p>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="icon-container">
+                        <?php echo $Ville_de_départ; ?>
+                    </div>
+                    <div class="text">
+                        <h4>Ville de départ</h4>
+                        <p>Paris</p>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="icon-container">
+                        <?php echo $Arrivée; ?>
+                    </div>
+                    <div class="text">
+                        <h4>Arrivée</h4>
+                        <p>05/10/24</p>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="icon-container">
+                        <?php echo $Départ; ?>
+                    </div>
+                    <div class="text">
+                        <h4>Départ</h4>
+                        <p>16/10/24</p>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="icon-container">
+                        <?php echo $Formule; ?>
+                    </div>
+                    <div class="text">
+                        <h4>Formule</h4>
+                        <p>Omra Essentielle</p>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="icon-container">
+                        <?php echo $Durée; ?>
+                    </div>
+                    <div class="text">
+                        <h4>Durée</h4>
+                        <p>10 jours</p>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="icon-container">
+                        <?php echo $Médine; ?>
+                    </div>
+                    <div class="text">
+                        <p>5 nuits à Médine</p>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="icon-container">
+                        <?php echo $Makkah; ?>
+                    </div>
+                    <div class="text">
+                        <p>5 nuits à Makkah</p>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="icon-container">
+                        <?php echo $Hébergements_Madinah; ?>
+                    </div>
+                    <div class="text">
+                        <h4>Hébergements (Madinah)</h4>
+                        <p>Le Bosphorus Waqf Al Safi Hotel</p>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="icon-container">
+                        <?php echo $Hébergement_Makkah; ?>
+                    </div>
+                    <div class="text">
+                        <h4>Hébergement (Makkah)</h4>
+                        <p>DoubleTree by Hilton</p>
+                    </div>
+                </div>
+            </div>
+            <button class="cta-button">
+                <div class="icon-arrow">
+                    <?php echo $up_arrow; ?>
+                </div>VOIR NOS TARIFS D'HÉBERGEMENTS
+            </button>
+            <div class="price-reservation">
+                <p class="price">À partir de <br><strong class="price-number">1290€</strong></p>
+                <button class="reserve-button">RÉSERVATION</button>
             </div>
         </div>
+
 
         <div class="content">
             <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Conubia placerat sit erat ante lacus. Habitant aliquet ultrices class euismod quisque mattis; senectus per. Nisi quam ex curabitur congue varius nulla ut. Lectus urna magnis praesent mattis est odio dictum pharetra. Mauris dui luctus gravida phasellus maecenas eleifend elit. Libero sapien amet erat libero iaculis. Malesuada montes nunc semper scelerisque mattis varius lectus elementum massa. Non amet posuere nisl commodo mus accumsan suspendisse.
