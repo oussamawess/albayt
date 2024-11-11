@@ -165,4 +165,13 @@ $up_arrow = '
   <path id="Icon_ionic-ios-arrow-up" data-name="Icon ionic-ios-arrow-up" d="M11.189,12.974l3.781,3.784a.715.715,0,0,0,1.009-1.012l-4.284-4.287a.713.713,0,0,0-.985-.021L6.4,15.743a.715.715,0,1,0,1.009,1.012Z" transform="translate(-6.188 -11.251)" fill="#fff"/>
 </svg>
 ';
+
+$down_arrow = '
+<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5.717" viewBox="0 0 10 5.717" transform="rotate(180)">
+  <path id="Icon_ionic-ios-arrow-up" data-name="Icon ionic-ios-arrow-up" d="M11.189,12.974l3.781,3.784a.715.715,0,0,0,1.009-1.012l-4.284-4.287a.713.713,0,0,0-.985-.021L6.4,15.743a.715.715,0,1,0,1.009,1.012Z" transform="translate(-6.188 -11.251)" fill="#737171"/>
+</svg>
+';
+
+
+
 // Add more icons as needed

@@ -8,6 +8,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <!-- Include the icons.php file -->
     <?php include('icons.php'); ?>
     <style>
@@ -203,8 +207,7 @@
 
 
             /* For screens 991px and below, make everything 100% width */
-            .content,
-            .sticky-sidebar {
+            .content {
                 flex: 0 0 100%;
                 position: static;
             }
@@ -468,13 +471,314 @@
             margin: 0px 15px 15px 15px;
         }
 
-        .icon-arrow{
+        .icon-arrow {
             margin: -5px;
         }
 
         .top-sidebar {
             width: 100%;
             text-align: center;
+        }
+
+        /*---------------------------------Test table on hover------------------------*/
+
+
+        /* Default for larger screens */
+        .sticky-sidebar {
+            flex: 0 0 40%;
+            box-sizing: border-box;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 95px;
+            background-color: white;
+            border-radius: 8px;
+            height: fit-content;
+            margin-top: 10px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            display: flex;
+            flex-direction: column;
+            /* Allow children to stack vertically */
+        }
+
+        /* Adjust content layout */
+        .content {
+            flex: 0 0 60%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        /* Pricing table container styles */
+        .pricing-table-container {
+            position: absolute;
+            bottom: 16%;
+            /* Position it just above the CTA button */
+            left: 0;
+            width: 100%;
+            /* Full width of the sidebar */
+            background-color: white;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 8px 8px 0 0;
+            padding: 10px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.6s ease;
+            z-index: 2;
+            /* Ensure it's above other content */
+        }
+
+        /* Hover effect on CTA button */
+        .cta-button:hover~.pricing-table-container,
+        .pricing-table-container:hover {
+            opacity: 1;
+            transform: translateY(0);
+            /* Ensure table stays above button */
+        }
+
+        /* Adjust table to take full width of the sidebar */
+        .pricing-table {
+            width: 100%;
+            /* Full width */
+            border-collapse: collapse;
+        }
+
+        /* Pricing table styles */
+        .pricing-table th,
+        .pricing-table td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .pricing-table th {
+            font-weight: bold;
+        }
+
+        .pricing-table td {
+            font-weight: normal;
+        }
+
+        .pricing-table tr:not(:last-child) td {
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Make sure the CTA button is positioned above the table */
+        .cta-button {
+            position: relative;
+            z-index: 1;
+            /* Ensure button is above the table */
+        }
+
+        /* Media query for mobile responsiveness */
+        @media (max-width: 991px) {
+
+            /* Switch to a column layout for smaller screens */
+            .container {
+                display: block;
+                padding: 10px;
+                /* Adjust container padding */
+            }
+
+            .content,
+            .sticky-sidebar {
+                flex: 0 0 100%;
+                /* Full width on small screens */
+                position: relative;
+                /* Reset sticky positioning on small screens */
+            }
+
+            /* Fix the layout issue where content goes below sidebar on small screens */
+            .sticky-sidebar {
+                margin-top: 0;
+                /* Remove extra margin */
+                position: static;
+            }
+
+            /* Ensure the table stays visible */
+            .pricing-table-container {
+                position: relative;
+                /* Switch from absolute to relative positioning */
+                margin-top: -49%;
+                /* Give space between table and button */
+                opacity: 0;
+                /* Keep the table visible */
+                transform: translateY(0);
+                /* Keep the table in normal position */
+            }
+
+            /* Ensure the CTA button is full-width */
+            .cta-button {
+                width: 100%;
+            }
+        }
+
+        /* Grouped media queries for pricing table container adjustments */
+        @media (max-width: 767px) {
+            .pricing-table-container {
+                margin-top: -66%;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .pricing-table-container {
+                margin-top: -62%;
+            }
+        }
+
+        @media (max-width: 570px) {
+            .pricing-table-container {
+                margin-top: -63%;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .pricing-table-container {
+                margin-top: -66%;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .pricing-table-container {
+                margin-top: -70%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .pricing-table-container {
+                margin-top: -73%;
+            }
+        }
+
+        @media (max-width: 470px) {
+            .pricing-table-container {
+                margin-top: -77%;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .pricing-table-container {
+                margin-top: -84%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .pricing-table-container {
+                margin-top: -92%;
+            }
+        }
+
+        @media (max-width: 370px) {
+            .pricing-table-container {
+                margin-top: -101%;
+            }
+        }
+
+        @media (max-width: 340px) {
+            .pricing-table-container {
+                margin-top: -110%;
+            }
+        }
+
+
+        .pricing-table th,
+        .pricing-table td {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .pricing-table td:first-child {
+            text-align: left;
+            font-weight: 100;
+        }
+
+        .pricing-table th:first-child {
+            font-weight: bold;
+            text-align: left;
+        }
+
+
+        /*-------------- FLIGHT BLOCK ---------------*/
+        .content {
+            max-width: 100%;
+            /* margin: auto; */
+            overflow: hidden;
+        }
+
+        .flight-carousel {
+            display: flex;
+            gap: 16px;
+            transition: transform 0.5s ease;
+        }
+
+        .flight-ticket {
+            min-width: calc(33.33% - 16px);
+            /* Three tickets per row by default */
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media (max-width: 991px) {
+            .flight-ticket {
+                min-width: 100%;
+                /* Show one ticket per row on smaller screens */
+            }
+        }
+
+        .ticket-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px 0px;
+        }
+
+        .airline-logo {
+            width: 150px;
+            height: auto;
+        }
+
+        .confirm-button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-size: .8rem;
+        }
+
+        .ticket-route {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .flight-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 8px 0;
+        }
+
+        .flight-details {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        .swiper-button-next.swiper-button,
+        .swiper-button-prev.swiper-button {
+            opacity: 1;
+            cursor: auto;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -702,9 +1006,159 @@
                     <?php echo $up_arrow; ?>
                 </div>VOIR NOS TARIFS D'HÉBERGEMENTS
             </button>
+
+            <div class="pricing-table-container">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Type d'hébergement</th>
+                            <th>Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div class="icon-arrow-down" style="text-align: center;">
+                            <?php echo $down_arrow; ?>
+                        </div>
+                        <h5 style="margin-left: 10px;">Les tarifs par personne</h5>
+                        <tr>
+                            <td>Individuelle</td>
+                            <td>2290.00 €</td>
+                        </tr>
+                        <tr>
+                            <td>Double</td>
+                            <td>1550.00 €</td>
+                        </tr>
+                        <tr>
+                            <td>Triple</td>
+                            <td>1390.00 €</td>
+                        </tr>
+                        <tr>
+                            <td>Quadruple</td>
+                            <td>1290.00 €</td>
+                        </tr>
+                        <tr>
+                            <td>Bébé</td>
+                            <td>350.00 €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
             <div class="price-reservation">
                 <p class="price">À partir de <br><strong class="price-number">1290€</strong></p>
                 <button class="reserve-button">RÉSERVATION</button>
+            </div>
+        </div>
+
+
+        <div class="content mt-4">
+        <h4 style="margin-bottom: 0;">Vols aller-retour</h4>
+            <div class="ticket-header">
+                <img src="../uploads/tunis Air.png" alt="Turkish Airlines" class="airline-logo">
+                <button class="confirm-button">Confirmé</button>
+            </div>
+            <!-- Carousel Wrapper -->
+            <div class="swiper flight-carousel">
+                <div class="swiper-wrapper">
+                    <!-- Each Flight Ticket Card -->
+                    <div class="swiper-slide flight-ticket">
+
+                        <div class="ticket-info">
+                            <div class="ticket-route">
+                                <span class="airport-code">CDG</span>
+                                <span class="airport-name">Paris Charles de Gaulle airport</span>
+                                <span class="flight-number">N° VOL SV144</span>
+                                <span class="airport-code">RDH</span>
+                                <span class="airport-name">Aéroport international du roi Khaled</span>
+                            </div>
+                            <img src="../uploads/plane.jpg" alt="Flight Image" class="flight-image">
+                            <div class="flight-details">
+                                <div class="departure">
+                                    <span>Départ</span>
+                                    <span>Mer 08 Sep</span>
+                                    <span>12:00</span>
+                                </div>
+                                <div class="duration">
+                                    <span>1hr 30min</span>
+                                    <span>Pas d'escale</span>
+                                </div>
+                                <div class="arrival">
+                                    <span>Arrivée</span>
+                                    <span>Mer 08 Sep</span>
+                                    <span>23:00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat .flight-ticket divs for each ticket -->
+                    <div class="swiper-slide flight-ticket">
+                        <!-- <div class="ticket-header">
+                            <img src="../uploads/tunis Air.png" alt="Turkish Airlines" class="airline-logo">
+                            <button class="confirm-button">Confirmé</button>
+                        </div> -->
+                        <div class="ticket-info">
+                            <div class="ticket-route">
+                                <span class="airport-code">CDG</span>
+                                <span class="airport-name">Paris Charles de Gaulle airport</span>
+                                <span class="flight-number">N° VOL SV144</span>
+                                <span class="airport-code">RDH</span>
+                                <span class="airport-name">Aéroport international du roi Khaled</span>
+                            </div>
+                            <img src="../uploads/plane.jpg" alt="Flight Image" class="flight-image">
+                            <div class="flight-details">
+                                <div class="departure">
+                                    <span>Départ</span>
+                                    <span>Mer 08 Sep</span>
+                                    <span>12:00</span>
+                                </div>
+                                <div class="duration">
+                                    <span>1hr 30min</span>
+                                    <span>Pas d'escale</span>
+                                </div>
+                                <div class="arrival">
+                                    <span>Arrivée</span>
+                                    <span>Mer 08 Sep</span>
+                                    <span>23:00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat .flight-ticket divs for each ticket -->
+                    <div class="swiper-slide flight-ticket">
+                        <!-- <div class="ticket-header">
+                            <img src="../uploads/tunis Air.png" alt="Turkish Airlines" class="airline-logo">
+                            <button class="confirm-button">Confirmé</button>
+                        </div> -->
+                        <div class="ticket-info">
+                            <div class="ticket-route">
+                                <span class="airport-code">CDG</span>
+                                <span class="airport-name">Paris Charles de Gaulle airport</span>
+                                <span class="flight-number">N° VOL SV144</span>
+                                <span class="airport-code">RDH</span>
+                                <span class="airport-name">Aéroport international du roi Khaled</span>
+                            </div>
+                            <img src="../uploads/plane.jpg" alt="Flight Image" class="flight-image">
+                            <div class="flight-details">
+                                <div class="departure">
+                                    <span>Départ</span>
+                                    <span>Mer 08 Sep</span>
+                                    <span>12:00</span>
+                                </div>
+                                <div class="duration">
+                                    <span>1hr 30min</span>
+                                    <span>Pas d'escale</span>
+                                </div>
+                                <div class="arrival">
+                                    <span>Arrivée</span>
+                                    <span>Mer 08 Sep</span>
+                                    <span>23:00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </div>
 
@@ -777,29 +1231,28 @@
         }
     </script>
 
-    <!-- <div class="container mt-5">
-        <h1>Welcome to the Page</h1>
-        <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Conubia placerat sit erat ante lacus. Habitant aliquet ultrices class euismod quisque mattis; senectus per. Nisi quam ex curabitur congue varius nulla ut. Lectus urna magnis praesent mattis est odio dictum pharetra. Mauris dui luctus gravida phasellus maecenas eleifend elit. Libero sapien amet erat libero iaculis. Malesuada montes nunc semper scelerisque mattis varius lectus elementum massa. Non amet posuere nisl commodo mus accumsan suspendisse.
-
-            Semper elit leo hendrerit vivamus in rhoncus vulputate quam. Hac dui nisl auctor habitasse vel et himenaeos. Taciti aliquam mus nullam bibendum tortor. Nibh montes at phasellus eleifend vehicula dolor curae. Ad proin eros consectetur hac maximus eleifend senectus. Finibus urna torquent conubia, ipsum feugiat ligula. Habitasse augue id massa nunc consectetur consectetur. Praesent neque sagittis sagittis nibh potenti. Lacus inceptos varius feugiat; aenean erat laoreet?
-
-            Neque sapien natoque ac quis auctor per maximus maecenas. Consequat eget eu in integer eros, ex ut condimentum. Habitasse sollicitudin praesent fringilla inceptos eros. Habitant luctus ultricies dolor morbi non lectus sodales. Metus egestas montes a erat cursus. Finibus nibh montes finibus gravida at.
-
-            Ac inceptos interdum commodo nisi ut pretium velit fusce. Vivamus cras eleifend vestibulum consequat venenatis dictumst in. Nunc luctus massa facilisi potenti id, elit at turpis. Integer ornare feugiat netus feugiat congue dui tellus interdum. Egestas semper felis aptent enim aptent etiam vestibulum. Varius tempor risus mollis semper non dignissim tortor. Potenti duis tortor tristique curae curabitur risus ornare aliquet diam.
-
-            Egestas lobortis integer non at aptent rhoncus. Vitae sociosqu scelerisque in consectetur aenean ac magnis. Laoreet venenatis tempor efficitur sollicitudin consequat. Fusce litora efficitur congue curae blandit accumsan ullamcorper. Dolor torquent fusce justo dictumst elementum magnis sodales eu? Tristique fringilla sodales porta luctus bibendum; nisi leo dis. Netus inceptos placerat mus justo neque sed ad.
-
-            Posuere suspendisse ad eros lobortis habitant. Dui nascetur penatibus accumsan duis integer. Ornare molestie quisque non quisque porttitor semper. Urna quis donec facilisi hendrerit lectus dui, porta at. Quisque montes amet nibh sagittis ligula, consectetur fringilla vitae. Ad ultricies pretium mi fringilla dignissim. Dui per ipsum efficitur dignissim ad consequat volutpat neque. Ipsum parturient maecenas eget at eget efficitur.
-
-            Dapibus primis cubilia euismod, sagittis ultricies pellentesque nisi rutrum. Ligula duis lobortis senectus tristique himenaeos nisi porttitor. Bibendum porta felis commodo accumsan at enim orci. Volutpat sociosqu quisque vel dictum suspendisse luctus sollicitudin. Id vivamus euismod tellus rhoncus; posuere feugiat lectus? Dictumst duis auctor elementum enim cras sociosqu.
-
-            Ex mattis primis volutpat placerat ullamcorper conubia ut. Arcu curae aptent primis ad laoreet curabitur. Orci in ipsum tincidunt sapien magnis. Sem habitant libero cubilia sem eros. Venenatis eget augue vehicula dictum lorem blandit commodo integer morbi. Tempus erat torquent sociosqu nulla sociosqu per. Vulputate consectetur venenatis enim sit auctor malesuada lorem. Pellentesque leo volutpat facilisi pretium suspendisse facilisis justo natoque. Ligula nunc laoreet a montes praesent eget.
-
-            Lorem facilisis velit eleifend platea blandit torquent. Ullamcorper hac commodo quisque nisi placerat nulla. Class arcu sapien convallis bibendum facilisis habitant diam tincidunt eget. Potenti blandit maximus odio egestas pulvinar rutrum tristique ultricies. Curae metus eros litora arcu natoque at eget. Augue laoreet eleifend sagittis eleifend metus potenti felis. Odio platea odio nisi metus vestibulum commodo. Enim conubia consequat dictum laoreet blandit. Potenti pulvinar quis luctus euismod dui diam at eleifend.
-
-            Sodales nunc massa aptent a dictum rhoncus. Dis erat sagittis mus aenean sit eleifend non mattis. Justo ultricies inceptos quis orci curabitur euismod facilisi. Iaculis habitasse risus congue himenaeos at. Urna aliquet viverra eleifend; nullam cras facilisi. Neque nullam pellentesque ut ad semper. At tortor phasellus feugiat neque tristique eros felis nisl.
-        </p>
-    </div> -->
+    <!-- SWIPER CODE -->
+    <script>
+        // Initialize Swiper
+        const swiper = new Swiper('.flight-carousel', {
+            slidesPerView: 1, // Default to 1 slide per view for smaller screens
+            spaceBetween: 20, // Space between slides
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                // When the screen width is >= 991px, show 2 slides per view
+                991: {
+                    slidesPerView: 2,
+                },
+                // You can add more breakpoints if needed
+                // 1200: {
+                //     slidesPerView: 3,
+                // }
+            }
+        });
+    </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
