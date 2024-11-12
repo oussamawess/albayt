@@ -17,10 +17,16 @@
     <style>
         :root {
             --primary-color: #C89D54;
+            --body-color: #F2EDE4;
+            --dark-color: #595651;
+            --darker-color: #403F3E;
+            --light-color: #F2F2F2;
+
         }
 
         body {
-            background-color: #f1ede4;
+            background-color: var(--body-color);
+            /* background-color: black; */
         }
 
         /* Container to hold both the content and sidebar */
@@ -130,7 +136,7 @@
         }
 
         .contact-btn:hover {
-            background-color: #595651;
+            background-color: var(--dark-color);
             color: white;
         }
 
@@ -139,7 +145,7 @@
         }
 
         .offcanvas {
-            background-color: #595651;
+            background-color: var(--dark-color);
         }
 
         .offcanvas.offcanvas-start {
@@ -432,7 +438,7 @@
             width: 100%;
             padding: 5px;
             margin-top: 20px;
-            background-color: #595651;
+            background-color: var(--dark-color);
             color: white;
             text-align: center;
             border: none;
@@ -713,8 +719,8 @@
             /* Three tickets per row by default */
             background: #fff;
             border-radius: 8px;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-            padding: 16px;
+            /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -755,15 +761,62 @@
             justify-content: space-around;
             align-items: center;
             width: 100%;
-            margin: 16px 0;
-            font-size: 14px;
+            margin: 5px 0;
+            font-size: 12px;
         }
+
+        /*------------------------------ FLIGHT BLOCK - top section ---------------*/
+        .ticket-route>span {
+            display: block;
+            /* Make each <span> a block element so they stack vertically */
+            text-align: center;
+            /* Default center alignment */
+        }
+
+        /* Align left section (airport code + name) */
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            font-size: 10px;
+            width: 33%;
+            /* Align to the left */
+        }
+
+        /* Align right section (airport code + name) */
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: end;
+            font-size: 10px;
+            width: 33%;
+            /* Align to the right */
+        }
+
+        /* Flight number centered */
+        .flight-number {
+            text-align: center;
+        }
+
+        .airport-code,
+        .flight-code {
+            font-weight: bold;
+        }
+
+        .swiper-wrapper {
+            margin-bottom: 30px;
+        }
+
+        /*------------------------------ FLIGHT BLOCK - top section ---------------*/
+
 
         .flight-image {
             width: 100%;
-            height: auto;
+            height: 120px;
             border-radius: 8px;
             margin: 8px 0;
+            object-fit: cover;
         }
 
         .flight-details {
@@ -773,12 +826,53 @@
             margin-top: 16px;
             font-size: 14px;
         }
+        
 
         .swiper-button-next.swiper-button,
         .swiper-button-prev.swiper-button {
             opacity: 1;
             cursor: auto;
             pointer-events: none;
+        }
+
+        /* -------------------- the circle cut ---------------- */
+        /* .ticket-info {
+    position: relative;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+} */
+
+        .dashed-line {
+            margin: 10px -10px;
+            border-top: dashed 2px #bbbbbb59;
+            position: relative;
+        }
+
+        .dashed-line.circle-cut::before,
+        .dashed-line.circle-cut::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            /* diameter of the circle cut */
+            height: 20px;
+            /* diameter of the circle cut */
+            background-color: var(--body-color);
+            /* match background of ticket */
+            border-radius: 50%;
+        }
+
+        .dashed-line.circle-cut::before {
+            left: -10px;
+            /* adjust to align half outside the line */
+        }
+
+        .dashed-line.circle-cut::after {
+            right: -10px;
+            /* adjust to align half outside the line */
         }
     </style>
 </head>
@@ -1052,7 +1146,7 @@
 
 
         <div class="content mt-4">
-        <h4 style="margin-bottom: 0;">Vols aller-retour</h4>
+            <h4 style="margin-bottom: 0;">Vols aller-retour</h4>
             <div class="ticket-header">
                 <img src="../uploads/tunis Air.png" alt="Turkish Airlines" class="airline-logo">
                 <button class="confirm-button">Confirmé</button>
@@ -1061,17 +1155,64 @@
             <div class="swiper flight-carousel">
                 <div class="swiper-wrapper">
                     <!-- Each Flight Ticket Card -->
-                    <div class="swiper-slide flight-ticket">
 
-                        <div class="ticket-info">
+                    <div class="swiper-slide flight-ticket ">
+
+                        <div class="ticket-info ">
                             <div class="ticket-route">
-                                <span class="airport-code">CDG</span>
-                                <span class="airport-name">Paris Charles de Gaulle airport</span>
-                                <span class="flight-number">N° VOL SV144</span>
-                                <span class="airport-code">RDH</span>
-                                <span class="airport-name">Aéroport international du roi Khaled</span>
+                                <div class="left-section">
+                                    <span class="airport-code">CDG</span>
+                                    <span class="airport-name">Paris Charles de Gaulle airport</span>
+                                </div>
+                                <span class="flight-number">N° VOL<br><span class="flight-code"> SV144</span></span>
+                                <div class="right-section">
+                                    <span class="airport-code">RDH</span>
+                                    <span class="airport-name">Aéroport international du roi Khaled</span>
+                                </div>
                             </div>
-                            <img src="../uploads/plane.jpg" alt="Flight Image" class="flight-image">
+                            <img src="../uploads/plane1.jpg" alt="Flight Image" class="flight-image">
+
+                            <div class="dashed-line circle-cut"></div>
+
+
+                            <div class="flight-details">
+                                <div class="departure">
+                                    <span>Départ</span>
+                                    <span>Mer 08 Sep</span>
+                                    <span>12:00</span>
+                                </div>
+                                <div class="duration">
+                                    <span>1hr 30min</span>
+                                    <span>Pas d'escale</span>
+                                </div>
+                                <div class="arrival">
+                                    <span>Arrivée</span>
+                                    <span>Mer 08 Sep</span>
+                                    <span>23:00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Repeat .flight-ticket divs for each ticket -->
+                    <div class="swiper-slide flight-ticket">
+                    <div class="ticket-info ">
+                            <div class="ticket-route">
+                                <div class="left-section">
+                                    <span class="airport-code">CDG</span>
+                                    <span class="airport-name">Paris Charles de Gaulle airport</span>
+                                </div>
+                                <span class="flight-number">N° VOL<br><span class="flight-code"> SV144</span></span>
+                                <div class="right-section">
+                                    <span class="airport-code">RDH</span>
+                                    <span class="airport-name">Aéroport international du roi Khaled</span>
+                                </div>
+                            </div>
+                            <img src="../uploads/plane2.jpg" alt="Flight Image" class="flight-image">
+
+                            <div class="dashed-line circle-cut"></div>
+
+
                             <div class="flight-details">
                                 <div class="departure">
                                     <span>Départ</span>
@@ -1092,52 +1233,23 @@
                     </div>
                     <!-- Repeat .flight-ticket divs for each ticket -->
                     <div class="swiper-slide flight-ticket">
-                        <!-- <div class="ticket-header">
-                            <img src="../uploads/tunis Air.png" alt="Turkish Airlines" class="airline-logo">
-                            <button class="confirm-button">Confirmé</button>
-                        </div> -->
-                        <div class="ticket-info">
+                    <div class="ticket-info ">
                             <div class="ticket-route">
-                                <span class="airport-code">CDG</span>
-                                <span class="airport-name">Paris Charles de Gaulle airport</span>
-                                <span class="flight-number">N° VOL SV144</span>
-                                <span class="airport-code">RDH</span>
-                                <span class="airport-name">Aéroport international du roi Khaled</span>
-                            </div>
-                            <img src="../uploads/plane.jpg" alt="Flight Image" class="flight-image">
-                            <div class="flight-details">
-                                <div class="departure">
-                                    <span>Départ</span>
-                                    <span>Mer 08 Sep</span>
-                                    <span>12:00</span>
+                                <div class="left-section">
+                                    <span class="airport-code">CDG</span>
+                                    <span class="airport-name">Paris Charles de Gaulle airport</span>
                                 </div>
-                                <div class="duration">
-                                    <span>1hr 30min</span>
-                                    <span>Pas d'escale</span>
-                                </div>
-                                <div class="arrival">
-                                    <span>Arrivée</span>
-                                    <span>Mer 08 Sep</span>
-                                    <span>23:00</span>
+                                <span class="flight-number">N° VOL<br><span class="flight-code"> SV144</span></span>
+                                <div class="right-section">
+                                    <span class="airport-code">RDH</span>
+                                    <span class="airport-name">Aéroport international du roi Khaled</span>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Repeat .flight-ticket divs for each ticket -->
-                    <div class="swiper-slide flight-ticket">
-                        <!-- <div class="ticket-header">
-                            <img src="../uploads/tunis Air.png" alt="Turkish Airlines" class="airline-logo">
-                            <button class="confirm-button">Confirmé</button>
-                        </div> -->
-                        <div class="ticket-info">
-                            <div class="ticket-route">
-                                <span class="airport-code">CDG</span>
-                                <span class="airport-name">Paris Charles de Gaulle airport</span>
-                                <span class="flight-number">N° VOL SV144</span>
-                                <span class="airport-code">RDH</span>
-                                <span class="airport-name">Aéroport international du roi Khaled</span>
-                            </div>
-                            <img src="../uploads/plane.jpg" alt="Flight Image" class="flight-image">
+                            <img src="../uploads/plane3.jpg" alt="Flight Image" class="flight-image">
+
+                            <div class="dashed-line circle-cut"></div>
+
+
                             <div class="flight-details">
                                 <div class="departure">
                                     <span>Départ</span>
@@ -1159,6 +1271,8 @@
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
+                <!-- Pagination Dots -->
+                <div class="swiper-pagination"></div>
             </div>
         </div>
 
@@ -1233,7 +1347,6 @@
 
     <!-- SWIPER CODE -->
     <script>
-        // Initialize Swiper
         const swiper = new Swiper('.flight-carousel', {
             slidesPerView: 1, // Default to 1 slide per view for smaller screens
             spaceBetween: 20, // Space between slides
@@ -1241,14 +1354,17 @@
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true, // Allows users to click on dots to navigate
+                dynamicBullets: true, // Makes dots adjust dynamically
+            },
             breakpoints: {
-                // When the screen width is >= 991px, show 2 slides per view
                 991: {
-                    slidesPerView: 2,
+                    slidesPerView: 2, // Show 2 slides on screens 991px and above
                 },
-                // You can add more breakpoints if needed
                 // 1200: {
-                //     slidesPerView: 3,
+                //   slidesPerView: 3, // Show 3 slides on screens 1200px and above
                 // }
             }
         });

@@ -172,6 +172,10 @@ $down_arrow = '
 </svg>
 ';
 
-
-
+$ticket = '
+<svg viewbox="0 0 10 3.5">
+  <path d="M4.2 1 A0.85 0.85 0 0 0 5.8 1 H10 V3.5 H0 V1z" fill="#333" />
+  <circle cx="5" cy="0.7" r="0.7" fill="red" /> 
+</svg>
+';
 // Add more icons as needed
