@@ -21,8 +21,6 @@
             --dark-color: #595651;
             --darker-color: #403F3E;
             --light-color: #F2F2F2;
-            --grey-text: #898989;
-
             --swiper-navigation-size: 21px;
 
         }
@@ -31,16 +29,6 @@
             background-color: var(--body-color);
             /* background-color: black; */
         }
-
-        /* <uniquifier>: Use a unique and descriptive class name 
-        <weight>: Use a value from 100 to 900  */
-        .raleway {
-            font-family: "Raleway", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: weight;
-            font-style: normal;
-        }
-
 
         /* Container to hold both the content and sidebar */
         .container {
@@ -304,25 +292,13 @@
         /* Logo placement */
         .logo {
             position: absolute;
-            top: 30px;
+            top: 10px;
             right: 0px;
             width: 100px;
             background-color: #ffffffb0;
             padding: 8px;
-            border-radius: 6px 0 0 6px;
         }
 
-        @media (max-width: 991px) {
-            .logo {
-                position: absolute;
-                top: 0px;
-                right: 30px;
-                width: 100px;
-                background-color: #ffffffb0;
-                padding: 8px;
-                border-radius: 0 0 6px 6px;
-            }
-        }
 
         /*---------------------------------Test------------------------*/
         /* .content {
@@ -457,7 +433,6 @@
             color: #333;
             margin: 0;
             font-weight: 700;
-            text-align: left;
         }
 
         .cta-button {
@@ -555,7 +530,6 @@
             transform: translateY(10px);
             transition: opacity 0.3s ease, transform 0.6s ease;
             z-index: 2;
-            visibility: hidden;
             /* Ensure it's above other content */
         }
 
@@ -564,7 +538,6 @@
         .pricing-table-container:hover {
             opacity: 1;
             transform: translateY(0);
-            visibility: visible;
             /* Ensure table stays above button */
         }
 
@@ -628,14 +601,13 @@
 
             /* Ensure the table stays visible */
             .pricing-table-container {
-                /* position: relative; */
+                position: relative;
                 /* Switch from absolute to relative positioning */
                 margin-top: -49%;
                 /* Give space between table and button */
                 opacity: 0;
                 /* Keep the table visible */
                 transform: translateY(0);
-                visibility: hidden;
                 /* Keep the table in normal position */
             }
 
@@ -646,7 +618,7 @@
         }
 
         /* Grouped media queries for pricing table container adjustments */
-        /* @media (max-width: 767px) {
+        @media (max-width: 767px) {
             .pricing-table-container {
                 margin-top: -66%;
             }
@@ -710,7 +682,7 @@
             .pricing-table-container {
                 margin-top: -110%;
             }
-        } */
+        }
 
 
         .pricing-table th,
@@ -851,18 +823,6 @@
             /* Align to the right */
         }
 
-        .bold {
-            font-weight: bold;
-        }
-
-        .grey {
-            color: var(--grey-text);
-        }
-
-        .dark-text {
-            color: var(--darker-color);
-        }
-
 
         .left-section-flight-details {
             display: flex;
@@ -889,7 +849,6 @@
             align-items: center;
             flex-wrap: wrap;
             justify-content: center;
-            font-size: 12px;
         }
 
         /* Flight number centered */
@@ -905,16 +864,6 @@
         .swiper-wrapper {
             margin-bottom: 30px;
         }
-
-        .swiper-button-next,
-        .swiper-button-prev {
-            background-color: white;
-            padding: 16px;
-            border-radius: 50%;
-            color: black;
-            top: var(--swiper-navigation-top-offset, 34%);
-        }
-
 
         /*------------------------------ FLIGHT BLOCK - top section ---------------*/
 
@@ -986,92 +935,6 @@
             right: -10px;
             /* adjust to align half outside the line */
         }
-
-
-        /*-----------------------  STICKY MOBILE FOOTER START ---------------------*/
-        @media (min-width: 991px) {
-            .sticky-footer {
-                display: none;
-            }
-        }
-
-        @media (max-width: 991px) {
-            .sticky-footer {
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-                background-color: white;
-                box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
-                padding: 0px 0;
-                text-align: center;
-                z-index: 1000;
-                height: fit-content;
-            }
-
-            .cta-mobile-table-button {
-                background-color: var(--dark-color);
-                color: white;
-                width: 100%;
-                border: none;
-                border-radius: 5px 5px 0 0;
-                padding-bottom: 7px;
-            }
-
-            .pricing-table-container-footer {
-                position: absolute;
-                bottom: 62%;
-                /* Position it just above the CTA button */
-                left: 0;
-                width: 100%;
-                /* Full width of the sidebar */
-                background-color: white;
-                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-                border-radius: 8px 8px 0 0;
-                padding: 10px;
-                opacity: 0;
-                transform: translateY(10px);
-                transition: opacity 0.3s ease, transform 0.6s ease;
-                z-index: 2;
-                visibility: hidden;
-                /* Ensure it's above other content */
-            }
-
-            .reservation-mobile-footer {
-                background-color: white;
-                padding: 10px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            /* Hover effect on CTA button */
-            .cta-mobile-table-button:hover~.pricing-table-container-footer,
-            .pricing-table-container-footer:hover {
-                opacity: 1;
-                transform: translateY(0);
-                visibility: visible;
-                /* Ensure table stays above button */
-            }
-
-            .cta-button {
-                display: none;
-            }
-
-            .pricing-table-container {
-                display: none;
-            }
-
-            .price-reservation {
-                display: none;
-            }
-
-            .sticky-sidebar {
-                padding-bottom: 10px;
-                border-radius: 8px 8px 0 0;
-            }
-        }
-
-        /*-----------------------  STICKY MOBILE FOOTER END ---------------------*/
     </style>
 </head>
 
@@ -1147,7 +1010,7 @@
             <div class="main-block">
                 <div class="position-relative">
                     <!-- Main Display Image -->
-                    <img src="../uploads/1.jpg" id="mainImage" class="main-image" alt="Main Display Image">
+                    <img src="../uploads/66a4be3b6417f7.22039243_makkah3.jpeg" id="mainImage" class="main-image" alt="Main Display Image">
                     <!-- Logo -->
                     <img src="../uploads/tunis Air.png" alt="Logo" class="logo">
                 </div>
@@ -1166,20 +1029,20 @@
                         <div class="thumbnail" onclick="changeImage('../uploads/3.jpg')">
                             <img src="../uploads/3.jpg" alt="Thumbnail 3">
                         </div>
-                        <div class="thumbnail" onclick="changeImage('../uploads/4.jpg')">
-                            <img src="../uploads/4.jpg" alt="Thumbnail 4">
+                        <div class="thumbnail" onclick="changeImage('../uploads/4.jpeg')">
+                            <img src="../uploads/4.jpeg" alt="Thumbnail 4">
                         </div>
-                        <div class="thumbnail" onclick="changeImage('../uploads/5.jpg')">
-                            <img src="../uploads/5.jpg" alt="Thumbnail 5">
+                        <div class="thumbnail" onclick="changeImage('../uploads/5.jpeg')">
+                            <img src="../uploads/5.jpeg" alt="Thumbnail 5">
                         </div>
-                        <div class="thumbnail" onclick="changeImage('../uploads/6.jpg')">
-                            <img src="../uploads/6.jpg" alt="Thumbnail 6">
+                        <div class="thumbnail" onclick="changeImage('../uploads/6.jpeg')">
+                            <img src="../uploads/6.jpeg" alt="Thumbnail 6">
                         </div>
                         <div class="thumbnail" onclick="changeImage('../uploads/7.jpg')">
                             <img src="../uploads/7.jpg" alt="Thumbnail 7">
                         </div>
-                        <div class="thumbnail" onclick="changeImage('../uploads/8.jpg')">
-                            <img src="../uploads/8.jpg" alt="Thumbnail 8">
+                        <div class="thumbnail" onclick="changeImage('../uploads/8.jpeg')">
+                            <img src="../uploads/8.jpeg" alt="Thumbnail 8">
                         </div>
                         <div class="thumbnail" onclick="changeImage('../uploads/9.jpg')">
                             <img src="../uploads/9.jpg" alt="Thumbnail 9">
@@ -1347,11 +1210,7 @@
             <h4 style="margin-bottom: 0;">Vols aller-retour</h4>
             <div class="ticket-header">
                 <img src="../uploads/tunis Air.png" alt="Turkish Airlines" class="airline-logo">
-                <button class="confirm-button">
-                    <div class="">Confirmé
-                        <?php echo $plane; ?>
-                    </div>
-                </button>
+                <button class="confirm-button">Confirmé</button>
             </div>
             <!-- Carousel Wrapper -->
             <div class="swiper flight-carousel">
@@ -1364,19 +1223,19 @@
                             <div class="ticket-route">
                                 <div class="left-section">
                                     <span class="airport-code">CDG</span>
-                                    <span class="airport-name dark-text">Paris Charles de Gaulle airport</span>
+                                    <span class="airport-name">Paris Charles de Gaulle airport</span>
                                 </div>
-                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text"> SV144</span></span>
+                                <span class="flight-number">N° VOL<br><span class="flight-code"> SV144</span></span>
                                 <div class="right-section">
                                     <span class="airport-code">RDH</span>
-                                    <span class="airport-name dark-text">Aéroport international du roi Khaled</span>
+                                    <span class="airport-name">Aéroport international du roi Khaled</span>
                                 </div>
                             </div>
                             <img src="../uploads/plane1.jpg" alt="Flight Image" class="flight-image">
 
                             <div class="dashed-line circle-cut"></div>
                             <div>
-                                <div class="" style="text-align: center; margin:0% 20%;">
+                                <div class="" style="text-align: center; margin:0% 20%;"> 
                                     <?php echo $plane_path; ?>
                                 </div>
                             </div>
@@ -1384,31 +1243,31 @@
 
                             <div class="flight-details">
                                 <div class="left-section-flight-details">
-                                    <span class="grey" style="margin-left: 13px;">Départ</span>
+                                    <span style="margin-left: 13px;">Départ</span>
                                     <span>
-                                        <div class="icon-container-vol-section-left dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section">
                                             <?php echo $time; ?>12:00
                                         </div>
                                     </span>
                                 </div>
-                                <div class="duration grey">
-                                    <span class="bold raleway">1hr 30min</span>
+                                <div class="duration">
+                                    <span>1hr 30min</span>
                                     <span>Pas d'escale</span>
                                 </div>
                                 <div class="right-section-flight-details">
-                                    <span class="grey" style="margin-left: 23px;">Arrivée</span>
+                                    <span style="margin-left: 23px;">Arrivée</span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right">
                                             <?php echo $time; ?>23:00
                                         </div>
                                     </span>
@@ -1423,54 +1282,33 @@
                             <div class="ticket-route">
                                 <div class="left-section">
                                     <span class="airport-code">CDG</span>
-                                    <span class="airport-name dark-text">Paris Charles de Gaulle airport</span>
+                                    <span class="airport-name">Paris Charles de Gaulle airport</span>
                                 </div>
-                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text"> SV144</span></span>
+                                <span class="flight-number">N° VOL<br><span class="flight-code"> SV144</span></span>
                                 <div class="right-section">
                                     <span class="airport-code">RDH</span>
-                                    <span class="airport-name dark-text">Aéroport international du roi Khaled</span>
+                                    <span class="airport-name">Aéroport international du roi Khaled</span>
                                 </div>
                             </div>
                             <img src="../uploads/plane2.jpg" alt="Flight Image" class="flight-image">
 
                             <div class="dashed-line circle-cut"></div>
-                            <div>
-                                <div class="" style="text-align: center; margin:0% 20%;">
-                                    <?php echo $plane_path; ?>
-                                </div>
-                            </div>
 
 
                             <div class="flight-details">
-                                <div class="left-section-flight-details">
-                                    <span class="grey" style="margin-left: 13px;">Départ</span>
-                                    <span>
-                                        <div class="icon-container-vol-section-left dark-text" style="font-size: 14px; font-weight: 600;">
-                                            <?php echo $calender; ?>Mer 08 Sep
-                                        </div>
-                                    </span>
-                                    <span>
-                                        <div class="icon-container-vol-section dark-text" style="font-size: 14px; font-weight: 600;">
-                                            <?php echo $time; ?>12:00
-                                        </div>
-                                    </span>
+                                <div class="departure">
+                                    <span>Départ</span>
+                                    <span>Mer 08 Sep</span>
+                                    <span>12:00</span>
                                 </div>
-                                <div class="duration grey">
-                                    <span class="bold raleway">1hr 30min</span>
+                                <div class="duration">
+                                    <span>1hr 30min</span>
                                     <span>Pas d'escale</span>
                                 </div>
-                                <div class="right-section-flight-details">
-                                    <span class="grey" style="margin-left: 23px;">Arrivée</span>
-                                    <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
-                                            <?php echo $calender; ?>Mer 08 Sep
-                                        </div>
-                                    </span>
-                                    <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
-                                            <?php echo $time; ?>23:00
-                                        </div>
-                                    </span>
+                                <div class="arrival">
+                                    <span>Arrivée</span>
+                                    <span>Mer 08 Sep</span>
+                                    <span>23:00</span>
                                 </div>
                             </div>
                         </div>
@@ -1481,54 +1319,33 @@
                             <div class="ticket-route">
                                 <div class="left-section">
                                     <span class="airport-code">CDG</span>
-                                    <span class="airport-name dark-text">Paris Charles de Gaulle airport</span>
+                                    <span class="airport-name">Paris Charles de Gaulle airport</span>
                                 </div>
-                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text"> SV144</span></span>
+                                <span class="flight-number">N° VOL<br><span class="flight-code"> SV144</span></span>
                                 <div class="right-section">
                                     <span class="airport-code">RDH</span>
-                                    <span class="airport-name dark-text">Aéroport international du roi Khaled</span>
+                                    <span class="airport-name">Aéroport international du roi Khaled</span>
                                 </div>
                             </div>
                             <img src="../uploads/plane3.jpg" alt="Flight Image" class="flight-image">
 
                             <div class="dashed-line circle-cut"></div>
-                            <div>
-                                <div class="" style="text-align: center; margin:0% 20%;">
-                                    <?php echo $plane_path; ?>
-                                </div>
-                            </div>
 
 
                             <div class="flight-details">
-                                <div class="left-section-flight-details">
-                                    <span class="grey" style="margin-left: 13px;">Départ</span>
-                                    <span>
-                                        <div class="icon-container-vol-section-left dark-text" style="font-size: 14px; font-weight: 600;">
-                                            <?php echo $calender; ?>Mer 08 Sep
-                                        </div>
-                                    </span>
-                                    <span>
-                                        <div class="icon-container-vol-section dark-text" style="font-size: 14px; font-weight: 600;">
-                                            <?php echo $time; ?>12:00
-                                        </div>
-                                    </span>
+                                <div class="departure">
+                                    <span>Départ</span>
+                                    <span>Mer 08 Sep</span>
+                                    <span>12:00</span>
                                 </div>
-                                <div class="duration grey">
-                                    <span class="bold raleway">1hr 30min</span>
+                                <div class="duration">
+                                    <span>1hr 30min</span>
                                     <span>Pas d'escale</span>
                                 </div>
-                                <div class="right-section-flight-details">
-                                    <span class="grey" style="margin-left: 23px;">Arrivée</span>
-                                    <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
-                                            <?php echo $calender; ?>Mer 08 Sep
-                                        </div>
-                                    </span>
-                                    <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
-                                            <?php echo $time; ?>23:00
-                                        </div>
-                                    </span>
+                                <div class="arrival">
+                                    <span>Arrivée</span>
+                                    <span>Mer 08 Sep</span>
+                                    <span>23:00</span>
                                 </div>
                             </div>
                         </div>
@@ -1565,61 +1382,7 @@
             </p>
         </div>
 
-
-
     </div>
-
-
-    <div class="sticky-footer">
-        <button class="cta-mobile-table-button">
-            <div class="icon-arrow">
-                <?php echo $up_arrow; ?>
-            </div><span style="font-size: 12px;">VOIR NOS TARIFS D'HÉBERGEMENTS</span>
-        </button>
-
-        <div class="pricing-table-container-footer">
-            <table class="pricing-table">
-                <thead>
-                    <tr>
-                        <th>Type d'hébergement</th>
-                        <th>Prix</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <div class="icon-arrow-down" style="text-align: center;">
-                        <?php echo $down_arrow; ?>
-                    </div>
-                    <h5 style="margin-left: 10px;">Les tarifs par personne</h5>
-                    <tr>
-                        <td>Individuelle</td>
-                        <td>2290.00 €</td>
-                    </tr>
-                    <tr>
-                        <td>Double</td>
-                        <td>1550.00 €</td>
-                    </tr>
-                    <tr>
-                        <td>Triple</td>
-                        <td>1390.00 €</td>
-                    </tr>
-                    <tr>
-                        <td>Quadruple</td>
-                        <td>1290.00 €</td>
-                    </tr>
-                    <tr>
-                        <td>Bébé</td>
-                        <td>350.00 €</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="reservation-mobile-footer">
-            <p class="grey" style="margin: 0px; font-size: .8rem;">À partir de <br><strong class="price-number dark-text">1290€</strong></p>
-            <button class="reserve-button">RÉSERVATION</button>
-        </div>
-    </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>

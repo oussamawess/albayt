@@ -178,4 +178,50 @@ $ticket = '
   <circle cx="5" cy="0.7" r="0.7" fill="red" /> 
 </svg>
 ';
+
+$calender = '
+<svg xmlns="http://www.w3.org/2000/svg" width="11" height="12.667" viewBox="0 0 11 12.667">
+  <g id="Icon" transform="translate(0.5 0.5)">
+    <rect id="Rectangle" width="10" height="10.267" rx="1" transform="translate(0 1.4)" fill="none" stroke="#898989" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path" d="M.333,0V2.8" transform="translate(6.889)" fill="none" stroke="#898989" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path-2" data-name="Path" d="M.333,0V2.8" transform="translate(2.444)" fill="none" stroke="#898989" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path-3" data-name="Path" d="M0,.35H10" transform="translate(0 4.317)" fill="none" stroke="#898989" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+  </g>
+</svg>
+';
+
+$time = '
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
+  <g id="Icon" transform="translate(0.5 0.5)">
+    <circle id="Oval" cx="6" cy="6" r="6" fill="none" stroke="#898989" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path" d="M0,0V4.2L2.8,5.6" transform="translate(5.75 2.133)" fill="none" stroke="#898989" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+  </g>
+</svg>
+';
+
+$plane_path = '
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 206 41">
+  <g id="Route" transform="translate(-0.407)">
+    <path id="Path" d="M0,19S48.412,0,96.824,0s96.824,19,96.824,19" transform="translate(6 15.08)" fill="none" stroke="#e6e6e6" stroke-miterlimit="10" stroke-width="2" stroke-dasharray="3"/>
+    <g id="Oval" transform="translate(0.407 29)" fill="#fff" stroke="#898989" stroke-miterlimit="10" stroke-width="3">
+      <circle cx="6" cy="6" r="6" stroke="none"/>
+      <circle cx="6" cy="6" r="4.5" fill="none"/>
+    </g>
+    <g id="Icon" transform="translate(87.749)">
+      <circle id="Oval-2" data-name="Oval" cx="15" cy="15" r="15" transform="translate(-0.343)" fill="#ededed"/>
+      <path id="Icon-2" data-name="Icon" d="M7,0a1.414,1.414,0,0,1,.933.5A2.588,2.588,0,0,1,8.4,2V6L14,10.5V12L7.933,9.5V15l2.333,2v1L7,17,3.733,18V17l2.333-2V9.5L0,12V10.5L5.6,6V2A2.588,2.588,0,0,1,6.067.5,1.414,1.414,0,0,1,7,0Z" transform="translate(23.657 8) rotate(90)" fill="#595651"/>
+    </g>
+    <g id="Oval-3" data-name="Oval" transform="translate(194.407 29)" fill="#fff" stroke="#898989" stroke-miterlimit="10" stroke-width="3">
+      <circle cx="6" cy="6" r="6" stroke="none"/>
+      <circle cx="6" cy="6" r="4.5" fill="none"/>
+    </g>
+  </g>
+</svg>
+';
+
+$plane='
+<svg xmlns="http://www.w3.org/2000/svg" width="11.424" height="11.424" viewBox="0 0 15.424 15.424" style="margin-left: 4px;">
+  <path id="Icon_metro-airplane" data-name="Icon metro-airplane" d="M6.427,11.568,9.181,8.814,2.571,3.856,4.5,1.928l8.262,3.305,2.6-2.6a1.726,1.726,0,0,1,2.327-.4,1.726,1.726,0,0,1-.4,2.327l-2.6,2.6,3.306,8.263-1.928,1.928-4.959-6.611L8.355,13.5v3.856H6.427L5.463,14.46,2.571,13.5V11.568H6.427Z" transform="translate(-2.571 -1.928)" fill="#fff"/>
+</svg>
+';
 // Add more icons as needed
