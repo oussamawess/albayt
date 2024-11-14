@@ -1072,6 +1072,137 @@
         }
 
         /*-----------------------  STICKY MOBILE FOOTER END ---------------------*/
+
+        /*------------------------ Hebergement START ----------------------------*/
+        /* Container for the entire section */
+        .hebergement-container {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .hotel-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .hotel-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #eaeaea;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hotel-button.active {
+            background-color: #d4a762;
+            color: #fff;
+        }
+
+        .hotel-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Styles for swiper-container (the image container) */
+        .swiper-container {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            display: flex;
+            /* Use flexbox to arrange images side by side */
+        }
+
+        /* .swiper-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        .swiper-slide {
+            width: 50%;
+            flex-shrink: 0;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        } */
+
+        .hotel-details {
+            /* padding: 15px; */
+            border-radius: 8px;
+            display: flex;
+            /* Use flexbox to split content */
+            justify-content: space-between;
+            /* Space out the sections */
+            flex-wrap: wrap;
+            /* Allow wrapping for small screen sizes */
+        }
+
+        .hotel-details .info {
+            flex: 1 1 60%;
+            /* Take 60% of the container */
+            margin-right: 20px;
+            /* Add some space between the sections */
+        }
+
+        /* Right section: Booking details */
+        .hotel-details .booking-details {
+            flex: 1 1 35%;
+            /* Take 35% of the container */
+            min-width: 250px;
+            /* Ensure the right section has a minimum width */
+            margin-left: 20px;
+        }
+
+        .hotel-details h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .rating {
+            color: #ffa500;
+        }
+
+        .booking-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .booking-details div {
+            flex: 1 1 45%;
+        }
+
+        .hotel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 991px) {
+            .hebergement-container {
+                /* max-width: 400px; */
+                padding: 15px;
+            }
+
+            .swiper-container {
+                /* height: 150px; */
+            }
+
+            .hotel-buttons {
+                /* justify-content: space-between; */
+            }
+        }
+
+        /*------------------------ Hebergement END ------------------------------*/
     </style>
 </head>
 
@@ -1342,7 +1473,7 @@
             </div>
         </div>
 
-
+        <!-- Vols aller-retour Start-->
         <div class="content mt-4">
             <h4 style="margin-bottom: 0;">Vols aller-retour</h4>
             <div class="ticket-header">
@@ -1540,157 +1671,292 @@
                 <div class="swiper-pagination"></div>
             </div>
         </div>
-
-
+        <!-- Vols aller-retour END-->
+        <!-- Hebergement START -->
         <div class="content">
-            <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Conubia placerat sit erat ante lacus. Habitant aliquet ultrices class euismod quisque mattis; senectus per. Nisi quam ex curabitur congue varius nulla ut. Lectus urna magnis praesent mattis est odio dictum pharetra. Mauris dui luctus gravida phasellus maecenas eleifend elit. Libero sapien amet erat libero iaculis. Malesuada montes nunc semper scelerisque mattis varius lectus elementum massa. Non amet posuere nisl commodo mus accumsan suspendisse.
+            <div class="hebergement-container">
+                <h2>Hébergement</h2>
+                <div class="hotel-buttons">
+                    <button class="hotel-button active" data-hotel="madinah">Hôtel Madinah</button>
+                    <button class="hotel-button" data-hotel="makkah">Hôtel Makkah</button>
+                </div>
+                <div class="hotel-content">
+                    <!-- Hotel Madinah Content -->
+                    <div class="hotel-info" id="hotel-madinah" style="display: block;">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel1.jpg" alt="Hôtel Madinah Image 1"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel2.jpg" alt="Hôtel Madinah Image 2"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel3.jpg" alt="Hôtel Madinah Image 3"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel 4.jpg" alt="Hôtel Makkah Image 1"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/pullman.jpg" alt="Hôtel Makkah Image 2"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/omra-octobre-formule-confort-17-2.jpg" alt="Hôtel Makkah Image 3"></div>
 
-                Semper elit leo hendrerit vivamus in rhoncus vulputate quam. Hac dui nisl auctor habitasse vel et himenaeos. Taciti aliquam mus nullam bibendum tortor. Nibh montes at phasellus eleifend vehicula dolor curae. Ad proin eros consectetur hac maximus eleifend senectus. Finibus urna torquent conubia, ipsum feugiat ligula. Habitasse augue id massa nunc consectetur consectetur. Praesent neque sagittis sagittis nibh potenti. Lacus inceptos varius feugiat; aenean erat laoreet?
-
-                Neque sapien natoque ac quis auctor per maximus maecenas. Consequat eget eu in integer eros, ex ut condimentum. Habitasse sollicitudin praesent fringilla inceptos eros. Habitant luctus ultricies dolor morbi non lectus sodales. Metus egestas montes a erat cursus. Finibus nibh montes finibus gravida at.
-
-                Ac inceptos interdum commodo nisi ut pretium velit fusce. Vivamus cras eleifend vestibulum consequat venenatis dictumst in. Nunc luctus massa facilisi potenti id, elit at turpis. Integer ornare feugiat netus feugiat congue dui tellus interdum. Egestas semper felis aptent enim aptent etiam vestibulum. Varius tempor risus mollis semper non dignissim tortor. Potenti duis tortor tristique curae curabitur risus ornare aliquet diam.
-
-                Egestas lobortis integer non at aptent rhoncus. Vitae sociosqu scelerisque in consectetur aenean ac magnis. Laoreet venenatis tempor efficitur sollicitudin consequat. Fusce litora efficitur congue curae blandit accumsan ullamcorper. Dolor torquent fusce justo dictumst elementum magnis sodales eu? Tristique fringilla sodales porta luctus bibendum; nisi leo dis. Netus inceptos placerat mus justo neque sed ad.
-
-                Posuere suspendisse ad eros lobortis habitant. Dui nascetur penatibus accumsan duis integer. Ornare molestie quisque non quisque porttitor semper. Urna quis donec facilisi hendrerit lectus dui, porta at. Quisque montes amet nibh sagittis ligula, consectetur fringilla vitae. Ad ultricies pretium mi fringilla dignissim. Dui per ipsum efficitur dignissim ad consequat volutpat neque. Ipsum parturient maecenas eget at eget efficitur.
-
-                Dapibus primis cubilia euismod, sagittis ultricies pellentesque nisi rutrum. Ligula duis lobortis senectus tristique himenaeos nisi porttitor. Bibendum porta felis commodo accumsan at enim orci. Volutpat sociosqu quisque vel dictum suspendisse luctus sollicitudin. Id vivamus euismod tellus rhoncus; posuere feugiat lectus? Dictumst duis auctor elementum enim cras sociosqu.
-
-                Ex mattis primis volutpat placerat ullamcorper conubia ut. Arcu curae aptent primis ad laoreet curabitur. Orci in ipsum tincidunt sapien magnis. Sem habitant libero cubilia sem eros. Venenatis eget augue vehicula dictum lorem blandit commodo integer morbi. Tempus erat torquent sociosqu nulla sociosqu per. Vulputate consectetur venenatis enim sit auctor malesuada lorem. Pellentesque leo volutpat facilisi pretium suspendisse facilisis justo natoque. Ligula nunc laoreet a montes praesent eget.
-
-                Lorem facilisis velit eleifend platea blandit torquent. Ullamcorper hac commodo quisque nisi placerat nulla. Class arcu sapien convallis bibendum facilisis habitant diam tincidunt eget. Potenti blandit maximus odio egestas pulvinar rutrum tristique ultricies. Curae metus eros litora arcu natoque at eget. Augue laoreet eleifend sagittis eleifend metus potenti felis. Odio platea odio nisi metus vestibulum commodo. Enim conubia consequat dictum laoreet blandit. Potenti pulvinar quis luctus euismod dui diam at eleifend.
-
-                Sodales nunc massa aptent a dictum rhoncus. Dis erat sagittis mus aenean sit eleifend non mattis. Justo ultricies inceptos quis orci curabitur euismod facilisi. Iaculis habitasse risus congue himenaeos at. Urna aliquet viverra eleifend; nullam cras facilisi. Neque nullam pellentesque ut ad semper. At tortor phasellus feugiat neque tristique eros felis nisl.
-            </p>
-        </div>
+                            </div>
+                            <!-- Pagination dots for Swiper -->
+                            <div class="swiper-pagination"></div>
+                        </div>
+                        <div class="hotel-details">
+                            <div class="info">
+                                <h3>Hôtel Bosphorus Waqf As Safi</h3>
+                                <div class="" style="margin: 10px 10px 15px 0px;">
+                                    <?php echo $fivestar; ?>
+                                </div>
+                                <p>Ville : Madinah<br>
+                                    Distance : 25 kilomètres<br>
+                                    Durée du trajet : Environ 35 minutes</p>
+                            </div>
+                            <div class="booking-details">
 
 
+                                <div class="">
+                                    <?php echo $Durée; ?> </div>
+                                <div>
+                                    Check-in
+                                    <br> <span>2024-09-08</span>
+                                </div>
+                                <div><strong>Check-out</strong><br> <span>2024-09-13</span></div>
+                                <div><strong>Durée du séjour</strong><br> <span>5 nuitées</span></div>
+                                <div><strong>Pension</strong><br> <span>Petit déjeuner</span></div>
 
-    </div>
+                            </div>
+                        </div>
 
-
-    <div class="sticky-footer">
-        <button class="cta-mobile-table-button">
-            <div class="icon-arrow">
-                <?php echo $up_arrow; ?>
-            </div><span style="font-size: 12px;">VOIR NOS TARIFS D'HÉBERGEMENTS</span>
-        </button>
-
-        <div class="pricing-table-container-footer">
-            <table class="pricing-table">
-                <thead>
-                    <tr>
-                        <th>Type d'hébergement</th>
-                        <th>Prix</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <div class="icon-arrow-down" style="text-align: center;">
-                        <?php echo $down_arrow; ?>
+                        <!-- Hotel Makkah Content -->
+                        <div class="hotel-info" id="hotel-makkah" style="display: none;">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel 4.jpg" alt="Hôtel Makkah Image 1"></div>
+                                    <div class="swiper-slide"><img class="hotel-image" src="../uploads/pullman.jpg" alt="Hôtel Makkah Image 2"></div>
+                                    <div class="swiper-slide"><img class="hotel-image" src="../uploads/omra-octobre-formule-confort-17-2.jpg" alt="Hôtel Makkah Image 3"></div>
+                                    <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel1.jpg" alt="Hôtel Madinah Image 1"></div>
+                                    <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel2.jpg" alt="Hôtel Madinah Image 2"></div>
+                                    <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel3.jpg" alt="Hôtel Madinah Image 3"></div>
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                            <div class="hotel-details">
+                                <div class="info">
+                                    <h3>Hôtel Bosphorus Waqf As Safi</h3>
+                                    <div class="" style="margin: 10px 10px 15px 0px;">
+                                        <?php echo $fivestar; ?>
+                                    </div>
+                                    <p>Ville : Madinah<br>
+                                        Distance : 25 kilomètres<br>
+                                        Durée du trajet : Environ 35 minutes</p>
+                                </div>
+                                <div class="booking-details">
+                                    <div><strong>Check-in</strong><br> <span>2024-09-08</span></div>
+                                    <div><strong>Check-out</strong><br> <span>2024-09-13</span></div>
+                                    <div><strong>Durée du séjour</strong><br> <span>5 nuitées</span></div>
+                                    <div><strong>Pension</strong><br> <span>Petit déjeuner</span></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h5 style="margin-left: 10px;">Les tarifs par personne</h5>
-                    <tr>
-                        <td>Individuelle</td>
-                        <td>2290.00 €</td>
-                    </tr>
-                    <tr>
-                        <td>Double</td>
-                        <td>1550.00 €</td>
-                    </tr>
-                    <tr>
-                        <td>Triple</td>
-                        <td>1390.00 €</td>
-                    </tr>
-                    <tr>
-                        <td>Quadruple</td>
-                        <td>1290.00 €</td>
-                    </tr>
-                    <tr>
-                        <td>Bébé</td>
-                        <td>350.00 €</td>
-                    </tr>
-                </tbody>
-            </table>
+                </div>
+            </div>
+
+            <!-- Hebergement END -->
+            <div class="content">
+                <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Conubia placerat sit erat ante lacus. Habitant aliquet ultrices class euismod quisque mattis; senectus per. Nisi quam ex curabitur congue varius nulla ut. Lectus urna magnis praesent mattis est odio dictum pharetra. Mauris dui luctus gravida phasellus maecenas eleifend elit. Libero sapien amet erat libero iaculis. Malesuada montes nunc semper scelerisque mattis varius lectus elementum massa. Non amet posuere nisl commodo mus accumsan suspendisse.
+
+                    Semper elit leo hendrerit vivamus in rhoncus vulputate quam. Hac dui nisl auctor habitasse vel et himenaeos. Taciti aliquam mus nullam bibendum tortor. Nibh montes at phasellus eleifend vehicula dolor curae. Ad proin eros consectetur hac maximus eleifend senectus. Finibus urna torquent conubia, ipsum feugiat ligula. Habitasse augue id massa nunc consectetur consectetur. Praesent neque sagittis sagittis nibh potenti. Lacus inceptos varius feugiat; aenean erat laoreet?
+
+                    Neque sapien natoque ac quis auctor per maximus maecenas. Consequat eget eu in integer eros, ex ut condimentum. Habitasse sollicitudin praesent fringilla inceptos eros. Habitant luctus ultricies dolor morbi non lectus sodales. Metus egestas montes a erat cursus. Finibus nibh montes finibus gravida at.
+
+                    Ac inceptos interdum commodo nisi ut pretium velit fusce. Vivamus cras eleifend vestibulum consequat venenatis dictumst in. Nunc luctus massa facilisi potenti id, elit at turpis. Integer ornare feugiat netus feugiat congue dui tellus interdum. Egestas semper felis aptent enim aptent etiam vestibulum. Varius tempor risus mollis semper non dignissim tortor. Potenti duis tortor tristique curae curabitur risus ornare aliquet diam.
+
+                    Egestas lobortis integer non at aptent rhoncus. Vitae sociosqu scelerisque in consectetur aenean ac magnis. Laoreet venenatis tempor efficitur sollicitudin consequat. Fusce litora efficitur congue curae blandit accumsan ullamcorper. Dolor torquent fusce justo dictumst elementum magnis sodales eu? Tristique fringilla sodales porta luctus bibendum; nisi leo dis. Netus inceptos placerat mus justo neque sed ad.
+
+                    Posuere suspendisse ad eros lobortis habitant. Dui nascetur penatibus accumsan duis integer. Ornare molestie quisque non quisque porttitor semper. Urna quis donec facilisi hendrerit lectus dui, porta at. Quisque montes amet nibh sagittis ligula, consectetur fringilla vitae. Ad ultricies pretium mi fringilla dignissim. Dui per ipsum efficitur dignissim ad consequat volutpat neque. Ipsum parturient maecenas eget at eget efficitur.
+
+                    Dapibus primis cubilia euismod, sagittis ultricies pellentesque nisi rutrum. Ligula duis lobortis senectus tristique himenaeos nisi porttitor. Bibendum porta felis commodo accumsan at enim orci. Volutpat sociosqu quisque vel dictum suspendisse luctus sollicitudin. Id vivamus euismod tellus rhoncus; posuere feugiat lectus? Dictumst duis auctor elementum enim cras sociosqu.
+
+                    Ex mattis primis volutpat placerat ullamcorper conubia ut. Arcu curae aptent primis ad laoreet curabitur. Orci in ipsum tincidunt sapien magnis. Sem habitant libero cubilia sem eros. Venenatis eget augue vehicula dictum lorem blandit commodo integer morbi. Tempus erat torquent sociosqu nulla sociosqu per. Vulputate consectetur venenatis enim sit auctor malesuada lorem. Pellentesque leo volutpat facilisi pretium suspendisse facilisis justo natoque. Ligula nunc laoreet a montes praesent eget.
+
+                    Lorem facilisis velit eleifend platea blandit torquent. Ullamcorper hac commodo quisque nisi placerat nulla. Class arcu sapien convallis bibendum facilisis habitant diam tincidunt eget. Potenti blandit maximus odio egestas pulvinar rutrum tristique ultricies. Curae metus eros litora arcu natoque at eget. Augue laoreet eleifend sagittis eleifend metus potenti felis. Odio platea odio nisi metus vestibulum commodo. Enim conubia consequat dictum laoreet blandit. Potenti pulvinar quis luctus euismod dui diam at eleifend.
+
+                    Sodales nunc massa aptent a dictum rhoncus. Dis erat sagittis mus aenean sit eleifend non mattis. Justo ultricies inceptos quis orci curabitur euismod facilisi. Iaculis habitasse risus congue himenaeos at. Urna aliquet viverra eleifend; nullam cras facilisi. Neque nullam pellentesque ut ad semper. At tortor phasellus feugiat neque tristique eros felis nisl.
+                </p>
+            </div>
+
+
+
         </div>
 
-        <div class="reservation-mobile-footer">
-            <p class="grey" style="margin: 0px; font-size: .8rem;">À partir de <br><strong class="price-number dark-text">1290€</strong></p>
-            <button class="reserve-button">RÉSERVATION</button>
+
+        <div class="sticky-footer">
+            <button class="cta-mobile-table-button">
+                <div class="icon-arrow">
+                    <?php echo $up_arrow; ?>
+                </div><span style="font-size: 12px;">VOIR NOS TARIFS D'HÉBERGEMENTS</span>
+            </button>
+
+            <div class="pricing-table-container-footer">
+                <table class="pricing-table">
+                    <thead>
+                        <tr>
+                            <th>Type d'hébergement</th>
+                            <th>Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div class="icon-arrow-down" style="text-align: center;">
+                            <?php echo $down_arrow; ?>
+                        </div>
+                        <h5 style="margin-left: 10px;">Les tarifs par personne</h5>
+                        <tr>
+                            <td>Individuelle</td>
+                            <td>2290.00 €</td>
+                        </tr>
+                        <tr>
+                            <td>Double</td>
+                            <td>1550.00 €</td>
+                        </tr>
+                        <tr>
+                            <td>Triple</td>
+                            <td>1390.00 €</td>
+                        </tr>
+                        <tr>
+                            <td>Quadruple</td>
+                            <td>1290.00 €</td>
+                        </tr>
+                        <tr>
+                            <td>Bébé</td>
+                            <td>350.00 €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="reservation-mobile-footer">
+                <p class="grey" style="margin: 0px; font-size: .8rem;">À partir de <br><strong class="price-number dark-text">1290€</strong></p>
+                <button class="reserve-button">RÉSERVATION</button>
+            </div>
         </div>
-    </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function changeImage(imagePath) {
-            // Change the main image source
-            document.getElementById('mainImage').src = imagePath;
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            function changeImage(imagePath) {
+                // Change the main image source
+                document.getElementById('mainImage').src = imagePath;
 
-            // Remove active class from all thumbnails
-            document.querySelectorAll('.thumbnail').forEach(thumbnail => {
-                thumbnail.classList.remove('active');
-            });
+                // Remove active class from all thumbnails
+                document.querySelectorAll('.thumbnail').forEach(thumbnail => {
+                    thumbnail.classList.remove('active');
+                });
 
-            // Add active class to the clicked thumbnail
-            event.currentTarget.classList.add('active');
-        }
-    </script>
-
-    <script>
-        let currentIndex = 0;
-
-        function slideThumbnails(direction) {
-            const carousel = document.querySelector('.thumbnail-carousel');
-            const thumbnails = document.querySelectorAll('.thumbnail');
-            const visibleThumbnails = 5; // Number of thumbnails visible at one time
-
-            // Calculate the maximum number of slides
-            const maxIndex = thumbnails.length - visibleThumbnails;
-
-            // Update the current index based on the direction (-1 for prev, +1 for next)
-            currentIndex += direction;
-
-            // Ensure the index is within bounds
-            if (currentIndex < 0) {
-                currentIndex = 0;
-            } else if (currentIndex > maxIndex) {
-                currentIndex = maxIndex;
+                // Add active class to the clicked thumbnail
+                event.currentTarget.classList.add('active');
             }
+        </script>
 
-            // Slide by adjusting the transform property
-            const offset = currentIndex * -20; // Each thumbnail is 20% of the container width
-            carousel.style.transform = `translateX(${offset}%)`;
-        }
-    </script>
+        <script>
+            let currentIndex = 0;
 
-    <!-- SWIPER CODE -->
-    <script>
-        const swiper = new Swiper('.flight-carousel', {
-            slidesPerView: 1, // Default to 1 slide per view for smaller screens
-            spaceBetween: 20, // Space between slides
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true, // Allows users to click on dots to navigate
-                dynamicBullets: true, // Makes dots adjust dynamically
-            },
-            breakpoints: {
-                991: {
-                    slidesPerView: 2, // Show 2 slides on screens 991px and above
+            function slideThumbnails(direction) {
+                const carousel = document.querySelector('.thumbnail-carousel');
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                const visibleThumbnails = 5; // Number of thumbnails visible at one time
+
+                // Calculate the maximum number of slides
+                const maxIndex = thumbnails.length - visibleThumbnails;
+
+                // Update the current index based on the direction (-1 for prev, +1 for next)
+                currentIndex += direction;
+
+                // Ensure the index is within bounds
+                if (currentIndex < 0) {
+                    currentIndex = 0;
+                } else if (currentIndex > maxIndex) {
+                    currentIndex = maxIndex;
+                }
+
+                // Slide by adjusting the transform property
+                const offset = currentIndex * -20; // Each thumbnail is 20% of the container width
+                carousel.style.transform = `translateX(${offset}%)`;
+            }
+        </script>
+
+        <!-- SWIPER FLIGHT CODE -->
+        <script>
+            const swiper = new Swiper('.flight-carousel', {
+                slidesPerView: 1, // Default to 1 slide per view for smaller screens
+                spaceBetween: 20, // Space between slides
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
                 },
-                // 1200: {
-                //   slidesPerView: 3, // Show 3 slides on screens 1200px and above
-                // }
-            }
-        });
-    </script>
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true, // Allows users to click on dots to navigate
+                    dynamicBullets: true, // Makes dots adjust dynamically
+                },
+                breakpoints: {
+                    991: {
+                        slidesPerView: 2.5, // Show 2 slides on screens 991px and above
+                    },
+                    // 1200: {
+                    //   slidesPerView: 3, // Show 3 slides on screens 1200px and above
+                    // }
+                }
+            });
+        </script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Hebergement SWIPER START  -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Swiper initialization
+                const madinahSwiper = new Swiper('#hotel-madinah .swiper-container', {
+                    slidesPerView: 1, // Show 1 image at a time
+                    spaceBetween: 10, // Space between images
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    breakpoints: {
+                        991: {
+                            slidesPerView: 2, // Show 2 slides on screens 991px and above
+                        }
+                    }
+                });
+
+                const makkahSwiper = new Swiper('#hotel-makkah .swiper-container', {
+                    slidesPerView: 1, // Show 1 image at a time
+                    spaceBetween: 10, // Space between images
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    breakpoints: {
+                        991: {
+                            slidesPerView: 2.5, // Show 2 slides on screens 991px and above
+                        }
+                    }
+                });
+
+                // Tab switching
+                const buttons = document.querySelectorAll(".hotel-button");
+                const hotelInfos = document.querySelectorAll(".hotel-info");
+
+                buttons.forEach(button => {
+                    button.addEventListener("click", () => {
+                        buttons.forEach(btn => btn.classList.remove("active"));
+                        button.classList.add("active");
+
+                        hotelInfos.forEach(info => {
+                            info.style.display = info.id === `hotel-${button.dataset.hotel}` ? "block" : "none";
+                        });
+                    });
+                });
+            });
+        </script>
+        <!-- Hebergement SWIPER END -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
