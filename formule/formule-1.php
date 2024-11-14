@@ -989,7 +989,7 @@
 
 
         /*-----------------------  STICKY MOBILE FOOTER START ---------------------*/
-        @media (min-width: 991px) {
+        @media (min-width: 992px) {
             .sticky-footer {
                 display: none;
             }
@@ -1099,7 +1099,7 @@
         }
 
         .hotel-button.active {
-            background-color: #d4a762;
+            background-color: var(--dark-color);
             color: #fff;
         }
 
@@ -1146,7 +1146,7 @@
         }
 
         .hotel-details .info {
-            flex: 1 1 60%;
+            flex: 1 1 40%;
             /* Take 60% of the container */
             margin-right: 20px;
             /* Add some space between the sections */
@@ -1187,10 +1187,21 @@
             border-radius: 5px;
         }
 
+        .swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet,
+        .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+            margin: 0 var(--swiper-pagination-bullet-horizontal-gap, 4px);
+            background-color: #ffffff;
+            /* outline: thin solid var(--primary-color); */
+            margin: 10px 5px 0px 0px;
+            border: 2px solid var(--primary-color);
+
+        }
+
         @media (max-width: 991px) {
             .hebergement-container {
                 /* max-width: 400px; */
-                padding: 15px;
+                padding: 0px 15px 15px 15px;
+                border-radius: 8px 8px 0px 0px;
             }
 
             .swiper-container {
@@ -1200,7 +1211,69 @@
             .hotel-buttons {
                 /* justify-content: space-between; */
             }
+
+            .hotel-details .info {
+                flex: 1 1 100%;
+                /* Take 60% of the container */
+                margin-right: 20px;
+                /* Add some space between the sections */
+            }
+
+            .hotel-details .booking-details {
+                margin-left: 0px;
+                margin-bottom: 40px;
+            }
         }
+
+        /* Ensure the pagination is positioned below the swiper images */
+        #hotel-madinah .swiper-container {
+            position: relative;
+            /* Make the container the reference point for the absolute positioning */
+        }
+
+        #hotel-madinah .swiper-pagination {
+            position: absolute;
+            bottom: 10px;
+            /* Adjust this value to set how far the pagination dots should be from the bottom of the swiper container */
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+            /* Ensure the dots appear on top of images */
+        }
+
+        #hotel-makkah .swiper-container {
+            position: relative;
+            /* Make the container the reference point for the absolute positioning */
+        }
+
+        #hotel-makkah .swiper-pagination {
+            position: absolute;
+            bottom: 10px;
+            /* Adjust this value to set how far the pagination dots should be from the bottom of the swiper container */
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+            /* Ensure the dots appear on top of images */
+        }
+
+        @media (max-width: 363px) {
+            .hotel-button {
+                padding: 8px 9px;
+                font-size: 13px;
+            }
+        }
+
+        .top-hebergement {
+            width: 100%;
+            text-align: center;
+        }
+
+        @media (min-width: 992px) {
+            .top-hebergement {
+                display:none;
+        }}
 
         /*------------------------ Hebergement END ------------------------------*/
     </style>
@@ -1664,6 +1737,182 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Repeat .flight-ticket divs for each ticket -->
+                    <div class="swiper-slide flight-ticket ">
+
+                        <div class="ticket-info ">
+                            <div class="ticket-route">
+                                <div class="left-section">
+                                    <span class="airport-code">CDG</span>
+                                    <span class="airport-name dark-text">Paris Charles de Gaulle airport</span>
+                                </div>
+                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text"> SV144</span></span>
+                                <div class="right-section">
+                                    <span class="airport-code">RDH</span>
+                                    <span class="airport-name dark-text">Aéroport international du roi Khaled</span>
+                                </div>
+                            </div>
+                            <img src="../uploads/plane1.jpg" alt="Flight Image" class="flight-image">
+
+                            <div class="dashed-line circle-cut"></div>
+                            <div>
+                                <div class="" style="text-align: center; margin:0% 20%;">
+                                    <?php echo $plane_path; ?>
+                                </div>
+                            </div>
+
+
+                            <div class="flight-details">
+                                <div class="left-section-flight-details">
+                                    <span class="grey" style="margin-left: 13px;">Départ</span>
+                                    <span>
+                                        <div class="icon-container-vol-section-left dark-text" style="font-size: 14px; font-weight: 600;">
+                                            <?php echo $calender; ?>Mer 08 Sep
+                                        </div>
+                                    </span>
+                                    <span>
+                                        <div class="icon-container-vol-section dark-text" style="font-size: 14px; font-weight: 600;">
+                                            <?php echo $time; ?>12:00
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="duration grey">
+                                    <span class="bold raleway">1hr 30min</span>
+                                    <span>Pas d'escale</span>
+                                </div>
+                                <div class="right-section-flight-details">
+                                    <span class="grey" style="margin-left: 23px;">Arrivée</span>
+                                    <span>
+                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                            <?php echo $calender; ?>Mer 08 Sep
+                                        </div>
+                                    </span>
+                                    <span>
+                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                            <?php echo $time; ?>23:00
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Repeat .flight-ticket divs for each ticket -->
+                    <div class="swiper-slide flight-ticket">
+                        <div class="ticket-info ">
+                            <div class="ticket-route">
+                                <div class="left-section">
+                                    <span class="airport-code">CDG</span>
+                                    <span class="airport-name dark-text">Paris Charles de Gaulle airport</span>
+                                </div>
+                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text"> SV144</span></span>
+                                <div class="right-section">
+                                    <span class="airport-code">RDH</span>
+                                    <span class="airport-name dark-text">Aéroport international du roi Khaled</span>
+                                </div>
+                            </div>
+                            <img src="../uploads/plane2.jpg" alt="Flight Image" class="flight-image">
+
+                            <div class="dashed-line circle-cut"></div>
+                            <div>
+                                <div class="" style="text-align: center; margin:0% 20%;">
+                                    <?php echo $plane_path; ?>
+                                </div>
+                            </div>
+
+
+                            <div class="flight-details">
+                                <div class="left-section-flight-details">
+                                    <span class="grey" style="margin-left: 13px;">Départ</span>
+                                    <span>
+                                        <div class="icon-container-vol-section-left dark-text" style="font-size: 14px; font-weight: 600;">
+                                            <?php echo $calender; ?>Mer 08 Sep
+                                        </div>
+                                    </span>
+                                    <span>
+                                        <div class="icon-container-vol-section dark-text" style="font-size: 14px; font-weight: 600;">
+                                            <?php echo $time; ?>12:00
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="duration grey">
+                                    <span class="bold raleway">1hr 30min</span>
+                                    <span>Pas d'escale</span>
+                                </div>
+                                <div class="right-section-flight-details">
+                                    <span class="grey" style="margin-left: 23px;">Arrivée</span>
+                                    <span>
+                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                            <?php echo $calender; ?>Mer 08 Sep
+                                        </div>
+                                    </span>
+                                    <span>
+                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                            <?php echo $time; ?>23:00
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat .flight-ticket divs for each ticket -->
+                    <div class="swiper-slide flight-ticket">
+                        <div class="ticket-info ">
+                            <div class="ticket-route">
+                                <div class="left-section">
+                                    <span class="airport-code">CDG</span>
+                                    <span class="airport-name dark-text">Paris Charles de Gaulle airport</span>
+                                </div>
+                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text"> SV144</span></span>
+                                <div class="right-section">
+                                    <span class="airport-code">RDH</span>
+                                    <span class="airport-name dark-text">Aéroport international du roi Khaled</span>
+                                </div>
+                            </div>
+                            <img src="../uploads/plane3.jpg" alt="Flight Image" class="flight-image">
+
+                            <div class="dashed-line circle-cut"></div>
+                            <div>
+                                <div class="" style="text-align: center; margin:0% 20%;">
+                                    <?php echo $plane_path; ?>
+                                </div>
+                            </div>
+
+
+                            <div class="flight-details">
+                                <div class="left-section-flight-details">
+                                    <span class="grey" style="margin-left: 13px;">Départ</span>
+                                    <span>
+                                        <div class="icon-container-vol-section-left dark-text" style="font-size: 14px; font-weight: 600;">
+                                            <?php echo $calender; ?>Mer 08 Sep
+                                        </div>
+                                    </span>
+                                    <span>
+                                        <div class="icon-container-vol-section dark-text" style="font-size: 14px; font-weight: 600;">
+                                            <?php echo $time; ?>12:00
+                                        </div>
+                                    </span>
+                                </div>
+                                <div class="duration grey">
+                                    <span class="bold raleway">1hr 30min</span>
+                                    <span>Pas d'escale</span>
+                                </div>
+                                <div class="right-section-flight-details">
+                                    <span class="grey" style="margin-left: 23px;">Arrivée</span>
+                                    <span>
+                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                            <?php echo $calender; ?>Mer 08 Sep
+                                        </div>
+                                    </span>
+                                    <span>
+                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                            <?php echo $time; ?>23:00
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -1674,7 +1923,13 @@
         <!-- Vols aller-retour END-->
         <!-- Hebergement START -->
         <div class="content">
+
             <div class="hebergement-container">
+                <div class="top-hebergement">
+                    <div class="icon-container">
+                        <?php echo $top_sidebar; ?>
+                    </div>
+                </div>
                 <h2>Hébergement</h2>
                 <div class="hotel-buttons">
                     <button class="hotel-button active" data-hotel="madinah">Hôtel Madinah</button>
@@ -1700,263 +1955,310 @@
                             <div class="info">
                                 <h3>Hôtel Bosphorus Waqf As Safi</h3>
                                 <div class="" style="margin: 10px 10px 15px 0px;">
-                                    <?php echo $fivestar; ?>
+                                    <?php echo $fivestar; ?> <span class="grey m-3">724 avis</span>
                                 </div>
                                 <p>Ville : Madinah<br>
                                     Distance : 25 kilomètres<br>
                                     Durée du trajet : Environ 35 minutes</p>
                             </div>
                             <div class="booking-details">
-
-
-                                <div class="">
-                                    <?php echo $Durée; ?> </div>
-                                <div>
-                                    Check-in
-                                    <br> <span>2024-09-08</span>
+                                <div class="formula-item">
+                                    <?php echo $Arrivée; ?>
+                                    <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                        <h4>Check-in</h4>
+                                        <p>2024-09-08</p>
+                                    </div>
                                 </div>
-                                <div><strong>Check-out</strong><br> <span>2024-09-13</span></div>
-                                <div><strong>Durée du séjour</strong><br> <span>5 nuitées</span></div>
-                                <div><strong>Pension</strong><br> <span>Petit déjeuner</span></div>
 
+                                <div class="formula-item">
+                                    <?php echo $Départ; ?>
+                                    <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                        <h4>Check-out</h4>
+                                        <p>2024-09-13</p>
+                                    </div>
+                                </div>
+
+                                <div class="formula-item">
+                                    <?php echo $Durée; ?>
+                                    <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                        <h4>Durée du séjour</h4>
+                                        <p>5 nuitées</p>
+                                    </div>
+                                </div>
+
+                                <div class="formula-item">
+                                    <?php echo $pension; ?>
+                                    <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                        <h4>Pension</h4>
+                                        <p>Petit déjeuner</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Hotel Makkah Content -->
-                        <div class="hotel-info" id="hotel-makkah" style="display: none;">
-                            <div class="swiper-container">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel 4.jpg" alt="Hôtel Makkah Image 1"></div>
-                                    <div class="swiper-slide"><img class="hotel-image" src="../uploads/pullman.jpg" alt="Hôtel Makkah Image 2"></div>
-                                    <div class="swiper-slide"><img class="hotel-image" src="../uploads/omra-octobre-formule-confort-17-2.jpg" alt="Hôtel Makkah Image 3"></div>
-                                    <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel1.jpg" alt="Hôtel Madinah Image 1"></div>
-                                    <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel2.jpg" alt="Hôtel Madinah Image 2"></div>
-                                    <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel3.jpg" alt="Hôtel Madinah Image 3"></div>
-                                </div>
-                                <div class="swiper-pagination"></div>
+                    <!-- Hotel Makkah Content -->
+                    <div class="hotel-info" id="hotel-makkah" style="display: none;">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel 4.jpg" alt="Hôtel Makkah Image 1"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/pullman.jpg" alt="Hôtel Makkah Image 2"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/omra-octobre-formule-confort-17-2.jpg" alt="Hôtel Makkah Image 3"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel1.jpg" alt="Hôtel Madinah Image 1"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel2.jpg" alt="Hôtel Madinah Image 2"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel3.jpg" alt="Hôtel Madinah Image 3"></div>
                             </div>
-                            <div class="hotel-details">
-                                <div class="info">
-                                    <h3>Hôtel Bosphorus Waqf As Safi</h3>
-                                    <div class="" style="margin: 10px 10px 15px 0px;">
-                                        <?php echo $fivestar; ?>
-                                    </div>
-                                    <p>Ville : Madinah<br>
-                                        Distance : 25 kilomètres<br>
-                                        Durée du trajet : Environ 35 minutes</p>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                        <div class="hotel-details">
+                            <div class="info">
+                                <h3>Hôtel Zamzam</h3>
+                                <div class="" style="margin: 10px 10px 15px 0px;">
+                                    <?php echo $fourstar; ?><span class="grey m-3">631 avis</span>
                                 </div>
-                                <div class="booking-details">
-                                    <div><strong>Check-in</strong><br> <span>2024-09-08</span></div>
-                                    <div><strong>Check-out</strong><br> <span>2024-09-13</span></div>
-                                    <div><strong>Durée du séjour</strong><br> <span>5 nuitées</span></div>
-                                    <div><strong>Pension</strong><br> <span>Petit déjeuner</span></div>
+                                <p>Ville : Makkah<br>
+                                    Distance : 12 kilomètres<br>
+                                    Durée du trajet : Environ 15 minutes</p>
+                            </div>
+                            <div class="booking-details">
+                                <div class="formula-item">
+                                    <?php echo $Arrivée; ?>
+                                    <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                        <h4>Check-in</h4>
+                                        <p>2024-09-20</p>
+                                    </div>
+                                </div>
+
+                                <div class="formula-item">
+                                    <?php echo $Départ; ?>
+                                    <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                        <h4>Check-out</h4>
+                                        <p>2024-09-26</p>
+                                    </div>
+                                </div>
+
+                                <div class="formula-item">
+                                    <?php echo $Durée; ?>
+                                    <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                        <h4>Durée du séjour</h4>
+                                        <p>6 nuitées</p>
+                                    </div>
+                                </div>
+
+                                <div class="formula-item">
+                                    <?php echo $pension; ?>
+                                    <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                        <h4>Pension</h4>
+                                        <p>demi-pension</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Hebergement END -->
-            <div class="content">
-                <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Conubia placerat sit erat ante lacus. Habitant aliquet ultrices class euismod quisque mattis; senectus per. Nisi quam ex curabitur congue varius nulla ut. Lectus urna magnis praesent mattis est odio dictum pharetra. Mauris dui luctus gravida phasellus maecenas eleifend elit. Libero sapien amet erat libero iaculis. Malesuada montes nunc semper scelerisque mattis varius lectus elementum massa. Non amet posuere nisl commodo mus accumsan suspendisse.
+        <!-- Hebergement END -->
+        <div class="content">
+            <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Conubia placerat sit erat ante lacus. Habitant aliquet ultrices class euismod quisque mattis; senectus per. Nisi quam ex curabitur congue varius nulla ut. Lectus urna magnis praesent mattis est odio dictum pharetra. Mauris dui luctus gravida phasellus maecenas eleifend elit. Libero sapien amet erat libero iaculis. Malesuada montes nunc semper scelerisque mattis varius lectus elementum massa. Non amet posuere nisl commodo mus accumsan suspendisse.
 
-                    Semper elit leo hendrerit vivamus in rhoncus vulputate quam. Hac dui nisl auctor habitasse vel et himenaeos. Taciti aliquam mus nullam bibendum tortor. Nibh montes at phasellus eleifend vehicula dolor curae. Ad proin eros consectetur hac maximus eleifend senectus. Finibus urna torquent conubia, ipsum feugiat ligula. Habitasse augue id massa nunc consectetur consectetur. Praesent neque sagittis sagittis nibh potenti. Lacus inceptos varius feugiat; aenean erat laoreet?
+                Semper elit leo hendrerit vivamus in rhoncus vulputate quam. Hac dui nisl auctor habitasse vel et himenaeos. Taciti aliquam mus nullam bibendum tortor. Nibh montes at phasellus eleifend vehicula dolor curae. Ad proin eros consectetur hac maximus eleifend senectus. Finibus urna torquent conubia, ipsum feugiat ligula. Habitasse augue id massa nunc consectetur consectetur. Praesent neque sagittis sagittis nibh potenti. Lacus inceptos varius feugiat; aenean erat laoreet?
 
-                    Neque sapien natoque ac quis auctor per maximus maecenas. Consequat eget eu in integer eros, ex ut condimentum. Habitasse sollicitudin praesent fringilla inceptos eros. Habitant luctus ultricies dolor morbi non lectus sodales. Metus egestas montes a erat cursus. Finibus nibh montes finibus gravida at.
+                Neque sapien natoque ac quis auctor per maximus maecenas. Consequat eget eu in integer eros, ex ut condimentum. Habitasse sollicitudin praesent fringilla inceptos eros. Habitant luctus ultricies dolor morbi non lectus sodales. Metus egestas montes a erat cursus. Finibus nibh montes finibus gravida at.
 
-                    Ac inceptos interdum commodo nisi ut pretium velit fusce. Vivamus cras eleifend vestibulum consequat venenatis dictumst in. Nunc luctus massa facilisi potenti id, elit at turpis. Integer ornare feugiat netus feugiat congue dui tellus interdum. Egestas semper felis aptent enim aptent etiam vestibulum. Varius tempor risus mollis semper non dignissim tortor. Potenti duis tortor tristique curae curabitur risus ornare aliquet diam.
+                Ac inceptos interdum commodo nisi ut pretium velit fusce. Vivamus cras eleifend vestibulum consequat venenatis dictumst in. Nunc luctus massa facilisi potenti id, elit at turpis. Integer ornare feugiat netus feugiat congue dui tellus interdum. Egestas semper felis aptent enim aptent etiam vestibulum. Varius tempor risus mollis semper non dignissim tortor. Potenti duis tortor tristique curae curabitur risus ornare aliquet diam.
 
-                    Egestas lobortis integer non at aptent rhoncus. Vitae sociosqu scelerisque in consectetur aenean ac magnis. Laoreet venenatis tempor efficitur sollicitudin consequat. Fusce litora efficitur congue curae blandit accumsan ullamcorper. Dolor torquent fusce justo dictumst elementum magnis sodales eu? Tristique fringilla sodales porta luctus bibendum; nisi leo dis. Netus inceptos placerat mus justo neque sed ad.
+                Egestas lobortis integer non at aptent rhoncus. Vitae sociosqu scelerisque in consectetur aenean ac magnis. Laoreet venenatis tempor efficitur sollicitudin consequat. Fusce litora efficitur congue curae blandit accumsan ullamcorper. Dolor torquent fusce justo dictumst elementum magnis sodales eu? Tristique fringilla sodales porta luctus bibendum; nisi leo dis. Netus inceptos placerat mus justo neque sed ad.
 
-                    Posuere suspendisse ad eros lobortis habitant. Dui nascetur penatibus accumsan duis integer. Ornare molestie quisque non quisque porttitor semper. Urna quis donec facilisi hendrerit lectus dui, porta at. Quisque montes amet nibh sagittis ligula, consectetur fringilla vitae. Ad ultricies pretium mi fringilla dignissim. Dui per ipsum efficitur dignissim ad consequat volutpat neque. Ipsum parturient maecenas eget at eget efficitur.
+                Posuere suspendisse ad eros lobortis habitant. Dui nascetur penatibus accumsan duis integer. Ornare molestie quisque non quisque porttitor semper. Urna quis donec facilisi hendrerit lectus dui, porta at. Quisque montes amet nibh sagittis ligula, consectetur fringilla vitae. Ad ultricies pretium mi fringilla dignissim. Dui per ipsum efficitur dignissim ad consequat volutpat neque. Ipsum parturient maecenas eget at eget efficitur.
 
-                    Dapibus primis cubilia euismod, sagittis ultricies pellentesque nisi rutrum. Ligula duis lobortis senectus tristique himenaeos nisi porttitor. Bibendum porta felis commodo accumsan at enim orci. Volutpat sociosqu quisque vel dictum suspendisse luctus sollicitudin. Id vivamus euismod tellus rhoncus; posuere feugiat lectus? Dictumst duis auctor elementum enim cras sociosqu.
+                Dapibus primis cubilia euismod, sagittis ultricies pellentesque nisi rutrum. Ligula duis lobortis senectus tristique himenaeos nisi porttitor. Bibendum porta felis commodo accumsan at enim orci. Volutpat sociosqu quisque vel dictum suspendisse luctus sollicitudin. Id vivamus euismod tellus rhoncus; posuere feugiat lectus? Dictumst duis auctor elementum enim cras sociosqu.
 
-                    Ex mattis primis volutpat placerat ullamcorper conubia ut. Arcu curae aptent primis ad laoreet curabitur. Orci in ipsum tincidunt sapien magnis. Sem habitant libero cubilia sem eros. Venenatis eget augue vehicula dictum lorem blandit commodo integer morbi. Tempus erat torquent sociosqu nulla sociosqu per. Vulputate consectetur venenatis enim sit auctor malesuada lorem. Pellentesque leo volutpat facilisi pretium suspendisse facilisis justo natoque. Ligula nunc laoreet a montes praesent eget.
+                Ex mattis primis volutpat placerat ullamcorper conubia ut. Arcu curae aptent primis ad laoreet curabitur. Orci in ipsum tincidunt sapien magnis. Sem habitant libero cubilia sem eros. Venenatis eget augue vehicula dictum lorem blandit commodo integer morbi. Tempus erat torquent sociosqu nulla sociosqu per. Vulputate consectetur venenatis enim sit auctor malesuada lorem. Pellentesque leo volutpat facilisi pretium suspendisse facilisis justo natoque. Ligula nunc laoreet a montes praesent eget.
 
-                    Lorem facilisis velit eleifend platea blandit torquent. Ullamcorper hac commodo quisque nisi placerat nulla. Class arcu sapien convallis bibendum facilisis habitant diam tincidunt eget. Potenti blandit maximus odio egestas pulvinar rutrum tristique ultricies. Curae metus eros litora arcu natoque at eget. Augue laoreet eleifend sagittis eleifend metus potenti felis. Odio platea odio nisi metus vestibulum commodo. Enim conubia consequat dictum laoreet blandit. Potenti pulvinar quis luctus euismod dui diam at eleifend.
+                Lorem facilisis velit eleifend platea blandit torquent. Ullamcorper hac commodo quisque nisi placerat nulla. Class arcu sapien convallis bibendum facilisis habitant diam tincidunt eget. Potenti blandit maximus odio egestas pulvinar rutrum tristique ultricies. Curae metus eros litora arcu natoque at eget. Augue laoreet eleifend sagittis eleifend metus potenti felis. Odio platea odio nisi metus vestibulum commodo. Enim conubia consequat dictum laoreet blandit. Potenti pulvinar quis luctus euismod dui diam at eleifend.
 
-                    Sodales nunc massa aptent a dictum rhoncus. Dis erat sagittis mus aenean sit eleifend non mattis. Justo ultricies inceptos quis orci curabitur euismod facilisi. Iaculis habitasse risus congue himenaeos at. Urna aliquet viverra eleifend; nullam cras facilisi. Neque nullam pellentesque ut ad semper. At tortor phasellus feugiat neque tristique eros felis nisl.
-                </p>
-            </div>
-
-
-
+                Sodales nunc massa aptent a dictum rhoncus. Dis erat sagittis mus aenean sit eleifend non mattis. Justo ultricies inceptos quis orci curabitur euismod facilisi. Iaculis habitasse risus congue himenaeos at. Urna aliquet viverra eleifend; nullam cras facilisi. Neque nullam pellentesque ut ad semper. At tortor phasellus feugiat neque tristique eros felis nisl.
+            </p>
         </div>
 
 
-        <div class="sticky-footer">
-            <button class="cta-mobile-table-button">
-                <div class="icon-arrow">
-                    <?php echo $up_arrow; ?>
-                </div><span style="font-size: 12px;">VOIR NOS TARIFS D'HÉBERGEMENTS</span>
-            </button>
 
-            <div class="pricing-table-container-footer">
-                <table class="pricing-table">
-                    <thead>
-                        <tr>
-                            <th>Type d'hébergement</th>
-                            <th>Prix</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <div class="icon-arrow-down" style="text-align: center;">
-                            <?php echo $down_arrow; ?>
-                        </div>
-                        <h5 style="margin-left: 10px;">Les tarifs par personne</h5>
-                        <tr>
-                            <td>Individuelle</td>
-                            <td>2290.00 €</td>
-                        </tr>
-                        <tr>
-                            <td>Double</td>
-                            <td>1550.00 €</td>
-                        </tr>
-                        <tr>
-                            <td>Triple</td>
-                            <td>1390.00 €</td>
-                        </tr>
-                        <tr>
-                            <td>Quadruple</td>
-                            <td>1290.00 €</td>
-                        </tr>
-                        <tr>
-                            <td>Bébé</td>
-                            <td>350.00 €</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    </div>
 
-            <div class="reservation-mobile-footer">
-                <p class="grey" style="margin: 0px; font-size: .8rem;">À partir de <br><strong class="price-number dark-text">1290€</strong></p>
-                <button class="reserve-button">RÉSERVATION</button>
-            </div>
+
+    <div class="sticky-footer">
+        <button class="cta-mobile-table-button">
+            <div class="icon-arrow">
+                <?php echo $up_arrow; ?>
+            </div><span style="font-size: 12px;">VOIR NOS TARIFS D'HÉBERGEMENTS</span>
+        </button>
+
+        <div class="pricing-table-container-footer">
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Type d'hébergement</th>
+                        <th>Prix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <div class="icon-arrow-down" style="text-align: center;">
+                        <?php echo $down_arrow; ?>
+                    </div>
+                    <h5 style="margin-left: 10px;">Les tarifs par personne</h5>
+                    <tr>
+                        <td>Individuelle</td>
+                        <td>2290.00 €</td>
+                    </tr>
+                    <tr>
+                        <td>Double</td>
+                        <td>1550.00 €</td>
+                    </tr>
+                    <tr>
+                        <td>Triple</td>
+                        <td>1390.00 €</td>
+                    </tr>
+                    <tr>
+                        <td>Quadruple</td>
+                        <td>1290.00 €</td>
+                    </tr>
+                    <tr>
+                        <td>Bébé</td>
+                        <td>350.00 €</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
+        <div class="reservation-mobile-footer">
+            <p class="grey" style="margin: 0px; font-size: .8rem;">À partir de <br><strong class="price-number dark-text">1290€</strong></p>
+            <button class="reserve-button">RÉSERVATION</button>
+        </div>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            function changeImage(imagePath) {
-                // Change the main image source
-                document.getElementById('mainImage').src = imagePath;
 
-                // Remove active class from all thumbnails
-                document.querySelectorAll('.thumbnail').forEach(thumbnail => {
-                    thumbnail.classList.remove('active');
-                });
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function changeImage(imagePath) {
+            // Change the main image source
+            document.getElementById('mainImage').src = imagePath;
 
-                // Add active class to the clicked thumbnail
-                event.currentTarget.classList.add('active');
+            // Remove active class from all thumbnails
+            document.querySelectorAll('.thumbnail').forEach(thumbnail => {
+                thumbnail.classList.remove('active');
+            });
+
+            // Add active class to the clicked thumbnail
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+
+    <script>
+        let currentIndex = 0;
+
+        function slideThumbnails(direction) {
+            const carousel = document.querySelector('.thumbnail-carousel');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const visibleThumbnails = 5; // Number of thumbnails visible at one time
+
+            // Calculate the maximum number of slides
+            const maxIndex = thumbnails.length - visibleThumbnails;
+
+            // Update the current index based on the direction (-1 for prev, +1 for next)
+            currentIndex += direction;
+
+            // Ensure the index is within bounds
+            if (currentIndex < 0) {
+                currentIndex = 0;
+            } else if (currentIndex > maxIndex) {
+                currentIndex = maxIndex;
             }
-        </script>
 
-        <script>
-            let currentIndex = 0;
+            // Slide by adjusting the transform property
+            const offset = currentIndex * -20; // Each thumbnail is 20% of the container width
+            carousel.style.transform = `translateX(${offset}%)`;
+        }
+    </script>
 
-            function slideThumbnails(direction) {
-                const carousel = document.querySelector('.thumbnail-carousel');
-                const thumbnails = document.querySelectorAll('.thumbnail');
-                const visibleThumbnails = 5; // Number of thumbnails visible at one time
-
-                // Calculate the maximum number of slides
-                const maxIndex = thumbnails.length - visibleThumbnails;
-
-                // Update the current index based on the direction (-1 for prev, +1 for next)
-                currentIndex += direction;
-
-                // Ensure the index is within bounds
-                if (currentIndex < 0) {
-                    currentIndex = 0;
-                } else if (currentIndex > maxIndex) {
-                    currentIndex = maxIndex;
-                }
-
-                // Slide by adjusting the transform property
-                const offset = currentIndex * -20; // Each thumbnail is 20% of the container width
-                carousel.style.transform = `translateX(${offset}%)`;
-            }
-        </script>
-
-        <!-- SWIPER FLIGHT CODE -->
-        <script>
-            const swiper = new Swiper('.flight-carousel', {
-                slidesPerView: 1, // Default to 1 slide per view for smaller screens
-                spaceBetween: 20, // Space between slides
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+    <!-- SWIPER FLIGHT CODE -->
+    <script>
+        const swiper = new Swiper('.flight-carousel', {
+            slidesPerView: 1, // Default to 1 slide per view for smaller screens
+            spaceBetween: 20, // Space between slides
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true, // Allows users to click on dots to navigate
+                dynamicBullets: true, // Makes dots adjust dynamically
+            },
+            breakpoints: {
+                991: {
+                    slidesPerView: 2, // Show 2 slides on screens 991px and above
                 },
+                // 1200: {
+                //   slidesPerView: 3, // Show 3 slides on screens 1200px and above
+                // }
+            }
+        });
+    </script>
+
+    <!-- Hebergement SWIPER START  -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Swiper initialization
+            const madinahSwiper = new Swiper('#hotel-madinah .swiper-container', {
+                slidesPerView: 1, // Show 1 image at a time
+                spaceBetween: 10, // Space between images
                 pagination: {
                     el: '.swiper-pagination',
-                    clickable: true, // Allows users to click on dots to navigate
-                    dynamicBullets: true, // Makes dots adjust dynamically
+                    clickable: true,
+                },
+                breakpoints: {
+                    991: {
+                        slidesPerView: 2, // Show 2 slides on screens 991px and above
+                    }
+                }
+            });
+
+            const makkahSwiper = new Swiper('#hotel-makkah .swiper-container', {
+                slidesPerView: 1, // Show 1 image at a time
+                spaceBetween: 10, // Space between images
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
                 },
                 breakpoints: {
                     991: {
                         slidesPerView: 2.5, // Show 2 slides on screens 991px and above
-                    },
-                    // 1200: {
-                    //   slidesPerView: 3, // Show 3 slides on screens 1200px and above
-                    // }
+                    }
                 }
             });
-        </script>
 
-        <!-- Hebergement SWIPER START  -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                // Swiper initialization
-                const madinahSwiper = new Swiper('#hotel-madinah .swiper-container', {
-                    slidesPerView: 1, // Show 1 image at a time
-                    spaceBetween: 10, // Space between images
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true,
-                    },
-                    breakpoints: {
-                        991: {
-                            slidesPerView: 2, // Show 2 slides on screens 991px and above
-                        }
-                    }
-                });
+            // Tab switching
+            const buttons = document.querySelectorAll(".hotel-button");
+            const hotelInfos = document.querySelectorAll(".hotel-info");
 
-                const makkahSwiper = new Swiper('#hotel-makkah .swiper-container', {
-                    slidesPerView: 1, // Show 1 image at a time
-                    spaceBetween: 10, // Space between images
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true,
-                    },
-                    breakpoints: {
-                        991: {
-                            slidesPerView: 2.5, // Show 2 slides on screens 991px and above
-                        }
-                    }
-                });
+            buttons.forEach(button => {
+                button.addEventListener("click", () => {
+                    buttons.forEach(btn => btn.classList.remove("active"));
+                    button.classList.add("active");
 
-                // Tab switching
-                const buttons = document.querySelectorAll(".hotel-button");
-                const hotelInfos = document.querySelectorAll(".hotel-info");
-
-                buttons.forEach(button => {
-                    button.addEventListener("click", () => {
-                        buttons.forEach(btn => btn.classList.remove("active"));
-                        button.classList.add("active");
-
-                        hotelInfos.forEach(info => {
-                            info.style.display = info.id === `hotel-${button.dataset.hotel}` ? "block" : "none";
-                        });
+                    hotelInfos.forEach(info => {
+                        info.style.display = info.id === `hotel-${button.dataset.hotel}` ? "block" : "none";
                     });
                 });
             });
-        </script>
-        <!-- Hebergement SWIPER END -->
+        });
+    </script>
+    <!-- Hebergement SWIPER END -->
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
