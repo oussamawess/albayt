@@ -730,6 +730,26 @@
         }
 
 
+
+
+        /* Initially hide the footer with a smooth transition */
+        .pricing-table-container-footer {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(100%);
+            /* Start hidden below */
+            transition: transform 0.5s ease, opacity 0.5s ease, visibility 0.5s ease;
+            /* Smooth transition */
+        }
+
+        /* When visible, slide the footer up and make it visible */
+        .pricing-table-container-footer.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            /* Slide up to original position */
+        }
+
         /*-------------- FLIGHT BLOCK ---------------*/
         .content {
             max-width: 100%;
@@ -1045,13 +1065,15 @@
             }
 
             /* Hover effect on CTA button */
-            .cta-mobile-table-button:hover~.pricing-table-container-footer,
+            /* .cta-mobile-table-button:hover~.pricing-table-container-footer,
             .pricing-table-container-footer:hover {
                 opacity: 1;
                 transform: translateY(0);
                 visibility: visible;
-                /* Ensure table stays above button */
-            }
+              
+            } */
+
+
 
             .cta-button {
                 display: none;
@@ -1204,13 +1226,6 @@
                 border-radius: 8px 8px 0px 0px;
             }
 
-            .swiper-container {
-                /* height: 150px; */
-            }
-
-            .hotel-buttons {
-                /* justify-content: space-between; */
-            }
 
             .hotel-details .info {
                 flex: 1 1 100%;
@@ -1272,10 +1287,206 @@
 
         @media (min-width: 992px) {
             .top-hebergement {
-                display:none;
-        }}
+                display: none;
+            }
+        }
 
         /*------------------------ Hebergement END ------------------------------*/
+
+        /*------------------------ Programme START ------------------------------*/
+        .programme-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .programme-container h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 0;
+        }
+
+        .date-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .date-info .date {
+            font-size: 14px;
+            color: var(--grey-text);
+            margin-right: 10px;
+            font-weight: 500;
+            display: grid;
+            text-align: center;
+        }
+
+        .date-info .title {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .toggle-icon {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .accordion-body {
+            display: none;
+            padding: 10px 0;
+        }
+
+        .accordion-item.active .accordion-body {
+            display: block;
+        }
+
+        .accordion-content {
+            display: flex;
+            gap: 20px;
+        }
+
+        .text-content {
+            flex: 2;
+            margin: 0px 20px 0px 10px;
+            font-size: small;
+        }
+
+        .vr {
+            margin-left: 10px;
+            color: var(--primary-color);
+            opacity: 1;
+        }
+
+
+        .content-text-image {
+            flex-direction: row;
+            display: flex;
+        }
+
+        .image-content {
+            position: relative;
+            flex: 2;
+            /* max-width: 200px; */
+        }
+
+        .image-content img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .duration-label {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: white;
+            color: var(--darker-color);
+            padding: 5px;
+            font-size: 12px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .accordion-item.active .date-info .date {
+            color: var(--primary-color);
+        }
+
+
+        @media (max-width: 991px) {
+            .programme-container {
+                border-radius: 5px;
+            }
+
+            .accordion-content {
+                display: flex;
+                /* Set to flex so we can position the line on the left and the text/image on the right */
+                flex-direction: row;
+                /* Reverse the order so that the line is on the left and the content is on the right */
+                align-items: stretch;
+                /* Ensure the image and text stretch the full height */
+            }
+
+            .d-flex {
+                display: block;
+                /* Make the .d-flex element act like a block-level element */
+                flex: 1;
+                height: auto;
+                margin-bottom: 0;
+                /* Remove any margin */
+            }
+
+            .vr {
+                height: 100%;
+                /* Make the line span the entire height of the content (image + text) */
+                position: relative;
+                left: 0;
+                /* Position the line on the left */
+                top: 0;
+                /* Ensure the line starts at the top */
+            }
+
+            .content-text-image {
+                flex-direction: column;
+                display: flex;
+            }
+
+            .text-content {
+                flex: 1;
+                margin-left: 0px;
+                margin-top: 10px;
+                margin-right: 0px;
+                order: 1;
+                /* Ensure text is positioned after the vertical line */
+            }
+
+            .image-content {
+                flex: 1;
+                order: 0;
+                /* Ensure image comes before text */
+                margin-top: 15px;
+                text-align: center;
+                /* Center image on mobile */
+            }
+
+            .image-content img {
+                width: 100%;
+                height: auto;
+                /* Ensure the image scales properly */
+            }
+        }
+
+        /*------------------------ Programme END ------------------------------*/
+
+        /*------------------------ Plus de details START ------------------------------*/
+        .details-container {
+            background-color: transparent;
+            padding: 30px;
+        }
+
+        .accordion-item-details {
+            border-bottom: 1px solid var(--darker-color);
+            margin-bottom: 0px;
+        }
+
+        .date-info .title {
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        /*------------------------ Plus de details END ------------------------------*/
     </style>
 </head>
 
@@ -2060,6 +2271,241 @@
         </div>
 
         <!-- Hebergement END -->
+
+        <!------------------------ Programme START ----------------------------->
+        <div class="content">
+            <div class="programme-container">
+                <h2>Programme</h2>
+                <div class="accordion-item active">
+                    <div class="accordion-header">
+                        <div class="date-info">
+                            <span class="date">SEP<span>08</span></span>
+
+                            <span class="title">Transfert Aéroport de Médine - Hôtel de Médine</span>
+                        </div>
+                        <span class="toggle-icon"><?php echo $up; ?></span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <div class="d-flex">
+                                <div class="vr"></div>
+                            </div>
+                            <div class="content-text-image">
+                                <div class="text-content">
+                                    <p>Aéroport de Médine > Hôtel à Médine<br>
+
+                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.</p>
+                                </div>
+                                <div class="image-content">
+                                    <img src="../uploads/bus-bagages.jpg" alt="Bus Image">
+                                    <div class="duration-label">Durée<br>1h30</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Accordion Items -->
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="date-info">
+                            <span class="date">SEP<span>10</span></span>
+                            <span class="title">Visites à Médine</span>
+                        </div>
+                        <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <div class="d-flex">
+                                <div class="vr"></div>
+                            </div>
+                            <div class="content-text-image">
+                                <div class="text-content">
+                                    <p>Aéroport de Médine > Hôtel à Médine<br>
+
+                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
+                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
+                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.</p>
+                                </div>
+                                <div class="image-content">
+                                    <img src="../uploads/bus.jpg" alt="Bus Image">
+                                    <div class="duration-label">Durée<br>1h30</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="date-info">
+                            <span class="date">SEP<span>12</span></span>
+                            <span class="title">Transfert Hôtel de Médine - Hôtel de Makkah</span>
+                        </div>
+                        <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <div class="d-flex">
+                                <div class="vr"></div>
+                            </div>
+                            <div class="content-text-image">
+                                <div class="text-content">
+                                    <p>Aéroport de Médine > Hôtel à Médine<br>
+
+                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
+                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.</p>
+                                </div>
+                                <div class="image-content">
+                                    <img src="../uploads/bus.jpg" alt="Bus Image">
+                                    <div class="duration-label">Durée<br>1h30</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!------------------------ Programme END ------------------------------->
+
+        <!------------------------ Plus de details START ----------------------------->
+        <div class="content">
+            <div class="details-container">
+                <h2>Plus de détails</h2>
+                <div class="accordion-item-details ">
+                    <div class="accordion-header">
+                        <div class="date-info">
+                            <span class="title">Compagnies aériennes</span>
+                        </div>
+                        <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <div class="text-content">
+                                <p>Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Accordion Items -->
+                <div class="accordion-item-details ">
+                    <div class="accordion-header">
+                        <div class="date-info">
+                            <span class="title">Distance du Haram</span>
+                        </div>
+                        <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <div class="text-content">
+                                <p>Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Accordion Items -->
+                <div class="accordion-item-details ">
+                    <div class="accordion-header">
+                        <div class="date-info">
+                            <span class="title">Standing du hotels</span>
+                        </div>
+                        <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <div class="text-content">
+                                <p>Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Accordion Items -->
+                <div class="accordion-item-details ">
+                    <div class="accordion-header">
+                        <div class="date-info">
+                            <span class="title">Inclus</span>
+                        </div>
+                        <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <div class="text-content">
+                                <p>Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Accordion Items -->
+                <div class="accordion-item-details ">
+                    <div class="accordion-header">
+                        <div class="date-info">
+                            <span class="title">Pas inclus</span>
+                        </div>
+                        <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <div class="text-content">
+                                <p>Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Accordion Items -->
+                <div class="accordion-item-details ">
+                    <div class="accordion-header">
+                        <div class="date-info">
+                            <span class="title">Information générales</span>
+                        </div>
+                        <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <div class="text-content">
+                                <p>Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Additional Accordion Items -->
+                <div class="accordion-item-details ">
+                    <div class="accordion-header">
+                        <div class="date-info">
+                            <span class="title">Condition d'entrée en Arabie saoudite</span>
+                        </div>
+                        <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                    </div>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            <div class="text-content">
+                                <p>Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                    Aéroport de Médine > Hôtel à Médine<br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!------------------------ Plus de details END ------------------------------->
         <div class="content">
             <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Conubia placerat sit erat ante lacus. Habitant aliquet ultrices class euismod quisque mattis; senectus per. Nisi quam ex curabitur congue varius nulla ut. Lectus urna magnis praesent mattis est odio dictum pharetra. Mauris dui luctus gravida phasellus maecenas eleifend elit. Libero sapien amet erat libero iaculis. Malesuada montes nunc semper scelerisque mattis varius lectus elementum massa. Non amet posuere nisl commodo mus accumsan suspendisse.
 
@@ -2105,7 +2551,9 @@
                 </thead>
                 <tbody>
                     <div class="icon-arrow-down" style="text-align: center;">
-                        <?php echo $down_arrow; ?>
+                        <button class="arrow-button-down" style="border: none; background-color: transparent; width:100%;">
+                            <?php echo $down_arrow; ?>
+                        </button>
                     </div>
                     <h5 style="margin-left: 10px;">Les tarifs par personne</h5>
                     <tr>
@@ -2136,6 +2584,34 @@
             <p class="grey" style="margin: 0px; font-size: .8rem;">À partir de <br><strong class="price-number dark-text">1290€</strong></p>
             <button class="reserve-button">RÉSERVATION</button>
         </div>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const footerContainer = document.querySelector('.pricing-table-container-footer');
+                const ctaButton = document.querySelector('.cta-mobile-table-button');
+                const downButton = document.querySelector('.arrow-button-down');
+
+                // Show the footer when the "cta-mobile-table-button" is clicked
+                ctaButton.addEventListener('click', function(event) {
+                    event.stopPropagation(); // Prevent click from bubbling up
+                    footerContainer.classList.add('visible');
+                });
+
+                // Hide the footer when the "arrow-button-down" is clicked
+                downButton.addEventListener('click', function(event) {
+                    event.stopPropagation(); // Prevent click from bubbling up
+                    footerContainer.classList.remove('visible');
+                });
+
+                // Hide the footer if the user clicks anywhere outside of the table or buttons
+                document.addEventListener('click', function(event) {
+                    if (!footerContainer.contains(event.target) && !ctaButton.contains(event.target)) {
+                        footerContainer.classList.remove('visible');
+                    }
+                });
+            });
+        </script>
     </div>
 
 
@@ -2256,6 +2732,50 @@
         });
     </script>
     <!-- Hebergement SWIPER END -->
+
+    <!------------------------ Programme Accordion START ----------------------------->
+    <script>
+        // Store PHP variables with SVG content as strings
+        const downArrowSVG = <?php echo json_encode($down_arrow); ?>;
+        const upArrowSVG = <?php echo json_encode($up); ?>;
+
+        // Add event listener to accordion headers
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const accordionItem = header.parentElement;
+
+                // Close other open accordion items
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    if (item !== accordionItem) {
+                        item.classList.remove('active');
+                        item.querySelector('.accordion-body').style.display = 'none';
+                        item.querySelector('.toggle-icon').innerHTML = downArrowSVG; // Update icon to down arrow
+                    }
+                });
+
+                // Toggle the current accordion item
+                accordionItem.classList.toggle('active');
+                const body = accordionItem.querySelector('.accordion-body');
+                const toggleIcon = header.querySelector('.toggle-icon');
+
+                if (accordionItem.classList.contains('active')) {
+                    body.style.display = 'block';
+                    toggleIcon.innerHTML = upArrowSVG; // Update icon to up arrow
+                } else {
+                    body.style.display = 'none';
+                    toggleIcon.innerHTML = downArrowSVG; // Update icon to down arrow
+                }
+            });
+        });
+
+        // Open the first accordion item by default
+        const firstAccordionItem = document.querySelector('.accordion-item');
+        firstAccordionItem.classList.add('active');
+        firstAccordionItem.querySelector('.accordion-body').style.display = 'block';
+        firstAccordionItem.querySelector('.toggle-icon').innerHTML = upArrowSVG; // Set first icon to up arrow
+    </script>
+
+    <!------------------------ Programme Accordion END ------------------------------->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
