@@ -30,6 +30,7 @@
         body {
             background-color: var(--body-color);
             /* background-color: black; */
+            margin-bottom: 125px;
         }
 
         /* <uniquifier>: Use a unique and descriptive class name 
@@ -1487,6 +1488,156 @@
         }
 
         /*------------------------ Plus de details END ------------------------------*/
+
+        /*------------------------  Footer_1 START -------------------------------*/
+
+        .left-reviews h3 {
+            font-size: 1.5rem;
+        }
+
+        .rating {
+            text-align: center;
+            color: var(--grey-text)
+        }
+
+        .reviews-count {
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .rating h2 {
+            font-size: 2.5rem;
+            color: black;
+        }
+
+        .stars {
+            font-size: 1rem;
+            color: #f4b400;
+        }
+
+        .criteria {
+            list-style: none;
+            padding: 0;
+        }
+
+        .criteria li {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-bar {
+            background: linear-gradient(to right, #FFC726 85%, #e0e0e0 70%);
+            height: 10px;
+            border-radius: 5px;
+            width: 150px;
+        }
+
+        .quote-text {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .reviews-container {
+            display: block;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+            max-width: 100%;
+        }
+
+        .left-reviews {
+            background: #ffffff;
+            padding: 20px 40px;
+            text-align: center;
+        }
+
+        .testimonials-slider {
+            position: relative;
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        .swiper-slide {
+            background: #fff;
+            border-radius: 8px;
+            /* padding: 15px; */
+            /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        blockquote {
+            margin: 0;
+            font-size: 16px;
+            font-style: italic;
+            text-align: center;
+        }
+
+
+        blockquote footer {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+
+        .quote-box {
+            border: 1px solid #d9d9d9;
+            padding: 20px 35px;
+        }
+
+        .quote-footer {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .quote-text.expanded {
+            white-space: normal;
+            overflow: visible;
+            text-overflow: unset;
+        }
+
+        .read-more {
+            color: #000000;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 13px;
+            margin: 30px 0px;
+        }
+
+        .client-info {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        @media (max-width: 991px) {
+            .reviews-container {
+                display: block;
+                padding: 0px;
+            }
+
+            .quote-text {
+                font-size: 1.5rem;
+            }
+
+            .left-reviews {
+                padding: 20px;
+            }
+        }
+
+        /*------------------------  Footer_1 END -------------------------------*/
     </style>
 </head>
 
@@ -2269,7 +2420,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Hebergement END -->
 
         <!------------------------ Programme START ----------------------------->
@@ -2506,33 +2656,105 @@
             </div>
         </div>
         <!------------------------ Plus de details END ------------------------------->
-        <div class="content">
-            <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Conubia placerat sit erat ante lacus. Habitant aliquet ultrices class euismod quisque mattis; senectus per. Nisi quam ex curabitur congue varius nulla ut. Lectus urna magnis praesent mattis est odio dictum pharetra. Mauris dui luctus gravida phasellus maecenas eleifend elit. Libero sapien amet erat libero iaculis. Malesuada montes nunc semper scelerisque mattis varius lectus elementum massa. Non amet posuere nisl commodo mus accumsan suspendisse.
+    </div>
+    <!------------------------ END container mt-3 ------------------------------->
 
-                Semper elit leo hendrerit vivamus in rhoncus vulputate quam. Hac dui nisl auctor habitasse vel et himenaeos. Taciti aliquam mus nullam bibendum tortor. Nibh montes at phasellus eleifend vehicula dolor curae. Ad proin eros consectetur hac maximus eleifend senectus. Finibus urna torquent conubia, ipsum feugiat ligula. Habitasse augue id massa nunc consectetur consectetur. Praesent neque sagittis sagittis nibh potenti. Lacus inceptos varius feugiat; aenean erat laoreet?
 
-                Neque sapien natoque ac quis auctor per maximus maecenas. Consequat eget eu in integer eros, ex ut condimentum. Habitasse sollicitudin praesent fringilla inceptos eros. Habitant luctus ultricies dolor morbi non lectus sodales. Metus egestas montes a erat cursus. Finibus nibh montes finibus gravida at.
+    <!------------------------ Footer_1 START ------------------------------->
+    <div class="reviews-container container">
+        <div class="row">
+            <!-- Left Block -->
+            <div class="col-lg-4 left-reviews">
+                <h3>Les avis de nos clients</h3>
+                <div class="rating">
+                    <h2>4,7</h2>
+                    <div class="stars">
+                        <?php echo $fivestar  ?>
+                    </div>
+                    <p class="reviews-count">724 avis</p>
+                </div>
+                <ul class="criteria">
+                    <li>Qualité du service <span class="progress-bar"></span></li>
+                    <li>Rapport qualité/prix <span class="progress-bar"></span></li>
+                    <li>Organisation du voyage <span class="progress-bar"></span></li>
+                    <li>Facilité des démarches <span class="progress-bar"></span></li>
+                </ul>
+                <div class="logos">
+                    <?php echo $google  ?>
+                    <?php echo $trustindex  ?>
+                    <!-- <img src="google-logo.png" alt="Google" /> -->
+                    <!-- <img src="trustindex-logo.png" alt="TrustIndex" /> -->
+                </div>
+            </div>
 
-                Ac inceptos interdum commodo nisi ut pretium velit fusce. Vivamus cras eleifend vestibulum consequat venenatis dictumst in. Nunc luctus massa facilisi potenti id, elit at turpis. Integer ornare feugiat netus feugiat congue dui tellus interdum. Egestas semper felis aptent enim aptent etiam vestibulum. Varius tempor risus mollis semper non dignissim tortor. Potenti duis tortor tristique curae curabitur risus ornare aliquet diam.
+            <!-- Testimonials Slider -->
+            <div class="col-lg-8 testimonials-slider">
+                <div class="swiper swiper_testimonials">
+                    <div class="swiper-wrapper">
+                        <!-- Testimonial Slide -->
+                        <div class="swiper-slide quote-box">
+                            <blockquote>
+                                <?php echo $quote  ?>
+                                <p class="quote-text">
+                                    Omra réalisé avec le guide Ahmed qui a été disponible, bienveillant et professionnel tout au long du voyage. Qu'Allah le récompense
+                                </p>
+                                <footer class="quote-footer">
 
-                Egestas lobortis integer non at aptent rhoncus. Vitae sociosqu scelerisque in consectetur aenean ac magnis. Laoreet venenatis tempor efficitur sollicitudin consequat. Fusce litora efficitur congue curae blandit accumsan ullamcorper. Dolor torquent fusce justo dictumst elementum magnis sodales eu? Tristique fringilla sodales porta luctus bibendum; nisi leo dis. Netus inceptos placerat mus justo neque sed ad.
+                                    <!-- Image on the left -->
+                                    <img src="../uploads/p1.jpeg" alt="Client Photo 1" width="50" height="50" style="border-radius: 50%;">
 
-                Posuere suspendisse ad eros lobortis habitant. Dui nascetur penatibus accumsan duis integer. Ornare molestie quisque non quisque porttitor semper. Urna quis donec facilisi hendrerit lectus dui, porta at. Quisque montes amet nibh sagittis ligula, consectetur fringilla vitae. Ad ultricies pretium mi fringilla dignissim. Dui per ipsum efficitur dignissim ad consequat volutpat neque. Ipsum parturient maecenas eget at eget efficitur.
+                                    <!-- Text content on the right -->
+                                    <div class="client-info">
+                                        <cite><b>Karim Sacko</b></cite>
+                                        <small>2024-08-30</small>
+                                    </div>
 
-                Dapibus primis cubilia euismod, sagittis ultricies pellentesque nisi rutrum. Ligula duis lobortis senectus tristique himenaeos nisi porttitor. Bibendum porta felis commodo accumsan at enim orci. Volutpat sociosqu quisque vel dictum suspendisse luctus sollicitudin. Id vivamus euismod tellus rhoncus; posuere feugiat lectus? Dictumst duis auctor elementum enim cras sociosqu.
-
-                Ex mattis primis volutpat placerat ullamcorper conubia ut. Arcu curae aptent primis ad laoreet curabitur. Orci in ipsum tincidunt sapien magnis. Sem habitant libero cubilia sem eros. Venenatis eget augue vehicula dictum lorem blandit commodo integer morbi. Tempus erat torquent sociosqu nulla sociosqu per. Vulputate consectetur venenatis enim sit auctor malesuada lorem. Pellentesque leo volutpat facilisi pretium suspendisse facilisis justo natoque. Ligula nunc laoreet a montes praesent eget.
-
-                Lorem facilisis velit eleifend platea blandit torquent. Ullamcorper hac commodo quisque nisi placerat nulla. Class arcu sapien convallis bibendum facilisis habitant diam tincidunt eget. Potenti blandit maximus odio egestas pulvinar rutrum tristique ultricies. Curae metus eros litora arcu natoque at eget. Augue laoreet eleifend sagittis eleifend metus potenti felis. Odio platea odio nisi metus vestibulum commodo. Enim conubia consequat dictum laoreet blandit. Potenti pulvinar quis luctus euismod dui diam at eleifend.
-
-                Sodales nunc massa aptent a dictum rhoncus. Dis erat sagittis mus aenean sit eleifend non mattis. Justo ultricies inceptos quis orci curabitur euismod facilisi. Iaculis habitasse risus congue himenaeos at. Urna aliquet viverra eleifend; nullam cras facilisi. Neque nullam pellentesque ut ad semper. At tortor phasellus feugiat neque tristique eros felis nisl.
-            </p>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <div class="swiper-slide quote-box">
+                            <blockquote>
+                                <?php echo $quote  ?>
+                                <p class="quote-text">
+                                    Voyage inoubliable avec une organisation parfaite. Le guide était exceptionnel et a rendu cette expérience
+                                    unique.
+                                </p>
+                                <footer class="quote-footer">
+                                    <img src="../uploads/p6.jpeg" alt="Client Photo 2" width="50" height="50" style="border-radius:50%">
+                                    <div class="client-info">
+                                        <cite><b>Ahmed Hamed</b></cite>
+                                        <small>2024-07-15</small>
+                                    </div>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <div class="swiper-slide quote-box">
+                            <blockquote>
+                                <?php echo $quote  ?>
+                                <p class="quote-text">
+                                    Service incroyable du début à la fin. Je recommande vivement cette agence de voyage à tous mes proches.
+                                </p>
+                                <footer class="quote-footer">
+                                    <img src="../uploads/p3.jpeg" alt="Client Photo 3" width="50" height="50" style="border-radius:50%">
+                                    <div class="client-info">
+                                        <cite><b>Majd Fersi</b></cite>
+                                        <small>2024-06-25</small>
+                                    </div>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
         </div>
-
-
-
     </div>
 
+
+
+    <!------------------------  Footer_1 END ------------------------------->
+    
 
     <div class="sticky-footer">
         <button class="cta-mobile-table-button">
@@ -2776,6 +2998,82 @@
     </script>
 
     <!------------------------ Programme Accordion END ------------------------------->
+
+    <!------------------------ Footer_1 START ------------------------------->
+    <script>
+        // Swiper initialization
+        const swiper_testimonials = new Swiper(".swiper_testimonials", {
+            slidesPerView: 2.5, // Show 2.5 slides on desktop
+            spaceBetween: 20, // Gap between slides
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                // Responsive settings
+                0: {
+                    slidesPerView: 1, // Show 1 slide on smaller screens (mobile)
+                    spaceBetween: 10,
+                },
+                991: {
+                    slidesPerView: 1, // For tablets
+                    spaceBetween: 15,
+                },
+                1200: {
+                    slidesPerView: 2.5, // For desktops
+                    spaceBetween: 20,
+                },
+            },
+        });
+    </script>
+
+    <!------------------------  Footer_1 END ------------------------------->
+
+    <!------------------------  Read more START ------------------------------->
+    <script>
+        document.querySelectorAll('.quote-text').forEach(paragraph => {
+            const fullText = paragraph.textContent.trim(); // Get the full text
+            const maxCharacters = 100; // Maximum number of characters to show initially
+
+            if (fullText.length > maxCharacters) {
+                // Truncate the text and add "Lire la suite"
+                const truncatedText = fullText.slice(0, maxCharacters) + '... ';
+                paragraph.innerHTML = `
+            ${truncatedText}
+            <span class="read-more" onclick="toggleReadMore(this)"><br>Lire la suite</span>
+        `;
+
+                // Store the full text in a data attribute
+                paragraph.setAttribute('data-full-text', fullText);
+            }
+        });
+
+        function toggleReadMore(element) {
+            const parentParagraph = element.closest('.quote-text');
+            const fullText = parentParagraph.getAttribute('data-full-text');
+            const maxCharacters = 100;
+
+            if (parentParagraph.classList.contains('expanded')) {
+                // Collapse the text
+                parentParagraph.classList.remove('expanded');
+                const truncatedText = fullText.slice(0, maxCharacters) + '... ';
+                parentParagraph.innerHTML = `
+            ${truncatedText}
+            <span class="read-more" onclick="toggleReadMore(this)"><br>Lire la suite</span>
+        `;
+            } else {
+                // Expand the text
+                parentParagraph.classList.add('expanded');
+                parentParagraph.innerHTML = `
+            ${fullText}
+            <span class="read-more" onclick="toggleReadMore(this)"><br>Réduire</span>
+        `;
+            }
+        }
+    </script>
+
+    <!------------------------  Read more END ------------------------------->
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
