@@ -608,7 +608,7 @@
             /* Switch to a column layout for smaller screens */
             .container {
                 display: block;
-                padding: 10px;
+                /* padding: 10px; */
                 /* Adjust container padding */
             }
 
@@ -1625,7 +1625,7 @@
         @media (max-width: 991px) {
             .reviews-container {
                 display: block;
-                padding: 0px;
+                /* padding: 0px; */
             }
 
             .quote-text {
@@ -1638,6 +1638,166 @@
         }
 
         /*------------------------  Footer_1 END -------------------------------*/
+
+        /*------------------------  Footer_2 START -------------------------------*/
+        .footer-2 {
+            background-color: white;
+            text-align: center;
+            padding: 10px 0px 40px 0px;
+            border-top: 1px solid #e3e3e3;
+            border-bottom: 1px solid #e3e3e3;
+        }
+
+        /*------------------------  Footer_2 END -------------------------------*/
+
+        /*------------------------  Footer_3 START -------------------------------*/
+        .unique-footer {
+            background-color: #f5f5f5;
+            padding: 30px 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .unique-footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .unique-footer-desktop {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .unique-footer-address,
+        .unique-footer-logo,
+        .unique-footer-links {
+            /* flex: 1; */
+            text-align: left;
+        }
+
+        .unique-footer-logo img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .unique-footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .unique-footer-links ul li {
+            margin: 5px 0;
+        }
+
+        .unique-footer-links ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .unique-footer-payment img {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        .unique-footer-mobile {
+            display: none;
+            text-align: center;
+        }
+
+        .unique-footer-mobile .unique-accordion-btn {
+            background-color: transparent;
+            border: none;
+            color: #333;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .unique-footer-mobile-links {
+            list-style: none;
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            /* Allow wrapping when necessary */
+            justify-content: center;
+        }
+
+        .unique-footer-mobile-links li {
+            display: inline-block;
+        }
+
+        .unique-footer-mobile-links a {
+            text-decoration: none;
+            color: inherit;
+            white-space: nowrap;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 991px) {
+            .unique-footer-desktop {
+                display: none;
+            }
+
+            .unique-footer-mobile {
+                display: block;
+            }
+        }
+
+        /*------------------------  Footer_3 END -------------------------------*/
+
+        /*------------------------  Footer_4 START -------------------------------*/
+        /* Basic Styles */
+        .footer-4 {
+            background-color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .swiper-container-footer {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            /* margin-bottom: 15px; */
+            display: flex;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+
+
+        /*------------------------  Footer_4 END -------------------------------*/
+
+        /*------------------------  Footer_5 START -------------------------------*/
+        @media (max-width: 991px) {
+            .footer-5 {
+                background-color: white;
+                text-align: center;
+                padding: 20px 0;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .footer-5 {
+                display: none;
+            }
+        }
+
+
+        /*------------------------  Footer_5 END -------------------------------*/
     </style>
 </head>
 
@@ -2754,7 +2914,141 @@
 
 
     <!------------------------  Footer_1 END ------------------------------->
-    
+    <!------------------------  Footer_2 START ------------------------------->
+    <div class="footer-2">
+        <?php echo $facebook  ?>
+        <?php echo $x  ?>
+        <?php echo $instagram  ?>
+        <?php echo $youtube  ?>
+        <?php echo $snapchat  ?>
+        <?php echo $tiktok  ?>
+    </div>
+    <!------------------------  Footer_2 END ------------------------------->
+
+    <!------------------------  Footer_3 START ------------------------------->
+    <footer class="unique-footer">
+        <div class="unique-footer-container">
+            <!-- Desktop Layout -->
+            <div class="unique-footer-desktop">
+                <!-- Left Section -->
+                <div class="unique-footer-address">
+                    <h5>Paris</h5>
+                    <p>38 rue des Cascades, 75020 Paris<br>+33123456789</p>
+                    <h5>Lyon</h5>
+                    <p>2 rue Boulanger, 69006 Lyon<br>+33123456788</p>
+                    <h5>Bruxelles</h5>
+                    <p>8 rue Boulanger, 6000 Bruxelles<br>+33123456787</p>
+                </div>
+
+                <!-- Center Section -->
+                <div class="unique-footer-logo" style="text-align: center;">
+                    <?php echo $albayt_logo ?>
+                    <p style="text-align: center; margin-top:20px;">Du lundi au samedi 10:00-18:30<br>contact@albayt.fr</p>
+                </div>
+
+                <!-- Right Section -->
+                <div class="unique-footer-links">
+                    <ul>
+                        <li><a href="#">À propos</a></li>
+                        <li><a href="#">Infos pratiques</a></li>
+                        <li><a href="#">Conditions de vente</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                    <div class="unique-footer-payment">
+                        <?php echo $paypal ?>
+                        <?php echo $stripe ?>
+                        <?php echo $visa ?>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Layout -->
+            <div class="unique-footer-mobile">
+                <?php echo $albayt_logo ?>
+                <p style="text-align: center; margin-top:20px;">Du lundi au samedi 10:00-18:30<br>contact@albayt.fr</p>
+                <div class="unique-footer-accordion">
+                    <div class="accordion-item-details" style="border: none;">
+                        <div class="accordion-header" style="justify-content: center; padding:0px"><button class="unique-accordion-btn">Paris</button>
+                            <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-content">
+                                <div class="text-content">
+                                    <p style="text-align: center;">38 rue des Cascades, 75020 Paris<br>+33123456789</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item-details" style="border: none;">
+                        <div class="accordion-header" style="justify-content: center; padding:0px"><button class="unique-accordion-btn">Lyon</button>
+                            <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-content">
+                                <div class="text-content">
+                                    <p style="text-align: center;">2 rue Boulanger, 69006 Lyon<br>+33123456788</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item-details" style="border: none;">
+                        <div class="accordion-header" style="justify-content: center; padding:0px"><button class="unique-accordion-btn">Bruxelles</button>
+                            <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-content">
+                                <div class="text-content">
+                                    <p style="text-align: center;">8 rue Boulanger, 6000 Bruxelles<br>+33123456787</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <ul class="unique-footer-mobile-links">
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Infos pratiques</a></li>
+                    <li><a href="#">Conditions de vente</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!------------------------  Footer_3 END ------------------------------->
+
+    <!------------------------  Footer_4 START ------------------------------->
+    <div class="footer-4 swiper-container-footer">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><?php echo $hiscos ?></div>
+            <div class="swiper-slide"><?php echo $atoutfrance ?></div>
+            <div class="swiper-slide"><?php echo $iata ?></div>
+            <div class="swiper-slide"><?php echo $saudi ?></div>
+
+            <div class="swiper-slide"><?php echo $hiscos ?></div>
+            <div class="swiper-slide"><?php echo $atoutfrance ?></div>
+            <div class="swiper-slide"><?php echo $iata ?></div>
+            <div class="swiper-slide"><?php echo $saudi ?></div>
+        </div>
+    </div>
+
+    <!------------------------  Footer_4 END ------------------------------->
+
+    <!------------------------  Footer_5 MOBILE START ------------------------------->
+    <div class="footer-5">
+        <?php echo $paypal ?>
+        <?php echo $stripe ?>
+        <?php echo $visa ?>
+    </div>
+
+    <!------------------------  Footer_5 MOBILE END ------------------------------->
 
     <div class="sticky-footer">
         <button class="cta-mobile-table-button">
@@ -3074,6 +3368,33 @@
 
     <!------------------------  Read more END ------------------------------->
 
+    <!------------------------  footer 4 STTART ------------------------------->
+    <script>
+        // Initialize Swiper
+        document.addEventListener("DOMContentLoaded", function() {
+            const swiper = new Swiper(".swiper-container-footer", {
+                slidesPerView: 2, // Display 3 slides
+                spaceBetween: 10, // Add space between slides
+                loop: true, // Infinite looping
+                breakpoints: {
+                    991: {
+                        slidesPerView: 4, // 3 slides for less than 991px
+                    },
+                    768: {
+                        slidesPerView: 3, // 2 slides for tablets
+                    },
+                    576: {
+                        slidesPerView: 2, // 1 slide for small screens
+                    },
+                    320: {
+                        slidesPerView: 1, // 1 slide for small screens                        
+                    },
+                },
+
+            });
+        });
+    </script>
+    <!------------------------  footer 4 END ------------------------------->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
