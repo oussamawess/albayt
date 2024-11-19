@@ -15,6 +15,74 @@
     <!-- Include the icons.php file -->
     <?php include('icons.php'); ?>
     <style>
+        /* Define the Raleway fonts */
+        @font-face {
+            font-family: 'Raleway';
+            src: url('../fonts/Raleway-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Raleway';
+            src: url('../fonts/Raleway-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Raleway';
+            src: url('../fonts/Raleway-SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Raleway';
+            src: url('../fonts/Raleway-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Apply Raleway Regular font for body text */
+        body {
+            font-family: 'Raleway', sans-serif;
+        }
+
+        /* Apply Raleway Medium for subheadings */
+        h2,
+        h3 {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 500;
+            /* Medium weight */
+        }
+
+        /* Apply Raleway SemiBold for specific elements */
+        .special-text {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 600;
+            /* SemiBold */
+        }
+
+        /* Apply Raleway Bold for headings */
+        h1,
+        h4,
+        h5 {
+            font-family: 'Raleway', sans-serif;
+            font-weight: bold;
+            /* Bold weight */
+        }
+
+        /* Fallback font for the body text */
+        body {
+            font-family: 'Raleway', Arial, sans-serif;
+        }
+
+
         :root {
             --primary-color: #C89D54;
             --body-color: #F2EDE4;
@@ -30,17 +98,9 @@
         body {
             background-color: var(--body-color);
             /* background-color: black; */
-            margin-bottom: 125px;
+
         }
 
-        /* <uniquifier>: Use a unique and descriptive class name 
-        <weight>: Use a value from 100 to 900  */
-        .raleway {
-            font-family: "Raleway", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: weight;
-            font-style: normal;
-        }
 
 
         /* Container to hold both the content and sidebar */
@@ -104,7 +164,7 @@
 
         .nav-link {
             font-size: 13px;
-            font-weight: 600;
+            /* font-weight: 600; */
             color: black;
             margin-right: 30px;
         }
@@ -341,6 +401,7 @@
             overflow: hidden;
             margin-top: -120px;
         }
+        
 
         @media (min-width: 1200px) {
             .thumbnail-carousel-container {
@@ -351,6 +412,12 @@
         @media (min-width: 768px) and (max-width: 991px) {
             .thumbnail-carousel-container {
                 margin-left: 40px;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .thumbnail-carousel-container {
+                margin-left: 84px;
             }
         }
 
@@ -469,7 +536,8 @@
             color: white;
             text-align: center;
             border: none;
-            font-size: 14px;
+            font-size: 12px;
+            font-weight: 600;
             cursor: pointer;
             border-radius: 5px 5px 0px 0px;
         }
@@ -498,6 +566,7 @@
             border-radius: 3px;
             cursor: pointer;
             font-size: 14px;
+            font-weight: 600;
         }
 
         .icon-container {
@@ -820,7 +889,7 @@
         }
 
         .icon-container-vol-section-right {
-            margin: 2px 0px 3px 10px;
+            margin: 0px 0px 0px 10px;
         }
 
         /*------------------------------ FLIGHT BLOCK - top section ---------------*/
@@ -922,6 +991,8 @@
         .flight-code {
             font-weight: bold;
         }
+
+       
 
         .swiper-wrapper {
             margin-bottom: 30px;
@@ -1756,6 +1827,7 @@
             background-color: white;
             text-align: center;
             padding: 20px 0;
+            position: relative;
         }
 
         .swiper-container-footer {
@@ -1767,11 +1839,16 @@
         }
 
         .swiper-slide {
-            text-align: center;
+            /* text-align: center; */
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+        }
+
+        .footer-4 .swiper-button-next,
+        .footer-4 .swiper-button-prev {
+            top: var(--swiper-navigation-top-offset, 50%);
         }
 
 
@@ -1796,8 +1873,30 @@
             }
         }
 
-
         /*------------------------  Footer_5 END -------------------------------*/
+
+        /*------------------------  Footer_6 START ------------------------------*/
+
+        .footer-6 {
+            background-color: white;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #e3e3e3;
+        }
+
+        .footer-6 p {
+            text-align: center;
+            color: var(--grey-text);
+        }
+
+        @media (max-width:991px) {
+            .footer-6 {
+                padding-bottom: 120px;
+            }
+        }
+
+
+        /*------------------------  Footer_6 END -----------------------------*/
     </style>
 </head>
 
@@ -2676,12 +2775,12 @@
             </div>
         </div>
         <!------------------------ Programme END ------------------------------->
-
+        
         <!------------------------ Plus de details START ----------------------------->
         <div class="content">
             <div class="details-container">
                 <h2>Plus de détails</h2>
-                <div class="accordion-item-details ">
+                <div class="accordion-item accordion-item-details ">
                     <div class="accordion-header">
                         <div class="date-info">
                             <span class="title">Compagnies aériennes</span>
@@ -2700,7 +2799,7 @@
                     </div>
                 </div>
                 <!-- Additional Accordion Items -->
-                <div class="accordion-item-details ">
+                <div class="accordion-item accordion-item-details ">
                     <div class="accordion-header">
                         <div class="date-info">
                             <span class="title">Distance du Haram</span>
@@ -2719,7 +2818,7 @@
                     </div>
                 </div>
                 <!-- Additional Accordion Items -->
-                <div class="accordion-item-details ">
+                <div class="accordion-item accordion-item-details ">
                     <div class="accordion-header">
                         <div class="date-info">
                             <span class="title">Standing du hotels</span>
@@ -2738,7 +2837,7 @@
                     </div>
                 </div>
                 <!-- Additional Accordion Items -->
-                <div class="accordion-item-details ">
+                <div class="accordion-item accordion-item-details ">
                     <div class="accordion-header">
                         <div class="date-info">
                             <span class="title">Inclus</span>
@@ -2757,7 +2856,7 @@
                     </div>
                 </div>
                 <!-- Additional Accordion Items -->
-                <div class="accordion-item-details ">
+                <div class="accordion-item accordion-item-details ">
                     <div class="accordion-header">
                         <div class="date-info">
                             <span class="title">Pas inclus</span>
@@ -2776,7 +2875,7 @@
                     </div>
                 </div>
                 <!-- Additional Accordion Items -->
-                <div class="accordion-item-details ">
+                <div class="accordion-item accordion-item-details ">
                     <div class="accordion-header">
                         <div class="date-info">
                             <span class="title">Information générales</span>
@@ -2795,7 +2894,7 @@
                     </div>
                 </div>
                 <!-- Additional Accordion Items -->
-                <div class="accordion-item-details ">
+                <div class="accordion-item accordion-item-details ">
                     <div class="accordion-header">
                         <div class="date-info">
                             <span class="title">Condition d'entrée en Arabie saoudite</span>
@@ -3037,6 +3136,10 @@
             <div class="swiper-slide"><?php echo $iata ?></div>
             <div class="swiper-slide"><?php echo $saudi ?></div>
         </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <!-- Pagination Dots -->
+        <div class="swiper-pagination"></div>
     </div>
 
     <!------------------------  Footer_4 END ------------------------------->
@@ -3049,6 +3152,13 @@
     </div>
 
     <!------------------------  Footer_5 MOBILE END ------------------------------->
+
+    <!------------------------  Footer_6 START ------------------------------->
+    <div class="footer-6">
+        <p>© Copyright 2024, Digietab Agency<br>All Rights Reserved.</p>
+    </div>
+
+    <!------------------------  Footer_6 END ------------------------------->
 
     <div class="sticky-footer">
         <button class="cta-mobile-table-button">
@@ -3293,6 +3403,10 @@
 
     <!------------------------ Programme Accordion END ------------------------------->
 
+    <!------------------------ plus de detais Accordion START ----------------------------->
+    
+    <!------------------------ plus de details Accordion END ------------------------------->
+
     <!------------------------ Footer_1 START ------------------------------->
     <script>
         // Swiper initialization
@@ -3376,6 +3490,16 @@
                 slidesPerView: 2, // Display 3 slides
                 spaceBetween: 10, // Add space between slides
                 loop: true, // Infinite looping
+
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true, // Allows users to click on dots to navigate
+                    dynamicBullets: true, // Makes dots adjust dynamically
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
                 breakpoints: {
                     991: {
                         slidesPerView: 4, // 3 slides for less than 991px
