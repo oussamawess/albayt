@@ -181,6 +181,28 @@ $down_arrow = '
 </svg>
 ';
 
+$left_arrow = '
+<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5.717" viewBox="0 0 10 5.717" transform="rotate(270)" style="margin-right: 10px;">
+  <path id="Icon_ionic-ios-arrow-up" data-name="Icon ionic-ios-arrow-up" d="M11.189,12.974l3.781,3.784a.715.715,0,0,0,1.009-1.012l-4.284-4.287a.713.713,0,0,0-.985-.021L6.4,15.743a.715.715,0,1,0,1.009,1.012Z" transform="translate(-6.188 -11.251)" fill="#737171"/>
+</svg>
+';
+
+$autres_dates = '
+<svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" style="margin-right: 5px;">
+  <g id="traveling_schedule" data-name="traveling schedule" transform="translate(-3.5 -3.5)">
+    <path id="Path_57" data-name="Path 57" d="M16.5,4.55V4a.5.5,0,0,0-1,0v.5h-7V4a.5.5,0,0,0-1,0v.55A4.492,4.492,0,0,0,3.5,9v6A4.507,4.507,0,0,0,8,19.5h8A4.507,4.507,0,0,0,20.5,15V9A4.492,4.492,0,0,0,16.5,4.55ZM19.5,15A3.5,3.5,0,0,1,16,18.5H8A3.5,3.5,0,0,1,4.5,15V9a3.5,3.5,0,0,1,3-3.45V6a.5.5,0,0,0,1,0V5.5h7V6a.5.5,0,0,0,1,0V5.55A3.5,3.5,0,0,1,19.5,9Z" fill="#737171"/>
+    <path id="Path_58" data-name="Path 58" d="M17,8.5H7a.5.5,0,0,0,0,1H17a.5.5,0,0,0,0-1Z" fill="#737171"/>
+    <path id="Path_59" data-name="Path 59" d="M12.02,11.5h0a.5.5,0,0,0-.5.5.5.5,0,0,0,1,0A.5.5,0,0,0,12.02,11.5Z" fill="#737171"/>
+    <path id="Path_60" data-name="Path 60" d="M16.02,11.5h0a.5.5,0,0,0-.5.5.5.5,0,0,0,1,0A.5.5,0,0,0,16.02,11.5Z" fill="#737171"/>
+    <path id="Path_61" data-name="Path 61" d="M12.02,13.5h0a.5.5,0,0,0-.5.5.5.5,0,0,0,1,0A.5.5,0,0,0,12.02,13.5Z" fill="#737171"/>
+    <path id="Path_62" data-name="Path 62" d="M16.02,13.5h0a.5.5,0,0,0-.5.5.5.5,0,0,0,1,0A.5.5,0,0,0,16.02,13.5Z" fill="#737171"/>
+    <path id="Path_63" data-name="Path 63" d="M8.02,15.5h0a.5.5,0,0,0-.5.5.5.5,0,0,0,1,0A.5.5,0,0,0,8.02,15.5Z" fill="#737171"/>
+    <path id="Path_64" data-name="Path 64" d="M12.02,15.5h0a.5.5,0,0,0-.5.5.5.5,0,0,0,1,0A.5.5,0,0,0,12.02,15.5Z" fill="#737171"/>
+    <path id="Path_65" data-name="Path 65" d="M8,10.5a2,2,0,1,0,2,2A2.006,2.006,0,0,0,8,10.5Zm0,3a1,1,0,1,1,1-1A1,1,0,0,1,8,13.5Z" fill="#737171"/>
+  </g>
+</svg>
+';
+
 $ticket = '
 <svg viewbox="0 0 10 3.5">
   <path d="M4.2 1 A0.85 0.85 0 0 0 5.8 1 H10 V3.5 H0 V1z" fill="#333" />
@@ -223,6 +245,25 @@ $plane_path = '
     <g id="Oval-3" data-name="Oval" transform="translate(194.407 29)" fill="#fff" stroke="#898989" stroke-miterlimit="10" stroke-width="3">
       <circle cx="6" cy="6" r="6" stroke="none"/>
       <circle cx="6" cy="6" r="4.5" fill="none"/>
+    </g>
+  </g>
+</svg>
+';
+
+$plane_path_popup = '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 210.519 32">
+  <g id="Group_162" data-name="Group 162" transform="translate(-109.75 -251)">
+    <path id="Vector_14" data-name="Vector 14" d="M0,0H210.019" transform="translate(110 266.744)" fill="none" stroke="#898989" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" stroke-dasharray="4 4"/>
+    <g id="Group_159" data-name="Group 159">
+      <g id="Icon" transform="translate(199.271 251)">
+        <rect id="Icon-2" data-name="Icon" width="32" height="32" transform="translate(-0.271 0)" fill="none"/>
+        <g id="Ellipse_13" data-name="Ellipse 13" transform="translate(0.729 1)" fill="#fff" stroke="#c89d54" stroke-width="1">
+          <circle cx="15" cy="15" r="15" stroke="none"/>
+          <circle cx="15" cy="15" r="11" fill="none"/>
+        </g>
+        <g id="Icon-3" data-name="Icon" transform="translate(8.397 8.737)">
+          <path id="Vector_15" data-name="Vector 15" d="M9.138,5.964H12.97c1.49,0,2.068,2.386,0,2.386H9.138L5.306,14.313H4.127L5.9,8.349H2.063L1.179,9.542H0L.59,7.157,0,4.771H1.179l.884,1.193H5.9L4.127,0H5.9Z" transform="translate(0 0)" fill="#c89d54"/>
+        </g>
+      </g>
     </g>
   </g>
 </svg>

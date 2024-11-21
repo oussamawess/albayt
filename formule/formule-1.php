@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
+
+
     <!-- Include the icons.php file -->
     <?php include('icons.php'); ?>
     <style>
@@ -231,7 +233,6 @@
         }
 
         .btn-close {
-            filter: invert(1);
             opacity: 0.75;
         }
 
@@ -401,7 +402,7 @@
             overflow: hidden;
             margin-top: -120px;
         }
-        
+
 
         @media (min-width: 1200px) {
             .thumbnail-carousel-container {
@@ -992,7 +993,7 @@
             font-weight: bold;
         }
 
-       
+
 
         .swiper-wrapper {
             margin-bottom: 30px;
@@ -1895,8 +1896,135 @@
             }
         }
 
-
         /*------------------------  Footer_6 END -----------------------------*/
+
+        /*------------------------  autres-dates START -----------------------------*/
+        .autres-dates-nav {
+            height: 0px;
+            box-shadow: none;
+        }
+
+        .autres-dates-btn {
+            border: none;
+            background-color: transparent;
+            color: #737171;
+            display: flex;
+            align-items: center;
+            height: inherit;
+        }
+
+        /*------------------------  autres-dates END -----------------------------*/
+
+        /*------------------------ POPUP autres-dates START -----------------------------*/
+        /* General Modal Styling */
+        .unique-modal-autre-dates .modal-dialog {
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        .unique-dialog-autre-dates {
+            width: 100%;
+        }
+
+        .unique-card-autre-dates {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .unique-card-autre-dates:hover {
+            border: 1px solid var(--primary-color)
+        }
+
+        .unique-row-autre-dates {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .left-info-popup {
+            width: 20%;
+            display: flex !important;
+            flex-direction: column;
+            padding: 0px 0px 10px 10px;
+        }
+
+
+        .svg-popup {
+            align-self: baseline;
+            width: 50%;
+            margin: 0px 0px 50px 0px;
+            padding: 0px;
+        }
+
+
+        .right-info-popup {
+            width: 20%;
+            display: flex !important;
+            flex-direction: column;
+            padding: 0px 10px 10px 0px;
+        }
+
+        .bottom-info-popup {
+            display: flex !important;
+            justify-content: space-between;
+            border-top: 1px solid #e9e9e9;
+            padding-top: 10px;
+        }
+
+        .buttom-right-info-popup {
+            display: flex !important;
+            flex-direction: column;
+        }
+
+        .price-text-popup {
+            font-size: .7rem;
+            text-align: end;
+        }
+
+
+        .price-number-popup {
+            text-align: end;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .unique-card-autre-dates img {
+            height: 30px;
+        }
+
+        .unique-header-autre-dates {
+            border-bottom: 1px solid #e3e3e3;
+        }
+
+        .unique-body-autre-dates {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .date-right-popup {
+            margin-left: -33px;
+        }
+
+        /* Full Width on Smaller Screens */
+        @media (max-width: 991px) {
+            .unique-modal-autre-dates .modal-dialog {
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .unique-dialog-autre-dates {
+                width: 100%;
+                padding: 5px;
+            }
+        }
+
+
+
+
+        /*------------------------ POPUP autres-dates END -----------------------------*/
     </style>
 </head>
 
@@ -1966,6 +2094,167 @@
             </div>
         </div>
     </nav>
+
+
+    <!------------------------ Autres dates START ------------------------------->
+    <nav class="autres-dates-nav navbar navbar-expand-lg bg-white bg-opacity-75">
+        <button class="autres-dates-btn unique-btn-autre-dates" data-bs-toggle="modal" data-bs-target="#autresDatesModal"><?php echo $left_arrow ?><?php echo $autres_dates ?>Autres dates</button>
+    </nav>
+    <!----------- POPUP Autres dates START ----------------->
+    <!-- Modal -->
+    <div class="modal fade unique-modal-autre-dates" id="autresDatesModal" tabindex="-1" aria-labelledby="autresDatesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable unique-dialog-autre-dates">
+            <div class="modal-content unique-content-autre-dates">
+                <div class="modal-header unique-header-autre-dates" style="display: block;">
+
+                    <div style="text-align: center; margin-top:-15px;">
+                        <?php echo $top_sidebar; ?>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <h5 class="modal-title unique-title-autre-dates" id="autresDatesModalLabel">Planifiez votre voyage</h5>
+
+                        <button type="button" class="btn-close unique-close-autre-dates" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="modal-body unique-body-autre-dates">
+                    <!-- Example Content -->
+                    <div class="unique-card-autre-dates">
+                        <div class="row align-items-center unique-row-autre-dates">
+                            <div class="col-6 left-info-popup">
+                                <span><b>Départ</b></span>
+                                <span>Dim</span>
+                                <span>08/09/2024</span>
+                            </div>
+                            <div class="svg-popup">
+                                <?php echo $plane_path_popup ?>
+                            </div>
+                            <div class="col-6 text-end right-info-popup">
+                                <span><b>Retour</b></span>
+                                <span>Mar</span>
+                                <span class="date-right-popup">17/10/2024</span>
+                            </div>
+                            <div class="col-12 d-flex align-items-center bottom-info-popup">
+                                <img src="../uploads/tunis Air.png" style="height:3rem;" alt="tunisAir" class="me-2">
+                                <!-- <p class="mb-0">À partir de <strong>1290€</strong></p> -->
+                                <div class="buttom-right-info-popup">
+                                    <span class="price-text-popup">À partir de</span>
+                                    <span class="price-number-popup">1290€</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat similar card structure for more entries -->
+                    <div class="unique-card-autre-dates">
+                        <div class="row align-items-center unique-row-autre-dates">
+                            <div class="col-6 left-info-popup">
+                                <span><b>Départ</b></span>
+                                <span>Dim</span>
+                                <span>08/09/2024</span>
+                            </div>
+                            <div class="svg-popup">
+                                <?php echo $plane_path_popup ?>
+                            </div>
+                            <div class="col-6 text-end right-info-popup">
+                                <span><b>Retour</b></span>
+                                <span>Mar</span>
+                                <span class="date-right-popup">17/10/2024</span>
+                            </div>
+                            <div class="col-12 d-flex align-items-center bottom-info-popup">
+                                <img src="../uploads/tunis Air.png" style="height:3rem;" alt="tunisAir" class="me-2">
+                                <!-- <p class="mb-0">À partir de <strong>1290€</strong></p> -->
+                                <div class="buttom-right-info-popup">
+                                    <span class="price-text-popup">À partir de</span>
+                                    <span class="price-number-popup">1290€</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat similar card structure for more entries -->
+                    <div class="unique-card-autre-dates">
+                        <div class="row align-items-center unique-row-autre-dates">
+                            <div class="col-6 left-info-popup">
+                                <span><b>Départ</b></span>
+                                <span>Dim</span>
+                                <span>08/09/2024</span>
+                            </div>
+                            <div class="svg-popup">
+                                <?php echo $plane_path_popup ?>
+                            </div>
+                            <div class="col-6 text-end right-info-popup">
+                                <span><b>Retour</b></span>
+                                <span>Mar</span>
+                                <span class="date-right-popup">17/10/2024</span>
+                            </div>
+                            <div class="col-12 d-flex align-items-center bottom-info-popup">
+                                <img src="../uploads/tunis Air.png" style="height:3rem;" alt="tunisAir" class="me-2">
+                                <!-- <p class="mb-0">À partir de <strong>1290€</strong></p> -->
+                                <div class="buttom-right-info-popup">
+                                    <span class="price-text-popup">À partir de</span>
+                                    <span class="price-number-popup">1290€</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat similar card structure for more entries -->
+                    <div class="unique-card-autre-dates">
+                        <div class="row align-items-center unique-row-autre-dates">
+                            <div class="col-6 left-info-popup">
+                                <span><b>Départ</b></span>
+                                <span>Dim</span>
+                                <span>08/09/2024</span>
+                            </div>
+                            <div class="svg-popup">
+                                <?php echo $plane_path_popup ?>
+                            </div>
+                            <div class="col-6 text-end right-info-popup">
+                                <span><b>Retour</b></span>
+                                <span>Mar</span>
+                                <span class="date-right-popup">17/10/2024</span>
+                            </div>
+                            <div class="col-12 d-flex align-items-center bottom-info-popup">
+                                <img src="../uploads/tunis Air.png" style="height:3rem;" alt="tunisAir" class="me-2">
+                                <!-- <p class="mb-0">À partir de <strong>1290€</strong></p> -->
+                                <div class="buttom-right-info-popup">
+                                    <span class="price-text-popup">À partir de</span>
+                                    <span class="price-number-popup">1290€</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat similar card structure for more entries -->
+                    <div class="unique-card-autre-dates">
+                        <div class="row align-items-center unique-row-autre-dates">
+                            <div class="col-6 left-info-popup">
+                                <span><b>Départ</b></span>
+                                <span>Dim</span>
+                                <span>08/09/2024</span>
+                            </div>
+                            <div class="svg-popup">
+                                <?php echo $plane_path_popup ?>
+                            </div>
+                            <div class="col-6 text-end right-info-popup">
+                                <span><b>Retour</b></span>
+                                <span>Mar</span>
+                                <span class="date-right-popup">17/10/2024</span>
+                            </div>
+                            <div class="col-12 d-flex align-items-center bottom-info-popup">
+                                <img src="../uploads/tunis Air.png" style="height:3rem;" alt="tunisAir" class="me-2">
+                                <!-- <p class="mb-0">À partir de <strong>1290€</strong></p> -->
+                                <div class="buttom-right-info-popup">
+                                    <span class="price-text-popup">À partir de</span>
+                                    <span class="price-number-popup">1290€</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!----------- POPUP Autres dates END ----------------->
+    <!------------------------ Autres dates END ------------------------------->
+
 
     <div class="container mt-3">
         <div class="content first-bolck">
@@ -2775,7 +3064,7 @@
             </div>
         </div>
         <!------------------------ Programme END ------------------------------->
-        
+
         <!------------------------ Plus de details START ----------------------------->
         <div class="content">
             <div class="details-container">
@@ -3404,7 +3693,7 @@
     <!------------------------ Programme Accordion END ------------------------------->
 
     <!------------------------ plus de detais Accordion START ----------------------------->
-    
+
     <!------------------------ plus de details Accordion END ------------------------------->
 
     <!------------------------ Footer_1 START ------------------------------->
