@@ -36,6 +36,12 @@ $Arrivée = '
 </svg>
 ';
 
+$landing_plane = '<svg id="plane_landing" data-name="plane landing" xmlns="http://www.w3.org/2000/svg" width="17" height="14.202" viewBox="0 0 17 14.202">
+<path id="Path_642" data-name="Path 642" d="M5.48,11.94l1.62.37-.51.62a1.46,1.46,0,0,0-.29,1.33,1.492,1.492,0,0,0,.92,1.02l.26.1a3.514,3.514,0,0,0,3.12-.31l1.05-.67a.557.557,0,0,1,.38-.07l6.54,1.49a1.317,1.317,0,0,0,.34.04,1.507,1.507,0,0,0,1.4-2.01l-.18-.51a6.535,6.535,0,0,0-4.96-4.21L8.82,7.98,8.7,6.77A2.484,2.484,0,0,0,7.1,4.68L6.38,4.4a1.459,1.459,0,0,0-1.24.08,1.5,1.5,0,0,0-.75.99L3.6,8.94a2.505,2.505,0,0,0,1.88,2.99ZM4.57,9.17,5.36,5.7a.491.491,0,0,1,.25-.33.513.513,0,0,1,.42-.03l.72.28a1.48,1.48,0,0,1,.96,1.25l.12,1.21a1.008,1.008,0,0,0,.82.89L15,10.12a5.51,5.51,0,0,1,4.2,3.56l.18.51a.49.49,0,0,1-.1.5.514.514,0,0,1-.49.16l-6.54-1.49a1.859,1.859,0,0,0-.33-.04,1.517,1.517,0,0,0-.8.23l-1.06.67a2.511,2.511,0,0,1-2.23.22l-.26-.1A.526.526,0,0,1,7.26,14a.494.494,0,0,1,.1-.44l1.02-1.25a.5.5,0,0,0-.27-.81L5.7,10.95a1.5,1.5,0,0,1-1.13-1.8Z" transform="translate(-3.5 -4.298)" fill="#c89d54"/>
+<path id="Path_643" data-name="Path 643" d="M20,17.5H4a.5.5,0,0,0,0,1H20a.5.5,0,0,0,0-1Z" transform="translate(-3.5 -4.298)" fill="#c89d54"/>
+</svg>
+';
+
 $Départ = '
 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16">
   <g id="traveling_schedule" data-name="traveling schedule" transform="translate(-3.5 -3.5)">
@@ -226,6 +232,15 @@ $time = '
   <g id="Icon" transform="translate(0.5 0.5)">
     <circle id="Oval" cx="6" cy="6" r="6" fill="none" stroke="#898989" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
     <path id="Path" d="M0,0V4.2L2.8,5.6" transform="translate(5.75 2.133)" fill="none" stroke="#898989" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+  </g>
+</svg>
+';
+
+$time_brown = '
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
+  <g id="Icon" transform="translate(0.5 0.5)">
+    <circle id="Oval" cx="6" cy="6" r="6" fill="none" stroke="#C89D54" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path" d="M0,0V4.2L2.8,5.6" transform="translate(5.75 2.133)" fill="none" stroke="#C89D54" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1"/>
   </g>
 </svg>
 ';

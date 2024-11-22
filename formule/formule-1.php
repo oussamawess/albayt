@@ -2255,6 +2255,980 @@
     <!----------- POPUP Autres dates END ----------------->
     <!------------------------ Autres dates END ------------------------------->
 
+    <!----------- POPUP reservation START ----------------->
+    <div class="modal fade" id="stepperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="display: block;">
+                    <?php
+                    // if ($formule['statut'] == 'activé') {
+                    //     echo '<h4 class="modal-title" id="exampleModalLabel"
+                    //                         style="margin-top: 10px; color:#028ae1">Réservez Votre Omra</h4>';
+                    // } else {
+                    //     echo '<h4 class="modal-title" id="exampleModalLabel"
+                    //                         style="margin-top: 10px; color:red !important;">Formule Épuisé</h4>';
+                    // }
+                    // 
+                    ?>
+
+                    <div style=" text-align: center; margin-top:-15px;">
+                        <?php echo $top_sidebar; ?>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <h6 class="modal-title">Reservation</h6>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="border: none; background-color: transparent;"></button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="stepwizard">
+                        <div class="stepwizard-row setup-panel" style="display: flex; justify-content: space-around;">
+                            <div class="stepwizard-step">
+                                <a href="#step-1" type="button"
+                                    class="btn btn-primary  non-clickable reservation-steps" style="background-color: #ffffff00; color: black;">
+                                    1</a>
+                                <!-- <p>Forfait</p> -->
+                            </div>
+                            <div class="stepwizard-step">
+                                <a href="#step-2" type="button"
+                                    class="btn btn-default  non-clickable reservation-steps" style="background-color: #ffffff00; color: black; "
+                                    disabled="disabled">
+                                    2</a>
+                                <!-- <p>Passagers</p> -->
+                            </div>
+                            <div class="stepwizard-step">
+                                <a href="#step-3" type="button"
+                                    class="btn btn-default  non-clickable reservation-steps" style="background-color: #ffffff00; color: black;"
+                                    disabled="disabled">
+                                    3</a>
+                                <!-- <p>Paiments</p> -->
+                            </div>
+                            <div class="stepwizard-step">
+                                <a href="#step-4" type="button"
+                                    class="btn btn-default  non-clickable reservation-steps" style="background-color: #ffffff00; color: black;"
+                                    disabled="disabled">
+                                    4</a>
+                                <!-- <p>Confirmation</p> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <form role="form">
+                        <div class="setup-content" id="step-1" style="display: none;">
+                            <h6 style="margin: 20px 0px;">Qui participe à ce voyage?</h6>
+                            <div style="padding: 2%;">
+                                <div class="form-group first-step" style="margin-bottom: 20px;">
+                                    <div><label for=""><b>ADULTES</b></label>
+                                        <p>13 ans et plus</p>
+                                    </div>
+                                    <div class="custom-number-input">
+                                        <button class="minus-btn-adults minus-btn-style" type="button">-</button>
+                                        <input type="number" id="adults" value="0" min="0" class="number-input number-input-adults" required>
+                                        <button class="plus-btn-adults plus-btn-style" type="button">+</button>
+                                    </div>
+                                </div>
+                                </table>
+                                <script>
+                                    const minusBtnAdults = document.querySelector('.minus-btn-adults');
+                                    const plusBtnAdults = document.querySelector('.plus-btn-adults');
+                                    const numberInputAdults = document.querySelector('.number-input-adults');
+
+                                    minusBtnAdults.addEventListener('click', () => {
+                                        let currentValue = parseInt(numberInputAdults.value);
+                                        if (currentValue > parseInt(numberInputAdults.min)) {
+                                            numberInputAdults.value = currentValue - 1;
+                                        }
+                                    });
+
+                                    plusBtnAdults.addEventListener('click', () => {
+                                        let currentValue = parseInt(numberInputAdults.value);
+                                        numberInputAdults.value = currentValue + 1;
+                                    });
+                                </script>
+                                <div class="form-group first-step" style="margin-bottom: 20px;">
+                                    <div><label for=""><b>ENFANTS</b></label>
+                                        <p>De 2 à 12 ans</p>
+                                    </div>
+                                    <div class="custom-number-input">
+                                        <button class="minus-btn-children minus-btn-style" type="button">-</button>
+                                        <input type="number" id="children" value="0" min="0" class="number-input number-input-children" required>
+                                        <button class="plus-btn-children plus-btn-style" type="button">
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+                                <script>
+                                    const minusBtnChildre = document.querySelector('.minus-btn-children');
+                                    const plusBtnChildren = document.querySelector('.plus-btn-children');
+                                    const numberInputChildren = document.querySelector('.number-input-children');
+
+                                    minusBtnChildre.addEventListener('click', () => {
+                                        let currentValue = parseInt(numberInputChildren.value);
+                                        if (currentValue > parseInt(numberInputChildren.min)) {
+                                            numberInputChildren.value = currentValue - 1;
+                                        }
+                                    });
+
+                                    plusBtnChildren.addEventListener('click', () => {
+                                        let currentValue = parseInt(numberInputChildren.value);
+                                        numberInputChildren.value = currentValue + 1;
+                                    });
+                                </script>
+
+                                <style>
+                                    input[type=number]::-webkit-inner-spin-button,
+                                    input[type=number]::-webkit-outer-spin-button {
+                                        -webkit-appearance: none;
+                                        -moz-appearance: none;
+                                        appearance: none;
+                                        margin: 0;
+                                    }
+
+                                    .minus-btn-style {
+                                        border: none;
+                                        background-color: #898989;
+                                        color: white;
+                                        border-radius: 8px;
+                                        font-size: 20px;
+                                        padding: 0px 10px;
+                                    }
+
+                                    .plus-btn-style {
+                                        border: none;
+                                        background-color: black;
+                                        color: white;
+                                        border-radius: 8px;
+                                        font-size: 20px;
+                                        padding: 0px 10px;
+                                    }
+
+                                    .number-input {
+                                        border: none;
+                                        width: 32px;
+                                        text-align: center;
+                                        padding: 0;
+                                    }
+
+                                    .step2-items {
+                                        display: flex;
+                                        margin-bottom: 20px;
+                                    }
+
+                                    .form-group {
+                                        display: flex;
+                                        justify-content: space-between;
+                                    }
+
+                                    .form-group p {
+                                        font-size: .8rem;
+                                        font-family: sans-serif;
+                                        color: var(--grey-text);
+                                        margin-bottom: 0px;
+                                    }
+
+                                    .form-group label b {
+                                        font-size: .9rem;
+                                    }
+
+                                    .custom-number-input label {
+                                        font-weight: bold;
+                                        font-size: .8rem;
+                                        margin-right: 10px;
+                                        align-self: center;
+                                    }
+                                </style>
+
+                                <div class="form-group first-step">
+                                    <div><label for=""><b>BÉBÉ</b></label>
+                                        <p>- de 2 ans</p>
+                                    </div>
+                                    <div class="custom-number-input">
+                                        <button class="minus-btn-babies minus-btn-style" type="button">-</button>
+                                        <input type="number" id="babies" value="0" min="0" class="number-input number-input-babies" required>
+                                        <button class="plus-btn-babies plus-btn-style" type="button">+</button>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    const minusBtn = document.querySelector('.minus-btn-babies');
+                                    const plusBtn = document.querySelector('.plus-btn-babies');
+                                    const numberInput = document.querySelector('.number-input-babies');
+
+                                    minusBtn.addEventListener('click', () => {
+                                        let currentValue = parseInt(numberInput.value);
+                                        if (currentValue > parseInt(numberInput.min)) {
+                                            numberInput.value = currentValue - 1;
+                                        }
+                                    });
+
+                                    plusBtn.addEventListener('click', () => {
+                                        let currentValue = parseInt(numberInput.value);
+                                        numberInput.value = currentValue + 1;
+                                    });
+                                </script>
+                                <?php
+                                // if ($formule['statut'] == 'activé') {
+                                //     echo '<button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem; margin-top:20px !important; display: block;">Suivant</button>';
+                                // } else {
+                                //     echo '<button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem; margin-top:20px !important; display: block; background-color:#dac392; border:none;" disabled>Suivant</button>';
+                                // }
+                                // 
+                                ?>
+                                <div style="display: flex; justify-content: end; margin-top: 30px;">
+                                    <button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem; display: block; background-color: var(--primary-color); border:none;">Suivant</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setup-content" id="step-2" style="display: none;">
+                            <h6 style="margin: 20px 0px;">Type d'hébergement</h6>
+                            <p id="passenger-count"></p>
+                            <!-- <div class="form-group">
+                                                        <label for="quadruple">Chambres Quadruples :</label>
+                                                        <input type="number" class="form-control room-input" id="quadruple"
+                                                            min="0" required>
+                                                    </div> -->
+
+
+
+
+                            <div style="padding: 2%;">
+                                <div class="form-group">
+                                    <label for=""><b>QUADRUPLE</b></label>
+                                    <div class="custom-number-input step2-items">
+                                        <button class="minus-btn-quadruple minus-btn-style" type="button">
+                                            -
+                                        </button>
+                                        <input type="number" id="quadruple" value="0" min="0" class="number-input form-control room-input number-input-quadruple" required>
+                                        <label>/Personne</label>
+                                        <button class="plus-btn-quadruple plus-btn-style" type="button">
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    const minusBtnQuadruple = document.querySelector('.minus-btn-quadruple');
+                                    const plusBtnQuadruple = document.querySelector('.plus-btn-quadruple');
+                                    const numberInputQuadruple = document.querySelector('.number-input-quadruple');
+
+                                    minusBtnQuadruple.addEventListener('click', () => {
+                                        let currentValue = Number(numberInputQuadruple.value);
+                                        if (currentValue > Number(numberInputQuadruple.min)) {
+                                            numberInputQuadruple.value = currentValue - 1;
+                                            numberInputQuadruple.dispatchEvent(new Event('change')); // Trigger change event
+                                        }
+                                    });
+
+                                    plusBtnQuadruple.addEventListener('click', () => {
+                                        let currentValue = Number(numberInputQuadruple.value);
+                                        numberInputQuadruple.value = currentValue + 1;
+                                        numberInputQuadruple.dispatchEvent(new Event('change')); // Trigger change event
+                                    });
+
+                                    // Similar logic for the triple, double, and single rooms
+                                </script>
+
+
+
+
+                                <!-- <div class="form-group">
+                                                        <label for="triple">Chambres Triples :</label>
+                                                        <input type="number" class="form-control room-input" id="triple"
+                                                            min="0">
+                                                    </div> -->
+
+                                <div class="form-group">
+
+                                    <label for=""><b>TRIPLE</b></label>
+
+                                    <div class="custom-number-input step2-items">
+                                        <button class="minus-btn-triple minus-btn-style" type="button">
+                                            -
+                                        </button>
+                                        <input type="number" id="triple" value="0" min="0" class="number-input form-control room-input number-input-triple" required>
+                                        <label>/Personne</label>
+                                        <button class="plus-btn-triple plus-btn-style" type="button">
+                                            +
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                                <script>
+                                    const minusBtnTriple = document.querySelector('.minus-btn-triple');
+                                    const plusBtnTriple = document.querySelector('.plus-btn-triple');
+                                    const numberInputTriple = document.querySelector('.number-input-triple');
+
+                                    minusBtnTriple.addEventListener('click', () => {
+                                        let currentValue = Number(numberInputTriple.value);
+                                        if (currentValue > Number(numberInputTriple.min)) {
+                                            numberInputTriple.value = currentValue - 1;
+                                            numberInputTriple.dispatchEvent(new Event('change'));
+                                        }
+                                    });
+
+                                    plusBtnTriple.addEventListener('click', () => {
+                                        let currentValue = Number(numberInputTriple.value);
+                                        numberInputTriple.value = currentValue + 1;
+                                        numberInputTriple.dispatchEvent(new Event('change'));
+                                    });
+                                </script>
+                                <!-- <div class="form-group">
+                                                        <label for="double">Chambres Doubles :</label>
+                                                        <input type="number" class="form-control room-input" id="double"
+                                                            min="0">
+                                                    </div> -->
+
+                                <div class="form-group">
+
+                                    <label for=""><b>DOUBLE</b></label>
+
+                                    <div class="custom-number-input step2-items">
+                                        <button class="minus-btn-double minus-btn-style" type="button">
+                                            -
+                                        </button>
+                                        <input type="number" id="double" value="0" min="0" class="number-input form-control room-input number-input-double" required>
+                                        <label>/Personne</label>
+                                        <button class="plus-btn-double plus-btn-style" type="button">
+                                            +
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                                <script>
+                                    const minusBtnDouble = document.querySelector('.minus-btn-double');
+                                    const plusBtnDouble = document.querySelector('.plus-btn-double');
+                                    const numberInputDouble = document.querySelector('.number-input-double');
+
+                                    minusBtnDouble.addEventListener('click', () => {
+                                        let currentValue = Number(numberInputDouble.value);
+                                        if (currentValue > Number(numberInputDouble.min)) {
+                                            numberInputDouble.value = currentValue - 1;
+                                            numberInputDouble.dispatchEvent(new Event('change'));
+                                        }
+                                    });
+
+                                    plusBtnDouble.addEventListener('click', () => {
+                                        let currentValue = Number(numberInputDouble.value);
+                                        numberInputDouble.value = currentValue + 1;
+                                        numberInputDouble.dispatchEvent(new Event('change'));
+                                    });
+                                </script>
+
+
+                                <!-- <div class="form-group">
+                                                        <label for="single">Chambres Simples :</label>
+                                                        <input type="number" class="form-control room-input" id="single"
+                                                            min="0">
+                                                    </div> -->
+
+                                <div class="form-group" style="display: flex; justify-content: space-between;">
+
+                                    <div><label for=""><b>INDIVIDUEL</b></label></div>
+
+                                    <div class="custom-number-input step2-items" style="display: flex;">
+                                        <button class="minus-btn-single minus-btn-style" type="button">
+                                            -
+                                        </button>
+                                        <input type="number" id="single" value="0" min="0" class="number-input form-control room-input number-input-single" required>
+                                        <label>/Personne</label>
+                                        <button class="plus-btn-single plus-btn-style" type="button">
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                                <script>
+                                    const minusBtnSingle = document.querySelector('.minus-btn-single');
+                                    const plusBtnSingle = document.querySelector('.plus-btn-single');
+                                    const numberInputSingle = document.querySelector('.number-input-single');
+
+                                    minusBtnSingle.addEventListener('click', () => {
+                                        let currentValue = Number(numberInputSingle.value);
+                                        if (currentValue > Number(numberInputSingle.min)) {
+                                            numberInputSingle.value = currentValue - 1;
+                                            numberInputSingle.dispatchEvent(new Event('change'));
+                                        }
+                                    });
+
+                                    plusBtnSingle.addEventListener('click', () => {
+                                        let currentValue = Number(numberInputSingle.value);
+                                        numberInputSingle.value = currentValue + 1;
+                                        numberInputSingle.dispatchEvent(new Event('change'));
+                                    });
+                                </script>
+
+
+                                <div id="error-message" class="text-danger"></div>
+                                <div style="display:flex; justify-content: space-between; margin-top:30px;">
+                                    <button class="btn btn-secondary prevBtn" type="button">Précedent</button>
+
+                                    <button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem; background-color: var(--primary-color); border:none;">Suivant</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setup-content" id="step-3" style="display: block;">
+                            <h6 style="margin: 20px 0px;">Les détails de votre réservation</h6>
+                            <div style="padding:2%;">
+
+                                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+
+                                    <div class="formula-item" style="align-items:baseline;">
+                                        <div class="icon-container">
+                                            <?php echo $landing_plane; ?>
+                                        </div>
+                                        <div class="text">
+                                            <h4>Arrivée</h4>
+                                            <p>Lun</p>
+                                            <p>05/10/2024</p>
+                                        </div>
+                                    </div>
+                                    <div class="formula-item" style="align-items:baseline;">
+                                        <div class="icon-container">
+                                            <?php echo $Ville_de_départ; ?>
+                                        </div>
+                                        <div class="text">
+                                            <h4>Départ</h4>
+                                            <p>Jeu</p>
+                                            <p>16/10/24</p>
+                                        </div>
+                                    </div>
+                                    <div class="formula-item" style="align-items:baseline;">
+                                        <div class="icon-container">
+                                            <?php echo $time_brown; ?>
+                                        </div>
+                                        <div class="text">
+                                            <h4>14h00 - 0h00</h4>
+                                        </div>
+                                    </div>
+                                    <div class="formula-item" style="align-items:baseline;">
+                                        <div class="icon-container">
+                                            <?php echo $time_brown; ?>
+                                        </div>
+                                        <div class="text">
+                                            <h4>0h00- 12h00</h4>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="formula-item" style="align-items:baseline;">
+                                    <div class="icon-container">
+                                        <?php echo $Arrivée; ?>
+                                    </div>
+                                    <div class="text">
+                                        <h4>Durée totale du séjour</h4>
+                                        <p>11 jours</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: center;">
+                                <hr style="width:80%; color:#cacaca; height:1px; opacity: 1;">
+                            </div>
+
+                            <h5><b>Vous avez sélectionné</b></h5>
+                            <p id="total-reservation" style="padding:5%">Total de la réservation : Calcul en cours...</p>
+
+                            <div style="display:flex; justify-content: space-between; margin-top:30px;">
+                                <button class="btn btn-secondary prevBtn" type="button">Précedent</button>
+                                <button class="btn btn-primary nextBtn" type="button" style="border-bottom: none; border-radius: 0.375rem; background-color: var(--primary-color); border:none;">Suivant</button>
+                            </div>
+                        </div>
+
+
+                        <div class="setup-content" id="step-4" style="display: none;">
+                            <h3>Comment pouvons-nous vous contacter ?</h3>
+
+                            <div class="form-group">
+                                <label for="fullName">Prénom et Nom *:</label>
+                                <input type="text" class="form-control" id="fullName" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Adresse *:</label>
+                                <input type="text" class="form-control" id="address" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phoneNumber">Numéro de téléphone *:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary dropdown-toggle"
+                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            <span class="flag-icon flag-icon-fr"></span> +33
+                                        </button>
+                                        <div class="dropdown-menu">
+                                        </div>
+                                    </div>
+                                    <input type="tel" class="form-control" id="phoneNumber" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">E-mail *:</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+
+                            <div id="error-message-step5" class="text-danger"></div>
+
+                            <button class="btn btn-secondary prevBtn" type="button">Précédent</button>
+                            <button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem;">Envoyer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const wrapper = document.querySelector("#programme .wrapper");
+            const cards = document.querySelectorAll("#programme .cardprog");
+            const prevBtn = document.querySelector("#programme .prev-btn");
+            const nextBtn = document.querySelector("#programme .next-btn");
+            const dotsContainer = document.createElement("div");
+
+            // Create dots and set up initial state
+            cards.forEach((_, index) => {
+                const dot = document.createElement("span");
+                dot.classList.add("dot");
+                if (index === 0) dot.classList.add("active"); // First dot active initially
+                dotsContainer.appendChild(dot);
+
+                dot.addEventListener("click", () => {
+                    const scrollAmount = index * cards[0].offsetWidth;
+                    wrapper.scrollTo({
+                        left: scrollAmount,
+                        behavior: "smooth"
+                    });
+                    updateActiveDot(index);
+                });
+            });
+
+            dotsContainer.classList.add("dots");
+            wrapper.after(dotsContainer); // Add dots container after wrapper
+
+            prevBtn.addEventListener("click", () => scrollWithButton(-1));
+            nextBtn.addEventListener("click", () => scrollWithButton(1));
+
+            function scrollWithButton(direction) {
+                const currentActive = document.querySelector(".dot.active");
+                let newIndex = Array.from(dotsContainer.children).indexOf(currentActive) + direction;
+                newIndex = Math.max(0, Math.min(newIndex, dotsContainer.children.length - 1));
+                dotsContainer.children[newIndex].click(); // Simulate dot click
+            }
+
+            function updateActiveDot(index) {
+                dotsContainer.querySelectorAll(".dot").forEach(dot => dot.classList.remove("active"));
+                dotsContainer.children[index].classList.add("active");
+            }
+        });
+    </script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <?php
+    // Récupération des prix depuis la base de données
+    $prix_quadruple = isset($formule_data['prix_chambre_quadruple']) ? $formule_data['prix_chambre_quadruple'] : 0;
+    $prix_triple = isset($formule_data['prix_chambre_triple']) ? $formule_data['prix_chambre_triple'] : 0;
+    $prix_double = isset($formule_data['prix_chambre_double']) ? $formule_data['prix_chambre_double'] : 0;
+    $prix_single = isset($formule_data['prix_chambre_single']) ? $formule_data['prix_chambre_single'] : 0;
+    $prix_quadruple_promo = isset($formule_data['prix_chambre_quadruple_promo']) ? $formule_data['prix_chambre_quadruple_promo'] : 0;
+    $prix_triple_promo = isset($formule_data['prix_chambre_triple_promo']) ? $formule_data['prix_chambre_triple_promo'] : 0;
+    $prix_double_promo = isset($formule_data['prix_chambre_double_promo']) ? $formule_data['prix_chambre_double_promo'] : 0;
+    $prix_single_promo = isset($formule_data['prix_chambre_single_promo']) ? $formule_data['prix_chambre_single_promo'] : 0;
+    $prix_bebe = isset($formule_data['prix_bebe']) ? $formule_data['prix_bebe'] : 0;
+    $child_discount = isset($formule_data['child_discount']) ? $formule_data['child_discount'] : 0;
+
+
+
+    ?>
+
+    <script>
+        $(document).ready(function() {
+            var navListItems = $('div.setup-panel div a'),
+                allWells = $('.setup-content'),
+                allNextBtn = $('.nextBtn'),
+                allPrevBtn = $('.prevBtn'), // Ajout du sélecteur pour les boutons "Précédent"
+                totalPassengers = 0,
+                passengersToAssign = 0;
+            var totalReservation = 0;
+            var totalChambres = 0; // Declare totalChambres globally
+            var quadrupleRooms = 0;
+            var tripleRooms = 0;
+            var doubleRooms = 0;
+            var singleRooms = 0;
+            var recapExtras = '';
+
+
+            $("#step-2").append(`
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     `);
+
+            // Initialize your variables with the hidden input values on page load
+            var prixQuadruple = parseFloat($('#prixQuadruple').val()) || 0;
+            var prixTriple = parseFloat($('#prixTriple').val()) || 0;
+            var prixDouble = parseFloat($('#prixDouble').val()) || 0;
+            var prixSingle = parseFloat($('#prixSingle').val()) || 0;
+
+            allWells.hide();
+
+            // Gestion du clic sur les étapes de la réservation
+            navListItems.click(function(e) {
+                e.preventDefault();
+                var $target = $($(this).attr('href')),
+                    $item = $(this);
+
+                if (!$item.hasClass('disabled')) {
+                    navListItems.removeClass('btn-primary').addClass('btn-default');
+                    $item.addClass('btn-primary');
+                    allWells.hide();
+                    $target.show();
+
+                    // Recalculer passengersToAssign en fonction des chambres déjà attribuées
+                    if ($target.attr('id') === 'step-2') {
+                        var quadrupleRooms = parseInt($('#quadruple').val()) || 0;
+                        var tripleRooms = parseInt($('#triple').val()) || 0;
+                        var doubleRooms = parseInt($('#double').val()) || 0;
+                        var singleRooms = parseInt($('#single').val()) || 0;
+                        var totalRooms = quadrupleRooms + tripleRooms + doubleRooms + singleRooms;
+
+                        passengersToAssign = totalPassengers - totalRooms;
+                        updatePassengerCount();
+                    }
+                }
+            });
+
+
+            function goToStep(step) {
+                $('div.setup-panel div a[href="#step-' + step + '"]').trigger('click');
+                currentStep = step;
+                allPrevBtn.toggle(currentStep > 1);
+                allNextBtn.toggle(currentStep < 4);
+
+                // Recalculate totalReservation when returning to step 3
+                if (step === 3) {
+                    calculateTotalReservation();
+                }
+            }
+            // Gestion du clic sur le bouton "Suivant"
+            allNextBtn.click(function() {
+                var curStep = $(this).closest(".setup-content"),
+                    curStepBtn = curStep.attr("id"),
+                    nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+                    curInputs = curStep.find("input[type='number']"),
+                    isValid = true;
+
+                // Vérification de la validité des champs
+                $(".form-group").removeClass("has-error");
+                for (var i = 0; i < curInputs.length; i++) {
+                    if (!curInputs[i].validity.valid) {
+                        isValid = false;
+                        $(curInputs[i]).closest(".form-group").addClass("has-error");
+                    }
+                }
+
+                // Conditions pour passer à l'étape suivante
+                if (curStepBtn === 'step-1' && isValid) {
+                    totalPassengers = parseInt($('#adults').val(), 10) + (parseInt($('#children').val(), 10) || 0);
+                    passengersToAssign = totalPassengers;
+                    updatePassengerCount();
+                    $('#error-message').text('');
+                    nextStepWizard.removeAttr('disabled').trigger('click');
+                }
+
+
+
+                var totalExtras = 0;
+                var recapExtras = '';
+
+                function calculateTotalReservation() {
+                    // Room Quantities and Prices
+                    var quadrupleRooms = parseInt($('#quadruple').val()) || 0;
+                    var tripleRooms = parseInt($('#triple').val()) || 0;
+                    var doubleRooms = parseInt($('#double').val()) || 0;
+                    var singleRooms = parseInt($('#single').val()) || 0;
+                    var babiesCount = parseInt($('#babies').val()) || 0;
+                    var childrenCount = parseInt($('#children').val(), 10) || 0;
+
+                    var prixQuadruple = parseFloat(<?php echo ($prix_quadruple_promo != 0.00 && $prix_quadruple_promo != null) ? $prix_quadruple_promo : $prix_quadruple; ?>) || 0;
+                    var prixTriple = parseFloat(<?php echo ($prix_triple_promo != 0.00 && $prix_triple_promo != null) ? $prix_triple_promo : $prix_triple; ?>) || 0;
+                    var prixDouble = parseFloat(<?php echo ($prix_double_promo != 0.00 && $prix_double_promo != null) ? $prix_double_promo : $prix_double; ?>) || 0;
+                    var prixSingle = parseFloat(<?php echo ($prix_single_promo != 0.00 && $prix_single_promo != null) ? $prix_single_promo : $prix_single; ?>) || 0;
+                    var fraisBebe = parseFloat(<?php echo $prix_bebe; ?>) || 0;
+                    var childDiscount = parseFloat(<?php echo $child_discount; ?>) || 0;
+
+                    // Baby Fee Calculation
+                    var totalFraisBebe = fraisBebe * babiesCount;
+
+                    // Child Discount Calculation
+                    var discountEnfants = childrenCount * childDiscount;
+
+                    // Total Room Costs
+                    var totalChambres = (quadrupleRooms * prixQuadruple) + (tripleRooms * prixTriple) + (doubleRooms * prixDouble) + (singleRooms * prixSingle);
+
+                    // Total Reservation Calculation
+                    totalReservation = totalChambres + totalFraisBebe + totalExtras - discountEnfants;
+
+                    // Build Reservation Summary
+                    var recapReservation = '<br>';
+                    // recapReservation += '<strong></strong><br style="display:block;">';
+                    if (quadrupleRooms > 0) {
+                        recapReservation += '- Chambre Quadruple: ' + prixQuadruple.toFixed(2) + ' € x ' + quadrupleRooms + '<br style="display:block;">';
+                    }
+                    if (tripleRooms > 0) {
+                        recapReservation += '- Chambre Triple: ' + prixTriple.toFixed(2) + ' € x ' + tripleRooms + '<br style="display:block;">';
+                    }
+                    if (doubleRooms > 0) {
+                        recapReservation += '- Chambre Double: ' + prixDouble.toFixed(2) + ' € x ' + doubleRooms + '<br style="display:block;">';
+                    }
+                    if (singleRooms > 0) {
+                        recapReservation += '- Chambre Simple: ' + prixSingle.toFixed(2) + ' € x ' + singleRooms + '<br style="display:block;">';
+                    }
+                    recapReservation += '<br style="display:block;">';
+
+                    if (recapExtras !== '') {
+                        recapReservation += '<strong>Extras :</strong><br style="display:block;">';
+                        recapReservation += recapExtras;
+                        // recapReservation += '<br style="display:block;">';
+                    }
+
+                    if (babiesCount > 0) {
+                        // recapReservation += '<strong></strong><br style="display:block;">';
+                        recapReservation += '- Frais bébé: ' + fraisBebe.toFixed(2) + ' € x ' + babiesCount + '<br style="display:block;">';
+                        // recapReservation += '<br style="display:block;">';
+                    }
+
+                    // recapReservation += '<strong></strong><br style="display:block;">';
+                    // recapReservation += '- Total des chambres : ' + totalChambres.toFixed(2) + ' €<br style="display:block;">';
+                    // recapReservation += '- Total frais bébé : ' + totalFraisBebe.toFixed(2) + ' €<br style="display:block;">';
+                    recapReservation += '- Réduction enfants : -' + discountEnfants.toFixed(2) + ' €<br style="display:block;"><br style="display:block;">';
+                    recapReservation += '<strong>Total à payer :</strong><br style="display:block;">';
+                    recapReservation += '<h3>' + totalReservation.toFixed(2) + ' €</h3>';
+
+                    // Display the updated summary
+                    $('#total-reservation').html(recapReservation);
+
+                }
+
+
+
+
+                if (curStepBtn === 'step-2' && isValid) {
+                    var quadrupleRooms = parseInt($('#quadruple').val()) || 0;
+                    var tripleRooms = parseInt($('#triple').val()) || 0;
+                    var doubleRooms = parseInt($('#double').val()) || 0;
+                    var singleRooms = parseInt($('#single').val()) || 0;
+                    var totalRooms = quadrupleRooms + tripleRooms + doubleRooms + singleRooms;
+
+                    // Calculate how many passengers have been assigned to rooms
+                    var passengersAssignedToRooms = totalPassengers - passengersToAssign;
+
+                    // Check if all passengers are assigned AND that some rooms have been filled
+                    if (passengersAssignedToRooms < totalPassengers && totalPassengers > 0) {
+                        isValid = false;
+                        $('#error-message').text('Veuillez attribuer tous les passagers aux chambres avant de continuer.');
+                    } else if (passengersToAssign == totalPassengers && totalPassengers > 0) { // Check if any rooms have been filled
+                        isValid = false;
+                        $('#error-message').text('Veuillez remplir le nombre de chambres.');
+                    } else if (totalRooms > totalPassengers && totalPassengers > 0) {
+                        isValid = false;
+                        $('#error-message').text('Le nombre total de chambres ne peut pas dépasser le nombre total de passagers.');
+                    } else {
+                        // If all passengers are assigned, proceed to next step
+                        passengersToAssign = totalPassengers - totalRooms;
+                        updatePassengerCount();
+                        $('#error-message').text('');
+                        nextStepWizard.removeAttr('disabled').trigger('click');
+                    }
+                    calculateTotalReservation();
+
+                }
+
+                if (curStepBtn === 'step-3' && isValid) {
+                    $('#error-message-step4').text('');
+                    nextStepWizard.removeAttr('disabled').trigger('click');
+
+                }
+
+                console.log(totalReservation)
+                console.log(typeof totalReservation);
+
+
+                if (curStepBtn === 'step-4' && isValid) {
+                    var formData = {
+                        fullName: $('#fullName').val(),
+                        address: $('#address').val(),
+                        phoneNumber: $('.dropdown-toggle').text().trim() + $('#phoneNumber').val(), // Inclure le code pays
+                        email: $('#email').val(),
+                        adults: parseInt($('#adults').val(), 10),
+                        children: parseInt($('#children').val(), 10) || 0,
+                        babies: parseInt($('#babies').val(), 10) || 0,
+                        quadrupleRooms: parseInt($('#quadruple').val(), 10) || 0,
+                        tripleRooms: parseInt($('#triple').val(), 10) || 0,
+                        doubleRooms: parseInt($('#double').val(), 10) || 0,
+                        singleRooms: parseInt($('#single').val(), 10) || 0,
+                        totalReservation: totalReservation.toFixed(2), // Supposant que totalReservation est calculé correctement à l'étape-3
+                        packageName: "<?php echo $nom_package; ?>",
+                        formulaName: "<?php echo $nom_type_formule; ?>",
+                        departureDate: "<?php echo $formattedDate; ?>",
+                    };
+
+
+
+                    // Envoyer les données via AJAX
+                    $.ajax({
+                        url: 'submit_reservation.php',
+                        type: 'POST',
+                        data: JSON.stringify(formData),
+                        contentType: 'application/json',
+                        success: function(response) {
+                            try {
+                                var data = JSON.parse(response);
+                                console.log('AJAX response:', data); // Log the response
+
+                                if (data.success) {
+                                    console.log('Reservation successful, preparing to redirect...');
+                                    window.parent.location.href = "https://www.albayt.fr/merci-etre-rappele/";
+                                } else {
+                                    $('#error-message-step5').text('Erreur lors de la réservation : ' + data.error);
+                                }
+                            } catch (error) {
+                                console.error("Erreur lors du parsing de la réponse JSON :", error);
+                                $('#error-message-step5').text("Erreur inattendue. Veuillez contacter l'administrateur.");
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Erreur AJAX :", xhr.responseText);
+                            $('#error-message-step5').text("Erreur lors de l'envoi de la réservation. Veuillez contacter l'administrateur du site. (Détails : " + error + ")");
+                        }
+                    });
+
+                    $.ajax({
+                        url: 'send_email.php', // Script PHP pour l'envoi d'email
+                        type: 'POST',
+                        data: JSON.stringify(formData), // Les mêmes données que celles envoyées précédemment
+                        contentType: 'application/json',
+                        success: function(emailResponse) {
+                            console.log('Email envoyé avec succès :', emailResponse);
+                            // Optionnel : Réinitialiser le formulaire ou fermer la modal
+                            // $('#stepperModal').modal('hide');
+                            // goToStep(1);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Erreur lors de l'envoi de l'email :", xhr.responseText);
+                            // Gérer l'erreur d'envoi d'email si nécessaire
+                        }
+                    });
+                    $.ajax({
+                        url: 'send_mailclient.php',
+                        type: 'POST',
+                        data: JSON.stringify(formData),
+                        contentType: 'application/json',
+                        success: function(response) {
+                            console.log('Réponse du serveur :', response);
+
+                            if (response.success) {
+                                console.log('Email envoyé avec succès au client :', response.clientEmail);
+                                // Optionnel : Réinitialiser le formulaire, fermer la modal, etc.
+                            } else {
+                                console.error('Erreur lors de l\'envoi de l\'email au client :', response.error);
+                                // Gérer l'erreur d'envoi d'email (afficher un message à l'utilisateur, etc.)
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Erreur AJAX lors de l\'envoi de l\'email au client :', xhr.responseText);
+                            // Gérer l'erreur AJAX (problème de réseau, etc.)
+                        }
+                    });
+
+                }
+
+            });
+
+            // Gestion du clic sur le bouton "Précédent"
+            allPrevBtn.click(function() {
+                var curStep = $(this).closest(".setup-content"),
+                    curStepBtn = curStep.attr("id"),
+                    prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
+
+                navListItems.removeClass('btn-primary').addClass('btn-default');
+                prevStepWizard.addClass('btn-primary');
+                allWells.hide();
+                $(prevStepWizard.attr('href')).show();
+
+                // Recalculer passengersToAssign en fonction des chambres déjà attribuées
+                if (curStepBtn === 'step-2') {
+                    var quadrupleRooms = parseInt($('#quadruple').val()) || 0;
+                    var tripleRooms = parseInt($('#triple').val()) || 0;
+                    var doubleRooms = parseInt($('#double').val()) || 0;
+                    var singleRooms = parseInt($('#single').val()) || 0;
+                    var totalRooms = quadrupleRooms + tripleRooms + doubleRooms + singleRooms;
+
+                    passengersToAssign = totalPassengers - totalRooms;
+                    updatePassengerCount();
+                }
+            });
+
+            // Mettre à jour le nombre de passagers restants à affecter
+            function updatePassengerCount() {
+                $('#passenger-count').text('Passagers restants à affecter : ' + passengersToAssign);
+            }
+
+            // Gérer les événements de changement des champs d'entrée
+            $('.room-input').on('change', function() {
+                var quadrupleRooms = parseInt($('#quadruple').val()) || 0;
+                var tripleRooms = parseInt($('#triple').val()) || 0;
+                var doubleRooms = parseInt($('#double').val()) || 0;
+                var singleRooms = parseInt($('#single').val()) || 0;
+
+                var totalRooms = quadrupleRooms + tripleRooms + doubleRooms + singleRooms;
+
+                if (totalRooms <= totalPassengers && totalPassengers > 0) {
+                    passengersToAssign = totalPassengers - totalRooms;
+                    updatePassengerCount();
+                    $('#error-message').text('');
+                    $('div.setup-panel div a.btn-primary').removeClass('disabled');
+                } else {
+                    $('#error-message').text('Le nombre total de chambres ne peut pas dépasser le nombre total de passagers.');
+                    $('div.setup-panel div a.btn-primary').addClass('disabled');
+                    passengersToAssign = Math.max(0, totalPassengers - totalRooms);
+                    updatePassengerCount();
+                }
+            });
+
+            $('div.setup-panel div a.btn-primary').trigger('click');
+        });
+
+
+        var countryCodes = {
+            fr: '+33',
+            us: '+1',
+            // ... ajouter plus de pays et codes ici si nécessaire
+        };
+
+        // Remplir le menu déroulant
+        var dropdownMenu = $('.dropdown-menu');
+        for (var country in countryCodes) {
+            dropdownMenu.append('<a class="dropdown-item" href="#" data-country="' + country + '">' +
+                '<span class="flag-icon flag-icon-' + country + '"></span> ' +
+                countryCodes[country] + '</a>');
+        }
+
+        // Gérer la sélection du pays
+        dropdownMenu.on('click', '.dropdown-item', function(e) {
+            e.preventDefault();
+            var countryCode = $(this).data('country');
+            var countryDialCode = countryCodes[countryCode];
+            $(this).closest('.input-group').find('.dropdown-toggle').html('<span class="flag-icon flag-icon-' + countryCode + '"></span> ' + countryDialCode);
+        });
+    </script>
+    <!----------- POPUP reservation END ----------------->
+
 
     <div class="container mt-3">
         <div class="content first-bolck">
@@ -2452,7 +3426,7 @@
 
             <div class="price-reservation">
                 <p class="price">À partir de <br><strong class="price-number">1290€</strong></p>
-                <button class="reserve-button">RÉSERVATION</button>
+                <button type="button" class="reserve-button" data-toggle="modal" data-target="#stepperModal">RÉSERVATION</button>
             </div>
         </div>
 
@@ -3497,7 +4471,7 @@
 
         <div class="reservation-mobile-footer">
             <p class="grey" style="margin: 0px; font-size: .8rem;">À partir de <br><strong class="price-number dark-text">1290€</strong></p>
-            <button class="reserve-button">RÉSERVATION</button>
+            <button class="reserve-button" data-toggle="modal" data-target="#stepperModal">RÉSERVATION</button>
         </div>
 
 
