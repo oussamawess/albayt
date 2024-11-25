@@ -50,6 +50,14 @@
             font-display: swap;
         }
 
+        @font-face {
+            font-family: 'Raleway-light';
+            src: url('../fonts/Raleway-light.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
         /* Apply Raleway Regular font for body text */
         body {
             font-family: 'Raleway', sans-serif;
@@ -1143,7 +1151,7 @@
                 opacity: 1;
                 transform: translateY(0);
                 visibility: visible;
-              
+
             } */
 
 
@@ -2021,10 +2029,171 @@
             }
         }
 
-
-
-
         /*------------------------ POPUP autres-dates END -----------------------------*/
+
+        /*------------------------ POPUP Reservation START -----------------------------*/
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
+        }
+
+        .minus-btn-style {
+            border: none;
+            background-color: #898989;
+            color: white;
+            border-radius: 8px;
+            font-size: 20px;
+            padding: 0px 10px;
+        }
+
+        .plus-btn-style {
+            border: none;
+            background-color: black;
+            color: white;
+            border-radius: 8px;
+            font-size: 20px;
+            padding: 0px 10px;
+        }
+
+        .number-input {
+            border: none;
+            width: 32px;
+            text-align: center;
+            padding: 0;
+        }
+
+        .step2-items {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-group p {
+            font-size: .8rem;
+            font-family: sans-serif;
+            color: var(--grey-text);
+            margin-bottom: 0px;
+        }
+
+        .form-group label b {
+            font-size: .9rem;
+        }
+
+        .custom-number-input label {
+            font-weight: bold;
+            font-size: .8rem;
+            margin-right: 10px;
+            align-self: center;
+        }
+
+        .contact-form {
+            margin: 5px 15px;
+            padding: 10px;
+        }
+
+
+        .prevBtn {
+            border: none;
+            background-color: #EDEDED;
+            color: black;
+            font-size: .8rem;
+            padding: .7rem .8rem;
+        }
+
+        .nextBtn {
+            border-radius: 0.375rem;
+            background-color: var(--primary-color);
+            border: none;
+            font-size: .8rem;
+            padding: .7rem .8rem;
+        }
+
+        /*------------------------ POPUP Reservation END -----------------------------*/
+
+        /*------------------------ POPUP Reservation - Stepwizard START  -----------------------------*/
+        /* Styling the steps */
+        .non-clickable {
+            pointer-events: none;
+            /* Disable clicks */
+            cursor: default;
+            /* Change cursor to default (arrow) */
+        }
+
+        .stepwizard-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .stepwizard-step {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        /* Steps buttons */
+        .btn.reservation-steps {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        /* Default (inactive) state */
+        .btn.btn-default {
+            background-color: #f4f4f4;
+            color: #a7a7a7;
+            cursor: not-allowed;
+            border: none;
+        }
+
+        /* Active state */
+        .btn.btn-primary {
+            background-color: #c59c5b;
+            /* Gold color */
+            color: white;
+            border: none;
+        }
+
+        /* Connecting lines */
+        .step-line {
+            position: absolute;
+            height: 2px;
+            background-color: #f4f4f4;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            z-index: 1;
+            transition: background-color 0.3s;
+        }
+
+        .stepwizard-step:last-child .step-line {
+            display: none;
+        }
+
+        /* Active line */
+        .step-line.line-active {
+            background-color: #c59c5b;
+            /* Gold color */
+        }
+
+        /*------------------------ POPUP Reservation - Stepwizard END  -----------------------------*/
     </style>
 </head>
 
@@ -2041,11 +2210,13 @@
 
 
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-                <div class="offcanvas-header">
+                <div class="offcanvas-header" style="justify-content: space-between;">
                     <a class="" href="#">
                         <img src="../uploads/logo-white.png" alt="Logo" width="150" height="auto">
                     </a>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <div>
+                    <button type="button" class="" data-bs-dismiss="offcanvas" aria-label="Close" style="border: none; background-color: transparent;"><?php echo $close_x ?></button>
+                    </div>
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -2063,6 +2234,35 @@
                         </li>
                     </ul>
                     <button class="btn contact-btn contact-btn-sidebar" type="submit">Contact</button>
+                    <style>
+
+                    </style>
+                    <div style="width:40%; padding:20% 0%; gap:10px;display: grid; grid-template-columns: 1fr 1fr 1fr;">
+                        <div class="social-offcanvas">
+                            <?php echo $facebook_white ?>
+                        </div>
+                        <div class="social-offcanvas">
+                            <?php echo $x_white ?>
+                        </div>
+                        <div class="social-offcanvas">
+                            <?php echo $instagram_white ?>
+                        </div>
+                        <div class="social-offcanvas">
+                            <?php echo $youtube_white ?>
+                        </div>
+                        <div class="social-offcanvas">
+                            <?php echo $snapshat_white ?>
+                        </div>
+                        <div class="social-offcanvas">
+                            <?php echo $tiktok_white ?>
+                        </div>
+                    </div>
+
+                    <div style="bottom: 0; position: relative; display: grid; gap: 20px;">
+                        <a href="#" style=" color:white; text-decoration:none;">Mentions légales</a>
+                        <a href="#" style=" color:white; text-decoration:none;">Infos pratiques</a>
+                        <a href="#" style=" color:white; text-decoration:none;">Conditions de vente</a>
+                    </div>
                 </div>
             </div>
 
@@ -2268,7 +2468,7 @@
                     //     echo '<h4 class="modal-title" id="exampleModalLabel"
                     //                         style="margin-top: 10px; color:red !important;">Formule Épuisé</h4>';
                     // }
-                    // 
+                    //
                     ?>
 
                     <div style=" text-align: center; margin-top:-15px;">
@@ -2281,33 +2481,30 @@
                 </div>
                 <div class="modal-body">
                     <div class="stepwizard">
+
                         <div class="stepwizard-row setup-panel" style="display: flex; justify-content: space-around;">
                             <div class="stepwizard-step">
-                                <a href="#step-1" type="button"
-                                    class="btn btn-primary  non-clickable reservation-steps" style="background-color: #ffffff00; color: black;">
-                                    1</a>
-                                <!-- <p>Forfait</p> -->
+                                <a href="#step-1" type="button" class="btn btn-primary non-clickable reservation-steps" data-step="1">
+                                    1
+                                </a>
+                                <div class="step-line"></div>
                             </div>
                             <div class="stepwizard-step">
-                                <a href="#step-2" type="button"
-                                    class="btn btn-default  non-clickable reservation-steps" style="background-color: #ffffff00; color: black; "
-                                    disabled="disabled">
-                                    2</a>
-                                <!-- <p>Passagers</p> -->
+                                <a href="#step-2" type="button" class="btn btn-default non-clickable reservation-steps" data-step="2" disabled="disabled">
+                                    2
+                                </a>
+                                <div class="step-line"></div>
                             </div>
                             <div class="stepwizard-step">
-                                <a href="#step-3" type="button"
-                                    class="btn btn-default  non-clickable reservation-steps" style="background-color: #ffffff00; color: black;"
-                                    disabled="disabled">
-                                    3</a>
-                                <!-- <p>Paiments</p> -->
+                                <a href="#step-3" type="button" class="btn btn-default non-clickable reservation-steps" data-step="3" disabled="disabled">
+                                    3
+                                </a>
+                                <div class="step-line"></div>
                             </div>
                             <div class="stepwizard-step">
-                                <a href="#step-4" type="button"
-                                    class="btn btn-default  non-clickable reservation-steps" style="background-color: #ffffff00; color: black;"
-                                    disabled="disabled">
-                                    4</a>
-                                <!-- <p>Confirmation</p> -->
+                                <a href="#step-4" type="button" class="btn btn-default non-clickable reservation-steps" data-step="4" disabled="disabled">
+                                    4
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -2374,69 +2571,6 @@
                                     });
                                 </script>
 
-                                <style>
-                                    input[type=number]::-webkit-inner-spin-button,
-                                    input[type=number]::-webkit-outer-spin-button {
-                                        -webkit-appearance: none;
-                                        -moz-appearance: none;
-                                        appearance: none;
-                                        margin: 0;
-                                    }
-
-                                    .minus-btn-style {
-                                        border: none;
-                                        background-color: #898989;
-                                        color: white;
-                                        border-radius: 8px;
-                                        font-size: 20px;
-                                        padding: 0px 10px;
-                                    }
-
-                                    .plus-btn-style {
-                                        border: none;
-                                        background-color: black;
-                                        color: white;
-                                        border-radius: 8px;
-                                        font-size: 20px;
-                                        padding: 0px 10px;
-                                    }
-
-                                    .number-input {
-                                        border: none;
-                                        width: 32px;
-                                        text-align: center;
-                                        padding: 0;
-                                    }
-
-                                    .step2-items {
-                                        display: flex;
-                                        margin-bottom: 20px;
-                                    }
-
-                                    .form-group {
-                                        display: flex;
-                                        justify-content: space-between;
-                                    }
-
-                                    .form-group p {
-                                        font-size: .8rem;
-                                        font-family: sans-serif;
-                                        color: var(--grey-text);
-                                        margin-bottom: 0px;
-                                    }
-
-                                    .form-group label b {
-                                        font-size: .9rem;
-                                    }
-
-                                    .custom-number-input label {
-                                        font-weight: bold;
-                                        font-size: .8rem;
-                                        margin-right: 10px;
-                                        align-self: center;
-                                    }
-                                </style>
-
                                 <div class="form-group first-step">
                                     <div><label for=""><b>BÉBÉ</b></label>
                                         <p>- de 2 ans</p>
@@ -2471,10 +2605,11 @@
                                 // } else {
                                 //     echo '<button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem; margin-top:20px !important; display: block; background-color:#dac392; border:none;" disabled>Suivant</button>';
                                 // }
-                                // 
+                                //
                                 ?>
                                 <div style="display: flex; justify-content: end; margin-top: 30px;">
-                                    <button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem; display: block; background-color: var(--primary-color); border:none;">Suivant</button>
+                                    <button class="btn btn-primary nextBtn next-btn" type="button">SUIVANT</button>
+
                                 </div>
                             </div>
                         </div>
@@ -2663,14 +2798,14 @@
 
                                 <div id="error-message" class="text-danger"></div>
                                 <div style="display:flex; justify-content: space-between; margin-top:30px;">
-                                    <button class="btn btn-secondary prevBtn" type="button">Précedent</button>
+                                    <button class="btn btn-secondary prevBtn prev-btn" type="button">PRÉCÉDENT</button>
 
-                                    <button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem; background-color: var(--primary-color); border:none;">Suivant</button>
+                                    <button class="btn btn-primary nextBtn next-btn" type="button">SUIVANT</button>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="setup-content" id="step-3" style="display: block;">
+                        <div class="setup-content" id="step-3" style="display: none; font-family: sans-serif;">
                             <h6 style="margin: 20px 0px;">Les détails de votre réservation</h6>
                             <div style="padding:2%;">
 
@@ -2725,36 +2860,46 @@
                                 </div>
                             </div>
                             <div style="display: flex; justify-content: center;">
-                                <hr style="width:80%; color:#cacaca; height:1px; opacity: 1;">
+                                <hr style="width:90%; color:#cacaca; height:1px; opacity: 1;">
                             </div>
 
-                            <h5><b>Vous avez sélectionné</b></h5>
-                            <p id="total-reservation" style="padding:5%">Total de la réservation : Calcul en cours...</p>
-
-                            <div style="display:flex; justify-content: space-between; margin-top:30px;">
-                                <button class="btn btn-secondary prevBtn" type="button">Précedent</button>
-                                <button class="btn btn-primary nextBtn" type="button" style="border-bottom: none; border-radius: 0.375rem; background-color: var(--primary-color); border:none;">Suivant</button>
-                            </div>
+                            <h6 style="margin-left:5%;"><b>Vous avez sélectionné</b></h>
+                                <p id="total-reservation">Total de la réservation : Calcul en cours...</p>
+                                <!-- <div style="display: grid; grid-template-columns: 2fr 1fr;">
+                                    <div>
+                                        <h6 style="font-weight:400;">Économies réalisées</h6>
+                                        <p style="text-align: left; font-size:.8rem;">Vous béneficiez d’un tarid réduit proposé par l'etablisement</p>
+                                    </div>
+                                    <div style="text-align: end; align-self: center;">
+                                        <h6 style="font-weight:400; font-size:.9rem">EUR 186,915</h6>
+                                    </div>
+                                </div> -->
+                                <button class="btn btn-secondary prevBtn prev-btn" type="button" style="border:none; background-color:transparent; color:black; padding:5px; font-size:.7rem; font-weight:bold; margin:10px 0px 10px 0px;"><u>Modifier la sélection</u></button>
+                                <div style="display:flex; justify-content: space-between; margin-top:30px;">
+                                    <button class="btn btn-secondary prevBtn prev-btn" type="button">PRÉCÉDENT</button>
+                                    <button class="btn btn-primary nextBtn next-btn" type="button">SUIVANT</button>
+                                </div>
                         </div>
 
 
-                        <div class="setup-content" id="step-4" style="display: none;">
-                            <h3>Comment pouvons-nous vous contacter ?</h3>
+                        <div class="setup-content" id="step-4" style="display: block;">
+                            <h6 style="margin: 20px 0px;">Details</h6>
+                            <div style="padding:2%;">
 
-                            <div class="form-group">
-                                <label for="fullName">Prénom et Nom *:</label>
-                                <input type="text" class="form-control" id="fullName" required>
-                            </div>
+                                <div class="form-group">
+                                    <!-- <label for="fullName">Prénom et Nom *:</label> -->
+                                    <input type="text" class="form-control contact-form" id="fullName" placeholder="Nom & Prénom*" style="background-image: url('<?php echo $data_uri; ?>'); background-repeat: no-repeat; background-position: right center;" required>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="address">Adresse *:</label>
-                                <input type="text" class="form-control" id="address" required>
-                            </div>
+                                <div class="form-group">
+                                    <!-- <label for="address">Adresse *:</label> -->
+                                    <input type="text" class="form-control contact-form" id="address" placeholder="Adresse*" style="background-image: url('<?php echo $data_uri; ?>'); background-repeat: no-repeat; background-position: right center;" required>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="phoneNumber">Numéro de téléphone *:</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
+                                <div class="form-group">
+                                    <!-- <label for="phoneNumber">Numéro de téléphone *:</label> -->
+                                    <div class="input-group">
+                                        <!-- <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary dropdown-toggle"
                                             type="button" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
@@ -2762,20 +2907,22 @@
                                         </button>
                                         <div class="dropdown-menu">
                                         </div>
+                                    </div> -->
+                                        <input type="tel" class="form-control contact-form" id="phoneNumber" placeholder="Numéro de téléphone*" style="background-image: url('<?php echo $data_uri; ?>'); background-repeat: no-repeat; background-position: right center;" required>
                                     </div>
-                                    <input type="tel" class="form-control" id="phoneNumber" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <!-- <label for="email">E-mail *:</label> -->
+                                    <input type="email" class="form-control contact-form" id="email" placeholder="E-mail*" style="background-image: url('<?php echo $data_uri; ?>'); background-repeat: no-repeat; background-position: right center;" required>
+                                </div>
+
+                                <div id="error-message-step5" class="text-danger"></div>
+                                <div style="display:flex; justify-content: space-between; margin:30px 15px 0px 15px;">
+                                    <button class="btn btn-secondary prevBtn prev-btn" type="button">PRÉCÉDENT</button>
+                                    <button class="btn btn-primary nextBtn next-btn" type="button">SOUMETTRE</button>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="email">E-mail *:</label>
-                                <input type="email" class="form-control" id="email" required>
-                            </div>
-
-                            <div id="error-message-step5" class="text-danger"></div>
-
-                            <button class="btn btn-secondary prevBtn" type="button">Précédent</button>
-                            <button class="btn btn-primary nextBtn" type="button" style="border-radius: 0.375rem;">Envoyer</button>
                         </div>
                     </form>
                 </div>
@@ -2977,19 +3124,37 @@
                     // Build Reservation Summary
                     var recapReservation = '<br>';
                     // recapReservation += '<strong></strong><br style="display:block;">';
+                    // if (quadrupleRooms > 0) {
+                    //     recapReservation += '- Chambre Quadruple: ' + prixQuadruple.toFixed(2) + ' € x ' + quadrupleRooms + '<br style="display:block;">';
+                    // }
+                    // if (tripleRooms > 0) {
+                    //     recapReservation += '- Chambre Triple: ' + prixTriple.toFixed(2) + ' € x ' + tripleRooms + '<br style="display:block;">';
+                    // }
+                    // if (doubleRooms > 0) {
+                    //     recapReservation += '- Chambre Double: ' + prixDouble.toFixed(2) + ' € x ' + doubleRooms + '<br style="display:block;">';
+                    // }
+                    // if (singleRooms > 0) {
+                    //     recapReservation += '- Chambre Simple: ' + prixSingle.toFixed(2) + ' € x ' + singleRooms + '<br style="display:block;">';
+                    // }
+                    // recapReservation += '<button class="btn btn-secondary prevBtn" type="button" style="border:none; background-color:transparent; color:black; padding:5px; font-size:.7rem; font-weight:bold; margin:10px 0px 10px 0px;"><u>Modifier la sélection</u></button>';
                     if (quadrupleRooms > 0) {
-                        recapReservation += '- Chambre Quadruple: ' + prixQuadruple.toFixed(2) + ' € x ' + quadrupleRooms + '<br style="display:block;">';
+                        recapReservation += quadrupleRooms + ' x Chambre Quadruple <br style="display:block;">';
                     }
                     if (tripleRooms > 0) {
-                        recapReservation += '- Chambre Triple: ' + prixTriple.toFixed(2) + ' € x ' + tripleRooms + '<br style="display:block;">';
+                        recapReservation += tripleRooms + ' x Chambre Triple <br style="display:block;">';
                     }
                     if (doubleRooms > 0) {
-                        recapReservation += '- Chambre Double: ' + prixDouble.toFixed(2) + ' € x ' + doubleRooms + '<br style="display:block;">';
+                        recapReservation += doubleRooms + ' x Chambre Double <br style="display:block;">';
                     }
                     if (singleRooms > 0) {
-                        recapReservation += '- Chambre Simple: ' + prixSingle.toFixed(2) + ' € x ' + singleRooms + '<br style="display:block;">';
+                        recapReservation += singleRooms + ' x Chambre Simple <br style="display:block;">';
                     }
+
+
+
                     recapReservation += '<br style="display:block;">';
+
+
 
                     if (recapExtras !== '') {
                         recapReservation += '<strong>Extras :</strong><br style="display:block;">';
@@ -3007,8 +3172,35 @@
                     // recapReservation += '- Total des chambres : ' + totalChambres.toFixed(2) + ' €<br style="display:block;">';
                     // recapReservation += '- Total frais bébé : ' + totalFraisBebe.toFixed(2) + ' €<br style="display:block;">';
                     recapReservation += '- Réduction enfants : -' + discountEnfants.toFixed(2) + ' €<br style="display:block;"><br style="display:block;">';
-                    recapReservation += '<strong>Total à payer :</strong><br style="display:block;">';
-                    recapReservation += '<h3>' + totalReservation.toFixed(2) + ' €</h3>';
+
+
+                    recapReservation += '<div style="display: grid; grid-template-columns: 2fr 1fr;">';
+                    recapReservation += '    <div>';
+                    recapReservation += '        <h6 style="font-weight:400;">Économies réalisées</h6>';
+                    recapReservation += '        <p style="text-align: left; font-size:.8rem;">Vous bénéficiez d’un tarif réduit proposé par l\'établissement</p>';
+                    recapReservation += '    </div>';
+                    recapReservation += '    <div style="text-align: end; align-self: center;">';
+                    recapReservation += '        <h6 style="font-weight:400; font-size:.9rem">EUR 186,915</h6>';
+                    recapReservation += '    </div>';
+                    recapReservation += '</div>';
+
+
+                    // recapReservation += '<strong>Total à payer :</strong><br style="display:block;">';
+                    // recapReservation += '<h3>' + totalReservation.toFixed(2) + ' €</h3>';
+                    recapReservation += '        <div style="margin:10px 0px">';
+                    recapReservation += '<div style="display: grid; grid-template-columns: 1fr 1fr;">';
+                    recapReservation += '    <div>';
+                    recapReservation += '        <h5 style="font-weight:bold;">Montant</h5>';
+
+                    recapReservation += '    </div>';
+                    recapReservation += '    <div style="text-align: end; align-self: center;">';
+                    recapReservation += '        <h5 style="font-weight:bold; font-size:.9rem">EUR ' + totalReservation.toFixed(2) + '</h5>';
+                    recapReservation += '    </div>';
+                    recapReservation += '</div>';
+                    recapReservation += '        <p style="text-align: left; font-size:.8rem;">Des frais supplémentaires peuvent s\'appliquer<br>Dans la devise de l\'établissement: 205,17</p>';
+                    recapReservation += '        </div>';
+
+
 
                     // Display the updated summary
                     $('#total-reservation').html(recapReservation);
@@ -4774,14 +4966,80 @@
                         slidesPerView: 2, // 1 slide for small screens
                     },
                     320: {
-                        slidesPerView: 1, // 1 slide for small screens                        
+                        slidesPerView: 1, // 1 slide for small screens
                     },
                 },
 
             });
         });
     </script>
+
+
     <!------------------------  footer 4 END ------------------------------->
+
+    <!------------------------  stepwizard steps START ------------------------------->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const steps = document.querySelectorAll('.reservation-steps'); // All step buttons
+            const lines = document.querySelectorAll('.step-line'); // All connecting lines
+            let currentStep = 0; // Initial step (step 1, index 0)
+
+            // Function to update steps and lines
+            function updateSteps() {
+                steps.forEach((step, index) => {
+                    if (index <= currentStep) {
+                        // Activate current and previous steps
+                        step.classList.remove('btn-default');
+                        step.classList.add('btn-primary');
+                        step.style.backgroundColor = '#c59c5b'; // Force golden background
+                        step.style.color = 'white';
+                        if (index > 0) {
+                            // Activate the connecting line to the previous step
+                            lines[index - 1].classList.add('line-active');
+                            lines[index - 1].style.backgroundColor = '#c59c5b'; // Force golden line
+                        }
+                    } else {
+                        // Deactivate future steps
+                        step.classList.remove('btn-primary');
+                        step.classList.add('btn-default');
+                        step.style.backgroundColor = '#f4f4f4'; // Default grey
+                        step.style.color = '#a7a7a7';
+                        if (index > 0) {
+                            // Deactivate connecting line
+                            lines[index - 1].classList.remove('line-active');
+                            lines[index - 1].style.backgroundColor = '#f4f4f4'; // Default grey
+                        }
+                    }
+                });
+            }
+
+            // Event listeners for the navigation buttons
+            document.querySelectorAll('.nextBtn').forEach((btn) => {
+                btn.addEventListener('click', function() {
+                    if (currentStep < steps.length - 1) {
+                        currentStep++;
+                        updateSteps();
+                    }
+                });
+            });
+
+            document.querySelectorAll('.prevBtn').forEach((btn) => {
+                btn.addEventListener('click', function() {
+                    if (currentStep > 0) {
+                        currentStep--;
+                        updateSteps();
+                    }
+                });
+            });
+
+            // Initialize steps on page load
+            updateSteps();
+        });
+    </script>
+
+    <!------------------------  stepwizard steps END ------------------------------->
+
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
