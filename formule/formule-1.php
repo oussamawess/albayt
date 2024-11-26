@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formule</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -155,6 +159,7 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
+            margin-right: 0px;
         }
 
         /* Remove border from the navbar-toggler button and icon */
@@ -285,7 +290,7 @@
                 padding: 5px 30px 5px 30px;
                 font-size: 13px;
                 font-weight: 600;
-                margin-left: 10px;
+                margin-left: 0px;
             }
 
             .navbar-brand {
@@ -2201,21 +2206,27 @@
     <nav class="navbar navbar-expand-lg bg-white sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="../uploads/logo.png" alt="Logo" width="150" height="auto" class="logo-mobile">
+                <?php echo $albayt_main_logo_black ?>
+                <!-- <img src="../uploads/logo.png" alt="Logo" width="150" height="auto" class="logo-mobile"> -->
             </a>
             <button class="btn contact-btn contact-btn-nav-mobile" type="submit">Contact</button>
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"
+                aria-expanded="false" aria-label="Toggle navigation" style="padding-right:0px; margin-left: 0px !important; padding-left: 0px;">
                 <span class="navbar-toggler-icon icons"></span>
             </button>
 
 
-            <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas-header" style="justify-content: space-between;">
                     <a class="" href="#">
-                        <img src="../uploads/logo-white.png" alt="Logo" width="150" height="auto">
+                        <?php echo $albayt_main_logo_white ?>
+                        <!-- <img src="../uploads/logo-white.png" alt="Logo" width="150" height="auto"> -->
                     </a>
                     <div>
-                    <button type="button" class="" data-bs-dismiss="offcanvas" aria-label="Close" style="border: none; background-color: transparent;"><?php echo $close_x ?></button>
+                        <button type="button" class="" data-bs-dismiss="offcanvas" aria-label="Close"
+                            style="border: none; background-color: transparent;"><?php echo $close_x ?></button>
                     </div>
                 </div>
                 <div class="offcanvas-body">
@@ -2285,7 +2296,8 @@
                     </li>
                 </ul>
                 <form class="d-flex search-box" role="search">
-                    <input class="form-control me-2 search-box-nav" type="search" placeholder="Recherche" aria-label="Search">
+                    <input class="form-control me-2 search-box-nav" type="search" placeholder="Recherche"
+                        aria-label="Search">
                     <button class="search-icon-btn" type="submit">
                         <i class="bi bi-search"></i>
                     </button>
@@ -2298,11 +2310,16 @@
 
     <!------------------------ Autres dates START ------------------------------->
     <nav class="autres-dates-nav navbar navbar-expand-lg bg-white bg-opacity-75">
-        <button class="autres-dates-btn unique-btn-autre-dates" data-bs-toggle="modal" data-bs-target="#autresDatesModal"><?php echo $left_arrow ?><?php echo $autres_dates ?>Autres dates</button>
+        <button class="autres-dates-btn unique-btn-autre-dates" data-bs-toggle="modal"
+            data-bs-target="#autresDatesModal">
+            <?php echo $left_arrow ?>
+            <?php echo $autres_dates ?>Autres dates
+        </button>
     </nav>
     <!----------- POPUP Autres dates START ----------------->
     <!-- Modal -->
-    <div class="modal fade unique-modal-autre-dates" id="autresDatesModal" tabindex="-1" aria-labelledby="autresDatesModalLabel" aria-hidden="true">
+    <div class="modal fade unique-modal-autre-dates" id="autresDatesModal" tabindex="-1"
+        aria-labelledby="autresDatesModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable unique-dialog-autre-dates">
             <div class="modal-content unique-content-autre-dates">
                 <div class="modal-header unique-header-autre-dates" style="display: block;">
@@ -2311,9 +2328,11 @@
                         <?php echo $top_sidebar; ?>
                     </div>
                     <div style="display: flex; align-items: center;">
-                        <h5 class="modal-title unique-title-autre-dates" id="autresDatesModalLabel">Planifiez votre voyage</h5>
+                        <h5 class="modal-title unique-title-autre-dates" id="autresDatesModalLabel">Planifiez votre
+                            voyage</h5>
 
-                        <button type="button" class="btn-close unique-close-autre-dates" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close unique-close-autre-dates" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                 </div>
                 <div class="modal-body unique-body-autre-dates">
@@ -2456,7 +2475,8 @@
     <!------------------------ Autres dates END ------------------------------->
 
     <!----------- POPUP reservation START ----------------->
-    <div class="modal fade" id="stepperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="stepperModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="display: block;">
@@ -2476,7 +2496,8 @@
                     </div>
                     <div style="display: flex; align-items: center;">
                         <h6 class="modal-title">Reservation</h6>
-                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="border: none; background-color: transparent;"></button>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"
+                            style="border: none; background-color: transparent;"></button>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -2484,25 +2505,29 @@
 
                         <div class="stepwizard-row setup-panel" style="display: flex; justify-content: space-around;">
                             <div class="stepwizard-step">
-                                <a href="#step-1" type="button" class="btn btn-primary non-clickable reservation-steps" data-step="1">
+                                <a href="#step-1" type="button" class="btn btn-primary non-clickable reservation-steps"
+                                    data-step="1">
                                     1
                                 </a>
                                 <div class="step-line"></div>
                             </div>
                             <div class="stepwizard-step">
-                                <a href="#step-2" type="button" class="btn btn-default non-clickable reservation-steps" data-step="2" disabled="disabled">
+                                <a href="#step-2" type="button" class="btn btn-default non-clickable reservation-steps"
+                                    data-step="2" disabled="disabled">
                                     2
                                 </a>
                                 <div class="step-line"></div>
                             </div>
                             <div class="stepwizard-step">
-                                <a href="#step-3" type="button" class="btn btn-default non-clickable reservation-steps" data-step="3" disabled="disabled">
+                                <a href="#step-3" type="button" class="btn btn-default non-clickable reservation-steps"
+                                    data-step="3" disabled="disabled">
                                     3
                                 </a>
                                 <div class="step-line"></div>
                             </div>
                             <div class="stepwizard-step">
-                                <a href="#step-4" type="button" class="btn btn-default non-clickable reservation-steps" data-step="4" disabled="disabled">
+                                <a href="#step-4" type="button" class="btn btn-default non-clickable reservation-steps"
+                                    data-step="4" disabled="disabled">
                                     4
                                 </a>
                             </div>
@@ -2519,7 +2544,8 @@
                                     </div>
                                     <div class="custom-number-input">
                                         <button class="minus-btn-adults minus-btn-style" type="button">-</button>
-                                        <input type="number" id="adults" value="0" min="0" class="number-input number-input-adults" required>
+                                        <input type="number" id="adults" value="0" min="0"
+                                            class="number-input number-input-adults" required>
                                         <button class="plus-btn-adults plus-btn-style" type="button">+</button>
                                     </div>
                                 </div>
@@ -2547,7 +2573,8 @@
                                     </div>
                                     <div class="custom-number-input">
                                         <button class="minus-btn-children minus-btn-style" type="button">-</button>
-                                        <input type="number" id="children" value="0" min="0" class="number-input number-input-children" required>
+                                        <input type="number" id="children" value="0" min="0"
+                                            class="number-input number-input-children" required>
                                         <button class="plus-btn-children plus-btn-style" type="button">
                                             +
                                         </button>
@@ -2577,7 +2604,8 @@
                                     </div>
                                     <div class="custom-number-input">
                                         <button class="minus-btn-babies minus-btn-style" type="button">-</button>
-                                        <input type="number" id="babies" value="0" min="0" class="number-input number-input-babies" required>
+                                        <input type="number" id="babies" value="0" min="0"
+                                            class="number-input number-input-babies" required>
                                         <button class="plus-btn-babies plus-btn-style" type="button">+</button>
                                     </div>
                                 </div>
@@ -2633,7 +2661,9 @@
                                         <button class="minus-btn-quadruple minus-btn-style" type="button">
                                             -
                                         </button>
-                                        <input type="number" id="quadruple" value="0" min="0" class="number-input form-control room-input number-input-quadruple" required>
+                                        <input type="number" id="quadruple" value="0" min="0"
+                                            class="number-input form-control room-input number-input-quadruple"
+                                            required>
                                         <label>/Personne</label>
                                         <button class="plus-btn-quadruple plus-btn-style" type="button">
                                             +
@@ -2680,7 +2710,8 @@
                                         <button class="minus-btn-triple minus-btn-style" type="button">
                                             -
                                         </button>
-                                        <input type="number" id="triple" value="0" min="0" class="number-input form-control room-input number-input-triple" required>
+                                        <input type="number" id="triple" value="0" min="0"
+                                            class="number-input form-control room-input number-input-triple" required>
                                         <label>/Personne</label>
                                         <button class="plus-btn-triple plus-btn-style" type="button">
                                             +
@@ -2722,7 +2753,8 @@
                                         <button class="minus-btn-double minus-btn-style" type="button">
                                             -
                                         </button>
-                                        <input type="number" id="double" value="0" min="0" class="number-input form-control room-input number-input-double" required>
+                                        <input type="number" id="double" value="0" min="0"
+                                            class="number-input form-control room-input number-input-double" required>
                                         <label>/Personne</label>
                                         <button class="plus-btn-double plus-btn-style" type="button">
                                             +
@@ -2766,7 +2798,8 @@
                                         <button class="minus-btn-single minus-btn-style" type="button">
                                             -
                                         </button>
-                                        <input type="number" id="single" value="0" min="0" class="number-input form-control room-input number-input-single" required>
+                                        <input type="number" id="single" value="0" min="0"
+                                            class="number-input form-control room-input number-input-single" required>
                                         <label>/Personne</label>
                                         <button class="plus-btn-single plus-btn-style" type="button">
                                             +
@@ -2874,7 +2907,9 @@
                                         <h6 style="font-weight:400; font-size:.9rem">EUR 186,915</h6>
                                     </div>
                                 </div> -->
-                                <button class="btn btn-secondary prevBtn prev-btn" type="button" style="border:none; background-color:transparent; color:black; padding:5px; font-size:.7rem; font-weight:bold; margin:10px 0px 10px 0px;"><u>Modifier la sélection</u></button>
+                                <button class="btn btn-secondary prevBtn prev-btn" type="button"
+                                    style="border:none; background-color:transparent; color:black; padding:5px; font-size:.7rem; font-weight:bold; margin:10px 0px 10px 0px;"><u>Modifier
+                                        la sélection</u></button>
                                 <div style="display:flex; justify-content: space-between; margin-top:30px;">
                                     <button class="btn btn-secondary prevBtn prev-btn" type="button">PRÉCÉDENT</button>
                                     <button class="btn btn-primary nextBtn next-btn" type="button">SUIVANT</button>
@@ -2888,12 +2923,18 @@
 
                                 <div class="form-group">
                                     <!-- <label for="fullName">Prénom et Nom *:</label> -->
-                                    <input type="text" class="form-control contact-form" id="fullName" placeholder="Nom & Prénom*" style="background-image: url('<?php echo $data_uri; ?>'); background-repeat: no-repeat; background-position: right center;" required>
+                                    <input type="text" class="form-control contact-form" id="fullName"
+                                        placeholder="Nom & Prénom*"
+                                        style="background-image: url('<?php echo $data_uri; ?>'); background-repeat: no-repeat; background-position: right center;"
+                                        required>
                                 </div>
 
                                 <div class="form-group">
                                     <!-- <label for="address">Adresse *:</label> -->
-                                    <input type="text" class="form-control contact-form" id="address" placeholder="Adresse*" style="background-image: url('<?php echo $data_uri; ?>'); background-repeat: no-repeat; background-position: right center;" required>
+                                    <input type="text" class="form-control contact-form" id="address"
+                                        placeholder="Adresse*"
+                                        style="background-image: url('<?php echo $data_uri; ?>'); background-repeat: no-repeat; background-position: right center;"
+                                        required>
                                 </div>
 
                                 <div class="form-group">
@@ -2908,13 +2949,19 @@
                                         <div class="dropdown-menu">
                                         </div>
                                     </div> -->
-                                        <input type="tel" class="form-control contact-form" id="phoneNumber" placeholder="Numéro de téléphone*" style="background-image: url('<?php echo $data_uri; ?>'); background-repeat: no-repeat; background-position: right center;" required>
+                                        <input type="tel" class="form-control contact-form" id="phoneNumber"
+                                            placeholder="Numéro de téléphone*"
+                                            style="background-image: url('<?php echo $data_uri; ?>'); background-repeat: no-repeat; background-position: right center;"
+                                            required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <!-- <label for="email">E-mail *:</label> -->
-                                    <input type="email" class="form-control contact-form" id="email" placeholder="E-mail*" style="background-image: url('<?php echo $data_uri; ?>'); background-repeat: no-repeat; background-position: right center;" required>
+                                    <input type="email" class="form-control contact-form" id="email"
+                                        placeholder="E-mail*"
+                                        style="background-image: url('<?php echo $data_uri; ?>'); background-repeat: no-repeat; background-position: right center;"
+                                        required>
                                 </div>
 
                                 <div id="error-message-step5" class="text-danger"></div>
@@ -2997,7 +3044,7 @@
     ?>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var navListItems = $('div.setup-panel div a'),
                 allWells = $('.setup-content'),
                 allNextBtn = $('.nextBtn'),
@@ -3025,7 +3072,7 @@
             allWells.hide();
 
             // Gestion du clic sur les étapes de la réservation
-            navListItems.click(function(e) {
+            navListItems.click(function (e) {
                 e.preventDefault();
                 var $target = $($(this).attr('href')),
                     $item = $(this);
@@ -3063,7 +3110,7 @@
                 }
             }
             // Gestion du clic sur le bouton "Suivant"
-            allNextBtn.click(function() {
+            allNextBtn.click(function () {
                 var curStep = $(this).closest(".setup-content"),
                     curStepBtn = curStep.attr("id"),
                     nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
@@ -3278,7 +3325,7 @@
                         type: 'POST',
                         data: JSON.stringify(formData),
                         contentType: 'application/json',
-                        success: function(response) {
+                        success: function (response) {
                             try {
                                 var data = JSON.parse(response);
                                 console.log('AJAX response:', data); // Log the response
@@ -3294,7 +3341,7 @@
                                 $('#error-message-step5').text("Erreur inattendue. Veuillez contacter l'administrateur.");
                             }
                         },
-                        error: function(xhr, status, error) {
+                        error: function (xhr, status, error) {
                             console.error("Erreur AJAX :", xhr.responseText);
                             $('#error-message-step5').text("Erreur lors de l'envoi de la réservation. Veuillez contacter l'administrateur du site. (Détails : " + error + ")");
                         }
@@ -3305,13 +3352,13 @@
                         type: 'POST',
                         data: JSON.stringify(formData), // Les mêmes données que celles envoyées précédemment
                         contentType: 'application/json',
-                        success: function(emailResponse) {
+                        success: function (emailResponse) {
                             console.log('Email envoyé avec succès :', emailResponse);
                             // Optionnel : Réinitialiser le formulaire ou fermer la modal
                             // $('#stepperModal').modal('hide');
                             // goToStep(1);
                         },
-                        error: function(xhr, status, error) {
+                        error: function (xhr, status, error) {
                             console.error("Erreur lors de l'envoi de l'email :", xhr.responseText);
                             // Gérer l'erreur d'envoi d'email si nécessaire
                         }
@@ -3321,7 +3368,7 @@
                         type: 'POST',
                         data: JSON.stringify(formData),
                         contentType: 'application/json',
-                        success: function(response) {
+                        success: function (response) {
                             console.log('Réponse du serveur :', response);
 
                             if (response.success) {
@@ -3332,7 +3379,7 @@
                                 // Gérer l'erreur d'envoi d'email (afficher un message à l'utilisateur, etc.)
                             }
                         },
-                        error: function(xhr, status, error) {
+                        error: function (xhr, status, error) {
                             console.error('Erreur AJAX lors de l\'envoi de l\'email au client :', xhr.responseText);
                             // Gérer l'erreur AJAX (problème de réseau, etc.)
                         }
@@ -3343,7 +3390,7 @@
             });
 
             // Gestion du clic sur le bouton "Précédent"
-            allPrevBtn.click(function() {
+            allPrevBtn.click(function () {
                 var curStep = $(this).closest(".setup-content"),
                     curStepBtn = curStep.attr("id"),
                     prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
@@ -3372,7 +3419,7 @@
             }
 
             // Gérer les événements de changement des champs d'entrée
-            $('.room-input').on('change', function() {
+            $('.room-input').on('change', function () {
                 var quadrupleRooms = parseInt($('#quadruple').val()) || 0;
                 var tripleRooms = parseInt($('#triple').val()) || 0;
                 var doubleRooms = parseInt($('#double').val()) || 0;
@@ -3412,7 +3459,7 @@
         }
 
         // Gérer la sélection du pays
-        dropdownMenu.on('click', '.dropdown-item', function(e) {
+        dropdownMenu.on('click', '.dropdown-item', function (e) {
             e.preventDefault();
             var countryCode = $(this).data('country');
             var countryDialCode = countryCodes[countryCode];
@@ -3618,7 +3665,8 @@
 
             <div class="price-reservation">
                 <p class="price">À partir de <br><strong class="price-number">1290€</strong></p>
-                <button type="button" class="reserve-button" data-toggle="modal" data-target="#stepperModal">RÉSERVATION</button>
+                <button type="button" class="reserve-button" data-toggle="modal"
+                    data-target="#stepperModal">RÉSERVATION</button>
             </div>
         </div>
 
@@ -3646,7 +3694,8 @@
                                     <span class="airport-code">CDG</span>
                                     <span class="airport-name dark-text">Paris Charles de Gaulle airport</span>
                                 </div>
-                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text"> SV144</span></span>
+                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text">
+                                        SV144</span></span>
                                 <div class="right-section">
                                     <span class="airport-code">RDH</span>
                                     <span class="airport-name dark-text">Aéroport international du roi Khaled</span>
@@ -3666,12 +3715,14 @@
                                 <div class="left-section-flight-details">
                                     <span class="grey" style="margin-left: 13px;">Départ</span>
                                     <span>
-                                        <div class="icon-container-vol-section-left dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-left dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $time; ?>12:00
                                         </div>
                                     </span>
@@ -3683,12 +3734,14 @@
                                 <div class="right-section-flight-details">
                                     <span class="grey" style="margin-left: 23px;">Arrivée</span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $time; ?>23:00
                                         </div>
                                     </span>
@@ -3705,7 +3758,8 @@
                                     <span class="airport-code">CDG</span>
                                     <span class="airport-name dark-text">Paris Charles de Gaulle airport</span>
                                 </div>
-                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text"> SV144</span></span>
+                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text">
+                                        SV144</span></span>
                                 <div class="right-section">
                                     <span class="airport-code">RDH</span>
                                     <span class="airport-name dark-text">Aéroport international du roi Khaled</span>
@@ -3725,12 +3779,14 @@
                                 <div class="left-section-flight-details">
                                     <span class="grey" style="margin-left: 13px;">Départ</span>
                                     <span>
-                                        <div class="icon-container-vol-section-left dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-left dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $time; ?>12:00
                                         </div>
                                     </span>
@@ -3742,12 +3798,14 @@
                                 <div class="right-section-flight-details">
                                     <span class="grey" style="margin-left: 23px;">Arrivée</span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $time; ?>23:00
                                         </div>
                                     </span>
@@ -3763,7 +3821,8 @@
                                     <span class="airport-code">CDG</span>
                                     <span class="airport-name dark-text">Paris Charles de Gaulle airport</span>
                                 </div>
-                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text"> SV144</span></span>
+                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text">
+                                        SV144</span></span>
                                 <div class="right-section">
                                     <span class="airport-code">RDH</span>
                                     <span class="airport-name dark-text">Aéroport international du roi Khaled</span>
@@ -3783,12 +3842,14 @@
                                 <div class="left-section-flight-details">
                                     <span class="grey" style="margin-left: 13px;">Départ</span>
                                     <span>
-                                        <div class="icon-container-vol-section-left dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-left dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $time; ?>12:00
                                         </div>
                                     </span>
@@ -3800,12 +3861,14 @@
                                 <div class="right-section-flight-details">
                                     <span class="grey" style="margin-left: 23px;">Arrivée</span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $time; ?>23:00
                                         </div>
                                     </span>
@@ -3822,7 +3885,8 @@
                                     <span class="airport-code">CDG</span>
                                     <span class="airport-name dark-text">Paris Charles de Gaulle airport</span>
                                 </div>
-                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text"> SV144</span></span>
+                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text">
+                                        SV144</span></span>
                                 <div class="right-section">
                                     <span class="airport-code">RDH</span>
                                     <span class="airport-name dark-text">Aéroport international du roi Khaled</span>
@@ -3842,12 +3906,14 @@
                                 <div class="left-section-flight-details">
                                     <span class="grey" style="margin-left: 13px;">Départ</span>
                                     <span>
-                                        <div class="icon-container-vol-section-left dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-left dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $time; ?>12:00
                                         </div>
                                     </span>
@@ -3859,12 +3925,14 @@
                                 <div class="right-section-flight-details">
                                     <span class="grey" style="margin-left: 23px;">Arrivée</span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $time; ?>23:00
                                         </div>
                                     </span>
@@ -3881,7 +3949,8 @@
                                     <span class="airport-code">CDG</span>
                                     <span class="airport-name dark-text">Paris Charles de Gaulle airport</span>
                                 </div>
-                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text"> SV144</span></span>
+                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text">
+                                        SV144</span></span>
                                 <div class="right-section">
                                     <span class="airport-code">RDH</span>
                                     <span class="airport-name dark-text">Aéroport international du roi Khaled</span>
@@ -3901,12 +3970,14 @@
                                 <div class="left-section-flight-details">
                                     <span class="grey" style="margin-left: 13px;">Départ</span>
                                     <span>
-                                        <div class="icon-container-vol-section-left dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-left dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $time; ?>12:00
                                         </div>
                                     </span>
@@ -3918,12 +3989,14 @@
                                 <div class="right-section-flight-details">
                                     <span class="grey" style="margin-left: 23px;">Arrivée</span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $time; ?>23:00
                                         </div>
                                     </span>
@@ -3939,7 +4012,8 @@
                                     <span class="airport-code">CDG</span>
                                     <span class="airport-name dark-text">Paris Charles de Gaulle airport</span>
                                 </div>
-                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text"> SV144</span></span>
+                                <span class="flight-number grey">N° VOL<br><span class="flight-code dark-text">
+                                        SV144</span></span>
                                 <div class="right-section">
                                     <span class="airport-code">RDH</span>
                                     <span class="airport-name dark-text">Aéroport international du roi Khaled</span>
@@ -3959,12 +4033,14 @@
                                 <div class="left-section-flight-details">
                                     <span class="grey" style="margin-left: 13px;">Départ</span>
                                     <span>
-                                        <div class="icon-container-vol-section-left dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-left dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $time; ?>12:00
                                         </div>
                                     </span>
@@ -3976,12 +4052,14 @@
                                 <div class="right-section-flight-details">
                                     <span class="grey" style="margin-left: 23px;">Arrivée</span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $calender; ?>Mer 08 Sep
                                         </div>
                                     </span>
                                     <span>
-                                        <div class="icon-container-vol-section-right dark-text" style="font-size: 14px; font-weight: 600;">
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
                                             <?php echo $time; ?>23:00
                                         </div>
                                     </span>
@@ -4016,12 +4094,19 @@
                     <div class="hotel-info" id="hotel-madinah" style="display: block;">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel1.jpg" alt="Hôtel Madinah Image 1"></div>
-                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel2.jpg" alt="Hôtel Madinah Image 2"></div>
-                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel3.jpg" alt="Hôtel Madinah Image 3"></div>
-                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel 4.jpg" alt="Hôtel Makkah Image 1"></div>
-                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/pullman.jpg" alt="Hôtel Makkah Image 2"></div>
-                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/omra-octobre-formule-confort-17-2.jpg" alt="Hôtel Makkah Image 3"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel1.jpg"
+                                        alt="Hôtel Madinah Image 1"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel2.jpg"
+                                        alt="Hôtel Madinah Image 2"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel3.jpg"
+                                        alt="Hôtel Madinah Image 3"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel 4.jpg"
+                                        alt="Hôtel Makkah Image 1"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/pullman.jpg"
+                                        alt="Hôtel Makkah Image 2"></div>
+                                <div class="swiper-slide"><img class="hotel-image"
+                                        src="../uploads/omra-octobre-formule-confort-17-2.jpg"
+                                        alt="Hôtel Makkah Image 3"></div>
 
                             </div>
                             <!-- Pagination dots for Swiper -->
@@ -4077,12 +4162,19 @@
                     <div class="hotel-info" id="hotel-makkah" style="display: none;">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel 4.jpg" alt="Hôtel Makkah Image 1"></div>
-                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/pullman.jpg" alt="Hôtel Makkah Image 2"></div>
-                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/omra-octobre-formule-confort-17-2.jpg" alt="Hôtel Makkah Image 3"></div>
-                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel1.jpg" alt="Hôtel Madinah Image 1"></div>
-                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel2.jpg" alt="Hôtel Madinah Image 2"></div>
-                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel3.jpg" alt="Hôtel Madinah Image 3"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel 4.jpg"
+                                        alt="Hôtel Makkah Image 1"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/pullman.jpg"
+                                        alt="Hôtel Makkah Image 2"></div>
+                                <div class="swiper-slide"><img class="hotel-image"
+                                        src="../uploads/omra-octobre-formule-confort-17-2.jpg"
+                                        alt="Hôtel Makkah Image 3"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel1.jpg"
+                                        alt="Hôtel Madinah Image 1"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel2.jpg"
+                                        alt="Hôtel Madinah Image 2"></div>
+                                <div class="swiper-slide"><img class="hotel-image" src="../uploads/hotel3.jpg"
+                                        alt="Hôtel Madinah Image 3"></div>
                             </div>
                             <div class="swiper-pagination"></div>
                         </div>
@@ -4147,7 +4239,9 @@
 
                             <span class="title">Transfert Aéroport de Médine - Hôtel de Médine</span>
                         </div>
-                        <span class="toggle-icon"><?php echo $up; ?></span>
+                        <span class="toggle-icon">
+                            <?php echo $up; ?>
+                        </span>
                     </div>
                     <div class="accordion-body">
                         <div class="accordion-content">
@@ -4158,7 +4252,9 @@
                                 <div class="text-content">
                                     <p>Aéroport de Médine > Hôtel à Médine<br>
 
-                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.</p>
+                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort
+                                        climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
+                                    </p>
                                 </div>
                                 <div class="image-content">
                                     <img src="../uploads/bus-bagages.jpg" alt="Bus Image">
@@ -4187,9 +4283,13 @@
                                 <div class="text-content">
                                     <p>Aéroport de Médine > Hôtel à Médine<br>
 
-                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
-                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
-                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.</p>
+                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort
+                                        climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
+                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort
+                                        climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
+                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort
+                                        climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
+                                    </p>
                                 </div>
                                 <div class="image-content">
                                     <img src="../uploads/bus.jpg" alt="Bus Image">
@@ -4216,8 +4316,11 @@
                                 <div class="text-content">
                                     <p>Aéroport de Médine > Hôtel à Médine<br>
 
-                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
-                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.</p>
+                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort
+                                        climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
+                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort
+                                        climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
+                                    </p>
                                 </div>
                                 <div class="image-content">
                                     <img src="../uploads/bus.jpg" alt="Bus Image">
@@ -4240,7 +4343,9 @@
                         <div class="date-info">
                             <span class="title">Compagnies aériennes</span>
                         </div>
-                        <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                        <span class="toggle-icon">
+                            <?php echo $down_arrow; ?>
+                        </span>
                     </div>
                     <div class="accordion-body">
                         <div class="accordion-content">
@@ -4383,7 +4488,7 @@
                 <div class="rating">
                     <h2>4,7</h2>
                     <div class="stars">
-                        <?php echo $fivestar  ?>
+                        <?php echo $fivestar ?>
                     </div>
                     <p class="reviews-count">724 avis</p>
                 </div>
@@ -4394,8 +4499,8 @@
                     <li>Facilité des démarches <span class="progress-bar"></span></li>
                 </ul>
                 <div class="logos">
-                    <?php echo $google  ?>
-                    <?php echo $trustindex  ?>
+                    <?php echo $google ?>
+                    <?php echo $trustindex ?>
                     <!-- <img src="google-logo.png" alt="Google" /> -->
                     <!-- <img src="trustindex-logo.png" alt="TrustIndex" /> -->
                 </div>
@@ -4408,14 +4513,16 @@
                         <!-- Testimonial Slide -->
                         <div class="swiper-slide quote-box">
                             <blockquote>
-                                <?php echo $quote  ?>
+                                <?php echo $quote ?>
                                 <p class="quote-text">
-                                    Omra réalisé avec le guide Ahmed qui a été disponible, bienveillant et professionnel tout au long du voyage. Qu'Allah le récompense
+                                    Omra réalisé avec le guide Ahmed qui a été disponible, bienveillant et professionnel
+                                    tout au long du voyage. Qu'Allah le récompense
                                 </p>
                                 <footer class="quote-footer">
 
                                     <!-- Image on the left -->
-                                    <img src="../uploads/p1.jpeg" alt="Client Photo 1" width="50" height="50" style="border-radius: 50%;">
+                                    <img src="../uploads/p1.jpeg" alt="Client Photo 1" width="50" height="50"
+                                        style="border-radius: 50%;">
 
                                     <!-- Text content on the right -->
                                     <div class="client-info">
@@ -4428,13 +4535,15 @@
                         </div>
                         <div class="swiper-slide quote-box">
                             <blockquote>
-                                <?php echo $quote  ?>
+                                <?php echo $quote ?>
                                 <p class="quote-text">
-                                    Voyage inoubliable avec une organisation parfaite. Le guide était exceptionnel et a rendu cette expérience
+                                    Voyage inoubliable avec une organisation parfaite. Le guide était exceptionnel et a
+                                    rendu cette expérience
                                     unique.
                                 </p>
                                 <footer class="quote-footer">
-                                    <img src="../uploads/p6.jpeg" alt="Client Photo 2" width="50" height="50" style="border-radius:50%">
+                                    <img src="../uploads/p6.jpeg" alt="Client Photo 2" width="50" height="50"
+                                        style="border-radius:50%">
                                     <div class="client-info">
                                         <cite><b>Ahmed Hamed</b></cite>
                                         <small>2024-07-15</small>
@@ -4444,12 +4553,14 @@
                         </div>
                         <div class="swiper-slide quote-box">
                             <blockquote>
-                                <?php echo $quote  ?>
+                                <?php echo $quote ?>
                                 <p class="quote-text">
-                                    Service incroyable du début à la fin. Je recommande vivement cette agence de voyage à tous mes proches.
+                                    Service incroyable du début à la fin. Je recommande vivement cette agence de voyage
+                                    à tous mes proches.
                                 </p>
                                 <footer class="quote-footer">
-                                    <img src="../uploads/p3.jpeg" alt="Client Photo 3" width="50" height="50" style="border-radius:50%">
+                                    <img src="../uploads/p3.jpeg" alt="Client Photo 3" width="50" height="50"
+                                        style="border-radius:50%">
                                     <div class="client-info">
                                         <cite><b>Majd Fersi</b></cite>
                                         <small>2024-06-25</small>
@@ -4470,12 +4581,12 @@
     <!------------------------  Footer_1 END ------------------------------->
     <!------------------------  Footer_2 START ------------------------------->
     <div class="footer-2">
-        <?php echo $facebook  ?>
-        <?php echo $x  ?>
-        <?php echo $instagram  ?>
-        <?php echo $youtube  ?>
-        <?php echo $snapchat  ?>
-        <?php echo $tiktok  ?>
+        <?php echo $facebook ?>
+        <?php echo $x ?>
+        <?php echo $instagram ?>
+        <?php echo $youtube ?>
+        <?php echo $snapchat ?>
+        <?php echo $tiktok ?>
     </div>
     <!------------------------  Footer_2 END ------------------------------->
 
@@ -4497,7 +4608,8 @@
                 <!-- Center Section -->
                 <div class="unique-footer-logo" style="text-align: center;">
                     <?php echo $albayt_logo ?>
-                    <p style="text-align: center; margin-top:20px;">Du lundi au samedi 10:00-18:30<br>contact@albayt.fr</p>
+                    <p style="text-align: center; margin-top:20px;">Du lundi au samedi 10:00-18:30<br>contact@albayt.fr
+                    </p>
                 </div>
 
                 <!-- Right Section -->
@@ -4524,7 +4636,8 @@
                 <p style="text-align: center; margin-top:20px;">Du lundi au samedi 10:00-18:30<br>contact@albayt.fr</p>
                 <div class="unique-footer-accordion">
                     <div class="accordion-item-details" style="border: none;">
-                        <div class="accordion-header" style="justify-content: center; padding:0px"><button class="unique-accordion-btn">Paris</button>
+                        <div class="accordion-header" style="justify-content: center; padding:0px"><button
+                                class="unique-accordion-btn">Paris</button>
                             <span class="toggle-icon"><?php echo $down_arrow; ?></span>
                         </div>
                         <div class="accordion-body">
@@ -4537,7 +4650,8 @@
                     </div>
 
                     <div class="accordion-item-details" style="border: none;">
-                        <div class="accordion-header" style="justify-content: center; padding:0px"><button class="unique-accordion-btn">Lyon</button>
+                        <div class="accordion-header" style="justify-content: center; padding:0px"><button
+                                class="unique-accordion-btn">Lyon</button>
                             <span class="toggle-icon"><?php echo $down_arrow; ?></span>
                         </div>
                         <div class="accordion-body">
@@ -4550,7 +4664,8 @@
                     </div>
 
                     <div class="accordion-item-details" style="border: none;">
-                        <div class="accordion-header" style="justify-content: center; padding:0px"><button class="unique-accordion-btn">Bruxelles</button>
+                        <div class="accordion-header" style="justify-content: center; padding:0px"><button
+                                class="unique-accordion-btn">Bruxelles</button>
                             <span class="toggle-icon"><?php echo $down_arrow; ?></span>
                         </div>
                         <div class="accordion-body">
@@ -4581,15 +4696,31 @@
     <!------------------------  Footer_4 START ------------------------------->
     <div class="footer-4 swiper-container-footer">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><?php echo $hiscos ?></div>
-            <div class="swiper-slide"><?php echo $atoutfrance ?></div>
-            <div class="swiper-slide"><?php echo $iata ?></div>
-            <div class="swiper-slide"><?php echo $saudi ?></div>
+            <div class="swiper-slide">
+                <?php echo $hiscos ?>
+            </div>
+            <div class="swiper-slide">
+                <?php echo $atoutfrance ?>
+            </div>
+            <div class="swiper-slide">
+                <?php echo $iata ?>
+            </div>
+            <div class="swiper-slide">
+                <?php echo $saudi ?>
+            </div>
 
-            <div class="swiper-slide"><?php echo $hiscos ?></div>
-            <div class="swiper-slide"><?php echo $atoutfrance ?></div>
-            <div class="swiper-slide"><?php echo $iata ?></div>
-            <div class="swiper-slide"><?php echo $saudi ?></div>
+            <div class="swiper-slide">
+                <?php echo $hiscos ?>
+            </div>
+            <div class="swiper-slide">
+                <?php echo $atoutfrance ?>
+            </div>
+            <div class="swiper-slide">
+                <?php echo $iata ?>
+            </div>
+            <div class="swiper-slide">
+                <?php echo $saudi ?>
+            </div>
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
@@ -4632,7 +4763,8 @@
                 </thead>
                 <tbody>
                     <div class="icon-arrow-down" style="text-align: center;">
-                        <button class="arrow-button-down" style="border: none; background-color: transparent; width:100%;">
+                        <button class="arrow-button-down"
+                            style="border: none; background-color: transparent; width:100%;">
                             <?php echo $down_arrow; ?>
                         </button>
                     </div>
@@ -4662,31 +4794,32 @@
         </div>
 
         <div class="reservation-mobile-footer">
-            <p class="grey" style="margin: 0px; font-size: .8rem;">À partir de <br><strong class="price-number dark-text">1290€</strong></p>
+            <p class="grey" style="margin: 0px; font-size: .8rem;">À partir de <br><strong
+                    class="price-number dark-text">1290€</strong></p>
             <button class="reserve-button" data-toggle="modal" data-target="#stepperModal">RÉSERVATION</button>
         </div>
 
 
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
+            document.addEventListener("DOMContentLoaded", function () {
                 const footerContainer = document.querySelector('.pricing-table-container-footer');
                 const ctaButton = document.querySelector('.cta-mobile-table-button');
                 const downButton = document.querySelector('.arrow-button-down');
 
                 // Show the footer when the "cta-mobile-table-button" is clicked
-                ctaButton.addEventListener('click', function(event) {
+                ctaButton.addEventListener('click', function (event) {
                     event.stopPropagation(); // Prevent click from bubbling up
                     footerContainer.classList.add('visible');
                 });
 
                 // Hide the footer when the "arrow-button-down" is clicked
-                downButton.addEventListener('click', function(event) {
+                downButton.addEventListener('click', function (event) {
                     event.stopPropagation(); // Prevent click from bubbling up
                     footerContainer.classList.remove('visible');
                 });
 
                 // Hide the footer if the user clicks anywhere outside of the table or buttons
-                document.addEventListener('click', function(event) {
+                document.addEventListener('click', function (event) {
                     if (!footerContainer.contains(event.target) && !ctaButton.contains(event.target)) {
                         footerContainer.classList.remove('visible');
                     }
@@ -4766,7 +4899,7 @@
 
     <!-- Hebergement SWIPER START  -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             // Swiper initialization
             const madinahSwiper = new Swiper('#hotel-madinah .swiper-container', {
                 slidesPerView: 1, // Show 1 image at a time
@@ -4940,7 +5073,7 @@
     <!------------------------  footer 4 STTART ------------------------------->
     <script>
         // Initialize Swiper
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const swiper = new Swiper(".swiper-container-footer", {
                 slidesPerView: 2, // Display 3 slides
                 spaceBetween: 10, // Add space between slides
@@ -4979,7 +5112,7 @@
 
     <!------------------------  stepwizard steps START ------------------------------->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const steps = document.querySelectorAll('.reservation-steps'); // All step buttons
             const lines = document.querySelectorAll('.step-line'); // All connecting lines
             let currentStep = 0; // Initial step (step 1, index 0)
@@ -5015,7 +5148,7 @@
 
             // Event listeners for the navigation buttons
             document.querySelectorAll('.nextBtn').forEach((btn) => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     if (currentStep < steps.length - 1) {
                         currentStep++;
                         updateSteps();
@@ -5024,7 +5157,7 @@
             });
 
             document.querySelectorAll('.prevBtn').forEach((btn) => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     if (currentStep > 0) {
                         currentStep--;
                         updateSteps();
