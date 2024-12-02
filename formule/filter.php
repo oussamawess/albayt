@@ -19,6 +19,13 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/d15834b2a7.js" crossorigin="anonymous"></script>
+
+    <!-- Select 2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <?php include('icons.php'); ?>
     <style>
         /* Define the Raleway fonts */
@@ -223,12 +230,18 @@
 <style>
     .container {
         width: fit-content;
+        margin-top: 230px
     }
 
     .category-btn {
         margin-right: 10px !important;
+        margin-bottom: 5px !important;
         background-color: transparent;
         border: 1px solid white;
+    }
+
+    .category-buttons {
+        margin-bottom: .5rem !important;
     }
 
     .category-btn:hover {
@@ -263,9 +276,11 @@
     }
 
     .btn:focus {
-    outline: var(--primary-color) !important;  /* Remove the default blue outline */
-    box-shadow: var(--primary-color) !important;  /* Optionally remove the box-shadow that Bootstrap applies */
-}
+        outline: var(--primary-color) !important;
+        /* Remove the default blue outline */
+        box-shadow: var(--primary-color) !important;
+        /* Optionally remove the box-shadow that Bootstrap applies */
+    }
 
 
 
@@ -283,7 +298,7 @@
 </style>
 
 <body>
-    <div class="container mt-5">
+    <div class="container">
         <!-- Category Buttons -->
         <div id="category-buttons" class="mb-4 category-buttons">
             <!-- Dynamic buttons will be inserted here -->
@@ -295,23 +310,39 @@
             <!-- Static Input: Pays de Depart -->
             <div class="form-group">
                 <!-- <label for="pays-depart">Pays de Départ</label> -->
-                <input type="text" class="form-control" id="pays-depart" value="France" disabled>
+                <input type="text" class="form-control" id="pays-depart" value="Pays de départ" disabled>
             </div>
+
+            <div class="form-group">
+                <select class="form-control select2 " name="state" style="width: 140px;" data-minimum-results-for-search="Infinity">
+                    <option value="AL" data-icon="formule">Ville</option>
+                    <option value="AL">Alabama</option>
+                    <option value="WY">Wyoming</option>
+                </select>
+            </div>
+
+
+
+
+
 
             <!-- Ville Dropdown -->
             <div class="form-group">
-                <!-- <label for="ville">Ville</label> -->
-                <select class="form-control" id="ville">
-                    <option value="" disabled selected>Choisir une ville</option>
+                <!-- <label for="formule">Ville</label> -->
+                <select class="form-control select2" name="state" id="ville" data-minimum-results-for-search="Infinity">
+                    <option value="v" disabled selected data-icon="formule">Ville</option>
                     <!-- Options dynamically generated -->
                 </select>
             </div>
 
+            
+
+
             <!-- Formule Dropdown -->
             <div class="form-group">
                 <!-- <label for="formule">Formule</label> -->
-                <select class="form-control" id="formule">
-                    <option value="" disabled selected>Choisir une formule</option>
+                <select class="form-control " id="formule">
+                    <option value="" disabled selected>Formule</option>
                     <!-- Options dynamically generated -->
                 </select>
             </div>
@@ -319,9 +350,9 @@
             <!-- Dates Button -->
             <div class="form-group">
                 <!-- <label for="dates-voyages">Dates de Voyages</label><br> -->
-                <button class="btn btn-primary"
-                    style="background-color: white;color:black;width: -webkit-fill-available;" id="dates-voyages"
-                    disabled>Afficher les Dates</button>
+                <button class="btn btn-dates"
+                    style="background-color: white;color:black; border:none; width: -webkit-fill-available;"
+                    id="dates-voyages" disabled>Dates de voyages</button>
             </div>
         </div>
     </div>
@@ -395,7 +426,7 @@
                     data: { category_id: categoryId },
                     success: function (data) {
                         const villes = JSON.parse(data);
-                        $('#ville').html('<option value="" disabled selected>Choisir une ville</option>');
+                        $('#ville').html('<option value="v" disabled selected  data-icon="formule" class"select2" name="state">Ville</option>');
                         villes.forEach(ville => {
                             $('#ville').append(`<option value="${ville.id}">${ville.nom}</option>`);
                         });
@@ -403,7 +434,7 @@
                 });
 
                 // Clear Formule and Dates
-                $('#formule').html('<option value="" disabled selected>Choisir une formule</option>');
+                $('#formule').html('<option value="" disabled selected>Formule</option>');
                 $('#dates-voyages').prop('disabled', true);
             });
 
@@ -418,7 +449,7 @@
                     data: { ville_id: villeId },
                     success: function (data) {
                         const formules = JSON.parse(data);
-                        $('#formule').html('<option value="" disabled selected>Choisir une formule</option>');
+                        $('#formule').html('<option value="" disabled selected>Formule</option>');
                         formules.forEach(formule => {
                             $('#formule').append(`<option value="${formule.id}">${formule.nom}</option>`);
                         });
@@ -457,31 +488,48 @@
 
                             // Loop through the dates and append to the modal body
                             dates.forEach(date => {
+                                // Format departure and return dates
+                                const formatDate = (dateString) => {
+                                    const weekday = new Date(dateString).toLocaleDateString('fr-FR', { weekday: 'short' });
+                                    const fullDate = new Date(dateString).toLocaleDateString('fr-FR');
+
+                                    // Make the first letter uppercase and remove the dot
+                                    const formattedWeekday = weekday.charAt(0).toUpperCase() + weekday.slice(1).replace('.', '');
+                                    return { formattedWeekday, fullDate: fullDate.replace('.', '') };
+                                };
+
+                                // Get formatted departure and return dates
+                                const { formattedWeekday: departWeekday, fullDate: departDate } = formatDate(date.date_depart);
+                                const { formattedWeekday: returnWeekday, fullDate: returnDate } = formatDate(date.date_retour);
+
                                 const cardHTML = `
-                        <div class="unique-card-autre-dates">
-                            <div class="row align-items-center unique-row-autre-dates">
-                                <div class="col-6 left-info-popup">
-                                    <span><b>Départ</b></span>
-                                    <span>${new Date(date.date_depart).toLocaleDateString('fr-FR', { weekday: 'short' })}</span>
-                                    <span>${new Date(date.date_depart).toLocaleDateString('fr-FR')}</span>
-                                </div>
-                                <div class="svg-popup">
-                                <?php echo $plane_path_popup ?> 
-                                </div>
-                                <div class="col-6 text-end right-info-popup">
-                                    <span><b>Retour</b></span>
-                                    <span>${new Date(date.date_retour).toLocaleDateString('fr-FR', { weekday: 'short' })}</span>
-                                    <span class="date-right-popup">${new Date(date.date_retour).toLocaleDateString('fr-FR')}</span>
-                                </div>
-                                <div class="col-12 d-flex align-items-center bottom-info-popup">
-                                    <img src="../${date.compagnie_logo}" style="width:50%; height:auto;" alt="Compagnie" class="me-2">
-                                    <div class="buttom-right-info-popup">
-                                        <span class="price-text-popup">À partir de</span>
-                                        <span class="price-number-popup">${date.prix_chambre_quadruple}€</span>
+                                <a style="text-decoration: none; color: inherit;" href="formule.php?id=${date.formule_id}">
+                                <div class="unique-card-autre-dates">
+                                    <div class="row align-items-center unique-row-autre-dates">
+                                        <div class="col-6 left-info-popup">
+                                            <span><b>Départ</b></span>
+                                            <span>${departWeekday}</span>
+                                            <span>${departDate}</span>
+                                        </div>
+                                        <div class="svg-popup">
+                                            <?php echo $plane_path_popup ?> 
+                                        </div>
+                                        <div class="col-6 text-end right-info-popup">
+                                            <span><b>Retour</b></span>
+                                            <span>${returnWeekday}</span>
+                                            <span class="date-right-popup">${returnDate}</span>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-center bottom-info-popup">
+                                            <img src="../${date.compagnie_logo}" style="width:40%; height:auto;" alt="Compagnie" class="me-2">
+                                            <div class="buttom-right-info-popup">
+                                                <span class="price-text-popup">À partir de</span>
+                                                <span class="price-number-popup">${date.prix_chambre_quadruple}€</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>`;
+                                </div></a>`;
+
+                                // Append the card to the modal
                                 $('.unique-body-autre-dates').append(cardHTML);
                             });
 
@@ -499,8 +547,55 @@
             });
 
 
+
         });
     </script>
+
+
+
+
+
+
+
+
+
+<script>
+                
+                $(document).ready(function () {
+                    // Define the SVG separately
+                    const icons = {
+                        formule: `
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="14" viewBox="0 0 19 14">
+                    <g id="suitcase_ticket" transform="translate(-2.5 -5.5)">
+                        <path d="M18,5.5H6A3.5,3.5,0,0,0,2.5,9v7A3.5,3.5,0,0,0,6,19.5H18A3.5,3.5,0,0,0,21.5,16V9A3.5,3.5,0,0,0,18,5.5ZM20.5,16A2.5,2.5,0,0,1,18,18.5H6A2.5,2.5,0,0,1,3.5,16V9A2.5,2.5,0,0,1,6,6.5H18A2.5,2.5,0,0,1,20.5,9Z" fill="#c89d54"/>
+                        <path d="M11,10.5h-.5V10A1.5,1.5,0,0,0,9,8.5H8A1.5,1.5,0,0,0,6.5,10v.5H6A1.5,1.5,0,0,0,4.5,12v3A1.5,1.5,0,0,0,6,16.5h5A1.5,1.5,0,0,0,12.5,15V12A1.5,1.5,0,0,0,11,10.5ZM7.5,10A.5.5,0,0,1,8,9.5H9a.5.5,0,0,1,.5.5v.5h-2Zm4,5a.5.5,0,0,1-.5.5H6a.5.5,0,0,1-.5-.5V12a.5.5,0,0,1,.5-.5h5a.5.5,0,0,1,.5.5Z" fill="#c89d54"/>
+                        <path d="M15,15.5H14a.5.5,0,0,0,0,1h1a.5.5,0,0,0,0-1Z" fill="#c89d54"/>
+                        <path d="M18,15.5H17a.5.5,0,0,0,0,1h1a.5.5,0,0,0,0-1Z" fill="#c89d54"/>
+                    </g>
+                </svg>
+            `
+                    };
+
+                    // Initialize Select2
+                    $('.select2').select2({
+                        templateResult: formatState, // Customize dropdown
+                        templateSelection: formatState // Customize selected value
+                    });
+
+                    function formatState(state) {
+                        if (!state.id) {
+                            return state.text; // Return default text for placeholder
+                        }
+
+                        const iconKey = $(state.element).data('icon'); // Get key from data-icon
+                        const icon = icons[iconKey] || ''; // Get SVG from icons object
+
+                        return $(
+                            `<span style="display: flex; align-items: center;">${icon} ${state.text}</span>`
+                        );
+                    }
+                });
+            </script>
 </body>
 
 </html>
