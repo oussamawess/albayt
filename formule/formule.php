@@ -1304,6 +1304,7 @@ if ($formule_id > 0) {
 
         .hotel-buttons {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 20px;
         }
@@ -3815,7 +3816,7 @@ if ($formule_id > 0) {
                         </tr>
                         <tr>
                             <td>Bébé</td>
-                            <td><?php echo htmlspecialchars ($data['prix_bebe']); ?> €</td>
+                            <td><?php echo htmlspecialchars($data['prix_bebe']); ?> €</td>
                         </tr>
                     </tbody>
                 </table>
@@ -3989,6 +3990,9 @@ if ($formule_id > 0) {
             </div>
         </div>
         <!-- Vols aller-retour END-->
+
+
+
         <!-- Hebergement START -->
         <?php
         // Include the database connection
@@ -3999,24 +4003,25 @@ if ($formule_id > 0) {
 
         // Prepare the SQL query
         $sql = "
-SELECT 
-    h.type_pension, 
-    h.date_checkin, 
-    h.date_checkout, 
-    h.nombre_nuit,
-    hotels.nom AS hotel_nom, 
-    hotels.etoiles,
-    hotels.details, 
-    hotels.monument, 
-    hotels.ville AS ville_id,
-    ville_depart.nom AS ville_nom,
-    hotel_gallery.image_path
-FROM hebergements h
-JOIN hotels ON h.hotel_id = hotels.id
-JOIN ville_depart ON hotels.ville = ville_depart.id
-LEFT JOIN hotel_gallery ON hotels.id = hotel_gallery.hotel_id
-WHERE h.formule_id = $formule_id
-";
+            SELECT 
+                h.type_pension, 
+                h.date_checkin, 
+                h.date_checkout, 
+                h.nombre_nuit,
+                hotels.id AS hotel_id, 
+                hotels.nom AS hotel_nom, 
+                hotels.etoiles,
+                hotels.details, 
+                hotels.monument, 
+                hotels.ville AS ville_id,
+                ville_depart.nom AS ville_nom,
+                hotel_gallery.image_path
+            FROM hebergements h
+            JOIN hotels ON h.hotel_id = hotels.id
+            JOIN ville_depart ON hotels.ville = ville_depart.id
+            LEFT JOIN hotel_gallery ON hotels.id = hotel_gallery.hotel_id
+            WHERE h.formule_id = $formule_id
+            ";
 
         // Execute the query
         $result = $conn->query($sql);
@@ -4025,7 +4030,8 @@ WHERE h.formule_id = $formule_id
         if ($result->num_rows > 0) {
             $data = [];
             while ($row = $result->fetch_assoc()) {
-                $data[$row['ville_nom']][] = $row;
+                $data[$row['hotel_id']]['hotel_info'] = $row;  // Store hotel info
+                $data[$row['hotel_id']]['images'][] = $row['image_path'];  // Store image paths
             }
         } else {
             $data = [];
@@ -4042,23 +4048,48 @@ WHERE h.formule_id = $formule_id
                 </div>
                 <h2>Hébergement</h2>
 
-                <!-- Generate buttons dynamically for each ville -->
+                <!-- Generate buttons dynamically for each ville (without duplicates) -->
                 <div class="hotel-buttons">
-                    <?php foreach ($data as $ville_nom => $hotels): ?>
-                        <button class="hotel-button" data-hotel="<?= strtolower($ville_nom) ?>">
-                            <?= $ville_nom ?>
-                        </button>
-                    <?php endforeach; ?>
+                    <?php
+                    $displayedCities = []; // Array to track displayed cities
+                    foreach ($data as $hotel_id => $hotels):
+                        $city_name = strtolower($hotels['hotel_info']['ville_nom']); // Get the city name
+                        if (!in_array($city_name, $displayedCities)): // Check if the city is already displayed
+                            $displayedCities[] = $city_name; // Add city to the array to prevent duplicates
+                            ?>
+                            <button class="hotel-button" data-hotel="<?= $city_name ?>">
+                                <?= $hotels['hotel_info']['ville_nom'] ?>
+                            </button>
+                        <?php endif; endforeach; ?>
                 </div>
+                <style>
+                    .swiper-container {
+                        position: relative;
+                        /* Ensure it positions itself relative to the page */
+                        width: 100%;
+                    }
 
+                    .swiper-pagination {
+                        position: absolute;
+                        /* Position absolutely within swiper container */
+                        bottom: 10px;
+                        /* Adjust this value to place the pagination at the bottom */
+                        left: 50% !important;
+                        transform: translateX(-50%);
+                        /* Center it horizontally */
+                        z-index: 10;
+                        /* Ensure it appears above images */
+                    }
+                </style>
                 <div class="hotel-content">
-                    <?php foreach ($data as $ville_nom => $hotels): ?>
-                        <div class="hotel-info" id="hotel-<?= strtolower($ville_nom) ?>" style="display: none;">
-                            <div class="swiper-container">
+                    <?php foreach ($data as $hotel_id => $hotels): ?>
+                        <div class="hotel-info" id="hotel-<?= strtolower($hotels['hotel_info']['ville_nom']) ?>"
+                            style="display: none;">
+                            <div class="swiper-container" id="swiper-<?= $hotel_id ?>">
                                 <div class="swiper-wrapper">
-                                    <?php foreach ($hotels as $hotel): ?>
+                                    <?php foreach ($hotels['images'] as $image_path): ?>
                                         <div class="swiper-slide">
-                                            <img class="hotel-image" src="../<?= $hotel['image_path'] ?>" alt="Hotel Image">
+                                            <img class="hotel-image" src="../<?= $image_path ?>" alt="Hotel Image">
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
@@ -4066,59 +4097,60 @@ WHERE h.formule_id = $formule_id
                             </div>
                             <div class="hotel-details">
                                 <div class="info">
-                                    <h3><?= $hotels[0]['hotel_nom'] ?></h3>
-                                    <div class="" style="margin: 10px 10px 15px 0px;">
-                                        <?php for ($i = 0; $i < $hotels[0]['etoiles']; $i++): ?>
-                                            <!-- <span class="star">★</span> -->
-                                            <?php echo $onestar ?>
-                                        <?php endfor; ?><span class="grey m-3">724 avis</span>
+                                    <h3><?= $hotels['hotel_info']['hotel_nom'] ?></h3>
+                                    <div style="margin: 10px 10px 15px 0px;">
+                                        <?php for ($i = 0; $i < $hotels['hotel_info']['etoiles']; $i++): ?>
+                                            <?php echo $onestar; ?>
+                                        <?php endfor; ?>
+                                        <span class="grey m-3">724 avis</span>
                                     </div>
                                     <p>
-                                        Ville : <?= $ville_nom ?><br>
-                                        Monument : <?= $hotels[0]['monument'] ?><br>
-                                        Détails : <?= $hotels[0]['details'] ?>
+                                        Ville : <b><?= $hotels['hotel_info']['ville_nom'] ?></b><br>
+                                        Monument : <b><?= $hotels['hotel_info']['monument'] ?></b><br>
+                                        Durée du trajet : <b><?= $hotels['hotel_info']['details'] ?></b>
                                     </p>
                                 </div>
                                 <div class="booking-details">
-                                    <?php foreach ($hotels as $hotel): ?>
-                                        <div class="formula-item">
-                                            <?php echo $Arrivée; ?>
-                                            <div class="text" style="margin-left: 10px; margin-top: 15px;">
-                                                <h4>Check-in</h4>
-                                                <p><?= $hotel['date_checkin'] ?></p>
-                                            </div>
+                                    <div class="formula-item">
+                                        <?php echo $Arrivée; ?>
+                                        <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                            <h4>Check-in</h4>
+                                            <p><?= $hotels['hotel_info']['date_checkin'] ?></p>
                                         </div>
-                                        <div class="formula-item">
-                                            <?php echo $Départ; ?>
-                                            <div class="text" style="margin-left: 10px; margin-top: 15px;">
-                                                <h4>Check-out</h4>
-                                                <p><?= $hotel['date_checkout'] ?></p>
-                                            </div>
+                                    </div>
+                                    <div class="formula-item">
+                                        <?php echo $Départ; ?>
+                                        <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                            <h4>Check-out</h4>
+                                            <p><?= $hotels['hotel_info']['date_checkout'] ?></p>
                                         </div>
-                                        <div class="formula-item">
-                                            <?php echo $Durée; ?>
-                                            <div class="text" style="margin-left: 10px; margin-top: 15px;">
-                                                <h4>Durée du séjour</h4>
-                                                <p><?= $hotel['nombre_nuit'] ?> nuitées</p>
-                                            </div>
+                                    </div>
+                                    <div class="formula-item">
+                                        <?php echo $Durée; ?>
+                                        <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                            <h4>Durée du séjour</h4>
+                                            <p><?= $hotels['hotel_info']['nombre_nuit'] ?> nuitées</p>
                                         </div>
-                                        <div class="formula-item">
-                                            <?php echo $pension; ?>
-                                            <div class="text" style="margin-left: 10px; margin-top: 15px;">
-                                                <h4>Pension</h4>
-                                                <p><?= $hotel['type_pension'] ?></p>
-                                            </div>
+                                    </div>
+                                    <div class="formula-item">
+                                        <?php echo $pension; ?>
+                                        <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                            <h4>Pension</h4>
+                                            <p><?= $hotels['hotel_info']['type_pension'] ?></p>
                                         </div>
-                                    <?php endforeach; ?>
+                                    </div>
                                 </div>
                             </div>
+                            <hr>
                         </div>
+                       
                     <?php endforeach; ?>
                 </div>
             </div>
         </div>
 
-        <script>
+
+        <!-- <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const buttons = document.querySelectorAll(".hotel-button");
                 const hotelInfos = document.querySelectorAll(".hotel-info");
@@ -4134,7 +4166,7 @@ WHERE h.formule_id = $formule_id
                     });
                 });
             });
-        </script>
+        </script> -->
 
 
         <!-- Hebergement END -->
@@ -4675,14 +4707,14 @@ WHERE h.formule_id = $formule_id
     <!------------------------  Sticky footer START ------------------------------->
     <!-- Query for Tarif Prices -->
     <?php
-include '../db.php'; // Include your database connection file
+    include '../db.php'; // Include your database connection file
+    
+    // Get the formule_id from the URL
+    $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// Get the formule_id from the URL
-$formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-
-if ($formule_id > 0) {
-    // Query to fetch pricing details
-    $query = "SELECT 
+    if ($formule_id > 0) {
+        // Query to fetch pricing details
+        $query = "SELECT 
                 prix_chambre_quadruple, 
                 prix_chambre_triple, 
                 prix_chambre_double, 
@@ -4696,35 +4728,35 @@ if ($formule_id > 0) {
               FROM formules 
               WHERE id = ?";
 
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $formule_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $formule_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        $data = $result->fetch_assoc();
+        if ($result->num_rows > 0) {
+            $data = $result->fetch_assoc();
 
-        // Assign fetched values to variables
-        $prix_chambre_quadruple = $data['prix_chambre_quadruple'];
-        $prix_chambre_triple = $data['prix_chambre_triple'];
-        $prix_chambre_double = $data['prix_chambre_double'];
-        $prix_chambre_single = $data['prix_chambre_single'];
-        $prix_bebe = $data['prix_bebe'];
-        $child_discount = $data['child_discount'];
-        $prix_chambre_quadruple_promo = $data['prix_chambre_quadruple_promo'];
-        $prix_chambre_triple_promo = $data['prix_chambre_triple_promo'];
-        $prix_chambre_double_promo = $data['prix_chambre_double_promo'];
-        $prix_chambre_single_promo = $data['prix_chambre_single_promo'];
+            // Assign fetched values to variables
+            $prix_chambre_quadruple = $data['prix_chambre_quadruple'];
+            $prix_chambre_triple = $data['prix_chambre_triple'];
+            $prix_chambre_double = $data['prix_chambre_double'];
+            $prix_chambre_single = $data['prix_chambre_single'];
+            $prix_bebe = $data['prix_bebe'];
+            $child_discount = $data['child_discount'];
+            $prix_chambre_quadruple_promo = $data['prix_chambre_quadruple_promo'];
+            $prix_chambre_triple_promo = $data['prix_chambre_triple_promo'];
+            $prix_chambre_double_promo = $data['prix_chambre_double_promo'];
+            $prix_chambre_single_promo = $data['prix_chambre_single_promo'];
+        } else {
+            // Default values if no record found
+            $prix_chambre_quadruple = $prix_chambre_triple = $prix_chambre_double = $prix_chambre_single = $prix_bebe = $child_discount = $prix_chambre_quadruple_promo = $prix_chambre_triple_promo = $prix_chambre_double_promo = $prix_chambre_single_promo = "N/A";
+        }
+        $stmt->close();
     } else {
-        // Default values if no record found
-        $prix_chambre_quadruple = $prix_chambre_triple = $prix_chambre_double = $prix_chambre_single = $prix_bebe = $child_discount = $prix_chambre_quadruple_promo = $prix_chambre_triple_promo = $prix_chambre_double_promo = $prix_chambre_single_promo = "N/A";
+        echo "Invalid Formule ID.";
     }
-    $stmt->close();
-} else {
-    echo "Invalid Formule ID.";
-}
-?>
-<!-- Query for Tarif Prices -->
+    ?>
+    <!-- Query for Tarif Prices -->
     <div class="sticky-footer">
         <button class="cta-mobile-table-button">
             <div class="icon-arrow">
@@ -4749,66 +4781,66 @@ if ($formule_id > 0) {
                     </div>
                     <h5 style="margin-left: 10px;">Les tarifs par personne</h5>
                     <tr>
-                            <td>Individuelle</td>
-                            <td>
-                                <?php if (!empty($data['prix_chambre_single_promo']) && $data['prix_chambre_single_promo'] != "0.00" && $data['prix_chambre_single_promo'] != $data['prix_chambre_single']): ?>
-                                    <span><?= htmlspecialchars($prix_chambre_single_promo) ?>
-                                        &euro;&nbsp;&nbsp;&nbsp;</span>
-                                    <span
-                                        style="text-decoration: line-through; color:var(--grey-text); "><?= htmlspecialchars($prix_chambre_single) ?>
-                                        &euro;</span>
-                                <?php else: ?>
-                                    <?= htmlspecialchars($prix_chambre_single) ?> &euro;
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Double</td>
-                            <td>
-                                <?php if (!empty($data['prix_chambre_double_promo']) && $data['prix_chambre_double_promo'] != "0.00" && $data['prix_chambre_double_promo'] != $data['prix_chambre_double']): ?>
-                                    <span><?= htmlspecialchars($prix_chambre_double_promo) ?>
-                                        &euro;&nbsp;&nbsp;&nbsp;</span>
-                                    <span
-                                        style="text-decoration: line-through; color:var(--grey-text); "><?= htmlspecialchars($prix_chambre_double) ?>
-                                        &euro;</span>
-                                <?php else: ?>
-                                    <?= htmlspecialchars($prix_chambre_double) ?> &euro;
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Triple</td>
-                            <td>
-                                <?php if (!empty($data['prix_chambre_triple_promo']) && $data['prix_chambre_triple_promo'] != "0.00" && $data['prix_chambre_triple_promo'] != $data['prix_chambre_triple']): ?>
-                                    <span><?= htmlspecialchars($prix_chambre_triple_promo) ?>
-                                        &euro;&nbsp;&nbsp;&nbsp;</span>
-                                    <span
-                                        style="text-decoration: line-through; color:var(--grey-text); "><?= htmlspecialchars($prix_chambre_triple) ?>
-                                        &euro;</span>
-                                <?php else: ?>
-                                    <?= htmlspecialchars($prix_chambre_triple) ?> &euro;
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Quadruple</td>
-                            <td>
-                                <?php if (!empty($data['prix_chambre_quadruple_promo']) && $data['prix_chambre_quadruple_promo'] != "0.00" && $data['prix_chambre_quadruple_promo'] != $data['prix_chambre_quadruple']): ?>
-                                    <span><?= htmlspecialchars($prix_chambre_quadruple_promo) ?>
-                                        &euro;&nbsp;&nbsp;&nbsp;</span>
-                                    <span
-                                        style="text-decoration: line-through; color:var(--grey-text); "><?= htmlspecialchars($prix_chambre_quadruple) ?>
-                                        &euro;</span>
-                                <?php else: ?>
-                                    <?= htmlspecialchars($prix_chambre_quadruple) ?> &euro;
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Bébé</td>
-                            <!-- <td><--?php echo $prix_bebess; ?> €<td> -->
-                            <td><?php echo htmlspecialchars ($data['prix_bebe']); ?> €</td>
-                        </tr>
+                        <td>Individuelle</td>
+                        <td>
+                            <?php if (!empty($data['prix_chambre_single_promo']) && $data['prix_chambre_single_promo'] != "0.00" && $data['prix_chambre_single_promo'] != $data['prix_chambre_single']): ?>
+                                <span><?= htmlspecialchars($prix_chambre_single_promo) ?>
+                                    &euro;&nbsp;&nbsp;&nbsp;</span>
+                                <span
+                                    style="text-decoration: line-through; color:var(--grey-text); "><?= htmlspecialchars($prix_chambre_single) ?>
+                                    &euro;</span>
+                            <?php else: ?>
+                                <?= htmlspecialchars($prix_chambre_single) ?> &euro;
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Double</td>
+                        <td>
+                            <?php if (!empty($data['prix_chambre_double_promo']) && $data['prix_chambre_double_promo'] != "0.00" && $data['prix_chambre_double_promo'] != $data['prix_chambre_double']): ?>
+                                <span><?= htmlspecialchars($prix_chambre_double_promo) ?>
+                                    &euro;&nbsp;&nbsp;&nbsp;</span>
+                                <span
+                                    style="text-decoration: line-through; color:var(--grey-text); "><?= htmlspecialchars($prix_chambre_double) ?>
+                                    &euro;</span>
+                            <?php else: ?>
+                                <?= htmlspecialchars($prix_chambre_double) ?> &euro;
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Triple</td>
+                        <td>
+                            <?php if (!empty($data['prix_chambre_triple_promo']) && $data['prix_chambre_triple_promo'] != "0.00" && $data['prix_chambre_triple_promo'] != $data['prix_chambre_triple']): ?>
+                                <span><?= htmlspecialchars($prix_chambre_triple_promo) ?>
+                                    &euro;&nbsp;&nbsp;&nbsp;</span>
+                                <span
+                                    style="text-decoration: line-through; color:var(--grey-text); "><?= htmlspecialchars($prix_chambre_triple) ?>
+                                    &euro;</span>
+                            <?php else: ?>
+                                <?= htmlspecialchars($prix_chambre_triple) ?> &euro;
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Quadruple</td>
+                        <td>
+                            <?php if (!empty($data['prix_chambre_quadruple_promo']) && $data['prix_chambre_quadruple_promo'] != "0.00" && $data['prix_chambre_quadruple_promo'] != $data['prix_chambre_quadruple']): ?>
+                                <span><?= htmlspecialchars($prix_chambre_quadruple_promo) ?>
+                                    &euro;&nbsp;&nbsp;&nbsp;</span>
+                                <span
+                                    style="text-decoration: line-through; color:var(--grey-text); "><?= htmlspecialchars($prix_chambre_quadruple) ?>
+                                    &euro;</span>
+                            <?php else: ?>
+                                <?= htmlspecialchars($prix_chambre_quadruple) ?> &euro;
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bébé</td>
+                        <!-- <td><--?php echo $prix_bebess; ?> €<td> -->
+                        <td><?php echo htmlspecialchars($data['prix_bebe']); ?> €</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -4849,7 +4881,7 @@ if ($formule_id > 0) {
             });
         </script>
     </div>
-<!------------------------  Sticky footer END ------------------------------->
+    <!------------------------  Sticky footer END ------------------------------->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -4922,50 +4954,54 @@ if ($formule_id > 0) {
     <!-- Hebergement SWIPER START  -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Swiper initialization
-            const madinahSwiper = new Swiper('#hotel-madinah .swiper-container', {
-                slidesPerView: 1, // Show 1 image at a time
-                spaceBetween: 10, // Space between images
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                breakpoints: {
-                    991: {
-                        slidesPerView: 2, // Show 2 slides on screens 991px and above
+            // Initialize all Swipers dynamically for each hotel
+            const hotelSwipers = document.querySelectorAll('.swiper-container');
+
+            hotelSwipers.forEach((swiperContainer) => {
+                const swiperId = swiperContainer.id;  // e.g., swiper-1, swiper-2, etc.
+                const swiperInstance = new Swiper(`#${swiperId}`, {
+                    slidesPerView: 1, // Show 1 image at a time
+                    spaceBetween: 10, // Space between images
+                    pagination: {
+                        el: `#${swiperId} .swiper-pagination`,
+                        clickable: true,
+                    },
+                    breakpoints: {
+                        991: {
+                            slidesPerView: 2.5, // Show 2 slides on screens 991px and above
+                        }
                     }
-                }
+                });
             });
 
-            const makkahSwiper = new Swiper('#hotel-makkah .swiper-container', {
-                slidesPerView: 1, // Show 1 image at a time
-                spaceBetween: 10, // Space between images
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                breakpoints: {
-                    991: {
-                        slidesPerView: 2.5, // Show 2 slides on screens 991px and above
-                    }
-                }
-            });
-
-            // Tab switching
+            // Tab switching for hotel info display
             const buttons = document.querySelectorAll(".hotel-button");
             const hotelInfos = document.querySelectorAll(".hotel-info");
 
+            // Function to activate a button and display its corresponding hotel info
+            function activateButton(button) {
+                buttons.forEach(btn => btn.classList.remove("active"));
+                button.classList.add("active");
+
+                hotelInfos.forEach(info => {
+                    info.style.display = info.id === `hotel-${button.dataset.hotel}` ? "block" : "none";
+                });
+            }
+
+            // Add event listeners for button clicks
             buttons.forEach(button => {
                 button.addEventListener("click", () => {
-                    buttons.forEach(btn => btn.classList.remove("active"));
-                    button.classList.add("active");
-
-                    hotelInfos.forEach(info => {
-                        info.style.display = info.id === `hotel-${button.dataset.hotel}` ? "block" : "none";
-                    });
+                    activateButton(button);
                 });
             });
+
+            // Set the first button as active and display its hotel info by default
+            if (buttons.length > 0) {
+                activateButton(buttons[0]);
+            }
+
         });
+
     </script>
     <!-- Hebergement SWIPER END -->
 
