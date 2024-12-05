@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 24 sep. 2024 à 19:46
+-- Généré le : jeu. 05 déc. 2024 à 19:19
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -69,7 +69,8 @@ CREATE TABLE `category_parent` (
 INSERT INTO `category_parent` (`id`, `nom`, `description`, `photo`) VALUES
 (4, 'Hajj', 'a', 'uploads/planet 4.jpeg'),
 (6, 'Omra', 'b', 'uploads/planet 3.jpeg'),
-(7, 'Omra Ramadhan', 'c', 'uploads/flower 2.jpeg');
+(7, 'Omra Ramadhan', 'c', 'uploads/flower 2.jpeg'),
+(12, 'OMRA 2025', 'd', 'uploads/bus-bagages.jpg');
 
 -- --------------------------------------------------------
 
@@ -169,7 +170,7 @@ INSERT INTO `formules` (`id`, `package_id`, `date_depart`, `date_retour`, `statu
 (447, 5, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 10, '2024-09-15 18:25:22', '[1,2,4,5,6,7]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
 (448, 5, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 11, '2024-09-15 18:25:26', '[1,2,4,5,6,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
 (449, 34, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 199, '2024-09-24 13:28:01', '[1,7,4,6,2,5]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', 'files/66f2be61dd63e_July-to-December-2022-Calendar.pdf', 'uploads/2151457384.jpg', 'CONFIRMÉ'),
-(450, 34, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 160, '2024-09-24 13:29:21', '[1,4,6,2,7,5]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', 'files/66f2beb1caf63_guide_anb.pdf', 'uploads/early-care-and-urgency-of-a-patient-with-symptoms-of-a-stroke-here-EHN4HN.jpg', 'CONFIRMÉ'),
+(450, 34, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 160, '2024-12-03 18:11:15', '[1,4,6,2,7,5]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '<p><br></p>', 'title 2', '<ul><li><strong>Lorem ipsum dolor </strong>sit amet <span style=\"background-color: rgb(255, 0, 255);\">consectetur </span>adipisicing elit. M<span style=\"color: rgb(255, 0, 0);\">axime mollitia</span>, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique <em>accusantium </em>nemo autem.</li></ul><p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', 'files/66f2beb1caf63_guide_anb.pdf', 'uploads/66f954881adde_2151457384.jpg', 'CONFIRMÉ'),
 (451, 40, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 201, '2024-09-15 18:25:36', '[7,6,5,4,2,1]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
 (452, 40, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 173, '2024-09-15 18:25:39', '[1,4,5,7]', '[1,4,6,2,7,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
 (453, 43, '2024-08-01', '2024-08-31', 'activé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 198, '2024-09-15 18:25:42', '[1,4,5,7]', '[1,7,4,6,2,5]', '<p><strong>Vols</strong></p><p>Compagnies aériennes prestigieuses: Saudi Airlines, Turkish Airlines, Emirates, Qatar Airways, etc.</p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '', '', '', '', '', '', '', '', '', NULL, NULL, 'CONFIRMÉ'),
@@ -192,7 +193,7 @@ INSERT INTO `formules` (`id`, `package_id`, `date_depart`, `date_retour`, `statu
 (528, 40, '1982-08-12', '1983-05-27', 'activé', 'Dicta molestiae aliq', '83.00', '57.00', '95.00', '67.00', '79.00', '39.00', '51.00', '56.00', '15.00', '61.00', 172, '2024-09-19 12:21:24', '[\"4\",\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p>Necessitatibus quos .</p>', '', '<p>Proident, excepturi .</p>', '', '<p>Irure aliquid accusa.</p>', '', '<p>Qui at voluptas fuga.</p>', '', '<p>Eum beatae ad provid.</p>', '', '<p>Iste ducimus, volupt.</p>', '', NULL, 'CONFIRMÉ'),
 (529, 4, '1995-11-18', '1997-04-13', 'activé', 'Atque ut nostrud deb', '44.00', '97.00', '27.00', '59.00', '76.00', '38.00', '81.00', '52.00', '24.00', '12.00', 6, '2024-09-19 12:24:08', '[\"1\",\"5\"]', '[1,2,4,5,6,7]', '<p>Distinctio. Dolores .</p>', '', '<p>Accusamus eum volupt.</p>', '', '<p>Deserunt sed sint, e.</p>', '', '<p>Quia quis est, omnis.</p>', '', '<p>Consequatur, id veli.</p>', '', '<p>In praesentium unde .</p>', '', NULL, 'CONFIRMÉ'),
 (530, 40, '2008-02-18', '2019-03-03', 'activé', 'Quas alias voluptate', '25.00', '91.00', '31.00', '32.00', '30.00', '72.00', '72.00', '94.00', '60.00', '17.00', 172, '2024-09-19 12:54:06', '[\"5\",\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p>Sit reiciendis maior.</p>', '', '<p>Voluptates amet, off.</p>', '', '<p>Est et corrupti, in .</p>', '', '<p>Nostrud consequatur.</p>', '', '<p>Temporibus qui velit.</p>', '', '<p>Dicta temporibus ab .</p>', '', NULL, 'CONFIRMÉ'),
-(531, 1, '1980-03-29', '1970-09-20', 'activé', 'Quasi architecto deb', '32.00', '49.00', '68.00', '13.00', '96.00', '46.00', '25.00', '99.00', '33.00', '22.00', 2, '2024-09-19 13:00:32', '[\"1\",\"2\",\"4\",\"5\",\"6\"]', '[1,2,4,5,6,7]', '<p>Cillum eos, accusamu.</p>', '', '<p>Id, ad reprehenderit.</p>', '', '<p>Optio, ex et in inve.</p>', '', '<p>Tempora fugiat, ea d.</p>', '', '<p>Enim velit, reprehen.</p>', '', '<p>Voluptate cumque vol.</p>', '', NULL, 'CONFIRMÉ'),
+(531, 1, '2024-12-01', '2024-12-11', 'activé', '10', '32.00', '49.00', '68.00', '13.00', '96.00', '46.00', '25.00', '99.00', '33.00', '22.00', 2, '2024-12-01 12:12:45', '[1,2,4,5,6]', '[1,2,4,5,6,7]', '<p>Cillum eos, accusamu.</p>', '', '<p>Id, ad reprehenderit.</p>', '', '<p>Optio, ex et in inve.</p>', '', '<p>Tempora fugiat, ea d.</p>', '', '<p>Enim velit, reprehen.</p>', '', '<p>Voluptate cumque vol.</p>', '', 'uploads/674c5213b6188_bus-bagages.jpg', 'CONFIRMÉ'),
 (533, 43, '1983-09-09', '2008-05-17', 'activé', 'Excepteur sapiente d', '97.00', '77.00', '77.00', '11.00', '73.00', '95.00', '90.00', '90.00', '37.00', '49.00', 179, '2024-09-19 13:08:15', '[\"4\",\"5\",\"7\"]', '[1,2,4,5,6,7]', '<p>Dolor ratione quod f.</p>', '', '<p>Aut error quidem des.</p>', '', '<p>Cum eveniet, dolorum.</p>', '', '<p>Fuga. Fuga. Odit et .</p>', '', '<p>Ipsum, repudiandae l.</p>', '', '<p>Suscipit illo pariat.</p>', '', NULL, 'CONFIRMÉ'),
 (534, 43, '2012-07-27', '1993-02-02', 'activé', 'Qui cumque error dol', '29.00', '59.00', '12.00', '44.00', '49.00', '98.00', '17.00', '93.00', '32.00', '48.00', 179, '2024-09-19 13:22:12', '[\"1\",\"2\",\"6\"]', '[1,2,4,5,6,7]', '<p>Officia voluptatem v.</p>', '', '<p>Sit, deleniti illum.</p>', '', '<p>Laborum. Velit quasi.</p>', '', '<p>Voluptatum sed fugit.</p>', '', '<p>Quae incidunt, tenet.</p>', '', '<p>Fugiat porro volupta.</p>', '', NULL, 'CONFIRMÉ'),
 (535, 3, '2000-07-07', '1970-12-11', 'activé', 'In incididunt non au', '7.00', '73.00', '42.00', '25.00', '19.00', '88.00', '2.00', '14.00', '98.00', '48.00', 5, '2024-09-19 13:30:27', '[\"5\"]', '[1,2,4,5,6,7]', '<p>Vel non nostrud iust.</p>', '', '<p>Labore sint, ab prae.</p>', '', '<p>Delectus, eum aut qu.</p>', '', '<p>Ullam sunt, itaque o.</p>', '', '<p>Pariatur. Incidunt, .</p>', '', '<p>Quisquam repellendus.</p>', '', NULL, 'CONFIRMÉ'),
@@ -215,11 +216,15 @@ INSERT INTO `formules` (`id`, `package_id`, `date_depart`, `date_retour`, `statu
 (580, 4, '1992-05-22', '1992-10-08', 'activé', 'Autem excepteur nihi', '59.00', '71.00', '73.00', '50.00', '47.00', '22.00', '52.00', '4.00', '3.00', '39.00', 6, '2024-09-24 11:35:31', '[\"2\",\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p>Minus est consequunt.</p>', '', '<p>Eligendi earum volup.</p>', '', '<p>Iure perferendis ame.</p>', '', '<p>Occaecat occaecat do.</p>', '', '<p>Earum adipisicing se.</p>', '', '<p>Assumenda occaecat s.</p>', 'files/66f2a40343b70_66f185ad3a072_manuel d\'utilisation_plateforme_equivalence_web_2 (2).pdf', '', 'CONFIRMÉ'),
 (581, 1, '1973-10-10', '1973-04-02', 'activé', 'Recusandae Fugit v', '59.00', '82.00', '44.00', '82.00', '57.00', '82.00', '86.00', '35.00', '51.00', '17.00', 2, '2024-09-24 11:39:06', '[\"6\",\"7\"]', '[1,2,4,5,6,7]', '<p>Sunt et consequatur.</p>', '', '<p>Veritatis velit, eni.</p>', '', '<p>Eius perspiciatis, m.</p>', '', '<p>Illo est eligendi ut.</p>', '', '<p>Dignissimos temporib.</p>', '', '<p>Dolorum similique au.</p>', 'files/66f2a4da7d86f_66f185ad3a072_manuel d\'utilisation_plateforme_equivalence_web_2 (2).pdf', 'uploads/66f2a4da7dc7a__11286dc2-1536-4f47-895c-cf481e8684b6.jpeg', 'CONFIRMÉ'),
 (582, 86, '2024-02-13', '2018-05-19', 'activé', 'Illum et aliquam qu', '78.00', '86.00', '69.00', '2.00', '80.00', '59.00', '3.00', '16.00', '70.00', '1.00', 240, '2024-09-24 11:45:14', '[\"1\",\"2\"]', '[1,2,4,5,6,7]', '<p>Et dolores est velit.</p>', '', '<p>Ut quod fugit, irure.</p>', '', '<p>Deleniti aut aut min.</p>', '', '<p>Porro dolore consect.</p>', '', '<p>Odio nisi lorem fuga.</p>', '', '<p>Pariatur. Excepteur .</p>', 'files/66f2a64ab44db_66f185ad3a072_manuel d\'utilisation_plateforme_equivalence_web_2 (2).pdf', 'uploads/66f2a64ab48f9_Seminar-amico.png', 'CONFIRMÉ'),
-(583, 3, '1994-08-31', '2006-11-22', 'activé', 'Consequat Aspernatu', '86.00', '71.00', '31.00', '68.00', '72.00', '44.00', '4.00', '98.00', '11.00', '38.00', 5, '2024-09-24 15:47:44', '[2,4,7]', '[1,2,4,5,6,7]', '<p>DESCRIPTION</p>', 'title 1', '<p>SECTION 1</p>', 'title 2', '<p>SECTION 2</p>', 'title 3', '<p>SECTION 3</p>', 'title 4', '<p>SECTION 4</p>', 'title 5', '<p>SECTION 5</p>', 'files/66f2b93450053_66f185ad3a072_manuel d\'utilisation_plateforme_equivalence_web_2 (2).pdf', '', 'CONFIRMÉ'),
+(583, 3, '1994-08-31', '2006-11-22', 'activé', '20', '86.00', '71.00', '31.00', '68.00', '72.00', '44.00', '4.00', '98.00', '11.00', '38.00', 5, '2024-09-29 09:48:03', '[2,4,7]', '[1,2,4,5,6,7]', '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum ! Provident similaire accusantium nemo autem.</p>', 'title 1', '<p>SECTION 1</p>', 'title 2', '<p>SECTION 2</p>', 'title 3', '<p>SECTION 3</p>', 'title 4', '<p>SECTION 4</p>', 'title 5', '<p>SECTION 5</p>', 'files/66f2b93450053_66f185ad3a072_manuel d\'utilisation_plateforme_equivalence_web_2 (2).pdf', 'uploads/66f921de32143_makkah3.jpeg', 'CONFIRMÉ'),
 (584, 3, '1994-08-31', '2006-11-22', 'désactivé', 'Consequat Aspernatu', '86.00', '71.00', '31.00', '68.00', '72.00', '44.00', '4.00', '98.00', '11.00', '38.00', 5, '2024-09-24 13:26:21', '[2,4,7]', '[1,2,4,5,6,7]', '<p>DESCRIPTION</p>', 'title 1', '<p>SECTION 1</p>', 'title 2', '<p>SECTION 2</p>', 'title 3', '<p>SECTION 3</p>', 'title 4', '<p>SECTION 4</p>', 'title 5', '<p>SECTION 5</p>', 'files/66f2bb2d4627f_CV professionnel gris simple.pdf', 'uploads/a-professional-design-of-a-purple-and-pink-gradien-Gc4UdF_nT2qX_14ZEdarDA-73kMud6zQzCOLcRstZ5anA.jpeg', 'CONFIRMÉ'),
 (585, 86, '2024-02-13', '2018-05-19', 'désactivé', 'Illum et aliquam qu', '78.00', '86.00', '69.00', '2.00', '80.00', '59.00', '3.00', '16.00', '70.00', '1.00', 240, '2024-09-24 13:14:51', '[\"1\",\"2\"]', '[1,2,4,5,6,7]', '<p>Et dolores est velit.</p>', '', '<p>Ut quod fugit, irure.</p>', '', '<p>Deleniti aut aut min.</p>', '', '<p>Porro dolore consect.</p>', '', '<p>Odio nisi lorem fuga.</p>', '', '<p>Pariatur. Excepteur .</p>', 'files/66f2a64ab44db_66f185ad3a072_manuel d\'utilisation_plateforme_equivalence_web_2 (2).pdf', 'uploads/66f2a64ab48f9_Seminar-amico.png', 'CONFIRMÉ'),
 (589, 88, '2024-08-01', '2024-08-31', 'désactivé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 244, '2024-09-24 17:45:50', '[1,7,4,6,2,5]', '[1,7,4,6,2,5]', '<p>hola</p><p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', 'files/66f2be61dd63e_July-to-December-2022-Calendar.pdf', 'uploads/66f2f6c09237e_medina.jpg', 'CONFIRMÉ'),
-(590, 88, '2024-08-01', '2024-08-31', 'désactivé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 245, '2024-09-24 17:02:37', '[1,4,6,2,7,5]', '[1,4,6,2,7,5]', '<p><br></p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', 'files/66f2beb1caf63_guide_anb.pdf', 'uploads/66f2f05baf687_35440.jpg', 'CONFIRMÉ');
+(590, 88, '2024-08-01', '2024-08-31', 'désactivé', '30', '1500.00', '1200.00', '1000.00', '700.00', '500.00', '300.00', '1400.00', '1100.00', '900.00', '600.00', 245, '2024-09-24 17:02:37', '[1,4,6,2,7,5]', '[1,4,6,2,7,5]', '<p><br></p><p><strong style=\"color: rgb(54, 60, 68);\">Distance du Haram</strong></p><p>Moins de 500 m (10 min à pieds) hors Ramadan et jusqu’à 1500 m (25 min à pieds) pendant le mois de Ramadan</p><p><strong style=\"color: rgb(54, 60, 68);\">Standing des hôtels</strong></p><p>Standing supérieur : Hôtels appartenant à des chaines locales ou internationales (Dar Al Imane, Bosphorus, Sheraton, Ramada, etc.)</p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', 'files/66f2beb1caf63_guide_anb.pdf', 'uploads/66f2f05baf687_35440.jpg', 'CONFIRMÉ'),
+(591, 52, '1982-11-26', '1999-03-23', 'activé', 'Unde quos sapiente n', '1.00', '20.00', '60.00', '67.00', '82.00', '60.00', '2.00', '18.00', '18.00', '75.00', 185, '2024-12-05 11:28:31', '[\"4\",\"6\",\"1\"]', '[4,null,6,null,1,null,2,null,5,null,7,null]', '<p>Vero voluptatem cill.</p>', '', '<p>Quia dignissimos har.</p>', '', '<p>Animi, tempore, veni.</p>', '', '<p>In fuga. Cum praesen.</p>', '', '<p>Pariatur. Id aut ear.</p>', '', '<p>Nihil voluptatum in .</p>', '', 'uploads/67518e5f42e51_1.jpg', 'CONFIRMÉ'),
+(592, 88, '1986-02-18', '1980-02-07', 'activé', 'Quasi natus possimus', '37.00', '9.00', '62.00', '14.00', '32.00', '94.00', '0.00', '0.00', '0.00', '0.00', 244, '2024-12-05 12:15:43', '[5,2,7]', '[5,1,2,4,6,7]', '<p>Dolor molestias sed .</p>', '', '<p>Adipisicing laborum .</p>', '', '<p>Veniam, voluptas pra.</p>', '', '<p>Recusandae. Exercita.</p>', '', '<p>Pariatur. Quia sit n.</p>', '', '<p>Lorem harum elit, et.</p>', '', 'uploads/675198e9a5146_2.jpg', 'EN ATTENTE'),
+(593, 1, '2024-12-05', '2024-12-18', 'activé', '10', '11.00', '11.00', '11.00', '11.00', '11.00', '11.00', '22.00', '22.00', '22.00', '22.00', 2, '2024-12-05 12:49:47', '[\"1\",\"2\",\"6\"]', '[1,2,4,5,6,7]', '<p>22</p><p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', 'uploads/6751a16b02646_3.jpg', 'CONFIRMÉ'),
+(594, 5, '2024-12-12', '2024-12-18', 'activé', '20', '10.00', '10.00', '10.00', '10.00', '10.00', '10.00', '20.00', '20.00', '20.00', '20.00', 10, '2024-12-05 18:15:08', '[7,6,2]', '[7,null,6,null,4,null,2,null,1,null]', '<p>l,kl</p><p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', '<p><br></p>', '', 'uploads/6751a7d3a57c0_6.jpg', 'CONFIRMÉ');
 
 -- --------------------------------------------------------
 
@@ -307,7 +312,6 @@ INSERT INTO `hebergements` (`id`, `formule_id`, `hotel_id`, `type_pension`, `dat
 (1269, 528, 6, 'Iftar', '1973-03-05', '1991-02-27', 6568),
 (1270, 529, 5, 'Sans pension', '2003-06-27', '1990-05-31', 0),
 (1271, 530, 18, 'Sans pension', '2015-05-22', '2020-02-19', 1734),
-(1272, 531, 5, 'Iftar', '2015-05-21', '2015-07-29', 69),
 (1273, 533, 18, 'Demi-pension', '1984-09-14', '1979-09-12', 0),
 (1274, 534, 7, 'Petit déjeuner', '1996-04-28', '2006-09-20', 3797),
 (1275, 535, 7, 'Pension Complète', '1991-11-10', '1987-12-23', 0),
@@ -338,16 +342,26 @@ INSERT INTO `hebergements` (`id`, `formule_id`, `hotel_id`, `type_pension`, `dat
 (1373, 449, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
 (1374, 449, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
 (1375, 449, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
-(1376, 450, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
-(1377, 450, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
-(1378, 450, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
-(1407, 583, 6, 'Iftar', '1985-09-26', '1997-09-16', 4373),
 (1450, 590, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
 (1451, 590, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
 (1452, 590, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
 (1462, 589, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
 (1463, 589, 6, 'Pension Complète', '2024-08-16', '2024-08-23', 7),
-(1464, 589, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8);
+(1464, 589, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
+(1487, 583, 6, 'Iftar', '1985-09-26', '1997-09-16', 4373),
+(1516, 450, 7, 'Pension Complète', '2024-08-01', '2024-08-16', 15),
+(1517, 450, 4, 'Pension Complète', '2024-08-23', '2024-08-31', 8),
+(1518, 450, 18, 'Demi-pension', '2024-07-01', '2024-07-10', 9),
+(1525, 531, 4, 'Iftar', '2024-12-01', '2024-12-06', 5),
+(1526, 531, 7, 'Sahour', '2024-12-06', '2024-12-11', 5),
+(1527, 531, 18, 'Sahour', '2024-12-18', '2024-12-21', 3),
+(1528, 531, 5, 'Pension Complète', '2024-12-18', '2024-12-21', 3),
+(1529, 531, 19, 'Sahour et Iftar', '2024-12-23', '2024-12-26', 3),
+(1530, 531, 21, 'Sahour et Iftar', '2024-12-12', '2024-12-17', 5),
+(1531, 591, 6, 'Petit déjeuner ensuite Iftar', '2007-05-20', '2021-10-24', 5271),
+(1533, 592, 21, 'Iftar', '2007-03-24', '2003-08-28', 0),
+(1534, 593, 5, 'Iftar', '2024-12-19', '2024-12-24', 5),
+(1546, 594, 7, 'Demi-pension', '2024-12-04', '2024-12-12', 8);
 
 -- --------------------------------------------------------
 
@@ -370,12 +384,13 @@ CREATE TABLE `hotels` (
 --
 
 INSERT INTO `hotels` (`id`, `nom`, `etoiles`, `ville`, `details`, `monument`, `image_gallery`) VALUES
-(4, 'Hotels Hilton Al Madinah', 5, '19', 'hotel 5*', 'en face de haram', NULL),
+(4, 'Hotels Hilton Al Madinah', 5, '19', 'Environ 35 minutes', 'en face de haram', NULL),
 (5, 'Hotel Seabel Alhambra', 5, '18', 'Hotel 5*', 'En Face de haram', NULL),
 (6, 'New Medinah Hotel', 4, '19', 'Hôtels économiques à Medina les mieux notés', '3km', NULL),
-(7, 'Pullan ZamZam Makkah ', 4, '18', 'Pullman ZamZam Makkah stands as a distinctive landmark in Makkah', '3.8km', NULL),
+(7, 'Pullan ZamZam Makkah ', 4, '18', 'Environ 25 minutes', '3.8km', NULL),
 (18, 'Recusandae Cupidata', 1, '2', 'Enim est ut quod nih', 'Dolores non exercita', NULL),
-(19, 'Dignissimos totam cu', 1, '2', 'Vero consequat Nihi', 'Ratione dolorem pers', NULL);
+(19, 'Dignissimos totam cu', 2, '2', 'Vero consequat Nihi', 'Ratione dolorem pers', NULL),
+(21, 'Hotel Luxu', 4, '18', '5 minutes', '1km', NULL);
 
 -- --------------------------------------------------------
 
@@ -395,17 +410,13 @@ CREATE TABLE `hotel_gallery` (
 
 INSERT INTO `hotel_gallery` (`id`, `hotel_id`, `image_path`) VALUES
 (5, 5, 'uploads/omra-octobre-formule-confort-17-2.jpg'),
-(7, 4, 'uploads/omra-octobre-formule-confort-17-2.jpg'),
-(26, 7, 'uploads/669a8a491114c3.16856690_6668d725d1d067.74923834_omra-octobre-18.jpg'),
 (32, 6, 'uploads/new medinah hotel.avif'),
 (33, 7, 'uploads/pullman.jpg'),
-(36, 6, 'uploads/66a021a294b131.21970312_66a01aac62cd57.92597814_669a8a491114c3.16856690_6668d725d1d067.74923834_omra-octobre-18.jpg'),
 (37, 4, 'uploads/hotel1.jpg'),
 (38, 4, 'uploads/hotel2.jpg'),
 (39, 4, 'uploads/hotel3.jpg'),
 (40, 4, 'uploads/hotel 4.jpg'),
 (41, 5, 'uploads/hotel 4.jpg'),
-(42, 5, 'uploads/hotel 4.jpg'),
 (43, 5, 'uploads/hotel3.jpg'),
 (44, 5, 'uploads/hotel2.jpg'),
 (45, 5, 'uploads/hotel1.jpg'),
@@ -419,7 +430,18 @@ INSERT INTO `hotel_gallery` (`id`, `hotel_id`, `image_path`) VALUES
 (53, 7, 'uploads/hotel3.jpg'),
 (54, 7, 'uploads/151616.jpg'),
 (58, 18, 'uploads/flower 2.jpeg'),
-(59, 19, 'uploads/flower 1.jpeg');
+(59, 19, 'uploads/flower 1.jpeg'),
+(66, 18, 'uploads/2.jpg'),
+(67, 4, 'uploads/2.jpg'),
+(68, 18, 'uploads/5.jpg'),
+(69, 21, 'uploads/3.jpg'),
+(70, 21, 'uploads/4.jpg'),
+(71, 21, 'uploads/5.jpg'),
+(72, 21, 'uploads/6.jpg'),
+(73, 21, 'uploads/7.jpg'),
+(74, 21, 'uploads/8.jpg'),
+(75, 21, 'uploads/9.jpg'),
+(76, 21, 'uploads/10.jpg');
 
 -- --------------------------------------------------------
 
@@ -473,9 +495,39 @@ INSERT INTO `programs` (`id`, `nom`, `description`, `photo`) VALUES
 (1, 'Programme 1', '4 nuits à Médine\r\n4 nuits à Makkah ', 'uploads/66a4bf55583b21.59640469_makkah.jpg'),
 (2, 'Programme 2', '5 nuits à Médine \r\n5 nuits à Makkah', 'uploads/66a4be20d6ab92.07264307_makkah2.jpg'),
 (4, 'Programme 3', '6 nuits à Médine \r\n6 nuits à Makkah', 'uploads/66a4be3b6417f7.22039243_makkah3.jpeg'),
-(5, 'Programme 4', '7 nuits à Médine \r\n7 nuits à Makkah', 'uploads/66a4be5878ccc4.21460091_medina1.jpg'),
 (6, 'Programme 5', '8 nuits à Médine \r\n8 nuits à Makkah', 'uploads/66a4be9fd18697.71041625_medina2.jpg'),
 (7, 'Programme 6', '9 nuits à Médine \r\n9 nuits à Makkah\r\n', 'uploads/66a4beb9348b42.27248419_medina3.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `program_details`
+--
+
+CREATE TABLE `program_details` (
+  `id` int(11) NOT NULL,
+  `formule_id` int(11) NOT NULL,
+  `program_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `duration` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `program_details`
+--
+
+INSERT INTO `program_details` (`id`, `formule_id`, `program_id`, `date`, `duration`) VALUES
+(1, 591, 4, '2024-01-03', '2h '),
+(2, 591, 6, '2024-01-05', '2h 40min'),
+(3, 591, 1, '2024-01-01', '1h 30min'),
+(4, 592, 2, '1971-02-09', '2h'),
+(6, 592, 7, '1970-08-17', '6h'),
+(7, 593, 1, '0000-00-00', ''),
+(8, 593, 2, '0000-00-00', ''),
+(9, 593, 6, '0000-00-00', ''),
+(41, 594, 7, '0000-00-00', ''),
+(42, 594, 6, '0000-00-00', ''),
+(43, 594, 2, '0000-00-00', '');
 
 -- --------------------------------------------------------
 
@@ -815,7 +867,6 @@ INSERT INTO `vols` (`id`, `formule_id`, `ville_depart_id`, `ville_destination_id
 (1760, 528, '11', 13, 9, 11, 7, 'Consequuntur delectu', '2021-01-21 09:38:00', '2020-02-19 10:57:00'),
 (1761, 529, '16', 19, 11, 11, 6, 'Aut beatae incididun', '2023-07-17 09:06:00', '1982-06-17 00:18:00'),
 (1762, 530, '13', 14, 11, 13, 6, 'Error nostrud ration', '2008-11-28 11:29:00', '1995-07-13 19:31:00'),
-(1763, 531, '13', 15, 7, 10, 7, 'Incidunt dolore bla', '2014-02-13 08:42:00', '2005-03-14 04:25:00'),
 (1764, 533, '13', 13, 2, 13, 7, 'Voluptas ut ipsum cu', '2008-12-25 22:08:00', '2007-01-23 19:57:00'),
 (1765, 534, '15', 2, 4, 13, 6, 'Amet ut qui volupta', '2001-08-22 22:54:00', '2019-01-20 12:44:00'),
 (1766, 535, '2', 12, 11, 13, 7, 'Culpa inventore vel ', '1977-12-23 08:22:00', '1977-04-11 04:15:00'),
@@ -848,12 +899,6 @@ INSERT INTO `vols` (`id`, `formule_id`, `ville_depart_id`, `ville_destination_id
 (1904, 449, '20', 19, 12, 13, 6, 'PS3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
 (1905, 449, '19', 2, 13, 4, 6, 'PS4', '2024-07-31 08:00:00', '2024-08-31 20:00:00'),
 (1906, 449, '2', 11, 4, 5, 6, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00'),
-(1907, 450, '11', 2, 5, 4, 6, 'PS1', '2024-08-01 06:00:00', '2024-08-01 08:00:00'),
-(1908, 450, '2', 20, 4, 12, 6, 'PS2', '2024-08-01 10:00:00', '2024-08-01 20:00:00'),
-(1909, 450, '20', 19, 12, 13, 6, 'PS3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
-(1910, 450, '19', 2, 13, 4, 6, 'PS4', '2024-07-31 08:00:00', '2024-08-31 20:00:00'),
-(1911, 450, '2', 11, 4, 5, 6, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00'),
-(1962, 583, '20', 13, 5, 7, 7, 'Et voluptate qui eum', '2007-10-14 23:58:00', '1975-01-03 11:22:00'),
 (2033, 590, '11', 2, 5, 4, 6, 'PS1', '2024-08-01 06:00:00', '2024-08-01 08:00:00'),
 (2034, 590, '2', 20, 4, 12, 6, 'PS2', '2024-08-01 10:00:00', '2024-08-01 20:00:00'),
 (2035, 590, '20', 19, 12, 13, 6, 'PS3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
@@ -863,7 +908,18 @@ INSERT INTO `vols` (`id`, `formule_id`, `ville_depart_id`, `ville_destination_id
 (2054, 589, '2', 20, 4, 12, 6, 'PS2', '2024-08-01 10:00:00', '2024-08-01 20:00:00'),
 (2055, 589, '20', 19, 12, 13, 6, 'PS3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
 (2056, 589, '19', 2, 13, 4, 6, 'PS4', '2024-07-31 08:00:00', '2024-08-31 20:00:00'),
-(2057, 589, '2', 11, 4, 5, 6, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00');
+(2057, 589, '2', 11, 4, 5, 6, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00'),
+(2085, 583, '20', 13, 5, 7, 7, 'Et voluptate qui eum', '2007-08-14 23:58:00', '1975-12-03 11:22:00'),
+(2123, 450, '11', 2, 5, 4, 6, 'PS1', '2024-08-01 06:00:00', '2024-08-01 08:00:00'),
+(2124, 450, '2', 20, 4, 12, 6, 'PS2', '2024-08-01 10:00:00', '2024-08-01 20:00:00'),
+(2125, 450, '20', 19, 12, 13, 6, 'PS3', '2024-08-16 06:00:00', '2024-08-16 08:00:00'),
+(2126, 450, '19', 2, 13, 4, 6, 'PS4', '2024-07-31 08:00:00', '2024-08-31 20:00:00'),
+(2127, 450, '2', 11, 4, 5, 6, 'PS5', '2024-08-31 21:00:00', '2024-08-31 23:00:00'),
+(2129, 531, '13', 15, 7, 10, 7, 'Incidunt dolore bla', '2014-02-13 08:42:00', '2005-03-14 04:25:00'),
+(2130, 591, '11', 14, 5, 5, 6, 'Repellendus Illum ', '2012-07-20 20:51:00', '2002-02-28 16:33:00'),
+(2132, 592, '12', 14, 11, 5, 6, 'Nesciunt natus irur', '2009-07-04 02:13:00', '2006-08-09 11:05:00'),
+(2133, 593, '18', 18, 12, 11, 7, '500', '2024-12-31 13:48:00', '2025-01-04 13:48:00'),
+(2145, 594, '16', 19, 12, 12, 6, 'Velit corporis saepe', '2024-12-30 14:15:00', '2024-12-27 14:15:00');
 
 --
 -- Index pour les tables déchargées
@@ -936,6 +992,14 @@ ALTER TABLE `programs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `program_details`
+--
+ALTER TABLE `program_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `formule_id` (`formule_id`),
+  ADD KEY `program_id` (`program_id`);
+
+--
 -- Index pour la table `reservations`
 --
 ALTER TABLE `reservations`
@@ -981,7 +1045,7 @@ ALTER TABLE `airports`
 -- AUTO_INCREMENT pour la table `category_parent`
 --
 ALTER TABLE `category_parent`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `compagnies_aeriennes`
@@ -999,25 +1063,25 @@ ALTER TABLE `extras`
 -- AUTO_INCREMENT pour la table `formules`
 --
 ALTER TABLE `formules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=592;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=596;
 
 --
 -- AUTO_INCREMENT pour la table `hebergements`
 --
 ALTER TABLE `hebergements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1465;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1547;
 
 --
 -- AUTO_INCREMENT pour la table `hotels`
 --
 ALTER TABLE `hotels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `hotel_gallery`
 --
 ALTER TABLE `hotel_gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT pour la table `omra_packages`
@@ -1030,6 +1094,12 @@ ALTER TABLE `omra_packages`
 --
 ALTER TABLE `programs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
+-- AUTO_INCREMENT pour la table `program_details`
+--
+ALTER TABLE `program_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT pour la table `reservations`
@@ -1059,7 +1129,7 @@ ALTER TABLE `ville_depart`
 -- AUTO_INCREMENT pour la table `vols`
 --
 ALTER TABLE `vols`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2058;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2146;
 
 --
 -- Contraintes pour les tables déchargées
@@ -1090,6 +1160,13 @@ ALTER TABLE `hotel_gallery`
 --
 ALTER TABLE `omra_packages`
   ADD CONSTRAINT `fk_category_parent` FOREIGN KEY (`category_parent_id`) REFERENCES `category_parent` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `program_details`
+--
+ALTER TABLE `program_details`
+  ADD CONSTRAINT `program_details_ibfk_1` FOREIGN KEY (`formule_id`) REFERENCES `formules` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `program_details_ibfk_2` FOREIGN KEY (`program_id`) REFERENCES `programs` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `type_formule_omra`
