@@ -44,6 +44,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $s5d = mysqli_real_escape_string($conn, $_POST['section5']);
     $statut_vol = mysqli_real_escape_string($conn, $_POST['statut_vol']);
     //wess
+    // Fetch and sanitize selected programs and their details
+    $selectedPrograms = isset($_POST['programs']) ? array_map('intval', $_POST['programs']) : [];
+    $programDates = isset($_POST['program_dates']) ? $_POST['program_dates'] : [];
+    $programDurations = isset($_POST['program_durations']) ? $_POST['program_durations'] : [];
+    $programOrder = isset($_POST['program_order']) ? $_POST['program_order'] : [];
+
+    // Ensure data consistency
+    $programDetails = [];
+    foreach ($selectedPrograms as $programId) {
+        $programDetails[] = [
+            'program_id' => $programId,
+            'date' => mysqli_real_escape_string($conn, $programDates[$programId] ?? ''),
+            'duration' => mysqli_real_escape_string($conn, $programDurations[$programId] ?? '')
+        ];
+    }
+
+    $programsJson = json_encode($selectedPrograms);
+    $programOrderJson = json_encode($programOrder);
+
+    // Clear previous program details for the formule
+    $deleteSql = "DELETE FROM program_details WHERE formule_id = $formule_id";
+    if (!mysqli_query($conn, $deleteSql)) {
+        echo "Erreur lors de la suppression des détails des programmes : " . mysqli_error($conn);
+        exit;
+    }
+
+    // Insert new program details
+    $insertProgramDetailsSql = "INSERT INTO program_details (formule_id, program_id, date, duration) VALUES ";
+    $values = [];
+    foreach ($programDetails as $detail) {
+        $values[] = "('$formule_id', '{$detail['program_id']}', '{$detail['date']}', '{$detail['duration']}')";
+    }
+    if (!empty($values)) {
+        $insertProgramDetailsSql .= implode(', ', $values);
+        if (!mysqli_query($conn, $insertProgramDetailsSql)) {
+            echo "Erreur lors de l'insertion des détails des programmes : " . mysqli_error($conn);
+            exit;
+        }
+    }
 
     // Handle file upload (if any)
     $uploaded_file_path = ''; // Initialize variable for the file path

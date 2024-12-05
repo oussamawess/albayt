@@ -375,6 +375,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         $programs[] = $program;
                     }
 
+
+
                     // Retrieve existing vols
                     $volsSql = "SELECT * FROM vols WHERE formule_id = $formuleId";
                     $volsResult = mysqli_query($conn, $volsSql);
@@ -408,6 +410,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             $orderedPrograms[] = $program;
                         }
                     }
+
+                    
+
+
                 } else {
                     echo "Formule not found.";
                     exit; // Or redirect to an error page
@@ -421,30 +427,30 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <h2>Modifier une Formule</h2>
             <input type="hidden" name="formule_id" value="<?php echo $formuleId; ?>">
             <div class="half-width-inputs">
-            <div class="input-group">
-        <label for="package">Ville de départ:</label>
-        <select id="package" name="package" class="half-width-input" required>
-            <option value="">Sélectionnez une ville</option>
-            <?php
-            // Fetch and display package options along with their category from the database
-            $sql = "
+                <div class="input-group">
+                    <label for="package">Ville de départ:</label>
+                    <select id="package" name="package" class="half-width-input" required>
+                        <option value="">Sélectionnez une ville</option>
+                        <?php
+                        // Fetch and display package options along with their category from the database
+                        $sql = "
             SELECT omra_packages.id, omra_packages.nom, category_parent.nom AS category_nom
             FROM omra_packages
             JOIN category_parent ON omra_packages.category_parent_id = category_parent.id";
 
-            // Execute the query
-            $result = mysqli_query($conn, $sql);
+                        // Execute the query
+                        $result = mysqli_query($conn, $sql);
 
-            // Loop through the result and populate the dropdown
-            while ($row = mysqli_fetch_assoc($result)) {
-                // Check if the package is the existing one (to pre-select it)
-                $selected = ($row["id"] == $existingPackageId) ? 'selected' : '';
-                // Display the package name and category name
-                echo "<option value='" . $row["id"] . "' $selected>" . $row["nom"] . " - " . $row["category_nom"] . "</option>";
-            }
-            ?>
-        </select>
-    </div>
+                        // Loop through the result and populate the dropdown
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            // Check if the package is the existing one (to pre-select it)
+                            $selected = ($row["id"] == $existingPackageId) ? 'selected' : '';
+                            // Display the package name and category name
+                            echo "<option value='" . $row["id"] . "' $selected>" . $row["nom"] . " - " . $row["category_nom"] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
 
                 <div class="input-group">
                     <label for="type">Type de la Formule:</label>
@@ -467,9 +473,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <label for="statut">Statut:</label>
                     <select id="statut" name="statut" class="half-width-input" required>
                         <option value="activé" <?php if ($existingStatut == 'activé')
-                                                    echo 'selected'; ?>>En vente</option>
+                            echo 'selected'; ?>>En vente
+                        </option>
                         <option value="désactivé" <?php if ($existingStatut == 'désactivé')
-                                                        echo 'selected'; ?>>Épuisé
+                            echo 'selected'; ?>>Épuisé
                         </option>
                     </select>
                 </div>
@@ -482,7 +489,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
             <script>
-                document.getElementById('package').addEventListener('change', function() {
+                document.getElementById('package').addEventListener('change', function () {
                     var packageId = this.value;
                     var typeSelect = document.getElementById('type');
                     typeSelect.innerHTML = '<option value="">Sélectionnez un type</option>'; // Clear current options
@@ -490,10 +497,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     if (packageId) {
                         var xhr = new XMLHttpRequest();
                         xhr.open('GET', 'fetch_types.php?package_id=' + packageId, true);
-                        xhr.onreadystatechange = function() {
+                        xhr.onreadystatechange = function () {
                             if (xhr.readyState === 4 && xhr.status === 200) {
                                 var types = JSON.parse(xhr.responseText);
-                                types.forEach(function(type) {
+                                types.forEach(function (type) {
                                     var option = document.createElement('option');
                                     option.value = type.id;
                                     option.text = type.nom;
@@ -508,17 +515,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="half-width-inputs">
                 <div class="input-group">
                     <label for="date_depart">Date de Départ:</label>
-                    <input type="date" id="date_depart" name="date_depart" class="half-width-input" value="<?php echo $existingDateDepart; ?>" required>
+                    <input type="date" id="date_depart" name="date_depart" class="half-width-input"
+                        value="<?php echo $existingDateDepart; ?>" required>
                 </div>
 
                 <div class="input-group">
                     <label for="date_retour">Date de Retour:</label>
-                    <input type="date" id="date_retour" name="date_retour" class="half-width-input" value="<?php echo $existingDateRetour; ?>" required>
+                    <input type="date" id="date_retour" name="date_retour" class="half-width-input"
+                        value="<?php echo $existingDateRetour; ?>" required>
                 </div>
 
                 <div class="input-group">
                     <label for="duree_sejour">Durée de séjour:</label>
-                    <input type="text" id="duree_sejour" name="duree_sejour" class="half-width-input" value="<?php echo $existingDureeSejour; ?>" required>
+                    <input type="text" id="duree_sejour" name="duree_sejour" class="half-width-input"
+                        value="<?php echo $existingDureeSejour; ?>" required>
                 </div>
             </div>
 
@@ -531,9 +541,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <div class="collapsible-content">
                     <div class="input-group">
                         <label for="statut_vol">Statut Vol:</label>
-                        <select id="statut_vol" name="statut_vol" class="half-width-input" style="width: 30%; background-color: <?php echo ($existingStatutVol == 'CONFIRMÉ') ? '#91d44a' : '#fac611'; ?>;" required onchange="changeBackgroundColor(this)">
-                            <option style="background-color: #91d44a"; value="CONFIRMÉ" <?php if ($existingStatutVol == 'CONFIRMÉ') echo 'selected'; ?>>CONFIRMÉ</option>
-                            <option style="background-color: #fac611" value="EN ATTENTE" <?php if ($existingStatutVol == 'EN ATTENTE') echo 'selected'; ?>>EN ATTENTE</option>
+                        <select id="statut_vol" name="statut_vol" class="half-width-input"
+                            style="width: 30%; background-color: <?php echo ($existingStatutVol == 'CONFIRMÉ') ? '#91d44a' : '#fac611'; ?>;"
+                            required onchange="changeBackgroundColor(this)">
+                            <option style="background-color: #91d44a" ; value="CONFIRMÉ" <?php if ($existingStatutVol == 'CONFIRMÉ')
+                                echo 'selected'; ?>>CONFIRMÉ</option>
+                            <option style="background-color: #fac611" value="EN ATTENTE" <?php if ($existingStatutVol == 'EN ATTENTE')
+                                echo 'selected'; ?>>EN ATTENTE</option>
                         </select>
                     </div>
                     <script>
@@ -553,12 +567,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <?php foreach ($volsData as $index => $vol) { ?>
 
                         <div class="vols-group">
-                            <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0; margin-bottom:30px; margin-top:50px;">
+                            <hr
+                                style="width:50%;height:1px;border-width:0;background-color:#C0C0C0; margin-bottom:30px; margin-top:50px;">
                             <div class="half-width-inputs">
                                 <div class="input-group">
                                     <label for="ville_depart_<?php echo $index; ?>">Départ:</label>
                                     <!-- <input type="text" id="ville_depart_<!?php echo $index; ?>" name="vols[<!?php echo $index; ?>][ville_depart]" class="half-width-input" value="<!?php echo $vol['ville_depart_id']; ?>" required> -->
-                                    <select id="ville_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][ville_depart_id]" class="half-width-input" required>
+                                    <select id="ville_depart_<?php echo $index; ?>"
+                                        name="vols[<?php echo $index; ?>][ville_depart_id]" class="half-width-input"
+                                        required>
                                         <option value="">Sélectionnez une Ville</option>
                                         <?php
                                         $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
@@ -572,7 +589,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 </div>
                                 <div class="input-group">
                                     <label for="compagnie_aerienne_<?php echo $index; ?>">Compagnie Aérienne:</label>
-                                    <select id="compagnie_aerienne_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][compagnie_aerienne]" class="half-width-input" required>
+                                    <select id="compagnie_aerienne_<?php echo $index; ?>"
+                                        name="vols[<?php echo $index; ?>][compagnie_aerienne]" class="half-width-input"
+                                        required>
                                         <?php
                                         $sql_compagnies_aeriennes = "SELECT * FROM compagnies_aeriennes";
                                         $result_compagnies_aeriennes = mysqli_query($conn, $sql_compagnies_aeriennes);
@@ -587,11 +606,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                             <div class="half-width-inputs">
                                 <div class="input-group">
                                     <label for="num_vol_<?php echo $index; ?>">N° Vol:</label>
-                                    <input type="text" id="num_vol_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][num_vol]" class="half-width-input" value="<?php echo $vol['num_vol']; ?>" required>
+                                    <input type="text" id="num_vol_<?php echo $index; ?>"
+                                        name="vols[<?php echo $index; ?>][num_vol]" class="half-width-input"
+                                        value="<?php echo $vol['num_vol']; ?>" required>
                                 </div>
                                 <div class="input-group">
                                     <label for="airport_depart_<?php echo $index; ?>">Aéroport de Départ:</label>
-                                    <select id="airport_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][airport_depart_id]" class="half-width-input" required>
+                                    <select id="airport_depart_<?php echo $index; ?>"
+                                        name="vols[<?php echo $index; ?>][airport_depart_id]" class="half-width-input"
+                                        required>
                                         <option value="">Sélectionnez un Aéroport</option>
                                         <?php
                                         $sql_airports_depart = "SELECT * FROM airports";
@@ -605,12 +628,16 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 </div>
                                 <div class="input-group">
                                     <label for="heure_depart_<?php echo $index; ?>">Heure & Date de Départ:</label>
-                                    <input type="datetime-local" id="heure_depart_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][heure_depart]" class="half-width-input" value="<?php echo $vol['heure_depart']; ?>" required>
+                                    <input type="datetime-local" id="heure_depart_<?php echo $index; ?>"
+                                        name="vols[<?php echo $index; ?>][heure_depart]" class="half-width-input"
+                                        value="<?php echo $vol['heure_depart']; ?>" required>
                                 </div>
 
                                 <div class="input-group">
                                     <label for="destination_<?php echo $index; ?>">Destination:</label>
-                                    <select id="destination_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][ville_destination_id]" class="half-width-input" required>
+                                    <select id="destination_<?php echo $index; ?>"
+                                        name="vols[<?php echo $index; ?>][ville_destination_id]" class="half-width-input"
+                                        required>
                                         <option value="">Sélectionnez une Ville</option>
                                         <?php
                                         $sql_villes_destination = "SELECT * FROM ville_depart WHERE statut='activé'";
@@ -624,7 +651,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 </div>
                                 <div class="input-group">
                                     <label for="airport_destination_<?php echo $index; ?>">Aéroport de Destination:</label>
-                                    <select id="airport_destination_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][airport_destination_id]" class="half-width-input" required>
+                                    <select id="airport_destination_<?php echo $index; ?>"
+                                        name="vols[<?php echo $index; ?>][airport_destination_id]" class="half-width-input"
+                                        required>
                                         <option value="">Sélectionnez un Aéroport</option>
                                         <?php
                                         $sql_airports_destination = "SELECT * FROM airports";
@@ -638,10 +667,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 </div>
                                 <div class="input-group">
                                     <label for="heure_arrivee_<?php echo $index; ?>">Heure & Date d'Arrivée:</label>
-                                    <input type="datetime-local" id="heure_arrivee_<?php echo $index; ?>" name="vols[<?php echo $index; ?>][heure_arrivee]" class="half-width-input" value="<?php echo $vol['heure_arrivee']; ?>" required>
+                                    <input type="datetime-local" id="heure_arrivee_<?php echo $index; ?>"
+                                        name="vols[<?php echo $index; ?>][heure_arrivee]" class="half-width-input"
+                                        value="<?php echo $vol['heure_arrivee']; ?>" required>
                                 </div>
                             </div>
-                            <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Supprimer Vol</button>
+                            <button type="button" class="remove-button deletebutton" onclick="removeVol(this)">Supprimer
+                                Vol</button>
                         </div>
                     <?php } ?>
 
@@ -675,12 +707,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <select id="ville_depart_${index}" name="vols[${index}][ville_depart_id]" class="half-width-input" required>
                 <option value="">Sélectionnez une Ville</option>
                        <?php
-                        $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
-                        $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
-                        while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
-                            echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
-                        }
-                        ?>
+                       $sql_villes_depart = "SELECT * FROM ville_depart WHERE statut='activé'";
+                       $result_villes_depart = mysqli_query($conn, $sql_villes_depart);
+                       while ($row_ville_depart = mysqli_fetch_assoc($result_villes_depart)) {
+                           echo "<option value='" . $row_ville_depart['id'] . "'>" . $row_ville_depart['nom'] . "</option>";
+                       }
+                       ?>
                 </select>
             </div>
             <div class="input-group">
@@ -707,12 +739,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <select id="airport_depart_${index}" name="vols[${index}][airport_depart_id]" class="half-width-input" required>
                 <option value="">Sélectionnez un Aéroport</option>
                        <?php
-                        $sql_airports_depart = "SELECT * FROM airports";
-                        $result_airports_depart = mysqli_query($conn, $sql_airports_depart);
-                        while ($row_airport_depart = mysqli_fetch_assoc($result_airports_depart)) {
-                            echo "<option value='" . $row_airport_depart['id'] . "'>" . $row_airport_depart['nom'] . " - " . $row_airport_depart['abrv'] . "</option>";
-                        }
-                        ?>
+                       $sql_airports_depart = "SELECT * FROM airports";
+                       $result_airports_depart = mysqli_query($conn, $sql_airports_depart);
+                       while ($row_airport_depart = mysqli_fetch_assoc($result_airports_depart)) {
+                           echo "<option value='" . $row_airport_depart['id'] . "'>" . $row_airport_depart['nom'] . " - " . $row_airport_depart['abrv'] . "</option>";
+                       }
+                       ?>
                 </select>
             </div>
             <div class="input-group">
@@ -725,12 +757,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <select id="destination_${index}" name="vols[${index}][ville_destination_id]" class="half-width-input" required>
                 <option value="">Sélectionnez une Ville</option>
                        <?php
-                        $sql_villes_destination = "SELECT * FROM ville_depart WHERE statut='activé'";
-                        $result_villes_destination = mysqli_query($conn, $sql_villes_destination);
-                        while ($row_ville_destination = mysqli_fetch_assoc($result_villes_destination)) {
-                            echo "<option value='" . $row_ville_destination['id'] . "'>" . $row_ville_destination['nom'] . "</option>";
-                        }
-                        ?>
+                       $sql_villes_destination = "SELECT * FROM ville_depart WHERE statut='activé'";
+                       $result_villes_destination = mysqli_query($conn, $sql_villes_destination);
+                       while ($row_ville_destination = mysqli_fetch_assoc($result_villes_destination)) {
+                           echo "<option value='" . $row_ville_destination['id'] . "'>" . $row_ville_destination['nom'] . "</option>";
+                       }
+                       ?>
                 </select>
             </div>
             
@@ -739,12 +771,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <select id="airport_destination_${index}" name="vols[${index}][airport_destination_id]" class="half-width-input" required>
                 <option value="">Sélectionnez un Aéroport</option>
                        <?php
-                        $sql_airports_destination = "SELECT * FROM airports";
-                        $result_airports_destination = mysqli_query($conn, $sql_airports_destination);
-                        while ($row_airport_destination = mysqli_fetch_assoc($result_airports_destination)) {
-                            echo "<option value='" . $row_airport_destination['id'] . "'>" . $row_airport_destination['nom'] . " - " . $row_airport_destination['abrv'] . "</option>";
-                        }
-                        ?>
+                       $sql_airports_destination = "SELECT * FROM airports";
+                       $result_airports_destination = mysqli_query($conn, $sql_airports_destination);
+                       while ($row_airport_destination = mysqli_fetch_assoc($result_airports_destination)) {
+                           echo "<option value='" . $row_airport_destination['id'] . "'>" . $row_airport_destination['nom'] . " - " . $row_airport_destination['abrv'] . "</option>";
+                       }
+                       ?>
                 </select>
             </div>
             <div class="input-group">
@@ -799,28 +831,39 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <!-- Hebergement section Starts  -->
 
             <div class="price-inputs">
-                <h3>Hébergement <span id="toggle-hebergement" class="toggle-icon" onclick="toggleCollapse(this)">+</span></h3>
+                <h3>Hébergement <span id="toggle-hebergement" class="toggle-icon"
+                        onclick="toggleCollapse(this)">+</span></h3>
 
                 <div id="hebergement-section" class="collapsible-content">
                     <div class="addbutton-container">
-                        <button type="button" id="add-hebergement" class="addbutton" onclick="addHebergement()">Ajouter Hébergement</button>
+                        <button type="button" id="add-hebergement" class="addbutton" onclick="addHebergement()">Ajouter
+                            Hébergement</button>
                     </div>
                     <br>
                     <?php foreach ($hebergementsData as $index => $hebergement) { ?>
                         <div class="hebergement-block" data-index="<?php echo $index; ?>">
-                            <hr style="width:50%;height:1px;border-width:0;background-color:#C0C0C0; margin-bottom: 30px; margin-top:50px;">
+                            <hr
+                                style="width:50%;height:1px;border-width:0;background-color:#C0C0C0; margin-bottom: 30px; margin-top:50px;">
                             <div class="half-width-inputs">
                                 <div class="input-group">
                                     <label for="date_checkin_<?php echo $index; ?>">Date Checkin :</label>
-                                    <input type="date" id="date_checkin_<?php echo $index; ?>" name="hebergements[<?php echo $index; ?>][date_checkin]" class="half-width-input" value="<?php echo $hebergement['date_checkin']; ?>" required onchange="calculateNights(<?php echo $index; ?>)">
+                                    <input type="date" id="date_checkin_<?php echo $index; ?>"
+                                        name="hebergements[<?php echo $index; ?>][date_checkin]" class="half-width-input"
+                                        value="<?php echo $hebergement['date_checkin']; ?>" required
+                                        onchange="calculateNights(<?php echo $index; ?>)">
                                 </div>
                                 <div class="input-group">
                                     <label for="date_checkout_<?php echo $index; ?>">Date Checkout :</label>
-                                    <input type="date" id="date_checkout_<?php echo $index; ?>" name="hebergements[<?php echo $index; ?>][date_checkout]" class="half-width-input" value="<?php echo $hebergement['date_checkout']; ?>" required onchange="calculateNights(<?php echo $index; ?>)">
+                                    <input type="date" id="date_checkout_<?php echo $index; ?>"
+                                        name="hebergements[<?php echo $index; ?>][date_checkout]" class="half-width-input"
+                                        value="<?php echo $hebergement['date_checkout']; ?>" required
+                                        onchange="calculateNights(<?php echo $index; ?>)">
                                 </div>
                                 <div class="input-group">
                                     <label for="hotel_<?php echo $index; ?>">Hôtel :</label>
-                                    <select id="hotel_<?php echo $index; ?>" name="hebergements[<?php echo $index; ?>][hotel_id]" class="half-width-input" required>
+                                    <select id="hotel_<?php echo $index; ?>"
+                                        name="hebergements[<?php echo $index; ?>][hotel_id]" class="half-width-input"
+                                        required>
                                         <?php
                                         // Fetch and display hotel options from the database
                                         $sql_hotels = "SELECT * FROM hotels";
@@ -835,10 +878,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <!-- wess -->
                                 <div class="input-group">
                                     <label for="type_pension_<?php echo $index; ?>">Type de Pension:</label>
-                                    <select id="type_pension_<?php echo $index; ?>" name="hebergements[<?php echo $index; ?>][type_pension]" required>
+                                    <select id="type_pension_<?php echo $index; ?>"
+                                        name="hebergements[<?php echo $index; ?>][type_pension]" required>
                                         <option value="">Sélectionnez le type de pension</option>
                                         <option value="Pension Complète" <?php echo ($hebergement['type_pension'] == 'Pension Complète') ? 'selected' : ''; ?>>Pension Complète</option>
-                                        <option value="Demi-pension" <?php echo ($hebergement['type_pension'] == 'Demi-pension') ? 'selected' : ''; ?>>Demi-pension</option>
+                                        <option value="Demi-pension" <?php echo ($hebergement['type_pension'] == 'Demi-pension') ? 'selected' : ''; ?>>
+                                            Demi-pension</option>
                                         <option value="Sans pension" <?php echo ($hebergement['type_pension'] == 'Sans pension') ? 'selected' : ''; ?>>Sans pension</option>
                                         <option value="Petit déjeuner" <?php echo ($hebergement['type_pension'] == 'Petit déjeuner') ? 'selected' : ''; ?>>Petit déjeuner</option>
                                         <option value="Sahour" <?php echo ($hebergement['type_pension'] == 'Sahour') ? 'selected' : ''; ?>>Sahour</option>
@@ -850,10 +895,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 <!-- wess -->
                                 <div class="input-group">
                                     <label for="nombre_nuit_<?php echo $index; ?>">Nombre de nuitées :</label>
-                                    <input type="number" id="nombre_nuit_<?php echo $index; ?>" name="hebergements[<?php echo $index; ?>][nombre_nuit]" class="half-width-input" value="<?php echo $hebergement['nombre_nuit']; ?>" required readonly>
+                                    <input type="number" id="nombre_nuit_<?php echo $index; ?>"
+                                        name="hebergements[<?php echo $index; ?>][nombre_nuit]" class="half-width-input"
+                                        value="<?php echo $hebergement['nombre_nuit']; ?>" required readonly>
                                 </div>
                             </div>
-                            <button type="button" class="remove-hebergement deletebutton" onclick="removeHebergement(<?php echo $index; ?>)">Supprimer Hébergement</button>
+                            <button type="button" class="remove-hebergement deletebutton"
+                                onclick="removeHebergement(<?php echo $index; ?>)">Supprimer Hébergement</button>
                         </div>
                     <?php } ?>
 
@@ -997,34 +1045,40 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <div class="half-width-inputs">
                         <div class="input-group">
                             <label for="prix_chambre_quadruple">Chambre quadruple:</label>
-                            <input type="number" id="prix_chambre_quadruple" name="prix_chambre_quadruple" class="price-input" value="<?php echo $existingPrixChambreQuadruple; ?>" required>
+                            <input type="number" id="prix_chambre_quadruple" name="prix_chambre_quadruple"
+                                class="price-input" value="<?php echo $existingPrixChambreQuadruple; ?>" required>
                         </div>
 
                         <div class="input-group">
                             <label for="prix_chambre_triple">Chambre triple:</label>
-                            <input type="number" id="prix_chambre_triple" name="prix_chambre_triple" class="price-input" value="<?php echo $existingPrixChambreTriple; ?>" required>
+                            <input type="number" id="prix_chambre_triple" name="prix_chambre_triple" class="price-input"
+                                value="<?php echo $existingPrixChambreTriple; ?>" required>
                         </div>
                     </div>
 
                     <div class="half-width-inputs">
                         <div class="input-group">
                             <label for="prix_chambre_double">Chambre double:</label>
-                            <input type="number" id="prix_chambre_double" name="prix_chambre_double" class="price-input" value="<?php echo $existingPrixChambreDouble; ?>" required>
+                            <input type="number" id="prix_chambre_double" name="prix_chambre_double" class="price-input"
+                                value="<?php echo $existingPrixChambreDouble; ?>" required>
                         </div>
                         <div class="input-group">
                             <label for="prix_chambre_single">Chambre single:</label>
-                            <input type="number" id="prix_chambre_single" name="prix_chambre_single" class="price-input" value="<?php echo $existingPrixChambreSingle; ?>" required>
+                            <input type="number" id="prix_chambre_single" name="prix_chambre_single" class="price-input"
+                                value="<?php echo $existingPrixChambreSingle; ?>" required>
                         </div>
                     </div>
 
                     <div class="half-width-inputs">
                         <div class="input-group">
                             <label for="child_discount">Tarif enfant:</label>
-                            <input type="number" id="child_discount" name="child_discount" class="price-input" value="<?php echo $existingChildDiscount; ?>" required>
+                            <input type="number" id="child_discount" name="child_discount" class="price-input"
+                                value="<?php echo $existingChildDiscount; ?>" required>
                         </div>
                         <div class="input-group">
                             <label for="prix_bebe">Tarif bébé:</label>
-                            <input type="number" id="prix_bebe" name="prix_bebe" class="price-input" value="<?php echo $existingPrixBebe; ?>" required>
+                            <input type="number" id="prix_bebe" name="prix_bebe" class="price-input"
+                                value="<?php echo $existingPrixBebe; ?>" required>
                         </div>
                     </div>
                 </div>
@@ -1037,21 +1091,25 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <div class="half-width-inputs">
                         <div class="input-group">
                             <label for="prix_chambre_quadruple_promo">Chambre quadruple:</label>
-                            <input type="number" id="prix_chambre_quadruple_promo" name="prix_chambre_quadruple_promo" class="price-input" value="<?php echo $existingPrixChambreQuadruplePromo; ?>">
+                            <input type="number" id="prix_chambre_quadruple_promo" name="prix_chambre_quadruple_promo"
+                                class="price-input" value="<?php echo $existingPrixChambreQuadruplePromo; ?>">
                         </div>
                         <div class="input-group">
                             <label for="prix_chambre_triple_promo">Chambre triple:</label>
-                            <input type="number" id="prix_chambre_triple_promo" name="prix_chambre_triple_promo" class="price-input" value="<?php echo $existingPrixChambreTriplePromo; ?>">
+                            <input type="number" id="prix_chambre_triple_promo" name="prix_chambre_triple_promo"
+                                class="price-input" value="<?php echo $existingPrixChambreTriplePromo; ?>">
                         </div>
                     </div>
                     <div class="half-width-inputs">
                         <div class="input-group">
                             <label for="prix_chambre_double_promo">Chambre double:</label>
-                            <input type="number" id="prix_chambre_double_promo" name="prix_chambre_double_promo" class="price-input" value="<?php echo $existingPrixChambreDoublePromo; ?>">
+                            <input type="number" id="prix_chambre_double_promo" name="prix_chambre_double_promo"
+                                class="price-input" value="<?php echo $existingPrixChambreDoublePromo; ?>">
                         </div>
                         <div class="input-group">
                             <label for="prix_chambre_single_promo">Chambre single:</label>
-                            <input type="number" id="prix_chambre_single_promo" name="prix_chambre_single_promo" class="price-input" value="<?php echo $existingPrixChambreSinglePromo; ?>">
+                            <input type="number" id="prix_chambre_single_promo" name="prix_chambre_single_promo"
+                                class="price-input" value="<?php echo $existingPrixChambreSinglePromo; ?>">
                         </div>
                     </div>
                 </div>
@@ -1060,40 +1118,94 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
             <!-- programs start -->
             <div class="price-inputs">
-                <h3>Programmes <span class="toggle-icon">+</span></h3>
-                <div class="collapsible-content" style="padding:5px;">
-                    <div class="program-grid" id="sortable-programs">
-                        <?php foreach ($orderedPrograms as $program) : ?>
-                            <div class="ui-state-default checkinputs" data-id="<?php echo $program['id']; ?>">
-                                <input type="checkbox" name="programs[]" value="<?php echo $program['id']; ?>" <?php echo in_array($program['id'], $currentPrograms) ? 'checked' : ''; ?>>
-                                <?php echo $program['nom']; ?>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </div>
+    <h3>Programmes <span class="toggle-icon">+</span></h3>
+    <div class="collapsible-content" style="padding:5px;">
+        <div class="program-grid" id="sortable-programs">
+            <?php
+            include 'db.php';
 
-            <script>
-                $(function() {
-                    $("#sortable-programs").sortable();
-                    $("#sortable-programs").disableSelection();
-                });
+            // Fetch program order from formules table
+            $sqlFormule = "SELECT program_order FROM formules WHERE id = $formuleId";
+            $resultFormule = mysqli_query($conn, $sqlFormule);
+            $programOrder = [];
+            if ($row = mysqli_fetch_assoc($resultFormule)) {
+                $programOrder = json_decode($row['program_order'], true);
+            }
 
-                function getProgramOrder() {
-                    var order = [];
-                    $('#sortable-programs div').each(function() {
-                        order.push($(this).data('id'));
-                    });
-                    return order;
+            // Fetch all programs
+            $sql_programs = "SELECT id, nom FROM programs";
+            $result_programs = mysqli_query($conn, $sql_programs);
+            $allPrograms = [];
+            while ($row = mysqli_fetch_assoc($result_programs)) {
+                $allPrograms[$row['id']] = $row;
+            }
+
+            // Fetch program details for the formule
+            $sqlProgramDetails = "SELECT * FROM program_details WHERE formule_id = $formuleId";
+            $resultProgramDetails = mysqli_query($conn, $sqlProgramDetails);
+            $programDetails = [];
+            while ($row = mysqli_fetch_assoc($resultProgramDetails)) {
+                $programDetails[$row['program_id']] = $row;
+            }
+
+            // Order programs based on program_order
+            $orderedPrograms = [];
+            if (!empty($programOrder)) {
+                foreach ($programOrder as $programId) {
+                    if (isset($allPrograms[$programId])) {
+                        $orderedPrograms[$programId] = $allPrograms[$programId];
+                        unset($allPrograms[$programId]); // Remove from remaining programs
+                    }
                 }
+            }
+            $orderedPrograms += $allPrograms; // Append remaining programs
 
-                $('form').on('submit', function() {
-                    var programOrder = getProgramOrder();
-                    $('input[name="program_order"]').val(JSON.stringify(programOrder));
-                });
-            </script>
+            // Render programs
+            foreach ($orderedPrograms as $programId => $program) {
+                $programName = $program['nom'];
+                $programDate = isset($programDetails[$programId]) ? $programDetails[$programId]['date'] : '';
+                $programDuration = isset($programDetails[$programId]) ? $programDetails[$programId]['duration'] : '';
+                $checked = isset($programDetails[$programId]) ? 'checked' : '';
 
-            <input type="hidden" name="program_order" value="">
+                echo '<div class="ui-state-default checkinputs" data-id="' . $programId . '">';
+                echo '<input type="checkbox" name="programs[]" value="' . $programId . '" ' . $checked . '> ' . $programName;
+                echo '<div>';
+                echo '<label>Date:</label>';
+                echo '<input type="date" name="program_dates[' . $programId . ']" class="program-date" value="' . $programDate . '">';
+                echo '<label>Duration:</label>';
+                echo '<input type="text" name="program_durations[' . $programId . ']" class="program-duration" placeholder="e.g., 3 days" value="' . $programDuration . '">';
+                echo '</div>';
+                echo '</div>';
+            }
+            ?>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $("#sortable-programs").sortable();
+        $("#sortable-programs").disableSelection();
+    });
+
+    function getProgramOrder() {
+        var order = [];
+        $('#sortable-programs div').each(function () {
+            order.push($(this).data('id'));
+        });
+        return order;
+    }
+
+    $('form').on('submit', function () {
+        var programOrder = getProgramOrder();
+        $('input[name="program_order"]').val(JSON.stringify(programOrder));
+    });
+</script>
+
+<input type="hidden" name="program_order" value="">
+
+
             <!--programs end -->
 
             <div class="price-inputs">
@@ -1167,7 +1279,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 quill.root.innerHTML = <?php echo json_encode($existingDescription); ?>;
 
                 // Add an event listener to the form submission
-                document.querySelector('form').addEventListener('submit', function() {
+                document.querySelector('form').addEventListener('submit', function () {
                     // Get the Quill editor content
                     var description = quill.root.innerHTML;
                     // Set the content to the hidden input field
@@ -1181,7 +1293,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <h3>Section 1 <span class="toggle-icon">+</span></h3>
                 <div class="collapsible-content" style="padding:5px; border:0px;">
                     <label for="titre_section1">Titre:</label>
-                    <input type="text" id="titre_section1" name="titre_section1" class="half-width-input" style="width:30%;" value="<?php echo $existingS1t; ?>">
+                    <input type="text" id="titre_section1" name="titre_section1" class="half-width-input"
+                        style="width:30%;" value="<?php echo $existingS1t; ?>">
                     <div class="">
                         <!-- Container for the Quill editor -->
                         <div class="editor-container">
@@ -1249,7 +1362,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 quillSection1.root.innerHTML = <?php echo json_encode($existingS1d); ?>;
 
                 // Add an event listener to the form submission
-                document.querySelector('form').addEventListener('submit', function() {
+                document.querySelector('form').addEventListener('submit', function () {
                     // Get the Quill editor content
                     var section1 = quillSection1.root.innerHTML;
                     // Set the content to the hidden input field
@@ -1263,7 +1376,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <h3>Section 2 <span class="toggle-icon">+</span></h3>
                 <div class="collapsible-content" style="padding:5px; border:0px;">
                     <label for="titre_section2">Titre:</label>
-                    <input type="text" id="titre_section2" name="titre_section2" class="half-width-input" style="width:30%;" value="<?php echo $existingS2t; ?>">
+                    <input type="text" id="titre_section2" name="titre_section2" class="half-width-input"
+                        style="width:30%;" value="<?php echo $existingS2t; ?>">
                     <div class="">
                         <!-- Container for the Quill editor -->
                         <div class="editor-container">
@@ -1331,7 +1445,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 quillSection2.root.innerHTML = <?php echo json_encode($existingS2d); ?>;
 
                 // Add an event listener to the form submission
-                document.querySelector('form').addEventListener('submit', function() {
+                document.querySelector('form').addEventListener('submit', function () {
                     // Get the Quill editor content
                     var section2 = quillSection2.root.innerHTML;
                     // Set the content to the hidden input field
@@ -1345,7 +1459,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <h3>Section 3 <span class="toggle-icon">+</span></h3>
                 <div class="collapsible-content" style="padding:5px; border:0px;">
                     <label for="titre_section3">Titre:</label>
-                    <input type="text" id="titre_section3" name="titre_section3" class="half-width-input" style="width:30%;" value="<?php echo $existingS3t; ?>">
+                    <input type="text" id="titre_section3" name="titre_section3" class="half-width-input"
+                        style="width:30%;" value="<?php echo $existingS3t; ?>">
                     <div class="">
                         <!-- Container for the Quill editor -->
                         <div class="editor-container">
@@ -1413,7 +1528,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 quillSection3.root.innerHTML = <?php echo json_encode($existingS3d); ?>;
 
                 // Add an event listener to the form submission
-                document.querySelector('form').addEventListener('submit', function() {
+                document.querySelector('form').addEventListener('submit', function () {
                     // Get the Quill editor content
                     var section3 = quillSection3.root.innerHTML;
                     // Set the content to the hidden input field
@@ -1427,7 +1542,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <h3>Section 4 <span class="toggle-icon">+</span></h3>
                 <div class="collapsible-content" style="padding:5px; border:0px;">
                     <label for="titre_section4">Titre:</label>
-                    <input type="text" id="titre_section4" name="titre_section4" class="half-width-input" style="width:30%;" value="<?php echo $existingS4t; ?>">
+                    <input type="text" id="titre_section4" name="titre_section4" class="half-width-input"
+                        style="width:30%;" value="<?php echo $existingS4t; ?>">
                     <div class="">
                         <!-- Container for the Quill editor -->
                         <div class="editor-container">
@@ -1495,7 +1611,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 quillSection4.root.innerHTML = <?php echo json_encode($existingS4d); ?>;
 
                 // Add an event listener to the form submission
-                document.querySelector('form').addEventListener('submit', function() {
+                document.querySelector('form').addEventListener('submit', function () {
                     // Get the Quill editor content
                     var section4 = quillSection4.root.innerHTML;
                     // Set the content to the hidden input field
@@ -1509,7 +1625,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <h3>Section 5 <span class="toggle-icon">+</span></h3>
                 <div class="collapsible-content" style="padding:5px; border:0px;">
                     <label for="titre_section5">Titre:</label>
-                    <input type="text" id="titre_section5" name="titre_section5" class="half-width-input" style="width:30%;" value="<?php echo $existingS5t; ?>">
+                    <input type="text" id="titre_section5" name="titre_section5" class="half-width-input"
+                        style="width:30%;" value="<?php echo $existingS5t; ?>">
                     <div class="">
                         <!-- Container for the Quill editor -->
                         <div class="editor-container">
@@ -1577,7 +1694,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 quillSection5.root.innerHTML = <?php echo json_encode($existingS5d); ?>;
 
                 // Add an event listener to the form submission
-                document.querySelector('form').addEventListener('submit', function() {
+                document.querySelector('form').addEventListener('submit', function () {
                     // Get the Quill editor content
                     var section5 = quillSection5.root.innerHTML;
                     // Set the content to the hidden input field
@@ -1587,10 +1704,12 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <!-- End section 5 -->
 
             <!-- Start download file -->
-            <div class="price-inputs" style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+            <div class="price-inputs"
+                style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
                 <div class="input-group" style="display: flex; flex-direction: column; align-items: center;">
                     <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Fichier</h3>
-                    <input type="file" name="uploaded_file" id="uploaded_file" class="form-control" style="padding: 10px; border: 1px solid #ababab; border-radius: 5px; transition: border-color 0.3s; width: 100%; max-width: 300px;"
+                    <input type="file" name="uploaded_file" id="uploaded_file" class="form-control"
+                        style="padding: 10px; border: 1px solid #ababab; border-radius: 5px; transition: border-color 0.3s; width: 100%; max-width: 300px;"
                         onfocus="this.style.borderColor='#32363b'; this.style.outline='none';"
                         onblur="this.style.borderColor='#32363b';">
 
@@ -1613,20 +1732,23 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <p><b>Fichier actuel:</b> <?php echo $cleanFilename; ?></p>
                 </div>
             </div>
-            <!-- End download file -->            
-            
-            <!-- Hidden input to hold the current image path -->
-<input type="hidden" name="image_actuel" value="<?php echo $existingImage; ?>">
+            <!-- End download file -->
 
-<!-- Start image -->
-<div class="price-inputs" style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
-    <div class="input-group" style="display: flex; flex-direction: column; align-items: center;">
-        <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Image</h3>
-        <input type="file" name="image_formule" id="image_formule" class="form-control" style="padding: 10px; border: 1px solid #ababab; border-radius: 5px;">
-        <!-- Display current image preview -->
-        <img src="<?php echo $existingImage; ?>" alt="Current Image" style="margin-top: 15px; max-width: 200px;">
-    </div>
-</div>
+            <!-- Hidden input to hold the current image path -->
+            <input type="hidden" name="image_actuel" value="<?php echo $existingImage; ?>">
+
+            <!-- Start image -->
+            <div class="price-inputs"
+                style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+                <div class="input-group" style="display: flex; flex-direction: column; align-items: center;">
+                    <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Image</h3>
+                    <input type="file" name="image_formule" id="image_formule" class="form-control"
+                        style="padding: 10px; border: 1px solid #ababab; border-radius: 5px;">
+                    <!-- Display current image preview -->
+                    <img src="<?php echo $existingImage; ?>" alt="Current Image"
+                        style="margin-top: 15px; max-width: 200px;">
+                </div>
+            </div>
 
             <!-- End image -->
 
@@ -1636,7 +1758,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
     <script>
         // 1. JavaScript for collapsible sections
-        document.addEventListener('DOMContentLoaded', function() { // Ensure DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () { // Ensure DOM is loaded
 
             const toggleIcons = document.querySelectorAll('.toggle-icon');
             const collapsibleContents = document.querySelectorAll('.collapsible-content');
@@ -1679,7 +1801,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         const packageSelect = document.getElementById('package');
         const typeFormuleSelect = document.getElementById('type');
 
-        packageSelect.addEventListener('change', function() {
+        packageSelect.addEventListener('change', function () {
             const packageId = this.value;
             fetchTypeFormules(packageId);
         });

@@ -118,6 +118,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_query($conn, $sql_formule)) {
         $formule_id = mysqli_insert_id($conn);
 
+        // Insert into program_details table for each program
+        $program_dates = $_POST['program_dates'];
+        $program_durations = $_POST['program_durations'];
+        if (!empty($selected_programs)) {
+            foreach ($selected_programs as $program_id) {
+                $program_date = mysqli_real_escape_string($conn, $program_dates[$program_id]);
+                $program_duration = mysqli_real_escape_string($conn, $program_durations[$program_id]);
+                $sql_program_details = "INSERT INTO program_details (formule_id, program_id, date, duration) 
+                                    VALUES ('$formule_id', '$program_id', '$program_date', '$program_duration')";
+                mysqli_query($conn, $sql_program_details);
+            }
+        }
+
         // Retrieve Hébergement data
         $date_checkin = $_POST['date_checkin'];
         $date_checkout = $_POST['date_checkout'];

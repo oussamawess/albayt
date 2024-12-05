@@ -2649,7 +2649,7 @@ if ($formule_id > 0) {
                     </div>
 
                     <form role="form">
-                        <div class="setup-content" id="step-1" style="display: none;">
+                        <div class="setup-content" id="step-1" style="display: block;">
                             <h6 style="margin: 20px 0px;">Qui participe à ce voyage?</h6>
                             <div style="padding: 2%;">
                                 <div class="form-group first-step" style="margin-bottom: 20px;">
@@ -3031,7 +3031,7 @@ if ($formule_id > 0) {
                         </div>
 
 
-                        <div class="setup-content" id="step-4" style="display: block;">
+                        <div class="setup-content" id="step-4" style="display: none;">
                             <h6 style="margin: 20px 0px;">Details</h6>
                             <div style="padding:2%;">
 
@@ -4141,7 +4141,9 @@ if ($formule_id > 0) {
                                     </div>
                                 </div>
                             </div>
+                            
                             <hr>
+                            
                         </div>
                        
                     <?php endforeach; ?>

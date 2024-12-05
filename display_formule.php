@@ -47,6 +47,23 @@ if (!empty($programs)) {
     $sqlPrograms = "SELECT id, nom, description FROM programs WHERE id IN ($programIds)";
     $resultPrograms = mysqli_query($conn, $sqlPrograms);
     while ($row = mysqli_fetch_assoc($resultPrograms)) {
+        // Check if program has associated details in program_details table
+        $sqlProgramDetails = "SELECT date, duration FROM program_details WHERE formule_id = ? AND program_id = ?";
+        $stmt = mysqli_prepare($conn, $sqlProgramDetails);
+        mysqli_stmt_bind_param($stmt, 'ii', $formule['id'], $row['id']);
+        mysqli_stmt_execute($stmt);
+        $resultDetails = mysqli_stmt_get_result($stmt);
+        
+        if ($details = mysqli_fetch_assoc($resultDetails)) {
+            // Program found in program_details, add date and duration
+            $row['date'] = $details['date'];
+            $row['duration'] = $details['duration'];
+        } else {
+            // Program not found in program_details, no date and duration
+            $row['date'] = null;
+            $row['duration'] = null;
+        }
+        
         $programData[$row['id']] = $row;
     }
 
@@ -58,6 +75,7 @@ if (!empty($programs)) {
         }
     }
 }
+
 
 
 // Fetch hebergements
@@ -247,7 +265,8 @@ $result_vols = mysqli_query($conn, $sql_vols);
     <div class="container">
         <div class="buttons">
             <button class="button add" onclick="window.location.href='ajoutformule.php'">Ajouter</button>
-            <button class="button edit" onclick="window.location.href='edit_formule.php?id=<?php echo $formule_id; ?>'">Editer</button>
+            <button class="button edit"
+                onclick="window.location.href='edit_formule.php?id=<?php echo $formule_id; ?>'">Editer</button>
             <button class="button delete" onclick="deleteFormule(<?php echo $formule_id; ?>)">Supprimer</button>
             <button class="button duplicate" onclick="duplicateFormule(<?php echo $formule_id; ?>)">Dupliquer</button>
             <button class="button print" onclick="printFormule()">Imprimer</button>
@@ -293,7 +312,8 @@ $result_vols = mysqli_query($conn, $sql_vols);
                 <h3>Vols</h3>
                 <table>
                     <tr>
-                        <th colspan="8" style="text-align:center; background-color:<?php echo ($formule['statut_vol'] == 'CONFIRMÉ') ? '#91d44a' : '#fac611' ?>;">
+                        <th colspan="8"
+                            style="text-align:center; background-color:<?php echo ($formule['statut_vol'] == 'CONFIRMÉ') ? '#91d44a' : '#fac611' ?>;">
                             <?php echo $formule['statut_vol']; ?>
                         </th>
                     </tr>
@@ -307,7 +327,7 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         <th>Aéroport de Destination</th>
                         <th>Heure & Date d'Arrivée</th>
                     </tr>
-                    <?php while ($row = mysqli_fetch_assoc($result_vols)) : ?>
+                    <?php while ($row = mysqli_fetch_assoc($result_vols)): ?>
                         <tr>
                             <td><?php echo $row['num_vol']; ?></td>
                             <td><?php echo $row['compagnie_aerienne']; ?></td>
@@ -315,7 +335,8 @@ $result_vols = mysqli_query($conn, $sql_vols);
                             <td><?php echo $row['airport_depart_nom'] . " - " . $row['airport_depart_abrv']; ?></td>
                             <td><?php echo $row['heure_depart']; ?></td>
                             <td><?php echo $row['ville_destination_nom']; ?></td>
-                            <td><?php echo $row['airport_destination_nom'] . " - " . $row['airport_destination_abrv']; ?></td>
+                            <td><?php echo $row['airport_destination_nom'] . " - " . $row['airport_destination_abrv']; ?>
+                            </td>
                             <td><?php echo $row['heure_arrivee']; ?></td>
                         </tr>
                     <?php endwhile; ?>
@@ -334,7 +355,7 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         <th>Date Checkout</th>
                         <th>Nombre de nuitées</th>
                     </tr>
-                    <?php while ($row = mysqli_fetch_assoc($result_hebergements)) : ?>
+                    <?php while ($row = mysqli_fetch_assoc($result_hebergements)): ?>
                         <tr>
                             <td><?php echo $row['hotel_name']; ?></td>
                             <td><?php echo $row['etoiles']; ?></td>
@@ -390,20 +411,40 @@ $result_vols = mysqli_query($conn, $sql_vols);
 
 
             <div class="section">
-                <h3>Programmes</h3>
-                <table>
-                    <tr>
-                        <th>Nom du Programme</th>
-                        <th>Description</th>
-                    </tr>
-                    <?php foreach ($orderedProgramData as $program) : ?>
-                        <tr>
-                            <td><?php echo $program['nom']; ?></td>
-                            <td><?php echo $program['description']; ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </table>
-            </div>
+    <h3>Programmes</h3>
+    <?php if (!empty($orderedProgramData)): ?>
+        <table>
+            <tr>
+                <th>Nom du Programme</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Duration</th>
+            </tr>
+            <?php foreach ($orderedProgramData as $program): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($program['nom']); ?></td>
+                    <td><?php echo htmlspecialchars($program['description']); ?></td>
+
+                    <?php if ($program['date'] && $program['duration']): ?>
+                        <td><?php echo htmlspecialchars($program['date']); ?></td>
+                        <td><?php echo htmlspecialchars($program['duration']); ?></td>
+                    <?php elseif (empty($program['duration'])): ?>
+                        <td><?php echo htmlspecialchars($program['date']); ?></td>
+                        <td>-</td> <!-- If no date or duration, show a placeholder -->
+                    <?php else: ?>
+                        <td>-</td> <!-- If no date or duration, show a placeholder -->
+                        <td>-</td> <!-- If no date or duration, show a placeholder -->
+                    <?php endif; ?>
+
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php else: ?>
+        <p>Aucun programme à afficher.</p>
+    <?php endif; ?>
+</div>
+
+
 
 
 
@@ -422,7 +463,7 @@ $result_vols = mysqli_query($conn, $sql_vols);
             <?php
             // Check if s1t is empty and s1d equals "<p><br></p>"
             if (!empty($formule['s1t']) && $formule['s1d'] != '<p><br></p>') {
-            ?>
+                ?>
                 <div class="section">
                     <h3>Section 1</h3>
                     <table>
@@ -434,14 +475,14 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         </tr>
                     </table>
                 </div>
-            <?php
+                <?php
             }
             ?>
 
             <?php
             // Check if s1t is empty and s1d equals "<p><br></p>"
             if (!empty($formule['s2t']) && $formule['s2d'] != '<p><br></p>') {
-            ?>
+                ?>
                 <div class="section">
                     <h3>Section 2</h3>
                     <table>
@@ -453,14 +494,14 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         </tr>
                     </table>
                 </div>
-            <?php
+                <?php
             }
             ?>
 
             <?php
             // Check if s1t is empty and s1d equals "<p><br></p>"
             if (!empty($formule['s3t']) && $formule['s3d'] != '<p><br></p>') {
-            ?>
+                ?>
                 <div class="section">
                     <h3>Section 3</h3>
                     <table>
@@ -472,14 +513,14 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         </tr>
                     </table>
                 </div>
-            <?php
+                <?php
             }
             ?>
 
             <?php
             // Check if s1t is empty and s1d equals "<p><br></p>"
             if (!empty($formule['s4t']) && $formule['s4d'] != '<p><br></p>') {
-            ?>
+                ?>
                 <div class="section">
                     <h3>Section 4</h3>
                     <table>
@@ -491,14 +532,14 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         </tr>
                     </table>
                 </div>
-            <?php
+                <?php
             }
             ?>
 
             <?php
             // Check if s1t is empty and s1d equals "<p><br></p>"
             if (!empty($formule['s5t']) && $formule['s5d'] != '<p><br></p>') {
-            ?>
+                ?>
                 <div class="section">
                     <h3>Section 5</h3>
                     <table>
@@ -510,13 +551,13 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         </tr>
                     </table>
                 </div>
-            <?php
+                <?php
             }
             ?>
 
             <?php
             if (!empty($formule['uploaded_file'])) {
-            ?>
+                ?>
                 <div class="section">
                     <h3>Fichier</h3>
                     <table>
@@ -541,21 +582,22 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         </tr>
                     </table>
                 </div>
-            <?php
+                <?php
             }
             ?>
 
-            <div class="section" >
+            <div class="section">
                 <h3>Image</h3>
                 <table style="text-align: center;">
                     <tr>
                         <th style="text-align: center;">
-                            Image actuel 
+                            Image actuel
                         </th>
                     </tr>
                     <tr>
                         <td style="text-align: center;">
-                            <img src="<?php echo $formule['image_formule']; ?>" alt="image_formule" style="width:300px; "></p>
+                            <img src="<?php echo $formule['image_formule']; ?>" alt="image_formule"
+                                style="width:300px; "></p>
                         </td>
                     </tr>
                 </table>

@@ -991,49 +991,61 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
       <!-- Start programs -->
-      <div class="price-inputs">
-        <h3>Programmes <span class="toggle-icon">+</span></h3>
-        <div class="collapsible-content" style="padding:5px;">
-          <div class="program-grid" id="sortable-programs">
+<div class="price-inputs">
+    <h3>Programmes <span class="toggle-icon">+</span></h3>
+    <div class="collapsible-content" style="padding:5px;">
+        <div class="program-grid" id="sortable-programs">
             <?php
             include 'db.php';
             $sql_programs = "SELECT id, nom FROM programs";
             $result_programs = mysqli_query($conn, $sql_programs);
             if (mysqli_num_rows($result_programs) > 0) {
-              while ($row = mysqli_fetch_assoc($result_programs)) {
-                echo '<div class="ui-state-default checkinputs" data-id="' . $row['id'] . '">';
-                echo '<input type="checkbox" name="programs[]" value="' . $row['id'] . '"> ' . $row['nom'];
-                echo '</div>';
-              }
+                while ($row = mysqli_fetch_assoc($result_programs)) {
+                    echo '<div class="ui-state-default checkinputs" data-id="' . $row['id'] . '">';
+                    echo '<input type="checkbox" name="programs[]" value="' . $row['id'] . '"> ' . $row['nom'];
+                    echo '<div>';
+                    echo '<label>Date:</label>';
+                    echo '<input type="date" name="program_dates[' . $row['id'] . ']" class="program-date">';
+                    echo '<label>Duration:</label>';
+                    echo '<input type="text" name="program_durations[' . $row['id'] . ']" class="program-duration" placeholder="e.g., 3 days">';
+                    echo '</div>';
+                    echo '</div>';
+                }
             } else {
-              echo "Aucun programme trouvé.";
+                echo "Aucun programme trouvé.";
             }
             ?>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
 
-      <script>
-        $(function() {
-          $("#sortable-programs").sortable();
-          $("#sortable-programs").disableSelection();
-        });
+<script>
+    $(function() {
+        $("#sortable-programs").sortable();
+        $("#sortable-programs").disableSelection();
+    });
 
-        function getProgramOrder() {
-          var order = [];
-          $('#sortable-programs div').each(function() {
-            order.push($(this).data('id'));
-          });
-          return order;
+    function getProgramOrder() {
+    var order = [];
+    $('#sortable-programs div').each(function() {
+        var id = $(this).data('id');
+        if (id) { // Only include elements with a valid data-id
+            order.push(id);
         }
+    });
+    return order;
+}
 
-        $('form').on('submit', function() {
-          var programOrder = getProgramOrder();
-          $('input[name="program_order"]').val(JSON.stringify(programOrder));
-        });
-      </script>
-      <input type="hidden" name="program_order" value="">
-      <!-- End programs -->
+
+    $('form').on('submit', function() {
+        var programOrder = getProgramOrder();
+        $('input[name="program_order"]').val(JSON.stringify(programOrder));
+    });
+</script>
+
+<input type="hidden" name="program_order" value="">
+<!-- End programs -->
+
 
 
       <!-- Start Description -->
