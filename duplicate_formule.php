@@ -109,6 +109,21 @@ if (isset($_GET['id'])) {
                 mysqli_query($conn, $sql_insert_vol);
             }
 
+            // Duplicate program details for the new formule
+            $sql_fetch_program_details = "SELECT program_id, date, duration FROM program_details WHERE formule_id = $formule_id";
+            $result_fetch_program_details = mysqli_query($conn, $sql_fetch_program_details);
+
+            while ($row_program_detail = mysqli_fetch_assoc($result_fetch_program_details)) {
+                $program_id = $row_program_detail['program_id'];
+                $date = $row_program_detail['date'];
+                $duration = $row_program_detail['duration'];
+
+                $sql_insert_program_detail = "INSERT INTO program_details (formule_id, program_id, date, duration)
+                    VALUES ('$new_formule_id', '$program_id', '$date', '$duration')";
+
+                mysqli_query($conn, $sql_insert_program_detail);
+            }
+
             echo "Formule and its associated vols and hebergements duplicated successfully";
             header("Location: display_formules.php"); // Redirect back to the form after successful duplication
             exit;

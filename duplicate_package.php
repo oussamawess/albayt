@@ -88,8 +88,14 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 }
             }
 
-            // Step 5: Duplicate vols and hebergements for the new formules
+            // Step 5: Duplicate Program_details vols and hebergements for the new formules
             foreach ($original_to_new_formule_ids as $original_formule_id => $new_formule_id) {
+                $sql_duplicate_program_details = "INSERT INTO program_details (formule_id, program_id, date, duration)
+                                                  SELECT $new_formule_id, program_id, date, duration
+                                                  FROM program_details
+                                                  WHERE formule_id = $original_formule_id";
+                mysqli_query($conn, $sql_duplicate_program_details);
+
                 $sql_duplicate_vols = "INSERT INTO vols (formule_id, ville_depart_id, compagnie_aerienne_id, num_vol, airport_depart_id, heure_depart, ville_destination_id, airport_destination_id, heure_arrivee)
                                        SELECT $new_formule_id, ville_depart_id, compagnie_aerienne_id, num_vol, airport_depart_id, heure_depart, ville_destination_id, airport_destination_id, heure_arrivee
                                        FROM vols

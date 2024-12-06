@@ -35,6 +35,14 @@ if (isset($_GET['id'])) {
         // Supprimer les vols associés aux formules du package
         if (!empty($formule_ids)) {
             $formule_ids_str = implode(',', $formule_ids);
+
+            // Delete program details associated with the formules
+            $sql_delete_program_details = "DELETE FROM program_details WHERE formule_id IN ($formule_ids_str)";
+            if (!mysqli_query($conn, $sql_delete_program_details)) {
+                echo "Erreur lors de la suppression des détails des programmes : " . mysqli_error($conn);
+            }
+
+            // Delete Vols details associated with the formules
             $sql_delete_vols = "DELETE FROM vols WHERE formule_id IN ($formule_ids_str)";
             if (!mysqli_query($conn, $sql_delete_vols)) {
                 echo "Erreur lors de la suppression des vols : " . mysqli_error($conn);

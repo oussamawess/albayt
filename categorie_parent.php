@@ -221,7 +221,7 @@
                         echo "</div>";
                         echo "<br>";
                         echo "<div >";
-                        echo "<button class='btn-delete' onclick=\"if(confirm('Êtes-vous sûr de vouloir supprimer ce package?')) { window.location.href='delete_categorie_parent.php?id=" . $category_parent_id . "'; }\">Supprimer</button>";
+                        echo "<button class='btn-delete' onclick=\"if(confirm('Êtes-vous sûr de vouloir supprimer ce categorie parent?')) { window.location.href='delete_categorie_parent.php?id=" . $category_parent_id . "'; }\">Supprimer</button>";
                         echo "</div>";
                         echo "<br>";
                         echo "<div >";

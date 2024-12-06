@@ -4141,11 +4141,11 @@ if ($formule_id > 0) {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <hr>
-                            
+
                         </div>
-                       
+
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -4174,113 +4174,131 @@ if ($formule_id > 0) {
         <!-- Hebergement END -->
 
         <!------------------------ Programme START ----------------------------->
-        <div class="content">
-            <div class="programme-container">
-                <h2>Programme</h2>
-                <div class="accordion-item active">
-                    <div class="accordion-header">
-                        <div class="date-info">
-                            <span class="date">SEP<span>08</span></span>
+<div class="content">
+    <div class="programme-container">
+        <h2>Programme</h2>
+        <?php
+        // Database connection
+        include '../db.php';
 
-                            <span class="title">Transfert Aéroport de Médine - Hôtel de Médine</span>
-                        </div>
-                        <span class="toggle-icon">
-                            <?php echo $up; ?>
-                        </span>
-                    </div>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            <div class="d-flex">
-                                <div class="vr"></div>
-                            </div>
-                            <div class="content-text-image">
-                                <div class="text-content">
-                                    <p>Aéroport de Médine > Hôtel à Médine<br>
+        // Get formule ID from GET parameter
+        $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort
-                                        climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
-                                    </p>
-                                </div>
-                                <div class="image-content">
-                                    <img src="../uploads/bus-bagages.jpg" alt="Bus Image">
-                                    <div class="duration-label">Durée<br>1h30</div>
-                                </div>
-                            </div>
+        // Fetch programs_id and program_order from formules table
+        $sql_fetch_formule = "SELECT programs_id, program_order FROM formules WHERE id = $formule_id";
+        $result_formule = mysqli_query($conn, $sql_fetch_formule);
 
-                        </div>
-                    </div>
-                </div>
-                <!-- Additional Accordion Items -->
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <div class="date-info">
-                            <span class="date">SEP<span>10</span></span>
-                            <span class="title">Visites à Médine</span>
-                        </div>
-                        <span class="toggle-icon"><?php echo $down_arrow; ?></span>
-                    </div>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            <div class="d-flex">
-                                <div class="vr"></div>
-                            </div>
-                            <div class="content-text-image">
-                                <div class="text-content">
-                                    <p>Aéroport de Médine > Hôtel à Médine<br>
+        if ($result_formule && mysqli_num_rows($result_formule) > 0) {
+            $row = mysqli_fetch_assoc($result_formule);
+            $program_ids = json_decode($row['programs_id'], true);
+            $program_order = json_decode($row['program_order'], true);
 
-                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort
-                                        climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
-                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort
-                                        climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
-                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort
-                                        climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
-                                    </p>
-                                </div>
-                                <div class="image-content">
-                                    <img src="../uploads/bus.jpg" alt="Bus Image">
-                                    <div class="duration-label">Durée<br>1h30</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <div class="date-info">
-                            <span class="date">SEP<span>12</span></span>
-                            <span class="title">Transfert Hôtel de Médine - Hôtel de Makkah</span>
-                        </div>
-                        <span class="toggle-icon"><?php echo $down_arrow; ?></span>
-                    </div>
-                    <div class="accordion-body">
-                        <div class="accordion-content">
-                            <div class="d-flex">
-                                <div class="vr"></div>
-                            </div>
-                            <div class="content-text-image">
-                                <div class="text-content">
-                                    <p>Aéroport de Médine > Hôtel à Médine<br>
+            if (!empty($program_ids) && !empty($program_order)) {
+                // Fetch programs from programs table
+                $program_ids_str = implode(',', $program_ids);
+                $sql_fetch_programs = "SELECT id, nom, description, photo 
+                                       FROM programs 
+                                       WHERE id IN ($program_ids_str) 
+                                       ORDER BY FIELD(id, $program_ids_str)";
+                $result_programs = mysqli_query($conn, $sql_fetch_programs);
 
-                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort
-                                        climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
-                                        Après avoir terminé les formalités de douane à Médine, un bus privé (confort
-                                        climatisé) vous transférera de l’aéroport de Médine vers votre hôtel à Médine.
-                                    </p>
+                $programs = [];
+                if ($result_programs && mysqli_num_rows($result_programs) > 0) {
+                    while ($program = mysqli_fetch_assoc($result_programs)) {
+                        $programs[$program['id']] = $program;
+                    }
+                }
+
+                // Fetch program details
+                $sql_fetch_details = "SELECT program_id, date, duration 
+                                      FROM program_details 
+                                      WHERE formule_id = $formule_id";
+                $result_details = mysqli_query($conn, $sql_fetch_details);
+
+                $program_details = [];
+                if ($result_details && mysqli_num_rows($result_details) > 0) {
+                    while ($detail = mysqli_fetch_assoc($result_details)) {
+                        $program_details[$detail['program_id']] = $detail;
+                    }
+                }
+
+                // Render programs in specified order
+                foreach ($program_order as $program_id) {
+                    if (isset($programs[$program_id])) {
+                        $program = $programs[$program_id];
+                        $details = isset($program_details[$program_id]) ? $program_details[$program_id] : null;
+                        ?>
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <div class="date-info">
+                                <span class="date">
+    <?php
+    if ($details) {
+        // Extract the date and format it
+        $program_date = date('M<\span>d', strtotime($details['date']));
+
+        // Replace English month abbreviations with French ones
+        $program_date = str_replace(
+            ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // English month abbreviations
+            ['JAN', 'FÉV', 'MARS', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOÛT', 'SEP', 'OCT', 'NOV', 'DÉC'], // French month abbreviations
+            $program_date
+        );
+
+        // Output the formatted date
+        echo $program_date;
+    }
+    ?>
+</span>
+
+
+                                    <span class="title"><?php echo htmlspecialchars($program['nom']); ?></span>
                                 </div>
-                                <div class="image-content">
-                                    <img src="../uploads/bus.jpg" alt="Bus Image">
-                                    <div class="duration-label">Durée<br>1h30</div>
+                                <span class="toggle-icon">
+                                    <?php echo isset($up) ? $up : ''; ?>
+                                </span>
+                            </div>
+                            <div class="accordion-body">
+                                <div class="accordion-content">
+                                    <div class="d-flex">
+                                        <div class="vr"></div>
+                                    </div>
+                                    <div class="content-text-image">
+                                        <div class="text-content">
+                                            <p><?php echo nl2br(htmlspecialchars($program['description'])); ?></p>
+                                        </div>
+                                        <div class="image-content">
+                                            <img src="../<?php echo htmlspecialchars($program['photo']); ?>" alt="Program Image">
+                                            <?php
+                                            if ($details) {
+                                                echo '<div class="duration-label">Durée<br>' . htmlspecialchars($details['duration']) . '</div>';
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!------------------------ Programme END ------------------------------->
+                        <?php
+                    }
+                }
+            } else {
+                echo "<p>Aucun programme disponible pour cette formule.</p>";
+            }
+        } else {
+            echo "<p>Formule invalide ou introuvable.</p>";
+        }
+
+        // Close connection
+        mysqli_close($conn);
+        ?>
+    </div>
+</div>
+<!------------------------ Programme END ----------------------------->
+
 
         <!------------------------ Plus de details START ----------------------------->
         <?php
+        include '../db.php';
         $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         $query = "SELECT  s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d FROM formules WHERE id = $formule_id";
 
