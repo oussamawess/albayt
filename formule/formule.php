@@ -1000,6 +1000,16 @@ if ($formule_id > 0) {
             font-size: .8rem;
         }
 
+        .not-confirm-button {
+            background-color: #d2a60e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-size: .8rem;
+        }
+
         .ticket-route {
             display: flex;
             justify-content: space-around;
@@ -2098,6 +2108,11 @@ if ($formule_id > 0) {
             padding-top: 10px;
         }
 
+        .bottom-info-popup img {
+            width: 20%;
+            height: auto;
+        }
+
         .buttom-right-info-popup {
             display: flex !important;
             flex-direction: column;
@@ -2116,9 +2131,9 @@ if ($formule_id > 0) {
             color: var(--primary-color);
         }
 
-        .unique-card-autre-dates img {
+        /* .unique-card-autre-dates img {
             height: 30px;
-        }
+        } */
 
         .unique-header-autre-dates {
             border-bottom: 1px solid #e3e3e3;
@@ -2143,6 +2158,18 @@ if ($formule_id > 0) {
             .unique-dialog-autre-dates {
                 width: 100%;
                 padding: 5px;
+            }
+
+            .bottom-info-popup img {
+                width: 30%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .bottom-info-popup img {
+                width: 40%;
+                height: auto;
             }
         }
 
@@ -2431,6 +2458,57 @@ if ($formule_id > 0) {
     </nav>
     <!----------- POPUP Autres dates START ----------------->
     <!-- Modal -->
+    <?php
+    // Include the database connection
+    include '../db.php';
+
+    // Get the `formule_id` from the URL
+    $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+    // Fetch the package_id and type_id for the current formule
+    $formule_query = "
+    SELECT package_id, type_id 
+    FROM formules 
+    WHERE id = $formule_id
+";
+    $formule_result = $conn->query($formule_query);
+    $formule_data = $formule_result->fetch_assoc();
+
+    if ($formule_data) {
+        $package_id = $formule_data['package_id'];
+        $type_id = $formule_data['type_id'];
+
+        // Fetch formules with the same package_id and type_id, ensuring each is unique
+        $query = "
+        SELECT DISTINCT
+            f.id AS formule_id, 
+            f.date_depart, 
+            f.date_retour, 
+            f.prix_chambre_quadruple,
+            ca.logo            
+        FROM formules f
+        JOIN vols v ON f.id = v.formule_id
+        JOIN compagnies_aeriennes ca ON v.compagnie_aerienne_id = ca.id
+        WHERE f.package_id = $package_id AND f.type_id = $type_id
+        ORDER BY f.date_depart ASC
+    ";
+
+        $result = $conn->query($query);
+
+        // Store results in an array
+        $formules = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $formules[] = $row;
+            }
+        }
+    } else {
+        $formules = [];
+    }
+    ?>
+
+
+
     <div class="modal fade unique-modal-autre-dates" id="autresDatesModal" tabindex="-1"
         aria-labelledby="autresDatesModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable unique-dialog-autre-dates">
@@ -2449,141 +2527,62 @@ if ($formule_id > 0) {
                     </div>
                 </div>
                 <div class="modal-body unique-body-autre-dates">
-                    <!-- Example Content -->
-                    <div class="unique-card-autre-dates">
-                        <div class="row align-items-center unique-row-autre-dates">
-                            <div class="col-6 left-info-popup">
-                                <span><b>Départ</b></span>
-                                <span>Dim</span>
-                                <span>08/09/2024</span>
-                            </div>
-                            <div class="svg-popup">
-                                <?php echo $plane_path_popup ?>
-                            </div>
-                            <div class="col-6 text-end right-info-popup">
-                                <span><b>Retour</b></span>
-                                <span>Mar</span>
-                                <span class="date-right-popup">17/10/2024</span>
-                            </div>
-                            <div class="col-12 d-flex align-items-center bottom-info-popup">
-                                <img src="../uploads/tunis Air.png" style="width:40%; height:auto;" alt="tunisAir"
-                                    class="me-2">
-                                <!-- <p class="mb-0">À partir de <strong>1290€</strong></p> -->
-                                <div class="buttom-right-info-popup">
-                                    <span class="price-text-popup">À partir de</span>
-                                    <span class="price-number-popup">1290€</span>
+                    <?php
+                    // Array to map English day abbreviations to French
+                    $dayNames = [
+                        'Sun' => 'Dim',
+                        'Mon' => 'Lun',
+                        'Tue' => 'Mar',
+                        'Wed' => 'Mer',
+                        'Thu' => 'Jeu',
+                        'Fri' => 'Ven',
+                        'Sat' => 'Sam'
+                    ];
+                    ?>
+                    <?php if (!empty($formules)): ?>
+                        <?php foreach ($formules as $formule): ?>
+                            <a style="text-decoration: none; color: inherit;" href="formule.php?id=<?= $formule['formule_id'] ?>">
+                                <div class="unique-card-autre-dates">
+                                    <div class="row align-items-center unique-row-autre-dates">
+                                        <div class="col-6 left-info-popup">
+                                            <span><b>Départ</b></span>
+                                            <?php
+                                            $departDay = date('D', strtotime($formule['date_depart']));
+                                            ?>
+                                            <span><?= $dayNames[$departDay] ?></span>
+                                            <span><?= date('d/m/Y', strtotime($formule['date_depart'])) ?></span>
+                                        </div>
+                                        <div class="svg-popup">
+                                            <?php echo $plane_path_popup ?>
+                                        </div>
+                                        <div class="col-6 text-end right-info-popup">
+                                            <span><b>Retour</b></span>
+                                            <?php
+                                            $retourDay = date('D', strtotime($formule['date_retour']));
+                                            ?>
+                                            <span><?= $dayNames[$retourDay] ?></span>
+                                            <span class="date-right-popup"><?= date('d/m/Y', strtotime($formule['date_retour'])) ?></span>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-center bottom-info-popup">
+                                            <img src="../<?= $formule['logo'] ?>" alt="compagnie logo"
+                                                class="me-2">
+                                            <div class="buttom-right-info-popup">
+                                                <span class="price-text-popup">À partir de</span>
+                                                <span class="price-number-popup"><?= number_format($formule['prix_chambre_quadruple'], 2, ',', ' ') ?>€</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Repeat similar card structure for more entries -->
-                    <div class="unique-card-autre-dates">
-                        <div class="row align-items-center unique-row-autre-dates">
-                            <div class="col-6 left-info-popup">
-                                <span><b>Départ</b></span>
-                                <span>Dim</span>
-                                <span>08/09/2024</span>
-                            </div>
-                            <div class="svg-popup">
-                                <?php echo $plane_path_popup ?>
-                            </div>
-                            <div class="col-6 text-end right-info-popup">
-                                <span><b>Retour</b></span>
-                                <span>Mar</span>
-                                <span class="date-right-popup">17/10/2024</span>
-                            </div>
-                            <div class="col-12 d-flex align-items-center bottom-info-popup">
-                                <img src="../uploads/tunis Air.png" style="height:3rem;" alt="tunisAir" class="me-2">
-                                <!-- <p class="mb-0">À partir de <strong>1290€</strong></p> -->
-                                <div class="buttom-right-info-popup">
-                                    <span class="price-text-popup">À partir de</span>
-                                    <span class="price-number-popup">1290€</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Repeat similar card structure for more entries -->
-                    <div class="unique-card-autre-dates">
-                        <div class="row align-items-center unique-row-autre-dates">
-                            <div class="col-6 left-info-popup">
-                                <span><b>Départ</b></span>
-                                <span>Dim</span>
-                                <span>08/09/2024</span>
-                            </div>
-                            <div class="svg-popup">
-                                <?php echo $plane_path_popup ?>
-                            </div>
-                            <div class="col-6 text-end right-info-popup">
-                                <span><b>Retour</b></span>
-                                <span>Mar</span>
-                                <span class="date-right-popup">17/10/2024</span>
-                            </div>
-                            <div class="col-12 d-flex align-items-center bottom-info-popup">
-                                <img src="../uploads/tunis Air.png" style="height:3rem;" alt="tunisAir" class="me-2">
-                                <!-- <p class="mb-0">À partir de <strong>1290€</strong></p> -->
-                                <div class="buttom-right-info-popup">
-                                    <span class="price-text-popup">À partir de</span>
-                                    <span class="price-number-popup">1290€</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Repeat similar card structure for more entries -->
-                    <div class="unique-card-autre-dates">
-                        <div class="row align-items-center unique-row-autre-dates">
-                            <div class="col-6 left-info-popup">
-                                <span><b>Départ</b></span>
-                                <span>Dim</span>
-                                <span>08/09/2024</span>
-                            </div>
-                            <div class="svg-popup">
-                                <?php echo $plane_path_popup ?>
-                            </div>
-                            <div class="col-6 text-end right-info-popup">
-                                <span><b>Retour</b></span>
-                                <span>Mar</span>
-                                <span class="date-right-popup">17/10/2024</span>
-                            </div>
-                            <div class="col-12 d-flex align-items-center bottom-info-popup">
-                                <img src="../uploads/tunis Air.png" style="height:3rem;" alt="tunisAir" class="me-2">
-                                <!-- <p class="mb-0">À partir de <strong>1290€</strong></p> -->
-                                <div class="buttom-right-info-popup">
-                                    <span class="price-text-popup">À partir de</span>
-                                    <span class="price-number-popup">1290€</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Repeat similar card structure for more entries -->
-                    <div class="unique-card-autre-dates">
-                        <div class="row align-items-center unique-row-autre-dates">
-                            <div class="col-6 left-info-popup">
-                                <span><b>Départ</b></span>
-                                <span>Dim</span>
-                                <span>08/09/2024</span>
-                            </div>
-                            <div class="svg-popup">
-                                <?php echo $plane_path_popup ?>
-                            </div>
-                            <div class="col-6 text-end right-info-popup">
-                                <span><b>Retour</b></span>
-                                <span>Mar</span>
-                                <span class="date-right-popup">17/10/2024</span>
-                            </div>
-                            <div class="col-12 d-flex align-items-center bottom-info-popup">
-                                <img src="../uploads/tunis Air.png" style="height:3rem;" alt="tunisAir" class="me-2">
-                                <!-- <p class="mb-0">À partir de <strong>1290€</strong></p> -->
-                                <div class="buttom-right-info-popup">
-                                    <span class="price-text-popup">À partir de</span>
-                                    <span class="price-number-popup">1290€</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            </a>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>Aucune formule disponible pour cette combinaison.</p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!----------- POPUP Autres dates END ----------------->
     <!------------------------ Autres dates END ------------------------------->
@@ -3158,7 +3157,7 @@ if ($formule_id > 0) {
     ?>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var navListItems = $('div.setup-panel div a'),
                 allWells = $('.setup-content'),
                 allNextBtn = $('.nextBtn'),
@@ -3186,7 +3185,7 @@ if ($formule_id > 0) {
             allWells.hide();
 
             // Gestion du clic sur les étapes de la réservation
-            navListItems.click(function (e) {
+            navListItems.click(function(e) {
                 e.preventDefault();
                 var $target = $($(this).attr('href')),
                     $item = $(this);
@@ -3224,7 +3223,7 @@ if ($formule_id > 0) {
                 }
             }
             // Gestion du clic sur le bouton "Suivant"
-            allNextBtn.click(function () {
+            allNextBtn.click(function() {
                 var curStep = $(this).closest(".setup-content"),
                     curStepBtn = curStep.attr("id"),
                     nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
@@ -3439,7 +3438,7 @@ if ($formule_id > 0) {
                         type: 'POST',
                         data: JSON.stringify(formData),
                         contentType: 'application/json',
-                        success: function (response) {
+                        success: function(response) {
                             try {
                                 var data = JSON.parse(response);
                                 console.log('AJAX response:', data); // Log the response
@@ -3455,7 +3454,7 @@ if ($formule_id > 0) {
                                 $('#error-message-step5').text("Erreur inattendue. Veuillez contacter l'administrateur.");
                             }
                         },
-                        error: function (xhr, status, error) {
+                        error: function(xhr, status, error) {
                             console.error("Erreur AJAX :", xhr.responseText);
                             $('#error-message-step5').text("Erreur lors de l'envoi de la réservation. Veuillez contacter l'administrateur du site. (Détails : " + error + ")");
                         }
@@ -3466,13 +3465,13 @@ if ($formule_id > 0) {
                         type: 'POST',
                         data: JSON.stringify(formData), // Les mêmes données que celles envoyées précédemment
                         contentType: 'application/json',
-                        success: function (emailResponse) {
+                        success: function(emailResponse) {
                             console.log('Email envoyé avec succès :', emailResponse);
                             // Optionnel : Réinitialiser le formulaire ou fermer la modal
                             // $('#stepperModal').modal('hide');
                             // goToStep(1);
                         },
-                        error: function (xhr, status, error) {
+                        error: function(xhr, status, error) {
                             console.error("Erreur lors de l'envoi de l'email :", xhr.responseText);
                             // Gérer l'erreur d'envoi d'email si nécessaire
                         }
@@ -3482,7 +3481,7 @@ if ($formule_id > 0) {
                         type: 'POST',
                         data: JSON.stringify(formData),
                         contentType: 'application/json',
-                        success: function (response) {
+                        success: function(response) {
                             console.log('Réponse du serveur :', response);
 
                             if (response.success) {
@@ -3493,7 +3492,7 @@ if ($formule_id > 0) {
                                 // Gérer l'erreur d'envoi d'email (afficher un message à l'utilisateur, etc.)
                             }
                         },
-                        error: function (xhr, status, error) {
+                        error: function(xhr, status, error) {
                             console.error('Erreur AJAX lors de l\'envoi de l\'email au client :', xhr.responseText);
                             // Gérer l'erreur AJAX (problème de réseau, etc.)
                         }
@@ -3504,7 +3503,7 @@ if ($formule_id > 0) {
             });
 
             // Gestion du clic sur le bouton "Précédent"
-            allPrevBtn.click(function () {
+            allPrevBtn.click(function() {
                 var curStep = $(this).closest(".setup-content"),
                     curStepBtn = curStep.attr("id"),
                     prevStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
@@ -3533,7 +3532,7 @@ if ($formule_id > 0) {
             }
 
             // Gérer les événements de changement des champs d'entrée
-            $('.room-input').on('change', function () {
+            $('.room-input').on('change', function() {
                 var quadrupleRooms = parseInt($('#quadruple').val()) || 0;
                 var tripleRooms = parseInt($('#triple').val()) || 0;
                 var doubleRooms = parseInt($('#double').val()) || 0;
@@ -3573,7 +3572,7 @@ if ($formule_id > 0) {
         }
 
         // Gérer la sélection du pays
-        dropdownMenu.on('click', '.dropdown-item', function (e) {
+        dropdownMenu.on('click', '.dropdown-item', function(e) {
             e.preventDefault();
             var countryCode = $(this).data('country');
             var countryDialCode = countryCodes[countryCode];
@@ -3837,11 +3836,53 @@ if ($formule_id > 0) {
 
 
                 <img src="../<?php echo $comp_logo["logo"] ?>" alt="Airline's Logo" class="airline-logo">
-                <button class="confirm-button">
-                    <div class="">Confirmé
-                        <?php echo $plane; ?>
-                    </div>
-                </button>
+                
+                <?php
+                // Include the database connection
+                include '../db.php';
+
+                // Get the `formule_id` from the URL
+                $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+                // Check if a valid ID is provided
+                if ($formule_id > 0) {
+                    // Prepare the SQL query to fetch `statut_vol`
+                    $stmt = $conn->prepare("SELECT statut_vol FROM formules WHERE id = ?");
+                    $stmt->bind_param("i", $formule_id); // Use a prepared statement to prevent SQL injection
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $row = $result->fetch_assoc();
+
+                    // Check if a result is returned
+                    if ($row) {
+                        $statut_vol = $row['statut_vol'];
+
+                        // Dynamically render the button based on `statut_vol`
+                        if ($statut_vol === 'CONFIRMÉ') {
+                            echo '<button class="confirm-button">
+                                    <div class="">Confirmé';
+                                        
+                        } else {
+                            echo '<button class="not-confirm-button">
+                                    <div class="">En attente';
+                        }
+
+                    } else {
+                        echo 'No formule found with the provided ID.';
+                    }
+
+                    // Close the statement
+                    $stmt->close();
+                } else {
+                    echo 'Invalid ID provided.';
+                }
+
+                // Close the database connection
+                $conn->close();
+                ?>
+                 <?php echo $plane; ?>
+                                    </div>
+                                </button>
             </div>
             <!-- Carousel Wrapper -->
             <!-- Carousel Wrapper -->
@@ -3857,9 +3898,9 @@ if ($formule_id > 0) {
                         $heure_depart = new DateTime($flight['heure_depart']);
                         $depart_date_raw = $heure_depart->format('D d M'); // e.g., "Thu 01 Aug"
                         $depart_date = ucwords(str_replace('.', '', $depart_date_raw));         // e.g., "Thu 01 Aug"
-                    
+
                         // Manually fix the problematic months in French
-                    
+
                         $depart_date = str_replace(
                             // First, replace English month abbreviations with French months
                             ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],  // English month abbreviations
@@ -3877,12 +3918,12 @@ if ($formule_id > 0) {
 
 
                         $depart_time = $heure_depart->format('H:i');                           // e.g., "06:00"
-                    
+
                         // Parse and format heure_arrivee
                         $heure_arrivee = new DateTime($flight['heure_arrivee']);
                         $arrive_date_raw = $heure_arrivee->format('D d M'); // e.g., "Thu 01 Aug"
                         $arrive_date = ucwords(str_replace('.', '', $arrive_date_raw));          // e.g., "Thu 01 Aug"
-                    
+
                         // Manually fix the problematic months in French
                         $arrive_date = str_replace(
                             // First, replace English month abbreviations with French months
@@ -3901,14 +3942,14 @@ if ($formule_id > 0) {
 
 
                         $arrive_time = $heure_arrivee->format('H:i');                           // e.g., "08:00"
-                    
+
                         // Calculate duration
                         $interval = $heure_depart->diff($heure_arrivee);
                         $duration = $interval->h . "hr " . $interval->i . "min";
 
                         // Select the current image
                         $image_path = $images[$index % $image_count];
-                        ?>
+                    ?>
 
 
 
@@ -3949,13 +3990,13 @@ if ($formule_id > 0) {
                                         <span>
                                             <div class="icon-container-vol-section-left dark-text"
                                                 style="font-size: 14px; font-weight: 600;">
-                                                <?= $calender; ?>     <?= htmlspecialchars($depart_date); ?>
+                                                <?= $calender; ?> <?= htmlspecialchars($depart_date); ?>
                                             </div>
                                         </span>
                                         <span>
                                             <div class="icon-container-vol-section dark-text"
                                                 style="font-size: 14px; font-weight: 600;">
-                                                <?= $time; ?>     <?= htmlspecialchars($depart_time); ?>
+                                                <?= $time; ?> <?= htmlspecialchars($depart_time); ?>
                                             </div>
                                         </span>
                                     </div>
@@ -3968,13 +4009,13 @@ if ($formule_id > 0) {
                                         <span>
                                             <div class="icon-container-vol-section-right dark-text"
                                                 style="font-size: 14px; font-weight: 600;">
-                                                <?= $calender; ?>     <?= htmlspecialchars($arrive_date); ?>
+                                                <?= $calender; ?> <?= htmlspecialchars($arrive_date); ?>
                                             </div>
                                         </span>
                                         <span>
                                             <div class="icon-container-vol-section-right dark-text"
                                                 style="font-size: 14px; font-weight: 600;">
-                                                <?= $time; ?>     <?= htmlspecialchars($arrive_time); ?>
+                                                <?= $time; ?> <?= htmlspecialchars($arrive_time); ?>
                                             </div>
                                         </span>
                                     </div>
@@ -4056,11 +4097,12 @@ if ($formule_id > 0) {
                         $city_name = strtolower($hotels['hotel_info']['ville_nom']); // Get the city name
                         if (!in_array($city_name, $displayedCities)): // Check if the city is already displayed
                             $displayedCities[] = $city_name; // Add city to the array to prevent duplicates
-                            ?>
+                    ?>
                             <button class="hotel-button" data-hotel="<?= $city_name ?>">
                                 <?= $hotels['hotel_info']['ville_nom'] ?>
                             </button>
-                        <?php endif; endforeach; ?>
+                    <?php endif;
+                    endforeach; ?>
                 </div>
                 <style>
                     .swiper-container {
@@ -4174,126 +4216,126 @@ if ($formule_id > 0) {
         <!-- Hebergement END -->
 
         <!------------------------ Programme START ----------------------------->
-<div class="content">
-    <div class="programme-container">
-        <h2>Programme</h2>
-        <?php
-        // Database connection
-        include '../db.php';
+        <div class="content">
+            <div class="programme-container">
+                <h2>Programme</h2>
+                <?php
+                // Database connection
+                include '../db.php';
 
-        // Get formule ID from GET parameter
-        $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+                // Get formule ID from GET parameter
+                $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-        // Fetch programs_id and program_order from formules table
-        $sql_fetch_formule = "SELECT programs_id, program_order FROM formules WHERE id = $formule_id";
-        $result_formule = mysqli_query($conn, $sql_fetch_formule);
+                // Fetch programs_id and program_order from formules table
+                $sql_fetch_formule = "SELECT programs_id, program_order FROM formules WHERE id = $formule_id";
+                $result_formule = mysqli_query($conn, $sql_fetch_formule);
 
-        if ($result_formule && mysqli_num_rows($result_formule) > 0) {
-            $row = mysqli_fetch_assoc($result_formule);
-            $program_ids = json_decode($row['programs_id'], true);
-            $program_order = json_decode($row['program_order'], true);
+                if ($result_formule && mysqli_num_rows($result_formule) > 0) {
+                    $row = mysqli_fetch_assoc($result_formule);
+                    $program_ids = json_decode($row['programs_id'], true);
+                    $program_order = json_decode($row['program_order'], true);
 
-            if (!empty($program_ids) && !empty($program_order)) {
-                // Fetch programs from programs table
-                $program_ids_str = implode(',', $program_ids);
-                $sql_fetch_programs = "SELECT id, nom, description, photo 
+                    if (!empty($program_ids) && !empty($program_order)) {
+                        // Fetch programs from programs table
+                        $program_ids_str = implode(',', $program_ids);
+                        $sql_fetch_programs = "SELECT id, nom, description, photo 
                                        FROM programs 
                                        WHERE id IN ($program_ids_str) 
                                        ORDER BY FIELD(id, $program_ids_str)";
-                $result_programs = mysqli_query($conn, $sql_fetch_programs);
+                        $result_programs = mysqli_query($conn, $sql_fetch_programs);
 
-                $programs = [];
-                if ($result_programs && mysqli_num_rows($result_programs) > 0) {
-                    while ($program = mysqli_fetch_assoc($result_programs)) {
-                        $programs[$program['id']] = $program;
-                    }
-                }
+                        $programs = [];
+                        if ($result_programs && mysqli_num_rows($result_programs) > 0) {
+                            while ($program = mysqli_fetch_assoc($result_programs)) {
+                                $programs[$program['id']] = $program;
+                            }
+                        }
 
-                // Fetch program details
-                $sql_fetch_details = "SELECT program_id, date, duration 
+                        // Fetch program details
+                        $sql_fetch_details = "SELECT program_id, date, duration 
                                       FROM program_details 
                                       WHERE formule_id = $formule_id";
-                $result_details = mysqli_query($conn, $sql_fetch_details);
+                        $result_details = mysqli_query($conn, $sql_fetch_details);
 
-                $program_details = [];
-                if ($result_details && mysqli_num_rows($result_details) > 0) {
-                    while ($detail = mysqli_fetch_assoc($result_details)) {
-                        $program_details[$detail['program_id']] = $detail;
+                        $program_details = [];
+                        if ($result_details && mysqli_num_rows($result_details) > 0) {
+                            while ($detail = mysqli_fetch_assoc($result_details)) {
+                                $program_details[$detail['program_id']] = $detail;
+                            }
+                        }
+
+                        // Render programs in specified order
+                        foreach ($program_order as $program_id) {
+                            if (isset($programs[$program_id])) {
+                                $program = $programs[$program_id];
+                                $details = isset($program_details[$program_id]) ? $program_details[$program_id] : null;
+                ?>
+                                <div class="accordion-item">
+                                    <div class="accordion-header">
+                                        <div class="date-info">
+                                            <span class="date">
+                                                <?php
+                                                if ($details) {
+                                                    // Extract the date and format it
+                                                    $program_date = date('M<\span>d', strtotime($details['date']));
+
+                                                    // Replace English month abbreviations with French ones
+                                                    $program_date = str_replace(
+                                                        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // English month abbreviations
+                                                        ['JAN', 'FÉV', 'MARS', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOÛT', 'SEP', 'OCT', 'NOV', 'DÉC'], // French month abbreviations
+                                                        $program_date
+                                                    );
+
+                                                    // Output the formatted date
+                                                    echo $program_date;
+                                                }
+                                                ?>
+                                            </span>
+
+
+                                            <span class="title"><?php echo htmlspecialchars($program['nom']); ?></span>
+                                        </div>
+                                        <span class="toggle-icon">
+                                            <?php echo isset($up) ? $up : ''; ?>
+                                        </span>
+                                    </div>
+                                    <div class="accordion-body">
+                                        <div class="accordion-content">
+                                            <div class="d-flex">
+                                                <div class="vr"></div>
+                                            </div>
+                                            <div class="content-text-image">
+                                                <div class="text-content">
+                                                    <p><?php echo nl2br(htmlspecialchars($program['description'])); ?></p>
+                                                </div>
+                                                <div class="image-content">
+                                                    <img src="../<?php echo htmlspecialchars($program['photo']); ?>" alt="Program Image">
+                                                    <?php
+                                                    if ($details) {
+                                                        echo '<div class="duration-label">Durée<br>' . htmlspecialchars($details['duration']) . '</div>';
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                <?php
+                            }
+                        }
+                    } else {
+                        echo "<p>Aucun programme disponible pour cette formule.</p>";
                     }
+                } else {
+                    echo "<p>Formule invalide ou introuvable.</p>";
                 }
 
-                // Render programs in specified order
-                foreach ($program_order as $program_id) {
-                    if (isset($programs[$program_id])) {
-                        $program = $programs[$program_id];
-                        $details = isset($program_details[$program_id]) ? $program_details[$program_id] : null;
-                        ?>
-                        <div class="accordion-item">
-                            <div class="accordion-header">
-                                <div class="date-info">
-                                <span class="date">
-    <?php
-    if ($details) {
-        // Extract the date and format it
-        $program_date = date('M<\span>d', strtotime($details['date']));
-
-        // Replace English month abbreviations with French ones
-        $program_date = str_replace(
-            ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // English month abbreviations
-            ['JAN', 'FÉV', 'MARS', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOÛT', 'SEP', 'OCT', 'NOV', 'DÉC'], // French month abbreviations
-            $program_date
-        );
-
-        // Output the formatted date
-        echo $program_date;
-    }
-    ?>
-</span>
-
-
-                                    <span class="title"><?php echo htmlspecialchars($program['nom']); ?></span>
-                                </div>
-                                <span class="toggle-icon">
-                                    <?php echo isset($up) ? $up : ''; ?>
-                                </span>
-                            </div>
-                            <div class="accordion-body">
-                                <div class="accordion-content">
-                                    <div class="d-flex">
-                                        <div class="vr"></div>
-                                    </div>
-                                    <div class="content-text-image">
-                                        <div class="text-content">
-                                            <p><?php echo nl2br(htmlspecialchars($program['description'])); ?></p>
-                                        </div>
-                                        <div class="image-content">
-                                            <img src="../<?php echo htmlspecialchars($program['photo']); ?>" alt="Program Image">
-                                            <?php
-                                            if ($details) {
-                                                echo '<div class="duration-label">Durée<br>' . htmlspecialchars($details['duration']) . '</div>';
-                                            }
-                                            ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                }
-            } else {
-                echo "<p>Aucun programme disponible pour cette formule.</p>";
-            }
-        } else {
-            echo "<p>Formule invalide ou introuvable.</p>";
-        }
-
-        // Close connection
-        mysqli_close($conn);
-        ?>
-    </div>
-</div>
-<!------------------------ Programme END ----------------------------->
+                // Close connection
+                mysqli_close($conn);
+                ?>
+            </div>
+        </div>
+        <!------------------------ Programme END ----------------------------->
 
 
         <!------------------------ Plus de details START ----------------------------->
@@ -4319,14 +4361,14 @@ if ($formule_id > 0) {
             (!empty($formule['s4t']) && $formule['s4d'] != '<p><br></p>') ||
             (!empty($formule['s5t']) && $formule['s5d'] != '<p><br></p>')
         ) {
-            ?>
-        <div class="content">
-            <div class="details-container">
-                <h2>Plus de détails</h2>
-                <!-- Start accordion section 1 -->
+        ?>
+            <div class="content">
+                <div class="details-container">
+                    <h2>Plus de détails</h2>
+                    <!-- Start accordion section 1 -->
                     <?php
                     if (!empty($formule['s1t']) && $formule['s1d'] != '<p><br></p>') {
-                        ?>
+                    ?>
                         <div class="accordion-item accordion-item-details ">
                             <div class="accordion-header">
                                 <div class="date-info">
@@ -4348,7 +4390,7 @@ if ($formule_id > 0) {
                                 </div>
                             </div>
                         </div>
-                        <?php
+                    <?php
                     }
                     ?>
                     <!-- End accordion section 1 -->
@@ -4356,7 +4398,7 @@ if ($formule_id > 0) {
                     <!-- Start accordion section 2 -->
                     <?php
                     if (!empty($formule['s2t']) && $formule['s2d'] != '<p><br></p>') {
-                        ?>
+                    ?>
                         <div class="accordion-item accordion-item-details ">
                             <div class="accordion-header">
                                 <div class="date-info">
@@ -4372,7 +4414,7 @@ if ($formule_id > 0) {
                                 </div>
                             </div>
                         </div>
-                        <?php
+                    <?php
                     }
                     ?>
                     <!-- End accordion section 2 -->
@@ -4380,7 +4422,7 @@ if ($formule_id > 0) {
                     <!-- Start accordion section 3 -->
                     <?php
                     if (!empty($formule['s3t']) && $formule['s3d'] != '<p><br></p>') {
-                        ?>
+                    ?>
                         <div class="accordion-item accordion-item-details ">
                             <div class="accordion-header">
                                 <div class="date-info">
@@ -4396,7 +4438,7 @@ if ($formule_id > 0) {
                                 </div>
                             </div>
                         </div>
-                        <?php
+                    <?php
                     }
                     ?>
                     <!-- End accordion section 3 -->
@@ -4404,7 +4446,7 @@ if ($formule_id > 0) {
                     <!-- Start accordion section 4 -->
                     <?php
                     if (!empty($formule['s4t']) && $formule['s4d'] != '<p><br></p>') {
-                        ?>
+                    ?>
                         <div class="accordion-item accordion-item-details ">
                             <div class="accordion-header">
                                 <div class="date-info">
@@ -4420,7 +4462,7 @@ if ($formule_id > 0) {
                                 </div>
                             </div>
                         </div>
-                        <?php
+                    <?php
                     }
                     ?>
                     <!-- End accordion section 4 -->
@@ -4428,7 +4470,7 @@ if ($formule_id > 0) {
                     <!-- Start accordion section 5 -->
                     <?php
                     if (!empty($formule['s5t']) && $formule['s5d'] != '<p><br></p>') {
-                        ?>
+                    ?>
                         <div class="accordion-item accordion-item-details ">
                             <div class="accordion-header">
                                 <div class="date-info">
@@ -4444,12 +4486,12 @@ if ($formule_id > 0) {
                                 </div>
                             </div>
                         </div>
-                        <?php
+                    <?php
                     } ?>
                     <!-- End accordion section 5 -->
                 </div>
             </div>
-            <?php
+        <?php
         }
         ?>
         <!------------------------ Plus de details END ------------------------------->
@@ -4728,7 +4770,7 @@ if ($formule_id > 0) {
     <!-- Query for Tarif Prices -->
     <?php
     include '../db.php'; // Include your database connection file
-    
+
     // Get the formule_id from the URL
     $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
@@ -4875,25 +4917,25 @@ if ($formule_id > 0) {
 
 
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("DOMContentLoaded", function() {
                 const footerContainer = document.querySelector('.pricing-table-container-footer');
                 const ctaButton = document.querySelector('.cta-mobile-table-button');
                 const downButton = document.querySelector('.arrow-button-down');
 
                 // Show the footer when the "cta-mobile-table-button" is clicked
-                ctaButton.addEventListener('click', function (event) {
+                ctaButton.addEventListener('click', function(event) {
                     event.stopPropagation(); // Prevent click from bubbling up
                     footerContainer.classList.add('visible');
                 });
 
                 // Hide the footer when the "arrow-button-down" is clicked
-                downButton.addEventListener('click', function (event) {
+                downButton.addEventListener('click', function(event) {
                     event.stopPropagation(); // Prevent click from bubbling up
                     footerContainer.classList.remove('visible');
                 });
 
                 // Hide the footer if the user clicks anywhere outside of the table or buttons
-                document.addEventListener('click', function (event) {
+                document.addEventListener('click', function(event) {
                     if (!footerContainer.contains(event.target) && !ctaButton.contains(event.target)) {
                         footerContainer.classList.remove('visible');
                     }
@@ -4973,12 +5015,12 @@ if ($formule_id > 0) {
 
     <!-- Hebergement SWIPER START  -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             // Initialize all Swipers dynamically for each hotel
             const hotelSwipers = document.querySelectorAll('.swiper-container');
 
             hotelSwipers.forEach((swiperContainer) => {
-                const swiperId = swiperContainer.id;  // e.g., swiper-1, swiper-2, etc.
+                const swiperId = swiperContainer.id; // e.g., swiper-1, swiper-2, etc.
                 const swiperInstance = new Swiper(`#${swiperId}`, {
                     slidesPerView: 1, // Show 1 image at a time
                     spaceBetween: 10, // Space between images
@@ -5021,7 +5063,6 @@ if ($formule_id > 0) {
             }
 
         });
-
     </script>
     <!-- Hebergement SWIPER END -->
 
@@ -5151,7 +5192,7 @@ if ($formule_id > 0) {
     <!------------------------  footer 4 STTART ------------------------------->
     <script>
         // Initialize Swiper
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const swiper = new Swiper(".swiper-container-footer", {
                 slidesPerView: 2, // Display 3 slides
                 spaceBetween: 10, // Add space between slides
@@ -5190,7 +5231,7 @@ if ($formule_id > 0) {
 
     <!------------------------  stepwizard steps START ------------------------------->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const steps = document.querySelectorAll('.reservation-steps'); // All step buttons
             const lines = document.querySelectorAll('.step-line'); // All connecting lines
             let currentStep = 0; // Initial step (step 1, index 0)
@@ -5226,7 +5267,7 @@ if ($formule_id > 0) {
 
             // Event listeners for the navigation buttons
             document.querySelectorAll('.nextBtn').forEach((btn) => {
-                btn.addEventListener('click', function () {
+                btn.addEventListener('click', function() {
                     if (currentStep < steps.length - 1) {
                         currentStep++;
                         updateSteps();
@@ -5235,7 +5276,7 @@ if ($formule_id > 0) {
             });
 
             document.querySelectorAll('.prevBtn').forEach((btn) => {
-                btn.addEventListener('click', function () {
+                btn.addEventListener('click', function() {
                     if (currentStep > 0) {
                         currentStep--;
                         updateSteps();
