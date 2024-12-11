@@ -2510,7 +2510,7 @@ if ($formule_id > 0) {
 
 
     <div class="modal fade unique-modal-autre-dates" id="autresDatesModal" tabindex="-1"
-        aria-labelledby="autresDatesModalLabel" aria-hidden="true">
+        aria-labelledby="autresDatesModalLabel" >
         <div class="modal-dialog modal-dialog-scrollable unique-dialog-autre-dates">
             <div class="modal-content unique-content-autre-dates">
                 <div class="modal-header unique-header-autre-dates" style="display: block;">
@@ -3635,6 +3635,83 @@ if ($formule_id > 0) {
 
 
 
+<!-- Sticky Sidebar Start -->
+<?php
+// Include the database connection
+include '../db.php';
+
+// Get the `formule_id` from the URL
+$formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+// Check if a valid ID is provided
+if ($formule_id > 0) {
+    // Prepare the SQL query
+    $query = "
+        SELECT 
+            cp.nom AS category_parent_nom,
+            op.nom AS omra_packages_nom,
+            f.date_depart,
+            f.date_retour,
+            f.duree_sejour,
+            tf.nom AS type_formule_nom,
+            COALESCE(h1.nombre_nuit, 'Not available') AS nombre_nuit_ville_19,
+            COALESCE(h2.nombre_nuit, 'Not available') AS nombre_nuit_ville_18,
+            COALESCE(ht1.nom, 'Not available') AS hotel_nom_ville_19,
+            COALESCE(ht2.nom, 'Not available') AS hotel_nom_ville_18
+        FROM formules f
+        LEFT JOIN omra_packages op ON f.package_id = op.id
+        LEFT JOIN category_parent cp ON op.category_parent_id = cp.id
+        LEFT JOIN type_formule_omra tf ON f.type_id = tf.id
+        LEFT JOIN hebergements h1 
+            ON h1.formule_id = f.id AND h1.hotel_id IN (
+                SELECT id FROM hotels WHERE ville = 19
+            )
+        LEFT JOIN hotels ht1 ON h1.hotel_id = ht1.id
+        LEFT JOIN hebergements h2 
+            ON h2.formule_id = f.id AND h2.hotel_id IN (
+                SELECT id FROM hotels WHERE ville = 18
+            )
+        LEFT JOIN hotels ht2 ON h2.hotel_id = ht2.id
+        WHERE f.id = ?
+        LIMIT 1
+    ";
+
+    // Use a prepared statement to execute the query
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $formule_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if a result is returned
+    if ($result->num_rows > 0) {
+        $data = $result->fetch_assoc();
+
+        // Assign the variables, ensuring "Not available" is used for null values
+        $category_parent_nom = $data['category_parent_nom'] ?? "Not available";
+        $omra_packages_nom = $data['omra_packages_nom'] ?? "Not available";
+        $date_depart = $data['date_depart'] ?? "Not available";
+        $date_retour = $data['date_retour'] ?? "Not available";
+        $duree_sejour = $data['duree_sejour'] ?? "Not available";
+        $type_formule_nom = $data['type_formule_nom'] ?? "Not available";
+        $nombre_nuit_ville_19 = $data['nombre_nuit_ville_19'];
+        $nombre_nuit_ville_18 = $data['nombre_nuit_ville_18'];
+        $hotel_nom_ville_19 = $data['hotel_nom_ville_19'];
+        $hotel_nom_ville_18 = $data['hotel_nom_ville_18'];
+    } else {
+        echo "No data found for the given formule ID.";
+    }
+
+    // Close the statement
+    $stmt->close();
+} else {
+    echo "Invalid ID provided.";
+}
+
+// Close the database connection
+$conn->close();
+?>
+
+
 
         <div class="sticky-sidebar">
             <div class="top-sidebar">
@@ -3650,7 +3727,7 @@ if ($formule_id > 0) {
 
                     <div class="text">
                         <h4>Type de Voyage</h4>
-                        <p>Omra</p>
+                        <p><?php echo $category_parent_nom; ?></p>
                     </div>
                 </div>
                 <div class="formula-item">
@@ -3659,7 +3736,7 @@ if ($formule_id > 0) {
                     </div>
                     <div class="text">
                         <h4>Ville de départ</h4>
-                        <p>Paris</p>
+                        <p><?php echo $omra_packages_nom ?></p>
                     </div>
                 </div>
                 <div class="formula-item">
@@ -3668,7 +3745,7 @@ if ($formule_id > 0) {
                     </div>
                     <div class="text">
                         <h4>Arrivée</h4>
-                        <p>05/10/24</p>
+                        <p><?php echo (new DateTime($date_depart))->format('d-m-Y'); ?></p>
                     </div>
                 </div>
                 <div class="formula-item">
@@ -3677,7 +3754,7 @@ if ($formule_id > 0) {
                     </div>
                     <div class="text">
                         <h4>Départ</h4>
-                        <p>16/10/24</p>
+                        <p><?php echo (new DateTime($date_retour))->format('d-m-Y'); ?></p>
                     </div>
                 </div>
                 <div class="formula-item">
@@ -3686,7 +3763,7 @@ if ($formule_id > 0) {
                     </div>
                     <div class="text">
                         <h4>Formule</h4>
-                        <p>Omra Essentielle</p>
+                        <p><?php echo $type_formule_nom ?></p>
                     </div>
                 </div>
                 <div class="formula-item">
@@ -3695,7 +3772,7 @@ if ($formule_id > 0) {
                     </div>
                     <div class="text">
                         <h4>Durée</h4>
-                        <p>10 jours</p>
+                        <p><?php echo $duree_sejour ?> jours</p>
                     </div>
                 </div>
                 <div class="formula-item">
@@ -3703,7 +3780,7 @@ if ($formule_id > 0) {
                         <?php echo $Médine; ?>
                     </div>
                     <div class="text">
-                        <p>5 nuits à Médine</p>
+                        <p><?php echo $nombre_nuit_ville_19 ?> nuits à Médina</p>
                     </div>
                 </div>
                 <div class="formula-item">
@@ -3711,7 +3788,7 @@ if ($formule_id > 0) {
                         <?php echo $Makkah; ?>
                     </div>
                     <div class="text">
-                        <p>5 nuits à Makkah</p>
+                        <p><?php echo $nombre_nuit_ville_18; ?> nuits à Makkah</p>                            
                     </div>
                 </div>
                 <div class="formula-item">
@@ -3719,8 +3796,8 @@ if ($formule_id > 0) {
                         <?php echo $Hébergements_Madinah; ?>
                     </div>
                     <div class="text">
-                        <h4>Hébergements (Madinah)</h4>
-                        <p>Le Bosphorus Waqf Al Safi Hotel</p>
+                        <h4>Hébergement (Madinah)</h4>
+                        <p><?php echo $hotel_nom_ville_19 ?></p>
                     </div>
                 </div>
                 <div class="formula-item">
@@ -3729,16 +3806,70 @@ if ($formule_id > 0) {
                     </div>
                     <div class="text">
                         <h4>Hébergement (Makkah)</h4>
-                        <p>DoubleTree by Hilton</p>
+                        <p><?php echo $hotel_nom_ville_18 ?></p>
                     </div>
                 </div>
             </div>
+
+
+
             <button class="cta-button">
                 <div class="icon-arrow">
                     <?php echo $up_arrow; ?>
                 </div>VOIR NOS TARIFS D'HÉBERGEMENTS
             </button>
 
+            <!-- Pricing table START -->
+            <?php
+include '../db.php'; // Include your database connection file
+
+// Get the formule_id from the URL
+$formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+if ($formule_id > 0) {
+    // Query to fetch pricing details
+    $query = "SELECT 
+                prix_chambre_quadruple, 
+                prix_chambre_triple, 
+                prix_chambre_double, 
+                prix_chambre_single, 
+                prix_bebe,
+                child_discount,
+                prix_chambre_quadruple_promo,
+                prix_chambre_triple_promo,
+                prix_chambre_double_promo,
+                prix_chambre_single_promo
+              FROM formules 
+              WHERE id = ?";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $formule_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $data = $result->fetch_assoc();
+
+        // Assign fetched values to variables
+        $prix_chambre_quadruple = $data['prix_chambre_quadruple'];
+        $prix_chambre_triple = $data['prix_chambre_triple'];
+        $prix_chambre_double = $data['prix_chambre_double'];
+        $prix_chambre_single = $data['prix_chambre_single'];
+        $prix_bebe = $data['prix_bebe'];
+        $child_discount = $data['child_discount'];
+        $prix_chambre_quadruple_promo = $data['prix_chambre_quadruple_promo'];
+        $prix_chambre_triple_promo = $data['prix_chambre_triple_promo'];
+        $prix_chambre_double_promo = $data['prix_chambre_double_promo'];
+        $prix_chambre_single_promo = $data['prix_chambre_single_promo'];
+    } else {
+        // Default values if no record found
+        $prix_chambre_quadruple = $prix_chambre_triple = $prix_chambre_double = $prix_chambre_single = $prix_bebe = $child_discount = $prix_chambre_quadruple_promo = $prix_chambre_triple_promo = $prix_chambre_double_promo = $prix_chambre_single_promo = "N/A";
+    }
+    $stmt->close();
+} else {
+    echo "Invalid Formule ID.";
+}
+?>
             <div class="pricing-table-container">
                 <table class="pricing-table">
                     <thead>
@@ -3820,6 +3951,7 @@ if ($formule_id > 0) {
                     </tbody>
                 </table>
             </div>
+            <!-- Pricing table END -->
 
             <div class="price-reservation">
                 <p class="price">À partir de <br><strong
@@ -3828,6 +3960,7 @@ if ($formule_id > 0) {
                     data-target="#stepperModal">RÉSERVATION</button>
             </div>
         </div>
+        <!-- Sticky Sidebar end -->
 
         <!-- Vols aller-retour Start-->
         <div class="content mt-4">
