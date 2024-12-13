@@ -428,7 +428,7 @@
                         const villes = JSON.parse(data);
                         $('#ville').html('<option value="v" disabled selected  data-icon="formule" class"select2" name="state">Ville</option>');
                         villes.forEach(ville => {
-                            $('#ville').append(`<option value="${ville.id}">${ville.nom}</option>`);
+                            $('#ville').append(`<option data-icon="formule" value="${ville.id}">${ville.nom}</option>`);
                         });
                     }
                 });

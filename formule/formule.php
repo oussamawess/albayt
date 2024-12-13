@@ -2510,7 +2510,7 @@ if ($formule_id > 0) {
 
 
     <div class="modal fade unique-modal-autre-dates" id="autresDatesModal" tabindex="-1"
-        aria-labelledby="autresDatesModalLabel" >
+        aria-labelledby="autresDatesModalLabel">
         <div class="modal-dialog modal-dialog-scrollable unique-dialog-autre-dates">
             <div class="modal-content unique-content-autre-dates">
                 <div class="modal-header unique-header-autre-dates" style="display: block;">
@@ -2648,7 +2648,7 @@ if ($formule_id > 0) {
                     </div>
 
                     <form role="form">
-                        <div class="setup-content" id="step-1" style="display: block;">
+                        <div class="setup-content" id="step-1" style="display: none;">
                             <h6 style="margin: 20px 0px;">Qui participe à ce voyage?</h6>
                             <div style="padding: 2%;">
                                 <div class="form-group first-step" style="margin-bottom: 20px;">
@@ -2951,7 +2951,104 @@ if ($formule_id > 0) {
                             </div>
                         </div>
 
-                        <div class="setup-content" id="step-3" style="display: none; font-family: sans-serif;">
+
+
+                        <?php
+                        // Include the database connection
+                        include '../db.php';
+
+                        $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0; // Get formule_id from the URL
+
+                        // SQL query
+                        $query = "
+                        SELECT 
+                            f.date_depart,
+                            f.date_retour,
+                            f.duree_sejour,
+                            (SELECT heure_depart FROM vols WHERE formule_id = f.id ORDER BY heure_depart ASC LIMIT 1) AS first_heure_depart,
+                            (SELECT heure_arrivee FROM vols WHERE formule_id = f.id ORDER BY heure_depart ASC LIMIT 1) AS first_heure_arrivee,
+                            (SELECT heure_depart FROM vols WHERE formule_id = f.id ORDER BY heure_depart DESC LIMIT 1) AS last_heure_depart,
+                            (SELECT heure_arrivee FROM vols WHERE formule_id = f.id ORDER BY heure_depart DESC LIMIT 1) AS last_heure_arrivee
+                        FROM 
+                            formules f
+                        WHERE 
+                            f.id = $formule_id
+";
+
+                        // Execute the query
+                        $result = $conn->query($query);
+
+                        if ($result->num_rows > 0) {
+                            $data = $result->fetch_assoc();
+
+                            // Assign data from the query to variables
+                            $duree_sejour = $data['duree_sejour'] ?? null;
+                            $first_heure_depart = $data['first_heure_depart'] ?? null;
+                            $first_heure_arrivee = $data['first_heure_arrivee'] ?? null;
+                            $last_heure_depart = $data['last_heure_depart'] ?? null;
+                            $last_heure_arrivee = $data['last_heure_arrivee'] ?? null;
+
+                            // Day name mapping for French
+                            $dayNames = [
+                                'Sun' => 'Dim',
+                                'Mon' => 'Lun',
+                                'Tue' => 'Mar',
+                                'Wed' => 'Mer',
+                                'Thu' => 'Jeu',
+                                'Fri' => 'Ven',
+                                'Sat' => 'Sam'
+                            ];
+
+                            // Function to format the date and time into separate variables
+                            function extractDateTimeParts($datetime, $dayNames)
+                            {
+                                if (!$datetime) return null;
+                                $dt = new DateTime($datetime);
+                                $dayEnglish = $dt->format('D'); // Get the English day abbreviation
+                                $dayFrench = isset($dayNames[$dayEnglish]) ? $dayNames[$dayEnglish] : $dayEnglish;
+                                $date = $dt->format('d/m/Y'); // Format the date
+                                $time = $dt->format('H\hi'); // Format the time in 24-hour notation with "h"
+                                return [
+                                    'day' => $dayFrench,
+                                    'date' => $date,
+                                    'hour' => $time
+                                ];
+                            }
+
+                            // Assign data to variables and extract parts
+                            $first_heure_depart_parts = $first_heure_depart ? extractDateTimeParts($first_heure_depart, $dayNames) : null;
+                            $first_heure_arrivee_parts = $first_heure_arrivee ? extractDateTimeParts($first_heure_arrivee, $dayNames) : null;
+                            $last_heure_depart_parts = $last_heure_depart ? extractDateTimeParts($last_heure_depart, $dayNames) : null;
+                            $last_heure_arrivee_parts = $last_heure_arrivee ? extractDateTimeParts($last_heure_arrivee, $dayNames) : null;
+
+                            // Access variables
+                            $first_day = $first_heure_depart_parts['day'] ?? '';
+                            $first_date = $first_heure_depart_parts['date'] ?? '';
+                            $first_hour = $first_heure_depart_parts['hour'] ?? '';
+
+                            $first_arrival_day = $first_heure_arrivee_parts['day'] ?? '';
+                            $first_arrival_date = $first_heure_arrivee_parts['date'] ?? '';
+                            $first_arrival_hour = $first_heure_arrivee_parts['hour'] ?? '';
+
+                            $last_day = $last_heure_depart_parts['day'] ?? '';
+                            $last_date = $last_heure_depart_parts['date'] ?? '';
+                            $last_hour = $last_heure_depart_parts['hour'] ?? '';
+
+                            $last_arrival_day = $last_heure_arrivee_parts['day'] ?? '';
+                            $last_arrival_date = $last_heure_arrivee_parts['date'] ?? '';
+                            $last_arrival_hour = $last_heure_arrivee_parts['hour'] ?? '';
+
+                            // Display individual parts for debugging
+                            // echo "First Heure Depart: Day: $first_day, Date: $first_date, Hour: $first_hour<br>";
+                            // echo "First Heure Arrivee: Day: $first_arrival_day, Date: $first_arrival_date, Hour: $first_arrival_hour<br>";
+                            // echo "Last Heure Depart: Day: $last_day, Date: $last_date, Hour: $last_hour<br>";
+                            // echo "Last Heure Arrivee: Day: $last_arrival_day, Date: $last_arrival_date, Hour: $last_arrival_hour<br>";
+                        } else {
+                            echo "No data found for formule_id: $formule_id";
+                        }
+                        ?>
+
+                        <div class="setup-content" id="step-3" style="display: block; font-family: sans-serif;">
                             <h6 style="margin: 20px 0px;">Les détails de votre réservation</h6>
                             <div style="padding:2%;">
 
@@ -2963,8 +3060,8 @@ if ($formule_id > 0) {
                                         </div>
                                         <div class="text">
                                             <h4>Arrivée</h4>
-                                            <p>Lun</p>
-                                            <p>05/10/2024</p>
+                                            <p><?php echo $first_day ?></p>
+                                            <p><?php echo $first_date ?></p>
                                         </div>
                                     </div>
                                     <div class="formula-item" style="align-items:baseline;">
@@ -2973,8 +3070,8 @@ if ($formule_id > 0) {
                                         </div>
                                         <div class="text">
                                             <h4>Départ</h4>
-                                            <p>Jeu</p>
-                                            <p>16/10/24</p>
+                                            <p><?php echo $last_arrival_day ?></p>
+                                            <p><?php echo $last_arrival_date ?></p>
                                         </div>
                                     </div>
                                     <div class="formula-item" style="align-items:baseline;">
@@ -2982,7 +3079,7 @@ if ($formule_id > 0) {
                                             <?php echo $time_brown; ?>
                                         </div>
                                         <div class="text">
-                                            <h4>14h00 - 0h00</h4>
+                                            <h4><?php echo $first_hour ?> - <?php echo $first_arrival_hour ?></h4>
                                         </div>
                                     </div>
                                     <div class="formula-item" style="align-items:baseline;">
@@ -2990,10 +3087,9 @@ if ($formule_id > 0) {
                                             <?php echo $time_brown; ?>
                                         </div>
                                         <div class="text">
-                                            <h4>0h00- 12h00</h4>
+                                            <h4><?php echo $last_hour ?> - <?php echo $last_arrival_hour ?></h4>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="formula-item" style="align-items:baseline;">
                                     <div class="icon-container">
@@ -3001,7 +3097,7 @@ if ($formule_id > 0) {
                                     </div>
                                     <div class="text">
                                         <h4>Durée totale du séjour</h4>
-                                        <p>11 jours</p>
+                                        <p><?php echo $duree_sejour ?> Jours</p>
                                     </div>
                                 </div>
                             </div>
@@ -3090,6 +3186,7 @@ if ($formule_id > 0) {
         </div>
     </div>
     <!-- </div> -->
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const wrapper = document.querySelector("#programme .wrapper");
@@ -3140,6 +3237,35 @@ if ($formule_id > 0) {
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <?php
+    include "../db.php";
+    $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+    // SQL query to fetch pricing data
+    $query = "
+    SELECT 
+        prix_chambre_quadruple,
+        prix_chambre_triple,
+        prix_chambre_double,
+        prix_chambre_single,
+        prix_chambre_quadruple_promo,
+        prix_chambre_triple_promo,
+        prix_chambre_double_promo,
+        prix_chambre_single_promo,
+        prix_bebe,
+        child_discount
+    FROM formules
+    WHERE id = $formule_id;
+    ";
+
+    $result = $conn->query($query);
+
+    // Check if data exists and fetch it
+    if ($result->num_rows > 0) {
+        $formule_data = $result->fetch_assoc();
+    } else {
+        $formule_data = []; // Empty array if no data found
+    }
+
     // Récupération des prix depuis la base de données
     $prix_quadruple = isset($formule_data['prix_chambre_quadruple']) ? $formule_data['prix_chambre_quadruple'] : 0;
     $prix_triple = isset($formule_data['prix_chambre_triple']) ? $formule_data['prix_chambre_triple'] : 0;
@@ -3151,9 +3277,6 @@ if ($formule_id > 0) {
     $prix_single_promo = isset($formule_data['prix_chambre_single_promo']) ? $formule_data['prix_chambre_single_promo'] : 0;
     $prix_bebe = isset($formule_data['prix_bebe']) ? $formule_data['prix_bebe'] : 0;
     $child_discount = isset($formule_data['child_discount']) ? $formule_data['child_discount'] : 0;
-
-
-
     ?>
 
     <script>
@@ -3635,18 +3758,18 @@ if ($formule_id > 0) {
 
 
 
-<!-- Sticky Sidebar Start -->
-<?php
-// Include the database connection
-include '../db.php';
+        <!-- Sticky Sidebar Start -->
+        <?php
+        // Include the database connection
+        include '../db.php';
 
-// Get the `formule_id` from the URL
-$formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        // Get the `formule_id` from the URL
+        $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// Check if a valid ID is provided
-if ($formule_id > 0) {
-    // Prepare the SQL query
-    $query = "
+        // Check if a valid ID is provided
+        if ($formule_id > 0) {
+            // Prepare the SQL query
+            $query = "
         SELECT 
             cp.nom AS category_parent_nom,
             op.nom AS omra_packages_nom,
@@ -3676,40 +3799,40 @@ if ($formule_id > 0) {
         LIMIT 1
     ";
 
-    // Use a prepared statement to execute the query
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $formule_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+            // Use a prepared statement to execute the query
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("i", $formule_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-    // Check if a result is returned
-    if ($result->num_rows > 0) {
-        $data = $result->fetch_assoc();
+            // Check if a result is returned
+            if ($result->num_rows > 0) {
+                $data = $result->fetch_assoc();
 
-        // Assign the variables, ensuring "Not available" is used for null values
-        $category_parent_nom = $data['category_parent_nom'] ?? "Not available";
-        $omra_packages_nom = $data['omra_packages_nom'] ?? "Not available";
-        $date_depart = $data['date_depart'] ?? "Not available";
-        $date_retour = $data['date_retour'] ?? "Not available";
-        $duree_sejour = $data['duree_sejour'] ?? "Not available";
-        $type_formule_nom = $data['type_formule_nom'] ?? "Not available";
-        $nombre_nuit_ville_19 = $data['nombre_nuit_ville_19'];
-        $nombre_nuit_ville_18 = $data['nombre_nuit_ville_18'];
-        $hotel_nom_ville_19 = $data['hotel_nom_ville_19'];
-        $hotel_nom_ville_18 = $data['hotel_nom_ville_18'];
-    } else {
-        echo "No data found for the given formule ID.";
-    }
+                // Assign the variables, ensuring "Not available" is used for null values
+                $category_parent_nom = $data['category_parent_nom'] ?? "Not available";
+                $omra_packages_nom = $data['omra_packages_nom'] ?? "Not available";
+                $date_depart = $data['date_depart'] ?? "Not available";
+                $date_retour = $data['date_retour'] ?? "Not available";
+                $duree_sejour = $data['duree_sejour'] ?? "Not available";
+                $type_formule_nom = $data['type_formule_nom'] ?? "Not available";
+                $nombre_nuit_ville_19 = $data['nombre_nuit_ville_19'];
+                $nombre_nuit_ville_18 = $data['nombre_nuit_ville_18'];
+                $hotel_nom_ville_19 = $data['hotel_nom_ville_19'];
+                $hotel_nom_ville_18 = $data['hotel_nom_ville_18'];
+            } else {
+                echo "No data found for the given formule ID.";
+            }
 
-    // Close the statement
-    $stmt->close();
-} else {
-    echo "Invalid ID provided.";
-}
+            // Close the statement
+            $stmt->close();
+        } else {
+            echo "Invalid ID provided.";
+        }
 
-// Close the database connection
-$conn->close();
-?>
+        // Close the database connection
+        $conn->close();
+        ?>
 
 
 
@@ -3788,7 +3911,7 @@ $conn->close();
                         <?php echo $Makkah; ?>
                     </div>
                     <div class="text">
-                        <p><?php echo $nombre_nuit_ville_18; ?> nuits à Makkah</p>                            
+                        <p><?php echo $nombre_nuit_ville_18; ?> nuits à Makkah</p>
                     </div>
                 </div>
                 <div class="formula-item">
@@ -3821,14 +3944,14 @@ $conn->close();
 
             <!-- Pricing table START -->
             <?php
-include '../db.php'; // Include your database connection file
+            include '../db.php'; // Include your database connection file
 
-// Get the formule_id from the URL
-$formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+            // Get the formule_id from the URL
+            $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-if ($formule_id > 0) {
-    // Query to fetch pricing details
-    $query = "SELECT 
+            if ($formule_id > 0) {
+                // Query to fetch pricing details
+                $query = "SELECT 
                 prix_chambre_quadruple, 
                 prix_chambre_triple, 
                 prix_chambre_double, 
@@ -3842,34 +3965,34 @@ if ($formule_id > 0) {
               FROM formules 
               WHERE id = ?";
 
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $formule_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("i", $formule_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        $data = $result->fetch_assoc();
+                if ($result->num_rows > 0) {
+                    $data = $result->fetch_assoc();
 
-        // Assign fetched values to variables
-        $prix_chambre_quadruple = $data['prix_chambre_quadruple'];
-        $prix_chambre_triple = $data['prix_chambre_triple'];
-        $prix_chambre_double = $data['prix_chambre_double'];
-        $prix_chambre_single = $data['prix_chambre_single'];
-        $prix_bebe = $data['prix_bebe'];
-        $child_discount = $data['child_discount'];
-        $prix_chambre_quadruple_promo = $data['prix_chambre_quadruple_promo'];
-        $prix_chambre_triple_promo = $data['prix_chambre_triple_promo'];
-        $prix_chambre_double_promo = $data['prix_chambre_double_promo'];
-        $prix_chambre_single_promo = $data['prix_chambre_single_promo'];
-    } else {
-        // Default values if no record found
-        $prix_chambre_quadruple = $prix_chambre_triple = $prix_chambre_double = $prix_chambre_single = $prix_bebe = $child_discount = $prix_chambre_quadruple_promo = $prix_chambre_triple_promo = $prix_chambre_double_promo = $prix_chambre_single_promo = "N/A";
-    }
-    $stmt->close();
-} else {
-    echo "Invalid Formule ID.";
-}
-?>
+                    // Assign fetched values to variables
+                    $prix_chambre_quadruple = $data['prix_chambre_quadruple'];
+                    $prix_chambre_triple = $data['prix_chambre_triple'];
+                    $prix_chambre_double = $data['prix_chambre_double'];
+                    $prix_chambre_single = $data['prix_chambre_single'];
+                    $prix_bebe = $data['prix_bebe'];
+                    $child_discount = $data['child_discount'];
+                    $prix_chambre_quadruple_promo = $data['prix_chambre_quadruple_promo'];
+                    $prix_chambre_triple_promo = $data['prix_chambre_triple_promo'];
+                    $prix_chambre_double_promo = $data['prix_chambre_double_promo'];
+                    $prix_chambre_single_promo = $data['prix_chambre_single_promo'];
+                } else {
+                    // Default values if no record found
+                    $prix_chambre_quadruple = $prix_chambre_triple = $prix_chambre_double = $prix_chambre_single = $prix_bebe = $child_discount = $prix_chambre_quadruple_promo = $prix_chambre_triple_promo = $prix_chambre_double_promo = $prix_chambre_single_promo = "N/A";
+                }
+                $stmt->close();
+            } else {
+                echo "Invalid Formule ID.";
+            }
+            ?>
             <div class="pricing-table-container">
                 <table class="pricing-table">
                     <thead>
@@ -3969,7 +4092,7 @@ if ($formule_id > 0) {
 
 
                 <img src="../<?php echo $comp_logo["logo"] ?>" alt="Airline's Logo" class="airline-logo">
-                
+
                 <?php
                 // Include the database connection
                 include '../db.php';
@@ -3994,12 +4117,10 @@ if ($formule_id > 0) {
                         if ($statut_vol === 'CONFIRMÉ') {
                             echo '<button class="confirm-button">
                                     <div class="">Confirmé';
-                                        
                         } else {
                             echo '<button class="not-confirm-button">
                                     <div class="">En attente';
                         }
-
                     } else {
                         echo 'No formule found with the provided ID.';
                     }
@@ -4013,170 +4134,170 @@ if ($formule_id > 0) {
                 // Close the database connection
                 $conn->close();
                 ?>
-                 <?php echo $plane; ?>
-                                    </div>
-                                </button>
+                <?php echo $plane; ?>
             </div>
-            <!-- Carousel Wrapper -->
-            <!-- Carousel Wrapper -->
-            <div class="swiper flight-carousel">
-                <div class="swiper-wrapper">
-                    <?php
-                    $images = ["../uploads/plane1.jpg", "../uploads/plane2.jpg", "../uploads/plane3.jpg"];
-                    $image_count = count($images);
-                    setlocale(LC_TIME, 'fr_FR.UTF-8', 'fra');
+            </button>
+        </div>
+        <!-- Carousel Wrapper -->
+        <!-- Carousel Wrapper -->
+        <div class="swiper flight-carousel">
+            <div class="swiper-wrapper">
+                <?php
+                $images = ["../uploads/plane1.jpg", "../uploads/plane2.jpg", "../uploads/plane3.jpg"];
+                $image_count = count($images);
+                setlocale(LC_TIME, 'fr_FR.UTF-8', 'fra');
 
-                    foreach ($flights as $index => $flight):
-                        // Parse and format heure_depart
-                        $heure_depart = new DateTime($flight['heure_depart']);
-                        $depart_date_raw = $heure_depart->format('D d M'); // e.g., "Thu 01 Aug"
-                        $depart_date = ucwords(str_replace('.', '', $depart_date_raw));         // e.g., "Thu 01 Aug"
+                foreach ($flights as $index => $flight):
+                    // Parse and format heure_depart
+                    $heure_depart = new DateTime($flight['heure_depart']);
+                    $depart_date_raw = $heure_depart->format('D d M'); // e.g., "Thu 01 Aug"
+                    $depart_date = ucwords(str_replace('.', '', $depart_date_raw));         // e.g., "Thu 01 Aug"
 
-                        // Manually fix the problematic months in French
+                    // Manually fix the problematic months in French
 
-                        $depart_date = str_replace(
-                            // First, replace English month abbreviations with French months
-                            ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],  // English month abbreviations
-                            ['Jan', 'Févr', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'], // French month abbreviations
-                            $depart_date
-                        );
+                    $depart_date = str_replace(
+                        // First, replace English month abbreviations with French months
+                        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],  // English month abbreviations
+                        ['Jan', 'Févr', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'], // French month abbreviations
+                        $depart_date
+                    );
 
-                        // Now, replace English day abbreviations with French days
-                        $depart_date = str_replace(
-                            ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],  // English day abbreviations
-                            ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'], // French day abbreviations
-                            $depart_date
-                        );
-
-
-
-                        $depart_time = $heure_depart->format('H:i');                           // e.g., "06:00"
-
-                        // Parse and format heure_arrivee
-                        $heure_arrivee = new DateTime($flight['heure_arrivee']);
-                        $arrive_date_raw = $heure_arrivee->format('D d M'); // e.g., "Thu 01 Aug"
-                        $arrive_date = ucwords(str_replace('.', '', $arrive_date_raw));          // e.g., "Thu 01 Aug"
-
-                        // Manually fix the problematic months in French
-                        $arrive_date = str_replace(
-                            // First, replace English month abbreviations with French months
-                            ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],  // English month abbreviations
-                            ['Jan', 'Févr', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'], // French month abbreviations
-                            $arrive_date
-                        );
-
-                        // Now, replace English day abbreviations with French days
-                        $arrive_date = str_replace(
-                            ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],  // English day abbreviations
-                            ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'], // French day abbreviations
-                            $arrive_date
-                        );
+                    // Now, replace English day abbreviations with French days
+                    $depart_date = str_replace(
+                        ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],  // English day abbreviations
+                        ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'], // French day abbreviations
+                        $depart_date
+                    );
 
 
 
-                        $arrive_time = $heure_arrivee->format('H:i');                           // e.g., "08:00"
+                    $depart_time = $heure_depart->format('H:i');                           // e.g., "06:00"
 
-                        // Calculate duration
-                        $interval = $heure_depart->diff($heure_arrivee);
-                        $duration = $interval->h . "hr " . $interval->i . "min";
+                    // Parse and format heure_arrivee
+                    $heure_arrivee = new DateTime($flight['heure_arrivee']);
+                    $arrive_date_raw = $heure_arrivee->format('D d M'); // e.g., "Thu 01 Aug"
+                    $arrive_date = ucwords(str_replace('.', '', $arrive_date_raw));          // e.g., "Thu 01 Aug"
 
-                        // Select the current image
-                        $image_path = $images[$index % $image_count];
-                    ?>
+                    // Manually fix the problematic months in French
+                    $arrive_date = str_replace(
+                        // First, replace English month abbreviations with French months
+                        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],  // English month abbreviations
+                        ['Jan', 'Févr', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'], // French month abbreviations
+                        $arrive_date
+                    );
+
+                    // Now, replace English day abbreviations with French days
+                    $arrive_date = str_replace(
+                        ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],  // English day abbreviations
+                        ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'], // French day abbreviations
+                        $arrive_date
+                    );
+
+
+
+                    $arrive_time = $heure_arrivee->format('H:i');                           // e.g., "08:00"
+
+                    // Calculate duration
+                    $interval = $heure_depart->diff($heure_arrivee);
+                    $duration = $interval->h . "hr " . $interval->i . "min";
+
+                    // Select the current image
+                    $image_path = $images[$index % $image_count];
+                ?>
 
 
 
 
-                        <!-- Each Flight Ticket Card -->
-                        <div class="swiper-slide flight-ticket">
-                            <div class="ticket-info">
-                                <div class="ticket-route">
-                                    <div class="left-section">
-                                        <span
-                                            class="airport-code"><?= htmlspecialchars($flight['depart_airport_code']); ?></span>
-                                        <span
-                                            class="airport-name dark-text"><?= htmlspecialchars($flight['depart_airport_name']); ?></span>
-                                    </div>
-                                    <span class="flight-number grey">N° VOL<br>
-                                        <span
-                                            class="flight-code dark-text"><?= htmlspecialchars($flight['num_vol']); ?></span>
+                    <!-- Each Flight Ticket Card -->
+                    <div class="swiper-slide flight-ticket">
+                        <div class="ticket-info">
+                            <div class="ticket-route">
+                                <div class="left-section">
+                                    <span
+                                        class="airport-code"><?= htmlspecialchars($flight['depart_airport_code']); ?></span>
+                                    <span
+                                        class="airport-name dark-text"><?= htmlspecialchars($flight['depart_airport_name']); ?></span>
+                                </div>
+                                <span class="flight-number grey">N° VOL<br>
+                                    <span
+                                        class="flight-code dark-text"><?= htmlspecialchars($flight['num_vol']); ?></span>
+                                </span>
+                                <div class="right-section">
+                                    <span
+                                        class="airport-code"><?= htmlspecialchars($flight['destination_airport_code']); ?></span>
+                                    <span
+                                        class="airport-name dark-text"><?= htmlspecialchars($flight['destination_airport_name']); ?></span>
+                                </div>
+                            </div>
+                            <img src="<?= $image_path; ?>" alt="Flight Image" class="flight-image">
+
+                            <div class="dashed-line circle-cut"></div>
+                            <div>
+                                <div class="" style="text-align: center; margin:0% 20%;">
+                                    <?= $plane_path; ?>
+                                </div>
+                            </div>
+
+                            <div class="flight-details">
+                                <div class="left-section-flight-details">
+                                    <span class="grey" style="margin-left: 13px;">Départ</span>
+                                    <span>
+                                        <div class="icon-container-vol-section-left dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
+                                            <?= $calender; ?> <?= htmlspecialchars($depart_date); ?>
+                                        </div>
                                     </span>
-                                    <div class="right-section">
-                                        <span
-                                            class="airport-code"><?= htmlspecialchars($flight['destination_airport_code']); ?></span>
-                                        <span
-                                            class="airport-name dark-text"><?= htmlspecialchars($flight['destination_airport_name']); ?></span>
-                                    </div>
+                                    <span>
+                                        <div class="icon-container-vol-section dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
+                                            <?= $time; ?> <?= htmlspecialchars($depart_time); ?>
+                                        </div>
+                                    </span>
                                 </div>
-                                <img src="<?= $image_path; ?>" alt="Flight Image" class="flight-image">
-
-                                <div class="dashed-line circle-cut"></div>
-                                <div>
-                                    <div class="" style="text-align: center; margin:0% 20%;">
-                                        <?= $plane_path; ?>
-                                    </div>
+                                <div class="duration grey">
+                                    <span class="bold raleway"><?= htmlspecialchars($duration); ?></span>
+                                    <span>Pas d'escale</span>
                                 </div>
-
-                                <div class="flight-details">
-                                    <div class="left-section-flight-details">
-                                        <span class="grey" style="margin-left: 13px;">Départ</span>
-                                        <span>
-                                            <div class="icon-container-vol-section-left dark-text"
-                                                style="font-size: 14px; font-weight: 600;">
-                                                <?= $calender; ?> <?= htmlspecialchars($depart_date); ?>
-                                            </div>
-                                        </span>
-                                        <span>
-                                            <div class="icon-container-vol-section dark-text"
-                                                style="font-size: 14px; font-weight: 600;">
-                                                <?= $time; ?> <?= htmlspecialchars($depart_time); ?>
-                                            </div>
-                                        </span>
-                                    </div>
-                                    <div class="duration grey">
-                                        <span class="bold raleway"><?= htmlspecialchars($duration); ?></span>
-                                        <span>Pas d'escale</span>
-                                    </div>
-                                    <div class="right-section-flight-details">
-                                        <span class="grey" style="margin-left: 23px;">Arrivée</span>
-                                        <span>
-                                            <div class="icon-container-vol-section-right dark-text"
-                                                style="font-size: 14px; font-weight: 600;">
-                                                <?= $calender; ?> <?= htmlspecialchars($arrive_date); ?>
-                                            </div>
-                                        </span>
-                                        <span>
-                                            <div class="icon-container-vol-section-right dark-text"
-                                                style="font-size: 14px; font-weight: 600;">
-                                                <?= $time; ?> <?= htmlspecialchars($arrive_time); ?>
-                                            </div>
-                                        </span>
-                                    </div>
+                                <div class="right-section-flight-details">
+                                    <span class="grey" style="margin-left: 23px;">Arrivée</span>
+                                    <span>
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
+                                            <?= $calender; ?> <?= htmlspecialchars($arrive_date); ?>
+                                        </div>
+                                    </span>
+                                    <span>
+                                        <div class="icon-container-vol-section-right dark-text"
+                                            style="font-size: 14px; font-weight: 600;">
+                                            <?= $time; ?> <?= htmlspecialchars($arrive_time); ?>
+                                        </div>
+                                    </span>
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach; ?>
-                </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <!-- Pagination Dots -->
-                <div class="swiper-pagination"></div>
+                    </div>
+                <?php endforeach; ?>
             </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <!-- Pagination Dots -->
+            <div class="swiper-pagination"></div>
         </div>
-        <!-- Vols aller-retour END-->
+    </div>
+    <!-- Vols aller-retour END-->
 
 
 
-        <!-- Hebergement START -->
-        <?php
-        // Include the database connection
-        include '../db.php';
+    <!-- Hebergement START -->
+    <?php
+    // Include the database connection
+    include '../db.php';
 
-        // Get the `formule_id` from the URL
-        $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+    // Get the `formule_id` from the URL
+    $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-        // Prepare the SQL query
-        $sql = "
+    // Prepare the SQL query
+    $sql = "
             SELECT 
                 h.type_pension, 
                 h.date_checkin, 
@@ -4197,137 +4318,137 @@ if ($formule_id > 0) {
             WHERE h.formule_id = $formule_id
             ";
 
-        // Execute the query
-        $result = $conn->query($sql);
+    // Execute the query
+    $result = $conn->query($sql);
 
-        // Check if data is fetched
-        if ($result->num_rows > 0) {
-            $data = [];
-            while ($row = $result->fetch_assoc()) {
-                $data[$row['hotel_id']]['hotel_info'] = $row;  // Store hotel info
-                $data[$row['hotel_id']]['images'][] = $row['image_path'];  // Store image paths
-            }
-        } else {
-            $data = [];
+    // Check if data is fetched
+    if ($result->num_rows > 0) {
+        $data = [];
+        while ($row = $result->fetch_assoc()) {
+            $data[$row['hotel_id']]['hotel_info'] = $row;  // Store hotel info
+            $data[$row['hotel_id']]['images'][] = $row['image_path'];  // Store image paths
         }
-        ?>
+    } else {
+        $data = [];
+    }
+    ?>
 
 
-        <div class="content">
-            <div class="hebergement-container">
-                <div class="top-hebergement">
-                    <div class="icon-container">
-                        <?php echo $top_sidebar; ?>
-                    </div>
-                </div>
-                <h2>Hébergement</h2>
-
-                <!-- Generate buttons dynamically for each ville (without duplicates) -->
-                <div class="hotel-buttons">
-                    <?php
-                    $displayedCities = []; // Array to track displayed cities
-                    foreach ($data as $hotel_id => $hotels):
-                        $city_name = strtolower($hotels['hotel_info']['ville_nom']); // Get the city name
-                        if (!in_array($city_name, $displayedCities)): // Check if the city is already displayed
-                            $displayedCities[] = $city_name; // Add city to the array to prevent duplicates
-                    ?>
-                            <button class="hotel-button" data-hotel="<?= $city_name ?>">
-                                <?= $hotels['hotel_info']['ville_nom'] ?>
-                            </button>
-                    <?php endif;
-                    endforeach; ?>
-                </div>
-                <style>
-                    .swiper-container {
-                        position: relative;
-                        /* Ensure it positions itself relative to the page */
-                        width: 100%;
-                    }
-
-                    .swiper-pagination {
-                        position: absolute;
-                        /* Position absolutely within swiper container */
-                        bottom: 10px;
-                        /* Adjust this value to place the pagination at the bottom */
-                        left: 50% !important;
-                        transform: translateX(-50%);
-                        /* Center it horizontally */
-                        z-index: 10;
-                        /* Ensure it appears above images */
-                    }
-                </style>
-                <div class="hotel-content">
-                    <?php foreach ($data as $hotel_id => $hotels): ?>
-                        <div class="hotel-info" id="hotel-<?= strtolower($hotels['hotel_info']['ville_nom']) ?>"
-                            style="display: none;">
-                            <div class="swiper-container" id="swiper-<?= $hotel_id ?>">
-                                <div class="swiper-wrapper">
-                                    <?php foreach ($hotels['images'] as $image_path): ?>
-                                        <div class="swiper-slide">
-                                            <img class="hotel-image" src="../<?= $image_path ?>" alt="Hotel Image">
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                                <div class="swiper-pagination"></div>
-                            </div>
-                            <div class="hotel-details">
-                                <div class="info">
-                                    <h3><?= $hotels['hotel_info']['hotel_nom'] ?></h3>
-                                    <div style="margin: 10px 10px 15px 0px;">
-                                        <?php for ($i = 0; $i < $hotels['hotel_info']['etoiles']; $i++): ?>
-                                            <?php echo $onestar; ?>
-                                        <?php endfor; ?>
-                                        <span class="grey m-3">724 avis</span>
-                                    </div>
-                                    <p>
-                                        Ville : <b><?= $hotels['hotel_info']['ville_nom'] ?></b><br>
-                                        Monument : <b><?= $hotels['hotel_info']['monument'] ?></b><br>
-                                        Durée du trajet : <b><?= $hotels['hotel_info']['details'] ?></b>
-                                    </p>
-                                </div>
-                                <div class="booking-details">
-                                    <div class="formula-item">
-                                        <?php echo $Arrivée; ?>
-                                        <div class="text" style="margin-left: 10px; margin-top: 15px;">
-                                            <h4>Check-in</h4>
-                                            <p><?= $hotels['hotel_info']['date_checkin'] ?></p>
-                                        </div>
-                                    </div>
-                                    <div class="formula-item">
-                                        <?php echo $Départ; ?>
-                                        <div class="text" style="margin-left: 10px; margin-top: 15px;">
-                                            <h4>Check-out</h4>
-                                            <p><?= $hotels['hotel_info']['date_checkout'] ?></p>
-                                        </div>
-                                    </div>
-                                    <div class="formula-item">
-                                        <?php echo $Durée; ?>
-                                        <div class="text" style="margin-left: 10px; margin-top: 15px;">
-                                            <h4>Durée du séjour</h4>
-                                            <p><?= $hotels['hotel_info']['nombre_nuit'] ?> nuitées</p>
-                                        </div>
-                                    </div>
-                                    <div class="formula-item">
-                                        <?php echo $pension; ?>
-                                        <div class="text" style="margin-left: 10px; margin-top: 15px;">
-                                            <h4>Pension</h4>
-                                            <p><?= $hotels['hotel_info']['type_pension'] ?></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr>
-
-                        </div>
-
-                    <?php endforeach; ?>
+    <div class="content">
+        <div class="hebergement-container">
+            <div class="top-hebergement">
+                <div class="icon-container">
+                    <?php echo $top_sidebar; ?>
                 </div>
             </div>
+            <h2>Hébergement</h2>
+
+            <!-- Generate buttons dynamically for each ville (without duplicates) -->
+            <div class="hotel-buttons">
+                <?php
+                $displayedCities = []; // Array to track displayed cities
+                foreach ($data as $hotel_id => $hotels):
+                    $city_name = strtolower($hotels['hotel_info']['ville_nom']); // Get the city name
+                    if (!in_array($city_name, $displayedCities)): // Check if the city is already displayed
+                        $displayedCities[] = $city_name; // Add city to the array to prevent duplicates
+                ?>
+                        <button class="hotel-button" data-hotel="<?= $city_name ?>">
+                            <?= $hotels['hotel_info']['ville_nom'] ?>
+                        </button>
+                <?php endif;
+                endforeach; ?>
+            </div>
+            <style>
+                .swiper-container {
+                    position: relative;
+                    /* Ensure it positions itself relative to the page */
+                    width: 100%;
+                }
+
+                .swiper-pagination {
+                    position: absolute;
+                    /* Position absolutely within swiper container */
+                    bottom: 10px;
+                    /* Adjust this value to place the pagination at the bottom */
+                    left: 50% !important;
+                    transform: translateX(-50%);
+                    /* Center it horizontally */
+                    z-index: 10;
+                    /* Ensure it appears above images */
+                }
+            </style>
+            <div class="hotel-content">
+                <?php foreach ($data as $hotel_id => $hotels): ?>
+                    <div class="hotel-info" id="hotel-<?= strtolower($hotels['hotel_info']['ville_nom']) ?>"
+                        style="display: none;">
+                        <div class="swiper-container" id="swiper-<?= $hotel_id ?>">
+                            <div class="swiper-wrapper">
+                                <?php foreach ($hotels['images'] as $image_path): ?>
+                                    <div class="swiper-slide">
+                                        <img class="hotel-image" src="../<?= $image_path ?>" alt="Hotel Image">
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                        <div class="hotel-details">
+                            <div class="info">
+                                <h3><?= $hotels['hotel_info']['hotel_nom'] ?></h3>
+                                <div style="margin: 10px 10px 15px 0px;">
+                                    <?php for ($i = 0; $i < $hotels['hotel_info']['etoiles']; $i++): ?>
+                                        <?php echo $onestar; ?>
+                                    <?php endfor; ?>
+                                    <span class="grey m-3">724 avis</span>
+                                </div>
+                                <p>
+                                    Ville : <b><?= $hotels['hotel_info']['ville_nom'] ?></b><br>
+                                    Monument : <b><?= $hotels['hotel_info']['monument'] ?></b><br>
+                                    Durée du trajet : <b><?= $hotels['hotel_info']['details'] ?></b>
+                                </p>
+                            </div>
+                            <div class="booking-details">
+                                <div class="formula-item">
+                                    <?php echo $Arrivée; ?>
+                                    <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                        <h4>Check-in</h4>
+                                        <p><?= $hotels['hotel_info']['date_checkin'] ?></p>
+                                    </div>
+                                </div>
+                                <div class="formula-item">
+                                    <?php echo $Départ; ?>
+                                    <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                        <h4>Check-out</h4>
+                                        <p><?= $hotels['hotel_info']['date_checkout'] ?></p>
+                                    </div>
+                                </div>
+                                <div class="formula-item">
+                                    <?php echo $Durée; ?>
+                                    <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                        <h4>Durée du séjour</h4>
+                                        <p><?= $hotels['hotel_info']['nombre_nuit'] ?> nuitées</p>
+                                    </div>
+                                </div>
+                                <div class="formula-item">
+                                    <?php echo $pension; ?>
+                                    <div class="text" style="margin-left: 10px; margin-top: 15px;">
+                                        <h4>Pension</h4>
+                                        <p><?= $hotels['hotel_info']['type_pension'] ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                    </div>
+
+                <?php endforeach; ?>
+            </div>
         </div>
+    </div>
 
 
-        <!-- <script>
+    <!-- <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const buttons = document.querySelectorAll(".hotel-button");
                 const hotelInfos = document.querySelectorAll(".hotel-info");
@@ -4346,288 +4467,288 @@ if ($formule_id > 0) {
         </script> -->
 
 
-        <!-- Hebergement END -->
+    <!-- Hebergement END -->
 
-        <!------------------------ Programme START ----------------------------->
-        <div class="content">
-            <div class="programme-container">
-                <h2>Programme</h2>
-                <?php
-                // Database connection
-                include '../db.php';
+    <!------------------------ Programme START ----------------------------->
+    <div class="content">
+        <div class="programme-container">
+            <h2>Programme</h2>
+            <?php
+            // Database connection
+            include '../db.php';
 
-                // Get formule ID from GET parameter
-                $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+            // Get formule ID from GET parameter
+            $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-                // Fetch programs_id and program_order from formules table
-                $sql_fetch_formule = "SELECT programs_id, program_order FROM formules WHERE id = $formule_id";
-                $result_formule = mysqli_query($conn, $sql_fetch_formule);
+            // Fetch programs_id and program_order from formules table
+            $sql_fetch_formule = "SELECT programs_id, program_order FROM formules WHERE id = $formule_id";
+            $result_formule = mysqli_query($conn, $sql_fetch_formule);
 
-                if ($result_formule && mysqli_num_rows($result_formule) > 0) {
-                    $row = mysqli_fetch_assoc($result_formule);
-                    $program_ids = json_decode($row['programs_id'], true);
-                    $program_order = json_decode($row['program_order'], true);
+            if ($result_formule && mysqli_num_rows($result_formule) > 0) {
+                $row = mysqli_fetch_assoc($result_formule);
+                $program_ids = json_decode($row['programs_id'], true);
+                $program_order = json_decode($row['program_order'], true);
 
-                    if (!empty($program_ids) && !empty($program_order)) {
-                        // Fetch programs from programs table
-                        $program_ids_str = implode(',', $program_ids);
-                        $sql_fetch_programs = "SELECT id, nom, description, photo 
+                if (!empty($program_ids) && !empty($program_order)) {
+                    // Fetch programs from programs table
+                    $program_ids_str = implode(',', $program_ids);
+                    $sql_fetch_programs = "SELECT id, nom, description, photo 
                                        FROM programs 
                                        WHERE id IN ($program_ids_str) 
                                        ORDER BY FIELD(id, $program_ids_str)";
-                        $result_programs = mysqli_query($conn, $sql_fetch_programs);
+                    $result_programs = mysqli_query($conn, $sql_fetch_programs);
 
-                        $programs = [];
-                        if ($result_programs && mysqli_num_rows($result_programs) > 0) {
-                            while ($program = mysqli_fetch_assoc($result_programs)) {
-                                $programs[$program['id']] = $program;
-                            }
+                    $programs = [];
+                    if ($result_programs && mysqli_num_rows($result_programs) > 0) {
+                        while ($program = mysqli_fetch_assoc($result_programs)) {
+                            $programs[$program['id']] = $program;
                         }
+                    }
 
-                        // Fetch program details
-                        $sql_fetch_details = "SELECT program_id, date, duration 
+                    // Fetch program details
+                    $sql_fetch_details = "SELECT program_id, date, duration 
                                       FROM program_details 
                                       WHERE formule_id = $formule_id";
-                        $result_details = mysqli_query($conn, $sql_fetch_details);
+                    $result_details = mysqli_query($conn, $sql_fetch_details);
 
-                        $program_details = [];
-                        if ($result_details && mysqli_num_rows($result_details) > 0) {
-                            while ($detail = mysqli_fetch_assoc($result_details)) {
-                                $program_details[$detail['program_id']] = $detail;
-                            }
+                    $program_details = [];
+                    if ($result_details && mysqli_num_rows($result_details) > 0) {
+                        while ($detail = mysqli_fetch_assoc($result_details)) {
+                            $program_details[$detail['program_id']] = $detail;
                         }
-
-                        // Render programs in specified order
-                        foreach ($program_order as $program_id) {
-                            if (isset($programs[$program_id])) {
-                                $program = $programs[$program_id];
-                                $details = isset($program_details[$program_id]) ? $program_details[$program_id] : null;
-                ?>
-                                <div class="accordion-item">
-                                    <div class="accordion-header">
-                                        <div class="date-info">
-                                            <span class="date">
-                                                <?php
-                                                if ($details) {
-                                                    // Extract the date and format it
-                                                    $program_date = date('M<\span>d', strtotime($details['date']));
-
-                                                    // Replace English month abbreviations with French ones
-                                                    $program_date = str_replace(
-                                                        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // English month abbreviations
-                                                        ['JAN', 'FÉV', 'MARS', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOÛT', 'SEP', 'OCT', 'NOV', 'DÉC'], // French month abbreviations
-                                                        $program_date
-                                                    );
-
-                                                    // Output the formatted date
-                                                    echo $program_date;
-                                                }
-                                                ?>
-                                            </span>
-
-
-                                            <span class="title"><?php echo htmlspecialchars($program['nom']); ?></span>
-                                        </div>
-                                        <span class="toggle-icon">
-                                            <?php echo isset($up) ? $up : ''; ?>
-                                        </span>
-                                    </div>
-                                    <div class="accordion-body">
-                                        <div class="accordion-content">
-                                            <div class="d-flex">
-                                                <div class="vr"></div>
-                                            </div>
-                                            <div class="content-text-image">
-                                                <div class="text-content">
-                                                    <p><?php echo nl2br(htmlspecialchars($program['description'])); ?></p>
-                                                </div>
-                                                <div class="image-content">
-                                                    <img src="../<?php echo htmlspecialchars($program['photo']); ?>" alt="Program Image">
-                                                    <?php
-                                                    if ($details) {
-                                                        echo '<div class="duration-label">Durée<br>' . htmlspecialchars($details['duration']) . '</div>';
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                <?php
-                            }
-                        }
-                    } else {
-                        echo "<p>Aucun programme disponible pour cette formule.</p>";
                     }
-                } else {
-                    echo "<p>Formule invalide ou introuvable.</p>";
-                }
 
-                // Close connection
-                mysqli_close($conn);
-                ?>
-            </div>
-        </div>
-        <!------------------------ Programme END ----------------------------->
+                    // Render programs in specified order
+                    foreach ($program_order as $program_id) {
+                        if (isset($programs[$program_id])) {
+                            $program = $programs[$program_id];
+                            $details = isset($program_details[$program_id]) ? $program_details[$program_id] : null;
+            ?>
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <div class="date-info">
+                                        <span class="date">
+                                            <?php
+                                            if ($details) {
+                                                // Extract the date and format it
+                                                $program_date = date('M<\span>d', strtotime($details['date']));
+
+                                                // Replace English month abbreviations with French ones
+                                                $program_date = str_replace(
+                                                    ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // English month abbreviations
+                                                    ['JAN', 'FÉV', 'MARS', 'AVR', 'MAI', 'JUIN', 'JUIL', 'AOÛT', 'SEP', 'OCT', 'NOV', 'DÉC'], // French month abbreviations
+                                                    $program_date
+                                                );
+
+                                                // Output the formatted date
+                                                echo $program_date;
+                                            }
+                                            ?>
+                                        </span>
 
 
-        <!------------------------ Plus de details START ----------------------------->
-        <?php
-        include '../db.php';
-        $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-        $query = "SELECT  s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d FROM formules WHERE id = $formule_id";
-
-        // Execute the query
-        $result = $conn->query($query);
-
-        // Check if data is fetched successfully
-        if ($result && $result->num_rows > 0) {
-            // Fetch the associative array for the formule
-            $formule = $result->fetch_assoc();
-        }
-        ?>
-        <?php
-        if (
-            (!empty($formule['s1t']) && $formule['s1d'] != '<p><br></p>') ||
-            (!empty($formule['s2t']) && $formule['s2d'] != '<p><br></p>') ||
-            (!empty($formule['s3t']) && $formule['s3d'] != '<p><br></p>') ||
-            (!empty($formule['s4t']) && $formule['s4d'] != '<p><br></p>') ||
-            (!empty($formule['s5t']) && $formule['s5d'] != '<p><br></p>')
-        ) {
-        ?>
-            <div class="content">
-                <div class="details-container">
-                    <h2>Plus de détails</h2>
-                    <!-- Start accordion section 1 -->
-                    <?php
-                    if (!empty($formule['s1t']) && $formule['s1d'] != '<p><br></p>') {
-                    ?>
-                        <div class="accordion-item accordion-item-details ">
-                            <div class="accordion-header">
-                                <div class="date-info">
-                                    <span class="title">
-                                        <?php echo $formule['s1t']; ?>
+                                        <span class="title"><?php echo htmlspecialchars($program['nom']); ?></span>
+                                    </div>
+                                    <span class="toggle-icon">
+                                        <?php echo isset($up) ? $up : ''; ?>
                                     </span>
                                 </div>
-                                <span class="toggle-icon">
-                                    <?php echo $down_arrow; ?>
+                                <div class="accordion-body">
+                                    <div class="accordion-content">
+                                        <div class="d-flex">
+                                            <div class="vr"></div>
+                                        </div>
+                                        <div class="content-text-image">
+                                            <div class="text-content">
+                                                <p><?php echo nl2br(htmlspecialchars($program['description'])); ?></p>
+                                            </div>
+                                            <div class="image-content">
+                                                <img src="../<?php echo htmlspecialchars($program['photo']); ?>" alt="Program Image">
+                                                <?php
+                                                if ($details) {
+                                                    echo '<div class="duration-label">Durée<br>' . htmlspecialchars($details['duration']) . '</div>';
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            <?php
+                        }
+                    }
+                } else {
+                    echo "<p>Aucun programme disponible pour cette formule.</p>";
+                }
+            } else {
+                echo "<p>Formule invalide ou introuvable.</p>";
+            }
+
+            // Close connection
+            mysqli_close($conn);
+            ?>
+        </div>
+    </div>
+    <!------------------------ Programme END ----------------------------->
+
+
+    <!------------------------ Plus de details START ----------------------------->
+    <?php
+    include '../db.php';
+    $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+    $query = "SELECT  s1t, s1d, s2t, s2d, s3t, s3d, s4t, s4d, s5t, s5d FROM formules WHERE id = $formule_id";
+
+    // Execute the query
+    $result = $conn->query($query);
+
+    // Check if data is fetched successfully
+    if ($result && $result->num_rows > 0) {
+        // Fetch the associative array for the formule
+        $formule = $result->fetch_assoc();
+    }
+    ?>
+    <?php
+    if (
+        (!empty($formule['s1t']) && $formule['s1d'] != '<p><br></p>') ||
+        (!empty($formule['s2t']) && $formule['s2d'] != '<p><br></p>') ||
+        (!empty($formule['s3t']) && $formule['s3d'] != '<p><br></p>') ||
+        (!empty($formule['s4t']) && $formule['s4d'] != '<p><br></p>') ||
+        (!empty($formule['s5t']) && $formule['s5d'] != '<p><br></p>')
+    ) {
+    ?>
+        <div class="content">
+            <div class="details-container">
+                <h2>Plus de détails</h2>
+                <!-- Start accordion section 1 -->
+                <?php
+                if (!empty($formule['s1t']) && $formule['s1d'] != '<p><br></p>') {
+                ?>
+                    <div class="accordion-item accordion-item-details ">
+                        <div class="accordion-header">
+                            <div class="date-info">
+                                <span class="title">
+                                    <?php echo $formule['s1t']; ?>
                                 </span>
                             </div>
-                            <div class="accordion-body">
-                                <div class="accordion-content">
-                                    <div class="text-content">
-                                        <p>
-                                            <?php echo $formule['s1d']; ?>
-                                        </p>
-                                    </div>
+                            <span class="toggle-icon">
+                                <?php echo $down_arrow; ?>
+                            </span>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-content">
+                                <div class="text-content">
+                                    <p>
+                                        <?php echo $formule['s1d']; ?>
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                    <?php
-                    }
-                    ?>
-                    <!-- End accordion section 1 -->
+                    </div>
+                <?php
+                }
+                ?>
+                <!-- End accordion section 1 -->
 
-                    <!-- Start accordion section 2 -->
-                    <?php
-                    if (!empty($formule['s2t']) && $formule['s2d'] != '<p><br></p>') {
-                    ?>
-                        <div class="accordion-item accordion-item-details ">
-                            <div class="accordion-header">
-                                <div class="date-info">
-                                    <span class="title"><?php echo $formule['s2t']; ?></span>
-                                </div>
-                                <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                <!-- Start accordion section 2 -->
+                <?php
+                if (!empty($formule['s2t']) && $formule['s2d'] != '<p><br></p>') {
+                ?>
+                    <div class="accordion-item accordion-item-details ">
+                        <div class="accordion-header">
+                            <div class="date-info">
+                                <span class="title"><?php echo $formule['s2t']; ?></span>
                             </div>
-                            <div class="accordion-body">
-                                <div class="accordion-content">
-                                    <div class="text-content">
-                                        <p><?php echo $formule['s2d']; ?></p>
-                                    </div>
+                            <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-content">
+                                <div class="text-content">
+                                    <p><?php echo $formule['s2d']; ?></p>
                                 </div>
                             </div>
                         </div>
-                    <?php
-                    }
-                    ?>
-                    <!-- End accordion section 2 -->
+                    </div>
+                <?php
+                }
+                ?>
+                <!-- End accordion section 2 -->
 
-                    <!-- Start accordion section 3 -->
-                    <?php
-                    if (!empty($formule['s3t']) && $formule['s3d'] != '<p><br></p>') {
-                    ?>
-                        <div class="accordion-item accordion-item-details ">
-                            <div class="accordion-header">
-                                <div class="date-info">
-                                    <span class="title"><?php echo $formule['s3t']; ?></span>
-                                </div>
-                                <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                <!-- Start accordion section 3 -->
+                <?php
+                if (!empty($formule['s3t']) && $formule['s3d'] != '<p><br></p>') {
+                ?>
+                    <div class="accordion-item accordion-item-details ">
+                        <div class="accordion-header">
+                            <div class="date-info">
+                                <span class="title"><?php echo $formule['s3t']; ?></span>
                             </div>
-                            <div class="accordion-body">
-                                <div class="accordion-content">
-                                    <div class="text-content">
-                                        <p><?php echo $formule['s3d']; ?></p>
-                                    </div>
+                            <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-content">
+                                <div class="text-content">
+                                    <p><?php echo $formule['s3d']; ?></p>
                                 </div>
                             </div>
                         </div>
-                    <?php
-                    }
-                    ?>
-                    <!-- End accordion section 3 -->
+                    </div>
+                <?php
+                }
+                ?>
+                <!-- End accordion section 3 -->
 
-                    <!-- Start accordion section 4 -->
-                    <?php
-                    if (!empty($formule['s4t']) && $formule['s4d'] != '<p><br></p>') {
-                    ?>
-                        <div class="accordion-item accordion-item-details ">
-                            <div class="accordion-header">
-                                <div class="date-info">
-                                    <span class="title"><?php echo $formule['s4t']; ?></span>
-                                </div>
-                                <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                <!-- Start accordion section 4 -->
+                <?php
+                if (!empty($formule['s4t']) && $formule['s4d'] != '<p><br></p>') {
+                ?>
+                    <div class="accordion-item accordion-item-details ">
+                        <div class="accordion-header">
+                            <div class="date-info">
+                                <span class="title"><?php echo $formule['s4t']; ?></span>
                             </div>
-                            <div class="accordion-body">
-                                <div class="accordion-content">
-                                    <div class="text-content">
-                                        <p><?php echo $formule['s4d']; ?></p>
-                                    </div>
+                            <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-content">
+                                <div class="text-content">
+                                    <p><?php echo $formule['s4d']; ?></p>
                                 </div>
                             </div>
                         </div>
-                    <?php
-                    }
-                    ?>
-                    <!-- End accordion section 4 -->
+                    </div>
+                <?php
+                }
+                ?>
+                <!-- End accordion section 4 -->
 
-                    <!-- Start accordion section 5 -->
-                    <?php
-                    if (!empty($formule['s5t']) && $formule['s5d'] != '<p><br></p>') {
-                    ?>
-                        <div class="accordion-item accordion-item-details ">
-                            <div class="accordion-header">
-                                <div class="date-info">
-                                    <span class="title"><?php echo $formule['s5t']; ?></span>
-                                </div>
-                                <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                <!-- Start accordion section 5 -->
+                <?php
+                if (!empty($formule['s5t']) && $formule['s5d'] != '<p><br></p>') {
+                ?>
+                    <div class="accordion-item accordion-item-details ">
+                        <div class="accordion-header">
+                            <div class="date-info">
+                                <span class="title"><?php echo $formule['s5t']; ?></span>
                             </div>
-                            <div class="accordion-body">
-                                <div class="accordion-content">
-                                    <div class="text-content">
-                                        <p><?php echo $formule['s5d']; ?></p>
-                                    </div>
+                            <span class="toggle-icon"><?php echo $down_arrow; ?></span>
+                        </div>
+                        <div class="accordion-body">
+                            <div class="accordion-content">
+                                <div class="text-content">
+                                    <p><?php echo $formule['s5d']; ?></p>
                                 </div>
                             </div>
                         </div>
-                    <?php
-                    } ?>
-                    <!-- End accordion section 5 -->
-                </div>
+                    </div>
+                <?php
+                } ?>
+                <!-- End accordion section 5 -->
             </div>
-        <?php
-        }
-        ?>
-        <!------------------------ Plus de details END ------------------------------->
+        </div>
+    <?php
+    }
+    ?>
+    <!------------------------ Plus de details END ------------------------------->
     </div>
     <!------------------------ END container mt-3 ------------------------------->
 
