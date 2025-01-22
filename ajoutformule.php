@@ -322,39 +322,39 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
       <div class="half-width-inputs">
 
 
-      <div class="input-group">
-    <label for="package">Ville de départ:</label>
-    <select id="package" name="package" class="half-width-input" required>
-        <option value="">Sélectionnez une ville</option>
-        <?php
-        // Inclure le fichier de connexion à la base de données
-        include 'db.php';
+        <div class="input-group">
+          <label for="package">Ville de départ:</label>
+          <select id="package" name="package" class="half-width-input" required>
+            <option value="">Sélectionnez une ville</option>
+            <?php
+            // Inclure le fichier de connexion à la base de données
+            include 'db.php';
 
-        // Requête SQL pour sélectionner les packages Omra et leurs catégories associées
-        $sql = "
+            // Requête SQL pour sélectionner les packages Omra et leurs catégories associées
+            $sql = "
         SELECT omra_packages.id, omra_packages.nom, category_parent.nom AS category_nom
         FROM omra_packages
         JOIN category_parent ON omra_packages.category_parent_id = category_parent.id";
 
-        // Exécuter la requête
-        $result = mysqli_query($conn, $sql);
+            // Exécuter la requête
+            $result = mysqli_query($conn, $sql);
 
-        // Vérifier s'il y a des résultats
-        if (mysqli_num_rows($result) > 0) {
-            // Afficher les options dans le menu déroulant
-            while ($row = mysqli_fetch_assoc($result)) {
+            // Vérifier s'il y a des résultats
+            if (mysqli_num_rows($result) > 0) {
+              // Afficher les options dans le menu déroulant
+              while ($row = mysqli_fetch_assoc($result)) {
                 // Inclure le nom du package et le nom de la catégorie dans l'option
                 echo "<option value='" . $row["id"] . "'>" . $row["nom"] . " - " . $row["category_nom"] . "</option>";
+              }
+            } else {
+              echo "<option disabled>Aucun package Omra disponible</option>";
             }
-        } else {
-            echo "<option disabled>Aucun package Omra disponible</option>";
-        }
 
-        // Fermer la connexion à la base de données
-        mysqli_close($conn);
-        ?>
-    </select>
-</div>
+            // Fermer la connexion à la base de données
+            mysqli_close($conn);
+            ?>
+          </select>
+        </div>
 
 
         <div class="input-group">
@@ -991,60 +991,60 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
       <!-- Start programs -->
-<div class="price-inputs">
-    <h3>Programmes <span class="toggle-icon">+</span></h3>
-    <div class="collapsible-content" style="padding:5px;">
-        <div class="program-grid" id="sortable-programs">
+      <div class="price-inputs">
+        <h3>Programmes <span class="toggle-icon">+</span></h3>
+        <div class="collapsible-content" style="padding:5px;">
+          <div class="program-grid" id="sortable-programs">
             <?php
             include 'db.php';
             $sql_programs = "SELECT id, nom FROM programs";
             $result_programs = mysqli_query($conn, $sql_programs);
             if (mysqli_num_rows($result_programs) > 0) {
-                while ($row = mysqli_fetch_assoc($result_programs)) {
-                    echo '<div class="ui-state-default checkinputs" data-id="' . $row['id'] . '">';
-                    echo '<input type="checkbox" name="programs[]" value="' . $row['id'] . '"> ' . $row['nom'];
-                    echo '<div>';
-                    echo '<label>Date:</label>';
-                    echo '<input type="date" name="program_dates[' . $row['id'] . ']" class="program-date">';
-                    echo '<label>Duration:</label>';
-                    echo '<input type="text" name="program_durations[' . $row['id'] . ']" class="program-duration" placeholder="e.g., 3 days">';
-                    echo '</div>';
-                    echo '</div>';
-                }
+              while ($row = mysqli_fetch_assoc($result_programs)) {
+                echo '<div class="ui-state-default checkinputs" data-id="' . $row['id'] . '">';
+                echo '<input type="checkbox" name="programs[]" value="' . $row['id'] . '"> ' . $row['nom'];
+                echo '<div>';
+                echo '<label>Date:</label>';
+                echo '<input type="date" name="program_dates[' . $row['id'] . ']" class="program-date">';
+                echo '<label>Duration:</label>';
+                echo '<input type="text" name="program_durations[' . $row['id'] . ']" class="program-duration" placeholder="e.g., 3 days">';
+                echo '</div>';
+                echo '</div>';
+              }
             } else {
-                echo "Aucun programme trouvé.";
+              echo "Aucun programme trouvé.";
             }
             ?>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
-<script>
-    $(function() {
-        $("#sortable-programs").sortable();
-        $("#sortable-programs").disableSelection();
-    });
+      <script>
+        $(function() {
+          $("#sortable-programs").sortable();
+          $("#sortable-programs").disableSelection();
+        });
 
-    function getProgramOrder() {
-    var order = [];
-    $('#sortable-programs div').each(function() {
-        var id = $(this).data('id');
-        if (id) { // Only include elements with a valid data-id
-            order.push(id);
+        function getProgramOrder() {
+          var order = [];
+          $('#sortable-programs div').each(function() {
+            var id = $(this).data('id');
+            if (id) { // Only include elements with a valid data-id
+              order.push(id);
+            }
+          });
+          return order;
         }
-    });
-    return order;
-}
 
 
-    $('form').on('submit', function() {
-        var programOrder = getProgramOrder();
-        $('input[name="program_order"]').val(JSON.stringify(programOrder));
-    });
-</script>
+        $('form').on('submit', function() {
+          var programOrder = getProgramOrder();
+          $('input[name="program_order"]').val(JSON.stringify(programOrder));
+        });
+      </script>
 
-<input type="hidden" name="program_order" value="">
-<!-- End programs -->
+      <input type="hidden" name="program_order" value="">
+      <!-- End programs -->
 
 
 
@@ -1524,7 +1524,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
       <!-- Start download file -->
       <div class="price-inputs" style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
         <div class="input-group" style="display: flex; flex-direction: column; align-items: center;">
-          <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Fichier</h3>
+          <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Fichier 1</h3>
           <input type="file" name="uploaded_file" id="uploaded_file" class="form-control" style="padding: 10px; border: 1px solid #ababab; border-radius: 5px; transition: border-color 0.3s; width: 100%; max-width: 300px;"
             onfocus="this.style.borderColor='#32363b'; this.style.outline='none';"
             onblur="this.style.borderColor='#32363b';">
@@ -1535,8 +1535,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
       <!-- Start Image -->
       <div class="price-inputs" style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
         <div class="input-group" style="display: flex; flex-direction: column; align-items: center;">
-          <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Image</h3>
-          <input required type="file" name="image_formule" id="image_formule" class="form-control" style="padding: 10px; border: 1px solid #ababab; border-radius: 5px; transition: border-color 0.3s; width: 100%; max-width: 300px;"
+          <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Fichier 2</h3>
+          <input type="file" name="image_formule" id="image_formule" class="form-control" style="padding: 10px; border: 1px solid #ababab; border-radius: 5px; transition: border-color 0.3s; width: 100%; max-width: 300px;"
             onfocus="this.style.borderColor='#32363b'; this.style.outline='none';"
             onblur="this.style.borderColor='#32363b';">
         </div>

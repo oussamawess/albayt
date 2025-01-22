@@ -255,6 +255,7 @@ if ($formule_id > 0) {
             border-radius: 8px;
             height: fit-content;
             margin-top: 10px;
+            margin-bottom: 10px;
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
             /* Adjust the value based on your layout */
         }
@@ -289,9 +290,9 @@ if ($formule_id > 0) {
         }
 
         .nav-link {
-            font-size: 13px;
-            /* font-weight: 600; */
-            color: black;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--darker-color);
             margin-right: 30px;
         }
 
@@ -330,9 +331,9 @@ if ($formule_id > 0) {
             border-radius: 3px;
             color: white;
             margin-left: 20px;
-            padding: 5px 30px 5px 30px;
-            font-size: 13px;
-            font-weight: 600;
+            padding: 3px 40px 3px 40px;
+            font-size: 16px;
+            font-weight: 700;
         }
 
         .contact-btn:hover {
@@ -341,7 +342,12 @@ if ($formule_id > 0) {
         }
 
         .contact-btn-sidebar {
+            margin-top: 30px;
             margin-left: 0px;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 7px 55px;
+            border-radius: 5px;
         }
 
         .offcanvas {
@@ -364,8 +370,20 @@ if ($formule_id > 0) {
             display: none;
         }
 
+        .bottom-links-sidebar-mobile {
+            bottom: 0;
+            position: relative;
+            display: grid;
+            gap: 20px;
+        }
 
-
+        .bottom-links-sidebar-mobile a {
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            font-family: 'helvetica', sans-serif;
+        }
 
 
 
@@ -396,11 +414,11 @@ if ($formule_id > 0) {
                 display: inline-block;
                 background-color: white;
                 border: 1px solid var(--primary-color);
-                border-radius: 3px;
+                border-radius: 5px;
                 color: var(--primary-color);
-                padding: 5px 30px 5px 30px;
-                font-size: 13px;
-                font-weight: 600;
+                padding: 6px 28px;
+                font-size: 16px;
+                font-weight: 700;
                 margin-left: 0px;
             }
 
@@ -686,7 +704,7 @@ if ($formule_id > 0) {
         .reserve-button {
             background-color: var(--primary-color);
             color: white;
-            padding: 2% 20%;
+            padding: 2% 15%;
             border: none;
             border-radius: 3px;
             cursor: pointer;
@@ -1883,9 +1901,30 @@ if ($formule_id > 0) {
             text-align: left;
         }
 
+        .unique-footer-address h5 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #403F3E;
+            font-family: 'Raleway', sans-serif !important;
+        }
+
+        .unique-footer-address p {
+            font-size: 18px;
+            font-weight: 400;
+            color: #403F3E;
+            /* font-family: 'Raleway', sans-serif !important; */
+        }
+
         .unique-footer-logo img {
             max-width: 100px;
             margin-bottom: 10px;
+        }
+
+        .unique-footer-logo p {
+            font-size: 18px;
+            font-weight: 500;
+            color: #403F3E;
+            font-family: 'Raleway', sans-serif !important;
         }
 
         .unique-footer-links ul {
@@ -1894,12 +1933,16 @@ if ($formule_id > 0) {
         }
 
         .unique-footer-links ul li {
-            margin: 5px 0;
+            margin: 5px 0 10px 0;
         }
 
         .unique-footer-links ul li a {
             text-decoration: none;
             color: #333;
+            font-family: "Dm Sans", sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            color: #403F3E;
         }
 
         .unique-footer-payment img {
@@ -1962,13 +2005,13 @@ if ($formule_id > 0) {
         .footer-4 {
             background-color: white;
             text-align: center;
-            padding: 20px 0;
+            padding: 20px 40px;
             position: relative;
         }
 
         .swiper-container-footer {
             width: 100%;
-            height: 200px;
+            height: 150px;
             overflow: hidden;
             /* margin-bottom: 15px; */
             display: flex;
@@ -1987,7 +2030,35 @@ if ($formule_id > 0) {
             top: var(--swiper-navigation-top-offset, 50%);
         }
 
+        @media (max-width: 650px) {
+            .footer-4 {
+                padding: 20px 20px;
+            }
 
+            .swiper-container-footer {
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .footer-4 {
+                padding: 20px 10px;
+            }
+
+            .swiper-container-footer {
+                height: 90px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .footer-4 {
+                padding: 20px 10px;
+            }
+
+            .swiper-container-footer {
+                height: 80px;
+            }
+        }
 
         /*------------------------  Footer_4 END -------------------------------*/
 
@@ -2022,7 +2093,10 @@ if ($formule_id > 0) {
 
         .footer-6 p {
             text-align: center;
-            color: var(--grey-text);
+            color: #999999;
+            font-size: 16px;
+            font-weight: 400;
+            font-family: "Dm Sans", sans-serif;
         }
 
         @media (max-width:991px) {
@@ -2344,7 +2418,7 @@ if ($formule_id > 0) {
 <body>
     <nav class="navbar navbar-expand-lg bg-white sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="https://preprodx1.digietab.com/">
                 <?php echo $albayt_main_logo_black ?>
                 <!-- <img src="../uploads/logo.png" alt="Logo" width="150" height="auto" class="logo-mobile"> -->
             </a>
@@ -2360,7 +2434,7 @@ if ($formule_id > 0) {
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
                 aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div class="offcanvas-header" style="justify-content: space-between;">
-                    <a class="" href="#">
+                    <a class="" href="https://preprodx1.digietab.com/">
                         <?php echo $albayt_main_logo_white ?>
                         <!-- <img src="../uploads/logo-white.png" alt="Logo" width="150" height="auto"> -->
                     </a>
@@ -2372,19 +2446,21 @@ if ($formule_id > 0) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-sidebar" aria-current="page" href="#">A PROPOS</a>
+                            <a class="nav-link nav-link-sidebar" aria-current="page" href="https://preprodx1.digietab.com/blog-3/">À PROPOS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-sidebar" href="#">OMRA</a>
+                            <a class="nav-link nav-link-sidebar" href="https://preprodx1.digietab.com/omra/">OMRA</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-sidebar" href="#">HAJJ</a>
+                            <a class="nav-link nav-link-sidebar" href="https://preprodx1.digietab.com/hajj/">HAJJ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-sidebar" href="#">BLOG</a>
+                            <a class="nav-link nav-link-sidebar" href="https://preprodx1.digietab.com/blog/">BLOG</a>
                         </li>
                     </ul>
-                    <button class="btn contact-btn contact-btn-sidebar" type="submit">Contact</button>
+
+                    <a href="https://preprodx1.digietab.com/contact/" class="btn contact-btn contact-btn-sidebar">CONTACT</a>
+
                     <style>
 
                     </style>
@@ -2409,10 +2485,10 @@ if ($formule_id > 0) {
                         </div>
                     </div>
 
-                    <div style="bottom: 0; position: relative; display: grid; gap: 20px;">
-                        <a href="#" style=" color:white; text-decoration:none;">Mentions légales</a>
-                        <a href="#" style=" color:white; text-decoration:none;">Infos pratiques</a>
-                        <a href="#" style=" color:white; text-decoration:none;">Conditions de vente</a>
+                    <div class="bottom-links-sidebar-mobile">
+                        <a href="#">Mentions légales</a>
+                        <a href="#">Infos pratiques</a>
+                        <a href="#">Conditions de vente</a>
                     </div>
                 </div>
             </div>
@@ -2423,26 +2499,28 @@ if ($formule_id > 0) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">A PROPOS</a>
+                        <a class="nav-link" aria-current="page" href="https://preprodx1.digietab.com/blog-3/">À PROPOS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">OMRA</a>
+                        <a class="nav-link" href="https://preprodx1.digietab.com/omra/">OMRA</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">HAJJ</a>
+                        <a class="nav-link" href="https://preprodx1.digietab.com/hajj/">HAJJ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">BLOG</a>
+                        <a class="nav-link" href="https://preprodx1.digietab.com/blog/">BLOG</a>
                     </li>
                 </ul>
                 <form class="d-flex search-box" role="search">
-                    <input class="form-control me-2 search-box-nav" type="search" placeholder="Recherche"
+                    <input class="form-control me-2 search-box-nav" type="search" placeholder=""
                         aria-label="Search">
                     <button class="search-icon-btn" type="submit">
                         <i class="bi bi-search"></i>
                     </button>
                 </form>
-                <button class="btn contact-btn" type="submit">Contact</button>
+                <a href="https://preprodx1.digietab.com/contact/" class="btn contact-btn">Contact</a>
+
+
             </div>
         </div>
     </nav>
@@ -2485,6 +2563,7 @@ if ($formule_id > 0) {
             f.date_depart, 
             f.date_retour, 
             f.prix_chambre_quadruple,
+            f.prix_chambre_quadruple_promo,
             ca.logo            
         FROM formules f
         JOIN vols v ON f.id = v.formule_id
@@ -2568,7 +2647,17 @@ if ($formule_id > 0) {
                                                 class="me-2">
                                             <div class="buttom-right-info-popup">
                                                 <span class="price-text-popup">À partir de</span>
-                                                <span class="price-number-popup"><?= number_format($formule['prix_chambre_quadruple'], 2, ',', ' ') ?>€</span>
+
+
+                                                <span class="price-number-popup">
+                                                    <!-- <!?= number_format($formule['prix_chambre_quadruple'], 2, ',', ' ') ?> -->
+                                                    <?php if (!empty($data['prix_chambre_quadruple_promo']) && $data['prix_chambre_quadruple_promo'] != "0.00" && $data['prix_chambre_quadruple_promo'] != $data['prix_chambre_quadruple']): ?>
+                                                        <?= number_format($formule['prix_chambre_quadruple_promo'], 2, ',', ' ') ?>
+                                                    <?php else: ?>
+                                                        <?= number_format($formule['prix_chambre_quadruple'], 2, ',', ' ') ?>
+                                                    <?php endif; ?>
+                                                    €</span>
+
                                             </div>
                                         </div>
                                     </div>
@@ -2648,7 +2737,7 @@ if ($formule_id > 0) {
                     </div>
 
                     <form role="form">
-                        <div class="setup-content" id="step-1" style="display: none;">
+                        <div class="setup-content" id="step-1">
                             <h6 style="margin: 20px 0px;">Qui participe à ce voyage?</h6>
                             <div style="padding: 2%;">
                                 <div class="form-group first-step" style="margin-bottom: 20px;">
@@ -2950,8 +3039,6 @@ if ($formule_id > 0) {
                                 </div>
                             </div>
                         </div>
-
-
 
                         <?php
                         // Include the database connection
@@ -3533,6 +3620,82 @@ if ($formule_id > 0) {
                 console.log(totalReservation)
                 console.log(typeof totalReservation);
 
+                /** */
+                <?php
+                // Include the database connection
+                include '../db.php';
+
+                // Get the `formule_id` from the URL
+                $formule_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+                // Check if a valid ID is provided
+                if ($formule_id > 0) {
+                    // Prepare the SQL query
+                    $query = "
+        SELECT 
+            cp.nom AS category_parent_nom,
+            op.nom AS omra_packages_nom,
+            f.date_depart,
+            f.date_retour,
+            f.duree_sejour,
+            tf.nom AS type_formule_nom,
+            COALESCE(h1.nombre_nuit, 'Not available') AS nombre_nuit_ville_19,
+            COALESCE(h2.nombre_nuit, 'Not available') AS nombre_nuit_ville_18,
+            COALESCE(ht1.nom, 'Not available') AS hotel_nom_ville_19,
+            COALESCE(ht2.nom, 'Not available') AS hotel_nom_ville_18
+        FROM formules f
+        LEFT JOIN omra_packages op ON f.package_id = op.id
+        LEFT JOIN category_parent cp ON op.category_parent_id = cp.id
+        LEFT JOIN type_formule_omra tf ON f.type_id = tf.id
+        LEFT JOIN hebergements h1 
+            ON h1.formule_id = f.id AND h1.hotel_id IN (
+                SELECT id FROM hotels WHERE ville = 19
+            )
+        LEFT JOIN hotels ht1 ON h1.hotel_id = ht1.id
+        LEFT JOIN hebergements h2 
+            ON h2.formule_id = f.id AND h2.hotel_id IN (
+                SELECT id FROM hotels WHERE ville = 18
+            )
+        LEFT JOIN hotels ht2 ON h2.hotel_id = ht2.id
+        WHERE f.id = ?
+        LIMIT 1
+    ";
+
+                    // Use a prepared statement to execute the query
+                    $stmt = $conn->prepare($query);
+                    $stmt->bind_param("i", $formule_id);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    // Check if a result is returned
+                    if ($result->num_rows > 0) {
+                        $data = $result->fetch_assoc();
+
+                        // Assign the variables, ensuring "Not available" is used for null values
+                        $category_parent_nom = $data['category_parent_nom'] ?? "Not available";
+                        $omra_packages_nom = $data['omra_packages_nom'] ?? "Not available";
+                        $date_depart = $data['date_depart'] ?? "Not available";
+                        $date_retour = $data['date_retour'] ?? "Not available";
+                        $duree_sejour = $data['duree_sejour'] ?? "Not available";
+                        $type_formule_nom = $data['type_formule_nom'] ?? "Not available";
+                        $nombre_nuit_ville_19 = $data['nombre_nuit_ville_19'];
+                        $nombre_nuit_ville_18 = $data['nombre_nuit_ville_18'];
+                        $hotel_nom_ville_19 = $data['hotel_nom_ville_19'];
+                        $hotel_nom_ville_18 = $data['hotel_nom_ville_18'];
+                    } else {
+                        echo "No data found for the given formule ID.";
+                    }
+
+                    // Close the statement
+                    $stmt->close();
+                } else {
+                    echo "Invalid ID provided.";
+                }
+
+                // Close the database connection
+                $conn->close();
+                ?>
+                /** */
 
                 if (curStepBtn === 'step-4' && isValid) {
                     var formData = {
@@ -3548,16 +3711,19 @@ if ($formule_id > 0) {
                         doubleRooms: parseInt($('#double').val(), 10) || 0,
                         singleRooms: parseInt($('#single').val(), 10) || 0,
                         totalReservation: totalReservation.toFixed(2), // Supposant que totalReservation est calculé correctement à l'étape-3
-                        packageName: "<?php echo $nom_package; ?>",
-                        formulaName: "<?php echo $nom_type_formule; ?>",
-                        departureDate: "<?php echo $formattedDate; ?>",
+                        packageName: "<?php echo $category_parent_nom; ?>",
+                        formulaName: "<?php echo $type_formule_nom ?>",
+                        departureDate: "<?php echo (new DateTime($date_depart))->format('d-m-Y'); ?>",
+                        // packageName: "<!?php echo $nom_package; ?>",
+                        // formulaName: "<!?php echo $nom_type_formule; ?>",
+                        // departureDate: "<!?php echo $formattedDate; ?>",
                     };
 
 
 
                     // Envoyer les données via AJAX
                     $.ajax({
-                        url: 'submit_reservation.php',
+                        url: '../submit_reservation.php',
                         type: 'POST',
                         data: JSON.stringify(formData),
                         contentType: 'application/json',
@@ -3584,7 +3750,7 @@ if ($formule_id > 0) {
                     });
 
                     $.ajax({
-                        url: 'send_email.php', // Script PHP pour l'envoi d'email
+                        url: '../send_email.php', // Script PHP pour l'envoi d'email
                         type: 'POST',
                         data: JSON.stringify(formData), // Les mêmes données que celles envoyées précédemment
                         contentType: 'application/json',
@@ -3600,7 +3766,7 @@ if ($formule_id > 0) {
                         }
                     });
                     $.ajax({
-                        url: 'send_mailclient.php',
+                        url: '../send_mailclient.php',
                         type: 'POST',
                         data: JSON.stringify(formData),
                         contentType: 'application/json',
@@ -3741,8 +3907,8 @@ if ($formule_id > 0) {
                         <div class="thumbnail" onclick="changeImage('../uploads/7.jpg')">
                             <img src="../uploads/7.jpg" alt="Thumbnail 7">
                         </div>
-                        <div class="thumbnail" onclick="changeImage('../uploads/8.jpg')">
-                            <img src="../uploads/8.jpg" alt="Thumbnail 8">
+                        <div class="thumbnail" onclick="changeImage('../uploads/blog-4.jpg')">
+                            <img src="../uploads/blog-4.jpg" alt="Thumbnail 8">
                         </div>
                         <div class="thumbnail" onclick="changeImage('../uploads/9.jpg')">
                             <img src="../uploads/9.jpg" alt="Thumbnail 9">
@@ -3952,6 +4118,7 @@ if ($formule_id > 0) {
             if ($formule_id > 0) {
                 // Query to fetch pricing details
                 $query = "SELECT 
+                statut,
                 prix_chambre_quadruple, 
                 prix_chambre_triple, 
                 prix_chambre_double, 
@@ -3974,6 +4141,7 @@ if ($formule_id > 0) {
                     $data = $result->fetch_assoc();
 
                     // Assign fetched values to variables
+                    $statut = $data['statut'];
                     $prix_chambre_quadruple = $data['prix_chambre_quadruple'];
                     $prix_chambre_triple = $data['prix_chambre_triple'];
                     $prix_chambre_double = $data['prix_chambre_double'];
@@ -4077,10 +4245,25 @@ if ($formule_id > 0) {
             <!-- Pricing table END -->
 
             <div class="price-reservation">
-                <p class="price">À partir de <br><strong
-                        class="price-number"><?= htmlspecialchars($prix_chambre_quadruple) ?>€</strong></p>
-                <button type="button" class="reserve-button" data-toggle="modal"
-                    data-target="#stepperModal">RÉSERVATION</button>
+                <p class="price">À partir de <br>
+                    <strong class="price-number">
+                        <?php if (!empty($data['prix_chambre_quadruple_promo']) && $data['prix_chambre_quadruple_promo'] != "0.00" && $data['prix_chambre_quadruple_promo'] != $data['prix_chambre_quadruple']): ?>
+                            <?= htmlspecialchars($prix_chambre_quadruple_promo) ?>
+                        <?php else: ?>
+                            <?= htmlspecialchars($prix_chambre_quadruple) ?>
+                        <?php endif; ?>
+                        €</strong>
+                </p>
+
+                <?php
+                if ($data['statut'] == 'activé') {
+                    echo '<button type="button" class="reserve-button" data-toggle="modal" data-target="#stepperModal">RÉSERVATION</button>';
+                } else {
+                    echo '<button type="button" style="background-color: #FE0944 !important;" class="reserve-button" data-toggle="modal" data-target="#stepperModal" disabled>Formule Épuisé</button>';
+                }
+                ?>
+
+                <!-- <button type="button" class="reserve-button" data-toggle="modal" data-target="#stepperModal">RÉSERVATION</button> -->
             </div>
         </div>
         <!-- Sticky Sidebar end -->
@@ -4143,7 +4326,7 @@ if ($formule_id > 0) {
         <div class="swiper flight-carousel">
             <div class="swiper-wrapper">
                 <?php
-                $images = ["../uploads/plane1.jpg", "../uploads/plane2.jpg", "../uploads/plane3.jpg"];
+                $images = ["../uploads/plane1.jpg", "../uploads/plane2.jpg", "../uploads/plane3.jpg", "../uploads/plane5.jpg", "../uploads/plane6.jpg"];
                 $image_count = count($images);
                 setlocale(LC_TIME, 'fr_FR.UTF-8', 'fra');
 
@@ -4256,7 +4439,8 @@ if ($formule_id > 0) {
                                 </div>
                                 <div class="duration grey">
                                     <span class="bold raleway"><?= htmlspecialchars($duration); ?></span>
-                                    <span>Pas d'escale</span>
+                                    <!-- <span>Pas d'escale</span> -->
+                                    <span class="vol-number" style="font-size: 15px;">Vol <?= $index + 1; ?></span>
                                 </div>
                                 <div class="right-section-flight-details">
                                     <span class="grey" style="margin-left: 23px;">Arrivée</span>
@@ -4751,8 +4935,12 @@ if ($formule_id > 0) {
     <!------------------------ Plus de details END ------------------------------->
     </div>
     <!------------------------ END container mt-3 ------------------------------->
+    <div class="" style="background-color: #fff; padding:20px 40px; margin-top:10px;">
+        <script defer async src='https://cdn.trustindex.io/loader.js?6a73a73398ea3819315666d1b74'></script>
+    </div>
 
-
+    <!-- <script src="https://static.elfsight.com/platform/platform.js" async></script>
+    <div class="elfsight-app-646b14be-443d-4db6-8e27-23f5b06c50d5" data-elfsight-app-lazy></div> -->
     <!------------------------ Footer_1 START ------------------------------->
     <div class="reviews-container container">
         <div class="row">
@@ -4982,7 +5170,6 @@ if ($formule_id > 0) {
             <div class="swiper-slide">
                 <?php echo $saudi ?>
             </div>
-
             <div class="swiper-slide">
                 <?php echo $hiscos ?>
             </div>
@@ -4996,8 +5183,8 @@ if ($formule_id > 0) {
                 <?php echo $saudi ?>
             </div>
         </div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+        <!-- <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div> -->
         <!-- Pagination Dots -->
         <div class="swiper-pagination"></div>
     </div>
@@ -5031,6 +5218,7 @@ if ($formule_id > 0) {
     if ($formule_id > 0) {
         // Query to fetch pricing details
         $query = "SELECT 
+                statut,
                 prix_chambre_quadruple, 
                 prix_chambre_triple, 
                 prix_chambre_double, 
@@ -5053,6 +5241,7 @@ if ($formule_id > 0) {
             $data = $result->fetch_assoc();
 
             // Assign fetched values to variables
+            $statut = $data['statut'];
             $prix_chambre_quadruple = $data['prix_chambre_quadruple'];
             $prix_chambre_triple = $data['prix_chambre_triple'];
             $prix_chambre_double = $data['prix_chambre_double'];
@@ -5161,13 +5350,28 @@ if ($formule_id > 0) {
             </table>
         </div>
 
+
         <div class="reservation-mobile-footer">
-            <p class="grey" style="margin: 0px; font-size: .8rem;">À partir de <br><strong
-                    class="price-number dark-text">
-                    <?= htmlspecialchars($prix_chambre_quadruple) ?>€
-                </strong></p>
-            <button class="reserve-button" data-toggle="modal" data-target="#stepperModal">RÉSERVATION</button>
+            <p class="grey" style="margin: 0px; font-size: .8rem;">À partir de <br>
+                <strong class="price-number dark-text">
+                    <?php if (!empty($data['prix_chambre_quadruple_promo']) && $data['prix_chambre_quadruple_promo'] != "0.00" && $data['prix_chambre_quadruple_promo'] != $data['prix_chambre_quadruple']): ?>
+                        <?= htmlspecialchars($prix_chambre_quadruple_promo) ?>
+                    <?php else: ?>
+                        <?= htmlspecialchars($prix_chambre_quadruple) ?>
+                    <?php endif; ?>
+                    €</strong>
+            </p>
+            <?php
+                if ($data['statut'] == 'activé') {
+                    echo '<button class="reserve-button" data-toggle="modal" data-target="#stepperModal">RÉSERVATION</button>';
+                } else {
+                    echo '<button style="background-color: #FE0944 !important;" class="reserve-button" data-toggle="modal" data-target="#stepperModal" disabled>Formule Épuisé</button>';
+                }
+                ?>
+            <!-- <button class="reserve-button" data-toggle="modal" data-target="#stepperModal">RÉSERVATION</button> -->
         </div>
+
+
 
 
         <script>
@@ -5463,16 +5667,16 @@ if ($formule_id > 0) {
                 },
                 breakpoints: {
                     991: {
-                        slidesPerView: 4, // 3 slides for less than 991px
+                        slidesPerView: 5, // 3 slides for less than 991px
                     },
                     768: {
                         slidesPerView: 3, // 2 slides for tablets
                     },
                     576: {
-                        slidesPerView: 2, // 1 slide for small screens
+                        slidesPerView: 3, // 1 slide for small screens
                     },
                     320: {
-                        slidesPerView: 1, // 1 slide for small screens
+                        slidesPerView: 3, // 1 slide for small screens
                     },
                 },
 

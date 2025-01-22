@@ -53,7 +53,7 @@ if (!empty($programs)) {
         mysqli_stmt_bind_param($stmt, 'ii', $formule['id'], $row['id']);
         mysqli_stmt_execute($stmt);
         $resultDetails = mysqli_stmt_get_result($stmt);
-        
+
         if ($details = mysqli_fetch_assoc($resultDetails)) {
             // Program found in program_details, add date and duration
             $row['date'] = $details['date'];
@@ -63,7 +63,7 @@ if (!empty($programs)) {
             $row['date'] = null;
             $row['duration'] = null;
         }
-        
+
         $programData[$row['id']] = $row;
     }
 
@@ -411,38 +411,38 @@ $result_vols = mysqli_query($conn, $sql_vols);
 
 
             <div class="section">
-    <h3>Programmes</h3>
-    <?php if (!empty($orderedProgramData)): ?>
-        <table>
-            <tr>
-                <th>Nom du Programme</th>
-                <th>Description</th>
-                <th>Date</th>
-                <th>Duration</th>
-            </tr>
-            <?php foreach ($orderedProgramData as $program): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($program['nom']); ?></td>
-                    <td><?php echo htmlspecialchars($program['description']); ?></td>
+                <h3>Programmes</h3>
+                <?php if (!empty($orderedProgramData)): ?>
+                    <table>
+                        <tr>
+                            <th>Nom du Programme</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Duration</th>
+                        </tr>
+                        <?php foreach ($orderedProgramData as $program): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($program['nom']); ?></td>
+                                <td><?php echo htmlspecialchars($program['description']); ?></td>
 
-                    <?php if ($program['date'] && $program['duration']): ?>
-                        <td><?php echo htmlspecialchars($program['date']); ?></td>
-                        <td><?php echo htmlspecialchars($program['duration']); ?></td>
-                    <?php elseif (empty($program['duration'])): ?>
-                        <td><?php echo htmlspecialchars($program['date']); ?></td>
-                        <td>-</td> <!-- If no date or duration, show a placeholder -->
-                    <?php else: ?>
-                        <td>-</td> <!-- If no date or duration, show a placeholder -->
-                        <td>-</td> <!-- If no date or duration, show a placeholder -->
-                    <?php endif; ?>
+                                <?php if ($program['date'] && $program['duration']): ?>
+                                    <td><?php echo htmlspecialchars($program['date']); ?></td>
+                                    <td><?php echo htmlspecialchars($program['duration']); ?></td>
+                                <?php elseif (empty($program['duration'])): ?>
+                                    <td><?php echo htmlspecialchars($program['date']); ?></td>
+                                    <td>-</td> <!-- If no date or duration, show a placeholder -->
+                                <?php else: ?>
+                                    <td>-</td> <!-- If no date or duration, show a placeholder -->
+                                    <td>-</td> <!-- If no date or duration, show a placeholder -->
+                                <?php endif; ?>
 
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php else: ?>
-        <p>Aucun programme à afficher.</p>
-    <?php endif; ?>
-</div>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                <?php else: ?>
+                    <p>Aucun programme à afficher.</p>
+                <?php endif; ?>
+            </div>
 
 
 
@@ -463,7 +463,7 @@ $result_vols = mysqli_query($conn, $sql_vols);
             <?php
             // Check if s1t is empty and s1d equals "<p><br></p>"
             if (!empty($formule['s1t']) && $formule['s1d'] != '<p><br></p>') {
-                ?>
+            ?>
                 <div class="section">
                     <h3>Section 1</h3>
                     <table>
@@ -475,14 +475,14 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         </tr>
                     </table>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
             <?php
             // Check if s1t is empty and s1d equals "<p><br></p>"
             if (!empty($formule['s2t']) && $formule['s2d'] != '<p><br></p>') {
-                ?>
+            ?>
                 <div class="section">
                     <h3>Section 2</h3>
                     <table>
@@ -494,14 +494,14 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         </tr>
                     </table>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
             <?php
             // Check if s1t is empty and s1d equals "<p><br></p>"
             if (!empty($formule['s3t']) && $formule['s3d'] != '<p><br></p>') {
-                ?>
+            ?>
                 <div class="section">
                     <h3>Section 3</h3>
                     <table>
@@ -513,14 +513,14 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         </tr>
                     </table>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
             <?php
             // Check if s1t is empty and s1d equals "<p><br></p>"
             if (!empty($formule['s4t']) && $formule['s4d'] != '<p><br></p>') {
-                ?>
+            ?>
                 <div class="section">
                     <h3>Section 4</h3>
                     <table>
@@ -532,14 +532,14 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         </tr>
                     </table>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
             <?php
             // Check if s1t is empty and s1d equals "<p><br></p>"
             if (!empty($formule['s5t']) && $formule['s5d'] != '<p><br></p>') {
-                ?>
+            ?>
                 <div class="section">
                     <h3>Section 5</h3>
                     <table>
@@ -551,15 +551,15 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         </tr>
                     </table>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
             <?php
             if (!empty($formule['uploaded_file'])) {
-                ?>
+            ?>
                 <div class="section">
-                    <h3>Fichier</h3>
+                    <h3>Fichier 1</h3>
                     <table>
                         <tr>
                             <?php
@@ -582,12 +582,43 @@ $result_vols = mysqli_query($conn, $sql_vols);
                         </tr>
                     </table>
                 </div>
-                <?php
+            <?php
             }
             ?>
 
-            <div class="section">
-                <h3>Image</h3>
+            <?php
+            if (!empty($formule['image_formule'])) {
+            ?>
+                <div class="section">
+                    <h3>Fichier 2</h3>
+                    <table>
+                        <tr>
+                            <?php
+                            $existingFiles = $formule['image_formule'];
+
+                            // Get the filename with the unique ID
+                            $filenameWithId = basename($existingFiles);
+
+                            // Split the filename at the underscore
+                            $parts = explode('_', $filenameWithId);
+
+                            // Remove the first part (the unique ID)
+                            array_shift($parts);
+
+                            // Join the remaining parts back together
+                            $cleanFilename = implode('_', $parts);
+
+                            ?>
+                            <th><?php echo $cleanFilename; ?></th>
+                        </tr>
+                    </table>
+                </div>
+            <?php
+            }
+            ?>
+
+            <!-- <div class="section">
+                <h3>Fichier 2</h3>
                 <table style="text-align: center;">
                     <tr>
                         <th style="text-align: center;">
@@ -596,12 +627,12 @@ $result_vols = mysqli_query($conn, $sql_vols);
                     </tr>
                     <tr>
                         <td style="text-align: center;">
-                            <img src="<?php echo $formule['image_formule']; ?>" alt="image_formule"
+                            <img src="<!?php echo $formule['image_formule']; ?>" alt="image_formule"
                                 style="width:300px; "></p>
                         </td>
                     </tr>
                 </table>
-            </div>
+            </div> -->
 
         </div>
     </div>

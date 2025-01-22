@@ -1,13 +1,4 @@
 <?php
-    session_start(); // Start session to access session variables
-    
-    // Check if user is not logged in, redirect to login page
-    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-        header("Location: login.php");
-        exit;
-    }
-?>
-<?php
 // Inclure le fichier de connexion à la base de données
 include 'db.php';
 
@@ -46,12 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         triple_rooms,
         double_rooms,
         single_rooms,
-        extras,
         total_price,
         package_name,
         formula_name,
-        departure_date,
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        departure_date
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
 
@@ -67,8 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $quadruple_rooms = $formData['quadrupleRooms'];
         $triple_rooms = $formData['tripleRooms'];
         $double_rooms = $formData['doubleRooms'];
-        $single_rooms = $formData['singleRooms'];
-        $extras = json_encode($formData['extras']); // Encoder les extras en JSON
+        $single_rooms = $formData['singleRooms'];        
         $total_price = $formData['totalReservation'];
         $package_name = $formData['packageName'];
         $formula_name = $formData['formulaName'];
@@ -76,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Binder les paramètres à la requête
         $stmt->bind_param(
-            "ssssiiiiiisdsssss", // Correction du type de données pour total_price 
+            "ssssiiiiiisdsss", // Correction du type de données pour total_price 
             $full_name,
             $address,
             $phone_number,
@@ -88,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $triple_rooms,
             $double_rooms,
             $single_rooms,
-            $extras,
             $total_price,
             $package_name,
             $formula_name,

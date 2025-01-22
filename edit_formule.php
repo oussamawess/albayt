@@ -1707,7 +1707,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="price-inputs"
                 style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
                 <div class="input-group" style="display: flex; flex-direction: column; align-items: center;">
-                    <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Fichier</h3>
+                    <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Fichier 1</h3>
                     <input type="file" name="uploaded_file" id="uploaded_file" class="form-control"
                         style="padding: 10px; border: 1px solid #ababab; border-radius: 5px; transition: border-color 0.3s; width: 100%; max-width: 300px;"
                         onfocus="this.style.borderColor='#32363b'; this.style.outline='none';"
@@ -1734,21 +1734,51 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
             <!-- End download file -->
 
+            <!-- Start download file 2-->
+            <div class="price-inputs"
+                style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+                <div class="input-group" style="display: flex; flex-direction: column; align-items: center;">
+                    <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Fichier 2</h3>
+                    <input type="file" name="image_formule" id="image_formule" class="form-control"
+                        style="padding: 10px; border: 1px solid #ababab; border-radius: 5px; transition: border-color 0.3s; width: 100%; max-width: 300px;"
+                        onfocus="this.style.borderColor='#32363b'; this.style.outline='none';"
+                        onblur="this.style.borderColor='#32363b';">
+
+                    <?php
+                    $existingFiles2 = $existingImage;
+
+                    // Get the filename with the unique ID
+                    $file2nameWithId = basename($existingFiles2);
+
+                    // Split the filename at the underscore
+                    $parts2 = explode('_', $file2nameWithId);
+
+                    // Remove the first part (the unique ID)
+                    array_shift($parts2);
+
+                    // Join the remaining parts back together
+                    $cleanFile2name = implode('_', $parts2);
+
+                    ?>
+                    <p><b>Fichier actuel:</b> <?php echo $cleanFile2name; ?></p>
+                </div>
+            </div>
+            <!-- End download file 2-->
+
             <!-- Hidden input to hold the current image path -->
-            <input type="hidden" name="image_actuel" value="<?php echo $existingImage; ?>">
+            <!-- <input type="hidden" name="image_actuel" value="<!?php echo $existingImage; ?>"> -->
 
             <!-- Start image -->
-            <div class="price-inputs"
+            <!-- <div class="price-inputs"
                 style="display: flex; justify-content: center; align-items: center; margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
                 <div class="input-group" style="display: flex; flex-direction: column; align-items: center;">
                     <h3 style="margin-bottom: 10px; font-size: 18px; color: #333;">Image</h3>
                     <input type="file" name="image_formule" id="image_formule" class="form-control"
                         style="padding: 10px; border: 1px solid #ababab; border-radius: 5px;">
-                    <!-- Display current image preview -->
-                    <img src="<?php echo $existingImage; ?>" alt="Current Image"
+                    <img src="<!?php echo $existingImage; ?>" alt="Current Image"
                         style="margin-top: 15px; max-width: 200px;">
                 </div>
-            </div>
+            </div> -->
 
             <!-- End image -->
 

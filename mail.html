@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-family: Roboto, Arial, sans-serif;
+        }
+
+        .email-container {
+            position: relative;
+            max-width: 424px;
+            height: 600px;
+            margin: 0 auto;
+            background: url("https://app-albayt.fr/uploads/imgcontainer.jpg") no-repeat center center;
+            background-size: contain;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-39%, -54%);
+            width: 80%;
+            padding: 20px;
+            background: url("https://app-albayt.fr/uploads/box-contained.png") no-repeat center center;
+            background-size: contain;
+            text-align: center;
+            color: #000;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .content p {
+            margin: 3px 0px;
+        }
+
+        /* .body-text{
+            text-align: left;
+        } */
+
+        .text-text {
+            margin-top: 17%;
+            margin-bottom: 10%;
+        }
+
+        .body-text,
+        .contact-info,
+        .footer {
+            margin-bottom: 5px;
+        }
+
+        .contact-info a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        .emojis {
+            font-size: 13px;
+        }
+
+        .social {
+            background-color: #000;
+            position: absolute;
+            bottom: 5%;
+            left: 20%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .social img {
+            width: 24px;
+            height: 24px;
+        }
+
+        @media (max-width: 480px) {
+            .email-container {
+                /* height: auto; */
+                padding: 10px;
+            }
+
+            .content {
+                font-size: 10px;
+                padding: 15px;
+            }
+
+            .social {
+                bottom: 8%;
+            }
+
+            .social img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        @media (max-width: 375px) {
+
+            .social {
+                bottom: 10%;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .content {
+                font-size: 9px;
+            }
+
+            .social {
+                bottom: 13%;
+            }
+        }
+
+        @media (max-width: 330px) {
+            .social {
+                bottom: 14%;
+            }
+        }
+    </style>
+    <title>Email Layout</title>
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="content">
+            <div class="text-text">
+                <div class="body-text">
+                    <p>Salam Aleykoum name name,</p>
+                    <p>
+                        Nous sommes ravis de vous compter parmi<br>
+                        les pèlerins qui nous font confiance pour<br>
+                        leurs projets Hajj ou Omra <span class="emojis">😊😊</span>.
+                    </p>
+                    <p>
+                        Votre préinscription a bien été prise<br>
+                        en compte, et un membre de notre équipe<br>
+                        vous contactera très prochainement pour<br>
+                        répondre à vos questions et vous guider dans<br>
+                        les prochaines étapes.
+                    </p>
+                    <p>Chez ALBAYT, notre mission est de rendre<br> votre expérience fluide et sereine.</p>
+                </div>
+                <div class="contact-info">
+                    <p>
+                        Si vous avez la moindre question en attendant,<br>
+                        n’hésitez pas à nous joindre:<br>
+                        📧 Email : <a href="mailto:contact@albayt.fr">contact@albayt.fr</a><br>
+                        📞 Téléphone : +33 1 89 77 14 77
+                    </p>
+                </div>
+                <div class="footer">
+                    <p>Nous avons hâte de contribuer à la réussite<br> de votre projet.</p>
+                    <p>Qu’Allah facilite votre chemin et bénisse<br> votre intention 🙏.</p>
+                    <strong>Fraternellement,<br> L’équipe ALBAYT</strong>
+                </div>
+            </div>
+        </div>
+        <div class="social">
+            <a href="https://www.instagram.com/albayt_hajj_omra/"><img
+                    src="https://app-albayt.fr/uploads/Instagramicon.png" alt="Instagram"></a>
+            <a href="https://www.facebook.com/albayt.fr"><img src="https://app-albayt.fr/uploads/Facebookicon.png"
+                    alt="Facebook"></a>
+            <a href="https://x.com/albayt_"><img src="https://app-albayt.fr/uploads/Twittericon.png" alt="Twitter"></a>
+            <a href="https://api.whatsapp.com/send?phone=33669772782"><img
+                    src="https://app-albayt.fr/uploads/Whatsappicon.png" alt="WhatsApp"></a>
+        </div>
+    </div>
+</body>
+
+</html>

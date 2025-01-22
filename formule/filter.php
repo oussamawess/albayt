@@ -101,9 +101,18 @@
         /* Fallback font for the body text */
         body {
             font-family: 'Raleway', Arial, sans-serif;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26)), url("../uploads/header.jpg");
+            /* background-image: linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url("../uploads/header.jpg");
             background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+            width: 100%;
+            overflow-x: hidden; */
+            background-color: transparent;
         }
+
+
 
 
         :root {
@@ -269,8 +278,15 @@
 </head>
 <style>
     .container {
-        width: fit-content;
-        margin-top: 230px
+        width: auto;
+        margin-top: 300px;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            margin-top: 190px;
+        }
+
     }
 
     .category-btn {
@@ -352,9 +368,17 @@
 
         <div class="ff">
             <!-- Static Input: Pays de Depart -->
-            <div class="form-group">
-                <!-- <label for="pays-depart">Pays de Départ</label> -->
+            <!-- <div class="form-group">
                 <button type="text" class="form-control" id="pays-depart" data-icon="plane" value="Pays de départ" disabled><?php echo $grey_plane; ?>&nbsp;&nbsp;Pays de départ</button>
+            </div> -->
+
+            <!-- country Dropdown -->
+            <div class="form-group">
+                <select class="form-control select2" name="state" id="category-parent" data-minimum-results-for-search="Infinity">
+                    <option value="c" disabled selected data-icon="plane">&nbsp;&nbsp;Pays de départ</option>
+                    <option value="c" data-icon="plane">&nbsp;&nbsp;France</option>
+                    <!-- Options dynamically generated -->
+                </select>
             </div>
 
             <!-- <div class="form-group">
@@ -526,7 +550,6 @@
             $('#dates-voyages').on('click', function() {
                 const formuleTypeId = $('#formule').val();
 
-                // Fetch Dates based on selected Formule
                 $.ajax({
                     url: 'fetch_dates.php',
                     method: 'GET',
@@ -561,31 +584,36 @@
                                     fullDate: returnDate
                                 } = formatDate(date.date_retour);
 
+                                // Ensure the price is a valid number
+                                const price = parseFloat(date.price);
+                                const formattedPrice = !isNaN(price) ? price.toFixed(2).replace('.', ',') : "N/A"; // Handle invalid price
+
                                 const cardHTML = `
-                                <a style="text-decoration: none; color: inherit;" href="formule.php?id=${date.formule_id}">
-                                    <div class="unique-card-autre-dates">
-                                        <div class="row align-items-center unique-row-autre-dates">
-                                            <div class="col-6 left-info-popup">
-                                                <span><b>Départ</b></span>
-                                                <span>${departWeekday}</span>
-                                                <span>${departDate}</span>
-                                            </div>
-                                            <div class="svg-popup"><?php echo $plane_path_popup ?></div>
-                                            <div class="col-6 text-end right-info-popup">
-                                                <span><b>Retour</b></span>
-                                                <span>${returnWeekday}</span>
-                                                <span class="date-right-popup">${returnDate}</span>
-                                            </div>
-                                            <div class="col-12 d-flex align-items-center bottom-info-popup">
-                                                <img src="../${date.compagnie_logo}" alt="Compagnie" class="me-2">
-                                                <div class="buttom-right-info-popup">
-                                                    <span class="price-text-popup">À partir de</span>
-                                                    <span class="price-number-popup">${date.prix_chambre_quadruple}€</span>
+                                    <a style="text-decoration: none; color: inherit;" target="_blank" href="formule.php?id=${date.formule_id}">
+                                        <div class="unique-card-autre-dates">
+                                            <div class="row align-items-center unique-row-autre-dates">
+                                                <div class="col-6 left-info-popup">
+                                                    <span><b>Départ</b></span>
+                                                    <span>${departWeekday}</span>
+                                                    <span>${departDate}</span>
+                                                </div>
+                                                <div class="svg-popup"><?php echo $plane_path_popup ?></div>
+                                                <div class="col-6 text-end right-info-popup">
+                                                    <span><b>Retour</b></span>
+                                                    <span>${returnWeekday}</span>
+                                                    <span class="date-right-popup">${returnDate}</span>
+                                                </div>
+                                                <div class="col-12 d-flex align-items-center bottom-info-popup">
+                                                    <img src="../${date.compagnie_logo}" alt="Compagnie" class="me-2">
+                                                    <div class="buttom-right-info-popup">
+                                                        <span class="price-text-popup">À partir de</span>
+                                                        <span class="price-number-popup">${formattedPrice} €</span>  <!-- Display the formatted price -->
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </a>`;
+                                    </a>`;
+
                                 $('.unique-body-autre-dates').append(cardHTML);
                             });
 
@@ -598,18 +626,10 @@
                         console.error('Error fetching data');
                     }
                 });
+
             });
         });
     </script>
-
-
-
-
-
-
-
-
-
 
     <script>
         $(document).ready(function() {
